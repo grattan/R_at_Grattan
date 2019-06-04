@@ -1,0 +1,62 @@
+---
+title: "How to structure analysis in R at Grattan Institute"
+author: 
+  - "Will Mackey"
+  - "Matt Cowgill"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+This document sets out good practices for structuring your R analysis at Grattan Institute. Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+
+This guide is designed for _everyone_ using R at Grattan. It includes a combination of rules and guidelines.
+
+You should also be aware of the Grattan Institute R Style Guide, which lives in the same place as this document.
+
+Any compaints or comments about this guide can be sent to Will or Matt, respectively.  
+
+# Using RStudio Projects
+
+_comment_
+
+Cover:
+1. setwd() and machine-speficic filepaths are bad
+2. relative file paths are good
+3. RStudio projects are an easy, reproducible way to set your wd
+
+## Filepaths
+
+Filepaths should be relative to the working directory, and the working directory should be set by the project.
+
+**Good**
+
+```{r}
+
+hes <- read_csv("data/HES/hes1516.csv")
+grattan_save("images/expenditure_by_income.pdf")
+
+```
+
+**Bad**
+```{r}
+
+hes <- read_csv("/Users/mcowgill/Desktop/hes1516.csv")
+hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
+grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
+
+```
+
+# Keep your scripts manageable
+
+As a general rule of thumb, use 1 script per output. It should be clear what your script is trying to do (use comments!).
+Consider breaking your analysis into pieces - import, tidy, model, visualise.
+Don't include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
+
+# Use subfolders of your project folder
+
+Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
+
+Use subfolders
