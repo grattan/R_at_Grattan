@@ -1,0 +1,34 @@
+---
+title: "Data transformation"
+subtitle: "Session 2 of the _R at Grattan_ series"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# The pipe
+
+# Key `dplyr` functions:
+
+All have the same syntax structure, which enable pipe-chains. 
+
+
+
+## Filter with `filter()`
+
+## Arrange with `arrange()`
+
+## Select variables with `select()`
+
+## Group data with `group_by()`
+
+## Edit and add new variables with `mutate()`
+
+### Cases when you should use `case_when()`
+
+## Summarise data with `summarise()`
+
+## Joining datasets with `*_join()` 
+

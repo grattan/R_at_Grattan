@@ -1,0 +1,92 @@
+---
+title: "Data Visualisation"
+subtitle: "Session 2 of the _R at Grattan_ series"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+# Using `ggplot2` to create graphs in R
+
+## Concepts
+
+Main ingredients to a `ggplot` chart:
+- Tidy data
+- Aesthetics
+- Geoms
+
+Along with:
+- Facets
+- Colours
+- Labels
+
+
+## Bar charts
+
+`geom_bar` if you have unit-record data and you want the geom to calculate something (count, sum, etc).
+`geom_col` if you want to plot numbers exactly as they are. This is how charts in Excel or Powerpoint work. It is the same as `geom_bar(stat = "identity")`
+
+The `position` argument...
+
+Remember: don't use too many colours (...and other viz tips from the Chart Style Guide)
+
+## Line charts
+
+
+## Scatter plots
+
+`geom_point`
+`geom_smooth`
+
+## Distributions
+
+`geom_histogram`
+`geom_density`
+
+`ggridges::`
+
+
+## Maps
+
+`absmapsdata`
+
+
+
+# Using grattantheme to make and export "Grattan-y" charts 
+
+(current text taken from an email I sent an intern once -- will need to be updated)
+
+The `grattantheme` package is hosted here: https://github.com/mattcowgill/grattantheme
+ 
+You can install it with install_github from the `remotes` package:
+
+```{r}
+install.packages("remotes")
+remotes::install_github("mattcowgill/grattantheme")
+
+library(grattantheme)
+```
+ 
+You can look at explanatory vignette with `vignette("using_grattantheme", "grattantheme")`.
+
+Key functions are:
+ 
+`theme_grattan()` to set the size and default single-colour. Set flipped = TRUE if you have used coord_flip() on the chart.
+ 
+`grattan_fill_manual(n = 2)` to manually set the fill colours of a chart if you have mapped fill to an aesthetic, eg `aes(…, fill = gender)`. Set `n` to the number of colours you have.
+ 
+`grattan_colour_manual(n = 2)` to manually set the colour if you have mapped colour to an aesthetic, eg `aes(…, colour = gender)`.
+ 
+`grattan_y_continuous()` to properly style the Y-axis and align it with zero.
+ 
+`grattan_save()` instead of `ggsave()` to export charts.
+ 
+
+
+
+# Creating simple interactive graphs with `plotly`
+
+`plotly::ggplotly()`

@@ -1,0 +1,21 @@
+---
+title: "Version control"
+subtitle: "Session 8 of the _R at Grattan_ series"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Version control is important and intimidating
+
+Version control is great!
+
+# Github
+s
+We use Github to version-control and share reports in LaTeX, so you're already a bit set-up. 
+
+# Git
+
+Using Git within R Studio...

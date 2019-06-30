@@ -1,0 +1,30 @@
+---
+title: "Different data types"
+subtitle: "Session 4 of the _R at Grattan_ series"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Tidy data
+
+Other data structures
+
+
+# Dates with `lubridate::`
+
+The `lubridate::` package
+
+# Strings with `stringr::`
+
+* Replacing values
+* Matching values
+* Separating columns
+
+# Factors with `forcats::`
+
+* Dangers with factors
+
+

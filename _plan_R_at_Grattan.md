@@ -60,15 +60,17 @@ _The basics required to use R at Grattan. This will be semi-compulsory and desig
     *   forcats functions
     *   Dangers with factors
 *   Joining datasets with *_join(). 
-*   Analysis using weights
+
 
 
 # Session 4: Analysis
 
+* Tidy modelling with broom
+* Analysis using weights
+* Visualising analysis
 
-
+# Session 5: Creating functions
 *   What is a function and when should you create one?
 *   `if` statements
 *   Iterating over code: `for` loops and `map()`
-*   Tidy modelling with broom
 

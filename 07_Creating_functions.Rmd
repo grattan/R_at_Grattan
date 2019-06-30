@@ -1,0 +1,24 @@
+---
+title: "Creating functions"
+subtitle: "Session 7 of the _R at Grattan_ series"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# It can be useful to make your own function
+
+Why on earth would you create your own function?
+
+# Defining simple functions
+
+
+# More complex functions
+
+# Sets of functions
+
+# Using `purrr::map`
+
+# Sharing your useful functions with Grattan

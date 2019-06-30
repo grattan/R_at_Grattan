@@ -1,8 +1,6 @@
 ---
-title: "How to structure analysis in R at Grattan Institute"
-author: 
-  - "Will Mackey"
-  - "Matt Cowgill"
+title: "Session 1: Using R at Grattan"
+subtitle: "Session 1 of the _R at Grattan_ series"
 output: html_document
 ---
 
@@ -18,9 +16,12 @@ You should also be aware of the Grattan Institute R Style Guide, which lives in 
 
 Any compaints or comments about this guide can be sent to Will or Matt, respectively.  
 
-# Using RStudio Projects
+# Why use R?
 
-_comment_
+# Using R projects for a fully reproducible workflow.
+
+_Finally adhering to the 'hit by a bus' rule._
+
 
 Cover:
 1. setwd() and machine-speficic filepaths are bad
@@ -49,14 +50,40 @@ grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
 
 ```
 
-# Keep your scripts manageable
+
+## Keep your scripts manageable
 
 As a general rule of thumb, use 1 script per output. It should be clear what your script is trying to do (use comments!).
 Consider breaking your analysis into pieces - import, tidy, model, visualise.
 Don't include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
 
-# Use subfolders of your project folder
+## Use subfolders of your project folder
 
 Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
 
 Use subfolders
+
+
+# Grattan coding style guide
+
+Short summary of why
+
+Link to style guide
+
+
+# What is the tidyverse and why do we use it?
+
+Introduce following chapters
+
+# An introduction to RMarkdown
+
+
+# Resources in this package
+
+- Starting a piece of analysis ‘cheat sheet’.
+- Updated style guide.
+- Written guide/slides.
+
+
+
+
