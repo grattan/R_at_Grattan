@@ -1,16 +1,8 @@
----
-title: "Data transformation"
-subtitle: "Session 2 of the _R at Grattan_ series"
-output: html_document
----
+# Data transformation
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
+## The pipe
 
-# The pipe
-
-# Key `dplyr` functions:
+## Key `dplyr` functions:
 
 All have the same syntax structure, which enable pipe-chains. 
 

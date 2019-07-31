@@ -1,15 +1,6 @@
----
-title: "Data Visualisation"
-subtitle: "Session 2 of the _R at Grattan_ series"
-output: html_document
----
+# Data Visualisation
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
-
-
-# Using `ggplot2` to create graphs in R
+## Using `ggplot2` to create graphs in R
 
 ## Concepts
 
@@ -63,7 +54,7 @@ The `grattantheme` package is hosted here: https://github.com/mattcowgill/gratta
  
 You can install it with install_github from the `remotes` package:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("remotes")
 remotes::install_github("mattcowgill/grattantheme")
 

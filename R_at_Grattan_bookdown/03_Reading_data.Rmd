@@ -1,16 +1,6 @@
----
-title: "Reading data"
-subtitle: "Session 3 of the _R at Grattan_ series"
-output: html_document
----
+# Reading data
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
-
-
-
-# Importing data
+## Importing data
 
 ## Reading CSV files
 
@@ -23,7 +13,7 @@ Pitfalls:
 
 We can also compress `.csv` files into `.zip` files and read them _directly_ using `read_csv()`:
 
-```{r}
+```{r, eval = FALSE}
 read_csv("data/my_data.zip")
 ```
 

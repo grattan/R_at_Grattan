@@ -1,11 +1,8 @@
----
-title: "Session 1: Using R at Grattan"
-subtitle: "Session 1 of the _R at Grattan_ series"
-output: html_document
----
+# Using R at Grattan {#intro}
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```{r}
+library(tidyverse)
+
 ```
 
 This document sets out good practices for structuring your R analysis at Grattan Institute. Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
@@ -34,7 +31,7 @@ Filepaths should be relative to the working directory, and the working directory
 
 **Good**
 
-```{r}
+```{r, eval = FALSE}
 
 hes <- read_csv("data/HES/hes1516.csv")
 grattan_save("images/expenditure_by_income.pdf")
@@ -42,7 +39,7 @@ grattan_save("images/expenditure_by_income.pdf")
 ```
 
 **Bad**
-```{r}
+```{r, eval = FALSE}
 
 hes <- read_csv("/Users/mcowgill/Desktop/hes1516.csv")
 hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
