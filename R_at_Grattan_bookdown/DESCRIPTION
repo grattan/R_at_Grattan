@@ -1,6 +1,6 @@
-Package: placeholder
+Package: R_at_Grattan
 Type: Book
-Title: Does not matter.
+Title: Using R at Grattan Institute
 Version: 0.0.1
 Imports: bookdown
 Remotes: rstudio/bookdown
