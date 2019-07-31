@@ -2,9 +2,9 @@
 
 ## Importing data
 
-## Reading CSV files
+### Reading CSV files
 
-### `read_csv()`
+#### `read_csv()`
 
 The `read_csv()` function from the `tidyverse` is quicker and smarter than `read.csv` in base R. 
 
@@ -22,17 +22,17 @@ This is useful for two reasons:
 1. The data takes up less room on your computer; and
 2. The original data, which shouldn't ever be directly edited, is protected and cannot be directly edited.
 
-### `data.table::fread()`
+#### `data.table::fread()`
 
 The `fread` function from `data.table` is quicker than both `read.csv` and `read_csv`. 
 
 
 
-## `readxl::read_excel()`
+### `readxl::read_excel()`
 
-## `rio` 
+### `rio` 
 
-## `readabs`
+### `readabs`
 
 
 
@@ -47,14 +47,14 @@ See data directory for a list of microdata available to Grattan.
 
 
 
-# Appropriately renaming variables
+## Appropriately renaming variables
 
 As shown in the style guide
 
 Add `rename_abs` function to a common Grattan package?
 
 
-# Getting to tidy data
+## Getting to tidy data
 
 `pivot_long()` and `pivot_wide()`
 _Make sure these are stable btw_

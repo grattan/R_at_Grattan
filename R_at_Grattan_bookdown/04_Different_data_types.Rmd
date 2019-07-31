@@ -15,7 +15,7 @@ The `lubridate::` package
 * Matching values
 * Separating columns
 
-# Factors with `forcats::`
+## Factors with `forcats::`
 
 * Dangers with factors
 

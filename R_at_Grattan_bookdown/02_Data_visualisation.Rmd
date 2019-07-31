@@ -2,7 +2,7 @@
 
 ## Using `ggplot2` to create graphs in R
 
-## Concepts
+### Concepts
 
 Main ingredients to a `ggplot` chart:
 - Tidy data
@@ -15,7 +15,7 @@ Along with:
 - Labels
 
 
-## Bar charts
+### Bar charts
 
 `geom_bar` if you have unit-record data and you want the geom to calculate something (count, sum, etc).
 `geom_col` if you want to plot numbers exactly as they are. This is how charts in Excel or Powerpoint work. It is the same as `geom_bar(stat = "identity")`
@@ -24,15 +24,15 @@ The `position` argument...
 
 Remember: don't use too many colours (...and other viz tips from the Chart Style Guide)
 
-## Line charts
+### Line charts
 
 
-## Scatter plots
+### Scatter plots
 
 `geom_point`
 `geom_smooth`
 
-## Distributions
+### Distributions
 
 `geom_histogram`
 `geom_density`
@@ -40,13 +40,13 @@ Remember: don't use too many colours (...and other viz tips from the Chart Style
 `ggridges::`
 
 
-## Maps
+### Maps
 
 `absmapsdata`
 
 
 
-# Using grattantheme to make and export "Grattan-y" charts 
+## Using grattantheme to make and export "Grattan-y" charts 
 
 (current text taken from an email I sent an intern once -- will need to be updated)
 
@@ -78,6 +78,6 @@ Key functions are:
 
 
 
-# Creating simple interactive graphs with `plotly`
+## Creating simple interactive graphs with `plotly`
 
 `plotly::ggplotly()`
