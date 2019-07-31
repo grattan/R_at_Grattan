@@ -53,15 +53,23 @@ grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
 
 ## Keep your scripts manageable
 
-As a general rule of thumb, use 1 script per output. It should be clear what your script is trying to do (use comments!).
-Consider breaking your analysis into pieces - import, tidy, model, visualise.
-Don't include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
+As a general rule of thumb, use one script per output. It should be clear what your script is trying to do (use comments!).
+
+Consider breaking your analysis into pieces. For example: 
+
+- 01_import.R
+- 02_tidy.R
+- 03_model.R
+- 04_visualise.R
+
+
+**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
 
 ## Use subfolders of your project folder
 
 Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
 
-Use subfolders
+Use subfolders to clearly separate your code, raw data, and output.
 
 
 # Grattan coding style guide
