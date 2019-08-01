@@ -12,3 +12,19 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.book .book-summary {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    bottom: 0;
+    z-index: 1;
+    width: 300px;
+    color: #F68B33;
+    background: #FEF0DE;
+    border-right: 1px solid #F68B33;
+    -webkit-transition: left 250ms ease;
+    -moz-transition: left 250ms ease;
+    -o-transition: left 250ms ease;
+    transition: left 250ms ease
+}
