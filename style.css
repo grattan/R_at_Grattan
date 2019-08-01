@@ -28,3 +28,13 @@ pre code {
     -o-transition: left 250ms ease;
     transition: left 250ms ease
 }
+
+.book .book-header {
+    overflow: visible;
+    height: 44px;
+    padding: 0 8px;
+    z-index: 2;
+    font-size: .85em;
+    color: #7e888b;
+    background: 0 0
+}
