@@ -2,27 +2,74 @@
 
 ## Using `ggplot2` to create graphs in R
 
+### Set-up and packages
+
+This section uses the package `ggplot2` to visualise data, and `dplyr` functions to manipulate data. Both of these packages are loaded with `tidyverse`. The `scales` package is handy for nicely labelling your axes.
+
+The `grattantheme` package is used to make charts look Grattan-y. The `absmapsdata` package is used to help make maps.
+
+We will use the data generated in previous sections.
+
+```{r}
+library(tidyverse)
+library(grattantheme)
+library(absmapsdata)
+library(scales)
+
+data <- read_csv("data/population_sa4.csv")
+```
+
 ### Concepts
 
-Main ingredients to a `ggplot` chart:
-- Tidy data
-- Aesthetics
-- Geoms
+The `ggplot2` package is based on the `g`rammar of `g`raphics. ...
 
-Along with:
-- Facets
-- Colours
-- Labels
+The main ingredients to a `ggplot` chart:
+- Data: what data should be plotted. e.g. `data`
+- Aesthetics: what variables should be linked to what chart elements. e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
+- Geoms: how the data should be plotted. e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart. 
+
+Each plot you make will be made up of these three elements. The [full list of standard geoms](https://ggplot2.tidyverse.org/reference/) is listed in the `tidyverse` documentation. 
+
+
+To customise your chart, we will also explore:
+- Setting a theme
+- Choosing colours
+- Adding chart labels
+
+Finally, once you're happy with your chart, you need to get it out of R using `ggsave` or `grattan_save` (the Grattan alternative).
 
 
 ### Bar charts
 
-`geom_bar` if you have unit-record data and you want the geom to calculate something (count, sum, etc).
-`geom_col` if you want to plot numbers exactly as they are. This is how charts in Excel or Powerpoint work. It is the same as `geom_bar(stat = "identity")`
+
+`geom_col`: if you want to plot numbers exactly as they are. This is how charts in Excel or Powerpoint work.^[This is the same as `geom_bar(stat = "identity")`]
+
+```{r}
+items <- c("Persons - Total (no.)")
+
+col_data <- data %>% 
+        filter(data_item %in% items) %>% 
+        group_by(year, state, data_item) %>% 
+        summarise(value = sum(value))
+
+col_data %>% 
+        filter(year == 2018) %>% 
+        ggplot() +
+        geom_col(aes(x = state, y = value, fill = year)) + 
+        theme_grattan() + 
+        grattan_y_continuous(labels = comma) +
+        coord_flip()
+        
+```
+
+
 
 The `position` argument...
 
 Remember: don't use too many colours (...and other viz tips from the Chart Style Guide)
+
+
+`geom_bar` if you have unit-record data and you want the geom to calculate something (count, sum, etc).
 
 ### Line charts
 
@@ -81,3 +128,34 @@ Key functions are:
 ## Creating simple interactive graphs with `plotly`
 
 `plotly::ggplotly()`
+
+
+
+## bin: generate data used (before prior sections are constructed)
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(absmapsdata)
+
+data <- read_csv("data/ABS_REGIONAL_ASGS2016_02082019164509969.csv") %>% 
+        clean_names() %>% 
+        select(data_code = measure,
+               data_item,
+               asgs = regiontype,
+               sa4_code_2016 = asgs_2016,
+               sa4_name_2016 = region,
+               year = time,
+               value) %>% 
+        mutate(sa4_code_2016 = as.character(sa4_code_2016)) %>% 
+        left_join(sa42016 %>% select(sa4_code_2016, state_name_2016)) %>% 
+        rename(state = state_name_2016,
+               sa4_code = sa4_code_2016,
+               sa4_name = sa4_name_2016)
+
+write_csv(data, "data/population_sa4.csv")
+
+```
+
+
+
