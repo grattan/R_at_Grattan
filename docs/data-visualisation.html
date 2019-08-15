@@ -153,8 +153,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.3" data-path="data-visualisation.html"><a href="data-visualisation.html#scatter-plots"><i class="fa fa-check"></i><b>2.4.3</b> Scatter plots</a></li>
 <li class="chapter" data-level="2.4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#distributions"><i class="fa fa-check"></i><b>2.4.4</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.5" data-path="data-visualisation.html"><a href="data-visualisation.html#maps"><i class="fa fa-check"></i><b>2.4.5</b> Maps</a></li>
-<li class="chapter" data-level="2.4.6" data-path="data-visualisation.html"><a href="data-visualisation.html#sf-objects"><i class="fa fa-check"></i><b>2.4.6</b> <code>sf</code> objects</a></li>
-<li class="chapter" data-level="2.4.7" data-path="data-visualisation.html"><a href="data-visualisation.html#using-absmapsdata"><i class="fa fa-check"></i><b>2.4.7</b> Using <code>absmapsdata</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>2.5</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 <li class="chapter" data-level="2.6" data-path="data-visualisation.html"><a href="data-visualisation.html#bin-generate-data-used-before-prior-sections-are-constructed"><i class="fa fa-check"></i><b>2.6</b> bin: generate data used (before prior sections are constructed)</a></li>
@@ -610,13 +608,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="maps" class="section level3">
 <h3><span class="header-section-number">2.4.5</span> Maps</h3>
-</div>
-<div id="sf-objects" class="section level3">
-<h3><span class="header-section-number">2.4.6</span> <code>sf</code> objects</h3>
+<div id="sf-objects" class="section level4">
+<h4><span class="header-section-number">2.4.5.1</span> <code>sf</code> objects</h4>
 <p>[what is]</p>
 </div>
-<div id="using-absmapsdata" class="section level3">
-<h3><span class="header-section-number">2.4.7</span> Using <code>absmapsdata</code></h3>
+<div id="using-absmapsdata" class="section level4">
+<h4><span class="header-section-number">2.4.5.2</span> Using <code>absmapsdata</code></h4>
 <p>The <code>absmapsdata</code> contains compressed, and tidied <code>sf</code> objects containing geometric information about ABS data structures. The included objects are:</p>
 <ul>
 <li>Statistical Area 1 2011: <code>sa12011</code></li>
@@ -644,8 +641,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb35-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb35-4" data-line-number="4"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a>
 <a class="sourceLine" id="cb35-5" data-line-number="5"><span class="kw">library</span>(sf)</a></code></pre></div>
+</div>
 <div id="making-choropleth-maps" class="section level4">
-<h4><span class="header-section-number">2.4.7.1</span> Making choropleth maps</h4>
+<h4><span class="header-section-number">2.4.5.3</span> Making choropleth maps</h4>
 <p>Choropleth maps break an area into ‘bits’, and colours each ‘bit’ according to a variable.</p>
 <p>SA4 is the largest non-state statistical area in the ABS ASGS standard.</p>
 <p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa4_name</code> compared to <code>sa4_name_2016</code> – so use the <code>by</code> function to match them.</p>

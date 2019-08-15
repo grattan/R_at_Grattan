@@ -511,10 +511,10 @@ population_diff %>%
 
 ### Maps
 
-### `sf` objects
+#### `sf` objects
 [what is]
 
-### Using `absmapsdata`
+#### Using `absmapsdata`
 
 The `absmapsdata` contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
