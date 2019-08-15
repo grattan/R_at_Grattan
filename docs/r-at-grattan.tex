@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-01}
+    \date{2019-08-15}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -263,40 +263,650 @@ Introduce following chapters
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
 
-\hypertarget{using-ggplot2-to-create-graphs-in-r}{%
-\section{\texorpdfstring{Using \texttt{ggplot2} to create graphs in R}{Using ggplot2 to create graphs in R}}\label{using-ggplot2-to-create-graphs-in-r}}
+{[}intro{]}
+
+\hypertarget{set-up-and-packages}{%
+\section{Set-up and packages}\label{set-up-and-packages}}
+
+This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package is handy for nicely labelling your axes.
+
+The \texttt{grattantheme} package is used to make charts look Grattan-y. The \texttt{absmapsdata} package is used to help make maps.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(grattantheme)}
+\KeywordTok{library}\NormalTok{(absmapsdata)}
+\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(scales)}
+\end{Highlighting}
+\end{Shaded}
+
+For most charts in this chapter, we'll use the \texttt{population\_table} data summarised here. It contains the population in each state between 2013 and 2018:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
+               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
+               \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(year)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{group_by}\NormalTok{(year, state) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop))}
+
+\CommentTok{# Show the first six rows of the new dataset}
+\KeywordTok{head}\NormalTok{(population_table)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   year [1]
+##   year  state     pop
+##   <fct> <chr>   <dbl>
+## 1 2013  ACT    383257
+## 2 2013  NSW   7404032
+## 3 2013  NT     244684
+## 4 2013  Qld   4652824
+## 5 2013  SA    1671488
+## 6 2013  Tas    512231
+\end{verbatim}
 
 \hypertarget{concepts}{%
-\subsection{Concepts}\label{concepts}}
+\section{Concepts}\label{concepts}}
 
-Main ingredients to a \texttt{ggplot} chart:
-- Tidy data
-- Aesthetics
-- Geoms
+The \texttt{ggplot2} package is based on the \texttt{g}rammar of \texttt{g}raphics. \ldots{}
 
-Along with:
-- Facets
-- Colours
-- Labels
+The main ingredients to a \texttt{ggplot} chart:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data}: what data should be plotted. e.g. \texttt{data}
+\item
+  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+\item
+  \textbf{Geoms}: how the data should be plotted. e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+\end{itemize}
+
+Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{<}\NormalTok{DATA}\OperatorTok{>}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\ErrorTok{<}\NormalTok{GEOM_FUNCTION}\OperatorTok{>}\NormalTok{(}
+     \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\OperatorTok{<}\NormalTok{MAPPINGS}\OperatorTok{>}\NormalTok{),}
+     \DataTypeTok{stat =} \OperatorTok{<}\NormalTok{STAT}\OperatorTok{>}\NormalTok{, }
+     \DataTypeTok{position =} \OperatorTok{<}\NormalTok{POSITION}\OperatorTok{>}
+\StringTok{  }\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\ErrorTok{<}\NormalTok{COORDINATE_FUNCTION}\OperatorTok{>}\StringTok{ }\OperatorTok{+}
+\StringTok{  }\ErrorTok{<}\NormalTok{FACET_FUNCTION}\OperatorTok{>}
+\end{Highlighting}
+\end{Shaded}
+
+For example, you can plot a column chart by passing the \texttt{population\_table} dataset into \texttt{ggplot()} (``make a chart wth this data''). This produces an empty plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/empty plot-1.pdf}
+
+Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/empty with aes-1.pdf}
+
+Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to plot them. For this we use \texttt{geoms}. Tell it to plot a column chart by using \texttt{geom\_col}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/complete plot-1.pdf}
+
+Great! Although stacking populations is a bit silly. You can adjust the way \texttt{geoms} work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using \texttt{position\ =\ "dodge"}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/with dodge-1.pdf}
+
+That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
+
+\begin{itemize}
+\tightlist
+\item
+  Grattanising your charts and choosing colours
+\item
+  Saving charts according to Grattan templates
+\item
+  Making bar, line, scatter and distribution plots
+\item
+  Making maps and interactive charts
+\item
+  Adding chart labels
+\end{itemize}
+
+\hypertarget{making-grattan-y-charts}{%
+\section{Making Grattan-y charts}\label{making-grattan-y-charts}}
+
+The \texttt{grattantheme} package contains functions that help \emph{Grattanise} your charts. It is hosted here: \url{https://github.com/mattcowgill/grattantheme}
+
+You can install it with \texttt{devtools::install\_github} from the package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The key functions of \texttt{grattantheme} are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{theme\_grattan}: set size, font and colour defaults that adhere to the Grattan style guide.
+\item
+  \texttt{grattan\_y\_continuous}: sets the right defaults for a continuous y-axis.
+\item
+  \texttt{grattan\_colour\_continuous}: pulls colours from the Grattan colour palete for \texttt{colour} aesthetics.
+\item
+  \texttt{grattan\_fill\_continuous}: pulls colours from the Grattan colour palete for \texttt{fill} aesthetics.
+\item
+  \texttt{grattan\_save}: a save function that exports charts in correct report or presentation dimensions.
+\end{itemize}
+
+This section will run through some examples of \emph{Grattanising} charts. The \texttt{ggplot} functions are explored in more detail in the next section.
+
+\hypertarget{making-grattan-charts}{%
+\subsection{Making Grattan charts}\label{making-grattan-charts}}
+
+Start with a column chart, similar to the one made above:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart <-}\StringTok{ }\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{title =} \StringTok{"NSW and Victoria are booming"}\NormalTok{,}
+             \DataTypeTok{subtitle =} \StringTok{"Population by state, 2013-2018"}\NormalTok{,}
+             \DataTypeTok{caption =} \StringTok{"Source: ABS Regional Dataset (2019)"}\NormalTok{)}
+
+\NormalTok{base_chart}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/base_chart-1.pdf}
+
+Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/add theme_grattan-1.pdf}
+
+Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This function takes the same arguments as \texttt{scale\_y\_continuous}, so you can add \texttt{labels\ =\ comma()} to reformat the y-axis labels:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/add grattan_y_continuous-1.pdf}
+
+To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the number of colours you need (six, in this case):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pop_chart <-}\StringTok{ }\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{)}
+
+\NormalTok{pop_chart}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/add fill-1.pdf}
+
+Nice chart! Now you can save it and share it with the world.
+
+\hypertarget{saving-grattan-charts}{%
+\subsection{Saving Grattan charts}\label{saving-grattan-charts}}
+
+The \texttt{grattan\_save} function saves your charts according to Grattan templates. It takes these arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{filename}: the path, name and file-type of your saved chart. eg: \texttt{"atlas/population\_chart.pdf"}.
+\item
+  \texttt{object}: the R object that you want to save. eg: \texttt{pop\_chart}. If left blank, it grabs the last chart that was displayed.
+\item
+  \texttt{type}: the Grattan template to be used. This is one of:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{"normal"} The default. Use for normal Grattan report charts, or to paste into a 4:3 Powerpoint slide. Width: 22.2cm, height: 14.5cm.
+  \item
+    \texttt{"normal\_169"} Only useful for pasting into a 16:9 format Grattan Powerpoint slide. Width: 30cm, height: 14.5cm.
+  \item
+    \texttt{"tiny"} Fills the width of a column in a Grattan report, but is shorter than usual. Width: 22.2cm, height: 11.1cm.
+  \item
+    \texttt{"wholecolumn"} Takes up a whole column in a Grattan report. Width: 22.2cm, height: 22.2cm.
+  \item
+    \texttt{"fullpage"} Fills a whole page of a Grattan report. Width: 44.3cm, height: 22.2cm.
+  \item
+    \texttt{"fullslide"} Creates an image that looks like a 4:3 Grattan Powerpoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
+  \item
+    \texttt{"fullslide\_169"} Creates` an image that looks like a 16:9 Grattan Powerpoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
+  \item
+    \texttt{"blog"} Creates a 4:3 image that looks like a Grattan Powerpoint slide, but with less border whitespace than `fullslide'."
+  \item
+    \texttt{"fullslide\_44"\ Creates} an image that looks like a 4:4 Grattan Powerpoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
+  \item
+    Set \texttt{type\ =\ "all"} to save your chart in all available sizes.
+  \end{itemize}
+\item
+  \texttt{height}: override the height set by \texttt{type}. This can be useful for really long charts in blogposts.
+\item
+  \texttt{save\_data}: exports a \texttt{csv} file containing the data used in the chart.
+\item
+  \texttt{force\_labs}: override the removal of labels for a particular \texttt{type}. eg \texttt{force\_labs\ =\ TRUE} will keep the y-axis label.
+\end{itemize}
+
+To save the \texttt{pop\_chart} plot created above as a whole-column chart for a \textbf{report}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_report.pdf"}\NormalTok{, pop_chart, }\DataTypeTok{type =} \StringTok{"wholecolumn"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{atlas/population_chart_report.png}
+
+To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_presentation.pdf"}\NormalTok{, pop_chart, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{atlas/population_chart_presentation.png}
+
+Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_blog.png"}\NormalTok{, pop_chart, }
+             \DataTypeTok{type =} \StringTok{"blog"}\NormalTok{, }\DataTypeTok{height =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{atlas/population_chart_blog.png}
+
+And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
+
+\hypertarget{chart-cookbook}{%
+\section{Chart cookbook}\label{chart-cookbook}}
+
+This section takes you through a few often-used chart types.
 
 \hypertarget{bar-charts}{%
 \subsection{Bar charts}\label{bar-charts}}
 
-\texttt{geom\_bar} if you have unit-record data and you want the geom to calculate something (count, sum, etc).
-\texttt{geom\_col} if you want to plot numbers exactly as they are. This is how charts in Excel or Powerpoint work. It is the same as \texttt{geom\_bar(stat\ =\ "identity")}
+Bar charts are made with \texttt{geom\_bar} or \texttt{geom\_col}. Creating a bar chart will look something like this:
 
-The \texttt{position} argument\ldots{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{<}\NormalTok{data}\OperatorTok{>}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \OperatorTok{<}\NormalTok{xvar}\OperatorTok{>}\NormalTok{, }\DataTypeTok{y =} \OperatorTok{<}\NormalTok{yvar}\OperatorTok{>}\NormalTok{),}
+     \DataTypeTok{stat =} \OperatorTok{<}\NormalTok{STAT}\OperatorTok{>}\NormalTok{, }
+     \DataTypeTok{position =} \OperatorTok{<}\NormalTok{POSITION}\OperatorTok{>}
+\StringTok{  }\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-Remember: don't use too many colours (\ldots and other viz tips from the Chart Style Guide)
+It has two key arguments: \texttt{stat} and \texttt{position}.
+
+First, \texttt{stat} defines what kind of \emph{operation} the function will do on the dataset before plotting. Some options are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{"count"}, the default: count the number of observations in a particular group, and plot that number. This is useful when you're using microdata. When this is the case, there is no need for a \texttt{y} aesthetic.
+\item
+  \texttt{"sum"}: sum the values of the \texttt{y} aesthetic.
+\item
+  \texttt{"identity"}: directly report the values of the \texttt{y} aesthetic. This is how Powerpoint and Excel charts work.
+\end{itemize}
+
+You can use \texttt{geom\_col} instead, as a shortcut for \texttt{geom\_bar(stat\ =\ "identity)}.
+
+Second, \texttt{position}, dictates how multiple bars occupying the same x-axis position will positioned. The options are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{"stack"}, the default: bars in the same group are stacked atop one another.
+\item
+  \texttt{"dodge"}: bars in the same group are positioned next to one another.
+\item
+  \texttt{"fill"}: bars in the same group are stacked and all fill to 100 per cent.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/bar2-1.pdf}
+
+You can also \textbf{order} the groups in your chart by a variable. If you want to order states by population, use \texttt{reorder} inside \texttt{aes}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }\CommentTok{# reorder state by negative population}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/bar3-1.pdf}
+
+To flip the chart -- a useful move when you have long labels -- add \texttt{coord\_flipped} (ie `flip coordinates') and tell \texttt{theme\_grattan} that the plot is flipped using \texttt{flipped\ =\ TRUE}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{  }\CommentTok{# flip the coordinates}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# tell theme_grattan}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/bar4-1.pdf}
 
 \hypertarget{line-charts}{%
 \subsection{Line charts}\label{line-charts}}
 
+A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} how to connect individual lines.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{colour =}\NormalTok{ state,}
+                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
+## than six colours is not recommended.
+\end{verbatim}
+
+\includegraphics{r-at-grattan_files/figure-latex/line1-1.pdf}
+
+You can also add dots for each year by layering \texttt{geom\_point} on top of \texttt{geom\_line}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{colour =}\NormalTok{ state,}
+                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
+## than six colours is not recommended.
+\end{verbatim}
+
+\includegraphics{r-at-grattan_files/figure-latex/line2-1.pdf}
+
+If you wanted to show each state individually, you could \textbf{facet} your chart so that a separate plot was produced for each state:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
+\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/line3-1.pdf}
+
+To tidy this up, we can:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  shorten the years to be ``13'', ``14'', etc instead of ``2013'', ``2014'', etc (via the \texttt{x} aesthetic)
+\item
+  shorten the y-axis labels to ``millions'' (via the \texttt{y} aesthetic)
+\item
+  add a black horizontal line at the bottom of each facet
+\item
+  give the facets a bit of room by adjusting \texttt{panel.spacing}
+\item
+  define our own x-axis label breaks to just show \texttt{13}, \texttt{15} and \texttt{17}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
+\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{substr}\NormalTok{(year, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\CommentTok{# 1: just take the last two characters}
+                   \DataTypeTok{y =}\NormalTok{ pop }\OperatorTok{/}\StringTok{ }\FloatTok{1e6}\NormalTok{, }\CommentTok{# 2: divide population by one million}
+                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# 3: add horizontal line at the bottom}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.spacing =} \KeywordTok{unit}\NormalTok{(}\DecValTok{10}\NormalTok{, }\StringTok{"mm"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\CommentTok{# 4: add panel spacing}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\StringTok{"13"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"17"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\CommentTok{# 5: define our own label breaks}
+\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/line4-1.pdf}
+
 \hypertarget{scatter-plots}{%
 \subsection{Scatter plots}\label{scatter-plots}}
 
-\texttt{geom\_point}
-\texttt{geom\_smooth}
+Scatter plots require \texttt{x} and \texttt{y} aesthetics. These can then be coloured and facetted.
+
+First, create a dataset that we'll use for scatter plots. Take the \texttt{population\_table} dataset and transform it to have one variable for population in 2013, and another for population in 2018:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
+               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long),}
+               \DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
+               \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(glue}\OperatorTok{::}\KeywordTok{glue}\NormalTok{(}\StringTok{"y\{year\}"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"y2013"}\NormalTok{, }\StringTok{"y2018"}\NormalTok{),}
+\NormalTok{               data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{,}
+\NormalTok{               sa4_name }\OperatorTok{!=}\StringTok{ "Other Territories"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{group_by}\NormalTok{(year, state, sa4_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{spread}\NormalTok{(year, pop) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop_change =} \DecValTok{100} \OperatorTok{*}\StringTok{ }\NormalTok{(y2018 }\OperatorTok{/}\StringTok{ }\NormalTok{y2013 }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,}
+                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/scatter1-1.pdf}
+
+It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with \texttt{geom\_smooth}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
+                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/scatter2-1.pdf}
+
+You could colour-code positive and negative changes from within the \texttt{geom\_point} aesthetic. Making a change there won't pass through to the \texttt{geom\_smooth} aesthetic, so your line-of-best-fit will apply to all data points.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
+                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ pop_change }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{),}
+                   \DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/scatter3-1.pdf}
+
+Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
+\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
+                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ pop_change }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{),}
+                   \DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/scatter4-1.pdf}
 
 \hypertarget{distributions}{%
 \subsection{Distributions}\label{distributions}}
@@ -309,44 +919,153 @@ Remember: don't use too many colours (\ldots and other viz tips from the Chart S
 \hypertarget{maps}{%
 \subsection{Maps}\label{maps}}
 
-\texttt{absmapsdata}
+\hypertarget{sf-objects}{%
+\subsection{\texorpdfstring{\texttt{sf} objects}{sf objects}}\label{sf-objects}}
 
-\hypertarget{using-grattantheme-to-make-and-export-grattan-y-charts}{%
-\section{Using grattantheme to make and export ``Grattan-y'' charts}\label{using-grattantheme-to-make-and-export-grattan-y-charts}}
+{[}what is{]}
 
-(current text taken from an email I sent an intern once -- will need to be updated)
+\hypertarget{using-absmapsdata}{%
+\subsection{\texorpdfstring{Using \texttt{absmapsdata}}{Using absmapsdata}}\label{using-absmapsdata}}
 
-The \texttt{grattantheme} package is hosted here: \url{https://github.com/mattcowgill/grattantheme}
+The \texttt{absmapsdata} contains compressed, and tidied \texttt{sf} objects containing geometric information about ABS data structures. The included objects are:
 
-You can install it with install\_github from the \texttt{remotes} package:
+\begin{itemize}
+\tightlist
+\item
+  Statistical Area 1 2011: \texttt{sa12011}
+\item
+  Statistical Area 1 2016: \texttt{sa12016}
+\item
+  Statistical Area 2 2011: \texttt{sa22011}
+\item
+  Statistical Area 2 2016: \texttt{sa22016}
+\item
+  Statistical Area 3 2011: \texttt{sa32011}
+\item
+  Statistical Area 3 2016: \texttt{sa32016}
+\item
+  Statistical Area 4 2011: \texttt{sa42011}
+\item
+  Statistical Area 4 2016: \texttt{sa42016}
+\item
+  Greater Capital Cities 2011: \texttt{gcc2011}
+\item
+  Greater Capital Cities 2016: \texttt{gcc2016}
+\item
+  Remoteness Areas 2011: \texttt{ra2011}
+\item
+  Remoteness Areas 2016: \texttt{ra2016}
+\item
+  State 2011: \texttt{state2011}
+\item
+  State 2016: \texttt{state2016}
+\item
+  Commonwealth Electoral Divisions 2018: \texttt{ced2018}
+\item
+  State Electoral Divisions 2018:\texttt{sed2018}
+\item
+  Local Government Areas 2016: \texttt{lga2016}
+\item
+  Local Government Areas 2018: \texttt{lga2018}
+\end{itemize}
+
+You can install the package from Github. You will also need the \texttt{sf} package installed to handle the \texttt{sf} objects.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(absmapsdata)}
 
-\KeywordTok{library}\NormalTok{(grattantheme)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"sf"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(sf)}
 \end{Highlighting}
 \end{Shaded}
 
-You can look at explanatory vignette with \texttt{vignette("using\_grattantheme",\ "grattantheme")}.
+\hypertarget{making-choropleth-maps}{%
+\subsubsection{Making choropleth maps}\label{making-choropleth-maps}}
 
-Key functions are:
+Choropleth maps break an area into `bits', and colours each `bit' according to a variable.
 
-\texttt{theme\_grattan()} to set the size and default single-colour. Set flipped = TRUE if you have used coord\_flip() on the chart.
+SA4 is the largest non-state statistical area in the ABS ASGS standard.
 
-\texttt{grattan\_fill\_manual(n\ =\ 2)} to manually set the fill colours of a chart if you have mapped fill to an aesthetic, eg \texttt{aes(\ldots{},\ fill\ =\ gender)}. Set \texttt{n} to the number of colours you have.
+You can join the \texttt{sf} objects from \texttt{absmapsdata} to your dataset using \texttt{left\_join}. The variable names might be different -- eg \texttt{sa4\_name} compared to \texttt{sa4\_name\_2016} -- so use the \texttt{by} function to match them.
 
-\texttt{grattan\_colour\_manual(n\ =\ 2)} to manually set the colour if you have mapped colour to an aesthetic, eg \texttt{aes(\ldots{},\ colour\ =\ gender)}.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{map_data <-}\StringTok{ }\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"sa4_name"}\NormalTok{ =}\StringTok{ "sa4_name_2016"}\NormalTok{))}
 
-\texttt{grattan\_y\_continuous()} to properly style the Y-axis and align it with zero.
+\KeywordTok{head}\NormalTok{(map_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{       }\KeywordTok{select}\NormalTok{(sa4_name, geometry))}
+\end{Highlighting}
+\end{Shaded}
 
-\texttt{grattan\_save()} instead of \texttt{ggsave()} to export charts.
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   state [2]
+##   state sa4_name                                                   geometry
+##   <chr> <chr>                                            <MULTIPOLYGON [°]>
+## 1 ACT   Australian Capita~ (((148.8041 -35.71402, 148.8018 -35.7121, 148.7~
+## 2 NSW   Capital Region     (((150.3113 -35.66588, 150.3126 -35.66814, 150.~
+## 3 NSW   Central Coast      (((151.315 -33.55582, 151.3159 -33.55503, 151.3~
+## 4 NSW   Central West       (((150.6107 -33.06614, 150.6117 -33.07051, 150.~
+## 5 NSW   Coffs Harbour - G~ (((153.2785 -29.91874, 153.2773 -29.92067, 153.~
+## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.~
+\end{verbatim}
+
+You then plot a map like you would any other \texttt{ggplot}: provide your data, choose your \texttt{aes} and your \texttt{geom}. For maps with \texttt{sf} objects, the key \textbf{aesthetic} is \texttt{geometry\ =\ geometry}, and the \textbf{geom} is \texttt{geom\_sf}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{map <-}\StringTok{ }\NormalTok{map_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry,}
+                   \DataTypeTok{fill =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{lwd =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_void}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
+                            \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
+                            \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{5}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population change"}\NormalTok{)}
+
+\NormalTok{map}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r-at-grattan_files/figure-latex/map1-1.pdf}
 
 \hypertarget{creating-simple-interactive-graphs-with-plotly}{%
 \section{\texorpdfstring{Creating simple interactive graphs with \texttt{plotly}}{Creating simple interactive graphs with plotly}}\label{creating-simple-interactive-graphs-with-plotly}}
 
 \texttt{plotly::ggplotly()}
+
+\hypertarget{bin-generate-data-used-before-prior-sections-are-constructed}{%
+\section{bin: generate data used (before prior sections are constructed)}\label{bin-generate-data-used-before-prior-sections-are-constructed}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(janitor)}
+\KeywordTok{library}\NormalTok{(absmapsdata)}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/ABS_REGIONAL_ASGS2016_02082019164509969.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{clean_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{select}\NormalTok{(}\DataTypeTok{data_code =}\NormalTok{ measure,}
+\NormalTok{               data_item,}
+               \DataTypeTok{asgs =}\NormalTok{ regiontype,}
+               \DataTypeTok{sa4_code_2016 =}\NormalTok{ asgs_}\DecValTok{2016}\NormalTok{,}
+               \DataTypeTok{sa4_name_2016 =}\NormalTok{ region,}
+               \DataTypeTok{year =}\NormalTok{ time,}
+\NormalTok{               value) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sa4_code_2016 =} \KeywordTok{as.character}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{, state_name_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{state =}\NormalTok{ state_name_}\DecValTok{2016}\NormalTok{,}
+               \DataTypeTok{sa4_code =}\NormalTok{ sa4_code_}\DecValTok{2016}\NormalTok{,}
+               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{)}
+
+\KeywordTok{write_csv}\NormalTok{(data, }\StringTok{"data/population_sa4.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{reading-data}{%
 \chapter{Reading data}\label{reading-data}}
