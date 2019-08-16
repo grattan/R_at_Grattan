@@ -3,7 +3,9 @@ title: "Using R at Grattan Institute"
 author: "Will Mackey and Matt Cowgill"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+    highlight: tango
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
