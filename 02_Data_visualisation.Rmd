@@ -4,7 +4,7 @@
 
 ## Set-up and packages
 
-This section uses the package `ggplot2` to visualise data, and `dplyr` functions to manipulate data. Both of these packages are loaded with `tidyverse`. The `scales` package is handy for nicely labelling your axes.
+This section uses the package `ggplot2` to visualise data, and `dplyr` functions to manipulate data. Both of these packages are loaded with `tidyverse`. The `scales` package helps with labelling your axes.
 
 The `grattantheme` package is used to make charts look Grattan-y. The `absmapsdata` package is used to help make maps.
 
@@ -21,8 +21,6 @@ For most charts in this chapter, we'll use the `population_table` data summarise
 
 ```{r get data, message = FALSE}
 population_table <- read_csv("data/population_sa4.csv") %>% 
-        mutate(state_long = state,
-               state = strayr::strayr(state_long)) %>% 
         filter(data_item == "Persons - Total (no.)") %>% 
         mutate(pop = as.numeric(value),
                year = as.factor(year)) %>% 
@@ -67,9 +65,7 @@ population_table %>%
 ```
 
 
-Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_:
-
-```{r empty with aes}
+Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_:```{r empty with aes}
 population_table %>% 
         ggplot(aes(x = state,
                    y = pop,
@@ -578,7 +574,7 @@ map <- map_data %>%
         grattan_fill_manual(discrete = FALSE, 
                             palette = "diverging",
                             limits = c(-20, 20),
-                            breaks = seq(-20, 20, 5)) +
+                            breaks = seq(-20, 20, 10)) +
   labs(fill = "Population change")
 
 map
@@ -612,8 +608,10 @@ data <- read_csv("data/ABS_REGIONAL_ASGS2016_02082019164509969.csv") %>%
         left_join(sa42016 %>% select(sa4_code_2016, state_name_2016)) %>% 
         rename(state = state_name_2016,
                sa4_code = sa4_code_2016,
-               sa4_name = sa4_name_2016)
-
+               sa4_name = sa4_name_2016) %>% 
+        mutate(state_long = state,
+               state = strayr::strayr(state_long))
+               
 write_csv(data, "data/population_sa4.csv")
 
 ```
