@@ -1,17 +1,19 @@
 Package: RatGrattan
-Type: Book
-Title: Use R at Grattan Institute
-Version: 0.0.900
+Title: Guide to using R at Grattan Institute
+Version: 0.0.0.9000
 Authors@R: c(
-    person(given = "Will", family = "Mackey", 
-    email = "william.mackey@grattaninstitute.edu.au",
-    role = c("aut", "cre")),
-    person(given = "Matt", family = "Cowgill", 
-    email = "matthew.cowgill@grattaninstitute.edu.au",
-    role = "aut"))
-Maintainer: 
-Description: A guide to using R at Grattan
+    person(given = "Will",
+           family = "Mackey",
+           role = c("aut", "cre"),
+           email = "william.mackey@grattaninstitute.edu.au"),
+    person(given = "Matt",
+           family = "Cowgill",
+           role = "aut",
+           email = "matthew.cowgill@grattaninstitute.du.au"))
+Description: How to use R at Grattan Institute.
 License: GPL-3
+Encoding: UTF-8
+LazyData: true
 Depends: R (>= 3.5.0)
 Imports:
     bookdown,
