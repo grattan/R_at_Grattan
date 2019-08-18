@@ -147,14 +147,14 @@ base_chart
 
 Let's make it Grattany. First, add `theme_grattan` to your plot:
 
-```{r add theme_grattan}
+```{r add_theme_grattan}
 base_chart +
         theme_grattan()
 ```
 
 Then `grattan_y_continuous` to align the x-axis with zero. This function takes the same arguments as `scale_y_continuous`, so you can add `labels = comma()` to reformat the y-axis labels:
 
-```{r add grattan_y_continuous}
+```{r add_grattan_y_continuous}
 base_chart +
         theme_grattan() +
         grattan_y_continuous(labels = comma)
@@ -162,7 +162,7 @@ base_chart +
 
 To define `fill` colours, use `grattan_fill_manual` with the number of colours you need (six, in this case):
 
-```{r add fill}
+```{r add_fill}
 pop_chart <- base_chart +
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
@@ -196,7 +196,7 @@ The `grattan_save` function saves your charts according to Grattan templates. It
   
 To save the `pop_chart` plot created above as a whole-column chart for a **report**:
   
-```{r save show1, eval = FALSE}
+```{r save_show1, eval = FALSE}
 grattan_save("atlas/population_chart_report.pdf", pop_chart, type = "wholecolumn")
 ```
 
@@ -209,34 +209,34 @@ knitr::include_graphics("atlas/population_chart_report.png")
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
 
-```{r save show2, eval = FALSE}
+```{r save_show2, eval = FALSE}
 grattan_save("atlas/population_chart_presentation.pdf", pop_chart, type = "fullslide")
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-```{r save hide2, message = FALSE, echo = FALSE, include = FALSE}
+```{r save_hide2, message = FALSE, echo = FALSE, include = FALSE}
 grattan_save("atlas/population_chart_presentation.png", pop_chart, type = "fullslide")
 ```
 
-```{r knit hide1, message = FALSE, echo = FALSE}
+```{r knit_hide1, message = FALSE, echo = FALSE}
 knitr::include_graphics("atlas/population_chart_presentation.png")
 ```
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
 
-```{r save show3, eval = FALSE}
+```{r save_show3, eval = FALSE}
 grattan_save("atlas/population_chart_blog.png", pop_chart, 
              type = "blog", height = 50)
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-```{r save hide3, message = FALSE, echo = FALSE, include = FALSE}
+```{r save_hide3, message = FALSE, echo = FALSE, include = FALSE}
 grattan_save("atlas/population_chart_blog.png", pop_chart, 
              type = "blog", height = 50)
 ```
 
-```{r knit hide2, message = FALSE, echo = FALSE}
+```{r knit_hide2, message = FALSE, echo = FALSE}
 knitr::include_graphics("atlas/population_chart_blog.png")
 ```
 
@@ -335,7 +335,7 @@ population_table %>%
         geom_line() +
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(8) +
+        grattan_colour_manual(9) +
         labs(x = "")
 ```
 
@@ -351,7 +351,7 @@ population_table %>%
         geom_point(size = 2) + 
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(8) + 
+        grattan_colour_manual(9) + 
         labs(x = "")
 ```
 

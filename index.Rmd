@@ -14,6 +14,14 @@ github-repo: grattan/R_at_Grattan
 description: "How to use R good. In development."
 ---
 
-# Introduction {-}
+# Welcome {-}
 
-R is good and cool. Do you want to be good and cool? Use R!
+This guide is designed for _everyone_ using R at Grattan Institute. 
+
+It does two things:
+1. Shows you how to use R to complete common analytical tasks you'll face at Grattan.
+2. Sets out some guidelines and good practices when using R at Grattan.
+
+As a guide to using R, this document is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free.
+
+Any complaints or comments about this guide can be sent to Will or Matt, respectively. 
