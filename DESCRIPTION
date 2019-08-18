@@ -1,6 +1,21 @@
-Package: R_at_Grattan
+Package: R at Grattan
 Type: Book
-Title: Using R at Grattan Institute
-Version: 0.0.1
-Imports: bookdown
-Remotes: rstudio/bookdown
+Title: Use R at Grattan Institute
+Version: 0.0.900
+Authors@R: c(person("Will", "Mackey", email = "william.mackey@grattaninstitute.edu.au",
+                role = "aut", "cre"),
+            person("Matt", "Cowgill", email = "matthew.cowgill@grattaninstitute.edu.au", 
+                role = c("aut")))
+Description: A guide to using R at Grattan
+License: GPL-3
+Depends: R (>= 3.5.0)
+Imports:
+    bookdown,
+    tidyverse,
+    grattantheme,
+    absmapsdata,
+    sf
+Remotes:
+    rstudio/bookdown,
+    mattcowgill/grattantheme,
+    wfmackey/absmapsdata
