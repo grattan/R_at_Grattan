@@ -1,0 +1,15 @@
+# Introduction to R
+
+Most people reading this guide will know what R is. Many will have used R before. But if you don't - that's OK! 
+
+## What is R?
+
+## Why use R? 
+
+## What is RStudio?
+
+## Installing R and RStudio
+
+## What is a package?
+
+## Installing packages
