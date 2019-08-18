@@ -9,3 +9,9 @@ before_script:
 script:
   - ./_build.sh
   - ./_deploy.sh
+
+addons:
+  apt:
+    packages:
+      - libudunits2-dev
+      - libxml2-dev
