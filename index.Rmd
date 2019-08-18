@@ -17,3 +17,7 @@ description: "How to use R good. In development."
 # Introduction {-}
 
 R is good and cool. Do you want to be good and cool? Use R!
+
+# What is R?
+
+# Why use R? {-}

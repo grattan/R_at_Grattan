@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-15}
+    \date{2019-08-18}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -148,6 +148,13 @@
 
 R is good and cool. Do you want to be good and cool? Use R!
 
+\hypertarget{what-is-r}{%
+\chapter{What is R?}\label{what-is-r}}
+
+\hypertarget{why-use-r}{%
+\chapter*{Why use R?}\label{why-use-r}}
+\addcontentsline{toc}{chapter}{Why use R?}
+
 \hypertarget{intro}{%
 \chapter{Using R at Grattan}\label{intro}}
 
@@ -165,8 +172,8 @@ You should also be aware of the Grattan Institute R Style Guide, which lives in 
 
 Any compaints or comments about this guide can be sent to Will or Matt, respectively.
 
-\hypertarget{why-use-r}{%
-\section{Why use R?}\label{why-use-r}}
+\hypertarget{why-use-r-1}{%
+\section{Why use R?}\label{why-use-r-1}}
 
 It's good and cool!
 
@@ -268,7 +275,7 @@ Introduce following chapters
 \hypertarget{set-up-and-packages}{%
 \section{Set-up and packages}\label{set-up-and-packages}}
 
-This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package is handy for nicely labelling your axes.
+This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package helps with labelling your axes.
 
 The \texttt{grattantheme} package is used to make charts look Grattan-y. The \texttt{absmapsdata} package is used to help make maps.
 
@@ -287,8 +294,6 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{population_table <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
-               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{filter}\NormalTok{(data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
                \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(year)) }\OperatorTok{%>%}\StringTok{ }
@@ -303,14 +308,14 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \begin{verbatim}
 ## # A tibble: 6 x 3
 ## # Groups:   year [1]
-##   year  state     pop
-##   <fct> <chr>   <dbl>
-## 1 2013  ACT    383257
-## 2 2013  NSW   7404032
-## 3 2013  NT     244684
-## 4 2013  Qld   4652824
-## 5 2013  SA    1671488
-## 6 2013  Tas    512231
+##   year  state                            pop
+##   <fct> <chr>                          <dbl>
+## 1 2013  Australian Capital Territory  383257
+## 2 2013  New South Wales              7404032
+## 3 2013  Northern Territory            241722
+## 4 2013  Other Territories               2962
+## 5 2013  Queensland                   4652824
+## 6 2013  South Australia              1671488
 \end{verbatim}
 
 \hypertarget{concepts}{%
@@ -323,11 +328,11 @@ The main ingredients to a \texttt{ggplot} chart:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data}: what data should be plotted. e.g. \texttt{data}
+  \textbf{Data}: what data should be plotted. e.g.~\texttt{data}
 \item
-  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
 \item
-  \textbf{Geoms}: how the data should be plotted. e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \textbf{Geoms}: how the data should be plotted. e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
@@ -356,18 +361,7 @@ For example, you can plot a column chart by passing the \texttt{population\_tabl
 
 \includegraphics{r-at-grattan_files/figure-latex/empty plot-1.pdf}
 
-Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{r-at-grattan_files/figure-latex/empty with aes-1.pdf}
+Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:\texttt{\{r\ empty\ with\ aes\}\ population\_table\ \%\textgreater{}\%\ \ \ \ \ \ \ \ \ \ ggplot(aes(x\ =\ state,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ pop,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fill\ =\ year))}
 
 Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to plot them. For this we use \texttt{geoms}. Tell it to plot a column chart by using \texttt{geom\_col}:
 
@@ -477,7 +471,7 @@ Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add theme_grattan-1.pdf}
+\includegraphics{r-at-grattan_files/figure-latex/add_theme_grattan-1.pdf}
 
 Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This function takes the same arguments as \texttt{scale\_y\_continuous}, so you can add \texttt{labels\ =\ comma()} to reformat the y-axis labels:
 
@@ -489,7 +483,7 @@ Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This functio
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add grattan_y_continuous-1.pdf}
+\includegraphics{r-at-grattan_files/figure-latex/add_grattan_y_continuous-1.pdf}
 
 To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the number of colours you need (six, in this case):
 
@@ -504,7 +498,7 @@ To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the num
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add fill-1.pdf}
+\includegraphics{r-at-grattan_files/figure-latex/add_fill-1.pdf}
 
 Nice chart! Now you can save it and share it with the world.
 
@@ -561,7 +555,7 @@ To save the \texttt{pop\_chart} plot created above as a whole-column chart for a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_report.png}
+\includegraphics[width=38.76in]{atlas/population_chart_report}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
@@ -571,7 +565,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_presentation.png}
+\includegraphics[width=44.44in]{atlas/population_chart_presentation}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
@@ -582,7 +576,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_blog.png}
+\includegraphics[width=44.44in]{atlas/population_chart_blog}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
@@ -704,7 +698,7 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 \StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -729,7 +723,7 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 \StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1025,7 +1019,7 @@ You then plot a map like you would any other \texttt{ggplot}: provide your data,
 \StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
                             \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
                             \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
-                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{5}\NormalTok{)) }\OperatorTok{+}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population change"}\NormalTok{)}
 
 \NormalTok{map}
@@ -1061,8 +1055,10 @@ You then plot a map like you would any other \texttt{ggplot}: provide your data,
 \StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{, state_name_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{state =}\NormalTok{ state_name_}\DecValTok{2016}\NormalTok{,}
                \DataTypeTok{sa4_code =}\NormalTok{ sa4_code_}\DecValTok{2016}\NormalTok{,}
-               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{)}
-
+               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
+               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long))}
+               
 \KeywordTok{write_csv}\NormalTok{(data, }\StringTok{"data/population_sa4.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
