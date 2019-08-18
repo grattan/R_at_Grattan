@@ -5,6 +5,8 @@ language:
     chapter_name: ""
 delete_merged_file: true
 
+new_session: yes
+
 rmd_files: [
   "index.rmd",
   "Introduction_to_R.Rmd",
