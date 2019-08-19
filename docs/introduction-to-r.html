@@ -66,7 +66,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -138,8 +138,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.0.1</b> Why use script-based software?</a></li>
-<li class="chapter" data-level="2.0.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.0.2</b> Why use R specifically?</a></li>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Using R at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#using-r-projects-for-a-fully-reproducible-workflow."><i class="fa fa-check"></i><b>3.1</b> Using R projects for a fully reproducible workflow.</a><ul>
@@ -245,26 +245,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>R also has some overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.</p>
 <p>R is quite old, having been first released publicly in 1995, but it’s also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as ‘packages’ - that extend R’s functionality in some way. We cover packages more <a href="introduction-to-r.html#packages">later in this page</a>.</p>
 <p>When you open R itself, you’re confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.</p>
-<p><img src="atlas/r_screenshot.png" width="575" /></p>
+<p><img src="atlas/r_screenshot.png" /><!-- --></p>
 <p>This looks a bit intimidating, but you’ll almost never open R directly and interact with it in that way.</p>
 <p>To analyse data with R, you will typically write out a text file containing your code. This file - which we’ll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that’s a chart, a document, or a set of model results) is to use RStudio.</p>
 </div>
 <div id="what-is-rstudio" class="section level2">
 <h2><span class="header-section-number">1.2</span> What is RStudio?</h2>
 <p>RStudio is another piece of free software you can download and run on your computer.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It’s also available for Windows, macOS and Linux. In programmer jargon, RStudio is an “integrated development environment” or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R ‘console’ to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you’ve created.</p>
-<p><img src="atlas/rstudio_screenshot.png" width="1325" /></p>
+<p><img src="atlas/rstudio_screenshot.png" /><!-- --></p>
 <p>You’ll almost always interact with R by opening RStudio.</p>
 </div>
 <div id="installing-r-and-rstudio" class="section level2">
 <h2><span class="header-section-number">1.3</span> Installing R and RStudio</h2>
 <p>Although you’ll usually work with R by opening RStudio, you need to install both R and RStudio separately.</p>
 <p>Install R by going to <a href="https://cran.r-project.org">CRAN</a>, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.</p>
-<p><img src="atlas/r_cran.png" width="1130" /></p>
+<p><img src="atlas/r_cran.png" /><!-- --></p>
 <p>You want to download the latest base R release, as a ‘binary’. Don’t worry, you don’t need to know what a binary is.</p>
 <p>For macOS, the page will look like this:
-<img src="atlas/r_cran_macos.png" width="1129" /></p>
+<img src="atlas/r_cran_macos.png" /><!-- --></p>
 <p>For Windows, you’ll need to click on the ‘base’ version, and then click again to start the download.</p>
-<p><img src="atlas/r_cran_windows_1.png" width="565" /><img src="atlas/r_cran_windows_2.png" width="564" /></p>
+<p><img src="atlas/r_cran_windows_1.png" /><!-- --><img src="atlas/r_cran_windows_2.png" /><!-- --></p>
 <p>Once you’ve installed R, you’ll need to install RStudio. Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio website and install the latest version</a> of RStudio Desktop (open source license).</p>
 <p>Once they’re both installed, get started by opening RStudio.</p>
 </div>
@@ -280,23 +280,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code>install.packages()</code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>To install a package from Github, we use the function <code>install_github()</code>. Unfortunately, this package doesn’t come with R - it’s part of the <code>devtools</code> package. First, we install devtools from CRAN:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>devtools</code> package. For example, here’s how we would install the Grattan ggplot2 theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="using-packages" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Using packages</h3>
 <p>Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code>library()</code> function:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># Now that the `devtools` package is loaded, we can use its `install_github()` function:</span></a>
-<a class="sourceLine" id="cb4-4" title="4"></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># Now that the `devtools` package is loaded, we can use its `install_github()` function:</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
 <p>Or, we can use two colons - <code>::</code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
 <p>It usually makes sense to load a package with <code>library()</code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code>::</code> operator even if you have already loaded a package with <code>library()</code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 
 </div>

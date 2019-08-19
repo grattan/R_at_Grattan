@@ -239,7 +239,7 @@ grattan_save("atlas/population_chart_report.pdf", pop_chart, type = "wholecolumn
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<img src="atlas/population_chart_report.png" width="2791" />
+![](atlas/population_chart_report.png)<!-- -->
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
@@ -252,7 +252,7 @@ grattan_save("atlas/population_chart_presentation.pdf", pop_chart, type = "fulls
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_presentation.png" width="3200" />
+![](atlas/population_chart_presentation.png)<!-- -->
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
@@ -266,7 +266,7 @@ grattan_save("atlas/population_chart_blog.png", pop_chart,
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_blog.png" width="3200" />
+![](atlas/population_chart_blog.png)<!-- -->
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 

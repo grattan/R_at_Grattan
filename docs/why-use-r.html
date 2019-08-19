@@ -66,7 +66,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -138,8 +138,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.0.1</b> Why use script-based software?</a></li>
-<li class="chapter" data-level="2.0.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.0.2</b> Why use R specifically?</a></li>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Using R at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#using-r-projects-for-a-fully-reproducible-workflow."><i class="fa fa-check"></i><b>3.1</b> Using R projects for a fully reproducible workflow.</a><ul>
@@ -239,13 +239,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>We can break this question into two parts:
 1. Why use script-based software to analyse data?
 2. Why use R, specifically?</p>
-<div id="why-script" class="section level3">
-<h3><span class="header-section-number">2.0.1</span> Why use script-based software?</h3>
+<div id="why-script" class="section level2">
+<h2><span class="header-section-number">2.1</span> Why use script-based software?</h2>
+<ol style="list-style-type: decimal">
+<li>Make your analysis reproducible by setting out the complete series of steps taken from raw data to final output.</li>
+<li>Work with large data sets.</li>
+</ol>
 </div>
-<div id="why-R" class="section level3">
-<h3><span class="header-section-number">2.0.2</span> Why use R specifically?</h3>
+<div id="why-R" class="section level2">
+<h2><span class="header-section-number">2.2</span> Why use R specifically?</h2>
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 </div>
 </div>
             </section>

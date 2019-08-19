@@ -176,7 +176,7 @@ R is quite old, having been first released publicly in 1995, but it's also growi
 
 When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
 
-\includegraphics[width=7.99in]{atlas/r_screenshot}
+\includegraphics{atlas/r_screenshot.png}
 
 This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
@@ -187,7 +187,7 @@ To analyse data with R, you will typically write out a text file containing your
 
 RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created.
 
-\includegraphics[width=18.4in]{atlas/rstudio_screenshot}
+\includegraphics{atlas/rstudio_screenshot.png}
 
 You'll almost always interact with R by opening RStudio.
 
@@ -198,18 +198,16 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to \href{https://cran.r-project.org}{CRAN}, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.
 
-\includegraphics[width=15.69in]{atlas/r_cran}
+\includegraphics{atlas/r_cran.png}
 
 You want to download the latest base R release, as a `binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-
-\includegraphics[width=15.68in]{atlas/r_cran_macos}
+\includegraphics{atlas/r_cran_macos.png}
 
 For Windows, you'll need to click on the `base' version, and then click again to start the download.
 
-\includegraphics[width=15.69in]{atlas/r_cran_windows_1}
-\includegraphics[width=15.67in]{atlas/r_cran_windows_2}
+\includegraphics{atlas/r_cran_windows_1.png} \includegraphics{atlas/r_cran_windows_2.png}
 
 Once you've installed R, you'll need to install RStudio. Go to the \href{https://www.rstudio.com/products/rstudio/download/\#download}{RStudio website and install the latest version} of RStudio Desktop (open source license).
 
@@ -294,10 +292,19 @@ We can break this question into two parts:
 2. Why use R, specifically?
 
 \hypertarget{why-script}{%
-\subsection{Why use script-based software?}\label{why-script}}
+\section{Why use script-based software?}\label{why-script}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Make your analysis reproducible by setting out the complete series of steps taken from raw data to final output.
+\item
+  Work with large data sets.
+\end{enumerate}
 
 \hypertarget{why-R}{%
-\subsection{Why use R specifically?}\label{why-R}}
+\section{Why use R specifically?}\label{why-R}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -461,11 +468,11 @@ The main ingredients to a \texttt{ggplot} chart:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data}: what data should be plotted. e.g.~\texttt{data}
+  \textbf{Data}: what data should be plotted. e.g. \texttt{data}
 \item
-  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
 \item
-  \textbf{Geoms}: how the data should be plotted. e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \textbf{Geoms}: how the data should be plotted. e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
@@ -688,7 +695,7 @@ To save the \texttt{pop\_chart} plot created above as a whole-column chart for a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=38.76in]{atlas/population_chart_report}
+\includegraphics{atlas/population_chart_report.png}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
@@ -698,7 +705,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/population_chart_presentation}
+\includegraphics{atlas/population_chart_presentation.png}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
@@ -709,7 +716,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/population_chart_blog}
+\includegraphics{atlas/population_chart_blog.png}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
