@@ -25,3 +25,5 @@ It does two main things:
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free.
 
 Any complaints or comments about this guide can be sent to Will or Matt, respectively. 
+
+This site was written in R with RMarkdown and the bookdown package.
