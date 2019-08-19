@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-08-18" />
+<meta name="date" content="2019-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,9 +127,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Using R at Grattan Institute</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="what-is-r.html"><a href="what-is-r.html"><i class="fa fa-check"></i><b>1</b> What is R?</a></li>
-<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>1.4</b> Packages</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>1.4.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-packages"><i class="fa fa-check"></i><b>1.4.2</b> Using packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.0.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.0.2</b> Why use R specifically?</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Using R at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#using-r-projects-for-a-fully-reproducible-workflow."><i class="fa fa-check"></i><b>3.1</b> Using R projects for a fully reproducible workflow.</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="intro.html"><a href="intro.html#filepaths"><i class="fa fa-check"></i><b>3.1.1</b> Filepaths</a></li>
@@ -230,21 +241,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Set-up and packages</h2>
 <p>This section uses the package <code>ggplot2</code> to visualise data, and <code>dplyr</code> functions to manipulate data. Both of these packages are loaded with <code>tidyverse</code>. The <code>scales</code> package helps with labelling your axes.</p>
 <p>The <code>grattantheme</code> package is used to make charts look Grattan-y. The <code>absmapsdata</code> package is used to help make maps.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">library</span>(grattantheme)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">library</span>(absmapsdata)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw">library</span>(sf)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw">library</span>(scales)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">library</span>(grattantheme)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">library</span>(absmapsdata)</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">library</span>(scales)</a></code></pre></div>
 <p>For most charts in this chapter, we’ll use the <code>population_table</code> data summarised here. It contains the population in each state between 2013 and 2018:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">population_table &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/population_sa4.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">        </span><span class="kw">filter</span>(data_item <span class="op">==</span><span class="st"> &quot;Persons - Total (no.)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pop =</span> <span class="kw">as.numeric</span>(value),</a>
-<a class="sourceLine" id="cb5-4" title="4">               <span class="dt">year =</span> <span class="kw">as.factor</span>(year)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">        </span><span class="kw">group_by</span>(year, state) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">pop =</span> <span class="kw">sum</span>(pop))</a>
-<a class="sourceLine" id="cb5-7" title="7"></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co"># Show the first six rows of the new dataset</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="kw">head</span>(population_table)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">population_table &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/population_sa4.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">        </span><span class="kw">filter</span>(data_item <span class="op">==</span><span class="st"> &quot;Persons - Total (no.)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pop =</span> <span class="kw">as.numeric</span>(value),</a>
+<a class="sourceLine" id="cb10-4" title="4">               <span class="dt">year =</span> <span class="kw">as.factor</span>(year)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="st">        </span><span class="kw">group_by</span>(year, state) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">pop =</span> <span class="kw">sum</span>(pop))</a>
+<a class="sourceLine" id="cb10-7" title="7"></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co"># Show the first six rows of the new dataset</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="kw">head</span>(population_table)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ## # Groups:   year [1]
 ##   year  state                            pop
@@ -266,33 +277,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Geoms</strong>: how the data should be plotted. e.g. <code>geom_point()</code> will produce a scatter plot, <code>geom_col</code> will produce a column chart.</li>
 </ul>
 <p>Each plot you make will be made up of these three elements. The <a href="https://ggplot2.tidyverse.org/reference/">full list of standard geoms</a> is listed in the <code>tidyverse</code> documentation.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="er">&lt;</span>GEOM_FUNCTION<span class="op">&gt;</span>(</a>
-<a class="sourceLine" id="cb7-3" title="3">     <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="op">&lt;</span>MAPPINGS<span class="op">&gt;</span>),</a>
-<a class="sourceLine" id="cb7-4" title="4">     <span class="dt">stat =</span> <span class="op">&lt;</span>STAT<span class="op">&gt;</span>, </a>
-<a class="sourceLine" id="cb7-5" title="5">     <span class="dt">position =</span> <span class="op">&lt;</span>POSITION<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="st">  </span><span class="er">&lt;</span>COORDINATE_FUNCTION<span class="op">&gt;</span><span class="st"> </span><span class="op">+</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="er">&lt;</span>FACET_FUNCTION<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="er">&lt;</span>GEOM_FUNCTION<span class="op">&gt;</span>(</a>
+<a class="sourceLine" id="cb12-3" title="3">     <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="op">&lt;</span>MAPPINGS<span class="op">&gt;</span>),</a>
+<a class="sourceLine" id="cb12-4" title="4">     <span class="dt">stat =</span> <span class="op">&lt;</span>STAT<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb12-5" title="5">     <span class="dt">position =</span> <span class="op">&lt;</span>POSITION<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="st">  </span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="st">  </span><span class="er">&lt;</span>COORDINATE_FUNCTION<span class="op">&gt;</span><span class="st"> </span><span class="op">+</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="st">  </span><span class="er">&lt;</span>FACET_FUNCTION<span class="op">&gt;</span></a></code></pre></div>
 <p>For example, you can plot a column chart by passing the <code>population_table</code> dataset into <code>ggplot()</code> (“make a chart wth this data”). This produces an empty plot:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>()</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/empty%20plot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>()</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/empty%20plot-1.png" width="672" /></p>
 <p>Next, set the <code>aes</code> (aesthetics) to <code>x = state</code> (“make the x-axis represent state”), <code>y = pop</code> (“the y-axis should represent population”), and <code>fill = year</code> (“the fill colour represents year”). Now <code>ggplot</code> knows where things should <em>go</em>:<code>{r empty with aes} population_table %&gt;%          ggplot(aes(x = state,                    y = pop,                    fill = year))</code></p>
 <p>Now that <code>ggplot</code> knows where things should go, it needs to <em>how</em> to plot them. For this we use <code>geoms</code>. Tell it to plot a column chart by using <code>geom_col</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
-<a class="sourceLine" id="cb9-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb9-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>()</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/complete%20plot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb14-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb14-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>()</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/complete%20plot-1.png" width="672" /></p>
 <p>Great! Although stacking populations is a bit silly. You can adjust the way <code>geoms</code> work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using <code>position = "dodge"</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
-<a class="sourceLine" id="cb10-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb10-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/with%20dodge-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb15-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb15-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/with%20dodge-1.png" width="672" /></p>
 <p>That’s nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:</p>
 <ul>
 <li>Grattanising your charts and choosing colours</li>
@@ -306,8 +317,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.3</span> Making Grattan-y charts</h2>
 <p>The <code>grattantheme</code> package contains functions that help <em>Grattanise</em> your charts. It is hosted here: <a href="https://github.com/mattcowgill/grattantheme" class="uri">https://github.com/mattcowgill/grattantheme</a></p>
 <p>You can install it with <code>devtools::install_github</code> from the package:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb11-2" title="2">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb16-2" title="2">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
 <p>The key functions of <code>grattantheme</code> are:</p>
 <ul>
 <li><code>theme_grattan</code>: set size, font and colour defaults that adhere to the Grattan style guide.</li>
@@ -320,35 +331,35 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="making-grattan-charts" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Making Grattan charts</h3>
 <p>Start with a column chart, similar to the one made above:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">base_chart &lt;-<span class="st"> </span>population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
-<a class="sourceLine" id="cb12-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb12-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb12-7" title="7">             <span class="dt">title =</span> <span class="st">&quot;NSW and Victoria are booming&quot;</span>,</a>
-<a class="sourceLine" id="cb12-8" title="8">             <span class="dt">subtitle =</span> <span class="st">&quot;Population by state, 2013-2018&quot;</span>,</a>
-<a class="sourceLine" id="cb12-9" title="9">             <span class="dt">caption =</span> <span class="st">&quot;Source: ABS Regional Dataset (2019)&quot;</span>)</a>
-<a class="sourceLine" id="cb12-10" title="10"></a>
-<a class="sourceLine" id="cb12-11" title="11">base_chart</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/base_chart-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">base_chart &lt;-<span class="st"> </span>population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb17-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb17-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">        </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb17-7" title="7">             <span class="dt">title =</span> <span class="st">&quot;NSW and Victoria are booming&quot;</span>,</a>
+<a class="sourceLine" id="cb17-8" title="8">             <span class="dt">subtitle =</span> <span class="st">&quot;Population by state, 2013-2018&quot;</span>,</a>
+<a class="sourceLine" id="cb17-9" title="9">             <span class="dt">caption =</span> <span class="st">&quot;Source: ABS Regional Dataset (2019)&quot;</span>)</a>
+<a class="sourceLine" id="cb17-10" title="10"></a>
+<a class="sourceLine" id="cb17-11" title="11">base_chart</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672" /></p>
 <p>Let’s make it Grattany. First, add <code>theme_grattan</code> to your plot:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>()</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/add_theme_grattan-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>()</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" /></p>
 <p>Then <code>grattan_y_continuous</code> to align the x-axis with zero. This function takes the same arguments as <code>scale_y_continuous</code>, so you can add <code>labels = comma()</code> to reformat the y-axis labels:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/add_grattan_y_continuous-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672" /></p>
 <p>To define <code>fill</code> colours, use <code>grattan_fill_manual</code> with the number of colours you need (six, in this case):</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">pop_chart &lt;-<span class="st"> </span>base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb15-5" title="5"></a>
-<a class="sourceLine" id="cb15-6" title="6">pop_chart</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/add_fill-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">pop_chart &lt;-<span class="st"> </span>base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb20-5" title="5"></a>
+<a class="sourceLine" id="cb20-6" title="6">pop_chart</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" /></p>
 <p>Nice chart! Now you can save it and share it with the world.</p>
 </div>
 <div id="saving-grattan-charts" class="section level3">
@@ -375,16 +386,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><code>force_labs</code>: override the removal of labels for a particular <code>type</code>. eg <code>force_labs = TRUE</code> will keep the y-axis label.</li>
 </ul>
 <p>To save the <code>pop_chart</code> plot created above as a whole-column chart for a <strong>report</strong>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_report.pdf&quot;</span>, pop_chart, <span class="dt">type =</span> <span class="st">&quot;wholecolumn&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_report.pdf&quot;</span>, pop_chart, <span class="dt">type =</span> <span class="st">&quot;wholecolumn&quot;</span>)</a></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/population_chart_report.png" width="1396" /></p>
 <p>To save it as a <strong>presentation</strong> slide instead, use <code>type = "fullslide"</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_presentation.pdf&quot;</span>, pop_chart, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_presentation.pdf&quot;</span>, pop_chart, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</a></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/population_chart_presentation.png" width="1600" /></p>
 <p>Or, if you want to emphasise the point in a <em>really tall</em> chart for a <strong>blogpost</strong>, you can use <code>type = "blog"</code> and adjust the <code>height</code> to be 50cm. Also note that because this is for the blog, you should save it as a <code>png</code> file:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_blog.png&quot;</span>, pop_chart, </a>
-<a class="sourceLine" id="cb18-2" title="2">             <span class="dt">type =</span> <span class="st">&quot;blog&quot;</span>, <span class="dt">height =</span> <span class="dv">50</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/population_chart_blog.png&quot;</span>, pop_chart, </a>
+<a class="sourceLine" id="cb23-2" title="2">             <span class="dt">type =</span> <span class="st">&quot;blog&quot;</span>, <span class="dt">height =</span> <span class="dv">50</span>)</a></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/population_chart_blog.png" width="1600" /></p>
 <p>And that’s it! The following sections will go into more detail about different chart types in R, but you’ll mostly use the same basic <code>grattantheme</code> formatting you’ve used here.</p>
@@ -396,11 +407,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="bar-charts" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> Bar charts</h3>
 <p>Bar charts are made with <code>geom_bar</code> or <code>geom_col</code>. Creating a bar chart will look something like this:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="op">&lt;</span>xvar<span class="op">&gt;</span>, <span class="dt">y =</span> <span class="op">&lt;</span>yvar<span class="op">&gt;</span>),</a>
-<a class="sourceLine" id="cb19-3" title="3">     <span class="dt">stat =</span> <span class="op">&lt;</span>STAT<span class="op">&gt;</span>, </a>
-<a class="sourceLine" id="cb19-4" title="4">     <span class="dt">position =</span> <span class="op">&lt;</span>POSITION<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="st">  </span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="op">&lt;</span>xvar<span class="op">&gt;</span>, <span class="dt">y =</span> <span class="op">&lt;</span>yvar<span class="op">&gt;</span>),</a>
+<a class="sourceLine" id="cb24-3" title="3">     <span class="dt">stat =</span> <span class="op">&lt;</span>STAT<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb24-4" title="4">     <span class="dt">position =</span> <span class="op">&lt;</span>POSITION<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="st">  </span>)</a></code></pre></div>
 <p>It has two key arguments: <code>stat</code> and <code>position</code>.</p>
 <p>First, <code>stat</code> defines what kind of <em>operation</em> the function will do on the dataset before plotting. Some options are:</p>
 <ul>
@@ -415,87 +426,87 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><code>"dodge"</code>: bars in the same group are positioned next to one another.</li>
 <li><code>"fill"</code>: bars in the same group are stacked and all fill to 100 per cent.</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
-<a class="sourceLine" id="cb20-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb20-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
-<a class="sourceLine" id="cb20-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-9" title="9"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/bar2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb25-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb25-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
+<a class="sourceLine" id="cb25-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/bar2-1.png" width="672" /></p>
 <p>You can also <strong>order</strong> the groups in your chart by a variable. If you want to order states by population, use <code>reorder</code> inside <code>aes</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>pop), <span class="co"># reorder state by negative population</span></a>
-<a class="sourceLine" id="cb21-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb21-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
-<a class="sourceLine" id="cb21-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-9" title="9"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/bar3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>pop), <span class="co"># reorder state by negative population</span></a>
+<a class="sourceLine" id="cb26-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb26-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
+<a class="sourceLine" id="cb26-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/bar3-1.png" width="672" /></p>
 <p>To flip the chart – a useful move when you have long labels – add <code>coord_flipped</code> (ie ‘flip coordinates’) and tell <code>theme_grattan</code> that the plot is flipped using <code>flipped = TRUE</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>pop), </a>
-<a class="sourceLine" id="cb22-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb22-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
-<a class="sourceLine" id="cb22-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-7" title="7"><span class="st">        </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st">  </span><span class="co"># flip the coordinates</span></a>
-<a class="sourceLine" id="cb22-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st">  </span><span class="co"># tell theme_grattan</span></a>
-<a class="sourceLine" id="cb22-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-10" title="10"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-11" title="11"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/bar4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>pop), </a>
+<a class="sourceLine" id="cb27-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb27-4" title="4">                   <span class="dt">fill =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,</a>
+<a class="sourceLine" id="cb27-6" title="6">                 <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="st">        </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st">  </span><span class="co"># flip the coordinates</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st">  </span><span class="co"># tell theme_grattan</span></a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-11" title="11"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/bar4-1.png" width="672" /></p>
 </div>
 <div id="line-charts" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Line charts</h3>
 <p>A line chart has one key aesthetic: <code>group</code>. This tells <code>ggplot</code> how to connect individual lines.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb23-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb23-4" title="4">                   <span class="dt">colour =</span> state,</a>
-<a class="sourceLine" id="cb23-5" title="5">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-6" title="6"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-9" title="9"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">9</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb28-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb28-4" title="4">                   <span class="dt">colour =</span> state,</a>
+<a class="sourceLine" id="cb28-5" title="5">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">9</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
 ## than six colours is not recommended.</code></pre>
-<p><img src="r-at-grattan_files/figure-html/line1-1.png" width="672" /></p>
+<p><img src="Data_visualisation_files/figure-html/line1-1.png" width="672" /></p>
 <p>You can also add dots for each year by layering <code>geom_point</code> on top of <code>geom_line</code>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb25-3" title="3">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb25-4" title="4">                   <span class="dt">colour =</span> state,</a>
-<a class="sourceLine" id="cb25-5" title="5">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-10" title="10"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">9</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-11" title="11"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb30-3" title="3">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb30-4" title="4">                   <span class="dt">colour =</span> state,</a>
+<a class="sourceLine" id="cb30-5" title="5">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-10" title="10"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">9</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-11" title="11"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
 ## than six colours is not recommended.</code></pre>
-<p><img src="r-at-grattan_files/figure-html/line2-1.png" width="672" /></p>
+<p><img src="Data_visualisation_files/figure-html/line2-1.png" width="672" /></p>
 <p>If you wanted to show each state individually, you could <strong>facet</strong> your chart so that a separate plot was produced for each state:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
-<a class="sourceLine" id="cb27-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb27-5" title="5">                   <span class="dt">y =</span> pop,</a>
-<a class="sourceLine" id="cb27-6" title="6">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-7" title="7"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-9" title="9"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-10" title="10"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-11" title="11"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-12" title="12"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/line3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
+<a class="sourceLine" id="cb32-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb32-5" title="5">                   <span class="dt">y =</span> pop,</a>
+<a class="sourceLine" id="cb32-6" title="6">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-12" title="12"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/line3-1.png" width="672" /></p>
 <p>To tidy this up, we can:</p>
 <ol style="list-style-type: decimal">
 <li>shorten the years to be “13”, “14”, etc instead of “2013”, “2014”, etc (via the <code>x</code> aesthetic)</li>
@@ -504,95 +515,95 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>give the facets a bit of room by adjusting <code>panel.spacing</code></li>
 <li>define our own x-axis label breaks to just show <code>13</code>, <code>15</code> and <code>17</code></li>
 </ol>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
-<a class="sourceLine" id="cb28-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">substr</span>(year, <span class="dv">3</span>, <span class="dv">4</span>), <span class="co"># 1: just take the last two characters</span></a>
-<a class="sourceLine" id="cb28-5" title="5">                   <span class="dt">y =</span> pop <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>, <span class="co"># 2: divide population by one million</span></a>
-<a class="sourceLine" id="cb28-6" title="6">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># 3: add horizontal line at the bottom</span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">panel.spacing =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># 4: add panel spacing</span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-13" title="13"><span class="st">        </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;13&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;17&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># 5: define our own label breaks</span></a>
-<a class="sourceLine" id="cb28-14" title="14"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-15" title="15"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/line4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">population_table <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
+<a class="sourceLine" id="cb33-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">substr</span>(year, <span class="dv">3</span>, <span class="dv">4</span>), <span class="co"># 1: just take the last two characters</span></a>
+<a class="sourceLine" id="cb33-5" title="5">                   <span class="dt">y =</span> pop <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>, <span class="co"># 2: divide population by one million</span></a>
+<a class="sourceLine" id="cb33-6" title="6">                   <span class="dt">group =</span> state)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-7" title="7"><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-8" title="8"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-9" title="9"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># 3: add horizontal line at the bottom</span></a>
+<a class="sourceLine" id="cb33-10" title="10"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-11" title="11"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">panel.spacing =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># 4: add panel spacing</span></a>
+<a class="sourceLine" id="cb33-12" title="12"><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-13" title="13"><span class="st">        </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;13&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;17&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># 5: define our own label breaks</span></a>
+<a class="sourceLine" id="cb33-14" title="14"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-15" title="15"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/line4-1.png" width="672" /></p>
 </div>
 <div id="scatter-plots" class="section level3">
 <h3><span class="header-section-number">4.4.3</span> Scatter plots</h3>
 <p>Scatter plots require <code>x</code> and <code>y</code> aesthetics. These can then be coloured and facetted.</p>
 <p>First, create a dataset that we’ll use for scatter plots. Take the <code>population_table</code> dataset and transform it to have one variable for population in 2013, and another for population in 2018:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">population_diff &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/population_sa4.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">state_long =</span> state,</a>
-<a class="sourceLine" id="cb29-3" title="3">               <span class="dt">state =</span> strayr<span class="op">::</span><span class="kw">strayr</span>(state_long),</a>
-<a class="sourceLine" id="cb29-4" title="4">               <span class="dt">pop =</span> <span class="kw">as.numeric</span>(value),</a>
-<a class="sourceLine" id="cb29-5" title="5">               <span class="dt">year =</span> <span class="kw">as.factor</span>(glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;y{year}&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="st">        </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y2013&quot;</span>, <span class="st">&quot;y2018&quot;</span>),</a>
-<a class="sourceLine" id="cb29-7" title="7">               data_item <span class="op">==</span><span class="st"> &quot;Persons - Total (no.)&quot;</span>,</a>
-<a class="sourceLine" id="cb29-8" title="8">               sa4_name <span class="op">!=</span><span class="st"> &quot;Other Territories&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="st">        </span><span class="kw">group_by</span>(year, state, sa4_name) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-10" title="10"><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">pop =</span> <span class="kw">sum</span>(pop)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="st">        </span><span class="kw">spread</span>(year, pop) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pop_change =</span> <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(y2018 <span class="op">/</span><span class="st"> </span>y2013 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb30-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-5" title="5"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-6" title="6"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-7" title="7"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-8" title="8"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
-<a class="sourceLine" id="cb30-9" title="9">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/scatter1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">population_diff &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/population_sa4.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">state_long =</span> state,</a>
+<a class="sourceLine" id="cb34-3" title="3">               <span class="dt">state =</span> strayr<span class="op">::</span><span class="kw">strayr</span>(state_long),</a>
+<a class="sourceLine" id="cb34-4" title="4">               <span class="dt">pop =</span> <span class="kw">as.numeric</span>(value),</a>
+<a class="sourceLine" id="cb34-5" title="5">               <span class="dt">year =</span> <span class="kw">as.factor</span>(glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;y{year}&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="st">        </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y2013&quot;</span>, <span class="st">&quot;y2018&quot;</span>),</a>
+<a class="sourceLine" id="cb34-7" title="7">               data_item <span class="op">==</span><span class="st"> &quot;Persons - Total (no.)&quot;</span>,</a>
+<a class="sourceLine" id="cb34-8" title="8">               sa4_name <span class="op">!=</span><span class="st"> &quot;Other Territories&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-9" title="9"><span class="st">        </span><span class="kw">group_by</span>(year, state, sa4_name) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">pop =</span> <span class="kw">sum</span>(pop)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="st">        </span><span class="kw">spread</span>(year, pop) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pop_change =</span> <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(y2018 <span class="op">/</span><span class="st"> </span>y2013 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb35-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
+<a class="sourceLine" id="cb35-9" title="9">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/scatter1-1.png" width="672" /></p>
 <p>It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with <code>geom_smooth</code>:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
-<a class="sourceLine" id="cb31-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb31-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb31-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb31-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
-<a class="sourceLine" id="cb31-11" title="11">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/scatter2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
+<a class="sourceLine" id="cb36-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-7" title="7"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-9" title="9"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-10" title="10"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
+<a class="sourceLine" id="cb36-11" title="11">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/scatter2-1.png" width="672" /></p>
 <p>You could colour-code positive and negative changes from within the <code>geom_point</code> aesthetic. Making a change there won’t pass through to the <code>geom_smooth</code> aesthetic, so your line-of-best-fit will apply to all data points.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
-<a class="sourceLine" id="cb32-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> pop_change <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb32-5" title="5">                   <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-6" title="6"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-7" title="7"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-9" title="9"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-10" title="10"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-11" title="11"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-12" title="12"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
-<a class="sourceLine" id="cb32-13" title="13">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/scatter3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
+<a class="sourceLine" id="cb37-3" title="3">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> pop_change <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb37-5" title="5">                   <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-7" title="7"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-8" title="8"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-10" title="10"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-11" title="11"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-12" title="12"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
+<a class="sourceLine" id="cb37-13" title="13">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/scatter3-1.png" width="672" /></p>
 <p>Like the charts above, you could facet this by state to see if there were any interesting patterns. We’ll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
-<a class="sourceLine" id="cb33-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
-<a class="sourceLine" id="cb33-5" title="5">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-6" title="6"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> pop_change <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb33-7" title="7">                   <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-9" title="9"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-13" title="13"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-14" title="14"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
-<a class="sourceLine" id="cb33-15" title="15">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-16" title="16"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/scatter4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">!=</span><span class="st"> &quot;ACT&quot;</span>,</a>
+<a class="sourceLine" id="cb38-3" title="3">               state <span class="op">!=</span><span class="st"> &quot;NT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-4" title="4"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y2013<span class="op">/</span><span class="dv">1000</span>,  <span class="co"># display the x-axis as thousands</span></a>
+<a class="sourceLine" id="cb38-5" title="5">                   <span class="dt">y =</span> pop_change)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> pop_change <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb38-7" title="7">                   <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-8" title="8"><span class="st">        </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-9" title="9"><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-10" title="10"><span class="st">        </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-11" title="11"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-12" title="12"><span class="st">        </span><span class="kw">grattan_y_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-13" title="13"><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-14" title="14"><span class="st">        </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Population increase to 2018, per cent&quot;</span>,</a>
+<a class="sourceLine" id="cb38-15" title="15">             <span class="dt">x =</span> <span class="st">&quot;Population in 2013, thousands&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-16" title="16"><span class="st">        </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/scatter4-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level3">
 <h3><span class="header-section-number">4.4.4</span> Distributions</h3>
@@ -630,22 +641,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Local Government Areas 2018: <code>lga2018</code></li>
 </ul>
 <p>You can install the package from Github. You will also need the <code>sf</code> package installed to handle the <code>sf</code> objects.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="kw">library</span>(absmapsdata)</a>
-<a class="sourceLine" id="cb34-3" title="3"></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="kw">library</span>(sf)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">library</span>(absmapsdata)</a>
+<a class="sourceLine" id="cb39-3" title="3"></a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a>
+<a class="sourceLine" id="cb39-5" title="5"><span class="kw">library</span>(sf)</a></code></pre></div>
 </div>
 <div id="making-choropleth-maps" class="section level4">
 <h4><span class="header-section-number">4.4.5.3</span> Making choropleth maps</h4>
 <p>Choropleth maps break an area into ‘bits’, and colours each ‘bit’ according to a variable.</p>
 <p>SA4 is the largest non-state statistical area in the ABS ASGS standard.</p>
 <p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa4_name</code> compared to <code>sa4_name_2016</code> – so use the <code>by</code> function to match them.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">map_data &lt;-<span class="st"> </span>population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="st">        </span><span class="kw">left_join</span>(sa42016, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sa4_name&quot;</span> =<span class="st"> &quot;sa4_name_2016&quot;</span>))</a>
-<a class="sourceLine" id="cb35-3" title="3"></a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="kw">head</span>(map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="st">       </span><span class="kw">select</span>(sa4_name, geometry))</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">map_data &lt;-<span class="st"> </span>population_diff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="st">        </span><span class="kw">left_join</span>(sa42016, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sa4_name&quot;</span> =<span class="st"> &quot;sa4_name_2016&quot;</span>))</a>
+<a class="sourceLine" id="cb40-3" title="3"></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="kw">head</span>(map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="st">       </span><span class="kw">select</span>(sa4_name, geometry))</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ## # Groups:   state [2]
 ##   state sa4_name                                                   geometry
@@ -657,19 +668,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5 NSW   Coffs Harbour - G… (((153.2785 -29.91874, 153.2773 -29.92067, 153.…
 ## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…</code></pre>
 <p>You then plot a map like you would any other <code>ggplot</code>: provide your data, choose your <code>aes</code> and your <code>geom</code>. For maps with <code>sf</code> objects, the key <strong>aesthetic</strong> is <code>geometry = geometry</code>, and the <strong>geom</strong> is <code>geom_sf</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">map &lt;-<span class="st"> </span>map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">geometry =</span> geometry,</a>
-<a class="sourceLine" id="cb37-3" title="3">                   <span class="dt">fill =</span> pop_change)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-4" title="4"><span class="st">        </span><span class="kw">geom_sf</span>(<span class="dt">lwd =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-5" title="5"><span class="st">        </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-6" title="6"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dt">discrete =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb37-7" title="7">                            <span class="dt">palette =</span> <span class="st">&quot;diverging&quot;</span>,</a>
-<a class="sourceLine" id="cb37-8" title="8">                            <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>),</a>
-<a class="sourceLine" id="cb37-9" title="9">                            <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Population change&quot;</span>)</a>
-<a class="sourceLine" id="cb37-11" title="11"></a>
-<a class="sourceLine" id="cb37-12" title="12">map</a></code></pre></div>
-<p><img src="r-at-grattan_files/figure-html/map1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">map &lt;-<span class="st"> </span>map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">geometry =</span> geometry,</a>
+<a class="sourceLine" id="cb42-3" title="3">                   <span class="dt">fill =</span> pop_change)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="st">        </span><span class="kw">geom_sf</span>(<span class="dt">lwd =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="st">        </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dt">discrete =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb42-7" title="7">                            <span class="dt">palette =</span> <span class="st">&quot;diverging&quot;</span>,</a>
+<a class="sourceLine" id="cb42-8" title="8">                            <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb42-9" title="9">                            <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Population change&quot;</span>)</a>
+<a class="sourceLine" id="cb42-11" title="11"></a>
+<a class="sourceLine" id="cb42-12" title="12">map</a></code></pre></div>
+<p><img src="Data_visualisation_files/figure-html/map1-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -679,28 +690,28 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="bin-generate-data-used-before-prior-sections-are-constructed" class="section level2">
 <h2><span class="header-section-number">4.6</span> bin: generate data used (before prior sections are constructed)</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="kw">library</span>(janitor)</a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="kw">library</span>(absmapsdata)</a>
-<a class="sourceLine" id="cb38-4" title="4"></a>
-<a class="sourceLine" id="cb38-5" title="5">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ABS_REGIONAL_ASGS2016_02082019164509969.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="st">        </span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-7" title="7"><span class="st">        </span><span class="kw">select</span>(<span class="dt">data_code =</span> measure,</a>
-<a class="sourceLine" id="cb38-8" title="8">               data_item,</a>
-<a class="sourceLine" id="cb38-9" title="9">               <span class="dt">asgs =</span> regiontype,</a>
-<a class="sourceLine" id="cb38-10" title="10">               <span class="dt">sa4_code_2016 =</span> asgs_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb38-11" title="11">               <span class="dt">sa4_name_2016 =</span> region,</a>
-<a class="sourceLine" id="cb38-12" title="12">               <span class="dt">year =</span> time,</a>
-<a class="sourceLine" id="cb38-13" title="13">               value) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-14" title="14"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">sa4_code_2016 =</span> <span class="kw">as.character</span>(sa4_code_<span class="dv">2016</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-15" title="15"><span class="st">        </span><span class="kw">left_join</span>(sa42016 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sa4_code_<span class="dv">2016</span>, state_name_<span class="dv">2016</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-16" title="16"><span class="st">        </span><span class="kw">rename</span>(<span class="dt">state =</span> state_name_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb38-17" title="17">               <span class="dt">sa4_code =</span> sa4_code_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb38-18" title="18">               <span class="dt">sa4_name =</span> sa4_name_<span class="dv">2016</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-19" title="19"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">state_long =</span> state,</a>
-<a class="sourceLine" id="cb38-20" title="20">               <span class="dt">state =</span> strayr<span class="op">::</span><span class="kw">strayr</span>(state_long))</a>
-<a class="sourceLine" id="cb38-21" title="21">               </a>
-<a class="sourceLine" id="cb38-22" title="22"><span class="kw">write_csv</span>(data, <span class="st">&quot;data/population_sa4.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="kw">library</span>(janitor)</a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">library</span>(absmapsdata)</a>
+<a class="sourceLine" id="cb43-4" title="4"></a>
+<a class="sourceLine" id="cb43-5" title="5">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ABS_REGIONAL_ASGS2016_02082019164509969.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-6" title="6"><span class="st">        </span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="st">        </span><span class="kw">select</span>(<span class="dt">data_code =</span> measure,</a>
+<a class="sourceLine" id="cb43-8" title="8">               data_item,</a>
+<a class="sourceLine" id="cb43-9" title="9">               <span class="dt">asgs =</span> regiontype,</a>
+<a class="sourceLine" id="cb43-10" title="10">               <span class="dt">sa4_code_2016 =</span> asgs_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb43-11" title="11">               <span class="dt">sa4_name_2016 =</span> region,</a>
+<a class="sourceLine" id="cb43-12" title="12">               <span class="dt">year =</span> time,</a>
+<a class="sourceLine" id="cb43-13" title="13">               value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-14" title="14"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">sa4_code_2016 =</span> <span class="kw">as.character</span>(sa4_code_<span class="dv">2016</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-15" title="15"><span class="st">        </span><span class="kw">left_join</span>(sa42016 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sa4_code_<span class="dv">2016</span>, state_name_<span class="dv">2016</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-16" title="16"><span class="st">        </span><span class="kw">rename</span>(<span class="dt">state =</span> state_name_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb43-17" title="17">               <span class="dt">sa4_code =</span> sa4_code_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb43-18" title="18">               <span class="dt">sa4_name =</span> sa4_name_<span class="dv">2016</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-19" title="19"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">state_long =</span> state,</a>
+<a class="sourceLine" id="cb43-20" title="20">               <span class="dt">state =</span> strayr<span class="op">::</span><span class="kw">strayr</span>(state_long))</a>
+<a class="sourceLine" id="cb43-21" title="21">               </a>
+<a class="sourceLine" id="cb43-22" title="22"><span class="kw">write_csv</span>(data, <span class="st">&quot;data/population_sa4.csv&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>

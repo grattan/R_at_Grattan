@@ -10,6 +10,7 @@ new_session: yes
 rmd_files: [
   "index.rmd",
   "Introduction_to_R.Rmd",
+  "Why_use_R.Rmd",
   "Using_R_at_Grattan.Rmd",
   "Data_visualisation.Rmd",
   "Reading_data.Rmd",
