@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-15}
+    \date{2019-08-19}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -142,14 +142,162 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{introduction}{%
-\chapter*{Introduction}\label{introduction}}
-\addcontentsline{toc}{chapter}{Introduction}
+\hypertarget{welcome}{%
+\chapter*{Welcome}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome}
 
-R is good and cool. Do you want to be good and cool? Use R!
+This guide is designed for everyone who uses - or would like to use - R at Grattan Institute.
 
-\hypertarget{intro}{%
-\chapter{Using R at Grattan}\label{intro}}
+It does two main things:
+1. Shows you how to use R to complete common analytical tasks you'll face at Grattan.
+2. Sets out some guidelines and good practices when using R at Grattan.
+
+As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
+
+Any complaints or comments about this guide can be sent to Will or Matt, respectively.
+
+\hypertarget{introduction-to-r}{%
+\chapter{Introduction to R}\label{introduction-to-r}}
+
+Most people reading this guide will know what R is. But if you don't - that's OK!
+
+If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R.
+
+\hypertarget{what-is-r}{%
+\section{What is R?}\label{what-is-r}}
+
+R is a programming language that is designed by and for statisticians, data scientists, and other people who work with data. It's free - you can download R at no charge. It's also open source - you can view and (if you're game) modify the code that underlies the R language. R is available for all major computing platforms including Windows, macOS, and Linux.
+
+R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
+
+R also has some overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
+
+R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
+
+When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
+
+\includegraphics[width=7.99in]{atlas/r_screenshot}
+
+This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
+
+To analyse data with R, you will typically write out a text file containing your code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
+
+\hypertarget{what-is-rstudio}{%
+\section{What is RStudio?}\label{what-is-rstudio}}
+
+RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created.
+
+\includegraphics[width=18.4in]{atlas/rstudio_screenshot}
+
+You'll almost always interact with R by opening RStudio.
+
+\hypertarget{installing-r-and-rstudio}{%
+\section{Installing R and RStudio}\label{installing-r-and-rstudio}}
+
+Although you'll usually work with R by opening RStudio, you need to install both R and RStudio separately.
+
+Install R by going to \href{https://cran.r-project.org}{CRAN}, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.
+
+\includegraphics[width=15.69in]{atlas/r_cran}
+
+You want to download the latest base R release, as a `binary'. Don't worry, you don't need to know what a binary is.
+
+For macOS, the page will look like this:
+
+\includegraphics[width=15.68in]{atlas/r_cran_macos}
+
+For Windows, you'll need to click on the `base' version, and then click again to start the download.
+
+\includegraphics[width=15.69in]{atlas/r_cran_windows_1}
+\includegraphics[width=15.67in]{atlas/r_cran_windows_2}
+
+Once you've installed R, you'll need to install RStudio. Go to the \href{https://www.rstudio.com/products/rstudio/download/\#download}{RStudio website and install the latest version} of RStudio Desktop (open source license).
+
+Once they're both installed, get started by opening RStudio.
+
+\hypertarget{packages}{%
+\section{Packages}\label{packages}}
+
+R comes with a lot of functions - commands - built in to do a broad range of data tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
+
+But a lot of our work at Grattan uses add-on software to base R, known as `packages'. Some packages, like the popular `dplyr', make it quicker and/or easier to do tasks that you could otherwise do in base R. Other packages expand the possibilities of what R can do - like fitting a machine learning model, for example.
+
+Like R itself, packages are free and open source. You can install them from within RStudio.
+
+At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover these more in a later chapter.
+
+\hypertarget{installing-packages}{%
+\subsection{Installing packages}\label{installing-packages}}
+
+You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
+
+In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
+
+To install a package from CRAN, we use the command \texttt{install.packages()}.
+
+For example, this code will install the \texttt{ggplot2} package from CRAN:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To install a package from Github, we use the function \texttt{install\_github()}. Unfortunately, this package doesn't come with R - it's part of the \texttt{devtools} package. First, we install devtools from CRAN:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{devtools} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{using-packages}{%
+\subsection{Using packages}\label{using-packages}}
+
+Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.
+
+We can either load (aka `attach') the package by using the \texttt{library()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools)}
+
+\CommentTok{# Now that the `devtools` package is loaded, we can use its `install_github()` function:}
+
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Or, we can use two colons - \texttt{::} - to tell R to use an individual function from a package without loading it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+It usually makes sense to load a package with \texttt{library()}, unless you only need to use one of its function once or twice. There's no harm to using the \texttt{::} operator even if you have already loaded a package with \texttt{library()}. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
+
+\hypertarget{why-use-r}{%
+\chapter{Why use R?}\label{why-use-r}}
+
+We can break this question into two parts:
+1. Why use script-based software to analyse data?
+2. Why use R, specifically?
+
+\hypertarget{why-script}{%
+\subsection{Why use script-based software?}\label{why-script}}
+
+\hypertarget{why-R}{%
+\subsection{Why use R specifically?}\label{why-R}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -157,23 +305,15 @@ R is good and cool. Do you want to be good and cool? Use R!
 \end{Highlighting}
 \end{Shaded}
 
-This document sets out good practices for structuring your R analysis at Grattan Institute. Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
-
-This guide is designed for \emph{everyone} using R at Grattan. It includes a combination of rules and guidelines.
-
-You should also be aware of the Grattan Institute R Style Guide, which lives in the same place as this document.
-
-Any compaints or comments about this guide can be sent to Will or Matt, respectively.
-
-\hypertarget{why-use-r}{%
-\section{Why use R?}\label{why-use-r}}
-
-It's good and cool!
+\hypertarget{intro}{%
+\chapter{Using R at Grattan}\label{intro}}
 
 \hypertarget{using-r-projects-for-a-fully-reproducible-workflow.}{%
 \section{Using R projects for a fully reproducible workflow.}\label{using-r-projects-for-a-fully-reproducible-workflow.}}
 
 \emph{Finally adhering to the `hit by a bus' rule.}
+
+Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
 
 Cover:
 1. setwd() and machine-speficic filepaths are bad
@@ -268,7 +408,7 @@ Introduce following chapters
 \hypertarget{set-up-and-packages}{%
 \section{Set-up and packages}\label{set-up-and-packages}}
 
-This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package is handy for nicely labelling your axes.
+This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package helps with labelling your axes.
 
 The \texttt{grattantheme} package is used to make charts look Grattan-y. The \texttt{absmapsdata} package is used to help make maps.
 
@@ -287,8 +427,6 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{population_table <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
-               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{filter}\NormalTok{(data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
                \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(year)) }\OperatorTok{%>%}\StringTok{ }
@@ -303,14 +441,14 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \begin{verbatim}
 ## # A tibble: 6 x 3
 ## # Groups:   year [1]
-##   year  state     pop
-##   <fct> <chr>   <dbl>
-## 1 2013  ACT    383257
-## 2 2013  NSW   7404032
-## 3 2013  NT     244684
-## 4 2013  Qld   4652824
-## 5 2013  SA    1671488
-## 6 2013  Tas    512231
+##   year  state                            pop
+##   <fct> <chr>                          <dbl>
+## 1 2013  Australian Capital Territory  383257
+## 2 2013  New South Wales              7404032
+## 3 2013  Northern Territory            241722
+## 4 2013  Other Territories               2962
+## 5 2013  Queensland                   4652824
+## 6 2013  South Australia              1671488
 \end{verbatim}
 
 \hypertarget{concepts}{%
@@ -323,11 +461,11 @@ The main ingredients to a \texttt{ggplot} chart:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data}: what data should be plotted. e.g. \texttt{data}
+  \textbf{Data}: what data should be plotted. e.g.~\texttt{data}
 \item
-  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
 \item
-  \textbf{Geoms}: how the data should be plotted. e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \textbf{Geoms}: how the data should be plotted. e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
@@ -354,20 +492,9 @@ For example, you can plot a column chart by passing the \texttt{population\_tabl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/empty plot-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/empty plot-1.pdf}
 
-Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{r-at-grattan_files/figure-latex/empty with aes-1.pdf}
+Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:\texttt{\{r\ empty\ with\ aes\}\ population\_table\ \%\textgreater{}\%\ \ \ \ \ \ \ \ \ \ ggplot(aes(x\ =\ state,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ pop,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fill\ =\ year))}
 
 Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to plot them. For this we use \texttt{geoms}. Tell it to plot a column chart by using \texttt{geom\_col}:
 
@@ -381,7 +508,7 @@ Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/complete plot-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/complete plot-1.pdf}
 
 Great! Although stacking populations is a bit silly. You can adjust the way \texttt{geoms} work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using \texttt{position\ =\ "dodge"}:
 
@@ -395,7 +522,7 @@ Great! Although stacking populations is a bit silly. You can adjust the way \tex
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/with dodge-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/with dodge-1.pdf}
 
 That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
 
@@ -466,7 +593,7 @@ Start with a column chart, similar to the one made above:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/base_chart-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/base_chart-1.pdf}
 
 Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
 
@@ -477,7 +604,7 @@ Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add theme_grattan-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/add_theme_grattan-1.pdf}
 
 Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This function takes the same arguments as \texttt{scale\_y\_continuous}, so you can add \texttt{labels\ =\ comma()} to reformat the y-axis labels:
 
@@ -489,7 +616,7 @@ Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This functio
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add grattan_y_continuous-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/add_grattan_y_continuous-1.pdf}
 
 To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the number of colours you need (six, in this case):
 
@@ -504,7 +631,7 @@ To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the num
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/add fill-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/add_fill-1.pdf}
 
 Nice chart! Now you can save it and share it with the world.
 
@@ -561,7 +688,7 @@ To save the \texttt{pop\_chart} plot created above as a whole-column chart for a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_report.png}
+\includegraphics[width=38.76in]{atlas/population_chart_report}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
@@ -571,7 +698,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_presentation.png}
+\includegraphics[width=44.44in]{atlas/population_chart_presentation}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
@@ -582,7 +709,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_blog.png}
+\includegraphics[width=44.44in]{atlas/population_chart_blog}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
@@ -648,7 +775,7 @@ Second, \texttt{position}, dictates how multiple bars occupying the same x-axis 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/bar2-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/bar2-1.pdf}
 
 You can also \textbf{order} the groups in your chart by a variable. If you want to order states by population, use \texttt{reorder} inside \texttt{aes}:
 
@@ -667,7 +794,7 @@ You can also \textbf{order} the groups in your chart by a variable. If you want 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/bar3-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/bar3-1.pdf}
 
 To flip the chart -- a useful move when you have long labels -- add \texttt{coord\_flipped} (ie `flip coordinates') and tell \texttt{theme\_grattan} that the plot is flipped using \texttt{flipped\ =\ TRUE}.
 
@@ -687,7 +814,7 @@ To flip the chart -- a useful move when you have long labels -- add \texttt{coor
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/bar4-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/bar4-1.pdf}
 
 \hypertarget{line-charts}{%
 \subsection{Line charts}\label{line-charts}}
@@ -704,7 +831,7 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 \StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -714,7 +841,7 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 ## than six colours is not recommended.
 \end{verbatim}
 
-\includegraphics{r-at-grattan_files/figure-latex/line1-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/line1-1.pdf}
 
 You can also add dots for each year by layering \texttt{geom\_point} on top of \texttt{geom\_line}:
 
@@ -729,7 +856,7 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 \StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -739,7 +866,7 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 ## than six colours is not recommended.
 \end{verbatim}
 
-\includegraphics{r-at-grattan_files/figure-latex/line2-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/line2-1.pdf}
 
 If you wanted to show each state individually, you could \textbf{facet} your chart so that a separate plot was produced for each state:
 
@@ -760,7 +887,7 @@ If you wanted to show each state individually, you could \textbf{facet} your cha
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/line3-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/line3-1.pdf}
 
 To tidy this up, we can:
 
@@ -799,7 +926,7 @@ To tidy this up, we can:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/line4-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/line4-1.pdf}
 
 \hypertarget{scatter-plots}{%
 \subsection{Scatter plots}\label{scatter-plots}}
@@ -839,7 +966,7 @@ First, create a dataset that we'll use for scatter plots. Take the \texttt{popul
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/scatter1-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter1-1.pdf}
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with \texttt{geom\_smooth}:
 
@@ -859,7 +986,7 @@ It looks like the areas with the largest population grew the most between 2013 a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/scatter2-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter2-1.pdf}
 
 You could colour-code positive and negative changes from within the \texttt{geom\_point} aesthetic. Making a change there won't pass through to the \texttt{geom\_smooth} aesthetic, so your line-of-best-fit will apply to all data points.
 
@@ -881,7 +1008,7 @@ You could colour-code positive and negative changes from within the \texttt{geom
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/scatter3-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter3-1.pdf}
 
 Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
 
@@ -906,7 +1033,7 @@ Like the charts above, you could facet this by state to see if there were any in
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/scatter4-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter4-1.pdf}
 
 \hypertarget{distributions}{%
 \subsection{Distributions}\label{distributions}}
@@ -1025,14 +1152,14 @@ You then plot a map like you would any other \texttt{ggplot}: provide your data,
 \StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
                             \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
                             \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
-                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{5}\NormalTok{)) }\OperatorTok{+}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population change"}\NormalTok{)}
 
 \NormalTok{map}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{r-at-grattan_files/figure-latex/map1-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/map1-1.pdf}
 
 \hypertarget{creating-simple-interactive-graphs-with-plotly}{%
 \section{\texorpdfstring{Creating simple interactive graphs with \texttt{plotly}}{Creating simple interactive graphs with plotly}}\label{creating-simple-interactive-graphs-with-plotly}}
@@ -1061,8 +1188,10 @@ You then plot a map like you would any other \texttt{ggplot}: provide your data,
 \StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{, state_name_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{state =}\NormalTok{ state_name_}\DecValTok{2016}\NormalTok{,}
                \DataTypeTok{sa4_code =}\NormalTok{ sa4_code_}\DecValTok{2016}\NormalTok{,}
-               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{)}
-
+               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
+               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long))}
+               
 \KeywordTok{write_csv}\NormalTok{(data, }\StringTok{"data/population_sa4.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}

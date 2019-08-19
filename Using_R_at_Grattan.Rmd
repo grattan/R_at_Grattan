@@ -1,26 +1,18 @@
-# Using R at Grattan {#intro}
+
 
 ```{r, message = FALSE}
 library(tidyverse)
 
 ```
 
-This document sets out good practices for structuring your R analysis at Grattan Institute. Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+# Using R at Grattan {#intro}
 
-This guide is designed for _everyone_ using R at Grattan. It includes a combination of rules and guidelines.
-
-You should also be aware of the Grattan Institute R Style Guide, which lives in the same place as this document.
-
-Any compaints or comments about this guide can be sent to Will or Matt, respectively.  
-
-## Why use R?
-
-It's good and cool!
 
 ## Using R projects for a fully reproducible workflow.
 
 _Finally adhering to the 'hit by a bus' rule._
 
+Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
 
 Cover:
 1. setwd() and machine-speficic filepaths are bad

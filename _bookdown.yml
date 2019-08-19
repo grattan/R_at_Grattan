@@ -4,3 +4,21 @@ language:
   ui:
     chapter_name: ""
 delete_merged_file: true
+
+new_session: yes
+
+rmd_files: [
+  "index.rmd",
+  "Introduction_to_R.Rmd",
+  "Why_use_R.Rmd",
+  "Using_R_at_Grattan.Rmd",
+  "Data_visualisation.Rmd",
+  "Reading_data.Rmd",
+  "Different_data_types.Rmd",
+  "Data_transformation.Rmd",
+  "Analysis.Rmd",
+  "Creating_functions.Rmd",
+  "Version_control.Rmd",
+  "references.Rmd"
+  
+]
