@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Why use R? | Using R at Grattan Institute</title>
-  <meta name="description" content="How to use R good. In development." />
+  <meta name="description" content="How to use R at Grattan good. In development." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Why use R? | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="How to use R good. In development." />
+  <meta property="og:description" content="How to use R at Grattan good. In development." />
   <meta name="github-repo" content="grattan/R_at_Grattan" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2 Why use R? | Using R at Grattan Institute" />
   
-  <meta name="twitter:description" content="How to use R good. In development." />
+  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
   
 
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-08-19" />
+<meta name="date" content="2019-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,8 +138,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.0.1</b> Why use script-based software?</a></li>
-<li class="chapter" data-level="2.0.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.0.2</b> Why use R specifically?</a></li>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Using R at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#using-r-projects-for-a-fully-reproducible-workflow."><i class="fa fa-check"></i><b>3.1</b> Using R projects for a fully reproducible workflow.</a><ul>
@@ -214,9 +214,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>10.3</b> Git</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/grattan/R_at_Grattan" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -236,17 +233,44 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="why-use-r" class="section level1">
 <h1><span class="header-section-number">2</span> Why use R?</h1>
-<p>We can break this question into two parts:
-1. Why use script-based software to analyse data?
-2. Why use R, specifically?</p>
-<div id="why-script" class="section level3">
-<h3><span class="header-section-number">2.0.1</span> Why use script-based software?</h3>
+<p>We can break this question into two parts:</p>
+<ol style="list-style-type: decimal">
+<li>Why use script-based software to analyse data?</li>
+<li>Why use R, specifically?</li>
+</ol>
+<div id="why-script" class="section level2">
+<h2><span class="header-section-number">2.1</span> Why use script-based software?</h2>
+<p>It’s important for our analyses to be <strong>reproducible</strong>. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary.</p>
+<p>Reproducibility is very important for QC, particularly of complex analyses - if it’s not clear what you’ve done, it’s hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it’s reproducible.</p>
+<p>Script-based analyses are more likely to be reproducible.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.</p>
+<p>Analysis that isn’t script based, like work done in Excel, is not reproducible. It is never clear what steps were taken, in which order, to go from the raw data to the output. It isn’t even always clear in a spreadsheet what is the ‘raw data’ and what has been modified in some way.</p>
+<p>Using scripts makes us less susceptible to the sort of errors <a href="https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt#Methodological_flaws">famously made by the economists Reinhart and Rogoff</a> in their Excel-based analysis of the effect of public debt on economic growth. It’s still possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.</p>
+<p>Script-based analysis software also allows us to:
+* Work with larger data sets;
+* Work with data in a broader range of formats;
+* Easily combine different data sets;
+* Automate tasks and build from previous analyses; and
+* Estimate statistical models.</p>
 </div>
-<div id="why-R" class="section level3">
-<h3><span class="header-section-number">2.0.2</span> Why use R specifically?</h3>
+<div id="why-R" class="section level2">
+<h2><span class="header-section-number">2.2</span> Why use R specifically?</h2>
+<p>Doing reproducible, script-based, research doesn’t necessarily involve using R. It’s perfectly possible to do reproducible work in Stata or Python (though harder in SPSS, where data is primarily manipulated by clicking things).</p>
+<p>We use R specifically because:
+* It’s free!
+* It’s open source.
+* It’s powerful.
+* It’s flexible.
+* It has an active community extending its capabilities all the time and providing support online.
+* It is becoming the norm in academic research and common in the corporate world.</p>
+<p>Everything you can do in Excel can be done in R.</p>
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Using a script-based approach doesn’t guarantee that your analysis will be truly reproducible. If your work involves some steps that aren’t documented in the script - such as data “cleaning” in Excel - then it is not fully reproducible.<a href="why-use-r.html#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

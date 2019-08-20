@@ -1,11 +1,6 @@
 
-
-
-```r
-library(tidyverse)
-```
-
 # Using R at Grattan {#intro}
+
 
 
 ## Using R projects for a fully reproducible workflow.

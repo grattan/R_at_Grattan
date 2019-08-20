@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-19}
+    \date{2019-08-20}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -155,6 +155,8 @@ It does two main things:
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
 
 Any complaints or comments about this guide can be sent to Will or Matt, respectively.
+
+This site was written in R with RMarkdown and the \href{https://bookdown.org}{bookdown} package.
 
 \hypertarget{introduction-to-r}{%
 \chapter{Introduction to R}\label{introduction-to-r}}
@@ -290,20 +292,50 @@ It usually makes sense to load a package with \texttt{library()}, unless you onl
 \chapter{Why use R?}\label{why-use-r}}
 
 We can break this question into two parts:
-1. Why use script-based software to analyse data?
-2. Why use R, specifically?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Why use script-based software to analyse data?
+\item
+  Why use R, specifically?
+\end{enumerate}
 
 \hypertarget{why-script}{%
-\subsection{Why use script-based software?}\label{why-script}}
+\section{Why use script-based software?}\label{why-script}}
+
+It's important for our analyses to be \textbf{reproducible}. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary.
+
+Reproducibility is very important for QC, particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
+
+Script-based analyses are more likely to be reproducible.\footnote{Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data ``cleaning'' in Excel - then it is not fully reproducible.} A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.
+
+Analysis that isn't script based, like work done in Excel, is not reproducible. It is never clear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the `raw data' and what has been modified in some way.
+
+Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
+
+Script-based analysis software also allows us to:
+* Work with larger data sets;
+* Work with data in a broader range of formats;
+* Easily combine different data sets;
+* Automate tasks and build from previous analyses; and
+* Estimate statistical models.
 
 \hypertarget{why-R}{%
-\subsection{Why use R specifically?}\label{why-R}}
+\section{Why use R specifically?}\label{why-R}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though harder in SPSS, where data is primarily manipulated by clicking things).
+
+We use R specifically because:
+* It's free!
+* It's open source.
+* It's powerful.
+* It's flexible.
+* It has an active community extending its capabilities all the time and providing support online.
+* It is becoming the norm in academic research and common in the corporate world.
+
+Everything you can do in Excel can be done in R.
 
 \hypertarget{intro}{%
 \chapter{Using R at Grattan}\label{intro}}

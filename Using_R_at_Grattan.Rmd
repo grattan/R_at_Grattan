@@ -1,12 +1,6 @@
-
-
-```{r, message = FALSE}
-library(tidyverse)
-
-```
-
 # Using R at Grattan {#intro}
 
+By sticking to a consistent way of organising our analyses, we're more able to read and check each others' work
 
 ## Using R projects for a fully reproducible workflow.
 
