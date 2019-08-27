@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-19}
+    \date{2019-08-28}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -146,15 +146,22 @@
 \chapter*{Welcome}\label{welcome}}
 \addcontentsline{toc}{chapter}{Welcome}
 
-This guide is designed for everyone who uses - or would like to use - R at Grattan Institute.
+This guide is designed for everyone who uses -- or would like to use -- R at Grattan Institute.
 
 It does two main things:
-1. Shows you how to use R to complete common analytical tasks you'll face at Grattan.
-2. Sets out some guidelines and good practices when using R at Grattan.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Shows you how to use R to complete common analytical tasks you'll face at Grattan.
+\item
+  Sets out some guidelines and good practices when using R at Grattan.
+\end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
 
-Any complaints or comments about this guide can be sent to Will or Matt, respectively.
+Any complaints or comments about this guide can be sent to Matt or Will, respectively.
 
 \hypertarget{introduction-to-r}{%
 \chapter{Introduction to R}\label{introduction-to-r}}
@@ -176,7 +183,7 @@ R is quite old, having been first released publicly in 1995, but it's also growi
 
 When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
 
-\includegraphics{atlas/r_screenshot.png}
+\includegraphics[width=7.99in]{atlas/r_screenshot}
 
 This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
@@ -187,7 +194,7 @@ To analyse data with R, you will typically write out a text file containing your
 
 RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created.
 
-\includegraphics{atlas/rstudio_screenshot.png}
+\includegraphics[width=18.4in]{atlas/rstudio_screenshot}
 
 You'll almost always interact with R by opening RStudio.
 
@@ -198,16 +205,18 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to \href{https://cran.r-project.org}{CRAN}, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.
 
-\includegraphics{atlas/r_cran.png}
+\includegraphics[width=15.69in]{atlas/r_cran}
 
 You want to download the latest base R release, as a `binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-\includegraphics{atlas/r_cran_macos.png}
+
+\includegraphics[width=15.68in]{atlas/r_cran_macos}
 
 For Windows, you'll need to click on the `base' version, and then click again to start the download.
 
-\includegraphics{atlas/r_cran_windows_1.png} \includegraphics{atlas/r_cran_windows_2.png}
+\includegraphics[width=15.69in]{atlas/r_cran_windows_1}
+\includegraphics[width=15.67in]{atlas/r_cran_windows_2}
 
 Once you've installed R, you'll need to install RStudio. Go to the \href{https://www.rstudio.com/products/rstudio/download/\#download}{RStudio website and install the latest version} of RStudio Desktop (open source license).
 
@@ -410,7 +419,30 @@ Introduce following chapters
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
 
-{[}intro{]}
+When you visualise data you make decisions about what the reader can and cannot see. You choose to highlight or omit certain things to help them better understand the message you are presenting.
+
+This requires a lot of important technical decisions: what data to use, what `stat' to present it with -- show every data point, show a distribution function, show the average, the median, etc -- and on what scale -- raw numbers, on a log scale, as a proportion of a total, etc.
+
+It also requires a bunch of aesthetic decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+
+All of these decisions need to made with two things in mind:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Rigour, accuracy, legitimacy: the chart needs to be honest.
+\item
+  The reader: the chart needs to help the reader understand something, and it must convince them to pay attention.
+\end{enumerate}
+
+At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. \ldots{}
+
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consequtive bar chart, your point loses its punch.
+
+The way we design charts -- much like our writing -- should always be honest, and should be clear and engaging to the reader.
+
+This chapter shows how you can do this with R. It starts with the `grammar of graphics' concepts of a package called \texttt{ggplot}, explains how to make those charts `Grattan-y', then provides examples for all common (and some not-so-common) charts you should add to your box of data visualisation tools to impress your message on our readers.
 
 \hypertarget{set-up-and-packages}{%
 \section{Set-up and packages}\label{set-up-and-packages}}
@@ -438,7 +470,9 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
                \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(year)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{group_by}\NormalTok{(year, state) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop))}
+\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
+               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long))}
 
 \CommentTok{# Show the first six rows of the new dataset}
 \KeywordTok{head}\NormalTok{(population_table)}
@@ -446,16 +480,16 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 3
+## # A tibble: 6 x 4
 ## # Groups:   year [1]
-##   year  state                            pop
-##   <fct> <chr>                          <dbl>
-## 1 2013  Australian Capital Territory  383257
-## 2 2013  New South Wales              7404032
-## 3 2013  Northern Territory            241722
-## 4 2013  Other Territories               2962
-## 5 2013  Queensland                   4652824
-## 6 2013  South Australia              1671488
+##   year  state     pop state_long                  
+##   <fct> <chr>   <dbl> <chr>                       
+## 1 2013  ACT    383257 Australian Capital Territory
+## 2 2013  NSW   7404032 New South Wales             
+## 3 2013  NT     241722 Northern Territory          
+## 4 2013  NT       2962 Other Territories           
+## 5 2013  Qld   4652824 Queensland                  
+## 6 2013  SA    1671488 South Australia
 \end{verbatim}
 
 \hypertarget{concepts}{%
@@ -463,34 +497,39 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 
 The \texttt{ggplot2} package is based on the \texttt{g}rammar of \texttt{g}raphics. \ldots{}
 
-The main ingredients to a \texttt{ggplot} chart:
+The main ingredients to a \texttt{ggplot} chart are:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data}: what data should be plotted. e.g. \texttt{data}
+  \textbf{Data}: what data should be plotted.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{data}
+  \end{itemize}
 \item
-  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \textbf{Aesthetics}: what variables should be linked to what chart elements.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \end{itemize}
 \item
-  \textbf{Geoms}: how the data should be plotted. e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \textbf{Geoms}: how the data should be plotted.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \end{itemize}
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{<}\NormalTok{DATA}\OperatorTok{>}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\ErrorTok{<}\NormalTok{GEOM_FUNCTION}\OperatorTok{>}\NormalTok{(}
-     \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\OperatorTok{<}\NormalTok{MAPPINGS}\OperatorTok{>}\NormalTok{),}
-     \DataTypeTok{stat =} \OperatorTok{<}\NormalTok{STAT}\OperatorTok{>}\NormalTok{, }
-     \DataTypeTok{position =} \OperatorTok{<}\NormalTok{POSITION}\OperatorTok{>}
-\StringTok{  }\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\ErrorTok{<}\NormalTok{COORDINATE_FUNCTION}\OperatorTok{>}\StringTok{ }\OperatorTok{+}
-\StringTok{  }\ErrorTok{<}\NormalTok{FACET_FUNCTION}\OperatorTok{>}
-\end{Highlighting}
-\end{Shaded}
-
-For example, you can plot a column chart by passing the \texttt{population\_table} dataset into \texttt{ggplot()} (``make a chart wth this data''). This produces an empty plot:
+For example, you can plot a column chart by passing the \texttt{population\_table} dataset into \texttt{ggplot()} (``make a chart wth this data''). This completes the first step -- data -- and produces an empty plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -499,11 +538,24 @@ For example, you can plot a column chart by passing the \texttt{population\_tabl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/empty plot-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/empty_plot-1.pdf}
 
-Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:\texttt{\{r\ empty\ with\ aes\}\ population\_table\ \%\textgreater{}\%\ \ \ \ \ \ \ \ \ \ ggplot(aes(x\ =\ state,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ pop,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fill\ =\ year))}
+Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}.
 
-Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to plot them. For this we use \texttt{geoms}. Tell it to plot a column chart by using \texttt{geom\_col}:
+If we just plot that, you'll see that \texttt{ggplot} knows a little bit more about what we're trying to do. It has the states on the x-axis and range of populations on the y-axis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/empty_aes-1.pdf}
+
+Now that \texttt{ggplot} knows where things should go, it needs to how to \emph{plot} them on the chart. For this we use \texttt{geoms}. Tell \texttt{ggplot} to take the things it knows and plot them as a column chart by using \texttt{geom\_col}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -515,9 +567,9 @@ Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/complete plot-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/complete_plot-1.pdf}
 
-Great! Although stacking populations is a bit silly. You can adjust the way \texttt{geoms} work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using \texttt{position\ =\ "dodge"}:
+Great! Although stacking populations is a bit silly. You can adjust the way a \texttt{geom} works with \emph{arguments}. In this case, tell \texttt{geom\_col} to place the different categories next to each other rather than ontop of each other, using \texttt{position\ =\ "dodge"}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -529,9 +581,11 @@ Great! Although stacking populations is a bit silly. You can adjust the way \tex
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/with dodge-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/with_dodge-1.pdf}
 
-That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
+That makes more sense. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of \texttt{data}, \texttt{aes}, and \texttt{geom}.
+
+The rest of the chapter will explore:
 
 \begin{itemize}
 \tightlist
@@ -552,11 +606,11 @@ That's nicer. The following sections in this chapter will build on this chart. T
 
 The \texttt{grattantheme} package contains functions that help \emph{Grattanise} your charts. It is hosted here: \url{https://github.com/mattcowgill/grattantheme}
 
-You can install it with \texttt{devtools::install\_github} from the package:
+You can install it with \texttt{remotes::install\_github} from the package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -695,7 +749,7 @@ To save the \texttt{pop\_chart} plot created above as a whole-column chart for a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_report.png}
+\includegraphics[width=38.76in]{atlas/population_chart_report}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
@@ -705,7 +759,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_presentation.png}
+\includegraphics[width=44.44in]{atlas/population_chart_presentation}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
@@ -716,7 +770,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{atlas/population_chart_blog.png}
+\includegraphics[width=44.44in]{atlas/population_chart_blog}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
@@ -778,7 +832,9 @@ Second, \texttt{position}, dictates how multiple bars occupying the same x-axis 
                  \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{)}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -797,7 +853,8 @@ You can also \textbf{order} the groups in your chart by a variable. If you want 
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -817,11 +874,37 @@ To flip the chart -- a useful move when you have long labels -- add \texttt{coor
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# tell theme_grattan}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Data_visualisation_files/figure-latex/bar4-1.pdf}
+
+Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
+
+Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the \texttt{seq} function\footnote{\texttt{seq(x1,\ x2,\ y)} will return a vector of numbers between \texttt{x1} and \texttt{x2}, spaced by \texttt{y}. For example: \texttt{seq(0,\ 10,\ 2)} will produce \texttt{0\ \ 2\ \ 4\ \ 6\ \ 8\ \ 10}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{  }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
+                             \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{9e6}\NormalTok{),}
+                             \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{8e6}\NormalTok{, }\FloatTok{2e6}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/bar5-1.pdf}
 
 \hypertarget{line-charts}{%
 \subsection{Line charts}\label{line-charts}}
@@ -844,8 +927,8 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line1-1.pdf}
@@ -864,13 +947,14 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 \StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line2-1.pdf}

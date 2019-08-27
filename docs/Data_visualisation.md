@@ -1,6 +1,24 @@
 # Data Visualisation
 
-[intro]
+When you visualise data you make decisions about what the reader can and cannot see. You choose to highlight or omit certain things to help them better understand the message you are presenting. 
+
+This requires a lot of important technical decisions: what data to use, what 'stat' to present it with -- show every data point, show a distribution function, show the average, the median, etc -- and on what scale -- raw numbers, on a log scale, as a proportion of a total, etc. 
+
+It also requires a bunch of aesthetic decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+
+All of these decisions need to made with two things in mind:
+
+1. Rigour, accuracy, legitimacy: the chart needs to be honest. 
+1. The reader: the chart needs to help the reader understand something, and it must convince them to pay attention. 
+
+At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. ...
+
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consequtive bar chart, your point loses its punch. 
+
+The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
+
+This chapter shows how you can do this with R. It starts with the 'grammar of graphics' concepts of a package called `ggplot`, explains how to make those charts 'Grattan-y', then provides examples for all common (and some not-so-common) charts you should add to your box of data visualisation tools to impress your message on our readers. 
+
 
 ## Set-up and packages
 
@@ -26,23 +44,25 @@ population_table <- read_csv("data/population_sa4.csv") %>%
         mutate(pop = as.numeric(value),
                year = as.factor(year)) %>% 
         group_by(year, state) %>% 
-        summarise(pop = sum(pop))
+        summarise(pop = sum(pop)) %>% 
+        mutate(state_long = state,
+               state = strayr::strayr(state_long))
 
 # Show the first six rows of the new dataset
 head(population_table)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 x 4
 ## # Groups:   year [1]
-##   year  state                            pop
-##   <fct> <chr>                          <dbl>
-## 1 2013  Australian Capital Territory  383257
-## 2 2013  New South Wales              7404032
-## 3 2013  Northern Territory            241722
-## 4 2013  Other Territories               2962
-## 5 2013  Queensland                   4652824
-## 6 2013  South Australia              1671488
+##   year  state     pop state_long                  
+##   <fct> <chr>   <dbl> <chr>                       
+## 1 2013  ACT    383257 Australian Capital Territory
+## 2 2013  NSW   7404032 New South Wales             
+## 3 2013  NT     241722 Northern Territory          
+## 4 2013  NT       2962 Other Territories           
+## 5 2013  Qld   4652824 Queensland                  
+## 6 2013  SA    1671488 South Australia
 ```
 
 
@@ -50,29 +70,22 @@ head(population_table)
 
 The `ggplot2` package is based on the `g`rammar of `g`raphics. ...
 
-The main ingredients to a `ggplot` chart:
+The main ingredients to a `ggplot` chart are:
 
-- **Data**: what data should be plotted. e.g. `data`
-- **Aesthetics**: what variables should be linked to what chart elements. e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
-- **Geoms**: how the data should be plotted. e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart. 
+- **Data**: what data should be plotted. 
+  - e.g. `data`
+- **Aesthetics**: what variables should be linked to what chart elements. 
+  - e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
+- **Geoms**: how the data should be plotted. 
+  - e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart. 
 
 Each plot you make will be made up of these three elements. The [full list of standard geoms](https://ggplot2.tidyverse.org/reference/) is listed in the `tidyverse` documentation. 
 
 
 
 
-```r
-ggplot(data = <DATA>) + 
-  <GEOM_FUNCTION>(
-     mapping = aes(<MAPPINGS>),
-     stat = <STAT>, 
-     position = <POSITION>
-  ) +
-  <COORDINATE_FUNCTION> +
-  <FACET_FUNCTION>
-```
 
-For example, you can plot a column chart by passing the `population_table` dataset into `ggplot()` ("make a chart wth this data"). This produces an empty plot:
+For example, you can plot a column chart by passing the `population_table` dataset into `ggplot()` ("make a chart wth this data"). This completes the first step -- data -- and produces an empty plot:
 
 
 ```r
@@ -80,18 +93,25 @@ population_table %>%
         ggplot()
 ```
 
-![](Data_visualisation_files/figure-epub3/empty plot-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/empty_plot-1.png)<!-- -->
 
 
-Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_:```{r empty with aes}
+Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_. 
+
+If we just plot that, you'll see that `ggplot` knows a little bit more about what we're trying to do. It has the states on the x-axis and range of populations on the y-axis:
+
+
+```r
 population_table %>% 
         ggplot(aes(x = state,
                    y = pop,
                    fill = year))
 ```
 
+![](Data_visualisation_files/figure-epub3/empty_aes-1.png)<!-- -->
 
-Now that `ggplot` knows where things should go, it needs to _how_ to plot them. For this we use `geoms`. Tell it to plot a column chart by using `geom_col`:
+
+Now that `ggplot` knows where things should go, it needs to how to _plot_ them on the chart. For this we use `geoms`. Tell `ggplot` to take the things it knows and plot them as a column chart by using `geom_col`:
 
 
 ```r
@@ -102,9 +122,9 @@ population_table %>%
         geom_col()
 ```
 
-![](Data_visualisation_files/figure-epub3/complete plot-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/complete_plot-1.png)<!-- -->
 
-Great! Although stacking populations is a bit silly. You can adjust the way `geoms` work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using `position = "dodge"`:
+Great! Although stacking populations is a bit silly. You can adjust the way a `geom` works with _arguments_. In this case, tell `geom_col` to place the different categories next to each other rather than ontop of each other, using `position = "dodge"`:
 
 
 ```r
@@ -115,10 +135,12 @@ population_table %>%
         geom_col(position = "dodge")
 ```
 
-![](Data_visualisation_files/figure-epub3/with dodge-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/with_dodge-1.png)<!-- -->
 
 
-That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
+That makes more sense. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of `data`, `aes`, and `geom`. 
+
+The rest of the chapter will explore:
 
   - Grattanising your charts and choosing colours
   - Saving charts according to Grattan templates
@@ -131,11 +153,11 @@ That's nicer. The following sections in this chapter will build on this chart. T
 
 The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/mattcowgill/grattantheme
  
-You can install it with `devtools::install_github` from the package:
+You can install it with `remotes::install_github` from the package:
 
 
 ```r
-install.packages("devtools")
+install.packages("remotes")
 remotes::install_github("mattcowgill/grattantheme")
 ```
  
@@ -239,7 +261,7 @@ grattan_save("atlas/population_chart_report.pdf", pop_chart, type = "wholecolumn
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-![](atlas/population_chart_report.png)<!-- -->
+<img src="atlas/population_chart_report.png" width="2791" />
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
@@ -252,7 +274,7 @@ grattan_save("atlas/population_chart_presentation.pdf", pop_chart, type = "fulls
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-![](atlas/population_chart_presentation.png)<!-- -->
+<img src="atlas/population_chart_presentation.png" width="3200" />
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
@@ -266,7 +288,7 @@ grattan_save("atlas/population_chart_blog.png", pop_chart,
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-![](atlas/population_chart_blog.png)<!-- -->
+<img src="atlas/population_chart_blog.png" width="3200" />
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
@@ -316,7 +338,9 @@ population_table %>%
                  position = "dodge") +
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6)
+        grattan_fill_manual(6) + 
+        labs(x = "",
+             y = "")
 ```
 
 ![](Data_visualisation_files/figure-epub3/bar2-1.png)<!-- -->
@@ -335,7 +359,8 @@ population_table %>%
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
         grattan_fill_manual(6) + 
-        labs(x = "")
+        labs(x = "",
+             y = "")
 ```
 
 ![](Data_visualisation_files/figure-epub3/bar3-1.png)<!-- -->
@@ -354,10 +379,36 @@ population_table %>%
         theme_grattan(flipped = TRUE) +  # tell theme_grattan
         grattan_y_continuous(labels = comma) +
         grattan_fill_manual(6) + 
-        labs(x = "")
+        labs(x = "",
+             y = "")
 ```
 
 ![](Data_visualisation_files/figure-epub3/bar4-1.png)<!-- -->
+
+
+Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
+
+Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
+
+
+```r
+population_table %>% 
+        ggplot(aes(x = reorder(state, -pop), 
+                   y = pop,
+                   fill = year)) +
+        geom_bar(stat = "identity",
+                 position = "dodge") +
+        coord_flip() +  
+        theme_grattan(flipped = TRUE) + 
+        grattan_y_continuous(labels = comma,
+                             limits = c(0, 9e6),
+                             breaks = seq(0, 8e6, 2e6)) +
+        grattan_fill_manual(6) + 
+        labs(x = "",
+             y = "")
+```
+
+![](Data_visualisation_files/figure-epub3/bar5-1.png)<!-- -->
 
 
 ### Line charts
@@ -379,8 +430,8 @@ population_table %>%
 ```
 
 ```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 ```
 
 ![](Data_visualisation_files/figure-epub3/line1-1.png)<!-- -->
@@ -399,12 +450,13 @@ population_table %>%
         theme_grattan() +
         grattan_y_continuous(labels = comma) +
         grattan_colour_manual(9) + 
-        labs(x = "")
+        labs(x = "",
+             y = "")
 ```
 
 ```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 ```
 
 ![](Data_visualisation_files/figure-epub3/line2-1.png)<!-- -->

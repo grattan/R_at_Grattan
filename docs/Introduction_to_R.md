@@ -16,7 +16,7 @@ R is quite old, having been first released publicly in 1995, but it's also growi
 
 When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
 
-![](atlas/r_screenshot.png)<!-- -->
+<img src="atlas/r_screenshot.png" width="575" />
 
 This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
@@ -26,7 +26,7 @@ To analyse data with R, you will typically write out a text file containing your
 
 RStudio is another piece of free software you can download and run on your computer.^[RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.] It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an "integrated development environment" or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R 'console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created. 
 
-![](atlas/rstudio_screenshot.png)<!-- -->
+<img src="atlas/rstudio_screenshot.png" width="1325" />
 
 You'll almost always interact with R by opening RStudio. 
 
@@ -36,16 +36,16 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to [CRAN](https://cran.r-project.org), the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages. 
 
-![](atlas/r_cran.png)<!-- -->
+<img src="atlas/r_cran.png" width="1130" />
 
 You want to download the latest base R release, as a 'binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-![](atlas/r_cran_macos.png)<!-- -->
+<img src="atlas/r_cran_macos.png" width="1129" />
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-![](atlas/r_cran_windows_1.png)<!-- -->![](atlas/r_cran_windows_2.png)<!-- -->
+<img src="atlas/r_cran_windows_1.png" width="1130" /><img src="atlas/r_cran_windows_2.png" width="1128" />
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 
