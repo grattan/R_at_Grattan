@@ -13,7 +13,7 @@ All of these decisions need to made with two things in mind:
 
 At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. ...
 
-Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consequtive bar chart, your point loses its punch. 
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.^["Bar charts are evidence that you are dead inside" -- Amanda Cox, data editor for the New York Times.]
 
 The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
 
@@ -93,7 +93,7 @@ population_table %>%
         ggplot()
 ```
 
-![](Data_visualisation_files/figure-epub3/empty_plot-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="672" />
 
 
 Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_. 
@@ -108,7 +108,7 @@ population_table %>%
                    fill = year))
 ```
 
-![](Data_visualisation_files/figure-epub3/empty_aes-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="672" />
 
 
 Now that `ggplot` knows where things should go, it needs to how to _plot_ them on the chart. For this we use `geoms`. Tell `ggplot` to take the things it knows and plot them as a column chart by using `geom_col`:
@@ -122,7 +122,7 @@ population_table %>%
         geom_col()
 ```
 
-![](Data_visualisation_files/figure-epub3/complete_plot-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672" />
 
 Great! Although stacking populations is a bit silly. You can adjust the way a `geom` works with _arguments_. In this case, tell `geom_col` to place the different categories next to each other rather than ontop of each other, using `position = "dodge"`:
 
@@ -135,7 +135,7 @@ population_table %>%
         geom_col(position = "dodge")
 ```
 
-![](Data_visualisation_files/figure-epub3/with_dodge-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/with_dodge-1.png" width="672" />
 
 
 That makes more sense. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of `data`, `aes`, and `geom`. 
@@ -192,7 +192,7 @@ base_chart <- population_table %>%
 base_chart
 ```
 
-![](Data_visualisation_files/figure-epub3/base_chart-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672" />
 
 
 Let's make it Grattany. First, add `theme_grattan` to your plot:
@@ -203,7 +203,7 @@ base_chart +
         theme_grattan()
 ```
 
-![](Data_visualisation_files/figure-epub3/add_theme_grattan-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" />
 
 Then `grattan_y_continuous` to align the x-axis with zero. This function takes the same arguments as `scale_y_continuous`, so you can add `labels = comma()` to reformat the y-axis labels:
 
@@ -214,7 +214,7 @@ base_chart +
         grattan_y_continuous(labels = comma)
 ```
 
-![](Data_visualisation_files/figure-epub3/add_grattan_y_continuous-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672" />
 
 To define `fill` colours, use `grattan_fill_manual` with the number of colours you need (six, in this case):
 
@@ -228,7 +228,7 @@ pop_chart <- base_chart +
 pop_chart
 ```
 
-![](Data_visualisation_files/figure-epub3/add_fill-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" />
 
 Nice chart! Now you can save it and share it with the world.
 
@@ -261,7 +261,7 @@ grattan_save("atlas/population_chart_report.pdf", pop_chart, type = "wholecolumn
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<img src="atlas/population_chart_report.png" width="2791" />
+<img src="atlas/population_chart_report.png" width="1396" />
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
@@ -274,7 +274,7 @@ grattan_save("atlas/population_chart_presentation.pdf", pop_chart, type = "fulls
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_presentation.png" width="3200" />
+<img src="atlas/population_chart_presentation.png" width="1600" />
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
@@ -288,7 +288,7 @@ grattan_save("atlas/population_chart_blog.png", pop_chart,
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_blog.png" width="3200" />
+<img src="atlas/population_chart_blog.png" width="1600" />
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
@@ -343,7 +343,7 @@ population_table %>%
              y = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/bar2-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/bar2-1.png" width="672" />
 
 
 You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
@@ -363,7 +363,7 @@ population_table %>%
              y = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/bar3-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/bar3-1.png" width="672" />
 
 To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
 
@@ -383,12 +383,12 @@ population_table %>%
              y = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/bar4-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/bar4-1.png" width="672" />
 
 
 Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
 
-Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
+1. Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
 
 
 ```r
@@ -408,8 +408,29 @@ population_table %>%
              y = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/bar5-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/bar5-1.png" width="672" />
 
+
+2. Add empty space at the top of the chart to accomodate the long labels:
+
+
+```r
+population_table %>% 
+        ggplot(aes(x = reorder(state, -pop), 
+                   y = pop,
+                   fill = year)) +
+        geom_bar(stat = "identity",
+                 position = "dodge") +
+        coord_flip() +  
+        theme_grattan(flipped = TRUE) + 
+        grattan_y_continuous(labels = comma, 
+                             expand_top = .1) +
+        grattan_fill_manual(6) + 
+        labs(x = "",
+             y = "")
+```
+
+<img src="Data_visualisation_files/figure-html/bar6-1.png" width="672" />
 
 ### Line charts
 
@@ -434,7 +455,7 @@ population_table %>%
 ## faded): Using more than six colours is not recommended.
 ```
 
-![](Data_visualisation_files/figure-epub3/line1-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/line1-1.png" width="672" />
 
 You can also add dots for each year by layering `geom_point` on top of `geom_line`:
 
@@ -459,7 +480,7 @@ population_table %>%
 ## faded): Using more than six colours is not recommended.
 ```
 
-![](Data_visualisation_files/figure-epub3/line2-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/line2-1.png" width="672" />
 
 If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
 
@@ -479,7 +500,7 @@ population_table %>%
         labs(x = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/line3-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/line3-1.png" width="672" />
 
 To tidy this up, we can: 
 
@@ -510,7 +531,7 @@ population_table %>%
         labs(x = "")
 ```
 
-![](Data_visualisation_files/figure-epub3/line4-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/line4-1.png" width="672" />
 
 
 
@@ -551,7 +572,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-![](Data_visualisation_files/figure-epub3/scatter1-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/scatter1-1.png" width="672" />
 
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with `geom_smooth`:
@@ -571,7 +592,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-![](Data_visualisation_files/figure-epub3/scatter2-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/scatter2-1.png" width="672" />
 
 
 You could colour-code positive and negative changes from within the `geom_point` aesthetic. Making a change there won't pass through to the `geom_smooth` aesthetic, so your line-of-best-fit will apply to all data points.
@@ -593,7 +614,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-![](Data_visualisation_files/figure-epub3/scatter3-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/scatter3-1.png" width="672" />
 
 
 Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
@@ -618,7 +639,7 @@ population_diff %>%
         facet_wrap(state ~ .)
 ```
 
-![](Data_visualisation_files/figure-epub3/scatter4-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/scatter4-1.png" width="672" />
 
 
 ### Distributions
@@ -720,7 +741,7 @@ map <- map_data %>%
 map
 ```
 
-![](Data_visualisation_files/figure-epub3/map1-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/map1-1.png" width="672" />
 
 
 

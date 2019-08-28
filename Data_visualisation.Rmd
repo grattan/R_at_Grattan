@@ -13,7 +13,7 @@ All of these decisions need to made with two things in mind:
 
 At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. ...
 
-Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consequtive bar chart, your point loses its punch. 
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.^["Bar charts are evidence that you are dead inside" -- Amanda Cox, data editor for the New York Times.]
 
 The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
 
@@ -29,6 +29,7 @@ The `grattantheme` package is used to make charts look Grattan-y. The `absmapsda
 ```{r load_packages, message = FALSE}
 library(tidyverse)
 library(grattantheme)
+library(ggrepel)
 library(absmapsdata)
 library(sf)
 library(scales)
@@ -357,7 +358,7 @@ population_table %>%
 
 Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
 
-Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
+1. Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
 
 ```{r bar5}
 population_table %>% 
@@ -377,6 +378,25 @@ population_table %>%
 
 ```
 
+
+2. Add empty space at the top of the chart to accomodate the long labels:
+
+```{r bar6}
+population_table %>% 
+        ggplot(aes(x = reorder(state, -pop), 
+                   y = pop,
+                   fill = year)) +
+        geom_bar(stat = "identity",
+                 position = "dodge") +
+        coord_flip() +  
+        theme_grattan(flipped = TRUE) + 
+        grattan_y_continuous(labels = comma, 
+                             expand_top = .1) +
+        grattan_fill_manual(6) + 
+        labs(x = "",
+             y = "")
+
+```
 
 ### Line charts
 
@@ -593,7 +613,7 @@ The `absmapsdata` contains compressed, and tidied `sf` objects containing geomet
 You can install the package from Github. You will also need the `sf` package installed to handle the `sf` objects.
 
 ```{r install_absmapsdata, eval = FALSE}
-devtools::install_github("wfmackey/absmapsdata")
+remotes::install_github("wfmackey/absmapsdata")
 library(absmapsdata)
 
 install.packages("sf")
@@ -621,6 +641,8 @@ head(map_data %>%
 
 You then plot a map like you would any other `ggplot`: provide your data, choose your `aes` and your `geom`. For maps with `sf` objects, the key **aesthetic** is `geometry = geometry`, and the **geom** is `geom_sf`.
 
+The argument `lwd` controls the line width of area borders.
+
 
 ```{r map1}
 map <- map_data %>% 
@@ -637,6 +659,62 @@ map <- map_data %>%
 map
 ```
 
+Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people who dominate the space. Showing individual states or capital city areas can sometimes be useful. 
+
+To do this, just filter the `map_data` object: 
+
+```{r map1}
+map <- map_data %>% 
+        filter(state == "Vic") %>% 
+        ggplot(aes(geometry = geometry,
+                   fill = pop_change)) +
+        geom_sf(lwd = 0) +
+        theme_void() +
+        grattan_fill_manual(discrete = FALSE, 
+                            palette = "diverging",
+                            limits = c(-20, 20),
+                            breaks = seq(-20, 20, 10)) +
+  labs(fill = "Population \n change")
+
+map
+```
+
+##### Adding labels to maps
+
+You can add labels to choropleth maps with the standard `geom_text` or `geom_label`. Because it is likely that some labels will overlap, `ggrepel::geom_text_repel` or `ggrepel::geom_label_repel` is usually the better option.
+
+To use `geom_(text|label)_repel`, you need to tell `ggrepel` where in 
+
+
+
+```{r map1}
+map <- map_data %>% 
+        filter(state == "Vic") %>% 
+        ggplot(aes(geometry = geometry)) +
+        geom_sf(aes(fill = pop_change),
+                lwd = .1,
+                colour = "black") +
+        theme_void() +
+        grattan_fill_manual(discrete = FALSE, 
+                            palette = "diverging",
+                            limits = c(-20, 20),
+                            breaks = seq(-20, 20, 10)) +
+  geom_label_repel(aes(label = sa4_name),
+                  stat = "sf_coordinates", nudge_x = 1000, segment.alpha = .5,
+                  size = 4, 
+                  direction = "y",
+                  label.size = 0, 
+                  label.padding = unit(0.1, "lines"),
+                  colour = "grey50",
+                  segment.color = "grey50") + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, .2))) + 
+  theme(legend.position = "top") + 
+  labs(fill = "Population \n change")
+
+map
+
+plotly::ggplotly(map)
+```
 
 
 ## Creating simple interactive graphs with `plotly`

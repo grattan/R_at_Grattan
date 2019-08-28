@@ -1,0 +1,86 @@
+
+
+
+```r
+library(tidyverse)
+```
+
+# Using R at Grattan {#intro}
+
+
+## Using R projects for a fully reproducible workflow.
+
+_Finally adhering to the 'hit by a bus' rule._
+
+Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+
+Cover:
+1. setwd() and machine-speficic filepaths are bad
+2. relative file paths are good
+3. RStudio projects are an easy, reproducible way to set your wd
+
+### Filepaths
+
+Filepaths should be relative to the working directory, and the working directory should be set by the project.
+
+**Good**
+
+
+```r
+hes <- read_csv("data/HES/hes1516.csv")
+grattan_save("images/expenditure_by_income.pdf")
+```
+
+**Bad**
+
+```r
+hes <- read_csv("/Users/mcowgill/Desktop/hes1516.csv")
+hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
+grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
+```
+
+
+### Keep your scripts manageable
+
+As a general rule of thumb, use one script per output. It should be clear what your script is trying to do (use comments!).
+
+Consider breaking your analysis into pieces. For example: 
+
+- 01_import.R
+- 02_tidy.R
+- 03_model.R
+- 04_visualise.R
+
+
+**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
+
+### Use subfolders of your project folder
+
+Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
+
+Use subfolders to clearly separate your code, raw data, and output.
+
+
+## Grattan coding style guide
+
+Short summary of why
+
+Link to style guide
+
+
+## What is the tidyverse and why do we use it?
+
+Introduce following chapters
+
+## An introduction to RMarkdown
+
+
+## Resources in this package
+
+- Starting a piece of analysis ‘cheat sheet’.
+- Updated style guide.
+- Written guide/slides.
+
+
+
+
