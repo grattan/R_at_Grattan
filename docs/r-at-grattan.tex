@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-28}
+    \date{2019-09-04}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -419,11 +419,33 @@ Introduce following chapters
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
 
-When you visualise data you make decisions about what the reader can and cannot see. You choose to highlight or omit certain things to help them better understand the message you are presenting.
+This chapter explores
 
-This requires a lot of important technical decisions: what data to use, what `stat' to present it with -- show every data point, show a distribution function, show the average, the median, etc -- and on what scale -- raw numbers, on a log scale, as a proportion of a total, etc.
+\hypertarget{introduction-to-data-visualisation}{%
+\section{Introduction to data visualisation}\label{introduction-to-data-visualisation}}
 
-It also requires a bunch of aesthetic decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+Data visualisation is used in two broad ways:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  to examine and explore your data; and
+\item
+  to present a finding to your audience.
+\end{enumerate}
+
+When you start using a dataset, you should \emph{look at it}.\footnote{From Kieran Healy's \emph{Data Vizualization: A Practical Introduction)} (\href{https://socviz.co/}{available free}): `You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.'} Plot histograms of variables-of-interest to spot outliers. Explore correlations with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use facetting to explore differences in the above between groups, and do it interactively with non-static plots.
+
+These \textbf{exploratory plots} are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette or be particularly interesting.
+They're built and used to explore the data.
+Through this process, you can become confident your data is \emph{what it says it is}.
+
+When you \textbf{present a visualisation to a reader}, you make decisions about what they can and cannot see. You choose to highlight or omit particular things to help them better understand the message you are presenting.
+
+This requires important technical decisions: what data to use, what `stat' to present it with --- show every data point, show a distribution function, show the average or the median --- and on what scale --- raw numbers, on a log scale, as a proportion of a total.
+
+It also requires \emph{aesthetic} decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
 
 All of these decisions need to made with two things in mind:
 
@@ -436,9 +458,9 @@ All of these decisions need to made with two things in mind:
   The reader: the chart needs to help the reader understand something, and it must convince them to pay attention.
 \end{enumerate}
 
-At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. \ldots{}
+At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader.
 
-Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.\footnote{``Bar charts are evidence that you are dead inside'' -- Amanda Cox, data editor for the New York Times.}
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.\footnote{`Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.}
 
 The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader.
 
@@ -455,6 +477,7 @@ The \texttt{grattantheme} package is used to make charts look Grattan-y. The \te
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(grattantheme)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
 \KeywordTok{library}\NormalTok{(absmapsdata)}
 \KeywordTok{library}\NormalTok{(sf)}
 \KeywordTok{library}\NormalTok{(scales)}
@@ -495,7 +518,7 @@ For most charts in this chapter, we'll use the \texttt{population\_table} data s
 \hypertarget{concepts}{%
 \section{Concepts}\label{concepts}}
 
-The \texttt{ggplot2} package is based on the \texttt{g}rammar of \texttt{g}raphics. \ldots{}
+The \texttt{ggplot2} package is based on the \textbf{g}rammar of \textbf{g}raphics. \ldots{}
 
 The main ingredients to a \texttt{ggplot} chart are:
 
@@ -523,11 +546,15 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
   \end{itemize}
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
+
+\texttt{ggplot} also has a `cheat sheet' that contains many of the often-used elements of a plot, which you can download \href{https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf}{here}.
+
+\begin{center}\includegraphics[width=17.08in]{atlas/ggplot_cheat_sheet} \end{center}
 
 For example, you can plot a column chart by passing the \texttt{population\_table} dataset into \texttt{ggplot()} (``make a chart wth this data''). This completes the first step -- data -- and produces an empty plot:
 
@@ -590,6 +617,8 @@ The rest of the chapter will explore:
 \begin{itemize}
 \tightlist
 \item
+  Exploratory data visualisation
+\item
   Grattanising your charts and choosing colours
 \item
   Saving charts according to Grattan templates
@@ -600,6 +629,11 @@ The rest of the chapter will explore:
 \item
   Adding chart labels
 \end{itemize}
+
+\hypertarget{exploratory-data-visualisation}{%
+\section{Exploratory data visualisation}\label{exploratory-data-visualisation}}
+
+Plotting your data early in the analysis stage can help you quickly identify outliers, oddities, things that don't look quite right.
 
 \hypertarget{making-grattan-y-charts}{%
 \section{Making Grattan-y charts}\label{making-grattan-y-charts}}
@@ -774,6 +808,9 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
+\hypertarget{adding-labels}{%
+\section{Adding labels}\label{adding-labels}}
+
 \hypertarget{chart-cookbook}{%
 \section{Chart cookbook}\label{chart-cookbook}}
 
@@ -883,7 +920,12 @@ To flip the chart -- a useful move when you have long labels -- add \texttt{coor
 
 Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
 
-Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the \texttt{seq} function\footnote{\texttt{seq(x1,\ x2,\ y)} will return a vector of numbers between \texttt{x1} and \texttt{x2}, spaced by \texttt{y}. For example: \texttt{seq(0,\ 10,\ 2)} will produce \texttt{0\ \ 2\ \ 4\ \ 6\ \ 8\ \ 10}}:
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the \texttt{seq} function\footnote{\texttt{seq(x1,\ x2,\ y)} will return a vector of numbers between \texttt{x1} and \texttt{x2}, spaced by \texttt{y}. For example: \texttt{seq(0,\ 10,\ 2)} will produce \texttt{0\ \ 2\ \ 4\ \ 6\ \ 8\ \ 10}}:
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -905,6 +947,34 @@ Adjust the limits of the axis to accomodate the long labels, meaning we will hav
 \end{Shaded}
 
 \includegraphics{Data_visualisation_files/figure-latex/bar5-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Add empty space at the top of the chart to accomodate the long labels:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }
+                   \DataTypeTok{y =}\NormalTok{ pop,}
+                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{  }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma, }
+                             \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/bar6-1.pdf}
 
 \hypertarget{line-charts}{%
 \subsection{Line charts}\label{line-charts}}
@@ -1043,6 +1113,24 @@ First, create a dataset that we'll use for scatter plots. Take the \texttt{popul
 \end{Highlighting}
 \end{Shaded}
 
+Then plot it
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013,}
+                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Population in 2013"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/scatter-1.pdf}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
@@ -1057,7 +1145,7 @@ First, create a dataset that we'll use for scatter plots. Take the \texttt{popul
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter1-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter_rescale-1.pdf}
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with \texttt{geom\_smooth}:
 
@@ -1077,7 +1165,7 @@ It looks like the areas with the largest population grew the most between 2013 a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter2-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter_smooth-1.pdf}
 
 You could colour-code positive and negative changes from within the \texttt{geom\_point} aesthetic. Making a change there won't pass through to the \texttt{geom\_smooth} aesthetic, so your line-of-best-fit will apply to all data points.
 
@@ -1099,7 +1187,7 @@ You could colour-code positive and negative changes from within the \texttt{geom
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter3-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter_colour-1.pdf}
 
 Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
 
@@ -1124,7 +1212,7 @@ Like the charts above, you could facet this by state to see if there were any in
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter4-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/scatter_facet-1.pdf}
 
 \hypertarget{distributions}{%
 \subsection{Distributions}\label{distributions}}
@@ -1150,50 +1238,42 @@ The \texttt{absmapsdata} contains compressed, and tidied \texttt{sf} objects con
 \begin{itemize}
 \tightlist
 \item
-  Statistical Area 1 2011: \texttt{sa12011}
+  Statistical Area 1 2011 and 2016: \texttt{sa12011} or \texttt{sa12016}
 \item
-  Statistical Area 1 2016: \texttt{sa12016}
+  Statistical Area 2 2011 and 2016: \texttt{sa22011} or \texttt{sa22016}
 \item
-  Statistical Area 2 2011: \texttt{sa22011}
+  Statistical Area 3 2011 and 2016: \texttt{sa32011} or \texttt{sa32016}
 \item
-  Statistical Area 2 2016: \texttt{sa22016}
+  Statistical Area 4 2011 and 2016: \texttt{sa42011} or \texttt{sa42016}
 \item
-  Statistical Area 3 2011: \texttt{sa32011}
+  Greater Capital Cities 2011 and 2016: \texttt{gcc2011} or \texttt{gcc2016}
 \item
-  Statistical Area 3 2016: \texttt{sa32016}
+  Remoteness Areas 2011 and 2016: \texttt{ra2011} or \texttt{ra2016}
 \item
-  Statistical Area 4 2011: \texttt{sa42011}
-\item
-  Statistical Area 4 2016: \texttt{sa42016}
-\item
-  Greater Capital Cities 2011: \texttt{gcc2011}
-\item
-  Greater Capital Cities 2016: \texttt{gcc2016}
-\item
-  Remoteness Areas 2011: \texttt{ra2011}
-\item
-  Remoteness Areas 2016: \texttt{ra2016}
-\item
-  State 2011: \texttt{state2011}
-\item
-  State 2016: \texttt{state2016}
+  State 2011 and 2016: \texttt{state2011} or \texttt{state2016}
 \item
   Commonwealth Electoral Divisions 2018: \texttt{ced2018}
 \item
   State Electoral Divisions 2018:\texttt{sed2018}
 \item
-  Local Government Areas 2016: \texttt{lga2016}
+  Local Government Areas 2016 and 2018: \texttt{lga2016} or \texttt{lga2018}
 \item
-  Local Government Areas 2018: \texttt{lga2018}
+  Postcodes 2016: \texttt{postcodes2016}
 \end{itemize}
 
-You can install the package from Github. You will also need the \texttt{sf} package installed to handle the \texttt{sf} objects.
+You can install the package from Github:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(absmapsdata)}
+\end{Highlighting}
+\end{Shaded}
 
+You will also need the \texttt{sf} package installed to handle the \texttt{sf} objects:
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"sf"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(sf)}
 \end{Highlighting}
@@ -1231,7 +1311,11 @@ You can join the \texttt{sf} objects from \texttt{absmapsdata} to your dataset u
 ## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.~
 \end{verbatim}
 
-You then plot a map like you would any other \texttt{ggplot}: provide your data, choose your \texttt{aes} and your \texttt{geom}. For maps with \texttt{sf} objects, the key \textbf{aesthetic} is \texttt{geometry\ =\ geometry}, and the \textbf{geom} is \texttt{geom\_sf}.
+You then plot a map like you would any other \texttt{ggplot}: provide your data, then choose your \texttt{aes} and your \texttt{geom}. For maps with \texttt{sf} objects, the \textbf{key aesthetic} is \texttt{geometry\ =\ geometry}, and the \textbf{key geom} is \texttt{geom\_sf}.
+
+The argument \texttt{lwd} controls the line width of area borders.
+
+Note that RStudio takes a long time to render a map in the
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1244,13 +1328,75 @@ You then plot a map like you would any other \texttt{ggplot}: provide your data,
                             \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
                             \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
                             \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population change"}\NormalTok{)}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population }\CharTok{\textbackslash{}n}\StringTok{change"}\NormalTok{)}
 
 \NormalTok{map}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Data_visualisation_files/figure-latex/map1-1.pdf}
+
+Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful.
+
+To do this, filter the \texttt{map\_data} object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{map <-}\StringTok{ }\NormalTok{map_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry,}
+                   \DataTypeTok{fill =}\NormalTok{ pop_change)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{lwd =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_void}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
+                            \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
+                            \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population }\CharTok{\textbackslash{}n}\StringTok{change"}\NormalTok{)}
+
+\NormalTok{map}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/map_filter-1.pdf}
+
+\hypertarget{adding-labels-to-maps}{%
+\paragraph{Adding labels to maps}\label{adding-labels-to-maps}}
+
+You can add labels to choropleth maps with the standard \texttt{geom\_text} or \texttt{geom\_label}. Because it is likely that some labels will overlap, \texttt{ggrepel::geom\_text\_repel} or \texttt{ggrepel::geom\_label\_repel} is usually the better option.
+
+To use \texttt{geom\_(text\textbar{}label)\_repel}, you need to tell \texttt{ggrepel} where in
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{map <-}\StringTok{ }\NormalTok{map_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ pop_change),}
+                \DataTypeTok{lwd =} \FloatTok{.1}\NormalTok{,}
+                \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_void}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
+                            \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
+                            \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ sa4_name),}
+                  \DataTypeTok{stat =} \StringTok{"sf_coordinates"}\NormalTok{, }\DataTypeTok{nudge_x =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{segment.alpha =} \FloatTok{.5}\NormalTok{,}
+                  \DataTypeTok{size =} \DecValTok{4}\NormalTok{, }
+                  \DataTypeTok{direction =} \StringTok{"y"}\NormalTok{,}
+                  \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{, }
+                  \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+                  \DataTypeTok{colour =} \StringTok{"grey50"}\NormalTok{,}
+                  \DataTypeTok{segment.color =} \StringTok{"grey50"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{expand_scale}\NormalTok{(}\DataTypeTok{mult =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{.2}\NormalTok{))) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population }\CharTok{\textbackslash{}n}\StringTok{change"}\NormalTok{)}
+
+\NormalTok{map}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/map_label-1.pdf}
 
 \hypertarget{creating-simple-interactive-graphs-with-plotly}{%
 \section{\texorpdfstring{Creating simple interactive graphs with \texttt{plotly}}{Creating simple interactive graphs with plotly}}\label{creating-simple-interactive-graphs-with-plotly}}

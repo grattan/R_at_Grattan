@@ -1,19 +1,39 @@
 # Data Visualisation
 
-When you visualise data you make decisions about what the reader can and cannot see. You choose to highlight or omit certain things to help them better understand the message you are presenting. 
+This chapter explores 
 
-This requires a lot of important technical decisions: what data to use, what 'stat' to present it with -- show every data point, show a distribution function, show the average, the median, etc -- and on what scale -- raw numbers, on a log scale, as a proportion of a total, etc. 
 
-It also requires a bunch of aesthetic decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+
+## Introduction to data visualisation
+
+Data visualisation is used in two broad ways: 
+
+1. to examine and explore your data; and 
+1. to present a finding to your audience. 
+
+When you start using a dataset, you should _look at it_.[^1] Plot histograms of variables-of-interest to spot outliers. Explore correlations with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots. 
+
+  [^1]: From Kieran Healy's _Data Vizualization: A Practical Introduction)_ ([available free ](https://socviz.co/)): 'You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.' 
+
+
+These **exploratory plots** are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette or be particularly interesting.
+They're built and used to explore the data. 
+Through this process, you can become confident your data is _what it says it is_. 
+
+When you **present a visualisation to a reader**, you make decisions about what they can and cannot see. You choose to highlight or omit particular things to help them better understand the message you are presenting. 
+
+This requires important technical decisions: what data to use, what 'stat' to present it with --- show every data point, show a distribution function, show the average or the median --- and on what scale --- raw numbers, on a log scale, as a proportion of a total. 
+
+It also requires _aesthetic_ decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
 
 All of these decisions need to made with two things in mind:
 
 1. Rigour, accuracy, legitimacy: the chart needs to be honest. 
 1. The reader: the chart needs to help the reader understand something, and it must convince them to pay attention. 
 
-At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader. ...
+At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader.
 
-Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.^["Bar charts are evidence that you are dead inside" -- Amanda Cox, data editor for the New York Times.]
+Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.^['Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.]
 
 The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
 
@@ -30,6 +50,7 @@ The `grattantheme` package is used to make charts look Grattan-y. The `absmapsda
 ```r
 library(tidyverse)
 library(grattantheme)
+library(ggrepel)
 library(absmapsdata)
 library(sf)
 library(scales)
@@ -68,7 +89,7 @@ head(population_table)
 
 ## Concepts
 
-The `ggplot2` package is based on the `g`rammar of `g`raphics. ...
+The `ggplot2` package is based on the **g**rammar of **g**raphics. ...
 
 The main ingredients to a `ggplot` chart are:
 
@@ -77,15 +98,18 @@ The main ingredients to a `ggplot` chart are:
 - **Aesthetics**: what variables should be linked to what chart elements. 
   - e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
 - **Geoms**: how the data should be plotted. 
-  - e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart. 
+  - e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart, `geom_line()` will produce a line chart. 
 
 Each plot you make will be made up of these three elements. The [full list of standard geoms](https://ggplot2.tidyverse.org/reference/) is listed in the `tidyverse` documentation. 
 
+`ggplot` also has a 'cheat sheet' that contains many of the often-used elements of a plot, which you can download [here](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
+
+<img src="atlas/ggplot_cheat_sheet.png" width="615" style="display: block; margin: auto;" />
 
 
 
 
-For example, you can plot a column chart by passing the `population_table` dataset into `ggplot()` ("make a chart wth this data"). This completes the first step -- data -- and produces an empty plot:
+For example, you can plot a column chart by passing the `population_table` dataset into `ggplot()` ("make a chart with this data"). This completes the first step -- data -- and produces an empty plot:
 
 
 ```r
@@ -124,7 +148,7 @@ population_table %>%
 
 <img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672" />
 
-Great! Although stacking populations is a bit silly. You can adjust the way a `geom` works with _arguments_. In this case, tell `geom_col` to place the different categories next to each other rather than ontop of each other, using `position = "dodge"`:
+Great! Although stacking populations is a bit silly. You can adjust the way a `geom` works with _arguments_. In this case, tell `geom_col` to place the different categories next to each other rather than on-top of each other, using `position = "dodge"`:
 
 
 ```r
@@ -142,12 +166,16 @@ That makes more sense. The following sections in this chapter will cover a broad
 
 The rest of the chapter will explore:
 
+  - Exploratory data visualisation
   - Grattanising your charts and choosing colours
   - Saving charts according to Grattan templates
   - Making bar, line, scatter and distribution plots
   - Making maps and interactive charts
   - Adding chart labels
 
+## Exploratory data visualisation
+
+Plotting your data early in the analysis stage can help you quickly identify outliers, oddities, things that don't look quite right. 
 
 ## Making Grattan-y charts
 
@@ -165,8 +193,8 @@ The key functions of `grattantheme` are:
 
   - `theme_grattan`: set size, font and colour defaults that adhere to the Grattan style guide.
   - `grattan_y_continuous`: sets the right defaults for a continuous y-axis.
-  - `grattan_colour_continuous`: pulls colours from the Grattan colour palete for `colour` aesthetics.
-  - `grattan_fill_continuous`: pulls colours from the Grattan colour palete for `fill` aesthetics.
+  - `grattan_colour_continuous`: pulls colours from the Grattan colour palette for `colour` aesthetics.
+  - `grattan_fill_continuous`: pulls colours from the Grattan colour palette for `fill` aesthetics.
   - `grattan_save`: a save function that exports charts in correct report or presentation dimensions.
 
 This section will run through some examples of _Grattanising_ charts. The `ggplot` functions are explored in more detail in the next section.
@@ -230,6 +258,7 @@ pop_chart
 
 <img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" />
 
+
 Nice chart! Now you can save it and share it with the world.
 
 ### Saving Grattan charts
@@ -239,15 +268,15 @@ The `grattan_save` function saves your charts according to Grattan templates. It
   - `filename`: the path, name and file-type of your saved chart. eg: `"atlas/population_chart.pdf"`.
   - `object`: the R object that you want to save. eg: `pop_chart`. If left blank, it grabs the last chart that was displayed.
   - `type`: the Grattan template to be used. This is one of:
-    - `"normal"` The default. Use for normal Grattan report charts, or to paste into a 4:3 Powerpoint slide. Width: 22.2cm, height: 14.5cm.
-    - `"normal_169"` Only useful for pasting into a 16:9 format Grattan Powerpoint slide. Width: 30cm, height: 14.5cm.
+    - `"normal"` The default. Use for normal Grattan report charts, or to paste into a 4:3 PowerPoint slide. Width: 22.2cm, height: 14.5cm.
+    - `"normal_169"` Only useful for pasting into a 16:9 format Grattan PowerPoint slide. Width: 30cm, height: 14.5cm.
     - `"tiny"` Fills the width of a column in a Grattan report, but is shorter than usual. Width: 22.2cm, height: 11.1cm.
     - `"wholecolumn"` Takes up a whole column in a Grattan report. Width: 22.2cm, height: 22.2cm.
     - `"fullpage"` Fills a whole page of a Grattan report. Width: 44.3cm, height: 22.2cm.
-    - `"fullslide"` Creates an image that looks like a 4:3 Grattan Powerpoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
-    - `"fullslide_169"` Creates` an image that looks like a 16:9 Grattan Powerpoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
-    - `"blog"` Creates a 4:3 image that looks like a Grattan Powerpoint slide, but with less border whitespace than 'fullslide'."
-    - `"fullslide_44" Creates` an image that looks like a 4:4 Grattan Powerpoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
+    - `"fullslide"` Creates an image that looks like a 4:3 Grattan PowerPoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
+    - `"fullslide_169"` Creates` an image that looks like a 16:9 Grattan PowerPoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
+    - `"blog"` Creates a 4:3 image that looks like a Grattan PowerPoint slide, but with less border whitespace than 'fullslide'."
+    - `"fullslide_44" Creates` an image that looks like a 4:4 Grattan PowerPoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
     - Set `type = "all"` to save your chart in all available sizes.
   - `height`: override the height set by `type`. This can be useful for really long charts in blogposts.
   - `save_data`: exports a `csv` file containing the data used in the chart.
@@ -292,6 +321,60 @@ grattan_save("atlas/population_chart_blog.png", pop_chart,
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
+
+## Adding labels
+
+Labels can be a bit finicky -- especially compared to labelling charts visually in PowerPoint. ...
+
+Labels can be done in two broad ways:
+
+1. As a single plot of text on the chart: the command `annotate` takes some text and plots it at the coordinates you specifiy. 
+2. As data, using aesthetics: `geom_label` and `geom_text` (and some useful extensions) fit into this group. They take aesthetics from a dataframe and plot text on the chart according to those rules.
+
+**`annotate`** works well if you want to add a note to your chart. You specify the geom type, `"text"`, and the `x` and `y` coordinates: `"Vic"` and `7.2e6` (`7.2*10^6`, 7.2 million). Then set the `size`, `colour`, and horizontal alignment with `hjust` (0 is left-aligned, 0.5 is centered, 1 is right-aligned). Add your text with `label`, and you're done.
+
+
+```r
+base_chart +
+  theme_grattan() +
+  grattan_y_continuous(labels = comma) +
+  grattan_fill_manual(6) +
+  annotate("text", x = "Vic", y = 7.2e6, 
+           size = 12/.pt, colour = grattan_grey3, hjust = 1,
+           label = "Victoria has had\nsubstantial\ngrowth")
+```
+
+<img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="672" />
+
+
+we can use `geom_label` to add labels to our chart. This is one of _many_ tools you can use to label your chart, which will be explored throughout the CHARTK BOOK SECTION.  is best when you want to add a single label to a chart:
+
+
+```r
+labels <- population_table %>% 
+  filter(state == "Qld")
+
+pop_chart <- base_chart +
+        theme_grattan() +
+        grattan_y_continuous(labels = comma) +
+        grattan_fill_manual(6) +
+        geom_text(data = labels, 
+                   aes(label = year,
+                       colour = ),
+                   size = 16/.pt, 
+                  position = position_dodge(width = 1),
+                  angle = 90, hjust = -.25, vjust = 0.5) + 
+        grattan_colour_manual(6)
+  
+
+pop_chart
+```
+
+<img src="Data_visualisation_files/figure-html/add_label-1.png" width="672" />
+
+
+
+
 ## Chart cookbook
 
 This section takes you through a few often-used chart types. 
@@ -317,7 +400,7 @@ First, `stat` defines what kind of _operation_ the function will do on the datas
 
 - `"count"`, the default: count the number of observations in a particular group, and plot that number. This is useful when you're using microdata. When this is the case, there is no need for a `y` aesthetic.
 - `"sum"`: sum the values of the `y` aesthetic.
-- `"identity"`: directly report the values of the `y` aesthetic. This is how Powerpoint and Excel charts work.
+- `"identity"`: directly report the values of the `y` aesthetic. This is how PowerPoint and Excel charts work.
 
 You can use `geom_col` instead, as a shortcut for `geom_bar(stat = "identity)`. 
 
@@ -388,7 +471,7 @@ population_table %>%
 
 Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
 
-1. Adjust the limits of the axis to accomodate the long labels, meaning we will have to dinfe our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
+1. Adjust the limits of the axis to accommodate the long labels, meaning we will have to define our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
 
 
 ```r
@@ -411,7 +494,7 @@ population_table %>%
 <img src="Data_visualisation_files/figure-html/bar5-1.png" width="672" />
 
 
-2. Add empty space at the top of the chart to accomodate the long labels:
+2. Add empty space at the top of the chart to accommodate the long labels:
 
 
 ```r
@@ -535,10 +618,9 @@ population_table %>%
 
 
 
-
 ### Scatter plots
 
-Scatter plots require `x` and `y` aesthetics. These can then be coloured and facetted.
+Scatter plots require `x` and `y` aesthetics. These can then be coloured and faceted.
 
 First, create a dataset that we'll use for scatter plots. Take the `population_table` dataset and transform it to have one variable for population in 2013, and another for population in 2018:
 
@@ -559,6 +641,24 @@ population_diff <- read_csv("data/population_sa4.csv") %>%
 ```
 
  
+Then plot it  
+ 
+
+```r
+population_diff %>% 
+        ggplot(aes(x = y2013,
+                   y = pop_change)) +
+        geom_point(size = 4) + 
+        theme_grattan() +
+        theme(axis.title.y = element_text(angle = 90)) +
+        grattan_y_continuous() + 
+        labs(y = "Population increase to 2018, per cent",
+             x = "Population in 2013")
+```
+
+<img src="Data_visualisation_files/figure-html/scatter-1.png" width="672" />
+
+
 
 ```r
 population_diff %>% 
@@ -572,7 +672,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-<img src="Data_visualisation_files/figure-html/scatter1-1.png" width="672" />
+<img src="Data_visualisation_files/figure-html/scatter_rescale-1.png" width="672" />
 
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with `geom_smooth`:
@@ -592,7 +692,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-<img src="Data_visualisation_files/figure-html/scatter2-1.png" width="672" />
+<img src="Data_visualisation_files/figure-html/scatter_smooth-1.png" width="672" />
 
 
 You could colour-code positive and negative changes from within the `geom_point` aesthetic. Making a change there won't pass through to the `geom_smooth` aesthetic, so your line-of-best-fit will apply to all data points.
@@ -614,7 +714,7 @@ population_diff %>%
              x = "Population in 2013, thousands")
 ```
 
-<img src="Data_visualisation_files/figure-html/scatter3-1.png" width="672" />
+<img src="Data_visualisation_files/figure-html/scatter_colour-1.png" width="672" />
 
 
 Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
@@ -639,7 +739,7 @@ population_diff %>%
         facet_wrap(state ~ .)
 ```
 
-<img src="Data_visualisation_files/figure-html/scatter4-1.png" width="672" />
+<img src="Data_visualisation_files/figure-html/scatter_facet-1.png" width="672" />
 
 
 ### Distributions
@@ -659,36 +759,33 @@ population_diff %>%
 
 The `absmapsdata` contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
-  - Statistical Area 1 2011: `sa12011`
-  - Statistical Area 1 2016: `sa12016`
-  - Statistical Area 2 2011: `sa22011`
-  - Statistical Area 2 2016: `sa22016`
-  - Statistical Area 3 2011: `sa32011`
-  - Statistical Area 3 2016: `sa32016`
-  - Statistical Area 4 2011: `sa42011`
-  - Statistical Area 4 2016: `sa42016`
-  - Greater Capital Cities 2011: `gcc2011`
-  - Greater Capital Cities 2016: `gcc2016`
-  - Remoteness Areas 2011: `ra2011`
-  - Remoteness Areas 2016: `ra2016`
-  - State 2011: `state2011`
-  - State 2016: `state2016`
+  - Statistical Area 1 2011 and 2016: `sa12011` or `sa12016`
+  - Statistical Area 2 2011 and 2016: `sa22011` or `sa22016`
+  - Statistical Area 3 2011 and 2016: `sa32011` or `sa32016`
+  - Statistical Area 4 2011 and 2016: `sa42011` or `sa42016`
+  - Greater Capital Cities 2011 and 2016: `gcc2011` or `gcc2016`
+  - Remoteness Areas 2011 and 2016: `ra2011` or `ra2016`
+  - State 2011 and 2016: `state2011` or `state2016`
   - Commonwealth Electoral Divisions 2018: `ced2018`
   - State Electoral Divisions 2018:`sed2018`
-  - Local Government Areas 2016: `lga2016`
-  - Local Government Areas 2018: `lga2018`
+  - Local Government Areas 2016 and 2018: `lga2016` or `lga2018`
+  - Postcodes 2016: `postcodes2016`
 
-You can install the package from Github. You will also need the `sf` package installed to handle the `sf` objects.
+You can install the package from Github:
 
 
 ```r
-devtools::install_github("wfmackey/absmapsdata")
+remotes::install_github("wfmackey/absmapsdata")
 library(absmapsdata)
+```
 
+You will also need the `sf` package installed to handle the `sf` objects:
+
+
+```r
 install.packages("sf")
 library(sf)
 ```
-
 
 
 
@@ -722,7 +819,11 @@ head(map_data %>%
 ## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…
 ```
 
-You then plot a map like you would any other `ggplot`: provide your data, choose your `aes` and your `geom`. For maps with `sf` objects, the key **aesthetic** is `geometry = geometry`, and the **geom** is `geom_sf`.
+You then plot a map like you would any other `ggplot`: provide your data, then choose your `aes` and your `geom`. For maps with `sf` objects, the **key aesthetic** is `geometry = geometry`, and the **key geom** is `geom_sf`.
+
+The argument `lwd` controls the line width of area borders.
+
+Note that RStudio takes a long time to render a map in the 
 
 
 
@@ -736,13 +837,74 @@ map <- map_data %>%
                             palette = "diverging",
                             limits = c(-20, 20),
                             breaks = seq(-20, 20, 10)) +
-  labs(fill = "Population change")
+  labs(fill = "Population \nchange")
 
 map
 ```
 
 <img src="Data_visualisation_files/figure-html/map1-1.png" width="672" />
 
+Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful. 
+
+To do this, filter the `map_data` object: 
+
+
+```r
+map <- map_data %>% 
+        filter(state == "Vic") %>% 
+        ggplot(aes(geometry = geometry,
+                   fill = pop_change)) +
+        geom_sf(lwd = 0) +
+        theme_void() +
+        grattan_fill_manual(discrete = FALSE, 
+                            palette = "diverging",
+                            limits = c(-20, 20),
+                            breaks = seq(-20, 20, 10)) +
+  labs(fill = "Population \nchange")
+
+map
+```
+
+<img src="Data_visualisation_files/figure-html/map_filter-1.png" width="672" />
+
+
+##### Adding labels to maps
+
+You can add labels to choropleth maps with the standard `geom_text` or `geom_label`. Because it is likely that some labels will overlap, `ggrepel::geom_text_repel` or `ggrepel::geom_label_repel` is usually the better option.
+
+To use `geom_(text|label)_repel`, you need to tell `ggrepel` where in 
+
+
+
+
+```r
+map <- map_data %>% 
+        filter(state == "Vic") %>% 
+        ggplot(aes(geometry = geometry)) +
+        geom_sf(aes(fill = pop_change),
+                lwd = .1,
+                colour = "black") +
+        theme_void() +
+        grattan_fill_manual(discrete = FALSE, 
+                            palette = "diverging",
+                            limits = c(-20, 20),
+                            breaks = seq(-20, 20, 10)) +
+  geom_label_repel(aes(label = sa4_name),
+                  stat = "sf_coordinates", nudge_x = 1000, segment.alpha = .5,
+                  size = 4, 
+                  direction = "y",
+                  label.size = 0, 
+                  label.padding = unit(0.1, "lines"),
+                  colour = "grey50",
+                  segment.color = "grey50") + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, .2))) + 
+  theme(legend.position = "top") + 
+  labs(fill = "Population \nchange")
+
+map
+```
+
+<img src="Data_visualisation_files/figure-html/map_label-1.png" width="672" />
 
 
 ## Creating simple interactive graphs with `plotly`
