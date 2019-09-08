@@ -1,18 +1,30 @@
+# Organising an R project at Grttan
 
-# Using R at Grattan {#intro}
+Our analysis has to be reproducible. **Elaborate here**
 
+By sticking to a consistent way of organising our analyses, we're more able to read and check each others' work. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your work and you'll find it harder to return to it down the track. All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
+This page sets out some guidelines for organising your work in R at Grattan. It covers:
 
-## Using R projects for a fully reproducible workflow.
+* Using RStudio projects and relative filepaths
+* Using a consistent subfolder structure
+* Naming your scripts and keeping them manageable
+* Coding style at Grattan
+* Preferring the tidyverse
 
-_Finally adhering to the 'hit by a bus' rule._
+## Use RStudio projects, don't use `setwd()`
 
-Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to - your working directory. 
 
-Cover:
-1. setwd() and machine-speficic filepaths are bad
-2. relative file paths are good
-3. RStudio projects are an easy, reproducible way to set your wd
+One way to tell R which folder to use as your working directory is using the command `setwd()`, like `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. This is a bad idea! If anyone - including you - tries to run your scripts on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, they can't check your work.
+
+Creating a 'project' in RStudio is a way to set your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
+
+RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -> Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
+
+## Keep your stuff together
+
+Your script(s), data, and output should generally all live in the same place. ^[This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.] That place should be the folder that contains the .Rproj file that was created when you created an R
 
 ### Filepaths
 
