@@ -1,6 +1,14 @@
-# Using R at Grattan {#intro}
+# Organising an R project at Grttan
 
 By sticking to a consistent way of organising our analyses, we're more able to read and check each others' work
+
+This page covers:
+
+* Using RStudio projects and relative filepaths
+* Using a consistent subfolder structure
+* Naming your scripts and keeping them manageable
+* Coding style at Grattan
+* Using the tidyverse
 
 ## Using R projects for a fully reproducible workflow.
 
