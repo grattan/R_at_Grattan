@@ -34,17 +34,22 @@ Your script(s), data, and output should generally all live in the same place. ^[
 
 Don't just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.
 
-A good structure is to have:
+A good structure is to have a subfolder for:
 
-- a subfolder for your code - called 'R' or 'code'.
+- your code - called 'R' or 'code'.
+- your source data - called 'data'
+- your graphs - called 'graphs' or 'figs' or 'atlas', like in LaTeX
+- your non-graph output, like formatted tables, called 'output' or 'tables'
 
-my_project/
-├── R/
-├── data/
-├── doc/
-├── figs/
-└── output/
+Sometimes your data folder might have subfolders - 'raw' for data that you've done nothing to, and 'clean' for data you've modified in some way. 
 
+## Include a README file
+
+Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy! 
+
+Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future. 
+
+Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run.
 
 ## Use relative filepaths
 
@@ -70,41 +75,22 @@ grattan_save("images/expenditure_by_income.pdf")
 
 The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
 
-### Keep your scripts manageable
+## Keep your scripts manageable
 
-As a general rule of thumb, use one script per output. It should be clear what your script is trying to do (use comments!).
+Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
 
-Consider breaking your analysis into pieces. For example: 
+Here's a useful structure: 
 
 - 01_import.R
 - 02_tidy.R
 - 03_model.R
 - 04_visualise.R
 
+It should be clear what each script is trying to do. Use comments! 
 
-**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.
 
-### Use subfolders of your project folder
+**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.
 
-Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
-
-Use subfolders to clearly separate your code, raw data, and output.
-
-
-## Grattan coding style guide
-
-Short summary of why
-
-Link to style guide
-
-
-
-## Resources in this package
-
-- Starting a piece of analysis ‘cheat sheet’.
-- Updated style guide.
-- Written guide/slides.
-
-
-
+Each script should generally do one main thing. If you're producing five charts, you should generally have five separate chart scripts.
 

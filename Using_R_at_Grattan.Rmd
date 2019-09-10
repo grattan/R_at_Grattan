@@ -98,21 +98,3 @@ Don't retain code that ultimately didn't lead anywhere. If you produced a graph 
 
 Each script should generally do one main thing. If you're producing five charts, you should generally have five separate chart scripts.
 
-
-## Grattan coding style guide
-
-Short summary of why
-
-Link to style guide
-
-
-
-## Resources in this package
-
-- Starting a piece of analysis ‘cheat sheet’.
-- Updated style guide.
-- Written guide/slides.
-
-
-
-
