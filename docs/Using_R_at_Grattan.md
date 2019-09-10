@@ -1,8 +1,8 @@
 # Organising an R project at Grttan
 
-Our analysis has to be reproducible. **Elaborate here**
+All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
-By sticking to a consistent way of organising our analyses, we're more able to read and check each others' work. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your work and you'll find it harder to return to it down the track. All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
+Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track. 
 
 This page sets out some guidelines for organising your work in R at Grattan. It covers:
 
@@ -10,33 +10,45 @@ This page sets out some guidelines for organising your work in R at Grattan. It 
 * Using a consistent subfolder structure
 * Naming your scripts and keeping them manageable
 * Coding style at Grattan
-* Preferring the tidyverse
 
-## Use RStudio projects, don't use `setwd()`
+## Use RStudio projects, not `setwd()`
 
-You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to - your working directory. 
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. 
+One way to tell R which folder to use as your working directory is using the command `setwd()`, like `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. **This is a bad idea!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
-One way to tell R which folder to use as your working directory is using the command `setwd()`, like `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. This is a bad idea! If anyone - including you - tries to run your scripts on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, they can't check your work.
+In the [words of Jenny Bryan](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/):
 
-Creating a 'project' in RStudio is a way to set your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
+> if the first line of your R script is `setwd("C:\Users\jenny\path\that\only\I\have")` I will come into your office and SET YOUR COMPUTER ON FIRE. 
+
+Seems fair. 
+
+Creating a 'project' in RStudio sets your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
+
+<img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;" />
 
 RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -> Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
 
 ## Keep your stuff together
 
-Your script(s), data, and output should generally all live in the same place. ^[This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.] That place should be the folder that contains the .Rproj file that was created when you created an R
+Your script(s), data, and output should generally all live in the same place. ^[This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.] That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder. 
 
-### Filepaths
+Don't just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.
 
-Filepaths should be relative to the working directory, and the working directory should be set by the project.
+A good structure is to have:
 
-**Good**
+- a subfolder for your code - called 'R' or 'code'.
+
+my_project/
+├── R/
+├── data/
+├── doc/
+├── figs/
+└── output/
 
 
-```r
-hes <- read_csv("data/HES/hes1516.csv")
-grattan_save("images/expenditure_by_income.pdf")
-```
+## Use relative filepaths
+
+When you read or write files with R, don't use filepaths that are specific to your machine.
 
 **Bad**
 
@@ -46,6 +58,17 @@ hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
 grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
 ```
 
+Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
+
+**Good**
+
+
+```r
+hes <- read_csv("data/HES/hes1516.csv")
+grattan_save("images/expenditure_by_income.pdf")
+```
+
+The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
 
 ### Keep your scripts manageable
 
@@ -74,12 +97,6 @@ Short summary of why
 
 Link to style guide
 
-
-## What is the tidyverse and why do we use it?
-
-Introduce following chapters
-
-## An introduction to RMarkdown
 
 
 ## Resources in this package

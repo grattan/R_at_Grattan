@@ -1,7 +1,7 @@
 --- 
 title: "Using R at Grattan Institute"
 author: "Will Mackey and Matt Cowgill"
-date: "2019-08-20"
+date: "2019-09-10"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:

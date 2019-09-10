@@ -379,8 +379,8 @@ population_table %>%
 ```
 
 ```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 ```
 
 ![](Data_visualisation_files/figure-epub3/line1-1.png)<!-- -->
@@ -403,8 +403,8 @@ population_table %>%
 ```
 
 ```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 ```
 
 ![](Data_visualisation_files/figure-epub3/line2-1.png)<!-- -->

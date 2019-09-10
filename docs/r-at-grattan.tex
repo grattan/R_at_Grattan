@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-20}
+    \date{2019-09-10}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -170,9 +170,11 @@ If you have used R before and are comfortable enough with it, you might want to 
 
 R is a programming language that is designed by and for statisticians, data scientists, and other people who work with data. It's free - you can download R at no charge. It's also open source - you can view and (if you're game) modify the code that underlies the R language. R is available for all major computing platforms including Windows, macOS, and Linux.
 
-R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
+R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more.
 
-R also has some overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
+You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
+
+R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
 
@@ -180,14 +182,14 @@ When you open R itself, you're confronted with a few disclaimers and a command p
 
 \includegraphics[width=7.99in]{atlas/r_screenshot}
 
-This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
+This might look a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
-To analyse data with R, you will typically write out a text file containing your code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
+To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 \hypertarget{what-is-rstudio}{%
 \section{What is RStudio?}\label{what-is-rstudio}}
 
-RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created.
+RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} Like R itself, RStudio is available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things.
 
 \includegraphics[width=18.4in]{atlas/rstudio_screenshot}
 
@@ -220,13 +222,13 @@ Once they're both installed, get started by opening RStudio.
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
 
-R comes with a lot of functions - commands - built in to do a broad range of data tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
 
 But a lot of our work at Grattan uses add-on software to base R, known as `packages'. Some packages, like the popular `dplyr', make it quicker and/or easier to do tasks that you could otherwise do in base R. Other packages expand the possibilities of what R can do - like fitting a machine learning model, for example.
 
 Like R itself, packages are free and open source. You can install them from within RStudio.
 
-At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover these more in a later chapter.
+At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover this more in a later chapter.
 
 \hypertarget{installing-packages}{%
 \subsection{Installing packages}\label{installing-packages}}
@@ -245,19 +247,19 @@ For example, this code will install the \texttt{ggplot2} package from CRAN:
 \end{Highlighting}
 \end{Shaded}
 
-To install a package from Github, we use the function \texttt{install\_github()}. Unfortunately, this package doesn't come with R - it's part of the \texttt{devtools} package. First, we install devtools from CRAN:
+The easiest way to install a package from Github is to use the function \texttt{install\_github()}. Unfortunately, this function doesn't come with base R. The \texttt{install\_github()} function is part of the \texttt{remotes} package. To use it, we first need to install \texttt{remotes} from CRAN:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{devtools} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -266,13 +268,13 @@ Now we can install packages from Github using the \texttt{install\_github()} fun
 
 Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.
 
-We can either load (aka `attach') the package by using the \texttt{library()} function:
+We can either load (aka `attach') the package by using the \texttt{library()} function. We typically do this at the top of a script.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{library}\NormalTok{(remotes)}
 
-\CommentTok{# Now that the `devtools` package is loaded, we can use its `install_github()` function:}
+\CommentTok{# Now that the `remotes` package is loaded, we can use its `install_github()` function:}
 
 \KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
@@ -282,7 +284,7 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -337,20 +339,49 @@ We use R specifically because:
 
 Everything you can do in Excel can be done in R.
 
-\hypertarget{intro}{%
-\chapter{Using R at Grattan}\label{intro}}
+\hypertarget{the-tidyverse}{%
+\chapter{The tidyverse}\label{the-tidyverse}}
 
-\hypertarget{using-r-projects-for-a-fully-reproducible-workflow.}{%
-\section{Using R projects for a fully reproducible workflow.}\label{using-r-projects-for-a-fully-reproducible-workflow.}}
+\hypertarget{what-is-the-tidyverse-and-why-do-we-use-it}{%
+\section{What is the tidyverse and why do we use it?}\label{what-is-the-tidyverse-and-why-do-we-use-it}}
 
-\emph{Finally adhering to the `hit by a bus' rule.}
+\hypertarget{an-introduction-to-rmarkdown}{%
+\section{An introduction to RMarkdown}\label{an-introduction-to-rmarkdown}}
 
-Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+\hypertarget{organising-an-r-project-at-grttan}{%
+\chapter{Organising an R project at Grttan}\label{organising-an-r-project-at-grttan}}
 
-Cover:
-1. setwd() and machine-speficic filepaths are bad
-2. relative file paths are good
-3. RStudio projects are an easy, reproducible way to set your wd
+By sticking to a consistent way of organising our analyses, we're more able to read and check each others' work. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track. All our work, in R or otherwise, should heed the ``hit by a bus'' rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
+
+This page sets out some guidelines for organising your work in R at Grattan. It covers:
+
+\begin{itemize}
+\tightlist
+\item
+  Using RStudio projects and relative filepaths
+\item
+  Using a consistent subfolder structure
+\item
+  Naming your scripts and keeping them manageable
+\item
+  Coding style at Grattan
+\end{itemize}
+
+\hypertarget{use-rstudio-projects-dont-use-setwd}{%
+\section{\texorpdfstring{Use RStudio projects, don't use \texttt{setwd()}}{Use RStudio projects, don't use setwd()}}\label{use-rstudio-projects-dont-use-setwd}}
+
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to - your working directory.
+
+One way to tell R which folder to use as your working directory is using the command \texttt{setwd()}, like \texttt{setwd("\textasciitilde{}/Desktop/some\ random\ folder")} or \texttt{setwd("C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Documents\textbackslash{}Somerandomfolder")}. This is a bad idea! If anyone - including you - tries to run your scripts on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, they can't check your work.
+
+Creating a `project' in RStudio is a way to set your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: \textbf{click File, then New Project}. You can then choose to start your project in a new directory, or an existing directory. Simple!
+
+RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -\textgreater{} Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
+
+\hypertarget{keep-your-stuff-together-but-keep-it-organised}{%
+\section{Keep your stuff together, but keep it organised}\label{keep-your-stuff-together-but-keep-it-organised}}
+
+Your script(s), data, and output should generally all live in the same place. \footnote{This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.} That place should be the folder that contains the .Rproj file that was created when you created an RStudio project.
 
 \hypertarget{filepaths}{%
 \subsection{Filepaths}\label{filepaths}}
@@ -410,14 +441,6 @@ Use subfolders to clearly separate your code, raw data, and output.
 Short summary of why
 
 Link to style guide
-
-\hypertarget{what-is-the-tidyverse-and-why-do-we-use-it}{%
-\section{What is the tidyverse and why do we use it?}\label{what-is-the-tidyverse-and-why-do-we-use-it}}
-
-Introduce following chapters
-
-\hypertarget{an-introduction-to-rmarkdown}{%
-\section{An introduction to RMarkdown}\label{an-introduction-to-rmarkdown}}
 
 \hypertarget{resources-in-this-package}{%
 \section{Resources in this package}\label{resources-in-this-package}}
@@ -869,8 +892,8 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line1-1.pdf}
@@ -894,8 +917,8 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line2-1.pdf}
