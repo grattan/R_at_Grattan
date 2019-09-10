@@ -1,28 +1,26 @@
 # Data Visualisation
 
-This chapter explores 
+This chapter explores data visualisation broadly, and how to 'do' data visualisation in R specifically. 
 
+The next chapter -- the Visualisation Cookbook -- gives more practical advice for the charts you might want to create. 
 
 
 ## Introduction to data visualisation
 
-Data visualisation is used in two broad ways: 
+You can use data visualisation to **examine and explore** your data, and to **present** a finding to your audience. Both of these elements are important.
 
-1. to **examine** and explore your data; and 
-1. to **present** a finding to your audience. 
-
-When you start using a dataset, you should _look at it_.[^1] Plot histograms of variables-of-interest to spot outliers. Explore correlations with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots. 
+When you start using a dataset, you should look at it.[^1] Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots. 
 
   [^1]: From Kieran Healy's [_Data Vizualization: A Practical Introduction_](https://socviz.co/): 'You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.' 
 
 
-These **exploratory plots** are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette or be particularly interesting.
-They're built and used to explore the data. 
-Through this process, you can become confident your data is _what it says it is_. 
+These **exploratory plots** are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette, or be particularly interesting.
+They're built and used only to help you and your team explore the data. 
+Through this process, you can become confident your data is _what you think it is_. 
 
-When you **present a visualisation to a reader**, you make decisions about what they can and cannot see. You choose to highlight or omit particular things to help them better understand the message you are presenting. 
+When you choose to **present a visualisation to a reader**, you have to make decisions about what they can and cannot see. You need to highlight or omit particular things to help them better understand the message you are presenting. 
 
-This requires important technical decisions: what data to use, what 'stat' to present it with --- show every data point, show a distribution function, show the average or the median --- and on what scale --- raw numbers, on a log scale, as a proportion of a total. 
+This requires important _technical_ decisions: what data to use, what 'stat' to present it with --- _show every data point, show a distribution function, show the average or the median?_ --- and on what scale --- _raw numbers, on a log scale, as a proportion of a total?_. 
 
 It also requires _aesthetic_ decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
 
@@ -31,13 +29,13 @@ All of these decisions need to made with two things in mind:
 1. Rigour, accuracy, legitimacy: the chart needs to be honest. 
 1. The reader: the chart needs to help the reader understand something, and it must convince them to pay attention. 
 
-At the margins, sometimes these two ideas can be in conflict: maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader.
+At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart's impact.
 
-Similarly, a bar chart is often the safest way to display data. But if the reader has stopped paying attention by your sixth consecutive bar chart, your point loses its punch.^['Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.]
+Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to _earn_ their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.^['Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.] 
 
 The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
 
-This chapter shows how you can do this with R. It starts with the 'grammar of graphics' concepts of a package called `ggplot`, explains how to make those charts 'Grattan-y', then provides examples for all common (and some not-so-common) charts you should add to your box of data visualisation tools to impress your message on our readers. 
+This chapter shows how you can do this with R. It starts with the 'grammar of graphics' concepts of a package called `ggplot`, and explains how to make those charts 'Grattan-y'. The next chapter gives you the when-to-use and how-to-make particular charts. 
 
 
 ## Set-up and packages
@@ -102,7 +100,7 @@ Each plot you make will be made up of these three elements. The [full list of st
 
 `ggplot` also has a 'cheat sheet' that contains many of the often-used elements of a plot, which you can download [here](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
 
-<img src="atlas/ggplot_cheat_sheet.png" width="615" style="display: block; margin: auto;" />
+<img src="atlas/ggplot_cheat_sheet.png" width="1230" style="display: block; margin: auto;" />
 
 
 
@@ -115,7 +113,7 @@ professionals %>%
         ggplot()
 ```
 
-<img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/empty_plot-1.png)<!-- -->
 
 
 Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_. 
@@ -130,7 +128,7 @@ professionals %>%
                    colour = sex))
 ```
 
-<img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/empty_aes-1.png)<!-- -->
 
 
 Now that `ggplot` knows where things should go, it needs to how to _plot_ them on the chart. For this we use `geoms`. Tell `ggplot` to take the things it knows and plot them as a column chart by using `geom_col`:
@@ -144,7 +142,7 @@ professionals %>%
         geom_point()
 ```
 
-<img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/complete_plot-1.png)<!-- -->
 
 Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don't need. So filter the data before you pass it to `ggplot` to just include 2015: `filter(year == 2015)`. There will still be lots of overlapping points, so set the opacity to below one with `alpha = 0.5`. The `workers` x-axis can be changed to a log scale with `scale_x_log10`.
 
@@ -158,7 +156,7 @@ professionals %>%
         scale_x_log10()
 ```
 
-<img src="Data_visualisation_files/figure-html/with_changes-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/with_changes-1.png)<!-- -->
 
 
 That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of `data`, `aes`, and `geom`. 
@@ -222,7 +220,7 @@ base_chart <- professionals %>%
 base_chart
 ```
 
-<img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/base_chart-1.png)<!-- -->
 
 
 Let's make it Grattany. First, add `theme_grattan` to your plot:
@@ -233,7 +231,7 @@ base_chart +
         theme_grattan()
 ```
 
-<img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/add_theme_grattan-1.png)<!-- -->
 
 Then use `grattan_y_continuous` to adjust the y-axis. This takes the same arguments as the standard `scale_y_continuous` function, but has Grattan defaults built in. Use it to set the labels as dollars (with `scales::dollar()`) and to give the y-axis some breathing room (starting at \$50,000 rather than the minimum point).
 Also add `scale_x_log10` to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using `scales::comma()`).^[The `dollar` and `comma` commands are functions, but can be used without `()`. Using `dollar()` or `comma()` works too, and you can provide arguments that adjust their output: eg `dollar(suffix = "million")`]
@@ -246,7 +244,7 @@ base_chart +
         scale_x_log10(labels = comma) 
 ```
 
-<img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/add_grattan_y_continuous-1.png)<!-- -->
 
 To define `colour` colours, use `grattan_colour_manual` with the number of colours you need (two, in this case):
 
@@ -261,7 +259,7 @@ prof_chart <- base_chart +
 prof_chart
 ```
 
-<img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/add_fill-1.png)<!-- -->
 
 
 Nice chart! Now you can save it and share it with the world.
@@ -295,7 +293,7 @@ grattan_save("atlas/professionals_chart_report.pdf", prof_chart, type = "wholeco
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<img src="atlas/professionals_chart_report.png" width="1396" />
+<img src="atlas/professionals_chart_report.png" width="2791" />
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
@@ -308,7 +306,7 @@ grattan_save("atlas/professionals_chart_presentation.pdf", prof_chart, type = "f
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/professionals_chart_presentation.png" width="1600" />
+<img src="atlas/professionals_chart_presentation.png" width="3200" />
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
@@ -322,7 +320,7 @@ grattan_save("atlas/professionals_chart_blog.png", prof_chart,
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/professionals_chart_blog.png" width="1600" />
+<img src="atlas/professionals_chart_blog.png" width="3200" />
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
@@ -345,7 +343,7 @@ prof_chart +
   geom_text(aes(label = sex))
 ```
 
-<img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/add_annotate-1.png)<!-- -->
 
 Great! That looks _terrible_. `geom_text` is labelling each individual point because it has been told to do so. Just like `geom_point`, it takes the `x` and `y` aesthetics of each observation, then plots the `label` at that location. But we just want to label one of the points for `female` and one for `male`. 
 
@@ -378,7 +376,7 @@ prof_chart +
             aes(label = sex))
 ```
 
-<img src="Data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
 
 Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the `label_data`:
 
@@ -394,7 +392,7 @@ prof_chart +
             aes(label = sex_label))
 ```
 
-<img src="Data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
 
 _Or_ you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).
 
@@ -405,7 +403,7 @@ prof_chart +
             aes(label = c("Women", "Men")))
 ```
 
-<img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
 
 To have more freedom over _where_ your labels are placed, you can create a dataset yourself. Add the `x` and `y` values for your labels, and the label names.^[We are using the `tribble` function here to make it a little bit clearer what values apply to which sex. The 'normal' way to create a tibble is with the `tibble` function: <br> `tibble(x = c(10, 100), y = c(100, 10))`, etc.]
@@ -438,4 +436,4 @@ prof_chart +
             hjust = 1)
 ```
 
-<img src="Data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->

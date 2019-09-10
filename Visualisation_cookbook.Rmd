@@ -87,34 +87,13 @@ data %>%
 You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
 
 ```{r bar3}
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), # reorder state by negative population
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6) + 
-        labs(x = "",
-             y = "")
+
 ```
 
 To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
 
 ```{r bar4}
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), 
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        coord_flip() +  # flip the coordinates
-        theme_grattan(flipped = TRUE) +  # tell theme_grattan
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6) + 
-        labs(x = "",
-             y = "")
+
 ```
 
 
@@ -123,20 +102,7 @@ Our long numeric labels means the chart clips them off a bit at the end. We can 
 1. Adjust the limits of the axis to accommodate the long labels, meaning we will have to define our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
 
 ```{r bar5}
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), 
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        coord_flip() +  
-        theme_grattan(flipped = TRUE) + 
-        grattan_y_continuous(labels = comma,
-                             limits = c(0, 9e6),
-                             breaks = seq(0, 8e6, 2e6)) +
-        grattan_fill_manual(6) + 
-        labs(x = "",
-             y = "")
+
 
 ```
 
@@ -144,19 +110,6 @@ population_table %>%
 2. Add empty space at the top of the chart to accommodate the long labels:
 
 ```{r bar6}
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), 
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        coord_flip() +  
-        theme_grattan(flipped = TRUE) + 
-        grattan_y_continuous(labels = comma, 
-                             expand_top = .1) +
-        grattan_fill_manual(6) + 
-        labs(x = "",
-             y = "")
 
 ```
 
@@ -165,50 +118,19 @@ population_table %>%
 A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines.
 
 ```{r line1, message = FALSE}
-population_table %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   colour = state,
-                   group = state)) +
-        geom_line() +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(9) +
-        labs(x = "")
+
 ```
 
 You can also add dots for each year by layering `geom_point` on top of `geom_line`:
 
 ```{r line2, message = FALSE}
-population_table %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   colour = state,
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(9) + 
-        labs(x = "",
-             y = "")
+
 ```
 
 If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
 
 ```{r line3, message = FALSE}
-population_table %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        theme_grattan() +
-        grattan_y_continuous() +
-        facet_wrap(state ~ .) + 
-        labs(x = "")
+
 ```
 
 To tidy this up, we can: 
@@ -222,21 +144,7 @@ To tidy this up, we can:
 
 
 ```{r line4, message = FALSE}
-population_table %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = substr(year, 3, 4), # 1: just take the last two characters
-                   y = pop / 1e6, # 2: divide population by one million
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        geom_hline(yintercept = 0) + # 3: add horizontal line at the bottom
-        theme_grattan() +
-        theme(panel.spacing = unit(10, "mm")) + # 4: add panel spacing
-        grattan_y_continuous(labels = comma) +
-        scale_x_discrete(breaks = c("13", "15", "17")) + # 5: define our own label breaks
-        facet_wrap(state ~ .) + 
-        labs(x = "")
+
 ```
 
 
@@ -248,18 +156,7 @@ Scatter plots require `x` and `y` aesthetics. These can then be coloured and fac
 First, create a dataset that we'll use for scatter plots. Take the `population_table` dataset and transform it to have one variable for population in 2013, and another for population in 2018:
 
 ```{r scatter_data, message = FALSE}
-population_diff <- read_csv("data/population_sa4.csv") %>% 
-        mutate(state_long = state,
-               state = strayr::strayr(state_long),
-               pop = as.numeric(value),
-               year = as.factor(glue::glue("y{year}"))) %>% 
-        filter(year %in% c("y2013", "y2018"),
-               data_item == "Persons - Total (no.)",
-               sa4_name != "Other Territories") %>% 
-        group_by(year, state, sa4_name) %>% 
-        summarise(pop = sum(pop)) %>% 
-        spread(year, pop) %>% 
-        mutate(pop_change = 100 * (y2018 / y2013 - 1))
+
 
 ```
 
@@ -267,86 +164,33 @@ population_diff <- read_csv("data/population_sa4.csv") %>%
 Then plot it  
  
 ```{r scatter, message = FALSE}
-population_diff %>% 
-        ggplot(aes(x = y2013,
-                   y = pop_change)) +
-        geom_point(size = 4) + 
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013")
+
 ```
 
 
 ```{r scatter_rescale, message = FALSE}
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,
-                   y = pop_change)) +
-        geom_point(size = 4) + 
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
+
 ```
 
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with `geom_smooth`:
 
 ```{r scatter_smooth, message = FALSE}
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(size = 4) + 
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
+
 ```
 
 
 You could colour-code positive and negative changes from within the `geom_point` aesthetic. Making a change there won't pass through to the `geom_smooth` aesthetic, so your line-of-best-fit will apply to all data points.
 
 ```{r scatter_colour, message = FALSE}
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(aes(colour = pop_change < 0),
-                   size = 4) + 
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        grattan_colour_manual(2) +
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
+
 ```
 
 
 Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
 
 ```{r scatter_facet, message = FALSE, warning = FALSE}
-population_diff %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(aes(colour = pop_change < 0),
-                   size = 2) +
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        grattan_colour_manual(2) +
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands") +
-        facet_wrap(state ~ .)
+
 ```
 
 
@@ -404,11 +248,7 @@ SA4 is the largest non-state statistical area in the ABS ASGS standard.
 You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa4_name` compared to `sa4_name_2016` -- so use the `by` function to match them.
 
 ```{r make_map_data, message = FALSE}
-map_data <- population_diff %>% 
-        left_join(sa42016, by = c("sa4_name" = "sa4_name_2016"))
 
-head(map_data %>% 
-       select(sa4_name, geometry))
 ```
 
 You then plot a map like you would any other `ggplot`: provide your data, then choose your `aes` and your `geom`. For maps with `sf` objects, the **key aesthetic** is `geometry = geometry`, and the **key geom** is `geom_sf`.
@@ -419,18 +259,7 @@ Note that RStudio takes a long time to render a map in the
 
 
 ```{r map1}
-map <- map_data %>% 
-        ggplot(aes(geometry = geometry,
-                   fill = pop_change)) +
-        geom_sf(lwd = 0) +
-        theme_void() +
-        grattan_fill_manual(discrete = FALSE, 
-                            palette = "diverging",
-                            limits = c(-20, 20),
-                            breaks = seq(-20, 20, 10)) +
-  labs(fill = "Population \nchange")
 
-map
 ```
 
 Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful. 
@@ -438,19 +267,7 @@ Showing all of Australia on a single map is difficult: there are enormous areas 
 To do this, filter the `map_data` object: 
 
 ```{r map_filter}
-map <- map_data %>% 
-        filter(state == "Vic") %>% 
-        ggplot(aes(geometry = geometry,
-                   fill = pop_change)) +
-        geom_sf(lwd = 0) +
-        theme_void() +
-        grattan_fill_manual(discrete = FALSE, 
-                            palette = "diverging",
-                            limits = c(-20, 20),
-                            breaks = seq(-20, 20, 10)) +
-  labs(fill = "Population \nchange")
 
-map
 ```
 
 
@@ -462,7 +279,7 @@ To use `geom_(text|label)_repel`, you need to tell `ggrepel` where in
 
 
 
-```{r map_label, warning = FALSE}
+```{r map_label, warning = FALSE, eval = FALSE}
 map <- map_data %>% 
         filter(state == "Vic") %>% 
         ggplot(aes(geometry = geometry)) +
