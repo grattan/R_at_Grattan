@@ -305,7 +305,7 @@ knitr::include_graphics("atlas/professionals_chart_blog.png")
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
 
-## Adding labels
+## Adding labels {#adding-labels}
 
 Labels can be a bit finicky -- especially compared to labelling charts visually in PowerPoint. ...
 

@@ -3,7 +3,7 @@
 This section takes you through a few often-used chart types. 
 
 
-# Set up
+## Set up
 
 
 ```{r load_packages, message = FALSE}
@@ -13,6 +13,7 @@ library(ggrepel)
 library(absmapsdata)
 library(sf)
 library(scales)
+library(ggfittext)
 ```
 
 The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2015-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2015.
@@ -32,7 +33,7 @@ head(sa3_income)
 Bar charts are made with `geom_bar` or `geom_col`. Creating a bar chart will look something like this:
 
 
-```{r bar1, eval = FALSE}
+```{r bar_eg, eval = FALSE}
 ggplot(data = <data>) + 
   geom_bar(aes(x = <xvar>, y = <yvar>),
      stat = <STAT>, 
@@ -57,65 +58,185 @@ Second, `position`, dictates how multiple bars occupying the same x-axis positio
 - `"dodge"`: bars in the same group are positioned next to one another.
 - `"fill"`: bars in the same group are stacked and all fill to 100 per cent.
 
-Let's look at a bar chart that shows the proportion of areas where people earn less than $50,000 in each occupation type:
+First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by state, greater capital city area, professional work and gender. We'll use this `base_data` throughout this section.
 
-```{r bar2}
-data <- sa3_income %>% 
-  filter(!sex == "Persons") %>% 
-  mutate(under = average_income < 60e3) %>% 
-  group_by(occupation, sex, under) %>% 
-  summarise(n = sum(workers)) %>% 
-  mutate(pc = n / sum(n)) %>% 
-  filter(under == FALSE)
-  
+```{r bar_basedata}
+base_data <- sa3_income %>% 
+  filter(!gender == "Persons") %>% 
+  mutate(income = average_income * workers,
+         prof = if_else(occupation %in% c("Professionals", "Managers"),
+                        "Professional",
+                        "Non-professional")) %>% 
+  group_by(state, gcc_name, prof, gender) %>% 
+  summarise(workers = sum(workers),
+            income = sum(income),
+            average_income = income / workers)
 
+```
+
+Time to create a bar chart!^[Wooh! (Sorry, that's an abuse of footnotes.)]
+You'll plot average incomes by state and gender, so first thing you'll do is **create the dataset that you want to plot**. 
+
+
+```{r bar1_data}
+data <- base_data %>% 
+  group_by(state, gender) %>% 
+  summarise(average_income = sum(income) / sum(workers))
+
+data
+```
+
+Looks good: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).^[The aesthetic `fill` represents the 'fill' colour -- the colour that fills the bars in your chart. The `colour` aesthetic controls the colours of the _lines_.] 
+And because you have the _actual_ values you want to plot from your `data` object, tell `geom_bar` to 'just use the number provided' with `stat = "identity"`:
+
+```{r bar1a}
 data %>% 
-  ggplot(aes(x = occupation,
-             y = pc * 100,
-             fill = sex)) +
-  geom_bar(stat = "identity",
-           position = "dodge") +
+  ggplot(aes(x = state,          # x-axis is state
+             y = average_income, # y-axis is income
+             fill = gender)) +      # fill colour is gender
+  geom_bar(stat = "identity") +  # "just use the number that's there"
   theme_grattan() +
-  grattan_y_continuous(labels = comma) +
-  grattan_fill_manual(6) + 
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
   labs(x = "",
-       y = "") +
-  coord_flip()
+       y = "")
+```
+
+Before addressing the accidental stacking, note that there is a short-cut-geom for `geom_bar(stat = "identity")`: `geom_col`. Using that instead, without the need for the `stat` argument gives the same result:
+
+```{r bar_col}
+data %>% 
+  ggplot(aes(x = state,        
+             y = average_income,
+             fill = gender)) +     
+  geom_col() +                 # no need for stat = "identity"
+  theme_grattan() +
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "")
+```
+
+The `fill` aesthetic creates two series -- one for women, one for men -- and `geom_col` stacks them by default. You can change this behaviour with the `position` argument:  
+
+```{r bar1b}
+data %>% 
+  ggplot(aes(x = state,         
+             y = average_income,
+             fill = gender)) +    
+  geom_col(position = "dodge") + # dodge instead of stack the series
+  theme_grattan() +
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "")
 ```
 
 
 You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
 
-```{r bar3}
-
+```{r bar2}
+data %>% 
+  ggplot(aes(x = reorder(state, -average_income), # change the order of state
+             y = average_income,
+             fill = gender)) +
+  geom_col(position = "dodge") +
+  theme_grattan() +
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "")
 ```
 
 To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
 
 ```{r bar4}
+data %>% 
+  ggplot(aes(x = reorder(state, -average_income),
+             y = average_income,
+             fill = gender)) +
+  geom_col(position = "dodge") +
+  theme_grattan(flipped = TRUE) +   # tell theme_grattan of flipping
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "") + 
+  coord_flip() # flip the chart
+```
 
+### Labelling bar charts
+
+Labelling charts in the Grattan style means labelling _one_ of each series and letting the reader connect the dots. 
+
+First, create a base chart that we'll use for the next few charts:
+
+```{r}
+bar <- data %>% 
+  ggplot(aes(x = reorder(state, -average_income),
+             y = average_income,
+             fill = gender,
+             label = gender)) +
+  geom_col(position = "dodge") +
+  theme_grattan(flipped = TRUE) +
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "") + 
+  coord_flip()
+
+bar
+```
+
+Section \@ref(adding-labels) shows how labels are treated like data points: they need to know where to go (`x` and `y`) and what to show (`label`). But if you provide _every point_ to your labelling `geom`, it will plot every label:
+
+```{r}
+bar +
+  geom_text(aes(colour = gender),
+            position = position_dodge(width = 1), 
+            size = 18/.pt, hjust = -0.1) + 
+  grattan_colour_manual(2)
+```
+
+So to just label _one_ of the plots -- ie the first one, Tasmania in this case -- we need to tell `geom_text`. You can do this by creating a label dataset beforehand, like `label_gender` below, which just includes the observations you want to label:
+
+```{r}
+label_gender <- data %>% 
+  filter(state == "Tas")
+
+bar +  
+  geom_text(data = label_gender,  # supply new dataset
+            aes(colour = gender),
+            position = position_dodge(width = 1), 
+                size = 18/.pt, hjust = -0.1) + 
+  grattan_colour_manual(2)
 ```
 
 
-Our long numeric labels means the chart clips them off a bit at the end. We can deal with this in two ways:
+### Facetting bar charts
 
-1. Adjust the limits of the axis to accommodate the long labels, meaning we will have to define our own axis-label breaks using the `seq` function^[`seq(x1, x2, y)` will return a vector of numbers between `x1` and `x2`, spaced by `y`. For example: `seq(0, 10, 2)` will produce `0  2  4  6  8  10`]:
+'Facetting' a chart means you create a separate plot for each group. 
+You can 'facet' bar charts -- and any other chart type -- with the `facet_grid` or `facet_wrap` commands. 
 
-```{r bar5}
+```{r}
+data %>% 
+  ggplot(aes(x = gender,
+             y = average_income)) + 
+  geom_col() + 
+  facet_grid(state ~ .) +
+  theme_grattan(flipped = TRUE) +
+  grattan_y_continuous() + 
+  coord_flip()
 
-
+grattan_save("atlas/bar_facet.pdf")
 ```
 
-
-2. Add empty space at the top of the chart to accommodate the long labels:
-
-```{r bar6}
-
-```
 
 ## Line charts
 
-A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines.
+A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines. 
+
+First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by year, state, greater capital city area, professional work and gender. We'll use this `base_data` throughout this section.
+
 
 ```{r line1, message = FALSE}
 

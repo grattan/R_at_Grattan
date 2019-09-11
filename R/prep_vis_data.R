@@ -55,9 +55,10 @@ base %>%
 
 
 out <- bind_rows(read_abs_file(5, 4382),
-                 read_abs_file(6, 4058))
+                 read_abs_file(6, 4058),
+                 read_abs_file(7, 1250))
 
-occs <- out$occupation %>% unique()
+
 occs_short <- c(
   "Admin",
   "Service",
@@ -98,10 +99,11 @@ sa3_info <- absmapsdata::sa32016 %>%
 
 out <- out %>% 
   left_join(sa3_info) %>% 
+  mutate(gender = if_else(sex == "Females", "Women", "Men")) %>% 
   select(sa3, sa3_name, sa3_sqkm, 
-         sa4_name, gcc_name, 
+         sa4_name, gcc_name, state,
          occupation, occ_short,
-         sex, year, 
+         gender, year, 
          median_income, 
          average_income, 
          workers = persons)
