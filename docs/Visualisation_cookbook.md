@@ -7,6 +7,8 @@ This section takes you through a few often-used chart types.
 
 
 
+
+
 ```r
 library(tidyverse)
 library(grattantheme)
@@ -16,6 +18,23 @@ library(sf)
 library(scales)
 library(ggfittext)
 ```
+
+
+
+```r
+# note: to be added to grattantheme; remove this when done
+grattan_label <- function(..., size = 18) {
+
+  .size = size / ggplot2::.pt
+  
+geom_label_repel(..., 
+           fill = "white",
+           label.padding = unit(0.1, "lines"), 
+           label.size = 0,
+           size = .size)
+}
+```
+
 
 The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2015-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2015.
 
@@ -105,7 +124,8 @@ base_data <- sa3_income %>%
   mutate(income = average_income * workers,
          prof = if_else(occupation %in% c("Professionals", "Managers"),
                         "Professional",
-                        "Non-professional")) %>% 
+                        "Non-professional"),
+         prof = factor(prof, levels = c("Professional", "Non-professional"))) %>% 
   group_by(state, gcc_name, prof, gender) %>% 
   summarise(workers = sum(workers),
             income = sum(income),
@@ -165,7 +185,7 @@ data %>%
        y = "")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar1a-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/bar1a-1.png" width="839.04" />
 
 Before addressing the accidental stacking, note that there is a short-cut-geom for `geom_bar(stat = "identity")`: `geom_col`. Using that instead, without the need for the `stat` argument gives the same result:
 
@@ -183,7 +203,7 @@ data %>%
        y = "")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_col-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/bar_col-1.png" width="839.04" />
 
 The `fill` aesthetic creates two series -- one for women, one for men -- and `geom_col` stacks them by default. You can change this behaviour with the `position` argument:  
 
@@ -201,7 +221,7 @@ data %>%
        y = "")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar1b-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/bar1b-1.png" width="839.04" />
 
 
 You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
@@ -220,9 +240,11 @@ data %>%
        y = "")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar2-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/bar2-1.png" width="839.04" />
 
 To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
+
+However, while the _coordinates_ have been flipped, the underlying data hasn't. If you want to refer to the `average_income` axis, which now lies horizontally, you would still refer to the `y` axis (eg `grattan_y_continuous` still refers to your `y` aesthetic, `average_income`). 
 
 
 ```r
@@ -239,7 +261,7 @@ data %>%
   coord_flip() # flip the chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar4-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/bar4-1.png" width="839.04" />
 
 ### Labelling bar charts
 
@@ -252,9 +274,8 @@ First, create a base chart that we'll use for the next few charts:
 bar <- data %>% 
   ggplot(aes(x = reorder(state, -average_income),
              y = average_income,
-             fill = gender,
-             label = gender)) +
-  geom_col(position = "dodge") +
+             fill = gender)) +
+  geom_col(position = position_dodge()) +
   theme_grattan(flipped = TRUE) +
   grattan_y_continuous(labels = dollar) +
   grattan_fill_manual(2) + 
@@ -265,61 +286,244 @@ bar <- data %>%
 bar
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="839.04" />
+
+You can use `grattan_label` to label your charts. This function is a 'wrapper' around `geom_label_repel` that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the standard arguments of `geom_label_repel`. 
 
 Section \@ref(adding-labels) shows how labels are treated like data points: they need to know where to go (`x` and `y`) and what to show (`label`). But if you provide _every point_ to your labelling `geom`, it will plot every label:
 
 
 ```r
 bar +
-  geom_text(aes(colour = gender),
-            position = position_dodge(width = 1), 
-            size = 18/.pt, hjust = -0.1) + 
-  grattan_colour_manual(2)
+  grattan_label(aes(colour = gender,  # colour the text according to gender
+                    label = gender),  # label the text according to gender
+            position = position_dodge(width = 1),  # position dodge with width 1
+            hjust = -0.1) +  # horizontally align the label so its outside the bar
+  grattan_colour_manual(2)   # define colour as two grattan colours
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="839.04" />
 
-So to just label _one_ of the plots -- ie the first one, Tasmania in this case -- we need to tell `geom_text`. You can do this by creating a label dataset beforehand, like `label_gender` below, which just includes the observations you want to label:
+To just label _one_ of the plots -- ie the first one, Tasmania in this case -- we need to tell `grattan_label`. The easiest way to do this is by **creating a label dataset beforehand**, like `label_gender` below. This just includes the observations you want to label:
 
 
 ```r
 label_gender <- data %>% 
-  filter(state == "Tas")
+  filter(state == "Tas")  # just want Tasmania observations
 
 bar +  
-  geom_text(data = label_gender,  # supply new dataset
-            aes(colour = gender),
-            position = position_dodge(width = 1), 
-                size = 18/.pt, hjust = -0.1) + 
+  grattan_label(data = label_gender,  # supply the new dataset
+                aes(colour = gender,
+                    label = gender), 
+                position = position_dodge(width = 1), 
+                hjust = -0.1) + 
   grattan_colour_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="839.04" />
 
 
-### Facetting bar charts
+Labelling a vertical bar chart is much the same, but you might find yourself with less horizontal space. After creating a new base chart, our previous technique is a bit off:
 
-'Facetting' a chart means you create a separate plot for each group. 
-You can 'facet' bar charts -- and any other chart type -- with the `facet_grid` or `facet_wrap` commands. 
+
+```r
+# Create vertical bar chart
+vbar <- data %>% 
+  ggplot(aes(x = reorder(state, -average_income),
+             y = average_income,
+             fill = gender)) +
+  geom_col(position = position_dodge()) +
+  theme_grattan() +
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "")
+
+# Create label dataset
+label_gender <- data %>% 
+  filter(state == "ACT")  # just want ACT observations
+
+# Label chart 
+vbar + 
+  grattan_label(data = label_gender,  # supply the new dataset
+              aes(colour = gender,
+                  label = gender), 
+              position = position_dodge(width = 1), 
+              hjust = 0.5,  # centre horizontally
+              vjust = -.1) + # nudged up a bit
+  grattan_colour_manual(2)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="839.04" />
+
+It might be best to label the bars in empty space _above_ the bars. First, expand the plot area by adding an `expand_top` argument to `grattan_y_continuous`:
+
+
+```r
+vbar + 
+  grattan_y_continuous(labels = dollar,
+                       expand_top = 0.2)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="839.04" />
+
+That gives you a bit of breathing room. Use the same `label_gender` dataset to place labels above the first state (ACT). Like before, `grattan_label` is used to plot the labels -- given a dataset and the right aesthetics -- but you'll need to tweak some of the settings to get it looking right.
+
+By using `nudge_y = Inf`, you're pushing the labels all the way to the top of the plot. Then, `direction = "x"` says 'only move the labels horizontally to make sure they're not overlapping'. Finally, `segment.colour = NA` turns off the line that connects the label to the data point (you can leave this out and see if you like the look of it!).
+
+
+
+```r
+# Create label dataset
+label_gender <- data %>% 
+  filter(state == "ACT")  
+
+# Plot with labels
+vbar + 
+  grattan_y_continuous(labels = dollar,
+                     expand_top = 0.07) + 
+  grattan_label(data = label_gender,
+              aes(colour = gender,
+                  label = gender), 
+              nudge_y = Inf, # move to the top of the plotting area
+              direction = "x", # automatically align along the x-axis
+              segment.colour = NA) +  # don't add a line to the data point
+  grattan_colour_manual(2)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-7-1.png" width="839.04" />
+
+
+There is an alternative approach that can be used in situations that require only a couple of labels. The `annotate` function will add text to a plot in the place you tell it. It doesn't require a new dataset, and is more like manually labelling a plot in Powerpoint. 
+
+The first argument of annotate is what kind of _thing_ it is: `"text"`. Then set the label text you'd like, eg `"label = Men"`, and where it should go with `x` and `y`. Then set the `colour`, and fiddle with `hjust` (horizontal alignment) to get your desired placement.
+
+The outcome is close to what we had with `grattan_label`:
+
+
+```r
+vbar + 
+  grattan_y_continuous(labels = dollar,
+                       expand_top = 0.1) + 
+  annotate("text", label = "Men",  # Male label
+           x = "ACT", y = 75e3, 
+           colour = grattan_orange,
+           hjust = 1) + 
+  annotate("text", label = "Women", # Female label
+           x = "NT", y = 75e3, 
+           colour = grattan_red,
+           hjust = 1)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-8-1.png" width="839.04" />
+
+
+### Facetting bar charts {#facet-bar}
+
+'Facetting' a chart means you create a separate plot for each group. It's particularly useful in showing differences between groups.
+
+You can 'facet' bar charts -- and any other chart type -- with the `facet_grid` or `facet_wrap` commands. The `fadcet_wrap` tends to give you more control over label placement, so let's start with that. 
+
+
+First, create a summary dataset of average income by professional employment, state and gender:
+
+
+```r
+data <- base_data %>% 
+  group_by(prof, state, gender) %>% 
+  summarise(average_income = sum(income) / sum(workers))
+
+head(data)
+```
+
+```
+## # A tibble: 6 x 4
+## # Groups:   prof, state [3]
+##   prof         state gender average_income
+##   <fct>        <chr> <chr>           <dbl>
+## 1 Professional ACT   Men            96488.
+## 2 Professional ACT   Women          79828.
+## 3 Professional NSW   Men            91624.
+## 4 Professional NSW   Women          68445.
+## 5 Professional NT    Men            87666.
+## 6 Professional NT    Women          72940.
+```
+
+Then plot a bar chart, similar to the one you made before, but add `facet_wrap` to the chain:
 
 
 ```r
 data %>% 
-  ggplot(aes(x = gender,
-             y = average_income)) + 
-  geom_col() + 
-  facet_grid(state ~ .) +
+  ggplot(aes(x = reorder(state, average_income),         
+             y = average_income,
+             fill = gender)) +  
+  geom_col(position = position_dodge()) + 
   theme_grattan(flipped = TRUE) +
-  grattan_y_continuous() + 
-  coord_flip()
+  grattan_y_continuous(labels = dollar) +
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "") + 
+  coord_flip() + 
+  facet_wrap(prof ~ .) # facet 'prof' around nothing else '.'
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-10-1.png" width="839.04" />
+
+Cool! Now you just have to tweak some settings to get the plot looking right on the page:
+
+- Add a black line along `average_income = 0` to distinguish the plots. 
+- Then define your 'breaks' (the spacing of the axis gridlines and labels) in `grattan_y_continuous`. 
+- Add some additional space -- `10mm` -- between the two facet plots with `panel.spacing = unit(10, "mm")` in the `theme` parameter.^[The `unit` function takes two arguments: the number of the unit, then the unit itself (eg "mm" for millimetre, or "cm" for centremetre, etc.)] 
+- Left-align the facet titles with `strip.text = element_text(hjust = 0)`^[The function `element_text` is useful for adjusting the look of text in a plot. With it, you can say you want the text to be red, `colour = "red"`, or MASSIVE, `size = 100`, or **bold**, `face = "bold"`.] 
+- We're a bit tight for space along the bottom, so get rid of the "$" and replace with "comma", then add that information in the `y` label.
+
+
 
 ```r
-grattan_save("atlas/bar_facet.pdf")
+facet_bar <- data %>% 
+  ggplot(aes(x = reorder(state, average_income),         
+             y = average_income,
+             fill = gender)) +  
+  geom_col(position = position_dodge()) + 
+  geom_hline(yintercept = 0) + # add a black base line for each facet
+  theme_grattan(flipped = TRUE) +
+  grattan_y_continuous(labels = comma, # change to comma
+                       breaks = c(0, 25e3, 50e3, 75e3)) + # define your breaks
+  grattan_fill_manual(2) + 
+  labs(x = "",
+       y = "Annual income, $") + # add $ info in y-label
+  coord_flip() + 
+  theme(panel.spacing = unit(10, "mm"), # add some space between the plots
+        strip.text = element_text(hjust = 0)) + # left-align facet titles
+  facet_wrap(prof ~ .)
+
+facet_bar
 ```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-11-1.png" width="839.04" />
+
+**Finally**, we'll add the women/men labels -- by creating a dataset with the labels we want and giving that to `grattan_label` -- 
+
+
+
+```r
+label_data <- data %>% 
+  filter(state == "ACT",
+         prof == "Non-professional")
+
+
+
+facet_bar +
+  grattan_label(data = label_data,  # supply the new dataset
+                aes(colour = gender,
+                    label = gender), 
+                position = position_dodge(width = 1), 
+                hjust = -.1) + 
+  grattan_colour_manual(2) # define the colour scale
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-12-1.png" width="839.04" />
+
 
 
 ## Line charts
