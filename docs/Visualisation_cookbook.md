@@ -126,7 +126,7 @@ base_data <- sa3_income %>%
                         "Professional",
                         "Non-professional"),
          prof = factor(prof, levels = c("Professional", "Non-professional"))) %>% 
-  group_by(state, gcc_name, prof, gender) %>% 
+  group_by(year, state, gcc_name, prof, gender) %>% 
   summarise(workers = sum(workers),
             income = sum(income),
             average_income = income / workers)
@@ -472,9 +472,9 @@ data %>%
 Cool! Now you just have to tweak some settings to get the plot looking right on the page:
 
 - Add a black line along `average_income = 0` to distinguish the plots. 
-- Then define your 'breaks' (the spacing of the axis gridlines and labels) in `grattan_y_continuous`. 
+- Define your 'breaks' (the spacing of the axis gridlines and labels) in `grattan_y_continuous`. 
 - Add some additional space -- `10mm` -- between the two facet plots with `panel.spacing = unit(10, "mm")` in the `theme` parameter.^[The `unit` function takes two arguments: the number of the unit, then the unit itself (eg "mm" for millimetre, or "cm" for centremetre, etc.)] 
-- Left-align the facet titles with `strip.text = element_text(hjust = 0)`^[The function `element_text` is useful for adjusting the look of text in a plot. With it, you can say you want the text to be red, `colour = "red"`, or MASSIVE, `size = 100`, or **bold**, `face = "bold"`.] 
+- Left-align the facet titles with `strip.text = element_text(hjust = 0)`.^[The function `element_text` is useful for adjusting the look of text in a plot. With it, you can say you want the text to be red, `colour = "red"`, or MASSIVE, `size = 100`, or **bold**, `face = "bold"`.] 
 - We're a bit tight for space along the bottom, so get rid of the "$" and replace with "comma", then add that information in the `y` label.
 
 
@@ -502,7 +502,7 @@ facet_bar
 
 <img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-11-1.png" width="839.04" />
 
-**Finally**, we'll add the women/men labels -- by creating a dataset with the labels we want and giving that to `grattan_label` -- 
+**Finally**, we'll add the women/men labels by creating a dataset with the labels we want and giving that to `grattan_label`. 
 
 
 
@@ -530,29 +530,143 @@ facet_bar +
 
 A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines. 
 
-First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by year, state, greater capital city area, professional work and gender. We'll use this `base_data` throughout this section.
+First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by year, state, professional work and gender. We'll use this `base_data` throughout this section, and we'll ignore ACT and NT.
 
 
+```r
+data <- base_data %>% 
+  filter(!state %in% c("ACT", "NT")) %>% 
+  group_by(year, state) %>% 
+  summarise(workers = sum(workers),
+            average_income = sum(income) / workers)
+
+data
+```
+
+```
+## # A tibble: 36 x 4
+## # Groups:   year [6]
+##     year state  workers average_income
+##    <dbl> <chr>    <dbl>          <dbl>
+##  1  2010 NSW   11927874         55169.
+##  2  2010 Qld    7689948         51126.
+##  3  2010 SA     2706979         48129.
+##  4  2010 Tas     842949         45143.
+##  5  2010 Vic    9423993         51728.
+##  6  2010 WA     4124159         58416.
+##  7  2011 NSW   12125598         57688.
+##  8  2011 Qld    7914234         54921.
+##  9  2011 SA     2733376         50851.
+## 10  2011 Tas     836749         47389.
+## # … with 26 more rows
+```
+
+Plot a line chart by taking the `data`, passing it to `ggplot` with  *aes*thetics, then using `geom_line`:
 
 
-You can also add dots for each year by layering `geom_point` on top of `geom_line`:
+```r
+data %>% 
+  ggplot(aes(x = year,
+             y = average_income,
+             group = state)) + 
+  geom_line()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="839.04" />
 
 
+Now you can represent each `state` by colour:
 
+
+```r
+data %>% 
+  ggplot(aes(x = year,
+             y = average_income,
+             group = state,
+             colour = state)) + 
+  geom_line()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="839.04" />
+
+Cooler! Adding some Grattan formatting to it and define it as our 'base chart':
+
+
+```r
+base_chart <-data %>% 
+  ggplot(aes(x = year,
+             y = average_income,
+             group = state,
+             colour = state)) + 
+  geom_line() +
+  theme_grattan() + 
+  grattan_y_continuous(labels = comma) + 
+  grattan_colour_manual(6) +
+  labs(x = "",
+       y = "")
+
+base_chart
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-13-1.png" width="839.04" />
+
+
+You can add 'dots' for each year by layering `geom_point` on top of `geom_line`:
+
+
+```r
+base_chart +
+  geom_point()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="839.04" />
+
+To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:
+
+
+```r
+base_chart +
+  grattan_x_continuous(expand_right = .3,
+                       breaks = seq(2010, 2015, 1),
+                       labels = c("2010", "11", "12", "13", "14", "15")) 
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="839.04" />
+
+Then add labels, using 
+
+
+```r
+label_line <- data %>% 
+  filter(year == 2010)
+
+base_chart +
+  geom_point() +
+  grattan_x_continuous(expand_left = .1,
+                       breaks = seq(2010, 2015, 1),
+                       labels = c("2010", "11", "12", "13", "14", "15")) +
+  grattan_label(data = label_line,
+                aes(label = state),
+                nudge_x = -Inf,
+                segment.colour = NA)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="839.04" />
 If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
 
 
+```r
+base_chart +
+  geom_point() +
+    grattan_x_continuous(expand_left = .1, 
+                         expand_right = .1,
+                         breaks = seq(2010, 2015, 1),
+                         labels = c("2010", "11", "12", "13", "14", "15")) +
+  theme(panel.spacing.x = unit(10, "mm")) + 
+  facet_wrap(state ~ .)
+```
 
-To tidy this up, we can: 
-
-  1. shorten the years to be "13", "14", etc instead of "2013", "2014", etc (via the `x` aesthetic)
-  1. shorten the y-axis labels to "millions" (via the `y` aesthetic)
-  1. add a black horizontal line at the bottom of each facet
-  1. give the facets a bit of room by adjusting `panel.spacing`
-  1. define our own x-axis label breaks to just show `13`, `15` and `17`
-
-
-
+<img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="839.04" />
 
 
 
