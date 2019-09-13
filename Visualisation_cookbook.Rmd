@@ -525,22 +525,48 @@ base_chart +
 
 Scatter plots require `x` and `y` aesthetics. These can then be coloured and faceted.
 
-First, create a dataset that we'll use for scatter plots. Take the `population_table` dataset and transform it to have one variable for population in 2013, and another for population in 2018:
+For this section, you will use the `sa3_income` dataset in 201
 
 ```{r scatter_data, message = FALSE}
+income2015 <- sa3_income %>% 
+  filter(year == 2015)
 
-
+head(income2015)
 ```
 
- 
-Then plot it  
+To make a scatter plot with `average_income` against `workers`, pass the `income2015` dataset
+to `ggplot`, add `x = workers`, `y = average_income` and `colour = gender` aesthetics, then plot it with `geom_point`:
  
 ```{r scatter, message = FALSE}
-
+ income2015 %>% 
+  ggplot(aes(x = workers,
+             y = average_income,
+             colour = gender)) + 
+  geom_point()
 ```
 
+Nice. There are lots of overlapping points, so decreasing the opacity with `alpha = 0.6` will make the plot a little clearer. Make this your `base_chart`:  
+
+```{r scatter_base, message = FALSE}
+base_chart <- income2015 %>% 
+  ggplot(aes(x = workers,
+             y = average_income,
+             colour = gender)) + 
+  geom_point(alpha = .6)
+
+base_chart
+```
+
+Add Grattan-y elements: `theme_grattan` with `chart_type = "scatter"`; `grattan_y_continuous` with `labels = dollar`; and `grattan_colour_manual` with `2` colours. Also change the x-axis to a log scale with `scale_x_log10` and set the labels to `comma`. Finally, add your axis labels: 
 
 ```{r scatter_rescale, message = FALSE}
+base_chart + 
+  theme_grattan(chart_type = "scatter") + 
+  grattan_y_continuous(labels = dollar) +
+  grattan_colour_manual(2) + 
+  scale_x_log10(labels = comma) +  
+  labs(x = "Workers",
+       y = "Income")
 
 ```
 
@@ -617,7 +643,7 @@ Choropleth maps break an area into 'bits', and colours each 'bit' according to a
 
 SA4 is the largest non-state statistical area in the ABS ASGS standard. 
 
-You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa4_name` compared to `sa4_name_2016` -- so use the `by` function to match them.
+You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa4_name` compared to `sa4_name_2016` -- so use the `by` argument to match them.
 
 ```{r make_map_data, message = FALSE}
 
