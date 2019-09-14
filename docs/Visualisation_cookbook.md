@@ -23,15 +23,27 @@ library(ggfittext)
 
 ```r
 # note: to be added to grattantheme; remove this when done
+grattan_label_repel <- function(..., size = 18) {
+
+  .size = size / ggplot2::.pt
+  
+  geom_label_repel(..., 
+                   fill = "white",
+                   label.padding = unit(0.1, "lines"), 
+                   label.size = 0,
+                   size = .size)
+}
+
+
 grattan_label <- function(..., size = 18) {
 
   .size = size / ggplot2::.pt
   
-geom_label_repel(..., 
-           fill = "white",
-           label.padding = unit(0.1, "lines"), 
-           label.size = 0,
-           size = .size)
+  geom_label(..., 
+                   fill = "white",
+                   label.padding = unit(0.1, "lines"), 
+                   label.size = 0,
+                   size = .size)
 }
 ```
 
@@ -51,15 +63,18 @@ sa3_income <- read_csv("data/sa3_income.csv") %>%
 ##   sa3 = col_double(),
 ##   sa3_name = col_character(),
 ##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
 ##   sa4_name = col_character(),
 ##   gcc_name = col_character(),
 ##   state = col_character(),
 ##   occupation = col_character(),
 ##   occ_short = col_character(),
+##   prof = col_character(),
 ##   gender = col_character(),
 ##   year = col_double(),
 ##   median_income = col_double(),
 ##   average_income = col_double(),
+##   total_income = col_double(),
 ##   workers = col_double()
 ## )
 ```
@@ -69,17 +84,18 @@ head(sa3_income)
 ```
 
 ```
-## # A tibble: 6 x 13
-##     sa3 sa3_name sa3_sqkm sa4_name gcc_name state occupation occ_short
-##   <dbl> <chr>       <dbl> <chr>    <chr>    <chr> <chr>      <chr>    
-## 1 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 2 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 3 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 4 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 5 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 6 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## # … with 5 more variables: gender <chr>, year <dbl>, median_income <dbl>,
-## #   average_income <dbl>, workers <dbl>
+## # A tibble: 6 x 16
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state
+##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr>
+## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW  
+## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW  
+## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW  
+## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW  
+## # … with 9 more variables: occupation <chr>, occ_short <chr>, prof <chr>,
+## #   gender <chr>, year <dbl>, median_income <dbl>, average_income <dbl>,
+## #   total_income <dbl>, workers <dbl>
 ```
 
 
@@ -115,32 +131,129 @@ Second, `position`, dictates how multiple bars occupying the same x-axis positio
 - `"dodge"`: bars in the same group are positioned next to one another.
 - `"fill"`: bars in the same group are stacked and all fill to 100 per cent.
 
-First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by state, greater capital city area, professional work and gender. We'll use this `base_data` throughout this section.
+### Simple bar plot
+
+This section will create the following vertical bar plot showing number of workers by state in 2015:
+
+<img src="atlas/simple_bar.png" width="1600" />
+
+First, create the data you want to plot. 
 
 
 ```r
-base_data <- sa3_income %>% 
-  filter(!gender == "Persons") %>% 
-  mutate(income = average_income * workers,
-         prof = if_else(occupation %in% c("Professionals", "Managers"),
-                        "Professional",
-                        "Non-professional"),
-         prof = factor(prof, levels = c("Professional", "Non-professional"))) %>% 
-  group_by(year, state, gcc_name, prof, gender) %>% 
-  summarise(workers = sum(workers),
-            income = sum(income),
-            average_income = income / workers)
+data <- sa3_income %>% 
+  filter(year == 2015) %>% 
+  group_by(state) %>% 
+  summarise(workers = sum(workers))
+
+data
 ```
 
-Time to create a bar chart!^[Wooh! (Sorry, that's an abuse of footnotes.)]
-You'll plot average incomes by state and gender, so first thing you'll do is **create the dataset that you want to plot**. 
+```
+## # A tibble: 8 x 2
+##   state workers
+##   <chr>   <dbl>
+## 1 ACT    386989
+## 2 NSW   6527661
+## 3 NT     206061
+## 4 Qld   4104503
+## 5 SA    1382446
+## 6 Tas    420767
+## 7 Vic   5190976
+## 8 WA    2297081
+```
+
+Looks fine: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+
+Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
+
+
+```r
+data %>% 
+  ggplot(aes(x = state,
+             y = workers)) + 
+  geom_col()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="839.04" />
+
+Make it Grattany by adjusting general theme defaults with `theme_grattan`, and use `grattan_y_continuous` to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding `labels = comma`. 
+
+
+```r
+data %>% 
+  ggplot(aes(x = state,
+             y = workers)) + 
+  geom_col() + 
+  theme_grattan() + 
+  grattan_y_continuous(labels = comma)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="839.04" />
+
+
+To order the states by number of workers, you can tell the `x` aesthetic that you want to `reorder` the `state` variable by `workers`:
+
+
+```r
+data %>% 
+  ggplot(aes(x = reorder(state, workers), # reorder states by workers
+             y = workers)) + 
+  geom_col() + 
+  theme_grattan() + 
+  grattan_y_continuous(labels = comma)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="839.04" />
+
+You can probably drop the x-axis label -- people will understand that they're states without you explicitly saying it -- and add a title and subtitle with `labs`:
 
 
 
 ```r
-data <- base_data %>% 
-  group_by(state, gender) %>% 
-  summarise(average_income = sum(income) / sum(workers))
+simple_bar <- data %>% 
+  ggplot(aes(x = reorder(state, workers),
+             y = workers)) + 
+  geom_col() + 
+  theme_grattan() + 
+  grattan_y_continuous(labels = comma) + 
+  labs(title = "Most workers are on the east coast",
+       subtitle = "Number people in employment, 2015",
+       x = "",
+       caption = "Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)")
+
+simple_bar
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-7-1.png" width="839.04" />
+
+Looks supreme! Now you can export as a full-slide Grattan chart using `grattan_save`:
+
+
+```r
+grattan_save("atlas/simple_bar.pdf", simple_bar, type = "fullslide")
+```
+
+
+
+<img src="atlas/simple_bar.png" width="1600" />
+
+
+
+### Bar plot with multiple series {#bar-multi}
+
+This section will create a horizontal bar plot showing average income by state and gender in 2015:
+
+
+
+First create the dataset you want to plot, getting the average income by state and gender in the year 2015:
+
+
+```r
+data <- sa3_income %>% 
+  filter(year == 2015) %>%   
+  group_by(state, gender) %>%   
+  summarise(average_income = sum(total_income) / sum(workers))
 
 data
 ```
@@ -150,151 +263,117 @@ data
 ## # Groups:   state [8]
 ##    state gender average_income
 ##    <chr> <chr>           <dbl>
-##  1 ACT   Men            71965.
-##  2 ACT   Women          59952.
-##  3 NSW   Men            64612.
-##  4 NSW   Women          48603.
-##  5 NT    Men            67125.
-##  6 NT    Women          53003.
-##  7 Qld   Men            61531.
-##  8 Qld   Women          44518.
-##  9 SA    Men            56444.
-## 10 SA    Women          43519.
-## 11 Tas   Men            52608.
-## 12 Tas   Women          41353.
-## 13 Vic   Men            60362.
-## 14 Vic   Women          45236.
-## 15 WA    Men            72822.
-## 16 WA    Women          47251.
+##  1 ACT   Men            78141.
+##  2 ACT   Women          65548.
+##  3 NSW   Men            69750.
+##  4 NSW   Women          53191.
+##  5 NT    Men            75246.
+##  6 NT    Women          58527.
+##  7 Qld   Men            65108.
+##  8 Qld   Women          48458.
+##  9 SA    Men            60244.
+## 10 SA    Women          47533.
+## 11 Tas   Men            56345.
+## 12 Tas   Women          45158.
+## 13 Vic   Men            64908.
+## 14 Vic   Women          49264.
+## 15 WA    Men            76677.
+## 16 WA    Women          51578.
 ```
 
-Looks good: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).^[The aesthetic `fill` represents the 'fill' colour -- the colour that fills the bars in your chart. The `colour` aesthetic controls the colours of the _lines_.] 
-And because you have the _actual_ values you want to plot from your `data` object, tell `geom_bar` to 'just use the number provided' with `stat = "identity"`:
+Looks admirable: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+
+
+
+Pass the data to `ggplot`, give it the appropriate `x` and `y` aesthetics, along with `fill` (the fill colour^[The aesthetic `fill` represents the 'fill' colour -- the colour that fills the bars in your chart. The `colour` aesthetic controls the colours of the _lines_.]) representing `gender`. And because you have the _actual_ values for `average_income` you want to plot, use `geom_col`:^[`geom_col` is shorthand for `geom_bar(stat = "identity"`] 
 
 
 ```r
 data %>% 
-  ggplot(aes(x = state,          # x-axis is state
-             y = average_income, # y-axis is income
-             fill = gender)) +      # fill colour is gender
-  geom_bar(stat = "identity") +  # "just use the number that's there"
-  theme_grattan() +
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "")
-```
-
-<img src="Visualisation_cookbook_files/figure-html/bar1a-1.png" width="839.04" />
-
-Before addressing the accidental stacking, note that there is a short-cut-geom for `geom_bar(stat = "identity")`: `geom_col`. Using that instead, without the need for the `stat` argument gives the same result:
-
-
-```r
-data %>% 
-  ggplot(aes(x = state,        
+  ggplot(aes(x = state,
              y = average_income,
-             fill = gender)) +     
-  geom_col() +                 # no need for stat = "identity"
-  theme_grattan() +
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "")
+             fill = gender)) + 
+  geom_col()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_col-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-12-1.png" width="839.04" />
 
-The `fill` aesthetic creates two series -- one for women, one for men -- and `geom_col` stacks them by default. You can change this behaviour with the `position` argument:  
+The two series -- women and men -- created by `fill` are stacked on-top of each other by `geom_col`. You can tell it to plot them next to each other -- to 'dodge' -- instead with the `position` argument _within_ `geom_col`:
 
 
 ```r
 data %>% 
-  ggplot(aes(x = state,         
+  ggplot(aes(x = state,
              y = average_income,
-             fill = gender)) +    
-  geom_col(position = "dodge") + # dodge instead of stack the series
-  theme_grattan() +
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "")
+             fill = gender)) + 
+  geom_col(position = "dodge") # 'dodge' the series
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar1b-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-13-1.png" width="839.04" />
 
-
-You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
-
-
-```r
-data %>% 
-  ggplot(aes(x = reorder(state, -average_income), # change the order of state
-             y = average_income,
-             fill = gender)) +
-  geom_col(position = "dodge") +
-  theme_grattan() +
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "")
-```
-
-<img src="Visualisation_cookbook_files/figure-html/bar2-1.png" width="839.04" />
-
-To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
+To flip the chart -- a useful move when you have long labels -- add `coord_flip` (ie 'flip the x and y coordinates of the chart'). 
 
 However, while the _coordinates_ have been flipped, the underlying data hasn't. If you want to refer to the `average_income` axis, which now lies horizontally, you would still refer to the `y` axis (eg `grattan_y_continuous` still refers to your `y` aesthetic, `average_income`). 
 
 
 ```r
 data %>% 
-  ggplot(aes(x = reorder(state, -average_income),
+  ggplot(aes(x = state,
              y = average_income,
-             fill = gender)) +
-  geom_col(position = "dodge") +
-  theme_grattan(flipped = TRUE) +   # tell theme_grattan of flipping
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "") + 
-  coord_flip() # flip the chart
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() # rotate the chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar4-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-14-1.png" width="839.04" />
 
-### Labelling bar charts
-
-Labelling charts in the Grattan style means labelling _one_ of each series and letting the reader connect the dots. 
-
-First, create a base chart that we'll use for the next few charts:
+And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the `reorder(var_to_reorder, var_to_reorder_by)` function when you define the `state` aesthetic:
 
 
 ```r
-bar <- data %>% 
-  ggplot(aes(x = reorder(state, -average_income),
+data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
              y = average_income,
-             fill = gender)) +
-  geom_col(position = position_dodge()) +
-  theme_grattan(flipped = TRUE) +
-  grattan_y_continuous(labels = dollar) +
-  grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "") + 
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
   coord_flip()
-
-bar
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-15-1.png" width="839.04" />
 
-You can use `grattan_label` to label your charts. This function is a 'wrapper' around `geom_label_repel` that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the standard arguments of `geom_label_repel`. 
+Wonderful -- that's how you want our _data_ to look. Now you can Grattanise it. Note that `theme_grattan` needs to know that the coordinates were flipped so it can apply the right settings. Also tell `grattan_fill_manual` that there are two fill series. 
+
+
+```r
+data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
+             y = average_income,
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar) + 
+  grattan_fill_manual(2)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-16-1.png" width="839.04" />
+
+You can use `grattan_label` to **label your charts** in the Grattan style. This function is a 'wrapper' around `geom_label` that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the [standard arguments of `geom_label`](https://ggplot2.tidyverse.org/reference/geom_text.html). 
 
 Section \@ref(adding-labels) shows how labels are treated like data points: they need to know where to go (`x` and `y`) and what to show (`label`). But if you provide _every point_ to your labelling `geom`, it will plot every label:
 
 
+
 ```r
-bar +
+data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
+             y = average_income,
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar) + 
+  grattan_fill_manual(2) + 
   grattan_label(aes(colour = gender,  # colour the text according to gender
                     label = gender),  # label the text according to gender
             position = position_dodge(width = 1),  # position dodge with width 1
@@ -302,16 +381,41 @@ bar +
   grattan_colour_manual(2)   # define colour as two grattan colours
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-17-1.png" width="839.04" />
 
-To just label _one_ of the plots -- ie the first one, Tasmania in this case -- we need to tell `grattan_label`. The easiest way to do this is by **creating a label dataset beforehand**, like `label_gender` below. This just includes the observations you want to label:
+To just label _one_ of the plots -- ie the first one, ACT in this case -- we need to tell `grattan_label`. The easiest way to do this is by **creating a label dataset beforehand**, like `label_gender` below. This just includes the observations you want to label:
+
 
 
 ```r
 label_gender <- data %>% 
-  filter(state == "Tas")  # just want Tasmania observations
+  filter(state == "ACT")  # just want Tasmania observations
 
-bar +  
+label_gender
+```
+
+```
+## # A tibble: 2 x 3
+## # Groups:   state [1]
+##   state gender average_income
+##   <chr> <chr>           <dbl>
+## 1 ACT   Men            78141.
+## 2 ACT   Women          65548.
+```
+
+So you can pass that `label_gender` dataset to `grattan_label`:
+
+
+```r
+data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
+             y = average_income,
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar) + 
+  grattan_fill_manual(2) + 
   grattan_label(data = label_gender,  # supply the new dataset
                 aes(colour = gender,
                     label = gender), 
@@ -320,118 +424,148 @@ bar +
   grattan_colour_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-19-1.png" width="839.04" />
 
-
-Labelling a vertical bar chart is much the same, but you might find yourself with less horizontal space. After creating a new base chart, our previous technique is a bit off:
+Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:
 
 
 ```r
-# Create vertical bar chart
-vbar <- data %>% 
-  ggplot(aes(x = reorder(state, -average_income),
+data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
              y = average_income,
-             fill = gender)) +
-  geom_col(position = position_dodge()) +
-  theme_grattan() +
-  grattan_y_continuous(labels = dollar) +
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar, 
+                       expand_top = .1) + 
   grattan_fill_manual(2) + 
-  labs(x = "",
-       y = "")
-
-# Create label dataset
-label_gender <- data %>% 
-  filter(state == "ACT")  # just want ACT observations
-
-# Label chart 
-vbar + 
   grattan_label(data = label_gender,  # supply the new dataset
-              aes(colour = gender,
-                  label = gender), 
-              position = position_dodge(width = 1), 
-              hjust = 0.5,  # centre horizontally
-              vjust = -.1) + # nudged up a bit
+                aes(colour = gender,
+                    label = gender), 
+                position = position_dodge(width = 1), 
+                hjust = -0.1) + 
   grattan_colour_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-20-1.png" width="839.04" />
 
-It might be best to label the bars in empty space _above_ the bars. First, expand the plot area by adding an `expand_top` argument to `grattan_y_continuous`:
-
-
-```r
-vbar + 
-  grattan_y_continuous(labels = dollar,
-                       expand_top = 0.2)
-```
-
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="839.04" />
-
-That gives you a bit of breathing room. Use the same `label_gender` dataset to place labels above the first state (ACT). Like before, `grattan_label` is used to plot the labels -- given a dataset and the right aesthetics -- but you'll need to tweak some of the settings to get it looking right.
-
-By using `nudge_y = Inf`, you're pushing the labels all the way to the top of the plot. Then, `direction = "x"` says 'only move the labels horizontally to make sure they're not overlapping'. Finally, `segment.colour = NA` turns off the line that connects the label to the data point (you can leave this out and see if you like the look of it!).
-
+Looks of high quality! Now you can add labels and save using `grattan_save`:
 
 
 ```r
-# Create label dataset
-label_gender <- data %>% 
-  filter(state == "ACT")  
-
-# Plot with labels
-vbar + 
-  grattan_y_continuous(labels = dollar,
-                     expand_top = 0.07) + 
-  grattan_label(data = label_gender,
-              aes(colour = gender,
-                  label = gender), 
-              nudge_y = Inf, # move to the top of the plotting area
-              direction = "x", # automatically align along the x-axis
-              segment.colour = NA) +  # don't add a line to the data point
-  grattan_colour_manual(2)
+multiple_bar <- data %>% 
+  ggplot(aes(x = reorder(state, average_income), # reorder
+             y = average_income,
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar, 
+                       expand_top = .1) + 
+  grattan_fill_manual(2) + 
+  grattan_label(data = label_gender,  # supply the new dataset
+                aes(colour = gender,
+                    label = gender), 
+                position = position_dodge(width = 1), 
+                hjust = -0.1) + 
+  grattan_colour_manual(2) + 
+  labs(title = "Women earn less in every state",
+       subtitle = "Average income of workers, 2015",
+       x = "",
+       y = "",
+       caption = "Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)")
 ```
-
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-7-1.png" width="839.04" />
-
-
-There is an alternative approach that can be used in situations that require only a couple of labels. The `annotate` function will add text to a plot in the place you tell it. It doesn't require a new dataset, and is more like manually labelling a plot in Powerpoint. 
-
-The first argument of annotate is what kind of _thing_ it is: `"text"`. Then set the label text you'd like, eg `"label = Men"`, and where it should go with `x` and `y`. Then set the `colour`, and fiddle with `hjust` (horizontal alignment) to get your desired placement.
-
-The outcome is close to what we had with `grattan_label`:
 
 
 ```r
-vbar + 
-  grattan_y_continuous(labels = dollar,
-                       expand_top = 0.1) + 
-  annotate("text", label = "Men",  # Male label
-           x = "ACT", y = 75e3, 
-           colour = grattan_orange,
-           hjust = 1) + 
-  annotate("text", label = "Women", # Female label
-           x = "NT", y = 75e3, 
-           colour = grattan_red,
-           hjust = 1)
+grattan_save("atlas/multiple_bar.pdf", multiple_bar, type = "fullslide")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-8-1.png" width="839.04" />
 
 
-### Facetting bar charts {#facet-bar}
+<img src="atlas/multiple_bar.png" width="1600" />
 
-'Facetting' a chart means you create a separate plot for each group. It's particularly useful in showing differences between groups.
 
-You can 'facet' bar charts -- and any other chart type -- with the `facet_grid` or `facet_wrap` commands. The `fadcet_wrap` tends to give you more control over label placement, so let's start with that. 
 
+### Facetted bar charts {#facet-bar}
+
+'Facetting' a chart means you create a separate plot for each group. It's particularly useful in showing differences between groups. The chart you'll make in this section will show annual income by gender and state, and by professional and non-professional workers:
+
+
+
+Start by creating the dataset you want to plot:
+
+
+```r
+data <- sa3_income %>% 
+  group_by(state, gender, prof) %>% 
+  summarise(average_income = sum(total_income) / sum(workers))
+
+data
+```
+
+```
+## # A tibble: 32 x 4
+## # Groups:   state, gender [16]
+##    state gender prof             average_income
+##    <chr> <chr>  <chr>                     <dbl>
+##  1 ACT   Men    Non-professional         52545.
+##  2 ACT   Men    Professional             96488.
+##  3 ACT   Women  Non-professional         46151.
+##  4 ACT   Women  Professional             79828.
+##  5 NSW   Men    Non-professional         49182.
+##  6 NSW   Men    Professional             91624.
+##  7 NSW   Women  Non-professional         36772.
+##  8 NSW   Women  Professional             68445.
+##  9 NT    Men    Non-professional         58844.
+## 10 NT    Men    Professional             87666.
+## # … with 22 more rows
+```
+
+Then plot a bar chart with `geom_col` and `theme_grattan` elements, using a similar chain to the final plot of \@ref(bar-multi) (without the labelling). We'll build on this chart:
+
+
+```r
+facet_bar <- data %>% 
+  ggplot(aes(x = reorder(state, average_income),
+             y = average_income,
+             fill = gender)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  theme_grattan(flipped = TRUE) + 
+  grattan_y_continuous(labels = dollar, 
+                       expand_top = .1) + 
+  grattan_fill_manual(2) + 
+  grattan_colour_manual(2) + 
+  labs(title = "Women earn less in every state",
+       subtitle = "Average income of workers, 2015",
+       x = "",
+       y = "",
+       caption = "Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)")
+```
+
+
+You can 'facet' bar charts -- and any other chart type -- with the `facet_grid` or `facet_wrap` commands. The latter tends to give you more control over label placement, so let's start with that. `fadcet_wrap` asks the questions: "what variables should I create separete charts for", and "how should I place them on the page"? Tell it to use the `prof` variable with the `vars()` function.^[The `vars()` function is sometimes used in the `tidyverse` to specifically say "I am using a variable name here". You can't use variable names directly because of legacy issues. You can learn more about it in the [official documentation](https://ggplot2.tidyverse.org/reference/facet_wrap.html).]
+
+
+
+```r
+facet_bar +
+  facet_wrap(vars(prof))
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-27-1.png" width="839.04" />
+
+That's good! It does what it should. You just need to tidy it up a little bit
 
 First, create a summary dataset of average income by professional employment, state and gender:
 
 
 ```r
-data <- base_data %>% 
+data <- sa3_income %>% 
   group_by(prof, state, gender) %>% 
-  summarise(average_income = sum(income) / sum(workers))
+  summarise(average_income = sum(total_income) / sum(workers))
 
 head(data)
 ```
@@ -439,14 +573,14 @@ head(data)
 ```
 ## # A tibble: 6 x 4
 ## # Groups:   prof, state [3]
-##   prof         state gender average_income
-##   <fct>        <chr> <chr>           <dbl>
-## 1 Professional ACT   Men            96488.
-## 2 Professional ACT   Women          79828.
-## 3 Professional NSW   Men            91624.
-## 4 Professional NSW   Women          68445.
-## 5 Professional NT    Men            87666.
-## 6 Professional NT    Women          72940.
+##   prof             state gender average_income
+##   <chr>            <chr> <chr>           <dbl>
+## 1 Non-professional ACT   Men            52545.
+## 2 Non-professional ACT   Women          46151.
+## 3 Non-professional NSW   Men            49182.
+## 4 Non-professional NSW   Women          36772.
+## 5 Non-professional NT    Men            58844.
+## 6 Non-professional NT    Women          43025.
 ```
 
 Then plot a bar chart, similar to the one you made before, but add `facet_wrap` to the chain:
@@ -467,7 +601,7 @@ data %>%
   facet_wrap(prof ~ .) # facet 'prof' around nothing else '.'
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-10-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-29-1.png" width="839.04" />
 
 Cool! Now you just have to tweak some settings to get the plot looking right on the page:
 
@@ -500,7 +634,7 @@ facet_bar <- data %>%
 facet_bar
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-11-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-30-1.png" width="839.04" />
 
 **Finally**, we'll add the women/men labels by creating a dataset with the labels we want and giving that to `grattan_label`. 
 
@@ -522,7 +656,7 @@ facet_bar +
   grattan_colour_manual(2) # define the colour scale
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-12-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-31-1.png" width="839.04" />
 
 
 
@@ -530,15 +664,15 @@ facet_bar +
 
 A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines. 
 
-First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by year, state, professional work and gender. We'll use this `base_data` throughout this section, and we'll ignore ACT and NT.
+First, we'll take the `sa3_income` dataset and create a summary table of total workers and income by year, state, professional work and gender. We'll use this `sa3_income` throughout this section, and we'll ignore ACT and NT.
 
 
 ```r
-data <- base_data %>% 
+data <- sa3_income %>% 
   filter(!state %in% c("ACT", "NT")) %>% 
   group_by(year, state) %>% 
   summarise(workers = sum(workers),
-            average_income = sum(income) / workers)
+            average_income = sum(total_income) / workers)
 
 data
 ```
@@ -546,18 +680,18 @@ data
 ```
 ## # A tibble: 36 x 4
 ## # Groups:   year [6]
-##     year state  workers average_income
-##    <dbl> <chr>    <dbl>          <dbl>
-##  1  2010 NSW   11927874         55169.
-##  2  2010 Qld    7689948         51126.
-##  3  2010 SA     2706979         48129.
-##  4  2010 Tas     842949         45143.
-##  5  2010 Vic    9423993         51728.
-##  6  2010 WA     4124159         58416.
-##  7  2011 NSW   12125598         57688.
-##  8  2011 Qld    7914234         54921.
-##  9  2011 SA     2733376         50851.
-## 10  2011 Tas     836749         47389.
+##     year state workers average_income
+##    <dbl> <chr>   <dbl>          <dbl>
+##  1  2010 NSW   5854166         55483.
+##  2  2010 Qld   3777991         51408.
+##  3  2010 SA    1323120         48443.
+##  4  2010 Tas    412691         45439.
+##  5  2010 Vic   4613674         52053.
+##  6  2010 WA    2016695         58795.
+##  7  2011 NSW   5956919         58011.
+##  8  2011 Qld   3891702         55200.
+##  9  2011 SA    1339193         51166.
+## 10  2011 Tas    410521         47688.
 ## # … with 26 more rows
 ```
 
@@ -608,7 +742,7 @@ base_chart <-data %>%
 base_chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-13-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-32-1.png" width="839.04" />
 
 
 You can add 'dots' for each year by layering `geom_point` on top of `geom_line`:
@@ -651,6 +785,10 @@ base_chart +
                 segment.colour = NA)
 ```
 
+```
+## Warning: Ignoring unknown parameters: segment.colour
+```
+
 <img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="839.04" />
 If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
 
@@ -675,32 +813,226 @@ base_chart +
 
 Scatter plots require `x` and `y` aesthetics. These can then be coloured and faceted.
 
-First, create a dataset that we'll use for scatter plots. Take the `population_table` dataset and transform it to have one variable for population in 2013, and another for population in 2018:
 
 
 
+For the first plot, we'll use the `sa3_income` dataset in 2015, looking at the incomes of non-professional workers by their area's total income percentile:
+
+
+```r
+income <- sa3_income %>% 
+  filter(year == 2015) %>%
+  mutate(total_income = average_income * workers) %>% 
+  group_by(sa3_name, sa3_income_percentile, prof, occ_short) %>% 
+  summarise(income = sum(total_income),
+            workers = sum(workers),
+            average_income = income / workers)
+
+head(income)
+```
+
+```
+## # A tibble: 6 x 7
+## # Groups:   sa3_name, sa3_income_percentile, prof [1]
+##   sa3_name  sa3_income_perce… prof  occ_short income workers average_income
+##   <chr>                 <dbl> <chr> <chr>      <dbl>   <dbl>          <dbl>
+## 1 Adelaide…                66 Non-… Admin     1.44e8    2674         53979.
+## 2 Adelaide…                66 Non-… Driver    1.85e7     396         46762.
+## 3 Adelaide…                66 Non-… Labourer  3.92e7    1516         25868.
+## 4 Adelaide…                66 Non-… Sales     5.05e7    1546         32680.
+## 5 Adelaide…                66 Non-… Service   7.75e7    2346         33034.
+## 6 Adelaide…                66 Non-… Trades    7.85e7    1525         51448.
+```
+
+To make a scatter plot with `average_income` against `sa3_income_percentile`, pass the `income` dataset to `ggplot`, add `x = sa3_income_percentile`, `y = average_income` and `colour = gender` aesthetics, then plot it with `geom_point`:
+
+
+
+```r
+income %>% 
+  ggplot(aes(x = sa3_income_percentile,
+             y = average_income,
+             colour = prof)) +
+  geom_point()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-33-1.png" width="839.04" />
+
+Nice. There are lots of overlapping points, so decreasing the opacity with `alpha = 0.6` will make the plot a little clearer. Make this your `base_chart`: 
+
+
+```r
+base_chart <- income %>% 
+  ggplot(aes(x = sa3_income_percentile,
+             y = average_income,
+             colour = prof)) +
+  geom_point(alpha = 0.2)
+
+
+base_chart
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-34-1.png" width="839.04" />
+
+Now add your theme objects: 
+
+- `theme_grattan()`, telling it that the `chart_type` is a scatter plot.
+- `grattan_colour_manual()` with `2` colours.
+- `grattan_y_continuous()`, setting the label style to `dollar`. Also tell the plot to start at zero by setting `limits = c(0, NA)` (lower, upper limits, with `NA` representing 'choose automatically'). Note that starting at zero isn't a requirement for scatter plots, but here it will give you some breathing space for your labels.
+- `grattan_x_continuous()`. 
+- Axes labels with `labs`. 
+
+
+
+```r
+base_theme <- base_chart + 
+  theme_grattan(chart_type = "scatter") + 
+  grattan_colour_manual(2) + 
+  grattan_y_continuous(labels = dollar, 
+                       limits = c(0, NA)) + 
+  grattan_x_continuous() + 
+  labs(x = "Area income percentile",
+       y = "Average income")
+  
+base_theme
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-35-1.png" width="839.04" />
+
+Looks on fleek! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+
+
+```r
+perc_average <- income %>% 
+  group_by(prof, sa3_income_percentile) %>% 
+  summarise(average_income = sum(income) / sum(workers))
+
+head(perc_average)
+```
+
+```
+## # A tibble: 6 x 3
+## # Groups:   prof [1]
+##   prof             sa3_income_percentile average_income
+##   <chr>                            <dbl>          <dbl>
+## 1 Non-professional                     1         40515.
+## 2 Non-professional                     2         42689.
+## 3 Non-professional                     3         42280.
+## 4 Non-professional                     4         42600.
+## 5 Non-professional                     5         43868.
+## 6 Non-professional                     6         42615.
+```
+
+Then layer this on your plot by adding another `geom_point` and providing the `perc_average` data. Add a `fill` aesthetic and change the shape to `21`: a circle with a border (controlled by `colour`) and fill colour (controlled by `fill`).^[See the full list of shapes [here](https://ggplot2.tidyverse.org/reference/scale_shape.html).]
+Make the outline of the circle black with `colour` and make the `size` a little bigger:
+
+
+```r
+scatter_plot <- base_theme +
+  geom_point(data = perc_average,
+             aes(fill = prof),
+             shape = 21,
+             size = 3, 
+             colour = "black") + 
+  grattan_fill_manual(2)
+
+scatter_plot
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-37-1.png" width="839.04" />
+
+### Adding labels
+
+To add labels, first decide where they'd fit best. First, try positioning the <font color='#A02226'>Professional</font> above its averages, and <font color='#F68B33'>Non-professional</font> at the bottom. 
+
+Like labelling before, you should create a new dataset with your label information, and pass that label dataset to the `grattan_label` function:
+
+
+```r
+label_data <- tibble(
+  sa3_income_percentile = c(50, 50),
+  average_income = c(15e3, 120e3),
+  prof =  c("Non-professional", "Professional"))
+```
+
+
+```r
+scatter_plot + 
+  grattan_label(data = label_data,
+                aes(label = prof))
+```
+
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-38-1.png" width="839.04" />
+
+
+
+
+Like the charts above, you could **facet** this by state to see if there were any interesting patterns. The territories only have 
+
+
+
+
+
+To make a scatter plot with `average_income` against `workers`, pass the `income` dataset
+to `ggplot`, add `x = workers`, `y = average_income` and `colour = gender` aesthetics, then plot it with `geom_point`:
  
-Then plot it  
- 
+
+```r
+income %>% 
+  ggplot(aes(x = sa3_income_percentile,
+             y = workers,
+             colour = prof)) + 
+  geom_point()
+```
+
+<img src="Visualisation_cookbook_files/figure-html/scatter-1.png" width="839.04" />
+
+Nice. There are lots of overlapping points, so decreasing the opacity with `alpha = 0.6` will make the plot a little clearer. Make this your `base_chart`: 
+Add Grattan-y elements: `theme_grattan` with `chart_type = "scatter"`; `grattan_y_continuous` with `labels = dollar`; and `grattan_colour_manual` with `2` colours. Also change the x-axis to a log scale with `scale_x_log10` and set the labels to `comma`. Finally, add your axis labels: 
 
 
 
+```r
+base_chart <- income %>% 
+  ggplot(aes(x = sa3_income_percentile,
+             y = workers,
+             colour = prof)) + 
+  geom_point(alpha = .3) +
+  theme_grattan(chart_type = "scatter") + 
+  grattan_y_continuous(labels = comma) +
+  grattan_x_continuous() + 
+  grattan_colour_manual(2) + 
+  labs(x = "Area income percentile",
+       y = "Workers")
+
+base_chart
+```
+
+<img src="Visualisation_cookbook_files/figure-html/scatter_base-1.png" width="839.04" />
 
 
 
 It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with `geom_smooth`:
 
 
+```r
+base_chart + 
+  geom_smooth(aes(fill = prof)) + 
+  grattan_fill_manual(2)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/scatter_smooth-1.png" width="839.04" />
 
 
-You could colour-code positive and negative changes from within the `geom_point` aesthetic. Making a change there won't pass through to the `geom_smooth` aesthetic, so your line-of-best-fit will apply to all data points.
 
 
+```r
+base_chart + 
+  geom_smooth(aes(fill = prof)) + 
+  grattan_fill_manual(2)
+```
 
-
-Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
-
-
+<img src="Visualisation_cookbook_files/figure-html/scatter_facet-1.png" width="839.04" />
 
 
 ## Distributions
@@ -732,7 +1064,7 @@ The `absmapsdata` contains compressed, and tidied `sf` objects containing geomet
   - Local Government Areas 2016 and 2018: `lga2016` or `lga2018`
   - Postcodes 2016: `postcodes2016`
 
-You can install the package from Github:
+The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and can be installed with `remotes::install_github()`
 
 
 ```r
@@ -748,17 +1080,45 @@ install.packages("sf")
 library(sf)
 ```
 
+Now you can view `sf` objects stored in `absmapsdata`:
+
+
+```r
+glimpse(sa32016)
+```
+
+```
+## Observations: 358
+## Variables: 12
+## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10…
+## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", …
+## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102",…
+## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Reg…
+## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1G…
+## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Re…
+## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…
+## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South…
+## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 121…
+## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799…
+## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.…
+## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MUL…
+```
+
 
 
 ### Making choropleth maps
 
 Choropleth maps break an area into 'bits', and colours each 'bit' according to a variable.
 
-SA4 is the largest non-state statistical area in the ABS ASGS standard. 
+You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
 
-You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa4_name` compared to `sa4_name_2016` -- so use the `by` function to match them.
+First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`:
 
 
+```r
+map_data <- sa3_income %>% 
+  left_join(sa32016, by = c("sa3_name" = "sa3_name_2016"))
+```
 
 You then plot a map like you would any other `ggplot`: provide your data, then choose your `aes` and your `geom`. For maps with `sf` objects, the **key aesthetic** is `geometry = geometry`, and the **key geom** is `geom_sf`.
 
@@ -797,7 +1157,7 @@ map <- map_data %>%
                             palette = "diverging",
                             limits = c(-20, 20),
                             breaks = seq(-20, 20, 10)) +
-  geom_label_repel(aes(label = sa4_name),
+  geom_label_repel(aes(label = sa3_name),
                   stat = "sf_coordinates", nudge_x = 1000, segment.alpha = .5,
                   size = 4, 
                   direction = "y",

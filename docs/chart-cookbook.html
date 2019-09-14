@@ -166,11 +166,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>5</b> Chart cookbook</a><ul>
 <li class="chapter" data-level="5.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up"><i class="fa fa-check"></i><b>5.1</b> Set up</a></li>
 <li class="chapter" data-level="5.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>5.2</b> Bar charts</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#labelling-bar-charts"><i class="fa fa-check"></i><b>5.2.1</b> Labelling bar charts</a></li>
-<li class="chapter" data-level="5.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>5.2.2</b> Facetting bar charts</a></li>
+<li class="chapter" data-level="5.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>5.2.1</b> Simple bar plot</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>5.2.2</b> Bar plot with multiple series</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>5.2.3</b> Facetted bar charts</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>5.3</b> Line charts</a></li>
-<li class="chapter" data-level="5.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>5.4</b> Scatter plots</a></li>
+<li class="chapter" data-level="5.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>5.4</b> Scatter plots</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#adding-labels-1"><i class="fa fa-check"></i><b>5.4.1</b> Adding labels</a></li>
+</ul></li>
 <li class="chapter" data-level="5.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>5.5</b> Distributions</a></li>
 <li class="chapter" data-level="5.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>5.6</b> Maps</a><ul>
 <li class="chapter" data-level="5.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>5.6.1</b> <code>sf</code> objects</a></li>
@@ -257,16 +260,28 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">library</span>(scales)</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">library</span>(ggfittext)</a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># note: to be added to grattantheme; remove this when done</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">grattan_label &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">size =</span> <span class="dv">18</span>) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">grattan_label_repel &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">size =</span> <span class="dv">18</span>) {</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  .size =<span class="st"> </span>size <span class="op">/</span><span class="st"> </span>ggplot2<span class="op">::</span>.pt</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">geom_label_repel</span>(..., </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">           <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">           <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>), </a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">           <span class="dt">label.size =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">           <span class="dt">size =</span> .size)</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">}</a></code></pre></div>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw">geom_label_repel</span>(..., </a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">                   <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">                   <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>), </a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">                   <span class="dt">label.size =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                   <span class="dt">size =</span> .size)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">grattan_label &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">size =</span> <span class="dv">18</span>) {</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">  .size =<span class="st"> </span>size <span class="op">/</span><span class="st"> </span>ggplot2<span class="op">::</span>.pt</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="kw">geom_label</span>(..., </a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">                   <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">                   <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>), </a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">                   <span class="dt">label.size =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">                   <span class="dt">size =</span> .size)</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">}</a></code></pre></div>
 <p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2015.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">sa3_income &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(median_income),</a>
@@ -276,29 +291,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   sa3 = col_double(),
 ##   sa3_name = col_character(),
 ##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
 ##   sa4_name = col_character(),
 ##   gcc_name = col_character(),
 ##   state = col_character(),
 ##   occupation = col_character(),
 ##   occ_short = col_character(),
+##   prof = col_character(),
 ##   gender = col_character(),
 ##   year = col_double(),
 ##   median_income = col_double(),
 ##   average_income = col_double(),
+##   total_income = col_double(),
 ##   workers = col_double()
 ## )</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">head</span>(sa3_income)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 13
-##     sa3 sa3_name sa3_sqkm sa4_name gcc_name state occupation occ_short
-##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    
-## 1 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 2 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 3 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 4 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 5 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## 6 10102 Queanbe…    6511. Capital… Rest of… NSW   Clerical … Admin    
-## # … with 5 more variables: gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;,
-## #   average_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 6 x 16
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW  
+## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW  
+## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW  
+## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW  
+## # … with 9 more variables: occupation &lt;chr&gt;, occ_short &lt;chr&gt;, prof &lt;chr&gt;,
+## #   gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;,
+## #   total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
 </div>
 <div id="bar-charts" class="section level2">
 <h2><span class="header-section-number">5.2</span> Bar charts</h2>
@@ -322,390 +341,576 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><code>&quot;dodge&quot;</code>: bars in the same group are positioned next to one another.</li>
 <li><code>&quot;fill&quot;</code>: bars in the same group are stacked and all fill to 100 per cent.</li>
 </ul>
-<p>First, we’ll take the <code>sa3_income</code> dataset and create a summary table of total workers and income by state, greater capital city area, professional work and gender. We’ll use this <code>base_data</code> throughout this section.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">base_data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>gender <span class="op">==</span><span class="st"> &quot;Persons&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">income =</span> average_income <span class="op">*</span><span class="st"> </span>workers,</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">         <span class="dt">prof =</span> <span class="kw">if_else</span>(occupation <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Professionals&quot;</span>, <span class="st">&quot;Managers&quot;</span>),</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">                        <span class="st">&quot;Professional&quot;</span>,</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">                        <span class="st">&quot;Non-professional&quot;</span>),</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">         <span class="dt">prof =</span> <span class="kw">factor</span>(prof, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Professional&quot;</span>, <span class="st">&quot;Non-professional&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(year, state, gcc_name, prof, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">workers =</span> <span class="kw">sum</span>(workers),</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">            <span class="dt">income =</span> <span class="kw">sum</span>(income),</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">            <span class="dt">average_income =</span> income <span class="op">/</span><span class="st"> </span>workers)</a></code></pre></div>
-<p>Time to create a bar chart!<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
-You’ll plot average incomes by state and gender, so first thing you’ll do is <strong>create the dataset that you want to plot</strong>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">data &lt;-<span class="st"> </span>base_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(state, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">data</a></code></pre></div>
+<div id="simple-bar-plot" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Simple bar plot</h3>
+<p>This section will create the following vertical bar plot showing number of workers by state in 2015:</p>
+<p><img src="atlas/simple_bar.png" width="1600" /></p>
+<p>First, create the data you want to plot.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(state) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">workers =</span> <span class="kw">sum</span>(workers))</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">data</a></code></pre></div>
+<pre><code>## # A tibble: 8 x 2
+##   state workers
+##   &lt;chr&gt;   &lt;dbl&gt;
+## 1 ACT    386989
+## 2 NSW   6527661
+## 3 NT     206061
+## 4 Qld   4104503
+## 5 SA    1382446
+## 6 Tas    420767
+## 7 Vic   5190976
+## 8 WA    2297081</code></pre>
+<p>Looks fine: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">             <span class="dt">y =</span> workers)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="839.04" /></p>
+<p>Make it Grattany by adjusting general theme defaults with <code>theme_grattan</code>, and use <code>grattan_y_continuous</code> to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding <code>labels = comma</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">             <span class="dt">y =</span> workers)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="839.04" /></p>
+<p>To order the states by number of workers, you can tell the <code>x</code> aesthetic that you want to <code>reorder</code> the <code>state</code> variable by <code>workers</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, workers), <span class="co"># reorder states by workers</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">             <span class="dt">y =</span> workers)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="839.04" /></p>
+<p>You can probably drop the x-axis label – people will understand that they’re states without you explicitly saying it – and add a title and subtitle with <code>labs</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">simple_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, workers),</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">             <span class="dt">y =</span> workers)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Most workers are on the east coast&quot;</span>,</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">       <span class="dt">subtitle =</span> <span class="st">&quot;Number people in employment, 2015&quot;</span>,</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">       <span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">       <span class="dt">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)&quot;</span>)</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">simple_bar</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-7-1.png" width="839.04" /></p>
+<p>Looks supreme! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/simple_bar.pdf&quot;</span>, simple_bar, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</a></code></pre></div>
+<p><img src="atlas/simple_bar.png" width="1600" /></p>
+</div>
+<div id="bar-multi" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Bar plot with multiple series</h3>
+<p>This section will create a horizontal bar plot showing average income by state and gender in 2015:</p>
+<p>First create the dataset you want to plot, getting the average income by state and gender in the year 2015:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st">   </span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(state, gender) <span class="op">%&gt;%</span><span class="st">   </span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(total_income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">data</a></code></pre></div>
 <pre><code>## # A tibble: 16 x 3
 ## # Groups:   state [8]
 ##    state gender average_income
 ##    &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
-##  1 ACT   Men            71965.
-##  2 ACT   Women          59952.
-##  3 NSW   Men            64612.
-##  4 NSW   Women          48603.
-##  5 NT    Men            67125.
-##  6 NT    Women          53003.
-##  7 Qld   Men            61531.
-##  8 Qld   Women          44518.
-##  9 SA    Men            56444.
-## 10 SA    Women          43519.
-## 11 Tas   Men            52608.
-## 12 Tas   Women          41353.
-## 13 Vic   Men            60362.
-## 14 Vic   Women          45236.
-## 15 WA    Men            72822.
-## 16 WA    Women          47251.</code></pre>
-<p>Looks good: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
-And because you have the <em>actual</em> values you want to plot from your <code>data</code> object, tell <code>geom_bar</code> to ‘just use the number provided’ with <code>stat = &quot;identity&quot;</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,          <span class="co"># x-axis is state</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">             <span class="dt">y =</span> average_income, <span class="co"># y-axis is income</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">      </span><span class="co"># fill colour is gender</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># &quot;just use the number that&#39;s there&quot;</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb11-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/bar1a-1.png" width="839.04" /></p>
-<p>Before addressing the accidental stacking, note that there is a short-cut-geom for <code>geom_bar(stat = &quot;identity&quot;)</code>: <code>geom_col</code>. Using that instead, without the need for the <code>stat</code> argument gives the same result:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,        </a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">     </span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st">                 </span><span class="co"># no need for stat = &quot;identity&quot;</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/bar_col-1.png" width="839.04" /></p>
-<p>The <code>fill</code> aesthetic creates two series – one for women, one for men – and <code>geom_col</code> stacks them by default. You can change this behaviour with the <code>position</code> argument:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,         </a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">    </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># dodge instead of stack the series</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/bar1b-1.png" width="839.04" /></p>
-<p>You can also <strong>order</strong> the groups in your chart by a variable. If you want to order states by population, use <code>reorder</code> inside <code>aes</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>average_income), <span class="co"># change the order of state</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/bar2-1.png" width="839.04" /></p>
-<p>To flip the chart – a useful move when you have long labels – add <code>coord_flipped</code> (ie ‘flip coordinates’) and tell <code>theme_grattan</code> that the plot is flipped using <code>flipped = TRUE</code>.</p>
+##  1 ACT   Men            78141.
+##  2 ACT   Women          65548.
+##  3 NSW   Men            69750.
+##  4 NSW   Women          53191.
+##  5 NT    Men            75246.
+##  6 NT    Women          58527.
+##  7 Qld   Men            65108.
+##  8 Qld   Women          48458.
+##  9 SA    Men            60244.
+## 10 SA    Women          47533.
+## 11 Tas   Men            56345.
+## 12 Tas   Women          45158.
+## 13 Vic   Men            64908.
+## 14 Vic   Women          49264.
+## 15 WA    Men            76677.
+## 16 WA    Women          51578.</code></pre>
+<p>Looks admirable: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-12-1.png" width="839.04" /></p>
+<p>The two series – women and men – created by <code>fill</code> are stacked on-top of each other by <code>geom_col</code>. You can tell it to plot them next to each other – to ‘dodge’ – instead with the <code>position</code> argument <em>within</em> <code>geom_col</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="co"># &#39;dodge&#39; the series</span></a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-13-1.png" width="839.04" /></p>
+<p>To flip the chart – a useful move when you have long labels – add <code>coord_flip</code> (ie ‘flip the x and y coordinates of the chart’).</p>
 <p>However, while the <em>coordinates</em> have been flipped, the underlying data hasn’t. If you want to refer to the <code>average_income</code> axis, which now lies horizontally, you would still refer to the <code>y</code> axis (eg <code>grattan_y_continuous</code> still refers to your <code>y</code> aesthetic, <code>average_income</code>).</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>average_income),</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st">   </span><span class="co"># tell theme_grattan of flipping</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># flip the chart</span></a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/bar4-1.png" width="839.04" /></p>
-<div id="labelling-bar-charts" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> Labelling bar charts</h3>
-<p>Labelling charts in the Grattan style means labelling <em>one</em> of each series and letting the reader connect the dots.</p>
-<p>First, create a base chart that we’ll use for the next few charts:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>average_income),</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="st">  </span><span class="kw">coord_flip</span>()</a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13">bar</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="839.04" /></p>
-<p>You can use <code>grattan_label</code> to label your charts. This function is a ‘wrapper’ around <code>geom_label_repel</code> that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the standard arguments of <code>geom_label_repel</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># rotate the chart</span></a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-14-1.png" width="839.04" /></p>
+<p>And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the <code>reorder(var_to_reorder, var_to_reorder_by)</code> function when you define the <code>state</code> aesthetic:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-15-1.png" width="839.04" /></p>
+<p>Wonderful – that’s how you want our <em>data</em> to look. Now you can Grattanise it. Note that <code>theme_grattan</code> needs to know that the coordinates were flipped so it can apply the right settings. Also tell <code>grattan_fill_manual</code> that there are two fill series.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-16-1.png" width="839.04" /></p>
+<p>You can use <code>grattan_label</code> to <strong>label your charts</strong> in the Grattan style. This function is a ‘wrapper’ around <code>geom_label</code> that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the <a href="https://ggplot2.tidyverse.org/reference/geom_text.html">standard arguments of <code>geom_label</code></a>.</p>
 <p>Section <a href="data-visualisation.html#adding-labels">4.6</a> shows how labels are treated like data points: they need to know where to go (<code>x</code> and <code>y</code>) and what to show (<code>label</code>). But if you provide <em>every point</em> to your labelling <code>geom</code>, it will plot every label:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">bar <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> gender,  <span class="co"># colour the text according to gender</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">                    <span class="dt">label =</span> gender),  <span class="co"># label the text according to gender</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>),  <span class="co"># position dodge with width 1</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">            <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st">  </span><span class="co"># horizontally align the label so its outside the bar</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)   <span class="co"># define colour as two grattan colours</span></a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="839.04" /></p>
-<p>To just label <em>one</em> of the plots – ie the first one, Tasmania in this case – we need to tell <code>grattan_label</code>. The easiest way to do this is by <strong>creating a label dataset beforehand</strong>, like <code>label_gender</code> below. This just includes the observations you want to label:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">label_gender &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;Tas&quot;</span>)  <span class="co"># just want Tasmania observations</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">bar <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,  <span class="co"># supply the new dataset</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">                    <span class="dt">label =</span> gender), </a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb18-9" data-line-number="9">                <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="839.04" /></p>
-<p>Labelling a vertical bar chart is much the same, but you might find yourself with less horizontal space. After creating a new base chart, our previous technique is a bit off:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Create vertical bar chart</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">vbar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, <span class="op">-</span>average_income),</a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">             <span class="dt">fill =</span> gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb19-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb19-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb19-13" data-line-number="13"><span class="co"># Create label dataset</span></a>
-<a class="sourceLine" id="cb19-14" data-line-number="14">label_gender &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-15" data-line-number="15"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;ACT&quot;</span>)  <span class="co"># just want ACT observations</span></a>
-<a class="sourceLine" id="cb19-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb19-17" data-line-number="17"><span class="co"># Label chart </span></a>
-<a class="sourceLine" id="cb19-18" data-line-number="18">vbar <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-19" data-line-number="19"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,  <span class="co"># supply the new dataset</span></a>
-<a class="sourceLine" id="cb19-20" data-line-number="20">              <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
-<a class="sourceLine" id="cb19-21" data-line-number="21">                  <span class="dt">label =</span> gender), </a>
-<a class="sourceLine" id="cb19-22" data-line-number="22">              <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb19-23" data-line-number="23">              <span class="dt">hjust =</span> <span class="fl">0.5</span>,  <span class="co"># centre horizontally</span></a>
-<a class="sourceLine" id="cb19-24" data-line-number="24">              <span class="dt">vjust =</span> <span class="fl">-.1</span>) <span class="op">+</span><span class="st"> </span><span class="co"># nudged up a bit</span></a>
-<a class="sourceLine" id="cb19-25" data-line-number="25"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="839.04" /></p>
-<p>It might be best to label the bars in empty space <em>above</em> the bars. First, expand the plot area by adding an <code>expand_top</code> argument to <code>grattan_y_continuous</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">vbar <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar,</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">                       <span class="dt">expand_top =</span> <span class="fl">0.2</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="839.04" /></p>
-<p>That gives you a bit of breathing room. Use the same <code>label_gender</code> dataset to place labels above the first state (ACT). Like before, <code>grattan_label</code> is used to plot the labels – given a dataset and the right aesthetics – but you’ll need to tweak some of the settings to get it looking right.</p>
-<p>By using <code>nudge_y = Inf</code>, you’re pushing the labels all the way to the top of the plot. Then, <code>direction = &quot;x&quot;</code> says ‘only move the labels horizontally to make sure they’re not overlapping’. Finally, <code>segment.colour = NA</code> turns off the line that connects the label to the data point (you can leave this out and see if you like the look of it!).</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># Create label dataset</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">label_gender &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;ACT&quot;</span>)  </a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co"># Plot with labels</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">vbar <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar,</a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">                     <span class="dt">expand_top =</span> <span class="fl">0.07</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,</a>
-<a class="sourceLine" id="cb21-10" data-line-number="10">              <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
-<a class="sourceLine" id="cb21-11" data-line-number="11">                  <span class="dt">label =</span> gender), </a>
-<a class="sourceLine" id="cb21-12" data-line-number="12">              <span class="dt">nudge_y =</span> <span class="ot">Inf</span>, <span class="co"># move to the top of the plotting area</span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13">              <span class="dt">direction =</span> <span class="st">&quot;x&quot;</span>, <span class="co"># automatically align along the x-axis</span></a>
-<a class="sourceLine" id="cb21-14" data-line-number="14">              <span class="dt">segment.colour =</span> <span class="ot">NA</span>) <span class="op">+</span><span class="st">  </span><span class="co"># don&#39;t add a line to the data point</span></a>
-<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-7-1.png" width="839.04" /></p>
-<p>There is an alternative approach that can be used in situations that require only a couple of labels. The <code>annotate</code> function will add text to a plot in the place you tell it. It doesn’t require a new dataset, and is more like manually labelling a plot in Powerpoint.</p>
-<p>The first argument of annotate is what kind of <em>thing</em> it is: <code>&quot;text&quot;</code>. Then set the label text you’d like, eg <code>&quot;label = Men&quot;</code>, and where it should go with <code>x</code> and <code>y</code>. Then set the <code>colour</code>, and fiddle with <code>hjust</code> (horizontal alignment) to get your desired placement.</p>
-<p>The outcome is close to what we had with <code>grattan_label</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">vbar <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar,</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">                       <span class="dt">expand_top =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Men&quot;</span>,  <span class="co"># Male label</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">           <span class="dt">x =</span> <span class="st">&quot;ACT&quot;</span>, <span class="dt">y =</span> <span class="fl">75e3</span>, </a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">           <span class="dt">colour =</span> grattan_orange,</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">           <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Women&quot;</span>, <span class="co"># Female label</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">           <span class="dt">x =</span> <span class="st">&quot;NT&quot;</span>, <span class="dt">y =</span> <span class="fl">75e3</span>, </a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">           <span class="dt">colour =</span> grattan_red,</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">           <span class="dt">hjust =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-8-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> gender,  <span class="co"># colour the text according to gender</span></a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">                    <span class="dt">label =</span> gender),  <span class="co"># label the text according to gender</span></a>
+<a class="sourceLine" id="cb22-12" data-line-number="12">            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>),  <span class="co"># position dodge with width 1</span></a>
+<a class="sourceLine" id="cb22-13" data-line-number="13">            <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st">  </span><span class="co"># horizontally align the label so its outside the bar</span></a>
+<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)   <span class="co"># define colour as two grattan colours</span></a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-17-1.png" width="839.04" /></p>
+<p>To just label <em>one</em> of the plots – ie the first one, ACT in this case – we need to tell <code>grattan_label</code>. The easiest way to do this is by <strong>creating a label dataset beforehand</strong>, like <code>label_gender</code> below. This just includes the observations you want to label:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">label_gender &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;ACT&quot;</span>)  <span class="co"># just want Tasmania observations</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">label_gender</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+## # Groups:   state [1]
+##   state gender average_income
+##   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1 ACT   Men            78141.
+## 2 ACT   Women          65548.</code></pre>
+<p>So you can pass that <code>label_gender</code> dataset to <code>grattan_label</code>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,  <span class="co"># supply the new dataset</span></a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
+<a class="sourceLine" id="cb25-12" data-line-number="12">                    <span class="dt">label =</span> gender), </a>
+<a class="sourceLine" id="cb25-13" data-line-number="13">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">                <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-15" data-line-number="15"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-19-1.png" width="839.04" /></p>
+<p>Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, </a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">                       <span class="dt">expand_top =</span> <span class="fl">.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-11" data-line-number="11"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,  <span class="co"># supply the new dataset</span></a>
+<a class="sourceLine" id="cb26-12" data-line-number="12">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
+<a class="sourceLine" id="cb26-13" data-line-number="13">                    <span class="dt">label =</span> gender), </a>
+<a class="sourceLine" id="cb26-14" data-line-number="14">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb26-15" data-line-number="15">                <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-16" data-line-number="16"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-20-1.png" width="839.04" /></p>
+<p>Looks of high quality! Now you can add labels and save using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">multiple_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), <span class="co"># reorder</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, </a>
+<a class="sourceLine" id="cb27-9" data-line-number="9">                       <span class="dt">expand_top =</span> <span class="fl">.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-11" data-line-number="11"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_gender,  <span class="co"># supply the new dataset</span></a>
+<a class="sourceLine" id="cb27-12" data-line-number="12">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
+<a class="sourceLine" id="cb27-13" data-line-number="13">                    <span class="dt">label =</span> gender), </a>
+<a class="sourceLine" id="cb27-14" data-line-number="14">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb27-15" data-line-number="15">                <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-16" data-line-number="16"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-17" data-line-number="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Women earn less in every state&quot;</span>,</a>
+<a class="sourceLine" id="cb27-18" data-line-number="18">       <span class="dt">subtitle =</span> <span class="st">&quot;Average income of workers, 2015&quot;</span>,</a>
+<a class="sourceLine" id="cb27-19" data-line-number="19">       <span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb27-20" data-line-number="20">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb27-21" data-line-number="21">       <span class="dt">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/multiple_bar.pdf&quot;</span>, multiple_bar, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</a></code></pre></div>
+<p><img src="atlas/multiple_bar.png" width="1600" /></p>
 </div>
 <div id="facet-bar" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> Facetting bar charts</h3>
-<p>‘Facetting’ a chart means you create a separate plot for each group. It’s particularly useful in showing differences between groups.</p>
-<p>You can ‘facet’ bar charts – and any other chart type – with the <code>facet_grid</code> or <code>facet_wrap</code> commands. The <code>fadcet_wrap</code> tends to give you more control over label placement, so let’s start with that.</p>
+<h3><span class="header-section-number">5.2.3</span> Facetted bar charts</h3>
+<p>‘Facetting’ a chart means you create a separate plot for each group. It’s particularly useful in showing differences between groups. The chart you’ll make in this section will show annual income by gender and state, and by professional and non-professional workers:</p>
+<p>Start by creating the dataset you want to plot:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(state, gender, prof) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(total_income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">data</a></code></pre></div>
+<pre><code>## # A tibble: 32 x 4
+## # Groups:   state, gender [16]
+##    state gender prof             average_income
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;                     &lt;dbl&gt;
+##  1 ACT   Men    Non-professional         52545.
+##  2 ACT   Men    Professional             96488.
+##  3 ACT   Women  Non-professional         46151.
+##  4 ACT   Women  Professional             79828.
+##  5 NSW   Men    Non-professional         49182.
+##  6 NSW   Men    Professional             91624.
+##  7 NSW   Women  Non-professional         36772.
+##  8 NSW   Women  Professional             68445.
+##  9 NT    Men    Non-professional         58844.
+## 10 NT    Men    Professional             87666.
+## # … with 22 more rows</code></pre>
+<p>Then plot a bar chart with <code>geom_col</code> and <code>theme_grattan</code> elements, using a similar chain to the final plot of <a href="chart-cookbook.html#bar-multi">5.2.2</a> (without the labelling). We’ll build on this chart:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">facet_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income),</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, </a>
+<a class="sourceLine" id="cb31-9" data-line-number="9">                       <span class="dt">expand_top =</span> <span class="fl">.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-11" data-line-number="11"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-12" data-line-number="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Women earn less in every state&quot;</span>,</a>
+<a class="sourceLine" id="cb31-13" data-line-number="13">       <span class="dt">subtitle =</span> <span class="st">&quot;Average income of workers, 2015&quot;</span>,</a>
+<a class="sourceLine" id="cb31-14" data-line-number="14">       <span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb31-15" data-line-number="15">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb31-16" data-line-number="16">       <span class="dt">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2015-16. Source: ABS (2018)&quot;</span>)</a></code></pre></div>
+<p>You can ‘facet’ bar charts – and any other chart type – with the <code>facet_grid</code> or <code>facet_wrap</code> commands. The latter tends to give you more control over label placement, so let’s start with that. <code>fadcet_wrap</code> asks the questions: “what variables should I create separete charts for”, and “how should I place them on the page”? Tell it to use the <code>prof</code> variable with the <code>vars()</code> function.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">facet_bar <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(prof))</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-27-1.png" width="839.04" /></p>
+<p>That’s good! It does what it should. You just need to tidy it up a little bit</p>
 <p>First, create a summary dataset of average income by professional employment, state and gender:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">data &lt;-<span class="st"> </span>base_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(prof, state, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="kw">head</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(prof, state, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(total_income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="kw">head</span>(data)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ## # Groups:   prof, state [3]
-##   prof         state gender average_income
-##   &lt;fct&gt;        &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
-## 1 Professional ACT   Men            96488.
-## 2 Professional ACT   Women          79828.
-## 3 Professional NSW   Men            91624.
-## 4 Professional NSW   Women          68445.
-## 5 Professional NT    Men            87666.
-## 6 Professional NT    Women          72940.</code></pre>
+##   prof             state gender average_income
+##   &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1 Non-professional ACT   Men            52545.
+## 2 Non-professional ACT   Women          46151.
+## 3 Non-professional NSW   Men            49182.
+## 4 Non-professional NSW   Women          36772.
+## 5 Non-professional NT    Men            58844.
+## 6 Non-professional NT    Women          43025.</code></pre>
 <p>Then plot a bar chart, similar to the one you made before, but add <code>facet_wrap</code> to the chain:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income),         </a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb25-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-11" data-line-number="11"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-12" data-line-number="12"><span class="st">  </span><span class="kw">facet_wrap</span>(prof <span class="op">~</span><span class="st"> </span>.) <span class="co"># facet &#39;prof&#39; around nothing else &#39;.&#39;</span></a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-10-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income),         </a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="st">  </span><span class="kw">facet_wrap</span>(prof <span class="op">~</span><span class="st"> </span>.) <span class="co"># facet &#39;prof&#39; around nothing else &#39;.&#39;</span></a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-29-1.png" width="839.04" /></p>
 <p>Cool! Now you just have to tweak some settings to get the plot looking right on the page:</p>
 <ul>
 <li>Add a black line along <code>average_income = 0</code> to distinguish the plots.</li>
 <li>Define your ‘breaks’ (the spacing of the axis gridlines and labels) in <code>grattan_y_continuous</code>.</li>
-<li>Add some additional space – <code>10mm</code> – between the two facet plots with <code>panel.spacing = unit(10, &quot;mm&quot;)</code> in the <code>theme</code> parameter.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></li>
-<li>Left-align the facet titles with <code>strip.text = element_text(hjust = 0)</code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></li>
+<li>Add some additional space – <code>10mm</code> – between the two facet plots with <code>panel.spacing = unit(10, &quot;mm&quot;)</code> in the <code>theme</code> parameter.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></li>
+<li>Left-align the facet titles with <code>strip.text = element_text(hjust = 0)</code>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></li>
 <li>We’re a bit tight for space along the bottom, so get rid of the “$” and replace with “comma”, then add that information in the <code>y</code> label.</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">facet_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income),         </a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add a black base line for each facet</span></a>
-<a class="sourceLine" id="cb26-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma, <span class="co"># change to comma</span></a>
-<a class="sourceLine" id="cb26-9" data-line-number="9">                       <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">25e3</span>, <span class="fl">50e3</span>, <span class="fl">75e3</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># define your breaks</span></a>
-<a class="sourceLine" id="cb26-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-11" data-line-number="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb26-12" data-line-number="12">       <span class="dt">y =</span> <span class="st">&quot;Annual income, $&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add $ info in y-label</span></a>
-<a class="sourceLine" id="cb26-13" data-line-number="13"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-14" data-line-number="14"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.spacing =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>), <span class="co"># add some space between the plots</span></a>
-<a class="sourceLine" id="cb26-15" data-line-number="15">        <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># left-align facet titles</span></a>
-<a class="sourceLine" id="cb26-16" data-line-number="16"><span class="st">  </span><span class="kw">facet_wrap</span>(prof <span class="op">~</span><span class="st"> </span>.)</a>
-<a class="sourceLine" id="cb26-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb26-18" data-line-number="18">facet_bar</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-11-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">facet_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income),         </a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">             <span class="dt">fill =</span> gender)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>()) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add a black base line for each facet</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma, <span class="co"># change to comma</span></a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">                       <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">25e3</span>, <span class="fl">50e3</span>, <span class="fl">75e3</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># define your breaks</span></a>
+<a class="sourceLine" id="cb36-10" data-line-number="10"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-11" data-line-number="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12">       <span class="dt">y =</span> <span class="st">&quot;Annual income, $&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add $ info in y-label</span></a>
+<a class="sourceLine" id="cb36-13" data-line-number="13"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-14" data-line-number="14"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.spacing =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>), <span class="co"># add some space between the plots</span></a>
+<a class="sourceLine" id="cb36-15" data-line-number="15">        <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># left-align facet titles</span></a>
+<a class="sourceLine" id="cb36-16" data-line-number="16"><span class="st">  </span><span class="kw">facet_wrap</span>(prof <span class="op">~</span><span class="st"> </span>.)</a>
+<a class="sourceLine" id="cb36-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb36-18" data-line-number="18">facet_bar</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-30-1.png" width="839.04" /></p>
 <p><strong>Finally</strong>, we’ll add the women/men labels by creating a dataset with the labels we want and giving that to <code>grattan_label</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">label_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;ACT&quot;</span>,</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">         prof <span class="op">==</span><span class="st"> &quot;Non-professional&quot;</span>)</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb27-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">facet_bar <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_data,  <span class="co"># supply the new dataset</span></a>
-<a class="sourceLine" id="cb27-9" data-line-number="9">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
-<a class="sourceLine" id="cb27-10" data-line-number="10">                    <span class="dt">label =</span> gender), </a>
-<a class="sourceLine" id="cb27-11" data-line-number="11">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb27-12" data-line-number="12">                <span class="dt">hjust =</span> <span class="fl">-.1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-13" data-line-number="13"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="co"># define the colour scale</span></a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-12-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">label_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;ACT&quot;</span>,</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">         prof <span class="op">==</span><span class="st"> &quot;Non-professional&quot;</span>)</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb37-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb37-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">facet_bar <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_data,  <span class="co"># supply the new dataset</span></a>
+<a class="sourceLine" id="cb37-9" data-line-number="9">                <span class="kw">aes</span>(<span class="dt">colour =</span> gender,</a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">                    <span class="dt">label =</span> gender), </a>
+<a class="sourceLine" id="cb37-11" data-line-number="11">                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb37-12" data-line-number="12">                <span class="dt">hjust =</span> <span class="fl">-.1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-13" data-line-number="13"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="co"># define the colour scale</span></a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-31-1.png" width="839.04" /></p>
 </div>
 </div>
 <div id="line-charts" class="section level2">
 <h2><span class="header-section-number">5.3</span> Line charts</h2>
 <p>A line chart has one key aesthetic: <code>group</code>. This tells <code>ggplot</code> how to connect individual lines.</p>
-<p>First, we’ll take the <code>sa3_income</code> dataset and create a summary table of total workers and income by year, state, professional work and gender. We’ll use this <code>base_data</code> throughout this section, and we’ll ignore ACT and NT.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">data &lt;-<span class="st"> </span>base_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ACT&quot;</span>, <span class="st">&quot;NT&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(year, state) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">workers =</span> <span class="kw">sum</span>(workers),</a>
-<a class="sourceLine" id="cb28-5" data-line-number="5">            <span class="dt">average_income =</span> <span class="kw">sum</span>(income) <span class="op">/</span><span class="st"> </span>workers)</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">data</a></code></pre></div>
+<p>First, we’ll take the <code>sa3_income</code> dataset and create a summary table of total workers and income by year, state, professional work and gender. We’ll use this <code>sa3_income</code> throughout this section, and we’ll ignore ACT and NT.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ACT&quot;</span>, <span class="st">&quot;NT&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(year, state) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">workers =</span> <span class="kw">sum</span>(workers),</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">            <span class="dt">average_income =</span> <span class="kw">sum</span>(total_income) <span class="op">/</span><span class="st"> </span>workers)</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7">data</a></code></pre></div>
 <pre><code>## # A tibble: 36 x 4
 ## # Groups:   year [6]
-##     year state  workers average_income
-##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;          &lt;dbl&gt;
-##  1  2010 NSW   11927874         55169.
-##  2  2010 Qld    7689948         51126.
-##  3  2010 SA     2706979         48129.
-##  4  2010 Tas     842949         45143.
-##  5  2010 Vic    9423993         51728.
-##  6  2010 WA     4124159         58416.
-##  7  2011 NSW   12125598         57688.
-##  8  2011 Qld    7914234         54921.
-##  9  2011 SA     2733376         50851.
-## 10  2011 Tas     836749         47389.
+##     year state workers average_income
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+##  1  2010 NSW   5854166         55483.
+##  2  2010 Qld   3777991         51408.
+##  3  2010 SA    1323120         48443.
+##  4  2010 Tas    412691         45439.
+##  5  2010 Vic   4613674         52053.
+##  6  2010 WA    2016695         58795.
+##  7  2011 NSW   5956919         58011.
+##  8  2011 Qld   3891702         55200.
+##  9  2011 SA    1339193         51166.
+## 10  2011 Tas    410521         47688.
 ## # … with 26 more rows</code></pre>
 <p>Plot a line chart by taking the <code>data</code>, passing it to <code>ggplot</code> with <em>aes</em>thetics, then using <code>geom_line</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4">             <span class="dt">group =</span> state)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">             <span class="dt">group =</span> state)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="839.04" /></p>
 <p>Now you can represent each <code>state</code> by colour:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4">             <span class="dt">group =</span> state,</a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">             <span class="dt">colour =</span> state)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">             <span class="dt">group =</span> state,</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">             <span class="dt">colour =</span> state)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="839.04" /></p>
 <p>Cooler! Adding some Grattan formatting to it and define it as our ‘base chart’:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">base_chart &lt;-data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">             <span class="dt">group =</span> state,</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">             <span class="dt">colour =</span> state)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">6</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb32-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb32-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb32-13" data-line-number="13">base_chart</a></code></pre></div>
-<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-13-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">base_chart &lt;-data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year,</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">             <span class="dt">group =</span> state,</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">             <span class="dt">colour =</span> state)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_grattan</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">6</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb42-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb42-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb42-13" data-line-number="13">base_chart</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-32-1.png" width="839.04" /></p>
 <p>You can add ‘dots’ for each year by layering <code>geom_point</code> on top of <code>geom_line</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="839.04" /></p>
 <p>To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_right =</span> <span class="fl">.3</span>,</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">                       <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">                       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_right =</span> <span class="fl">.3</span>,</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">                       <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">                       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) </a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="839.04" /></p>
 <p>Then add labels, using</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">label_line &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2010</span>)</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_left =</span> <span class="fl">.1</span>,</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">                       <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">                       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_line,</a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">                <span class="kw">aes</span>(<span class="dt">label =</span> state),</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11">                <span class="dt">nudge_x =</span> <span class="op">-</span><span class="ot">Inf</span>,</a>
-<a class="sourceLine" id="cb35-12" data-line-number="12">                <span class="dt">segment.colour =</span> <span class="ot">NA</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">label_line &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2010</span>)</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_left =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">                       <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb45-8" data-line-number="8">                       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_line,</a>
+<a class="sourceLine" id="cb45-10" data-line-number="10">                <span class="kw">aes</span>(<span class="dt">label =</span> state),</a>
+<a class="sourceLine" id="cb45-11" data-line-number="11">                <span class="dt">nudge_x =</span> <span class="op">-</span><span class="ot">Inf</span>,</a>
+<a class="sourceLine" id="cb45-12" data-line-number="12">                <span class="dt">segment.colour =</span> <span class="ot">NA</span>)</a></code></pre></div>
+<pre><code>## Warning: Ignoring unknown parameters: segment.colour</code></pre>
 <p><img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="839.04" />
 If you wanted to show each state individually, you could <strong>facet</strong> your chart so that a separate plot was produced for each state:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">base_chart <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="st">    </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_left =</span> <span class="fl">.1</span>, </a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">                         <span class="dt">expand_right =</span> <span class="fl">.1</span>,</a>
-<a class="sourceLine" id="cb36-5" data-line-number="5">                         <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">                         <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-7" data-line-number="7"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.spacing.x =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="st">  </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">base_chart <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="st">    </span><span class="kw">grattan_x_continuous</span>(<span class="dt">expand_left =</span> <span class="fl">.1</span>, </a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">                         <span class="dt">expand_right =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">                         <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">                         <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.spacing.x =</span> <span class="kw">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb47-8" data-line-number="8"><span class="st">  </span><span class="kw">facet_wrap</span>(state <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="839.04" /></p>
 </div>
 <div id="scatter-plots" class="section level2">
 <h2><span class="header-section-number">5.4</span> Scatter plots</h2>
 <p>Scatter plots require <code>x</code> and <code>y</code> aesthetics. These can then be coloured and faceted.</p>
-<p>First, create a dataset that we’ll use for scatter plots. Take the <code>population_table</code> dataset and transform it to have one variable for population in 2013, and another for population in 2018:</p>
-<p>Then plot it</p>
+<p>For the first plot, we’ll use the <code>sa3_income</code> dataset in 2015, looking at the incomes of non-professional workers by their area’s total income percentile:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">income &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_income =</span> average_income <span class="op">*</span><span class="st"> </span>workers) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(sa3_name, sa3_income_percentile, prof, occ_short) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">income =</span> <span class="kw">sum</span>(total_income),</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">            <span class="dt">workers =</span> <span class="kw">sum</span>(workers),</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">            <span class="dt">average_income =</span> income <span class="op">/</span><span class="st"> </span>workers)</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb48-9" data-line-number="9"><span class="kw">head</span>(income)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+## # Groups:   sa3_name, sa3_income_percentile, prof [1]
+##   sa3_name  sa3_income_perce… prof  occ_short income workers average_income
+##   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Adelaide…                66 Non-… Admin     1.44e8    2674         53979.
+## 2 Adelaide…                66 Non-… Driver    1.85e7     396         46762.
+## 3 Adelaide…                66 Non-… Labourer  3.92e7    1516         25868.
+## 4 Adelaide…                66 Non-… Sales     5.05e7    1546         32680.
+## 5 Adelaide…                66 Non-… Service   7.75e7    2346         33034.
+## 6 Adelaide…                66 Non-… Trades    7.85e7    1525         51448.</code></pre>
+<p>To make a scatter plot with <code>average_income</code> against <code>sa3_income_percentile</code>, pass the <code>income</code> dataset to <code>ggplot</code>, add <code>x = sa3_income_percentile</code>, <code>y = average_income</code> and <code>colour = gender</code> aesthetics, then plot it with <code>geom_point</code>:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sa3_income_percentile,</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">             <span class="dt">colour =</span> prof)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-33-1.png" width="839.04" /></p>
+<p>Nice. There are lots of overlapping points, so decreasing the opacity with <code>alpha = 0.6</code> will make the plot a little clearer. Make this your <code>base_chart</code>:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">base_chart &lt;-<span class="st"> </span>income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sa3_income_percentile,</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">             <span class="dt">colour =</span> prof)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb51-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb51-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">base_chart</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-34-1.png" width="839.04" /></p>
+<p>Now add your theme objects:</p>
+<ul>
+<li><code>theme_grattan()</code>, telling it that the <code>chart_type</code> is a scatter plot.</li>
+<li><code>grattan_colour_manual()</code> with <code>2</code> colours.</li>
+<li><code>grattan_y_continuous()</code>, setting the label style to <code>dollar</code>. Also tell the plot to start at zero by setting <code>limits = c(0, NA)</code> (lower, upper limits, with <code>NA</code> representing ‘choose automatically’). Note that starting at zero isn’t a requirement for scatter plots, but here it will give you some breathing space for your labels.</li>
+<li><code>grattan_x_continuous()</code>.</li>
+<li>Axes labels with <code>labs</code>.</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">base_theme &lt;-<span class="st"> </span>base_chart <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, </a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="ot">NA</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_x_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Area income percentile&quot;</span>,</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8">       <span class="dt">y =</span> <span class="st">&quot;Average income&quot;</span>)</a>
+<a class="sourceLine" id="cb52-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">base_theme</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-35-1.png" width="839.04" /></p>
+<p>Looks on fleek! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">perc_average &lt;-<span class="st"> </span>income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(prof, sa3_income_percentile) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="kw">head</span>(perc_average)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   prof [1]
+##   prof             sa3_income_percentile average_income
+##   &lt;chr&gt;                            &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Non-professional                     1         40515.
+## 2 Non-professional                     2         42689.
+## 3 Non-professional                     3         42280.
+## 4 Non-professional                     4         42600.
+## 5 Non-professional                     5         43868.
+## 6 Non-professional                     6         42615.</code></pre>
+<p>Then layer this on your plot by adding another <code>geom_point</code> and providing the <code>perc_average</code> data. Add a <code>fill</code> aesthetic and change the shape to <code>21</code>: a circle with a border (controlled by <code>colour</code>) and fill colour (controlled by <code>fill</code>).<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+Make the outline of the circle black with <code>colour</code> and make the <code>size</code> a little bigger:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">scatter_plot &lt;-<span class="st"> </span>base_theme <span class="op">+</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> perc_average,</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">             <span class="kw">aes</span>(<span class="dt">fill =</span> prof),</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">             <span class="dt">shape =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">             <span class="dt">size =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb55-6" data-line-number="6">             <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb55-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb55-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb55-9" data-line-number="9">scatter_plot</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-37-1.png" width="839.04" /></p>
+<div id="adding-labels-1" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Adding labels</h3>
+<p>To add labels, first decide where they’d fit best. First, try positioning the <font color='#A02226'>Professional</font> above its averages, and <font color='#F68B33'>Non-professional</font> at the bottom.</p>
+<p>Like labelling before, you should create a new dataset with your label information, and pass that label dataset to the <code>grattan_label</code> function:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">label_data &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">  <span class="dt">sa3_income_percentile =</span> <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">50</span>),</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">  <span class="dt">average_income =</span> <span class="kw">c</span>(<span class="fl">15e3</span>, <span class="fl">120e3</span>),</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">  <span class="dt">prof =</span>  <span class="kw">c</span>(<span class="st">&quot;Non-professional&quot;</span>, <span class="st">&quot;Professional&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">scatter_plot <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="st">  </span><span class="kw">grattan_label</span>(<span class="dt">data =</span> label_data,</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">                <span class="kw">aes</span>(<span class="dt">label =</span> prof))</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-38-1.png" width="839.04" /></p>
+<p>Like the charts above, you could <strong>facet</strong> this by state to see if there were any interesting patterns. The territories only have</p>
+<p>To make a scatter plot with <code>average_income</code> against <code>workers</code>, pass the <code>income</code> dataset
+to <code>ggplot</code>, add <code>x = workers</code>, <code>y = average_income</code> and <code>colour = gender</code> aesthetics, then plot it with <code>geom_point</code>:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sa3_income_percentile,</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">             <span class="dt">y =</span> workers,</a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">             <span class="dt">colour =</span> prof)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb58-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter-1.png" width="839.04" /></p>
+<p>Nice. There are lots of overlapping points, so decreasing the opacity with <code>alpha = 0.6</code> will make the plot a little clearer. Make this your <code>base_chart</code>:
+Add Grattan-y elements: <code>theme_grattan</code> with <code>chart_type = &quot;scatter&quot;</code>; <code>grattan_y_continuous</code> with <code>labels = dollar</code>; and <code>grattan_colour_manual</code> with <code>2</code> colours. Also change the x-axis to a log scale with <code>scale_x_log10</code> and set the labels to <code>comma</code>. Finally, add your axis labels:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">base_chart &lt;-<span class="st"> </span>income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sa3_income_percentile,</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">             <span class="dt">y =</span> workers,</a>
+<a class="sourceLine" id="cb59-4" data-line-number="4">             <span class="dt">colour =</span> prof)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_grattan</span>(<span class="dt">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-8" data-line-number="8"><span class="st">  </span><span class="kw">grattan_x_continuous</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-9" data-line-number="9"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Area income percentile&quot;</span>,</a>
+<a class="sourceLine" id="cb59-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;Workers&quot;</span>)</a>
+<a class="sourceLine" id="cb59-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb59-13" data-line-number="13">base_chart</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_base-1.png" width="839.04" /></p>
 <p>It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with <code>geom_smooth</code>:</p>
-<p>You could colour-code positive and negative changes from within the <code>geom_point</code> aesthetic. Making a change there won’t pass through to the <code>geom_smooth</code> aesthetic, so your line-of-best-fit will apply to all data points.</p>
-<p>Like the charts above, you could facet this by state to see if there were any interesting patterns. We’ll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">base_chart <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> prof)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_smooth-1.png" width="839.04" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">base_chart <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> prof)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="st">  </span><span class="kw">grattan_fill_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_facet-1.png" width="839.04" /></p>
+</div>
 </div>
 <div id="distributions" class="section level2">
 <h2><span class="header-section-number">5.5</span> Distributions</h2>
@@ -735,18 +940,36 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <li>Local Government Areas 2016 and 2018: <code>lga2016</code> or <code>lga2018</code></li>
 <li>Postcodes 2016: <code>postcodes2016</code></li>
 </ul>
-<p>You can install the package from Github:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">library</span>(absmapsdata)</a></code></pre></div>
+<p>The package is <a href="https://github.com/wfmackey/absmapsdata">hosted on Github</a> and can be installed with <code>remotes::install_github()</code></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">library</span>(absmapsdata)</a></code></pre></div>
 <p>You will also need the <code>sf</code> package installed to handle the <code>sf</code> objects:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">library</span>(sf)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">library</span>(sf)</a></code></pre></div>
+<p>Now you can view <code>sf</code> objects stored in <code>absmapsdata</code>:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">glimpse</span>(sa32016)</a></code></pre></div>
+<pre><code>## Observations: 358
+## Variables: 12
+## $ sa3_code_2016   &lt;chr&gt; &quot;10102&quot;, &quot;10103&quot;, &quot;10104&quot;, &quot;10105&quot;, &quot;10106&quot;, &quot;10…
+## $ sa3_name_2016   &lt;chr&gt; &quot;Queanbeyan&quot;, &quot;Snowy Mountains&quot;, &quot;South Coast&quot;, …
+## $ sa4_code_2016   &lt;chr&gt; &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;102&quot;, &quot;102&quot;,…
+## $ sa4_name_2016   &lt;chr&gt; &quot;Capital Region&quot;, &quot;Capital Region&quot;, &quot;Capital Reg…
+## $ gcc_code_2016   &lt;chr&gt; &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1G…
+## $ gcc_name_2016   &lt;chr&gt; &quot;Rest of NSW&quot;, &quot;Rest of NSW&quot;, &quot;Rest of NSW&quot;, &quot;Re…
+## $ state_code_2016 &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;…
+## $ state_name_2016 &lt;chr&gt; &quot;New South Wales&quot;, &quot;New South Wales&quot;, &quot;New South…
+## $ areasqkm_2016   &lt;dbl&gt; 6511.1906, 14283.4221, 9864.8680, 9099.9086, 121…
+## $ cent_long       &lt;dbl&gt; 149.6013, 148.9415, 149.8063, 149.6054, 148.6799…
+## $ cent_lat        &lt;dbl&gt; -35.44939, -36.43952, -36.49933, -34.51814, -34.…
+## $ geometry        &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((149.979 -35..., MUL…</code></pre>
 </div>
 <div id="making-choropleth-maps" class="section level3">
 <h3><span class="header-section-number">5.6.3</span> Making choropleth maps</h3>
 <p>Choropleth maps break an area into ‘bits’, and colours each ‘bit’ according to a variable.</p>
-<p>SA4 is the largest non-state statistical area in the ABS ASGS standard.</p>
-<p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa4_name</code> compared to <code>sa4_name_2016</code> – so use the <code>by</code> function to match them.</p>
+<p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa3_name</code> compared to <code>sa3_name_2016</code> – so use the <code>by</code> argument to match them.</p>
+<p>First, take the <code>sa3_income</code> dataset and join the <code>sf</code> object <code>sa32016</code> from <code>absmapsdata</code>:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">map_data &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="st">  </span><span class="kw">left_join</span>(sa32016, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sa3_name&quot;</span> =<span class="st"> &quot;sa3_name_2016&quot;</span>))</a></code></pre></div>
 <p>You then plot a map like you would any other <code>ggplot</code>: provide your data, then choose your <code>aes</code> and your <code>geom</code>. For maps with <code>sf</code> objects, the <strong>key aesthetic</strong> is <code>geometry = geometry</code>, and the <strong>key geom</strong> is <code>geom_sf</code>.</p>
 <p>The argument <code>lwd</code> controls the line width of area borders.</p>
 <p>Note that RStudio takes a long time to render a map in the</p>
@@ -756,30 +979,30 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <h4><span class="header-section-number">5.6.3.1</span> Adding labels to maps</h4>
 <p>You can add labels to choropleth maps with the standard <code>geom_text</code> or <code>geom_label</code>. Because it is likely that some labels will overlap, <code>ggrepel::geom_text_repel</code> or <code>ggrepel::geom_label_repel</code> is usually the better option.</p>
 <p>To use <code>geom_(text|label)_repel</code>, you need to tell <code>ggrepel</code> where in</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">map &lt;-<span class="st"> </span>map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;Vic&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">geometry =</span> geometry)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="st">        </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> pop_change),</a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">                <span class="dt">lwd =</span> <span class="fl">.1</span>,</a>
-<a class="sourceLine" id="cb39-6" data-line-number="6">                <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="st">        </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dt">discrete =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb39-9" data-line-number="9">                            <span class="dt">palette =</span> <span class="st">&quot;diverging&quot;</span>,</a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">                            <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>),</a>
-<a class="sourceLine" id="cb39-11" data-line-number="11">                            <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb39-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_label_repel</span>(<span class="kw">aes</span>(<span class="dt">label =</span> sa4_name),</a>
-<a class="sourceLine" id="cb39-13" data-line-number="13">                  <span class="dt">stat =</span> <span class="st">&quot;sf_coordinates&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">1000</span>, <span class="dt">segment.alpha =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb39-14" data-line-number="14">                  <span class="dt">size =</span> <span class="dv">4</span>, </a>
-<a class="sourceLine" id="cb39-15" data-line-number="15">                  <span class="dt">direction =</span> <span class="st">&quot;y&quot;</span>,</a>
-<a class="sourceLine" id="cb39-16" data-line-number="16">                  <span class="dt">label.size =</span> <span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb39-17" data-line-number="17">                  <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>),</a>
-<a class="sourceLine" id="cb39-18" data-line-number="18">                  <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>,</a>
-<a class="sourceLine" id="cb39-19" data-line-number="19">                  <span class="dt">segment.color =</span> <span class="st">&quot;grey50&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb39-20" data-line-number="20"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.2</span>))) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb39-21" data-line-number="21"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb39-22" data-line-number="22"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Population </span><span class="ch">\n</span><span class="st">change&quot;</span>)</a>
-<a class="sourceLine" id="cb39-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb39-24" data-line-number="24">map</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">map &lt;-<span class="st"> </span>map_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="st">        </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;Vic&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">geometry =</span> geometry)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="st">        </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> pop_change),</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5">                <span class="dt">lwd =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb67-6" data-line-number="6">                <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb67-7" data-line-number="7"><span class="st">        </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb67-8" data-line-number="8"><span class="st">        </span><span class="kw">grattan_fill_manual</span>(<span class="dt">discrete =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb67-9" data-line-number="9">                            <span class="dt">palette =</span> <span class="st">&quot;diverging&quot;</span>,</a>
+<a class="sourceLine" id="cb67-10" data-line-number="10">                            <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb67-11" data-line-number="11">                            <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb67-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_label_repel</span>(<span class="kw">aes</span>(<span class="dt">label =</span> sa3_name),</a>
+<a class="sourceLine" id="cb67-13" data-line-number="13">                  <span class="dt">stat =</span> <span class="st">&quot;sf_coordinates&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">1000</span>, <span class="dt">segment.alpha =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb67-14" data-line-number="14">                  <span class="dt">size =</span> <span class="dv">4</span>, </a>
+<a class="sourceLine" id="cb67-15" data-line-number="15">                  <span class="dt">direction =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb67-16" data-line-number="16">                  <span class="dt">label.size =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb67-17" data-line-number="17">                  <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>),</a>
+<a class="sourceLine" id="cb67-18" data-line-number="18">                  <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>,</a>
+<a class="sourceLine" id="cb67-19" data-line-number="19">                  <span class="dt">segment.color =</span> <span class="st">&quot;grey50&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-20" data-line-number="20"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.2</span>))) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-21" data-line-number="21"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-22" data-line-number="22"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Population </span><span class="ch">\n</span><span class="st">change&quot;</span>)</a>
+<a class="sourceLine" id="cb67-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb67-24" data-line-number="24">map</a></code></pre></div>
 </div>
 </div>
 </div>
@@ -793,10 +1016,13 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <hr />
 <ol start="1">
 <li id="fn1"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2015-16</a><a href="chart-cookbook.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Wooh! (Sorry, that’s an abuse of footnotes.)<a href="chart-cookbook.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Remember that <code>geom_col</code> is just shorthand for <code>geom_bar(stat = &quot;identity&quot;)</code><a href="chart-cookbook.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>The aesthetic <code>fill</code> represents the ‘fill’ colour – the colour that fills the bars in your chart. The <code>colour</code> aesthetic controls the colours of the <em>lines</em>.<a href="chart-cookbook.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>The <code>unit</code> function takes two arguments: the number of the unit, then the unit itself (eg “mm” for millimetre, or “cm” for centremetre, etc.)<a href="chart-cookbook.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>The function <code>element_text</code> is useful for adjusting the look of text in a plot. With it, you can say you want the text to be red, <code>colour = &quot;red&quot;</code>, or MASSIVE, <code>size = 100</code>, or <strong>bold</strong>, <code>face = &quot;bold&quot;</code>.<a href="chart-cookbook.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><code>geom_col</code> is shorthand for <code>geom_bar(stat = &quot;identity&quot;</code><a href="chart-cookbook.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>The <code>vars()</code> function is sometimes used in the <code>tidyverse</code> to specifically say “I am using a variable name here”. You can’t use variable names directly because of legacy issues. You can learn more about it in the <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">official documentation</a>.<a href="chart-cookbook.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>The <code>unit</code> function takes two arguments: the number of the unit, then the unit itself (eg “mm” for millimetre, or “cm” for centremetre, etc.)<a href="chart-cookbook.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>The function <code>element_text</code> is useful for adjusting the look of text in a plot. With it, you can say you want the text to be red, <code>colour = &quot;red&quot;</code>, or MASSIVE, <code>size = 100</code>, or <strong>bold</strong>, <code>face = &quot;bold&quot;</code>.<a href="chart-cookbook.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>See the full list of shapes <a href="https://ggplot2.tidyverse.org/reference/scale_shape.html">here</a>.<a href="chart-cookbook.html#fnref8" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

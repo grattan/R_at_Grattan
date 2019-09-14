@@ -54,10 +54,11 @@ base %>%
 }
 
 
-out <- bind_rows(read_abs_file(5, 4382),
+prep <- bind_rows(read_abs_file(5, 4382),
                  read_abs_file(6, 4058),
                  read_abs_file(7, 1250))
 
+occs <- unique(prep$occupation)
 
 occs_short <- c(
   "Admin",
@@ -71,7 +72,7 @@ occs_short <- c(
   "Total"
 )
 
-out <- out %>% 
+dat <- prep %>% 
   mutate(occ_short = case_when(
     occupation == occs[1] ~ occs_short[1],
     occupation == occs[2] ~ occs_short[2],
@@ -81,7 +82,22 @@ out <- out %>%
     occupation == occs[6] ~ occs_short[6],
     occupation == occs[7] ~ occs_short[7],
     occupation == occs[8] ~ occs_short[8],
-    occupation == occs[9] ~ occs_short[9]))
+    occupation == occs[9] ~ occs_short[9])) %>% 
+  filter(occupation != "Total earners")
+
+
+# Get income percentiles by SA3
+perc <- dat %>% 
+  mutate(income = persons * average_income) %>% 
+  group_by(year, sa3) %>% 
+  summarise(persons = sum(persons, na.rm = T),
+            total_income = sum(income, na.rm = T),
+            average_income = total_income  / persons) %>% 
+  filter(persons > 0) %>% 
+  mutate(income_percentile = grattan::weighted_ntile(average_income, persons, 100)) %>% 
+  select(year, sa3, 
+         sa3_income_percentile = income_percentile)
+
 
 # Get state information
 sa3_info <- absmapsdata::sa32016 %>% 
@@ -96,16 +112,27 @@ sa3_info <- absmapsdata::sa32016 %>%
          sa3 = as.double(sa3))
 
 
-
-out <- out %>% 
+# Combine and get 
+out <- dat %>% 
+  left_join(perc) %>% 
   left_join(sa3_info) %>% 
-  mutate(gender = if_else(sex == "Females", "Women", "Men")) %>% 
+  mutate(gender = if_else(sex == "Females", "Women", "Men"),
+         total_income = average_income * persons,
+         prof = if_else(occupation %in% c("Professionals", "Managers"),
+                        "Professional",
+                        "Non-professional"),
+         prof = factor(prof, levels = c("Professional", "Non-professional"))) %>% 
   select(sa3, sa3_name, sa3_sqkm, 
+         sa3_income_percentile,
          sa4_name, gcc_name, state,
-         occupation, occ_short,
+         occupation, occ_short, prof,
          gender, year, 
          median_income, 
          average_income, 
-         workers = persons)
+         total_income,
+         workers = persons) %>% 
+  filter(!is.na(workers))
+
 
 write_csv(out, "data/sa3_income.csv")
+
