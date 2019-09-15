@@ -21,6 +21,7 @@ Imports:
     grattantheme,
     absmapsdata,
     sf
+    janitor
 Remotes:
     rstudio/bookdown,
     mattcowgill/grattantheme,
