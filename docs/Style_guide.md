@@ -12,38 +12,6 @@ Below we describe the **key** code-style elements, without being too tedious abo
 
 You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
 
-## Use meaningful filenames
-
-You already know that you should break your analysis into manageable pieces, with one script per piece ([remember?](#manageable)).
-
-Your filenames should be meaningful, describing the 'point' of the script in a word or two:
-
-**Good**
-
-```r
-combine_data.R
-run_regressions.R
-```
-
-**Bad**
-
-```r
-analysis.r
-stuff.r
-```
-
-If files need to be run in sequence, prefix them with numbers:
-
-
-```r
-0_read_data.R
-1_combine_data.R
-2_explore.R
-3_regression.R
-4_visualisation.R
-```
-
-
 ## Script preamble
 
 Describe what your script does in the first few lines using comments or within an RMarkdown document.
@@ -60,7 +28,7 @@ Describe what your script does in the first few lines using comments or within a
 # make ABS ed data graph
 ```
 
-If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See `Organising_Grattan_R_projects` for more on project organisation.
+If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See [Organising R Projects at Grattan](#organising-projects) for more.
 
 ## Comments
 

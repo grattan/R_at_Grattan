@@ -29,7 +29,7 @@ Describe what your script does in the first few lines using comments or within a
 # make ABS ed data graph
 ```
 
-If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See `Organising_Grattan_R_projects` for more on project organisation.
+If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See [Organising R Projects at Grattan](#organising-projects) for more.
 
 ## Comments
 

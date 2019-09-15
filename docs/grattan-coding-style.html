@@ -147,12 +147,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#include-a-readme-file"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
 <li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
 <li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#rules_9a_final_final_mc"><i class="fa fa-check"></i><b>3.7</b> Rules_9a_FINAL_FINAL_MC</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
-<li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#use-meaningful-file-names"><i class="fa fa-check"></i><b>4.1</b> Use meaningful file names</a></li>
-<li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.2</b> Script preamble</a></li>
-<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#comments"><i class="fa fa-check"></i><b>4.3</b> Comments</a></li>
-<li class="chapter" data-level="4.4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.4</b> Breaking your script into parts</a></li>
+<li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.1</b> Script preamble</a></li>
+<li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#comments"><i class="fa fa-check"></i><b>4.2</b> Comments</a></li>
+<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into parts</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="naming-objects-and-variables.html"><a href="naming-objects-and-variables.html"><i class="fa fa-check"></i><b>5</b> Naming objects and variables</a></li>
 <li class="chapter" data-level="6" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>6</b> Spacing</a><ul>
@@ -254,63 +255,44 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Below we describe the <strong>key</strong> code-style elements, without being too tedious about it all. There are many elements of coding style we don’t cover in this guide; if you’re unsure about anything, <a href="https://style.tidyverse.org/">consult the <code>tidyverse</code> guide</a>.</p>
 <p>You should also see the <a href="organising-projects.html#organising-projects">Using R at Grattan</a> page for guidelines about setting up projects.</p>
-<div id="use-meaningful-file-names" class="section level2">
-<h2><span class="header-section-number">4.1</span> Use meaningful file names</h2>
-<p>You already know that you should break your analysis into manageable pieces, with one script per piece (<a href="organising-projects.html#manageable">remember?</a>).</p>
-<p>File names should be meaningful, describing the ‘point’ of the script in a couple of words:</p>
-<p><strong>Good</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">combine_data.R</a>
-<a class="sourceLine" id="cb8-2" title="2">run_regressions.R</a></code></pre></div>
-<p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">analysis.r</a>
-<a class="sourceLine" id="cb9-2" title="2">stuff.r</a></code></pre></div>
-<p>If files need to be run in sequence, prefix them with numbers:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="dv">0</span>_read_data.R</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="dv">1</span>_combine_data.R</a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="dv">2</span>_explore.R</a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="dv">3</span>_regression.R</a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="dv">4</span>_visualisation.R</a></code></pre></div>
-<p>Don’t create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) If you do end up with multiple versions, put everything other than the latest version in a subfolder, called “archive”.</p>
-<p>We set out more rules and guidelines for organising R analyses at Grattan in the <code>Organising_Grattan_R_projects</code> document that is found together with this guide.</p>
-</div>
 <div id="script-preamble" class="section level2">
-<h2><span class="header-section-number">4.2</span> Script preamble</h2>
+<h2><span class="header-section-number">4.1</span> Script preamble</h2>
 <p>Describe what your script does in the first few lines using comments or within an RMarkdown document.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></a></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># make ABS ed data graph</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># make ABS ed data graph</span></a></code></pre></div>
 <p>If it’s hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See <code>Organising_Grattan_R_projects</code> for more on project organisation.</p>
 </div>
 <div id="comments" class="section level2">
-<h2><span class="header-section-number">4.3</span> Comments</h2>
+<h2><span class="header-section-number">4.2</span> Comments</h2>
 <p>Comments are necessary where the code <em>alone</em> doesn’t tell the full story. This is important when groups are coded with numbers rather than character strings:</p>
 <p><strong>Necessary to comment</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></a>
-<a class="sourceLine" id="cb13-3" title="3">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></a>
+<a class="sourceLine" id="cb10-3" title="3">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></a></code></pre></div>
 <p><strong>Not necessary (but okay if included)</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</a>
-<a class="sourceLine" id="cb14-3" title="3">         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</a>
+<a class="sourceLine" id="cb11-3" title="3">         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</a></code></pre></div>
 <p>Comments can either go next to code, as in the example above, or they can precede the code, like this:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Keep only male observations and 35-39 year olds</span></a>
-<a class="sourceLine" id="cb15-2" title="2">data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb15-4" title="4">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Keep only male observations and 35-39 year olds</span></a>
+<a class="sourceLine" id="cb12-2" title="2">data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb12-4" title="4">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)</a></code></pre></div>
 <p>You should also include comments where your code is more complex and may not be easily understood by the reader.</p>
 <p>Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you’re writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future.</p>
 </div>
 <div id="breaking-your-script-into-parts" class="section level2">
-<h2><span class="header-section-number">4.4</span> Breaking your script into parts</h2>
+<h2><span class="header-section-number">4.3</span> Breaking your script into parts</h2>
 <p>It’s useful to break a lengthy script into parts with <code>-------</code>.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Read file A -----</span></a>
-<a class="sourceLine" id="cb16-2" title="2"></a>
-<a class="sourceLine" id="cb16-3" title="3"></a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co"># Read file B -----</span></a>
-<a class="sourceLine" id="cb16-5" title="5"></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="co"># Merge files A and B ----</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Read file A -----</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Read file B -----</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co"># Merge files A and B ----</span></a></code></pre></div>
 <p>This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. It also makes your code easier to read.</p>
 </div>
 </div>

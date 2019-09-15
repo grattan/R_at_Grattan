@@ -147,12 +147,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#include-a-readme-file"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
 <li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
 <li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#rules_9a_final_final_mc"><i class="fa fa-check"></i><b>3.7</b> Rules_9a_FINAL_FINAL_MC</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
-<li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#use-meaningful-file-names"><i class="fa fa-check"></i><b>4.1</b> Use meaningful file names</a></li>
-<li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.2</b> Script preamble</a></li>
-<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#comments"><i class="fa fa-check"></i><b>4.3</b> Comments</a></li>
-<li class="chapter" data-level="4.4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.4</b> Breaking your script into parts</a></li>
+<li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.1</b> Script preamble</a></li>
+<li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#comments"><i class="fa fa-check"></i><b>4.2</b> Comments</a></li>
+<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into parts</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="naming-objects-and-variables.html"><a href="naming-objects-and-variables.html"><i class="fa fa-check"></i><b>5</b> Naming objects and variables</a></li>
 <li class="chapter" data-level="6" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>6</b> Spacing</a><ul>
@@ -311,9 +312,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>03_model.R</li>
 <li>04_visualise.R</li>
 </ul>
-<p>It should be clear what each script is trying to do. Use comments to explain why you’re doing things!</p>
-<p>Don’t retain code that ultimately didn’t lead anywhere. If you produced a graph that ended up not being used, don’t keep the code in your script - if you want to save it, move it to a subfolder named ‘archive’ or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.</p>
-<p><strong>Don’t</strong> include interactive work (like <code>View(mydf)</code>, <code>str(mydf)</code>, and commands like that) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.</p>
+<p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things!</p>
+</div>
+<div id="omit-needless-code" class="section level2">
+<h2><span class="header-section-number">3.6</span> Omit needless code</h2>
+<p>Don’t retain code that ultimately didn’t lead anywhere. If you produced a graph that ended up not being used, don’t keep the code in your script - if you want to save it, move it to a subfolder named ‘archive’ or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn’t have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.</p>
+<p>When you’re doing data analysis, you’ll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with <code>View(mydf)</code> or <code>str(mydf)</code>. This is fine, and often necessary, when you’re doing your analysis. <strong>Don’t keep these commands in your script</strong>. These type of commands should usually be entered straight into the R console, not in a script.</p>
+</div>
+<div id="rules_9a_final_final_mc" class="section level2">
+<h2><span class="header-section-number">3.7</span> Rules_9a_FINAL_FINAL_MC</h2>
+<p>We’re all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like <code>cool_word_doc_002.docx</code>. Try to avoid replicating this nightmare in R.</p>
+<p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive”. To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
 
 </div>
 </div>
