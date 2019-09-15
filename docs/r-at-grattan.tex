@@ -411,8 +411,8 @@ A good structure is to have a subfolder for:
 
 Sometimes your data folder might have subfolders - `raw' for data that you've done nothing to, and `clean' for data you've modified in some way.\footnote{Other folder structures are OK and might make more sense for your project. The important thing is to \textbf{have} a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.}
 
-\hypertarget{include-a-readme-file}{%
-\section{Include a README file}\label{include-a-readme-file}}
+\hypertarget{README}{%
+\section{Include a README file}\label{README}}
 
 Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!
 
@@ -521,10 +521,24 @@ Describe what your script does in the first few lines using comments or within a
 
 If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See \protect\hyperlink{organising-projects}{Organising R Projects at Grattan} for more.
 
-\hypertarget{comments}{%
-\section{Comments}\label{comments}}
+Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:
 
-Comments are necessary where the code \emph{alone} doesn't tell the full story. This is important when groups are coded with numbers rather than character strings:
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can't use the income variable in the NHS for this purpose, as it only contains information about respondents' income decile, not the income itself.}
+\end{Highlighting}
+\end{Shaded}
+
+The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your \protect\hyperlink{README}{README file}.
+
+\hypertarget{use-comments}{%
+\section{Use comments}\label{use-comments}}
+
+Comments are necessary where the code \emph{alone} doesn't tell the full story. Comments should tell the reader \textbf{why} you're doing something, rather than just \textbf{what} you're doing.
+
+For example, comments are important when groups are coded with numbers rather than character strings:
 
 \textbf{Necessary to comment}
 
@@ -536,35 +550,28 @@ Comments are necessary where the code \emph{alone} doesn't tell the full story. 
 \end{Highlighting}
 \end{Shaded}
 
+Without the comment, readers of your code might not be aware that \texttt{1} in this dataset corresponds to \texttt{male}, or that \texttt{age\ ==\ "05"} refers to 35-39 year olds. Without the comment, the code is not self-explanatory.
+
+If your code \emph{is} self-explanatory, you can include or omit comments as you see fit.
 \textbf{Not necessary (but okay if included)}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# We want to only look at women aged 35-39}
 \NormalTok{data }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{,}
 \NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{35} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{39}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Comments can either go next to code, as in the example above, or they can precede the code, like this:
+You should also include comments where your code is more complex and may not be easily understood by the reader. If you're using a function from a package that isn't commonly used at Grattan, include a comment to explain what it does.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Keep only male observations and 35-39 year olds}
-\NormalTok{data }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{,}
-\NormalTok{         age }\OperatorTok{==}\StringTok{ "05"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.
 
-You should also include comments where your code is more complex and may not be easily understood by the reader.
+\hypertarget{breaking-your-script-into-chunks}{%
+\section{Breaking your script into chunks}\label{breaking-your-script-into-chunks}}
 
-Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future.
-
-\hypertarget{breaking-your-script-into-parts}{%
-\section{Breaking your script into parts}\label{breaking-your-script-into-parts}}
-
-It's useful to break a lengthy script into parts with \texttt{-\/-\/-\/-\/-\/-\/-}.
+It's useful to break a lengthy script into chunks with \texttt{-\/-\/-\/-\/-}.
 
 \textbf{Good}
 
@@ -579,11 +586,16 @@ It's useful to break a lengthy script into parts with \texttt{-\/-\/-\/-\/-\/-\/
 \end{Highlighting}
 \end{Shaded}
 
-This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. It also makes your code easier to read.
+This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script.
+
+\includegraphics[width=7.64in]{atlas/rstudio_navigation}
+
+Breaking your script into chunks with \texttt{-\/-\/-\/-\/-} also makes your code easier to read.
 
 \hypertarget{naming-objects-and-variables}{%
-\chapter{Naming objects and variables}\label{naming-objects-and-variables}}
+\section{Naming objects and variables}\label{naming-objects-and-variables}}
 
+≥/
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called \texttt{ed\_by\_age} or \texttt{edByAge} or \texttt{ed.by.age}.
 
 As with filenames, Grattan primarily uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{considered good practice across the Tidyverse}.
@@ -801,7 +813,45 @@ Resist the urge to use the pipe to make code blocks too long.
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
 
-{[}intro{]}
+This chapter explores data visualisation broadly, and how to `do' data visualisation in R specifically.
+
+The next chapter -- the Visualisation Cookbook -- gives more practical advice for the charts you might want to create.
+
+\hypertarget{introduction-to-data-visualisation}{%
+\section{Introduction to data visualisation}\label{introduction-to-data-visualisation}}
+
+You can use data visualisation to \textbf{examine and explore} your data, and to \textbf{present} a finding to your audience. Both of these elements are important.
+
+When you start using a dataset, you should look at it.\footnote{From Kieran Healy's \href{https://socviz.co/}{\emph{Data Vizualization: A Practical Introduction}}: `You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.'} Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots.
+
+These \textbf{exploratory plots} are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette, or be particularly interesting.
+They're built and used only to help you and your team explore the data.
+Through this process, you can become confident your data is \emph{what you think it is}.
+
+When you choose to \textbf{present a visualisation to a reader}, you have to make decisions about what they can and cannot see. You need to highlight or omit particular things to help them better understand the message you are presenting.
+
+This requires important \emph{technical} decisions: what data to use, what `stat' to present it with --- \emph{show every data point, show a distribution function, show the average or the median?} --- and on what scale --- \emph{raw numbers, on a log scale, as a proportion of a total?}.
+
+It also requires \emph{aesthetic} decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+
+All of these decisions need to made with two things in mind:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Rigour, accuracy, legitimacy: the chart needs to be honest.
+\item
+  The reader: the chart needs to help the reader understand something, and it must convince them to pay attention.
+\end{enumerate}
+
+At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart's impact.
+
+Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to \emph{earn} their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.\footnote{`Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.}
+
+The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader.
+
+This chapter shows how you can do this with R. It starts with the `grammar of graphics' concepts of a package called \texttt{ggplot}, and explains how to make those charts `Grattan-y'. The next chapter gives you the when-to-use and how-to-make particular charts.
 
 \hypertarget{set-up-and-packages}{%
 \section{Set-up and packages}\label{set-up-and-packages}}
@@ -814,118 +864,164 @@ The \texttt{grattantheme} package is used to make charts look Grattan-y. The \te
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(grattantheme)}
-\KeywordTok{library}\NormalTok{(absmapsdata)}
-\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
 \KeywordTok{library}\NormalTok{(scales)}
 \end{Highlighting}
 \end{Shaded}
 
-For most charts in this chapter, we'll use the \texttt{population\_table} data summarised here. It contains the population in each state between 2013 and 2018:
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# note: to be added to grattantheme; remove this when done}
+\NormalTok{grattan_label <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
+
+\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
+  
+\KeywordTok{geom_label}\NormalTok{(..., }
+           \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
+           \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
+           \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
+           \DataTypeTok{size =}\NormalTok{ .size)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+For most charts in this chapter, we'll use the \texttt{sa3\_income} data summarised below.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and gender, 2010-11 to 2015-16}} It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a \texttt{professionals} subset that only includes people in professional occupations in 2015:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
-               \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(year)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{group_by}\NormalTok{(year, state) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop))}
+\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{)}
+
+\NormalTok{professionals <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{sa4_name, }\OperatorTok{-}\NormalTok{gcc_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{,}
+\NormalTok{         occupation }\OperatorTok{==}\StringTok{ "Professionals"}\NormalTok{,}
+         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median_income),}
+         \OperatorTok{!}\NormalTok{gender }\OperatorTok{==}\StringTok{ "Persons"}\NormalTok{) }
 
 \CommentTok{# Show the first six rows of the new dataset}
-\KeywordTok{head}\NormalTok{(population_table)}
+\KeywordTok{head}\NormalTok{(professionals)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 3
-## # Groups:   year [1]
-##   year  state                            pop
-##   <fct> <chr>                          <dbl>
-## 1 2013  Australian Capital Territory  383257
-## 2 2013  New South Wales              7404032
-## 3 2013  Northern Territory            241722
-## 4 2013  Other Territories               2962
-## 5 2013  Queensland                   4652824
-## 6 2013  South Australia              1671488
+## # A tibble: 6 x 14
+##     sa3 sa3_name sa3_sqkm sa3_income_perc~ state occupation occ_short prof 
+##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
+## 1 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
+## 2 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
+## 3 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
+## 4 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
+## 5 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
+## 6 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
+## # ... with 6 more variables: gender <chr>, year <dbl>,
+## #   median_income <dbl>, average_income <dbl>, total_income <dbl>,
+## #   workers <dbl>
 \end{verbatim}
 
 \hypertarget{concepts}{%
 \section{Concepts}\label{concepts}}
 
-The \texttt{ggplot2} package is based on the \texttt{g}rammar of \texttt{g}raphics. \ldots{}
+The \texttt{ggplot2} package is based on the \textbf{g}rammar of \textbf{g}raphics. \ldots{}
 
-The main ingredients to a \texttt{ggplot} chart:
+The main ingredients to a \texttt{ggplot} chart are:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data}: what data should be plotted. e.g.~\texttt{data}
+  \textbf{Data}: what data should be plotted.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{data}
+  \end{itemize}
 \item
-  \textbf{Aesthetics}: what variables should be linked to what chart elements. e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \textbf{Aesthetics}: what variables should be linked to what chart elements.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+  \end{itemize}
 \item
-  \textbf{Geoms}: how the data should be plotted. e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart.
+  \textbf{Geoms}: how the data should be plotted.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
+  \end{itemize}
 \end{itemize}
 
 Each plot you make will be made up of these three elements. The \href{https://ggplot2.tidyverse.org/reference/}{full list of standard geoms} is listed in the \texttt{tidyverse} documentation.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{<}\NormalTok{DATA}\OperatorTok{>}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\ErrorTok{<}\NormalTok{GEOM_FUNCTION}\OperatorTok{>}\NormalTok{(}
-     \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\OperatorTok{<}\NormalTok{MAPPINGS}\OperatorTok{>}\NormalTok{),}
-     \DataTypeTok{stat =} \OperatorTok{<}\NormalTok{STAT}\OperatorTok{>}\NormalTok{, }
-     \DataTypeTok{position =} \OperatorTok{<}\NormalTok{POSITION}\OperatorTok{>}
-\StringTok{  }\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\ErrorTok{<}\NormalTok{COORDINATE_FUNCTION}\OperatorTok{>}\StringTok{ }\OperatorTok{+}
-\StringTok{  }\ErrorTok{<}\NormalTok{FACET_FUNCTION}\OperatorTok{>}
-\end{Highlighting}
-\end{Shaded}
+\texttt{ggplot} also has a `cheat sheet' that contains many of the often-used elements of a plot, which you can download \href{https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf}{here}.
 
-For example, you can plot a column chart by passing the \texttt{population\_table} dataset into \texttt{ggplot()} (``make a chart wth this data''). This produces an empty plot:
+\begin{center}\includegraphics[width=17.08in]{atlas/ggplot_cheat_sheet} \end{center}
+
+For example, you can plot a column chart by passing the \texttt{sa3\_income} dataset into \texttt{ggplot()} (``make a chart with this data''). This completes the first step -- data -- and produces an empty plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/empty plot-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/empty_plot-1.pdf}
 
-Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}:\texttt{\{r\ empty\ with\ aes\}\ population\_table\ \%\textgreater{}\%\ \ \ \ \ \ \ \ \ \ ggplot(aes(x\ =\ state,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ pop,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fill\ =\ year))}
+Next, set the \texttt{aes} (aesthetics) to \texttt{x\ =\ state} (``make the x-axis represent state''), \texttt{y\ =\ pop} (``the y-axis should represent population''), and \texttt{fill\ =\ year} (``the fill colour represents year''). Now \texttt{ggplot} knows where things should \emph{go}.
 
-Now that \texttt{ggplot} knows where things should go, it needs to \emph{how} to plot them. For this we use \texttt{geoms}. Tell it to plot a column chart by using \texttt{geom\_col}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_col}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Data_visualisation_files/figure-latex/complete plot-1.pdf}
-
-Great! Although stacking populations is a bit silly. You can adjust the way \texttt{geoms} work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using \texttt{position\ =\ "dodge"}:
+If we just plot that, you'll see that \texttt{ggplot} knows a little bit more about what we're trying to do. It has the states on the x-axis and range of populations on the y-axis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{colour =}\NormalTok{ gender))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/with dodge-1.pdf}
+\includegraphics{Data_visualisation_files/figure-latex/empty_aes-1.pdf}
 
-That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
+Now that \texttt{ggplot} knows where things should go, it needs to how to \emph{plot} them on the chart. For this we use \texttt{geoms}. Tell \texttt{ggplot} to take the things it knows and plot them as a column chart by using \texttt{geom\_col}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{professionals }\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/complete_plot-1.pdf}
+
+Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don't need. So filter the data before you pass it to \texttt{ggplot} to just include 2015: \texttt{filter(year\ ==\ 2015)}. There will still be lots of overlapping points, so set the opacity to below one with \texttt{alpha\ =\ 0.5}. The \texttt{workers} x-axis can be changed to a log scale with \texttt{scale\_x\_log10}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/with_changes-1.pdf}
+
+That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of \texttt{data}, \texttt{aes}, and \texttt{geom}.
+
+The rest of the chapter will explore:
 
 \begin{itemize}
 \tightlist
+\item
+  Exploratory data visualisation
 \item
   Grattanising your charts and choosing colours
 \item
@@ -938,16 +1034,21 @@ That's nicer. The following sections in this chapter will build on this chart. T
   Adding chart labels
 \end{itemize}
 
+\hypertarget{exploratory-data-visualisation}{%
+\section{Exploratory data visualisation}\label{exploratory-data-visualisation}}
+
+Plotting your data early in the analysis stage can help you quickly identify outliers, oddities, things that don't look quite right.
+
 \hypertarget{making-grattan-y-charts}{%
 \section{Making Grattan-y charts}\label{making-grattan-y-charts}}
 
 The \texttt{grattantheme} package contains functions that help \emph{Grattanise} your charts. It is hosted here: \url{https://github.com/mattcowgill/grattantheme}
 
-You can install it with \texttt{devtools::install\_github} from the package:
+You can install it with \texttt{remotes::install\_github} from the package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -961,9 +1062,9 @@ The key functions of \texttt{grattantheme} are:
 \item
   \texttt{grattan\_y\_continuous}: sets the right defaults for a continuous y-axis.
 \item
-  \texttt{grattan\_colour\_continuous}: pulls colours from the Grattan colour palete for \texttt{colour} aesthetics.
+  \texttt{grattan\_colour\_continuous}: pulls colours from the Grattan colour palette for \texttt{colour} aesthetics.
 \item
-  \texttt{grattan\_fill\_continuous}: pulls colours from the Grattan colour palete for \texttt{fill} aesthetics.
+  \texttt{grattan\_fill\_continuous}: pulls colours from the Grattan colour palette for \texttt{fill} aesthetics.
 \item
   \texttt{grattan\_save}: a save function that exports charts in correct report or presentation dimensions.
 \end{itemize}
@@ -973,19 +1074,20 @@ This section will run through some examples of \emph{Grattanising} charts. The \
 \hypertarget{making-grattan-charts}{%
 \subsection{Making Grattan charts}\label{making-grattan-charts}}
 
-Start with a column chart, similar to the one made above:
+Start with a scatterplot, similar to the one made above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart <-}\StringTok{ }\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
-             \DataTypeTok{title =} \StringTok{"NSW and Victoria are booming"}\NormalTok{,}
-             \DataTypeTok{subtitle =} \StringTok{"Population by state, 2013-2018"}\NormalTok{,}
-             \DataTypeTok{caption =} \StringTok{"Source: ABS Regional Dataset (2019)"}\NormalTok{)}
+\NormalTok{base_chart <-}\StringTok{ }\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"More professionals, the more they earn"}\NormalTok{,}
+             \DataTypeTok{subtitle =} \StringTok{"Median income of professional workers in SA3s"}\NormalTok{,}
+             \DataTypeTok{x =} \StringTok{"Number of professional workers"}\NormalTok{,}
+             \DataTypeTok{y =} \StringTok{"Median income"}\NormalTok{,}
+             \DataTypeTok{caption =} \StringTok{"Source: ABS Estimates of Personal Income for Small Areas, 2011-2016"}\NormalTok{)}
 
 \NormalTok{base_chart}
 \end{Highlighting}
@@ -998,34 +1100,37 @@ Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{()}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Data_visualisation_files/figure-latex/add_theme_grattan-1.pdf}
 
-Then \texttt{grattan\_y\_continuous} to align the x-axis with zero. This function takes the same arguments as \texttt{scale\_y\_continuous}, so you can add \texttt{labels\ =\ comma()} to reformat the y-axis labels:
+Then use \texttt{grattan\_y\_continuous} to adjust the y-axis. This takes the same arguments as the standard \texttt{scale\_y\_continuous} function, but has Grattan defaults built in. Use it to set the labels as dollars (with \texttt{scales::dollar()}) and to give the y-axis some breathing room (starting at \$50,000 rather than the minimum point).
+Also add \texttt{scale\_x\_log10} to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using \texttt{scales::comma()}).\footnote{The \texttt{dollar} and \texttt{comma} commands are functions, but can be used without \texttt{()}. Using \texttt{dollar()} or \texttt{comma()} works too, and you can provide arguments that adjust their output: eg \texttt{dollar(suffix\ =\ "million")}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Data_visualisation_files/figure-latex/add_grattan_y_continuous-1.pdf}
 
-To define \texttt{fill} colours, use \texttt{grattan\_fill\_manual} with the number of colours you need (six, in this case):
+To define \texttt{colour} colours, use \texttt{grattan\_colour\_manual} with the number of colours you need (two, in this case):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pop_chart <-}\StringTok{ }\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{)}
+\NormalTok{prof_chart <-}\StringTok{ }\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }
 
-\NormalTok{pop_chart}
+\NormalTok{prof_chart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1041,18 +1146,18 @@ The \texttt{grattan\_save} function saves your charts according to Grattan templ
 \begin{itemize}
 \tightlist
 \item
-  \texttt{filename}: the path, name and file-type of your saved chart. eg: \texttt{"atlas/population\_chart.pdf"}.
+  \texttt{filename}: the path, name and file-type of your saved chart. eg: \texttt{"atlas/professionals\_chart.pdf"}.
 \item
-  \texttt{object}: the R object that you want to save. eg: \texttt{pop\_chart}. If left blank, it grabs the last chart that was displayed.
+  \texttt{object}: the R object that you want to save. eg: \texttt{prof\_chart}. If left blank, it grabs the last chart that was displayed.
 \item
   \texttt{type}: the Grattan template to be used. This is one of:
 
   \begin{itemize}
   \tightlist
   \item
-    \texttt{"normal"} The default. Use for normal Grattan report charts, or to paste into a 4:3 Powerpoint slide. Width: 22.2cm, height: 14.5cm.
+    \texttt{"normal"} The default. Use for normal Grattan report charts, or to paste into a 4:3 PowerPoint slide. Width: 22.2cm, height: 14.5cm.
   \item
-    \texttt{"normal\_169"} Only useful for pasting into a 16:9 format Grattan Powerpoint slide. Width: 30cm, height: 14.5cm.
+    \texttt{"normal\_169"} Only useful for pasting into a 16:9 format Grattan PowerPoint slide. Width: 30cm, height: 14.5cm.
   \item
     \texttt{"tiny"} Fills the width of a column in a Grattan report, but is shorter than usual. Width: 22.2cm, height: 11.1cm.
   \item
@@ -1060,13 +1165,13 @@ The \texttt{grattan\_save} function saves your charts according to Grattan templ
   \item
     \texttt{"fullpage"} Fills a whole page of a Grattan report. Width: 44.3cm, height: 22.2cm.
   \item
-    \texttt{"fullslide"} Creates an image that looks like a 4:3 Grattan Powerpoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
+    \texttt{"fullslide"} Creates an image that looks like a 4:3 Grattan PowerPoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
   \item
-    \texttt{"fullslide\_169"} Creates` an image that looks like a 16:9 Grattan Powerpoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
+    \texttt{"fullslide\_169"} Creates` an image that looks like a 16:9 Grattan PowerPoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
   \item
-    \texttt{"blog"} Creates a 4:3 image that looks like a Grattan Powerpoint slide, but with less border whitespace than `fullslide'."
+    \texttt{"blog"} Creates a 4:3 image that looks like a Grattan PowerPoint slide, but with less border whitespace than `fullslide'."
   \item
-    \texttt{"fullslide\_44"\ Creates} an image that looks like a 4:4 Grattan Powerpoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
+    \texttt{"fullslide\_44"\ Creates} an image that looks like a 4:4 Grattan PowerPoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
   \item
     Set \texttt{type\ =\ "all"} to save your chart in all available sizes.
   \end{itemize}
@@ -1078,46 +1183,272 @@ The \texttt{grattan\_save} function saves your charts according to Grattan templ
   \texttt{force\_labs}: override the removal of labels for a particular \texttt{type}. eg \texttt{force\_labs\ =\ TRUE} will keep the y-axis label.
 \end{itemize}
 
-To save the \texttt{pop\_chart} plot created above as a whole-column chart for a \textbf{report}:
+To save the \texttt{prof\_chart} plot created above as a whole-column chart for a \textbf{report}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_report.pdf"}\NormalTok{, pop_chart, }\DataTypeTok{type =} \StringTok{"wholecolumn"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_report.pdf"}\NormalTok{, prof_chart, }\DataTypeTok{type =} \StringTok{"wholecolumn"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=38.76in]{atlas/population_chart_report}
+\includegraphics[width=38.76in]{atlas/professionals_chart_report}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_presentation.pdf"}\NormalTok{, pop_chart, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_presentation.pdf"}\NormalTok{, prof_chart, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/population_chart_presentation}
+\includegraphics[width=44.44in]{atlas/professionals_chart_presentation}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/population_chart_blog.png"}\NormalTok{, pop_chart, }
-             \DataTypeTok{type =} \StringTok{"blog"}\NormalTok{, }\DataTypeTok{height =} \DecValTok{50}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_blog.png"}\NormalTok{, prof_chart, }
+             \DataTypeTok{type =} \StringTok{"blog"}\NormalTok{, }\DataTypeTok{height =} \DecValTok{30}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/population_chart_blog}
+\includegraphics[width=44.44in]{atlas/professionals_chart_blog}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
+\hypertarget{adding-labels}{%
+\section{Adding labels}\label{adding-labels}}
+
+Labels can be a bit finicky -- especially compared to labelling charts visually in PowerPoint. \ldots{}
+
+Labels can be done in two broad ways:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Labelling every single data point on your chart. Grattan charts rarely do this.
+\item
+  Labelling some of the data points on your chart. This is how you label Grattan charts: label on item in a group and let the reader join the dots.
+\end{enumerate}
+
+We'll look at the first approach so you can get a feel for how the labelling geoms -- \texttt{geom\_label} and \texttt{geom\_text} (and some useful extensions) -- work. It won't be pretty.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prof_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/add_annotate-1.pdf}
+
+Great! That looks \emph{terrible}. \texttt{geom\_text} is labelling each individual point because it has been told to do so. Just like \texttt{geom\_point}, it takes the \texttt{x} and \texttt{y} aesthetics of each observation, then plots the \texttt{label} at that location. But we just want to label one of the points for \texttt{female} and one for \texttt{male}.
+
+To do this, we can create a new dataset that just contains one observation each. Here, you're filtering the dataset to include \emph{only} the female/male observations that have the most people:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_data <-}\StringTok{ }\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(workers }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(workers)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\NormalTok{label_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 14
+##     sa3 sa3_name sa3_sqkm sa3_income_perc~ state occupation occ_short prof 
+##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
+## 1 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
+## 2 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
+## # ... with 6 more variables: gender <chr>, year <dbl>,
+## #   median_income <dbl>, average_income <dbl>, total_income <dbl>,
+## #   workers <dbl>
+\end{verbatim}
+
+And then tell \texttt{geom\_text} to look at \emph{that} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prof_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the \texttt{label\_data}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_data_short <-}\StringTok{ }\NormalTok{label_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{gender_label =} \KeywordTok{if_else}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Females"}\NormalTok{, }
+                             \StringTok{"Women"}\NormalTok{, }
+                             \StringTok{"Men"}\NormalTok{))}
+
+\NormalTok{prof_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data_short,}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender_label))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\emph{Or} you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prof_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+To have more freedom over \emph{where} your labels are placed, you can create a dataset yourself. Add the \texttt{x} and \texttt{y} values for your labels, and the label names.\footnote{We are using the \texttt{tribble} function here to make it a little bit clearer what values apply to which gender. The `normal' way to create a tibble is with the \texttt{tibble} function: \texttt{tibble(x\ =\ c(10,\ 100),\ y\ =\ c(100,\ 10))}, etc.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{self_label <-}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
+  \OperatorTok{~}\NormalTok{gender, }\OperatorTok{~}\NormalTok{workers,   }\OperatorTok{~}\NormalTok{median_income,}
+  \StringTok{"Women"}\NormalTok{,    }\DecValTok{23000}\NormalTok{,            }\DecValTok{55000}\NormalTok{,}
+  \StringTok{"Men"}\NormalTok{,      }\DecValTok{23000}\NormalTok{,           }\DecValTok{110000}\NormalTok{)}
+
+
+\NormalTok{self_label}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   gender workers median_income
+##   <chr>    <dbl>         <dbl>
+## 1 Women    23000         55000
+## 2 Men      23000        110000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prof_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ self_label,}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender), }
+            \DataTypeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Data_visualisation_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+{[}cover \texttt{annotate}{]}
+
 \hypertarget{chart-cookbook}{%
-\section{Chart cookbook}\label{chart-cookbook}}
+\chapter{Chart cookbook}\label{chart-cookbook}}
 
 This section takes you through a few often-used chart types.
 
+\hypertarget{set-up}{%
+\section{Set up}\label{set-up}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(grattantheme)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
+\KeywordTok{library}\NormalTok{(absmapsdata)}
+\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(scales)}
+\CommentTok{# this might be hairy; should get `grattools` happening:}
+\KeywordTok{library}\NormalTok{(grattan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# note: to be added to grattantheme; remove this when done}
+\NormalTok{grattan_label_repel <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
+
+\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
+  
+  \KeywordTok{geom_label_repel}\NormalTok{(..., }
+                   \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
+                   \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
+                   \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
+                   \DataTypeTok{size =}\NormalTok{ .size)}
+\NormalTok{\}}
+
+
+\NormalTok{grattan_label <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
+
+\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
+  
+  \KeywordTok{geom_label}\NormalTok{(..., }
+                   \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
+                   \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
+                   \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
+                   \DataTypeTok{size =}\NormalTok{ .size)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{sa3\_income} dataset will be used for all key examples in this chapter.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and sex, 2010-11 to 2016-16}} It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median_income),}
+         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(average_income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(sa3_income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 16
+##     sa3 sa3_name sa3_sqkm sa3_income_perc~ sa4_name gcc_name state
+##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr>
+## 1 10102 Queanbe~    6511.               80 Capital~ Rest of~ NSW  
+## 2 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW  
+## 3 10102 Queanbe~    6511.               78 Capital~ Rest of~ NSW  
+## 4 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW  
+## 5 10102 Queanbe~    6511.               74 Capital~ Rest of~ NSW  
+## 6 10102 Queanbe~    6511.               79 Capital~ Rest of~ NSW  
+## # ... with 9 more variables: occupation <chr>, occ_short <chr>,
+## #   prof <chr>, gender <chr>, year <dbl>, median_income <dbl>,
+## #   average_income <dbl>, total_income <dbl>, workers <dbl>
+\end{verbatim}
+
 \hypertarget{bar-charts}{%
-\subsection{Bar charts}\label{bar-charts}}
+\section{Bar charts}\label{bar-charts}}
 
 Bar charts are made with \texttt{geom\_bar} or \texttt{geom\_col}. Creating a bar chart will look something like this:
 
@@ -1138,14 +1469,14 @@ First, \texttt{stat} defines what kind of \emph{operation} the function will do 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{"count"}, the default: count the number of observations in a particular group, and plot that number. This is useful when you're using microdata. When this is the case, there is no need for a \texttt{y} aesthetic.
+  \texttt{"count"}, the \textbf{default}: count the number of observations in a particular group, and plot that number. This is useful when you're using microdata. When this is the case, there is no need for a \texttt{y} aesthetic.
 \item
   \texttt{"sum"}: sum the values of the \texttt{y} aesthetic.
 \item
-  \texttt{"identity"}: directly report the values of the \texttt{y} aesthetic. This is how Powerpoint and Excel charts work.
+  \texttt{"identity"}: directly report the values of the \texttt{y} aesthetic. This is how PowerPoint and Excel charts work.
 \end{itemize}
 
-You can use \texttt{geom\_col} instead, as a shortcut for \texttt{geom\_bar(stat\ =\ "identity)}.
+You can use \textbf{\texttt{geom\_col}} instead, as a shortcut for \texttt{geom\_bar(stat\ =\ "identity)}.
 
 Second, \texttt{position}, dictates how multiple bars occupying the same x-axis position will positioned. The options are:
 
@@ -1159,282 +1490,1163 @@ Second, \texttt{position}, dictates how multiple bars occupying the same x-axis 
   \texttt{"fill"}: bars in the same group are stacked and all fill to 100 per cent.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{simple-bar-plot}{%
+\subsection{Simple bar plot}\label{simple-bar-plot}}
 
-\includegraphics{Data_visualisation_files/figure-latex/bar2-1.pdf}
+This section will create the following vertical bar plot showing number of workers by state in 2016:
 
-You can also \textbf{order} the groups in your chart by a variable. If you want to order states by population, use \texttt{reorder} inside \texttt{aes}:
+\includegraphics[width=44.44in]{atlas/simple_bar}
+
+First, create the data you want to plot.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }\CommentTok{# reorder state by negative population}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
+
+\NormalTok{data}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/bar3-1.pdf}
+\begin{verbatim}
+## # A tibble: 8 x 2
+##   state workers
+##   <chr>   <dbl>
+## 1 ACT    386989
+## 2 NSW   6527661
+## 3 NT     206061
+## 4 Qld   4104503
+## 5 SA    1382446
+## 6 Tas    420767
+## 7 Vic   5190976
+## 8 WA    2297081
+\end{verbatim}
 
-To flip the chart -- a useful move when you have long labels -- add \texttt{coord\_flipped} (ie `flip coordinates') and tell \texttt{theme\_grattan} that the plot is flipped using \texttt{flipped\ =\ TRUE}.
+Looks splendid: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+
+Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, }\OperatorTok{-}\NormalTok{pop), }
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{fill =}\NormalTok{ year)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{  }\CommentTok{# flip the coordinates}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# tell theme_grattan}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+             \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/bar4-1.pdf}
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_base-1.pdf}
+
+Make it Grattany by adjusting general theme defaults with \texttt{theme\_grattan}, and use \texttt{grattan\_y\_continuous} to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding \texttt{labels\ =\ comma}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+             \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_grattan-1.pdf}
+
+To order the states by number of workers, you can tell the \texttt{x} aesthetic that you want to \texttt{reorder} the \texttt{state} variable by \texttt{workers}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, workers), }\CommentTok{# reorder states by workers}
+             \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_reorder-1.pdf}
+
+You can probably drop the x-axis label -- people will understand that they're states without you explicitly saying it -- and add a title and subtitle with \texttt{labs}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simple_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, workers),}
+             \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Most workers are on the east coast"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Number people in employment, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+
+\NormalTok{simple_bar}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
+
+Looks magic! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/simple_bar.pdf"}\NormalTok{, simple_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/simple_bar}
+
+\hypertarget{bar-multi}{%
+\subsection{Bar plot with multiple series}\label{bar-multi}}
+
+This section will create a horizontal bar plot showing average income by state and gender in 2016:
+
+First create the dataset you want to plot, getting the average income by state and gender in the year 2016:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{   }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, gender) }\OperatorTok{%>%}\StringTok{   }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 3
+## # Groups:   state [8]
+##    state gender average_income
+##    <chr> <chr>           <dbl>
+##  1 ACT   Men            78141.
+##  2 ACT   Women          65548.
+##  3 NSW   Men            69750.
+##  4 NSW   Women          53191.
+##  5 NT    Men            75246.
+##  6 NT    Women          58527.
+##  7 Qld   Men            65108.
+##  8 Qld   Women          48458.
+##  9 SA    Men            60244.
+## 10 SA    Women          47533.
+## 11 Tas   Men            56345.
+## 12 Tas   Women          45158.
+## 13 Vic   Men            64908.
+## 14 Vic   Women          49264.
+## 15 WA    Men            76677.
+## 16 WA    Women          51578.
+\end{verbatim}
+
+Looks champion: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+
+Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_base-1.pdf}
+
+The two series -- women and men -- created by \texttt{fill} are stacked on-top of each other by \texttt{geom\_col}. You can tell it to plot them next to each other -- to `dodge' -- instead with the \texttt{position} argument \emph{within} \texttt{geom\_col}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\CommentTok{# 'dodge' the series}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_dodge-1.pdf}
+
+To flip the chart -- a useful move when you have long labels -- add \texttt{coord\_flip} (ie `flip the x and y coordinates of the chart').
+
+However, while the \emph{coordinates} have been flipped, the underlying data hasn't. If you want to refer to the \texttt{average\_income} axis, which now lies horizontally, you would still refer to the \texttt{y} axis (eg \texttt{grattan\_y\_continuous} still refers to your \texttt{y} aesthetic, \texttt{average\_income}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\CommentTok{# rotate the chart}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_flip-1.pdf}
+
+And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the \texttt{reorder(var\_to\_reorder,\ var\_to\_reorder\_by)} function when you define the \texttt{state} aesthetic:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }\CommentTok{# reorder}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_reorder-1.pdf}
+
+Wonderful -- that's how you want our \emph{data} to look. Now you can Grattanise it. Note that \texttt{theme\_grattan} needs to know that the coordinates were flipped so it can apply the right settings. Also tell \texttt{grattan\_fill\_manual} that there are two fill series.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# grattan theme}
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }\CommentTok{# y axis}
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\CommentTok{# grattan fill colours}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_grattan-1.pdf}
+
+You can use \texttt{grattan\_label} to \textbf{label your charts} in the Grattan style. This function is a `wrapper' around \texttt{geom\_label} that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the \href{https://ggplot2.tidyverse.org/reference/geom_text.html}{standard arguments of \texttt{geom\_label}}.
+
+Section \ref{adding-labels} shows how labels are treated like data points: they need to know where to go (\texttt{x} and \texttt{y}) and what to show (\texttt{label}). But if you provide \emph{every point} to your labelling \texttt{geom}, it will plot every label:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,  }\CommentTok{# colour the text according to gender}
+                    \DataTypeTok{label =}\NormalTok{ gender),  }\CommentTok{# label the text according to gender}
+            \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{),  }\CommentTok{# position dodge with width 1}
+            \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# horizontally align the label so its outside the bar}
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)   }\CommentTok{# define colour as two grattan colours}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_label_all-1.pdf}
+
+To just label \emph{one} of the plots -- ie the first one, ACT in this case -- we need to tell \texttt{grattan\_label}. The easiest way to do this is by \textbf{creating a label dataset beforehand}, like \texttt{label\_gender} below. This just includes the observations you want to label:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_gender <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{)  }\CommentTok{# just want Tasmania observations}
+
+\NormalTok{label_gender}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+## # Groups:   state [1]
+##   state gender average_income
+##   <chr> <chr>           <dbl>
+## 1 ACT   Men            78141.
+## 2 ACT   Women          65548.
+\end{verbatim}
+
+So you can pass that \texttt{label\_gender} dataset to \texttt{grattan\_label}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender,  }\CommentTok{# supply the new dataset}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
+                    \DataTypeTok{label =}\NormalTok{ gender), }
+                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_label-1.pdf}
+
+Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# expand the plot}
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
+                    \DataTypeTok{label =}\NormalTok{ gender), }
+                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
+
+Looks smashing! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{multiple_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender, }
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
+                    \DataTypeTok{label =}\NormalTok{ gender), }
+                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Women earn less than men in every state"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/multiple_bar.pdf"}\NormalTok{, multiple_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/multiple_bar}
+
+\hypertarget{facet-bar}{%
+\subsection{Facetted bar charts}\label{facet-bar}}
+
+`Facetting' a chart means you create a separate plot for each group. It's particularly useful in showing differences between more than one group. The chart you'll make in this section will show annual income by gender and state, \emph{and} by professional and non-professional workers:
+
+Start by creating the dataset you want to plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, gender, prof) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 32 x 4
+## # Groups:   state, gender [16]
+##    state gender prof             average_income
+##    <chr> <chr>  <chr>                     <dbl>
+##  1 ACT   Men    Non-professional         52545.
+##  2 ACT   Men    Professional             96488.
+##  3 ACT   Women  Non-professional         46151.
+##  4 ACT   Women  Professional             79828.
+##  5 NSW   Men    Non-professional         49182.
+##  6 NSW   Men    Professional             91624.
+##  7 NSW   Women  Non-professional         36772.
+##  8 NSW   Women  Professional             68445.
+##  9 NT    Men    Non-professional         58844.
+## 10 NT    Men    Professional             87666.
+## # ... with 22 more rows
+\end{verbatim}
+
+Then plot a bar chart with \texttt{geom\_col} and \texttt{theme\_grattan} elements, using a similar chain to the final plot of \ref{bar-multi} (without the labelling). We'll build on this chart:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{facet_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Professional workers earn more in every state"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You can `facet' bar charts -- and any other chart type -- with the \texttt{facet\_grid} or \texttt{facet\_wrap} commands. The latter tends to give you more control over label placement, so let's start with that. \texttt{fadcet\_wrap} asks the questions: ``what variables should I create separete charts for'', and ``how should I place them on the page''? Tell it to use the \texttt{prof} variable with the \texttt{vars()} function.\footnote{The \texttt{vars()} function is sometimes used in the \texttt{tidyverse} to specifically say ``I am using a variable name here''. You can't use variable names directly because of legacy issues. You can learn more about it in the \href{https://ggplot2.tidyverse.org/reference/facet_wrap.html}{official documentation}.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{facet_bar }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_wrap-1.pdf}
+
+That's good! It does what it should. Now you just need to tidy it up a little bit by adding labels and avoiding clashes along the bottom axis.
+
+Create labels in the same way you have done before: you only want to label one `women' and `men' series, so create a dataset that contains only that information:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{,}
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non-professional"}\NormalTok{)}
+
+\NormalTok{label_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 4
+## # Groups:   state, gender [2]
+##   state gender prof             average_income
+##   <chr> <chr>  <chr>                     <dbl>
+## 1 ACT   Men    Non-professional         52545.
+## 2 ACT   Women  Non-professional         46151.
+\end{verbatim}
+
+Good -- now add that to the plot with \texttt{grattan\_label}, supplying the required aesthetics and position. And use \texttt{hjust\ =\ 0} to tell the labels to be left-aligned.
+
+To give each plot a black base axis, you can add \texttt{geom\_hline()} with \texttt{yintercept\ =\ 0}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{facet_bar }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# add black line}
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data, }\CommentTok{# supply label data}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender,}
+                    \DataTypeTok{colour =}\NormalTok{ gender),}
+                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
+
+Beaut! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create label data}
+\NormalTok{label_data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{,}
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non-professional"}\NormalTok{)}
+
+\CommentTok{# Create plot}
+\NormalTok{facet_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar,}
+                       \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{25e3}\NormalTok{, }\FloatTok{50e3}\NormalTok{, }\FloatTok{75e3}\NormalTok{)) }\OperatorTok{+}\StringTok{  }\CommentTok{# change breaks}
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Professional workers earn more in every state"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender,}
+                    \DataTypeTok{colour =}\NormalTok{ gender),}
+                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/facet_bar.pdf"}\NormalTok{, facet_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/facet_bar}
 
 \hypertarget{line-charts}{%
-\subsection{Line charts}\label{line-charts}}
+\section{Line charts}\label{line-charts}}
 
 A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} how to connect individual lines.
 
+\hypertarget{simple-line-chart}{%
+\subsection{Simple line chart}\label{simple-line-chart}}
+
+The first line chart shows the number of workers in Australia between 2011 and 2016:
+
+\hypertarget{line-chart-with-multiple-series}{%
+\subsection{Line chart with multiple series}\label{line-chart-with-multiple-series}}
+
+This line chart will show how \textbf{real} average income has changed for each state over the past five years:
+
+First, take the \texttt{sa3\_income} dataset and create a summary table average income by year and state. Ignore the territories for this chart.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{colour =}\NormalTok{ state,}
-                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\NormalTok{state }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"ACT"}\NormalTok{, }\StringTok{"NT"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
-## faded): Using more than six colours is not recommended.
+## # A tibble: 6 x 3
+## # Groups:   year [1]
+##    year state average_income
+##   <dbl> <chr>          <dbl>
+## 1  2011 NSW           55483.
+## 2  2011 Qld           51408.
+## 3  2011 SA            48443.
+## 4  2011 Tas           45439.
+## 5  2011 Vic           52053.
+## 6  2011 WA            58795.
 \end{verbatim}
 
-\includegraphics{Data_visualisation_files/figure-latex/line1-1.pdf}
+The income data presented is nominal, so you'll need to inflate to `real' dollars using the `cpi\_inflate
 
-You can also add dots for each year by layering \texttt{geom\_point} on top of \texttt{geom\_line}:
+Plot a line chart by taking the \texttt{data}, passing it to \texttt{ggplot} with \emph{aes}thetics, then using \texttt{geom\_line}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{colour =}\NormalTok{ state,}
-                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/line1_nocol-1.pdf}
+
+Now you can represent each \texttt{state} by colour:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{group =}\NormalTok{ state,}
+             \DataTypeTok{colour =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/line1_wcol-1.pdf}
+
+Cooler! Adding some Grattan formatting to it and define it as our `base chart':
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart <-data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{group =}\NormalTok{ state,}
+             \DataTypeTok{colour =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+
+\NormalTok{base_chart}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+You can add `dots' for each year by layering \texttt{geom\_point} on top of \texttt{geom\_line}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/line2-1.pdf}
+
+To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_right =} \FloatTok{.3}\NormalTok{,}
+                       \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                       \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/line_expand-1.pdf}
+
+Then add labels, using
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_line <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2010}\NormalTok{)}
+
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_left =} \FloatTok{.1}\NormalTok{,}
+                       \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                       \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_line,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ state),}
+                \DataTypeTok{nudge_x =} \OperatorTok{-}\OtherTok{Inf}\NormalTok{,}
+                \DataTypeTok{segment.colour =} \OtherTok{NA}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
-## faded): Using more than six colours is not recommended.
+## Warning: Ignoring unknown parameters: segment.colour
 \end{verbatim}
 
-\includegraphics{Data_visualisation_files/figure-latex/line2-1.pdf}
-
+\includegraphics{Visualisation_cookbook_files/figure-latex/line_label-1.pdf}
 If you wanted to show each state individually, you could \textbf{facet} your chart so that a separate plot was produced for each state:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
-\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-                   \DataTypeTok{y =}\NormalTok{ pop,}
-                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_left =} \FloatTok{.1}\NormalTok{, }
+                         \DataTypeTok{expand_right =} \FloatTok{.1}\NormalTok{,}
+                         \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                         \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.spacing.x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{10}\NormalTok{, }\StringTok{"mm"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/line3-1.pdf}
-
-To tidy this up, we can:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  shorten the years to be ``13'', ``14'', etc instead of ``2013'', ``2014'', etc (via the \texttt{x} aesthetic)
-\item
-  shorten the y-axis labels to ``millions'' (via the \texttt{y} aesthetic)
-\item
-  add a black horizontal line at the bottom of each facet
-\item
-  give the facets a bit of room by adjusting \texttt{panel.spacing}
-\item
-  define our own x-axis label breaks to just show \texttt{13}, \texttt{15} and \texttt{17}
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{population_table }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
-\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{substr}\NormalTok{(year, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\CommentTok{# 1: just take the last two characters}
-                   \DataTypeTok{y =}\NormalTok{ pop }\OperatorTok{/}\StringTok{ }\FloatTok{1e6}\NormalTok{, }\CommentTok{# 2: divide population by one million}
-                   \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# 3: add horizontal line at the bottom}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.spacing =} \KeywordTok{unit}\NormalTok{(}\DecValTok{10}\NormalTok{, }\StringTok{"mm"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\CommentTok{# 4: add panel spacing}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\StringTok{"13"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"17"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\CommentTok{# 5: define our own label breaks}
-\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Data_visualisation_files/figure-latex/line4-1.pdf}
+\includegraphics{Visualisation_cookbook_files/figure-latex/line3-1.pdf}
 
 \hypertarget{scatter-plots}{%
-\subsection{Scatter plots}\label{scatter-plots}}
+\section{Scatter plots}\label{scatter-plots}}
 
-Scatter plots require \texttt{x} and \texttt{y} aesthetics. These can then be coloured and facetted.
+Scatter plots require \texttt{x} and \texttt{y} aesthetics. These can then be coloured and faceted.
 
-First, create a dataset that we'll use for scatter plots. Take the \texttt{population\_table} dataset and transform it to have one variable for population in 2013, and another for population in 2018:
+\hypertarget{simple-scatter-plot}{%
+\subsection{Simple scatter plot}\label{simple-scatter-plot}}
+
+The first simple scatter plot will show the relationship between average incomes of professionals and the number of professional workers by area in 2016:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_diff <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/population_sa4.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
-               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long),}
-               \DataTypeTok{pop =} \KeywordTok{as.numeric}\NormalTok{(value),}
-               \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(glue}\OperatorTok{::}\KeywordTok{glue}\NormalTok{(}\StringTok{"y\{year\}"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"y2013"}\NormalTok{, }\StringTok{"y2018"}\NormalTok{),}
-\NormalTok{               data_item }\OperatorTok{==}\StringTok{ "Persons - Total (no.)"}\NormalTok{,}
-\NormalTok{               sa4_name }\OperatorTok{!=}\StringTok{ "Other Territories"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{group_by}\NormalTok{(year, state, sa4_name) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{pop =} \KeywordTok{sum}\NormalTok{(pop)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{spread}\NormalTok{(year, pop) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pop_change =} \DecValTok{100} \OperatorTok{*}\StringTok{ }\NormalTok{(y2018 }\OperatorTok{/}\StringTok{ }\NormalTok{y2013 }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{))}
+\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/simple_scatter.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/simple_scatter}
+
+Create the dataset you want to plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{,}
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Professional"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers),}
+            \DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
+
+\KeywordTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   sa3_name       workers average_income
+##   <chr>            <dbl>          <dbl>
+## 1 Adelaide City    10005         90115.
+## 2 Adelaide Hills   24715         84921.
+## 3 Albany           12390         70581.
+## 4 Albury           16465         72305.
+## 5 Alice Springs     9640         84340.
+## 6 Armadale         19771         85407.
+\end{verbatim}
+
+The dataset has one observation per SA3, and the two variables you want to plot: workers and average income. Pass the data to \texttt{ggplot}, set the aesthetics and plot with \texttt{geom\_point}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_base-1.pdf}
+
+Then add Grattan theme elements:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{theme\_grattan()}, telling it that the \texttt{chart\_type} is a scatter plot.
+\item
+  \texttt{grattan\_y\_continuous()}, setting the label style to \texttt{dollar}.
+\item
+  \texttt{grattan\_x\_continuous()}, setting the label style to \texttt{comma}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
+
+Looks brill. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
+                       \DataTypeTok{expand_right =} \FloatTok{.05}\NormalTok{) }\CommentTok{# expand the right by 5%}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_expand-1.pdf}
+
+Finally, add titles and save the plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simple_scatter <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
+             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
+                       \DataTypeTok{expand_right =} \FloatTok{.05}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"More workers, more income"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income and number of workers by SA3, 2016"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Workers"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,}
-                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
-             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/simple_scatter.pdf"}\NormalTok{, simple_scatter, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter1-1.pdf}
+\includegraphics[width=44.44in]{atlas/simple_scatter}
 
-It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with \texttt{geom\_smooth}:
+\hypertarget{scatter-plot-with-reshaped-data}{%
+\subsection{Scatter plot with reshaped data}\label{scatter-plot-with-reshaped-data}}
+
+The next scatter plot involves the same basic plotting principles of the chart above, but requires a bit more data manipulation before plotting.
+
+The chart will show the wages of professional workers and non-professional workers in 2016:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
-                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
-             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/scatter_reshape.png"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter2-1.pdf}
+\includegraphics[width=44.44in]{atlas/scatter_reshape}
 
-You could colour-code positive and negative changes from within the \texttt{geom\_point} aesthetic. Making a change there won't pass through to the \texttt{geom\_smooth} aesthetic, so your line-of-best-fit will apply to all data points.
+First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
-                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ pop_change }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{),}
-                   \DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
-             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{)}
+\NormalTok{data_prep <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, prof) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\KeywordTok{head}\NormalTok{(data_prep)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter3-1.pdf}
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   sa3_name [3]
+##   sa3_name       prof             average_income
+##   <chr>          <chr>                     <dbl>
+## 1 Adelaide City  Non-professional         40843.
+## 2 Adelaide City  Professional             90115.
+## 3 Adelaide Hills Non-professional         47208.
+## 4 Adelaide Hills Professional             84921.
+## 5 Albany         Non-professional         46609.
+## 6 Albany         Professional             70581.
+\end{verbatim}
 
-Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
+That's good -- you have the numbers you need. But think about how you're going to \emph{plot} them using \texttt{x} and \texttt{y} aesthetics. You'll need one variable for \texttt{x\ =\ professional\_income} and one variable for \texttt{y\ =\ non\_professional\_income}. At the moment, these are represented by different \emph{rows}.
+
+You can fix this by reshaping the data with the \texttt{pivot\_wider} function. The three arguments you provide here are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{id\_cols\ =\ sa3\_name}: the variable \texttt{sa3\_name} uniquely identifies each row in your data.
+\item
+  \texttt{names\_from\ =\ prof}: the variable \texttt{prof} contains the variables names for the \emph{new} variables you are creating.
+\item
+  \texttt{values\_from\ =\ average\_income}: the variable \texttt{average\_income} contains the \emph{values} that will fill the new variables.
+\end{itemize}
+
+After the \texttt{pivot\_wider} step is complete, use \texttt{janitor::clean\_names()} to convert the new \texttt{Professional} and \texttt{Non-Professional} names to \texttt{snake\_case} to make them easier to use down the track:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{!=}\StringTok{ "ACT"}\NormalTok{,}
-\NormalTok{               state }\OperatorTok{!=}\StringTok{ "NT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ y2013}\OperatorTok{/}\DecValTok{1000}\NormalTok{,  }\CommentTok{# display the x-axis as thousands}
-                   \DataTypeTok{y =}\NormalTok{ pop_change)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ pop_change }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{),}
-                   \DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_smooth}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Population increase to 2018, per cent"}\NormalTok{,}
-             \DataTypeTok{x =} \StringTok{"Population in 2013, thousands"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data_prep }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{id_cols =}\NormalTok{ sa3_name,  }\CommentTok{# variables that will stay the same}
+              \DataTypeTok{names_from =}\NormalTok{ prof,   }\CommentTok{# variables that will dictate the new names}
+              \DataTypeTok{values_from =}\NormalTok{ average_income) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# these will be the values}
+\StringTok{  }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{() }\CommentTok{# tidy up the new variable names}
+
+\KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/scatter4-1.pdf}
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   sa3_name [6]
+##   sa3_name       non_professional professional
+##   <chr>                     <dbl>        <dbl>
+## 1 Adelaide City            40843.       90115.
+## 2 Adelaide Hills           47208.       84921.
+## 3 Albany                   46609.       70581.
+## 4 Albury                   44718.       72305.
+## 5 Alice Springs            54647.       84340.
+## 6 Armadale                 57599.       85407.
+\end{verbatim}
+
+Getting the data in the right format for your plot -- rather than `hacking' your plot to fit your data -- will save you time and effort down the line.
+
+Now you have a dataset in the format you want to plot, you can pass it to \texttt{ggplot} and add aesthetics like you normally would.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non_professional,}
+             \DataTypeTok{y =}\NormalTok{ professional)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\CommentTok{# make the points a little transparent}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/scatter_reshape_base-1.pdf}
+
+Then, like you've done before, add Grattan theme elements and titles, and save with \texttt{grattan\_save}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scatter_reshape <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non_professional,}
+             \DataTypeTok{y =}\NormalTok{ professional)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professionals tend to earn more when professionals do"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income for workers by SA3, 2016"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Professional incomes"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Non-professional incomes"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/scatter_reshape.pdf"}\NormalTok{, scatter_reshape, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/scatter_reshape}
+
+\hypertarget{layered-scatter-plot}{%
+\subsection{Layered scatter plot}\label{layered-scatter-plot}}
+
+For the third plot, look at the incomes of non-professional workers by their area's total income percentile:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/scatter_layer.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/scatter_layer}
+
+Get the data you want to plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total_income =}\NormalTok{ average_income }\OperatorTok{*}\StringTok{ }\NormalTok{workers) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, sa3_income_percentile, prof, occ_short) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{income =} \KeywordTok{sum}\NormalTok{(total_income),}
+            \DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers),}
+            \DataTypeTok{average_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
+
+\KeywordTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 7
+## # Groups:   sa3_name, sa3_income_percentile, prof [1]
+##   sa3_name  sa3_income_perce~ prof  occ_short income workers average_income
+##   <chr>                 <dbl> <chr> <chr>      <dbl>   <dbl>          <dbl>
+## 1 Adelaide~                66 Non-~ Admin     1.44e8    2674         53979.
+## 2 Adelaide~                66 Non-~ Driver    1.85e7     396         46762.
+## 3 Adelaide~                66 Non-~ Labourer  3.92e7    1516         25868.
+## 4 Adelaide~                66 Non-~ Sales     5.05e7    1546         32680.
+## 5 Adelaide~                66 Non-~ Service   7.75e7    2346         33034.
+## 6 Adelaide~                66 Non-~ Trades    7.85e7    1525         51448.
+\end{verbatim}
+
+To make a scatter plot with \texttt{average\_income} against \texttt{sa3\_income\_percentile}, pass the \texttt{income} dataset to \texttt{ggplot}, add \texttt{x\ =\ sa3\_income\_percentile}, \texttt{y\ =\ average\_income} and \texttt{colour\ =\ gender} aesthetics, then plot it with \texttt{geom\_point}. Tell \texttt{geom\_point} to reduce the opacity with \texttt{alpha\ =\ 0.2}, as these individual points are more of the `background' to the plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_prep-1.pdf}
+
+Now add your Grattan theme elements:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{theme\_grattan()}, telling it that the \texttt{chart\_type} is a scatter plot.
+\item
+  \texttt{grattan\_colour\_manual()} with \texttt{2} colours.
+\item
+  \texttt{grattan\_y\_continuous()}, setting the label style to \texttt{dollar}. Also tell the plot to start at zero by setting \texttt{limits\ =\ c(0,\ NA)} (lower, upper limits, with \texttt{NA} representing `choose automatically'). Note that starting at zero isn't a requirement for scatter plots, but here it will give you some breathing space for your labels.
+\item
+  \texttt{grattan\_x\_continuous()}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{()}
+
+\NormalTok{base_chart}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
+
+Looks first-rate! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{perc_average <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(prof, sa3_income_percentile) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\KeywordTok{head}\NormalTok{(perc_average)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   prof [1]
+##   prof             sa3_income_percentile average_income
+##   <chr>                            <dbl>          <dbl>
+## 1 Non-professional                     1         40515.
+## 2 Non-professional                     2         42689.
+## 3 Non-professional                     3         42280.
+## 4 Non-professional                     4         42600.
+## 5 Non-professional                     5         43868.
+## 6 Non-professional                     6         42615.
+\end{verbatim}
+
+Then layer this on your plot by adding another \texttt{geom\_point} and providing the \texttt{perc\_average} data. Add a \texttt{fill} aesthetic and change the shape to \texttt{21}: a circle with a border (controlled by \texttt{colour}) and fill colour (controlled by \texttt{fill}).\footnote{See the full list of shapes \href{https://ggplot2.tidyverse.org/reference/scale_shape.html}{here}.}
+Make the outline of the circle black with \texttt{colour} and make the \texttt{size} a little bigger:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
+             \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
+             \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
+             \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_add_perc-1.pdf}
+
+To add labels, first decide where they should go. Try positioning the ``Professional'' above its averages, and ``Non-professional'' at the bottom.
+
+Like labelling before, you should create a new dataset with your label information, and pass that label dataset to the \texttt{grattan\_label} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{label_data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{sa3_income_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
+  \DataTypeTok{average_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
+  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non-professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Finally, add the labels to the plot and give some titles:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
+             \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
+             \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
+             \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professional workers earn about the same, regardless of area income"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income of workers by area income percentile, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Area total income percentile"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_label-1.pdf}
+
+Putting that all together, your code will look something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create percentage data}
+\NormalTok{perc_average <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(prof, sa3_income_percentile) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+
+\CommentTok{# Create label data}
+\NormalTok{label_data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{sa3_income_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
+  \DataTypeTok{average_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
+  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non-professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
+
+
+\CommentTok{# Plot }
+\NormalTok{scatter_layer <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
+             \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
+             \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
+             \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professional workers earn about the same, regardless of area income"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Average income of workers by area income percentile, 2016"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Area total income percentile"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/scatter_layer.pdf"}\NormalTok{, scatter_layer, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=44.44in]{atlas/scatter_layer}
+
+\hypertarget{scatter-plots-with-trendlines}{%
+\subsection{Scatter plots with trendlines}\label{scatter-plots-with-trendlines}}
+
+\hypertarget{facetted-scatter-plots}{%
+\subsection{Facetted scatter plots}\label{facetted-scatter-plots}}
 
 \hypertarget{distributions}{%
-\subsection{Distributions}\label{distributions}}
+\section{Distributions}\label{distributions}}
 
 \texttt{geom\_histogram}
 \texttt{geom\_density}
@@ -1442,157 +2654,153 @@ Like the charts above, you could facet this by state to see if there were any in
 \texttt{ggridges::}
 
 \hypertarget{maps}{%
-\subsection{Maps}\label{maps}}
+\section{Maps}\label{maps}}
 
 \hypertarget{sf-objects}{%
-\subsubsection{\texorpdfstring{\texttt{sf} objects}{sf objects}}\label{sf-objects}}
+\subsection{\texorpdfstring{\texttt{sf} objects}{sf objects}}\label{sf-objects}}
 
 {[}what is{]}
 
 \hypertarget{using-absmapsdata}{%
-\subsubsection{\texorpdfstring{Using \texttt{absmapsdata}}{Using absmapsdata}}\label{using-absmapsdata}}
+\subsection{\texorpdfstring{Using \texttt{absmapsdata}}{Using absmapsdata}}\label{using-absmapsdata}}
 
 The \texttt{absmapsdata} contains compressed, and tidied \texttt{sf} objects containing geometric information about ABS data structures. The included objects are:
 
 \begin{itemize}
 \tightlist
 \item
-  Statistical Area 1 2011: \texttt{sa12011}
+  Statistical Area 1 2011 and 2016: \texttt{sa12011} or \texttt{sa12016}
 \item
-  Statistical Area 1 2016: \texttt{sa12016}
+  Statistical Area 2 2011 and 2016: \texttt{sa22011} or \texttt{sa22016}
 \item
-  Statistical Area 2 2011: \texttt{sa22011}
+  Statistical Area 3 2011 and 2016: \texttt{sa32011} or \texttt{sa32016}
 \item
-  Statistical Area 2 2016: \texttt{sa22016}
+  Statistical Area 4 2011 and 2016: \texttt{sa42011} or \texttt{sa42016}
 \item
-  Statistical Area 3 2011: \texttt{sa32011}
+  Greater Capital Cities 2011 and 2016: \texttt{gcc2011} or \texttt{gcc2016}
 \item
-  Statistical Area 3 2016: \texttt{sa32016}
+  Remoteness Areas 2011 and 2016: \texttt{ra2011} or \texttt{ra2016}
 \item
-  Statistical Area 4 2011: \texttt{sa42011}
-\item
-  Statistical Area 4 2016: \texttt{sa42016}
-\item
-  Greater Capital Cities 2011: \texttt{gcc2011}
-\item
-  Greater Capital Cities 2016: \texttt{gcc2016}
-\item
-  Remoteness Areas 2011: \texttt{ra2011}
-\item
-  Remoteness Areas 2016: \texttt{ra2016}
-\item
-  State 2011: \texttt{state2011}
-\item
-  State 2016: \texttt{state2016}
+  State 2011 and 2016: \texttt{state2011} or \texttt{state2016}
 \item
   Commonwealth Electoral Divisions 2018: \texttt{ced2018}
 \item
   State Electoral Divisions 2018:\texttt{sed2018}
 \item
-  Local Government Areas 2016: \texttt{lga2016}
+  Local Government Areas 2016 and 2018: \texttt{lga2016} or \texttt{lga2018}
 \item
-  Local Government Areas 2018: \texttt{lga2018}
+  Postcodes 2016: \texttt{postcodes2016}
 \end{itemize}
 
-You can install the package from Github. You will also need the \texttt{sf} package installed to handle the \texttt{sf} objects.
+The package is \href{https://github.com/wfmackey/absmapsdata}{hosted on Github} and can be installed with \texttt{remotes::install\_github()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(absmapsdata)}
+\end{Highlighting}
+\end{Shaded}
 
+You will also need the \texttt{sf} package installed to handle the \texttt{sf} objects:
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"sf"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(sf)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{making-choropleth-maps}{%
-\subsubsection{Making choropleth maps}\label{making-choropleth-maps}}
-
-Choropleth maps break an area into `bits', and colours each `bit' according to a variable.
-
-SA4 is the largest non-state statistical area in the ABS ASGS standard.
-
-You can join the \texttt{sf} objects from \texttt{absmapsdata} to your dataset using \texttt{left\_join}. The variable names might be different -- eg \texttt{sa4\_name} compared to \texttt{sa4\_name\_2016} -- so use the \texttt{by} function to match them.
+Now you can view \texttt{sf} objects stored in \texttt{absmapsdata}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{map_data <-}\StringTok{ }\NormalTok{population_diff }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"sa4_name"}\NormalTok{ =}\StringTok{ "sa4_name_2016"}\NormalTok{))}
-
-\KeywordTok{head}\NormalTok{(map_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{       }\KeywordTok{select}\NormalTok{(sa4_name, geometry))}
+\KeywordTok{glimpse}\NormalTok{(sa32016)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 3
-## # Groups:   state [2]
-##   state sa4_name                                                   geometry
-##   <chr> <chr>                                            <MULTIPOLYGON [°]>
-## 1 ACT   Australian Capita~ (((148.8041 -35.71402, 148.8018 -35.7121, 148.7~
-## 2 NSW   Capital Region     (((150.3113 -35.66588, 150.3126 -35.66814, 150.~
-## 3 NSW   Central Coast      (((151.315 -33.55582, 151.3159 -33.55503, 151.3~
-## 4 NSW   Central West       (((150.6107 -33.06614, 150.6117 -33.07051, 150.~
-## 5 NSW   Coffs Harbour - G~ (((153.2785 -29.91874, 153.2773 -29.92067, 153.~
-## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.~
+## Observations: 358
+## Variables: 12
+## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "...
+## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast"...
+## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102...
+## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital R...
+## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "...
+## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "...
+## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "...
+## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New Sou...
+## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 1...
+## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.67...
+## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -3...
+## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., M...
 \end{verbatim}
 
-You then plot a map like you would any other \texttt{ggplot}: provide your data, choose your \texttt{aes} and your \texttt{geom}. For maps with \texttt{sf} objects, the key \textbf{aesthetic} is \texttt{geometry\ =\ geometry}, and the \textbf{geom} is \texttt{geom\_sf}.
+\hypertarget{making-choropleth-maps}{%
+\subsection{Making choropleth maps}\label{making-choropleth-maps}}
+
+Choropleth maps break an area into `bits', and colours each `bit' according to a variable.
+
+You can join the \texttt{sf} objects from \texttt{absmapsdata} to your dataset using \texttt{left\_join}. The variable names might be different -- eg \texttt{sa3\_name} compared to \texttt{sa3\_name\_2016} -- so use the \texttt{by} argument to match them.
+
+First, take the \texttt{sa3\_income} dataset and join the \texttt{sf} object \texttt{sa32016} from \texttt{absmapsdata}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{map_data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(sa32016, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"sa3_name"}\NormalTok{ =}\StringTok{ "sa3_name_2016"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You then plot a map like you would any other \texttt{ggplot}: provide your data, then choose your \texttt{aes} and your \texttt{geom}. For maps with \texttt{sf} objects, the \textbf{key aesthetic} is \texttt{geometry\ =\ geometry}, and the \textbf{key geom} is \texttt{geom\_sf}.
+
+The argument \texttt{lwd} controls the line width of area borders.
+
+Note that RStudio takes a long time to render a map in the
+
+Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful.
+
+To do this, filter the \texttt{map\_data} object:
+
+\hypertarget{adding-labels-to-maps}{%
+\subsubsection{Adding labels to maps}\label{adding-labels-to-maps}}
+
+You can add labels to choropleth maps with the standard \texttt{geom\_text} or \texttt{geom\_label}. Because it is likely that some labels will overlap, \texttt{ggrepel::geom\_text\_repel} or \texttt{ggrepel::geom\_label\_repel} is usually the better option.
+
+To use \texttt{geom\_(text\textbar{}label)\_repel}, you need to tell \texttt{ggrepel} where in
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{map <-}\StringTok{ }\NormalTok{map_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry,}
-                   \DataTypeTok{fill =}\NormalTok{ pop_change)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{lwd =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ pop_change),}
+                \DataTypeTok{lwd =} \FloatTok{.1}\NormalTok{,}
+                \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_void}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
                             \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
                             \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
                             \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population change"}\NormalTok{)}
+\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ sa3_name),}
+                  \DataTypeTok{stat =} \StringTok{"sf_coordinates"}\NormalTok{, }\DataTypeTok{nudge_x =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{segment.alpha =} \FloatTok{.5}\NormalTok{,}
+                  \DataTypeTok{size =} \DecValTok{4}\NormalTok{, }
+                  \DataTypeTok{direction =} \StringTok{"y"}\NormalTok{,}
+                  \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{, }
+                  \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+                  \DataTypeTok{colour =} \StringTok{"grey50"}\NormalTok{,}
+                  \DataTypeTok{segment.color =} \StringTok{"grey50"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{expand_scale}\NormalTok{(}\DataTypeTok{mult =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{.2}\NormalTok{))) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population }\CharTok{\textbackslash{}n}\StringTok{change"}\NormalTok{)}
 
 \NormalTok{map}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Data_visualisation_files/figure-latex/map1-1.pdf}
-
 \hypertarget{creating-simple-interactive-graphs-with-plotly}{%
 \section{\texorpdfstring{Creating simple interactive graphs with \texttt{plotly}}{Creating simple interactive graphs with plotly}}\label{creating-simple-interactive-graphs-with-plotly}}
 
 \texttt{plotly::ggplotly()}
-
-\hypertarget{bin-generate-data-used-before-prior-sections-are-constructed}{%
-\section{bin: generate data used (before prior sections are constructed)}\label{bin-generate-data-used-before-prior-sections-are-constructed}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(janitor)}
-\KeywordTok{library}\NormalTok{(absmapsdata)}
-
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/ABS_REGIONAL_ASGS2016_02082019164509969.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{clean_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{select}\NormalTok{(}\DataTypeTok{data_code =}\NormalTok{ measure,}
-\NormalTok{               data_item,}
-               \DataTypeTok{asgs =}\NormalTok{ regiontype,}
-               \DataTypeTok{sa4_code_2016 =}\NormalTok{ asgs_}\DecValTok{2016}\NormalTok{,}
-               \DataTypeTok{sa4_name_2016 =}\NormalTok{ region,}
-               \DataTypeTok{year =}\NormalTok{ time,}
-\NormalTok{               value) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sa4_code_2016 =} \KeywordTok{as.character}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{left_join}\NormalTok{(sa42016 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(sa4_code_}\DecValTok{2016}\NormalTok{, state_name_}\DecValTok{2016}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{state =}\NormalTok{ state_name_}\DecValTok{2016}\NormalTok{,}
-               \DataTypeTok{sa4_code =}\NormalTok{ sa4_code_}\DecValTok{2016}\NormalTok{,}
-               \DataTypeTok{sa4_name =}\NormalTok{ sa4_name_}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{state_long =}\NormalTok{ state,}
-               \DataTypeTok{state =}\NormalTok{ strayr}\OperatorTok{::}\KeywordTok{strayr}\NormalTok{(state_long))}
-               
-\KeywordTok{write_csv}\NormalTok{(data, }\StringTok{"data/population_sa4.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{reading-data}{%
 \chapter{Reading data}\label{reading-data}}

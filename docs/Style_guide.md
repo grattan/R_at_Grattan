@@ -70,9 +70,9 @@ You should also include comments where your code is more complex and may not be 
 
 Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.
 
-## Breaking your script into parts
+## Breaking your script into chunks
 
-It's useful to break a lengthy script into parts with `-------`. 
+It's useful to break a lengthy script into chunks with `-----`. 
 
 **Good**
 
@@ -87,12 +87,13 @@ It's useful to break a lengthy script into parts with `-------`.
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="275" />
+<img src="atlas/rstudio_navigation.png" width="550" />
 
-It also makes your code easier to read.
+Breaking your script into chunks with `-----` also makes your code easier to read.
 
-# Naming objects and variables
 
+## Naming objects and variables
+≥/
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called `ed_by_age` or `edByAge` or `ed.by.age`. 
 
 As with filenames, Grattan primarily uses _words separated by underscores_ `_` (aka 'snake_case') to name objects and variables. This is [considered good practice across the Tidyverse](https://style.tidyverse.org/syntax.html#object-names). 
