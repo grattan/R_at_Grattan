@@ -20,7 +20,7 @@ Imports:
     tidyverse,
     grattantheme,
     absmapsdata,
-    sf
+    sf,
     janitor
 Remotes:
     rstudio/bookdown,
