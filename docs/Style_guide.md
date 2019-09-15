@@ -30,9 +30,21 @@ Describe what your script does in the first few lines using comments or within a
 
 If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See [Organising R Projects at Grattan](#organising-projects) for more.
 
-## Comments
+Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:
 
-Comments are necessary where the code _alone_ doesn't tell the full story. This is important when groups are coded with numbers rather than character strings:
+**Good**
+
+```r
+# This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can't use the income variable in the NHS for this purpose, as it only contains information about respondents' income decile, not the income itself.
+```
+
+The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your [README file](#README).
+
+## Use comments
+
+Comments are necessary where the code _alone_ doesn't tell the full story. Comments should tell the reader **why** you're doing something, rather than just **what** you're doing. 
+
+For example, comments are important when groups are coded with numbers rather than character strings:
 
 **Necessary to comment**
 
@@ -42,28 +54,21 @@ data %>%
          age == "05")   # Keep only 35-39 year-olds. 
 ```
 
+Without the comment, readers of your code might not be aware that `1` in this dataset corresponds to `male`, or that `age == "05"` refers to 35-39 year olds. Without the comment, the code is not self-explanatory.
 
+If your code _is_ self-explanatory, you can include or omit comments as you see fit.
 **Not necessary (but okay if included)**
 
 ```r
+# We want to only look at women aged 35-39
 data %>% 
   filter(gender == "Female",
          age >= 35 & age <= 39)
 ```
 
-Comments can either go next to code, as in the example above, or they can precede the code, like this:
+You should also include comments where your code is more complex and may not be easily understood by the reader. If you're using a function from a package that isn't commonly used at Grattan, include a comment to explain what it does.
 
-
-```r
-# Keep only male observations and 35-39 year olds
-data %>%
-  filter(gender == 1,
-         age == "05")
-```
-
-You should also include comments where your code is more complex and may not be easily understood by the reader.
-
-Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future.
+Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.
 
 ## Breaking your script into parts
 
@@ -80,7 +85,11 @@ It's useful to break a lengthy script into parts with `-------`.
 # Merge files A and B ----
 ```
 
-This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. It also makes your code easier to read.
+This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
+
+<img src="atlas/rstudio_navigation.png" width="275" />
+
+It also makes your code easier to read.
 
 # Naming objects and variables
 
