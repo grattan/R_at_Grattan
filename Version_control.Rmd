@@ -1,4 +1,4 @@
-# Version control
+# Version control {#version-control}
 
 ## Version control is important and intimidating
 

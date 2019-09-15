@@ -1,35 +1,60 @@
+# Organising an R project at Grattan {#organising-projects} 
 
+All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
+Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track. 
 
-```r
-library(tidyverse)
-```
+This page sets out some guidelines for organising your work in R at Grattan. It covers:
 
-# Using R at Grattan {#intro}
+* Using RStudio projects and relative filepaths
+* Using a consistent subfolder structure
+* Naming your scripts and keeping them manageable
+* Coding style at Grattan
 
+## Use RStudio projects, not `setwd()`
 
-## Using R projects for a fully reproducible workflow.
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. 
 
-_Finally adhering to the 'hit by a bus' rule._
+One way to tell R which folder to use as your working directory is using the command `setwd()`, like `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. **This is a bad idea!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
-Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+In the [words of Jenny Bryan](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/):
 
-Cover:
-1. setwd() and machine-speficic filepaths are bad
-2. relative file paths are good
-3. RStudio projects are an easy, reproducible way to set your wd
+> if the first line of your R script is `setwd("C:\Users\jenny\path\that\only\I\have")` I will come into your office and SET YOUR COMPUTER ON FIRE. 
 
-### Filepaths
+Seems fair. 
 
-Filepaths should be relative to the working directory, and the working directory should be set by the project.
+Creating a 'project' in RStudio sets your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
 
-**Good**
+<img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;" />
 
+RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -> Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
 
-```r
-hes <- read_csv("data/HES/hes1516.csv")
-grattan_save("images/expenditure_by_income.pdf")
-```
+## Keep your stuff together
+
+Your script(s), data, and output should generally all live in the same place. ^[This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.] That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder. 
+
+Don't just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.
+
+A good structure is to have a subfolder for:
+
+- your code - called 'R'
+- your source data - called 'data'
+- your graphs - called 'atlas', like in our LaTeX projects
+- your non-graph output, like formatted tables, called 'output'
+
+Sometimes your data folder might have subfolders - 'raw' for data that you've done nothing to, and 'clean' for data you've modified in some way.^[Other folder structures are OK and might make more sense for your project. The important thing is to **have** a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.] 
+
+## Include a README file
+
+Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy! 
+
+Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future. 
+
+Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.
+
+## Use relative filepaths
+
+When you read or write files with R, don't use filepaths that are specific to your machine. For one thing, these machine-specific filepaths will fail when someone else tries to run your script. For another, they're super annoying! Who wants to type out a full filepath everytime you load or save a file? 
 
 **Bad**
 
@@ -39,48 +64,34 @@ hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
 grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
 ```
 
+Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
 
-### Keep your scripts manageable
+**Good**
 
-As a general rule of thumb, use one script per output. It should be clear what your script is trying to do (use comments!).
 
-Consider breaking your analysis into pieces. For example: 
+```r
+hes <- read_csv("data/HES/hes1516.csv")
+grattan_save("atlas/expenditure_by_income.pdf")
+```
+
+The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
+
+## Keep your scripts manageable {#manageable}
+
+Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
+
+Here's a useful structure: 
 
 - 01_import.R
 - 02_tidy.R
 - 03_model.R
 - 04_visualise.R
 
+It should be clear what each script is trying to do. Use comments to explain why you're doing things! 
 
-**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, `mean(mydf$variable)`, etc.) in your saved script.
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.
 
-### Use subfolders of your project folder
+**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, and commands like that) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.
 
-Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
-
-Use subfolders to clearly separate your code, raw data, and output.
-
-
-## Grattan coding style guide
-
-Short summary of why
-
-Link to style guide
-
-
-## What is the tidyverse and why do we use it?
-
-Introduce following chapters
-
-## An introduction to RMarkdown
-
-
-## Resources in this package
-
-- Starting a piece of analysis ‘cheat sheet’.
-- Updated style guide.
-- Written guide/slides.
-
-
-
+**Don't** create multiple versions of the same script (like `analysis_FINAL_002_MC.R` and `analysis_FINALFINAL_003_MC_WM.R`.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your 'R' folder, called "R/archive". 
 

@@ -5,8 +5,6 @@ bookdown::gitbook:
       collapse: section
       before: |
         <li><a href="./">Using R at Grattan Institute</a></li>
-      after: |
-        <li><a href="https://github.com/grattan/R_at_Grattan" target="blank">Published with bookdown</a></li>
     download: ["pdf"]
 bookdown::pdf_book:
   includes:

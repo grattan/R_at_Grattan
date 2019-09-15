@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-19}
+    \date{2019-09-15}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -149,12 +149,21 @@
 This guide is designed for everyone who uses - or would like to use - R at Grattan Institute.
 
 It does two main things:
-1. Shows you how to use R to complete common analytical tasks you'll face at Grattan.
-2. Sets out some guidelines and good practices when using R at Grattan.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Shows you how to use R to complete common analytical tasks you'll face at Grattan.
+\item
+  Sets out some guidelines and good practices when using R at Grattan.
+\end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
 
 Any complaints or comments about this guide can be sent to Will or Matt, respectively.
+
+This site was written in R with RMarkdown and the \href{https://bookdown.org}{bookdown} package.
 
 \hypertarget{introduction-to-r}{%
 \chapter{Introduction to R}\label{introduction-to-r}}
@@ -168,9 +177,11 @@ If you have used R before and are comfortable enough with it, you might want to 
 
 R is a programming language that is designed by and for statisticians, data scientists, and other people who work with data. It's free - you can download R at no charge. It's also open source - you can view and (if you're game) modify the code that underlies the R language. R is available for all major computing platforms including Windows, macOS, and Linux.
 
-R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
+R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more.
 
-R also has some overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
+You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
+
+R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
 
@@ -178,14 +189,14 @@ When you open R itself, you're confronted with a few disclaimers and a command p
 
 \includegraphics[width=7.99in]{atlas/r_screenshot}
 
-This looks a bit intimidating, but you'll almost never open R directly and interact with it in that way.
+This might look a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
-To analyse data with R, you will typically write out a text file containing your code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
+To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 \hypertarget{what-is-rstudio}{%
 \section{What is RStudio?}\label{what-is-rstudio}}
 
-RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} It's also available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. This means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created.
+RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} Like R itself, RStudio is available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things.
 
 \includegraphics[width=18.4in]{atlas/rstudio_screenshot}
 
@@ -218,13 +229,13 @@ Once they're both installed, get started by opening RStudio.
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
 
-R comes with a lot of functions - commands - built in to do a broad range of data tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
 
 But a lot of our work at Grattan uses add-on software to base R, known as `packages'. Some packages, like the popular `dplyr', make it quicker and/or easier to do tasks that you could otherwise do in base R. Other packages expand the possibilities of what R can do - like fitting a machine learning model, for example.
 
 Like R itself, packages are free and open source. You can install them from within RStudio.
 
-At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover these more in a later chapter.
+At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover this more in a later chapter.
 
 \hypertarget{installing-packages}{%
 \subsection{Installing packages}\label{installing-packages}}
@@ -243,19 +254,19 @@ For example, this code will install the \texttt{ggplot2} package from CRAN:
 \end{Highlighting}
 \end{Shaded}
 
-To install a package from Github, we use the function \texttt{install\_github()}. Unfortunately, this package doesn't come with R - it's part of the \texttt{devtools} package. First, we install devtools from CRAN:
+The easiest way to install a package from Github is to use the function \texttt{install\_github()}. Unfortunately, this function doesn't come with base R. The \texttt{install\_github()} function is part of the \texttt{remotes} package. To use it, we first need to install \texttt{remotes} from CRAN:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{devtools} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -264,13 +275,13 @@ Now we can install packages from Github using the \texttt{install\_github()} fun
 
 Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.
 
-We can either load (aka `attach') the package by using the \texttt{library()} function:
+We can either load (aka `attach') the package by using the \texttt{library()} function. We typically do this at the top of a script.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{library}\NormalTok{(remotes)}
 
-\CommentTok{# Now that the `devtools` package is loaded, we can use its `install_github()` function:}
+\CommentTok{# Now that the `remotes` package is loaded, we can use its `install_github()` function:}
 
 \KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
@@ -280,7 +291,7 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -290,49 +301,129 @@ It usually makes sense to load a package with \texttt{library()}, unless you onl
 \chapter{Why use R?}\label{why-use-r}}
 
 We can break this question into two parts:
-1. Why use script-based software to analyse data?
-2. Why use R, specifically?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Why use script-based software to analyse data?
+\item
+  Why use R, specifically?
+\end{enumerate}
 
 \hypertarget{why-script}{%
-\subsection{Why use script-based software?}\label{why-script}}
+\section{Why use script-based software?}\label{why-script}}
+
+It's important for our analyses to be \textbf{reproducible}. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary.
+
+Reproducibility is very important for QC, particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
+
+Script-based analyses are more likely to be reproducible.\footnote{Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data ``cleaning'' in Excel - then it is not fully reproducible.} A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.
+
+Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the `raw data' and what has been modified in some way.
+
+Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
+
+Script-based analysis software also allows us to:
+* Work with larger data sets;
+* Work with data in a broader range of formats;
+* Easily combine different data sets;
+* Automate tasks and build from previous analyses; and
+* Estimate statistical models.
 
 \hypertarget{why-R}{%
-\subsection{Why use R specifically?}\label{why-R}}
+\section{Why use R specifically?}\label{why-R}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though harder in SPSS, where data is primarily manipulated by clicking things).
 
-\hypertarget{intro}{%
-\chapter{Using R at Grattan}\label{intro}}
+We use R specifically because:
+* It's free!
+* It's open source.
+* It's powerful, particularly when it comes to statistics and data science.
+* It's flexible.
+* It has an active community extending its capabilities all the time and providing support online.
+* It is becoming the norm in academic research and common in the corporate world.
 
-\hypertarget{using-r-projects-for-a-fully-reproducible-workflow.}{%
-\section{Using R projects for a fully reproducible workflow.}\label{using-r-projects-for-a-fully-reproducible-workflow.}}
+Everything you can do in Excel can be done in R.
 
-\emph{Finally adhering to the `hit by a bus' rule.}
+\hypertarget{organising-projects}{%
+\chapter{Organising an R project at Grattan}\label{organising-projects}}
 
-Having a clear, consistent structure for our analyses means that our work is more easily checked and revised, including by ourselves in the future. A small investment of time up front to set up your analysis will save time (your own and others') down the track.
+All our work, in R or otherwise, should heed the ``hit by a bus'' rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
-Cover:
-1. setwd() and machine-speficic filepaths are bad
-2. relative file paths are good
-3. RStudio projects are an easy, reproducible way to set your wd
+Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track.
 
-\hypertarget{filepaths}{%
-\subsection{Filepaths}\label{filepaths}}
+This page sets out some guidelines for organising your work in R at Grattan. It covers:
 
-Filepaths should be relative to the working directory, and the working directory should be set by the project.
+\begin{itemize}
+\tightlist
+\item
+  Using RStudio projects and relative filepaths
+\item
+  Using a consistent subfolder structure
+\item
+  Naming your scripts and keeping them manageable
+\item
+  Coding style at Grattan
+\end{itemize}
 
-\textbf{Good}
+\hypertarget{use-rstudio-projects-not-setwd}{%
+\section{\texorpdfstring{Use RStudio projects, not \texttt{setwd()}}{Use RStudio projects, not setwd()}}\label{use-rstudio-projects-not-setwd}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"images/expenditure_by_income.pdf"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory.
+
+One way to tell R which folder to use as your working directory is using the command \texttt{setwd()}, like \texttt{setwd("\textasciitilde{}/Desktop/some\ random\ folder")} or \texttt{setwd("C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Documents\textbackslash{}Somerandomfolder")}. \textbf{This is a bad idea!} If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
+
+In the \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{words of Jenny Bryan}:
+
+\begin{quote}
+if the first line of your R script is \texttt{setwd("C:\textbackslash{}Users\textbackslash{}jenny\textbackslash{}path\textbackslash{}that\textbackslash{}only\textbackslash{}I\textbackslash{}have")} I will come into your office and SET YOUR COMPUTER ON FIRE.
+\end{quote}
+
+Seems fair.
+
+Creating a `project' in RStudio sets your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: \textbf{click File, then New Project}. You can then choose to start your project in a new directory, or an existing directory. Simple!
+
+\begin{center}\includegraphics[width=0.66\linewidth]{atlas/rstudio_newproject} \end{center}
+
+RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -\textgreater{} Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
+
+\hypertarget{keep-your-stuff-together}{%
+\section{Keep your stuff together}\label{keep-your-stuff-together}}
+
+Your script(s), data, and output should generally all live in the same place. \footnote{This isn't always possible, like when you're working with restricted-access microdata. But unless there's a really good reason why you can't keep your data together with the rest of your work, you should do it.} That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.
+
+Don't just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.
+
+A good structure is to have a subfolder for:
+
+\begin{itemize}
+\tightlist
+\item
+  your code - called `R'
+\item
+  your source data - called `data'
+\item
+  your graphs - called `atlas', like in our LaTeX projects
+\item
+  your non-graph output, like formatted tables, called `output'
+\end{itemize}
+
+Sometimes your data folder might have subfolders - `raw' for data that you've done nothing to, and `clean' for data you've modified in some way.\footnote{Other folder structures are OK and might make more sense for your project. The important thing is to \textbf{have} a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.}
+
+\hypertarget{include-a-readme-file}{%
+\section{Include a README file}\label{include-a-readme-file}}
+
+Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!
+
+Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.
+
+Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.
+
+\hypertarget{use-relative-filepaths}{%
+\section{Use relative filepaths}\label{use-relative-filepaths}}
+
+When you read or write files with R, don't use filepaths that are specific to your machine. For one thing, these machine-specific filepaths will fail when someone else tries to run your script. For another, they're super annoying! Who wants to type out a full filepath everytime you load or save a file?
 
 \textbf{Bad}
 
@@ -344,12 +435,25 @@ Filepaths should be relative to the working directory, and the working directory
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{keep-your-scripts-manageable}{%
-\subsection{Keep your scripts manageable}\label{keep-your-scripts-manageable}}
+Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
 
-As a general rule of thumb, use one script per output. It should be clear what your script is trying to do (use comments!).
+\textbf{Good}
 
-Consider breaking your analysis into pieces. For example:
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/expenditure_by_income.pdf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The first example above tells R to look in the `data' subdirectory of your project folder, and then the `HES' subdirectory of `data', to find the `hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
+
+\hypertarget{manageable}{%
+\section{Keep your scripts manageable}\label{manageable}}
+
+Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
+
+Here's a useful structure:
 
 \begin{itemize}
 \tightlist
@@ -363,42 +467,336 @@ Consider breaking your analysis into pieces. For example:
   04\_visualise.R
 \end{itemize}
 
-\textbf{Don't} include interactive work (like \texttt{View(mydf)}, \texttt{str(mydf)}, \texttt{mean(mydf\$variable)}, etc.) in your saved script.
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things!
 
-\hypertarget{use-subfolders-of-your-project-folder}{%
-\subsection{Use subfolders of your project folder}\label{use-subfolders-of-your-project-folder}}
+\hypertarget{omit-needless-code}{%
+\section{Omit needless code}\label{omit-needless-code}}
 
-Remember the hit-by-a-bus rule. It should be easy for any Grattan colleague to open your project folder and get up to speed with what it does. Putting all your files - raw data, scripts, output - in the one folder makes it harder to understand how your work fits together.
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named `archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
 
-Use subfolders to clearly separate your code, raw data, and output.
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with \texttt{View(mydf)} or \texttt{str(mydf)}. This is fine, and often necessary, when you're doing your analysis. \textbf{Don't keep these commands in your script}. These type of commands should usually be entered straight into the R console, not in a script.
 
-\hypertarget{grattan-coding-style-guide}{%
-\section{Grattan coding style guide}\label{grattan-coding-style-guide}}
+\hypertarget{rules_9a_final_final_mc}{%
+\section{Rules\_9a\_FINAL\_FINAL\_MC}\label{rules_9a_final_final_mc}}
 
-Short summary of why
+We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like \texttt{cool\_word\_doc\_002.docx}. Try to avoid replicating this nightmare in R.
 
-Link to style guide
+\textbf{Don't} create multiple versions of the same script (like \texttt{analysis\_FINAL\_002\_MC.R} and \texttt{analysis\_FINALFINAL\_003\_MC\_WM.R}.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your ``R'' folder, called ``R/archive''. To avoid a horrible mess of \texttt{analysis\_FINAL\_002.R} type documents cluttering up your folder, consider using \protect\hyperlink{version-control}{Git for version control}.
+
+\hypertarget{grattan-coding-style}{%
+\chapter{Grattan coding style}\label{grattan-coding-style}}
+
+This Grattan style guide is a condensed and lightly adapted version of the Hadley Wickham's \texttt{tidyverse} style guide, found at \url{https://style.tidyverse.org/}.
+
+The benefits of a common coding style are well explained \href{http://r-pkgs.had.co.nz/style.html}{by Hadley}:
+
+\begin{quote}
+Good style is important because while your code only has one author, it'll usually have multiple readers. This is especially true when you're writing code with others. In that case, it's a good idea to agree on a common style up-front.
+\end{quote}
+
+Below we describe the \textbf{key} code-style elements, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, \href{https://style.tidyverse.org/}{consult the \texttt{tidyverse} guide}.
+
+You should also see the \protect\hyperlink{organising-projects}{Using R at Grattan} page for guidelines about setting up projects.
+
+\hypertarget{script-preamble}{%
+\section{Script preamble}\label{script-preamble}}
+
+Describe what your script does in the first few lines using comments or within an RMarkdown document.
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. }
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# make ABS ed data graph}
+\end{Highlighting}
+\end{Shaded}
+
+If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See \protect\hyperlink{organising-projects}{Organising R Projects at Grattan} for more.
+
+\hypertarget{comments}{%
+\section{Comments}\label{comments}}
+
+Comments are necessary where the code \emph{alone} doesn't tell the full story. This is important when groups are coded with numbers rather than character strings:
+
+\textbf{Necessary to comment}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{,   }\CommentTok{# Keep only male observations}
+\NormalTok{         age }\OperatorTok{==}\StringTok{ "05"}\NormalTok{)   }\CommentTok{# Keep only 35-39 year-olds. }
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Not necessary (but okay if included)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{,}
+\NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{35} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{39}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Comments can either go next to code, as in the example above, or they can precede the code, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Keep only male observations and 35-39 year olds}
+\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{         age }\OperatorTok{==}\StringTok{ "05"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You should also include comments where your code is more complex and may not be easily understood by the reader.
+
+Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future.
+
+\hypertarget{breaking-your-script-into-parts}{%
+\section{Breaking your script into parts}\label{breaking-your-script-into-parts}}
+
+It's useful to break a lengthy script into parts with \texttt{-\/-\/-\/-\/-\/-\/-}.
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Read file A -----}
+
+
+\CommentTok{# Read file B -----}
+
+\CommentTok{# Merge files A and B ----}
+\end{Highlighting}
+\end{Shaded}
+
+This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. It also makes your code easier to read.
+
+\hypertarget{naming-objects-and-variables}{%
+\chapter{Naming objects and variables}\label{naming-objects-and-variables}}
+
+It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called \texttt{ed\_by\_age} or \texttt{edByAge} or \texttt{ed.by.age}.
+
+As with filenames, Grattan primarily uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{considered good practice across the Tidyverse}.
+
+Object names should be descriptive and not-too-long. This is a trade-off, and one that's sometimes hard to get right. However, using snake\_case provides consistency:
+
+\textbf{Good object names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_population}
+\NormalTok{gdp_growth_vic}
+\NormalTok{uni_attainment}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad object names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3Pop}
+\NormalTok{GDPgrowthVIC}
+\NormalTok{uni.attainment}
+\end{Highlighting}
+\end{Shaded}
+
+Variable names face a similar trade-off. Again, try to be descriptive and short using snake\_case:
+
+\textbf{Good variable names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gender}
+\NormalTok{gdp_growth}
+\NormalTok{highest_edu}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad variable names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s801LHSAA}
+\NormalTok{gdp.growth}
+\NormalTok{highEdu}
+\NormalTok{chaosVar_name.silly}
+\NormalTok{var2}
+\end{Highlighting}
+\end{Shaded}
+
+When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to \href{https://dplyr.tidyverse.org/reference/select.html}{rename your variables}, giving them consistent, descriptive, short, snake\_case names.
+
+The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake\_case, which we strongly recommend, reduces friction for other people reading and editing your code.
+
+\hypertarget{spacing}{%
+\chapter{Spacing}\label{spacing}}
+
+Giving you code room to breathe greatly helps readability for future-you and others who will have to read your code.
+
+\hypertarget{assign-and-equals}{%
+\section{Assign and equals}\label{assign-and-equals}}
+
+Put a space each side of an assign operator \texttt{\textless{}-}, equals \texttt{=}, and other `infix operators' (\texttt{==}, \texttt{+}, \texttt{-}, etc.)
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uni_attainment <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(data, age }\OperatorTok{==}\StringTok{ }\DecValTok{25}\NormalTok{, gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uni_attainment<-}\KeywordTok{filter}\NormalTok{(data,age}\OperatorTok{==}\DecValTok{25}\NormalTok{,gender}\OperatorTok{==}\StringTok{"Female"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Exceptions are operators that \emph{directly connect} to an object, package or function, which should \textbf{not} have spaces on either side: \texttt{::}, \texttt{\$}, \texttt{@}, \texttt{{[}}, \texttt{{[}{[}}, etc.
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uni_attainment}\OperatorTok{$}\NormalTok{gender}
+\NormalTok{uni_attainment}\OperatorTok{$}\NormalTok{age[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{readabs}\OperatorTok{::}\KeywordTok{read_abs}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uni_attainment }\OperatorTok{$}\StringTok{ }\NormalTok{gender}
+\NormalTok{uni_attainment}\OperatorTok{$}\StringTok{ }\NormalTok{age [ }\DecValTok{1} \OperatorTok{:}\StringTok{ }\DecValTok{10}\NormalTok{]}
+\NormalTok{readabs }\OperatorTok{::}\StringTok{ }\KeywordTok{read_abs}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{commas}{%
+\section{Commas}\label{commas}}
+
+Always put a space \emph{after} a comma and not before, just like in regular English.
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(data, age, gender, sa2, sa3)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(data,age,gender,sa2,sa3)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parentheses}{%
+\section{Parentheses}\label{parentheses}}
+
+Do not use spaces around parentheses in most cases:
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{ (x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{mean}\NormalTok{( x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{function}, see \href{https://style.tidyverse.org/syntax.html\#parentheses}{the Tidyverse guide}.
+
+\hypertarget{short-lines-and-line-indentation}{%
+\section{Short lines and line indentation}\label{short-lines-and-line-indentation}}
+
+Tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
+
+Using pipes \texttt{\%\textgreater{}\%} instead of nesting functions also makes things clearer. The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
+
+\textbf{Good: short lines and indentation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA,}
+         \DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Less good: short lines, no indentation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA,}
+\DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
+\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Bad: long lines}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA, }\DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{War-crime bad: long lines without pipes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{young_qual_income<-}\KeywordTok{summarise}\NormalTok{(}\KeywordTok{group_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(}\KeywordTok{rename}\NormalTok{(data,}\DataTypeTok{gender=}\NormalTok{s801LHSAA,}\DataTypeTok{uni_attainment=}\NormalTok{high.ed),income}\OperatorTok{>}\DecValTok{0}\NormalTok{,age}\OperatorTok{>=}\DecValTok{25}\OperatorTok{&}\NormalTok{age}\OperatorTok{<=}\DecValTok{34}\NormalTok{),uni_attainment),}\DataTypeTok{mean_income=}\KeywordTok{mean}\NormalTok{(income,}\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{blocks-of-code}{%
+\chapter{Blocks of code}\label{blocks-of-code}}
+
+As shown above, the pipe function \texttt{\%\textgreater{}\%} can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.
+
+Resist the urge to use the pipe to make code blocks too long.
+
+\hypertarget{the-tidyverse}{%
+\chapter{The tidyverse}\label{the-tidyverse}}
 
 \hypertarget{what-is-the-tidyverse-and-why-do-we-use-it}{%
 \section{What is the tidyverse and why do we use it?}\label{what-is-the-tidyverse-and-why-do-we-use-it}}
 
-Introduce following chapters
-
 \hypertarget{an-introduction-to-rmarkdown}{%
 \section{An introduction to RMarkdown}\label{an-introduction-to-rmarkdown}}
-
-\hypertarget{resources-in-this-package}{%
-\section{Resources in this package}\label{resources-in-this-package}}
-
-\begin{itemize}
-\tightlist
-\item
-  Starting a piece of analysis `cheat sheet'.
-\item
-  Updated style guide.
-\item
-  Written guide/slides.
-\end{itemize}
 
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
@@ -837,8 +1235,8 @@ A line chart has one key aesthetic: \texttt{group}. This tells \texttt{ggplot} h
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line1-1.pdf}
@@ -862,8 +1260,8 @@ You can also add dots for each year by layering \texttt{geom\_point} on top of \
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse): Using more
-## than six colours is not recommended.
+## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
+## faded): Using more than six colours is not recommended.
 \end{verbatim}
 
 \includegraphics{Data_visualisation_files/figure-latex/line2-1.pdf}
