@@ -39,6 +39,7 @@ library(ggrepel)
 library(absmapsdata)
 library(sf)
 library(scales)
+library(janitor)
 # this might be hairy; should get `grattools` happening:
 library(grattan)
 ```
