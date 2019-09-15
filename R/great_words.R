@@ -44,7 +44,6 @@ great_words <- c("very good",
                    "brill",
                    "smashing",
                    "champion",
-                   "bosting",
                    "badass",
                    "awesomesauce",
                    "on fleek",
@@ -61,4 +60,10 @@ great <- function() {
   great_words[n]
 }
 
-great()
+Great <- function() {
+  n <- round(runif(1, 0, length(great_words)), 0)
+  word <- great_words[n]
+  substr(word, 1, 1) <- toupper(substr(word, 1, 1))
+  word
+}
+

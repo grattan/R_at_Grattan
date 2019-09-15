@@ -117,6 +117,7 @@ out <- dat %>%
   left_join(perc) %>% 
   left_join(sa3_info) %>% 
   mutate(gender = if_else(sex == "Females", "Women", "Men"),
+         year = as.double(year) + 1,
          total_income = average_income * persons,
          prof = if_else(occupation %in% c("Professionals", "Managers"),
                         "Professional",
