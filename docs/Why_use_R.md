@@ -13,7 +13,7 @@ Reproducibility is very important for QC, particularly of complex analyses - if 
 
 Script-based analyses are more likely to be reproducible.^[Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data "cleaning" in Excel - then it is not fully reproducible.] A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output. 
 
-Analysis that isn't script based, like work done in Excel, is not reproducible. It is never clear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the 'raw data' and what has been modified in some way.
+Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the 'raw data' and what has been modified in some way.
 
 Using scripts makes us less susceptible to the sort of errors [famously made by the economists Reinhart and Rogoff](https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt#Methodological_flaws) in their Excel-based analysis of the effect of public debt on economic growth. It's still possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
@@ -31,7 +31,7 @@ Doing reproducible, script-based, research doesn't necessarily involve using R. 
 We use R specifically because:
 * It's free!
 * It's open source.
-* It's powerful.
+* It's powerful, particularly when it comes to statistics and data science.
 * It's flexible.
 * It has an active community extending its capabilities all the time and providing support online.
 * It is becoming the norm in academic research and common in the corporate world.

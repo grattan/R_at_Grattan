@@ -23,5 +23,5 @@ Imports:
     sf
 Remotes:
     rstudio/bookdown,
-    mattcowgill/grattantheme,
+    mattcowgill/grattantheme (>= 0.5.1.900),
     wfmackey/absmapsdata

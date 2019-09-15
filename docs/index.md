@@ -1,7 +1,7 @@
 --- 
 title: "Using R at Grattan Institute"
 author: "Will Mackey and Matt Cowgill"
-date: "2019-09-10"
+date: "2019-09-15"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -19,6 +19,7 @@ description: "How to use R at Grattan good. In development."
 This guide is designed for everyone who uses - or would like to use - R at Grattan Institute. 
 
 It does two main things:
+
 1. Shows you how to use R to complete common analytical tasks you'll face at Grattan.
 2. Sets out some guidelines and good practices when using R at Grattan.
 

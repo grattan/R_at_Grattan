@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Organising an R project at Grattan | Using R at Grattan Institute</title>
+  <meta name="description" content="How to use R at Grattan good. In development." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Organising an R project at Grattan | Using R at Grattan Institute" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta name="github-repo" content="grattan/R_at_Grattan" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Organising an R project at Grattan | Using R at Grattan Institute" />
+  
+  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  
+
+<meta name="author" content="Will Mackey and Matt Cowgill" />
+
+
+<meta name="date" content="2019-09-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="why-use-r.html"/>
+<link rel="next" href="grattan-coding-style.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Using R at Grattan Institute</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>1.4</b> Packages</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>1.4.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-packages"><i class="fa fa-check"></i><b>1.4.2</b> Using packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#use-rstudio-projects-not-setwd"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a></li>
+<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.2</b> Keep your stuff together</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#include-a-readme-file"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
+<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
+<li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#use-meaningful-file-names"><i class="fa fa-check"></i><b>4.1</b> Use meaningful file names</a></li>
+<li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.2</b> Script preamble</a></li>
+<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#comments"><i class="fa fa-check"></i><b>4.3</b> Comments</a></li>
+<li class="chapter" data-level="4.4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.4</b> Breaking your script into parts</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="naming-objects-and-variables.html"><a href="naming-objects-and-variables.html"><i class="fa fa-check"></i><b>5</b> Naming objects and variables</a></li>
+<li class="chapter" data-level="6" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>6</b> Spacing</a><ul>
+<li class="chapter" data-level="6.1" data-path="spacing.html"><a href="spacing.html#assign-and-equals"><i class="fa fa-check"></i><b>6.1</b> Assign and equals</a></li>
+<li class="chapter" data-level="6.2" data-path="spacing.html"><a href="spacing.html#commas"><i class="fa fa-check"></i><b>6.2</b> Commas</a></li>
+<li class="chapter" data-level="6.3" data-path="spacing.html"><a href="spacing.html#parentheses"><i class="fa fa-check"></i><b>6.3</b> Parentheses</a></li>
+<li class="chapter" data-level="6.4" data-path="spacing.html"><a href="spacing.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>6.4</b> Short lines and line indentation</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="blocks-of-code.html"><a href="blocks-of-code.html"><i class="fa fa-check"></i><b>7</b> Blocks of code</a></li>
+<li class="chapter" data-level="8" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>8</b> The tidyverse</a><ul>
+<li class="chapter" data-level="8.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>8.1</b> What is the tidyverse and why do we use it?</a></li>
+<li class="chapter" data-level="8.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>8.2</b> An introduction to RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>9</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="9.1" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>9.1</b> Set-up and packages</a></li>
+<li class="chapter" data-level="9.2" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>9.2</b> Concepts</a></li>
+<li class="chapter" data-level="9.3" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>9.3</b> Making Grattan-y charts</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>9.3.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="9.3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>9.3.2</b> Saving Grattan charts</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="data-visualisation.html"><a href="data-visualisation.html#chart-cookbook"><i class="fa fa-check"></i><b>9.4</b> Chart cookbook</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#bar-charts"><i class="fa fa-check"></i><b>9.4.1</b> Bar charts</a></li>
+<li class="chapter" data-level="9.4.2" data-path="data-visualisation.html"><a href="data-visualisation.html#line-charts"><i class="fa fa-check"></i><b>9.4.2</b> Line charts</a></li>
+<li class="chapter" data-level="9.4.3" data-path="data-visualisation.html"><a href="data-visualisation.html#scatter-plots"><i class="fa fa-check"></i><b>9.4.3</b> Scatter plots</a></li>
+<li class="chapter" data-level="9.4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#distributions"><i class="fa fa-check"></i><b>9.4.4</b> Distributions</a></li>
+<li class="chapter" data-level="9.4.5" data-path="data-visualisation.html"><a href="data-visualisation.html#maps"><i class="fa fa-check"></i><b>9.4.5</b> Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>9.5</b> Creating simple interactive graphs with <code>plotly</code></a></li>
+<li class="chapter" data-level="9.6" data-path="data-visualisation.html"><a href="data-visualisation.html#bin-generate-data-used-before-prior-sections-are-constructed"><i class="fa fa-check"></i><b>9.6</b> bin: generate data used (before prior sections are constructed)</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>10</b> Reading data</a><ul>
+<li class="chapter" data-level="10.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>10.1</b> Importing data</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>10.1.1</b> Reading CSV files</a></li>
+<li class="chapter" data-level="10.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>10.1.2</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="10.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>10.1.3</b> <code>rio</code></a></li>
+<li class="chapter" data-level="10.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>10.1.4</b> <code>readabs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>10.2</b> Reading common files:</a></li>
+<li class="chapter" data-level="10.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>10.3</b> Appropriately renaming variables</a></li>
+<li class="chapter" data-level="10.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>10.4</b> Getting to tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>11</b> Different data types</a><ul>
+<li class="chapter" data-level="11.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>11.1</b> Tidy data</a></li>
+<li class="chapter" data-level="11.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>11.2</b> Dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="11.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>11.3</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="11.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>11.4</b> Factors with <code>forcats::</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>12</b> Data transformation</a><ul>
+<li class="chapter" data-level="12.1" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>12.1</b> The pipe</a></li>
+<li class="chapter" data-level="12.2" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>12.2</b> Key <code>dplyr</code> functions:</a></li>
+<li class="chapter" data-level="12.3" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>12.3</b> Filter with <code>filter()</code></a></li>
+<li class="chapter" data-level="12.4" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>12.4</b> Arrange with <code>arrange()</code></a></li>
+<li class="chapter" data-level="12.5" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>12.5</b> Select variables with <code>select()</code></a></li>
+<li class="chapter" data-level="12.6" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>12.6</b> Group data with <code>group_by()</code></a></li>
+<li class="chapter" data-level="12.7" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>12.7</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="12.7.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>12.7.1</b> Cases when you should use <code>case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>12.8</b> Summarise data with <code>summarise()</code></a></li>
+<li class="chapter" data-level="12.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>12.9</b> Joining datasets with <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>13</b> Analysis</a></li>
+<li class="chapter" data-level="14" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>14</b> Creating functions</a><ul>
+<li class="chapter" data-level="14.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>14.1</b> It can be useful to make your own function</a></li>
+<li class="chapter" data-level="14.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="14.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>14.3</b> More complex functions</a></li>
+<li class="chapter" data-level="14.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>14.4</b> Sets of functions</a></li>
+<li class="chapter" data-level="14.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>14.5</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="14.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>14.6</b> Sharing your useful functions with Grattan</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a><ul>
+<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
+<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using R at Grattan Institute</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="organising-projects" class="section level1">
+<h1><span class="header-section-number">3</span> Organising an R project at Grattan</h1>
+<p>All our work, in R or otherwise, should heed the “hit by a bus” rule - if you’re not around, colleagues should be able to access, understand, verify, and build on the work you’ve done.</p>
+<p>Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you’re more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you’ll find it harder to return to it down the track.</p>
+<p>This page sets out some guidelines for organising your work in R at Grattan. It covers:</p>
+<ul>
+<li>Using RStudio projects and relative filepaths</li>
+<li>Using a consistent subfolder structure</li>
+<li>Naming your scripts and keeping them manageable</li>
+<li>Coding style at Grattan</li>
+</ul>
+<div id="use-rstudio-projects-not-setwd" class="section level2">
+<h2><span class="header-section-number">3.1</span> Use RStudio projects, not <code>setwd()</code></h2>
+<p>You’ll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory.</p>
+<p>One way to tell R which folder to use as your working directory is using the command <code>setwd()</code>, like <code>setwd("~/Desktop/some random folder")</code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
+<p>In the <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">words of Jenny Bryan</a>:</p>
+<blockquote>
+<p>if the first line of your R script is <code>setwd("C:\Users\jenny\path\that\only\I\have")</code> I will come into your office and SET YOUR COMPUTER ON FIRE.</p>
+</blockquote>
+<p>Seems fair.</p>
+<p>Creating a ‘project’ in RStudio sets your working directory in a way that’s portable across machines. Creating an RStudio project is straightforward: <strong>click File, then New Project</strong>. You can then choose to start your project in a new directory, or an existing directory. Simple!</p>
+<p><img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;" /></p>
+<p>RStudio will then create a file with an .Rproj extension in the folder you’ve chosen. When you want to work in this project, just open the .Rproj file, or click File -&gt; Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.</p>
+</div>
+<div id="keep-your-stuff-together" class="section level2">
+<h2><span class="header-section-number">3.2</span> Keep your stuff together</h2>
+<p>Your script(s), data, and output should generally all live in the same place.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
+<p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
+<p>A good structure is to have a subfolder for:</p>
+<ul>
+<li>your code - called ‘R’</li>
+<li>your source data - called ‘data’</li>
+<li>your graphs - called ‘atlas’, like in our LaTeX projects</li>
+<li>your non-graph output, like formatted tables, called ‘output’</li>
+</ul>
+<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+</div>
+<div id="include-a-readme-file" class="section level2">
+<h2><span class="header-section-number">3.3</span> Include a README file</h2>
+<p>Your analysis workflow might seem completely obvious to you. Let’s say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!</p>
+<p>Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.</p>
+<p>Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn’t clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.</p>
+</div>
+<div id="use-relative-filepaths" class="section level2">
+<h2><span class="header-section-number">3.4</span> Use relative filepaths</h2>
+<p>When you read or write files with R, don’t use filepaths that are specific to your machine. For one thing, these machine-specific filepaths will fail when someone else tries to run your script. For another, they’re super annoying! Who wants to type out a full filepath everytime you load or save a file?</p>
+<p><strong>Bad</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/Users/mcowgill/Desktop/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">hes &lt;-<span class="st"> </span><span class="kw">read_csb</span>(<span class="st">&quot;C:\Users\mcowgill\Desktop\hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">grattan_save</span>(<span class="st">&quot;/Users/mcowgill/Desktop/images/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
+<p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
+<p><strong>Good</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
+<p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
+</div>
+<div id="manageable" class="section level2">
+<h2><span class="header-section-number">3.5</span> Keep your scripts manageable</h2>
+<p>Unless your project is very simple, it’s probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they’re supposed to be run in.</p>
+<p>Here’s a useful structure:</p>
+<ul>
+<li>01_import.R</li>
+<li>02_tidy.R</li>
+<li>03_model.R</li>
+<li>04_visualise.R</li>
+</ul>
+<p>It should be clear what each script is trying to do. Use comments to explain why you’re doing things!</p>
+<p>Don’t retain code that ultimately didn’t lead anywhere. If you produced a graph that ended up not being used, don’t keep the code in your script - if you want to save it, move it to a subfolder named ‘archive’ or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.</p>
+<p><strong>Don’t</strong> include interactive work (like <code>View(mydf)</code>, <code>str(mydf)</code>, and commands like that) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-projects.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.<a href="organising-projects.html#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="why-use-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="grattan-coding-style.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["r-at-grattan.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

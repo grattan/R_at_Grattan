@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-09-10" />
+<meta name="date" content="2019-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,9 +50,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -61,16 +61,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +77,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -143,7 +141,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
 <li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="grattan-coding-style-guide.html"><a href="grattan-coding-style-guide.html"><i class="fa fa-check"></i><b>3</b> Grattan coding style guide</a></li>
+<li class="chapter" data-level="3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html"><i class="fa fa-check"></i><b>3</b> Grattan coding style</a></li>
 <li class="chapter" data-level="4" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>4</b> The tidyverse</a><ul>
 <li class="chapter" data-level="4.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>4.1</b> What is the tidyverse and why do we use it?</a></li>
 <li class="chapter" data-level="4.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>4.2</b> An introduction to RMarkdown</a></li>
@@ -247,8 +245,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="use-rstudio-projects-not-setwd" class="section level2">
 <h2><span class="header-section-number">5.1</span> Use RStudio projects, not <code>setwd()</code></h2>
-<p>You’ll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory.
-One way to tell R which folder to use as your working directory is using the command <code>setwd()</code>, like <code>setwd("~/Desktop/some random folder")</code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
+<p>You’ll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory.</p>
+<p>One way to tell R which folder to use as your working directory is using the command <code>setwd()</code>, like <code>setwd("~/Desktop/some random folder")</code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
 <p>In the <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">words of Jenny Bryan</a>:</p>
 <blockquote>
 <p>if the first line of your R script is <code>setwd("C:\Users\jenny\path\that\only\I\have")</code> I will come into your office and SET YOUR COMPUTER ON FIRE.</p>
@@ -260,16 +258,16 @@ One way to tell R which folder to use as your working directory is using the com
 </div>
 <div id="keep-your-stuff-together" class="section level2">
 <h2><span class="header-section-number">5.2</span> Keep your stuff together</h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a href="references.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
+<p>Your script(s), data, and output should generally all live in the same place.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
-<li>your code - called ‘R’ or ‘code’.</li>
+<li>your code - called ‘R’</li>
 <li>your source data - called ‘data’</li>
-<li>your graphs - called ‘graphs’ or ‘figs’ or ‘atlas’, like in LaTeX</li>
-<li>your non-graph output, like formatted tables, called ‘output’ or ‘tables’</li>
+<li>your graphs - called ‘atlas’, like in our LaTeX projects</li>
+<li>your non-graph output, like formatted tables, called ‘output’</li>
 </ul>
-<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.</p>
+<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 </div>
 <div id="include-a-readme-file" class="section level2">
 <h2><span class="header-section-number">5.3</span> Include a README file</h2>
@@ -279,15 +277,15 @@ One way to tell R which folder to use as your working directory is using the com
 </div>
 <div id="use-relative-filepaths" class="section level2">
 <h2><span class="header-section-number">5.4</span> Use relative filepaths</h2>
-<p>When you read or write files with R, don’t use filepaths that are specific to your machine.</p>
+<p>When you read or write files with R, don’t use filepaths that are specific to your machine. For one thing, these machine-specific filepaths will fail when someone else tries to run your script. For another, they’re super annoying! Who wants to type out a full filepath everytime you load or save a file?</p>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="organising-an-r-project-at-grttan.html#cb6-1"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/Users/mcowgill/Desktop/hes1516.csv&quot;</span>)</span>
-<span id="cb6-2"><a href="organising-an-r-project-at-grttan.html#cb6-2"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csb</span>(<span class="st">&quot;C:\Users\mcowgill\Desktop\hes1516.csv&quot;</span>)</span>
-<span id="cb6-3"><a href="organising-an-r-project-at-grttan.html#cb6-3"></a><span class="kw">grattan_save</span>(<span class="st">&quot;/Users/mcowgill/Desktop/images/expenditure_by_income.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/Users/mcowgill/Desktop/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">hes &lt;-<span class="st"> </span><span class="kw">read_csb</span>(<span class="st">&quot;C:\Users\mcowgill\Desktop\hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">grattan_save</span>(<span class="st">&quot;/Users/mcowgill/Desktop/images/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
 <p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="organising-an-r-project-at-grttan.html#cb7-1"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</span>
-<span id="cb7-2"><a href="organising-an-r-project-at-grttan.html#cb7-2"></a><span class="kw">grattan_save</span>(<span class="st">&quot;images/expenditure_by_income.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">grattan_save</span>(<span class="st">&quot;images/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
 </div>
 <div id="keep-your-scripts-manageable" class="section level2">
@@ -302,10 +300,16 @@ One way to tell R which folder to use as your working directory is using the com
 </ul>
 <p>It should be clear what each script is trying to do. Use comments!</p>
 <p>Don’t retain code that ultimately didn’t lead anywhere. If you produced a graph that ended up not being used, don’t keep the code in your script - if you want to save it, move it to a subfolder named ‘archive’ or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.</p>
-<p><strong>Don’t</strong> include interactive work (like <code>View(mydf)</code>, <code>str(mydf)</code>, <code>mean(mydf$variable)</code>, etc.) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.</p>
-<p>Each script should generally do one main thing. If you’re producing five charts, you should generally have five separate chart scripts.</p>
+<p><strong>Don’t</strong> include interactive work (like <code>View(mydf)</code>, <code>str(mydf)</code>, and commands like that) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-an-r-project-at-grttan.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.<a href="organising-an-r-project-at-grttan.html#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

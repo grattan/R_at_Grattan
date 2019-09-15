@@ -1,4 +1,4 @@
-# Organising an R project at Grttan
+# Organising an R project at Grattan {#organising-projects} 
 
 All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
@@ -52,7 +52,7 @@ Your analysis workflow might seem completely obvious to you. Let's say that in o
 
 Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future. 
 
-Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run.
+Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.
 
 ## Use relative filepaths
 
@@ -74,13 +74,13 @@ Instead, use relative filepaths. These are filepaths that are relative (hence th
 ```{r, eval = FALSE}
 
 hes <- read_csv("data/HES/hes1516.csv")
-grattan_save("images/expenditure_by_income.pdf")
+grattan_save("atlas/expenditure_by_income.pdf")
 
 ```
 
 The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
 
-## Keep your scripts manageable
+## Keep your scripts manageable {#manageable}
 
 Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
 
@@ -91,10 +91,17 @@ Here's a useful structure:
 - 03_model.R
 - 04_visualise.R
 
-It should be clear what each script is trying to do. Use comments! 
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things! 
 
-Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps.
+## Omit needless code
 
-**Don't** include interactive work (like `View(mydf)`, `str(mydf)`, and commands like that) in your saved script. These type of commands should usually be entered straight into the R console, not in a script.
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
 
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with `View(mydf)` or `str(mydf)`. This is fine, and often necessary, when you're doing your analysis. **Don't keep these commands in your script**. These type of commands should usually be entered straight into the R console, not in a script.
+
+## Rules_9a_FINAL_FINAL_MC
+
+We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like `cool_word_doc_002.docx`. Try to avoid replicating this nightmare in R.
+
+**Don't** create multiple versions of the same script (like `analysis_FINAL_002_MC.R` and `analysis_FINALFINAL_003_MC_WM.R`.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your "R" folder, called "R/archive". To avoid a horrible mess of `analysis_FINAL_002.R` type documents cluttering up your folder, consider using [Git for version control](#version-control).
 
