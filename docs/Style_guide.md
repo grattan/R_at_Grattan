@@ -87,7 +87,7 @@ It's useful to break a lengthy script into chunks with `-----`.
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="550" />
+<img src="atlas/rstudio_navigation.png" width="275" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
