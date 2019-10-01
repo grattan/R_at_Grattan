@@ -1,19 +1,20 @@
 # Organising an R project at Grattan {#organising-projects} 
 
-All our work, in R or otherwise, should heed the "hit by a bus" rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
+All our work at Grattan, whether it's in R or some other software, should heed the "hit by a bus" rule. If you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
 Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track. 
 
 This page sets out some guidelines for organising your work in R at Grattan. It covers:
 
-* Using RStudio projects and relative filepaths
-* Using a consistent subfolder structure
-* Naming your scripts and keeping them manageable
-* Coding style at Grattan
+* Using RStudio projects and relative filepaths;
+* Using a consistent subfolder structure; and
+* Naming your scripts and keeping them manageable.
+
+Using a consistent coding style also helps make our work more shareable; that's [covered on the next page](#coding-style).
 
 ## Use RStudio projects, not `setwd()`
 
-You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. 
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command `getwd()`. 
 
 One way to tell R which folder to use as your working directory is using the command `setwd()`, like `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. **This is a bad idea!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
@@ -44,7 +45,7 @@ A good structure is to have a subfolder for:
 
 Sometimes your data folder might have subfolders - 'raw' for data that you've done nothing to, and 'clean' for data you've modified in some way.^[Other folder structures are OK and might make more sense for your project. The important thing is to **have** a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.] 
 
-## Include a README file
+## Include a README file {#README}
 
 Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy! 
 
