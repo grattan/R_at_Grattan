@@ -26,4 +26,5 @@ Imports:
 Remotes:
     rstudio/bookdown,
     mattcowgill/grattantheme,
+    mattcowgill/strayr,
     wfmackey/absmapsdata
