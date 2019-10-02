@@ -47,7 +47,7 @@ For macOS, the page will look like this:
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-<img src="atlas/r_cran_windows_1.png" width="565" /><img src="atlas/r_cran_windows_2.png" width="564" />
+<img src="atlas/r_cran_windows_1.png" width="1130" /><img src="atlas/r_cran_windows_2.png" width="1128" />
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 

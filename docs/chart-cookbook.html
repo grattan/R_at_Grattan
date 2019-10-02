@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-09-15" />
+<meta name="date" content="2019-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -384,7 +384,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Tas    420767
 ## 7 Vic   5190976
 ## 8 WA    2297081</code></pre>
-<p>Looks brill: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Looks eminent: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
 <p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb64-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
@@ -421,7 +421,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb67-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb67-12" data-line-number="12">simple_bar</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="839.04" /></p>
-<p>Looks of the highest quality! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<p>Looks of the highest standard! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/simple_bar.pdf&quot;</span>, simple_bar, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</a></code></pre></div>
 <p><img src="atlas/simple_bar.png" width="1600" /></p>
 </div>
@@ -455,7 +455,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 14 Vic   Women          49264.
 ## 15 WA    Men            76677.
 ## 16 WA    Women          51578.</code></pre>
-<p>Looks beaut: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Looks on fleek: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
 <p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb71-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> state,</a>
@@ -561,7 +561,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb80-15" data-line-number="15">                <span class="dt">hjust =</span> <span class="fl">-0.1</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb80-16" data-line-number="16"><span class="st">  </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04" /></p>
-<p>Looks of the highest standard! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<p>Looks superior! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">multiple_bar &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(state, average_income), </a>
 <a class="sourceLine" id="cb81-3" data-line-number="3">             <span class="dt">y =</span> average_income,</a>
@@ -829,7 +829,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <a class="sourceLine" id="cb106-6" data-line-number="6"><span class="st">  </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb106-7" data-line-number="7"><span class="st">  </span><span class="kw">grattan_x_continuous</span>(<span class="dt">labels =</span> comma)</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04" /></p>
-<p>Looks super. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<p>Looks awesomesauce. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb107-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> workers,</a>
 <a class="sourceLine" id="cb107-3" data-line-number="3">             <span class="dt">y =</span> average_income)) <span class="op">+</span><span class="st"> </span></a>
@@ -980,7 +980,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <a class="sourceLine" id="cb123-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb123-12" data-line-number="12">base_chart</a></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04" /></p>
-<p>Looks champion! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<p>Looks wicked! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">perc_average &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb124-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(prof, sa3_income_percentile) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb124-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_income =</span> <span class="kw">sum</span>(income) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(workers))</a>
