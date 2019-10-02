@@ -91,7 +91,6 @@ This helps you, and others, navigate your code better, using the navigation tool
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
-
 ## Naming objects and variables
 ≥/
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called `ed_by_age` or `edByAge` or `ed.by.age`. 
