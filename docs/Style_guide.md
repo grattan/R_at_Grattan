@@ -1,4 +1,4 @@
-# Grattan coding style
+# Grattan coding style {#coding-style}
 
 
 
@@ -40,7 +40,7 @@ Your preamble should anticipate and answer any questions other people might have
 
 The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your [README file](#README).
 
-## Use comments
+## Use comments {#use-comments}
 
 Comments are necessary where the code _alone_ doesn't tell the full story. Comments should tell the reader **why** you're doing something, rather than just **what** you're doing. 
 
@@ -140,11 +140,11 @@ When you load data from outside Grattan, such as ABS microdata, variables will o
 
 The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code. 
 
-# Spacing
+## Spacing
 
 Giving you code room to breathe greatly helps readability for future-you and others who will have to read your code. 
 
-## Assign and equals
+### Assign and equals
 
 Put a space each side of an assign operator `<-`, equals `=`, and other 'infix operators' (`==`, `+`, `-`, etc.)
 
@@ -179,7 +179,7 @@ readabs :: read_abs()
 ```
 
 
-## Commas
+### Commas
 Always put a space _after_ a comma and not before, just like in regular English.
 
 **Good**
@@ -194,7 +194,7 @@ select(data, age, gender, sa2, sa3)
 select(data,age,gender,sa2,sa3)
 ```
 
-## Parentheses
+### Parentheses
 
 Do not use spaces around parentheses in most cases:
 
@@ -256,7 +256,7 @@ young_qual_income <- data %>% rename(gender = s801LHSAA, uni_attainment = high.e
 young_qual_income<-summarise(group_by(filter(rename(data,gender=s801LHSAA,uni_attainment=high.ed),income>0,age>=25&age<=34),uni_attainment),mean_income=mean(income,na.rm=TRUE))
 ```
 
-# Blocks of code
+## Blocks of code
 
 As shown above, the pipe function `%>%` can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand. 
 
