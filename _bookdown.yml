@@ -15,6 +15,7 @@ rmd_files: [
   "Style_guide.Rmd",
   "Tidyverse.Rmd",
   "Data_visualisation.Rmd",
+  "Visualisation_cookbook.Rmd",
   "Reading_data.Rmd",
   "Different_data_types.Rmd",
   "Data_transformation.Rmd",

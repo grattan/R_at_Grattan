@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Grattan coding style | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Grattan coding style | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-09-15" />
+<meta name="date" content="2019-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="organising-projects.html"/>
-<link rel="next" href="naming-objects-and-variables.html"/>
+<link rel="prev" href="organising-projects.html">
+<link rel="next" href="spacing.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -66,7 +66,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -144,7 +144,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#use-rstudio-projects-not-setwd"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a></li>
 <li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.2</b> Keep your stuff together</a></li>
-<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#include-a-readme-file"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
 <li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
 <li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
 <li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
@@ -153,61 +153,56 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
 <li class="chapter" data-level="4.1" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.1</b> Script preamble</a></li>
 <li class="chapter" data-level="4.2" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#use-comments"><i class="fa fa-check"></i><b>4.2</b> Use comments</a></li>
-<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-parts"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into parts</a></li>
+<li class="chapter" data-level="4.3" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#breaking-your-script-into-chunks"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into chunks</a></li>
+<li class="chapter" data-level="4.4" data-path="grattan-coding-style.html"><a href="grattan-coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.4</b> Naming objects and variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="naming-objects-and-variables.html"><a href="naming-objects-and-variables.html"><i class="fa fa-check"></i><b>5</b> Naming objects and variables</a></li>
-<li class="chapter" data-level="6" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>6</b> Spacing</a><ul>
-<li class="chapter" data-level="6.1" data-path="spacing.html"><a href="spacing.html#assign-and-equals"><i class="fa fa-check"></i><b>6.1</b> Assign and equals</a></li>
-<li class="chapter" data-level="6.2" data-path="spacing.html"><a href="spacing.html#commas"><i class="fa fa-check"></i><b>6.2</b> Commas</a></li>
-<li class="chapter" data-level="6.3" data-path="spacing.html"><a href="spacing.html#parentheses"><i class="fa fa-check"></i><b>6.3</b> Parentheses</a></li>
-<li class="chapter" data-level="6.4" data-path="spacing.html"><a href="spacing.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>6.4</b> Short lines and line indentation</a></li>
+<li class="chapter" data-level="5" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>5</b> Spacing</a><ul>
+<li class="chapter" data-level="5.1" data-path="spacing.html"><a href="spacing.html#assign-and-equals"><i class="fa fa-check"></i><b>5.1</b> Assign and equals</a></li>
+<li class="chapter" data-level="5.2" data-path="spacing.html"><a href="spacing.html#commas"><i class="fa fa-check"></i><b>5.2</b> Commas</a></li>
+<li class="chapter" data-level="5.3" data-path="spacing.html"><a href="spacing.html#parentheses"><i class="fa fa-check"></i><b>5.3</b> Parentheses</a></li>
+<li class="chapter" data-level="5.4" data-path="spacing.html"><a href="spacing.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>5.4</b> Short lines and line indentation</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="blocks-of-code.html"><a href="blocks-of-code.html"><i class="fa fa-check"></i><b>7</b> Blocks of code</a></li>
-<li class="chapter" data-level="8" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>8</b> The tidyverse</a><ul>
-<li class="chapter" data-level="8.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>8.1</b> What is the tidyverse and why do we use it?</a></li>
-<li class="chapter" data-level="8.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>8.2</b> An introduction to RMarkdown</a></li>
+<li class="chapter" data-level="6" data-path="blocks-of-code.html"><a href="blocks-of-code.html"><i class="fa fa-check"></i><b>6</b> Blocks of code</a></li>
+<li class="chapter" data-level="7" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>7</b> The tidyverse</a><ul>
+<li class="chapter" data-level="7.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>7.1</b> What is the tidyverse and why do we use it?</a></li>
+<li class="chapter" data-level="7.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>7.2</b> An introduction to RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>9</b> Data Visualisation</a><ul>
-<li class="chapter" data-level="9.1" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>9.1</b> Set-up and packages</a></li>
-<li class="chapter" data-level="9.2" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3"><i class="fa fa-check"></i><b>9.2</b> # A tibble: 6 x 3</a></li>
-<li class="chapter" data-level="9.3" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-year-1"><i class="fa fa-check"></i><b>9.3</b> # Groups: year [1]</a></li>
-<li class="chapter" data-level="9.4" data-path="data-visualisation.html"><a href="data-visualisation.html#year-state-pop"><i class="fa fa-check"></i><b>9.4</b> year state pop</a></li>
-<li class="chapter" data-level="9.5" data-path="data-visualisation.html"><a href="data-visualisation.html#section"><i class="fa fa-check"></i><b>9.5</b> <fct> <chr> <dbl></a></li>
-<li class="chapter" data-level="9.6" data-path="data-visualisation.html"><a href="data-visualisation.html#australian-capital-territory-383257"><i class="fa fa-check"></i><b>9.6</b> 1 2013 Australian Capital Territory 383257</a></li>
-<li class="chapter" data-level="9.7" data-path="data-visualisation.html"><a href="data-visualisation.html#new-south-wales-7404032"><i class="fa fa-check"></i><b>9.7</b> 2 2013 New South Wales 7404032</a></li>
-<li class="chapter" data-level="9.8" data-path="data-visualisation.html"><a href="data-visualisation.html#northern-territory-241722"><i class="fa fa-check"></i><b>9.8</b> 3 2013 Northern Territory 241722</a></li>
-<li class="chapter" data-level="9.9" data-path="data-visualisation.html"><a href="data-visualisation.html#other-territories-2962"><i class="fa fa-check"></i><b>9.9</b> 4 2013 Other Territories 2962</a></li>
-<li class="chapter" data-level="9.10" data-path="data-visualisation.html"><a href="data-visualisation.html#queensland-4652824"><i class="fa fa-check"></i><b>9.10</b> 5 2013 Queensland 4652824</a></li>
-<li class="chapter" data-level="9.11" data-path="data-visualisation.html"><a href="data-visualisation.html#south-australia-1671488"><i class="fa fa-check"></i><b>9.11</b> 6 2013 South Australia 1671488</a></li>
-<li class="chapter" data-level="9.12" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>9.12</b> Concepts</a></li>
-<li class="chapter" data-level="9.13" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>9.13</b> Making Grattan-y charts</a><ul>
-<li class="chapter" data-level="9.13.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>9.13.1</b> Making Grattan charts</a></li>
-<li class="chapter" data-level="9.13.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>9.13.2</b> Saving Grattan charts</a></li>
+<li class="chapter" data-level="8" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>8</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="8.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>8.1</b> Introduction to data visualisation</a></li>
+<li class="chapter" data-level="8.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>8.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="8.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>8.3</b> Concepts</a></li>
+<li class="chapter" data-level="8.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>8.4</b> Exploratory data visualisation</a></li>
+<li class="chapter" data-level="8.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>8.5</b> Making Grattan-y charts</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>8.5.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>8.5.2</b> Saving Grattan charts</a></li>
 </ul></li>
-<li class="chapter" data-level="9.14" data-path="data-visualisation.html"><a href="data-visualisation.html#chart-cookbook"><i class="fa fa-check"></i><b>9.14</b> Chart cookbook</a><ul>
-<li class="chapter" data-level="9.14.1" data-path="data-visualisation.html"><a href="data-visualisation.html#bar-charts"><i class="fa fa-check"></i><b>9.14.1</b> Bar charts</a></li>
-<li class="chapter" data-level="9.14.2" data-path="data-visualisation.html"><a href="data-visualisation.html#line-charts"><i class="fa fa-check"></i><b>9.14.2</b> Line charts</a></li>
+<li class="chapter" data-level="8.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>8.6</b> Adding labels</a></li>
 </ul></li>
-<li class="chapter" data-level="9.15" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded"><i class="fa fa-check"></i><b>9.15</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
-<li class="chapter" data-level="9.16" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended."><i class="fa fa-check"></i><b>9.16</b> faded): Using more than six colours is not recommended.</a></li>
-<li class="chapter" data-level="9.17" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded-1"><i class="fa fa-check"></i><b>9.17</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
-<li class="chapter" data-level="9.18" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended.-1"><i class="fa fa-check"></i><b>9.18</b> faded): Using more than six colours is not recommended.</a><ul>
-<li class="chapter" data-level="9.18.1" data-path="data-visualisation.html"><a href="data-visualisation.html#scatter-plots"><i class="fa fa-check"></i><b>9.18.1</b> Scatter plots</a></li>
-<li class="chapter" data-level="9.18.2" data-path="data-visualisation.html"><a href="data-visualisation.html#distributions"><i class="fa fa-check"></i><b>9.18.2</b> Distributions</a></li>
-<li class="chapter" data-level="9.18.3" data-path="data-visualisation.html"><a href="data-visualisation.html#maps"><i class="fa fa-check"></i><b>9.18.3</b> Maps</a></li>
+<li class="chapter" data-level="9" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>9</b> Chart cookbook</a><ul>
+<li class="chapter" data-level="9.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up"><i class="fa fa-check"></i><b>9.1</b> Set up</a></li>
+<li class="chapter" data-level="9.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>9.2</b> Bar charts</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>9.2.1</b> Simple bar plot</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>9.2.2</b> Bar plot with multiple series</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>9.2.3</b> Facetted bar charts</a></li>
 </ul></li>
-<li class="chapter" data-level="9.19" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3-1"><i class="fa fa-check"></i><b>9.19</b> # A tibble: 6 x 3</a></li>
-<li class="chapter" data-level="9.20" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-state-2"><i class="fa fa-check"></i><b>9.20</b> # Groups: state [2]</a></li>
-<li class="chapter" data-level="9.21" data-path="data-visualisation.html"><a href="data-visualisation.html#state-sa4_name-geometry"><i class="fa fa-check"></i><b>9.21</b> state sa4_name geometry</a></li>
-<li class="chapter" data-level="9.22" data-path="data-visualisation.html"><a href="data-visualisation.html#multipolygon"><i class="fa fa-check"></i><b>9.22</b> <chr> <chr> &lt;MULTIPOLYGON [°]&gt;</a></li>
-<li class="chapter" data-level="9.23" data-path="data-visualisation.html"><a href="data-visualisation.html#act-australian-capita-148.8041--35.71402-148.8018--35.7121-148.7"><i class="fa fa-check"></i><b>9.23</b> 1 ACT Australian Capita… (((148.8041 -35.71402, 148.8018 -35.7121, 148.7…</a></li>
-<li class="chapter" data-level="9.24" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-capital-region-150.3113--35.66588-150.3126--35.66814-150."><i class="fa fa-check"></i><b>9.24</b> 2 NSW Capital Region (((150.3113 -35.66588, 150.3126 -35.66814, 150.…</a></li>
-<li class="chapter" data-level="9.25" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-coast-151.315--33.55582-151.3159--33.55503-151.3"><i class="fa fa-check"></i><b>9.25</b> 3 NSW Central Coast (((151.315 -33.55582, 151.3159 -33.55503, 151.3…</a></li>
-<li class="chapter" data-level="9.26" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-west-150.6107--33.06614-150.6117--33.07051-150."><i class="fa fa-check"></i><b>9.26</b> 4 NSW Central West (((150.6107 -33.06614, 150.6117 -33.07051, 150.…</a></li>
-<li class="chapter" data-level="9.27" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-coffs-harbour---g-153.2785--29.91874-153.2773--29.92067-153."><i class="fa fa-check"></i><b>9.27</b> 5 NSW Coffs Harbour - G… (((153.2785 -29.91874, 153.2773 -29.92067, 153.…</a></li>
-<li class="chapter" data-level="9.28" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-far-west-and-orana-150.1106--31.74613-150.1103--31.74892-150."><i class="fa fa-check"></i><b>9.28</b> 6 NSW Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…</a></li>
-<li class="chapter" data-level="9.29" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>9.29</b> Creating simple interactive graphs with <code>plotly</code></a></li>
-<li class="chapter" data-level="9.30" data-path="data-visualisation.html"><a href="data-visualisation.html#bin-generate-data-used-before-prior-sections-are-constructed"><i class="fa fa-check"></i><b>9.30</b> bin: generate data used (before prior sections are constructed)</a></li>
+<li class="chapter" data-level="9.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>9.3</b> Line charts</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>9.3.1</b> Simple line chart</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>9.3.2</b> Line chart with multiple series</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>9.4</b> Scatter plots</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>9.4.1</b> Simple scatter plot</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>9.4.2</b> Scatter plot with reshaped data</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>9.4.3</b> Layered scatter plot</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>9.4.4</b> Scatter plots with trendlines</a></li>
+<li class="chapter" data-level="9.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>9.4.5</b> Facetted scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>9.5</b> Distributions</a></li>
+<li class="chapter" data-level="9.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>9.6</b> Maps</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>9.6.1</b> <code>sf</code> objects</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>9.6.2</b> Using <code>absmapsdata</code></a></li>
+<li class="chapter" data-level="9.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>9.6.3</b> Making choropleth maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>9.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>10</b> Reading data</a><ul>
 <li class="chapter" data-level="10.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>10.1</b> Importing data</a><ul>
@@ -284,46 +279,74 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Script preamble</h2>
 <p>Describe what your script does in the first few lines using comments or within an RMarkdown document.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></a></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># make ABS ed data graph</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># make ABS ed data graph</span></a></code></pre></div>
 <p>If it’s hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See <a href="organising-projects.html#organising-projects">Organising R Projects at Grattan</a> for more.</p>
 <p>Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></a></code></pre></div>
-<p>The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your <a href="#README">README file</a>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></a></code></pre></div>
+<p>The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your <a href="organising-projects.html#README">README file</a>.</p>
 </div>
 <div id="use-comments" class="section level2">
 <h2><span class="header-section-number">4.2</span> Use comments</h2>
 <p>Comments are necessary where the code <em>alone</em> doesn’t tell the full story. Comments should tell the reader <strong>why</strong> you’re doing something, rather than just <strong>what</strong> you’re doing.</p>
 <p>For example, comments are important when groups are coded with numbers rather than character strings:</p>
 <p><strong>Necessary to comment</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></a>
-<a class="sourceLine" id="cb4-3" title="3">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></a></code></pre></div>
-<p>Without the comment, readers of your code might not be aware that <code>1</code> in this dataset corresponds to <code>male</code>, or that <code>age == "05"</code> refers to 35-39 year olds. Without the comment, the code is not self-explanatory.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></a></code></pre></div>
+<p>Without the comment, readers of your code might not be aware that <code>1</code> in this dataset corresponds to <code>male</code>, or that <code>age == &quot;05&quot;</code> refers to 35-39 year olds. Without the comment, the code is not self-explanatory.</p>
 <p>If your code <em>is</em> self-explanatory, you can include or omit comments as you see fit.
 <strong>Not necessary (but okay if included)</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># We want to only look at women aged 35-39</span></a>
-<a class="sourceLine" id="cb5-2" title="2">data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</a>
-<a class="sourceLine" id="cb5-4" title="4">         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># We want to only look at women aged 35-39</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</a></code></pre></div>
 <p>You should also include comments where your code is more complex and may not be easily understood by the reader. If you’re using a function from a package that isn’t commonly used at Grattan, include a comment to explain what it does.</p>
 <p>Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you’re writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.</p>
 </div>
-<div id="breaking-your-script-into-parts" class="section level2">
-<h2><span class="header-section-number">4.3</span> Breaking your script into parts</h2>
-<p>It’s useful to break a lengthy script into parts with <code>-------</code>.</p>
+<div id="breaking-your-script-into-chunks" class="section level2">
+<h2><span class="header-section-number">4.3</span> Breaking your script into chunks</h2>
+<p>It’s useful to break a lengthy script into chunks with <code>-----</code>.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Read file A -----</span></a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Read file B -----</span></a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co"># Merge files A and B ----</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Read file A -----</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co"># Read file B -----</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co"># Merge files A and B ----</span></a></code></pre></div>
 <p>This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there’s a little navigation tool that helps you easily jump between named sections of your script.</p>
 <p><img src="atlas/rstudio_navigation.png" width="275" /></p>
-<p>It also makes your code easier to read.</p>
+<p>Breaking your script into chunks with <code>-----</code> also makes your code easier to read.</p>
+</div>
+<div id="naming-objects-and-variables" class="section level2">
+<h2><span class="header-section-number">4.4</span> Naming objects and variables</h2>
+<p>≥/
+It’s important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don’t need to stop to remember if your object is called <code>ed_by_age</code> or <code>edByAge</code> or <code>ed.by.age</code>.</p>
+<p>As with filenames, Grattan primarily uses <em>words separated by underscores</em> <code>_</code> (aka ‘snake_case’) to name objects and variables. This is <a href="https://style.tidyverse.org/syntax.html#object-names">considered good practice across the Tidyverse</a>.</p>
+<p>Object names should be descriptive and not-too-long. This is a trade-off, and one that’s sometimes hard to get right. However, using snake_case provides consistency:</p>
+<p><strong>Good object names</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">sa3_population</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">gdp_growth_vic</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">uni_attainment</a></code></pre></div>
+<p><strong>Bad object names</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">sa3Pop</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">GDPgrowthVIC</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">uni.attainment</a></code></pre></div>
+<p>Variable names face a similar trade-off. Again, try to be descriptive and short using snake_case:</p>
+<p><strong>Good variable names</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">gender</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">gdp_growth</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">highest_edu</a></code></pre></div>
+<p><strong>Bad variable names</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">s801LHSAA</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">gdp.growth</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">highEdu</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">chaosVar_name.silly</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">var2</a></code></pre></div>
+<p>When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to <a href="https://dplyr.tidyverse.org/reference/select.html">rename your variables</a>, giving them consistent, descriptive, short, snake_case names.</p>
+<p>The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code.</p>
 </div>
 </div>
             </section>
@@ -332,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="organising-projects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="naming-objects-and-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="spacing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -377,6 +400,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

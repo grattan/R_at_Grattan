@@ -1,6 +1,42 @@
 # Data Visualisation
 
-[intro]
+This chapter explores data visualisation broadly, and how to 'do' data visualisation in R specifically. 
+
+The next chapter -- the Visualisation Cookbook -- gives more practical advice for the charts you might want to create. 
+
+
+## Introduction to data visualisation
+
+You can use data visualisation to **examine and explore** your data, and to **present** a finding to your audience. Both of these elements are important.
+
+When you start using a dataset, you should look at it.[^1] Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots. 
+
+  [^1]: From Kieran Healy's [_Data Vizualization: A Practical Introduction_](https://socviz.co/): 'You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.' 
+
+
+These **exploratory plots** are just for you and your team. They don't need to be perfectly labelled, the right size, in the Grattan palette, or be particularly interesting.
+They're built and used only to help you and your team explore the data. 
+Through this process, you can become confident your data is _what you think it is_. 
+
+When you choose to **present a visualisation to a reader**, you have to make decisions about what they can and cannot see. You need to highlight or omit particular things to help them better understand the message you are presenting. 
+
+This requires important _technical_ decisions: what data to use, what 'stat' to present it with --- _show every data point, show a distribution function, show the average or the median?_ --- and on what scale --- _raw numbers, on a log scale, as a proportion of a total?_. 
+
+It also requires _aesthetic_ decisions. What colours in the Grattan palette would work best? Where should the labels be placed and how could they be phrased to succinctly convey meaning? Should data points be represented by lines, or bars, or dots, or balloons, or shades of colour?
+
+All of these decisions need to made with two things in mind:
+
+1. Rigour, accuracy, legitimacy: the chart needs to be honest. 
+1. The reader: the chart needs to help the reader understand something, and it must convince them to pay attention. 
+
+At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart's impact.
+
+Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to _earn_ their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.^['Bar charts are evidence that you are dead inside' -- Amanda Cox, data editor for the New York Times.] 
+
+The way we design charts -- much like our writing -- should always be honest, clear and engaging to the reader. 
+
+This chapter shows how you can do this with R. It starts with the 'grammar of graphics' concepts of a package called `ggplot`, and explains how to make those charts 'Grattan-y'. The next chapter gives you the when-to-use and how-to-make particular charts. 
+
 
 ## Set-up and packages
 
@@ -12,130 +48,161 @@ The `grattantheme` package is used to make charts look Grattan-y. The `absmapsda
 ```r
 library(tidyverse)
 library(grattantheme)
-library(absmapsdata)
-library(sf)
+library(ggrepel)
 library(scales)
 ```
 
-For most charts in this chapter, we'll use the `population_table` data summarised here. It contains the population in each state between 2013 and 2018:
 
 
 ```r
-population_table <- read_csv("data/population_sa4.csv") %>% 
-        filter(data_item == "Persons - Total (no.)") %>% 
-        mutate(pop = as.numeric(value),
-               year = as.factor(year)) %>% 
-        group_by(year, state) %>% 
-        summarise(pop = sum(pop))
+# note: to be added to grattantheme; remove this when done
+grattan_label <- function(..., size = 18) {
+
+  .size = size / ggplot2::.pt
+  
+geom_label(..., 
+           fill = "white",
+           label.padding = unit(0.01, "lines"), 
+           label.size = 0,
+           size = .size)
+}
+```
+
+
+For most charts in this chapter, we'll use the `sa3_income` data summarised below.^[From [ABS Employee income by occupation and gender, 2010-11 to 2015-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a `professionals` subset that only includes people in professional occupations in 2015:
+
+
+```r
+sa3_income <- read_csv("data/sa3_income.csv")
+
+professionals <- sa3_income %>% 
+  select(-sa4_name, -gcc_name) %>% 
+  filter(year == 2015,
+         occupation == "Professionals",
+         !is.na(median_income),
+         !gender == "Persons") 
 
 # Show the first six rows of the new dataset
-head(population_table)
+head(professionals)
 ```
 
 ```
-## # A tibble: 6 x 3
-## # Groups:   year [1]
-##   year  state                            pop
-##   <fct> <chr>                          <dbl>
-## 1 2013  Australian Capital Territory  383257
-## 2 2013  New South Wales              7404032
-## 3 2013  Northern Territory            241722
-## 4 2013  Other Territories               2962
-## 5 2013  Queensland                   4652824
-## 6 2013  South Australia              1671488
+## # A tibble: 6 x 14
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
+##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
+## 1 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 2 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 3 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 4 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## 5 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## 6 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## # … with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## #   average_income <dbl>, total_income <dbl>, workers <dbl>
 ```
 
 
 ## Concepts
 
-The `ggplot2` package is based on the `g`rammar of `g`raphics. ...
+The `ggplot2` package is based on the **g**rammar of **g**raphics. ...
 
-The main ingredients to a `ggplot` chart:
+The main ingredients to a `ggplot` chart are:
 
-- **Data**: what data should be plotted. e.g. `data`
-- **Aesthetics**: what variables should be linked to what chart elements. e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
-- **Geoms**: how the data should be plotted. e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart. 
+- **Data**: what data should be plotted. 
+  - e.g. `data`
+- **Aesthetics**: what variables should be linked to what chart elements. 
+  - e.g. `aes(x = population, y = age)` to connect the `population` variable to the `x` axis, and the `age` variable to the `y` axis. 
+- **Geoms**: how the data should be plotted. 
+  - e.g. `geom_point()` will produce a scatter plot, `geom_col` will produce a column chart, `geom_line()` will produce a line chart. 
 
 Each plot you make will be made up of these three elements. The [full list of standard geoms](https://ggplot2.tidyverse.org/reference/) is listed in the `tidyverse` documentation. 
 
+`ggplot` also has a 'cheat sheet' that contains many of the often-used elements of a plot, which you can download [here](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
+
+<img src="atlas/ggplot_cheat_sheet.png" width="1230" style="display: block; margin: auto;" />
 
 
 
-```r
-ggplot(data = <DATA>) + 
-  <GEOM_FUNCTION>(
-     mapping = aes(<MAPPINGS>),
-     stat = <STAT>, 
-     position = <POSITION>
-  ) +
-  <COORDINATE_FUNCTION> +
-  <FACET_FUNCTION>
-```
 
-For example, you can plot a column chart by passing the `population_table` dataset into `ggplot()` ("make a chart wth this data"). This produces an empty plot:
+For example, you can plot a column chart by passing the `sa3_income` dataset into `ggplot()` ("make a chart with this data"). This completes the first step -- data -- and produces an empty plot:
 
 
 ```r
-population_table %>% 
+professionals %>% 
         ggplot()
 ```
 
-![](Data_visualisation_files/figure-epub3/empty plot-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/empty_plot-1.png)<!-- -->
 
 
-Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_:```{r empty with aes}
-population_table %>% 
-        ggplot(aes(x = state,
-                   y = pop,
-                   fill = year))
-```
+Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_. 
 
-
-Now that `ggplot` knows where things should go, it needs to _how_ to plot them. For this we use `geoms`. Tell it to plot a column chart by using `geom_col`:
+If we just plot that, you'll see that `ggplot` knows a little bit more about what we're trying to do. It has the states on the x-axis and range of populations on the y-axis:
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = state,
-                   y = pop,
-                   fill = year)) +
-        geom_col()
+professionals %>% 
+        ggplot(aes(x = workers,
+                   y = median_income,
+                   colour = gender))
 ```
 
-![](Data_visualisation_files/figure-epub3/complete plot-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/empty_aes-1.png)<!-- -->
 
-Great! Although stacking populations is a bit silly. You can adjust the way `geoms` work with arguments. In this case, tell it to place the different categories next to each other rather than ontop of each other using `position = "dodge"`:
+
+Now that `ggplot` knows where things should go, it needs to how to _plot_ them on the chart. For this we use `geoms`. Tell `ggplot` to take the things it knows and plot them as a column chart by using `geom_col`:
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = state,
-                   y = pop,
-                   fill = year)) +
-        geom_col(position = "dodge")
+professionals %>%
+        ggplot(aes(x = workers,
+                   y = median_income,
+                   colour = gender)) + 
+        geom_point()
 ```
 
-![](Data_visualisation_files/figure-epub3/with dodge-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/complete_plot-1.png)<!-- -->
+
+Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don't need. So filter the data before you pass it to `ggplot` to just include 2015: `filter(year == 2015)`. There will still be lots of overlapping points, so set the opacity to below one with `alpha = 0.5`. The `workers` x-axis can be changed to a log scale with `scale_x_log10`.
 
 
-That's nicer. The following sections in this chapter will build on this chart. The rest of the chapter will explore:
+```r
+professionals %>% 
+        ggplot(aes(x = workers,
+                   y = median_income,
+                   colour = gender)) + 
+        geom_point(alpha = .5) + 
+        scale_x_log10()
+```
 
+![](Data_visualisation_files/figure-epub3/with_changes-1.png)<!-- -->
+
+
+That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of `data`, `aes`, and `geom`. 
+
+The rest of the chapter will explore:
+
+  - Exploratory data visualisation
   - Grattanising your charts and choosing colours
   - Saving charts according to Grattan templates
   - Making bar, line, scatter and distribution plots
   - Making maps and interactive charts
   - Adding chart labels
 
+## Exploratory data visualisation
+
+Plotting your data early in the analysis stage can help you quickly identify outliers, oddities, things that don't look quite right. 
+
+
 
 ## Making Grattan-y charts
 
 The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/mattcowgill/grattantheme
  
-You can install it with `devtools::install_github` from the package:
+You can install it with `remotes::install_github` from the package:
 
 
 ```r
-install.packages("devtools")
+install.packages("remotes")
 remotes::install_github("mattcowgill/grattantheme")
 ```
  
@@ -143,8 +210,8 @@ The key functions of `grattantheme` are:
 
   - `theme_grattan`: set size, font and colour defaults that adhere to the Grattan style guide.
   - `grattan_y_continuous`: sets the right defaults for a continuous y-axis.
-  - `grattan_colour_continuous`: pulls colours from the Grattan colour palete for `colour` aesthetics.
-  - `grattan_fill_continuous`: pulls colours from the Grattan colour palete for `fill` aesthetics.
+  - `grattan_colour_continuous`: pulls colours from the Grattan colour palette for `colour` aesthetics.
+  - `grattan_fill_continuous`: pulls colours from the Grattan colour palette for `fill` aesthetics.
   - `grattan_save`: a save function that exports charts in correct report or presentation dimensions.
 
 This section will run through some examples of _Grattanising_ charts. The `ggplot` functions are explored in more detail in the next section.
@@ -153,19 +220,20 @@ This section will run through some examples of _Grattanising_ charts. The `ggplo
 
 ### Making Grattan charts
 
-Start with a column chart, similar to the one made above:
+Start with a scatterplot, similar to the one made above:
 
 
 ```r
-base_chart <- population_table %>% 
-        ggplot(aes(x = state,
-                   y = pop,
-                   fill = year)) +
-        geom_col(position = "dodge") +
-        labs(x = "",
-             title = "NSW and Victoria are booming",
-             subtitle = "Population by state, 2013-2018",
-             caption = "Source: ABS Regional Dataset (2019)")
+base_chart <- professionals %>% 
+        ggplot(aes(x = workers,
+                   y = median_income,
+                   colour = gender)) + 
+        geom_point(alpha = .5) + 
+        labs(title = "More professionals, the more they earn",
+             subtitle = "Median income of professional workers in SA3s",
+             x = "Number of professional workers",
+             y = "Median income",
+             caption = "Source: ABS Estimates of Personal Income for Small Areas, 2011-2016")
 
 base_chart
 ```
@@ -178,35 +246,39 @@ Let's make it Grattany. First, add `theme_grattan` to your plot:
 
 ```r
 base_chart +
-        theme_grattan()
+        theme_grattan(chart_type = "scatter")
 ```
 
 ![](Data_visualisation_files/figure-epub3/add_theme_grattan-1.png)<!-- -->
 
-Then `grattan_y_continuous` to align the x-axis with zero. This function takes the same arguments as `scale_y_continuous`, so you can add `labels = comma()` to reformat the y-axis labels:
+Then use `grattan_y_continuous` to adjust the y-axis. This takes the same arguments as the standard `scale_y_continuous` function, but has Grattan defaults built in. Use it to set the labels as dollars (with `scales::dollar()`) and to give the y-axis some breathing room (starting at \$50,000 rather than the minimum point).
+Also add `scale_x_log10` to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using `scales::comma()`).^[The `dollar` and `comma` commands are functions, but can be used without `()`. Using `dollar()` or `comma()` works too, and you can provide arguments that adjust their output: eg `dollar(suffix = "million")`]
 
 
 ```r
 base_chart +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma)
+        theme_grattan(chart_type = "scatter") +
+        grattan_y_continuous(labels = dollar, limits = c(50e3, NA)) +
+        scale_x_log10(labels = comma) 
 ```
 
 ![](Data_visualisation_files/figure-epub3/add_grattan_y_continuous-1.png)<!-- -->
 
-To define `fill` colours, use `grattan_fill_manual` with the number of colours you need (six, in this case):
+To define `colour` colours, use `grattan_colour_manual` with the number of colours you need (two, in this case):
 
 
 ```r
-pop_chart <- base_chart +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6)
+prof_chart <- base_chart +
+        theme_grattan(chart_type = "scatter") +
+        grattan_y_continuous(labels = dollar, limits = c(50e3, NA)) +
+        scale_x_log10(labels = comma) +
+        grattan_colour_manual(2) 
 
-pop_chart
+prof_chart
 ```
 
 ![](Data_visualisation_files/figure-epub3/add_fill-1.png)<!-- -->
+
 
 Nice chart! Now you can save it and share it with the world.
 
@@ -214,497 +286,175 @@ Nice chart! Now you can save it and share it with the world.
 
 The `grattan_save` function saves your charts according to Grattan templates. It takes these arguments:
 
-  - `filename`: the path, name and file-type of your saved chart. eg: `"atlas/population_chart.pdf"`.
-  - `object`: the R object that you want to save. eg: `pop_chart`. If left blank, it grabs the last chart that was displayed.
+  - `filename`: the path, name and file-type of your saved chart. eg: `"atlas/professionals_chart.pdf"`.
+  - `object`: the R object that you want to save. eg: `prof_chart`. If left blank, it grabs the last chart that was displayed.
   - `type`: the Grattan template to be used. This is one of:
-    - `"normal"` The default. Use for normal Grattan report charts, or to paste into a 4:3 Powerpoint slide. Width: 22.2cm, height: 14.5cm.
-    - `"normal_169"` Only useful for pasting into a 16:9 format Grattan Powerpoint slide. Width: 30cm, height: 14.5cm.
+    - `"normal"` The default. Use for normal Grattan report charts, or to paste into a 4:3 PowerPoint slide. Width: 22.2cm, height: 14.5cm.
+    - `"normal_169"` Only useful for pasting into a 16:9 format Grattan PowerPoint slide. Width: 30cm, height: 14.5cm.
     - `"tiny"` Fills the width of a column in a Grattan report, but is shorter than usual. Width: 22.2cm, height: 11.1cm.
     - `"wholecolumn"` Takes up a whole column in a Grattan report. Width: 22.2cm, height: 22.2cm.
     - `"fullpage"` Fills a whole page of a Grattan report. Width: 44.3cm, height: 22.2cm.
-    - `"fullslide"` Creates an image that looks like a 4:3 Grattan Powerpoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
-    - `"fullslide_169"` Creates` an image that looks like a 16:9 Grattan Powerpoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
-    - `"blog"` Creates a 4:3 image that looks like a Grattan Powerpoint slide, but with less border whitespace than 'fullslide'."
-    - `"fullslide_44" Creates` an image that looks like a 4:4 Grattan Powerpoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
+    - `"fullslide"` Creates an image that looks like a 4:3 Grattan PowerPoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.
+    - `"fullslide_169"` Creates` an image that looks like a 16:9 Grattan PowerPoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm
+    - `"blog"` Creates a 4:3 image that looks like a Grattan PowerPoint slide, but with less border whitespace than 'fullslide'."
+    - `"fullslide_44" Creates` an image that looks like a 4:4 Grattan PowerPoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.
     - Set `type = "all"` to save your chart in all available sizes.
   - `height`: override the height set by `type`. This can be useful for really long charts in blogposts.
   - `save_data`: exports a `csv` file containing the data used in the chart.
   - `force_labs`: override the removal of labels for a particular `type`. eg `force_labs = TRUE` will keep the y-axis label.
   
-To save the `pop_chart` plot created above as a whole-column chart for a **report**:
+To save the `prof_chart` plot created above as a whole-column chart for a **report**:
   
 
 ```r
-grattan_save("atlas/population_chart_report.pdf", pop_chart, type = "wholecolumn")
+grattan_save("atlas/professionals_chart_report.pdf", prof_chart, type = "wholecolumn")
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<img src="atlas/population_chart_report.png" width="2791" />
+<img src="atlas/professionals_chart_report.png" width="2791" />
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
 
 
 ```r
-grattan_save("atlas/population_chart_presentation.pdf", pop_chart, type = "fullslide")
+grattan_save("atlas/professionals_chart_presentation.pdf", prof_chart, type = "fullslide")
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_presentation.png" width="3200" />
+<img src="atlas/professionals_chart_presentation.png" width="3200" />
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
 
 
 ```r
-grattan_save("atlas/population_chart_blog.png", pop_chart, 
-             type = "blog", height = 50)
+grattan_save("atlas/professionals_chart_blog.png", prof_chart, 
+             type = "blog", height = 30)
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/population_chart_blog.png" width="3200" />
+<img src="atlas/professionals_chart_blog.png" width="3200" />
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 
-## Chart cookbook
 
-This section takes you through a few often-used chart types. 
+## Adding labels {#adding-labels}
 
-### Bar charts
+Labels can be a bit finicky -- especially compared to labelling charts visually in PowerPoint. ...
 
-Bar charts are made with `geom_bar` or `geom_col`. Creating a bar chart will look something like this:
+Labels can be done in two broad ways:
 
+1. Labelling every single data point on your chart. Grattan charts rarely do this. 
+2. Labelling some of the data points on your chart. This is how you label Grattan charts: label on item in a group and let the reader join the dots. 
 
-
-```r
-ggplot(data = <data>) + 
-  geom_bar(aes(x = <xvar>, y = <yvar>),
-     stat = <STAT>, 
-     position = <POSITION>
-  )
-```
-
-
-It has two key arguments: `stat` and `position`. 
-
-First, `stat` defines what kind of _operation_ the function will do on the dataset before plotting. Some options are:
-
-- `"count"`, the default: count the number of observations in a particular group, and plot that number. This is useful when you're using microdata. When this is the case, there is no need for a `y` aesthetic.
-- `"sum"`: sum the values of the `y` aesthetic.
-- `"identity"`: directly report the values of the `y` aesthetic. This is how Powerpoint and Excel charts work.
-
-You can use `geom_col` instead, as a shortcut for `geom_bar(stat = "identity)`. 
-
-Second, `position`, dictates how multiple bars occupying the same x-axis position will positioned. The options are:
-
-- `"stack"`, the default: bars in the same group are stacked atop one another.
-- `"dodge"`: bars in the same group are positioned next to one another.
-- `"fill"`: bars in the same group are stacked and all fill to 100 per cent.
+We'll look at the first approach so you can get a feel for how the labelling geoms -- `geom_label` and `geom_text` (and some useful extensions) -- work. It won't be pretty.
 
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = state,
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6)
+prof_chart +
+  geom_text(aes(label = gender))
 ```
 
-![](Data_visualisation_files/figure-epub3/bar2-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/add_annotate-1.png)<!-- -->
 
+Great! That looks _terrible_. `geom_text` is labelling each individual point because it has been told to do so. Just like `geom_point`, it takes the `x` and `y` aesthetics of each observation, then plots the `label` at that location. But we just want to label one of the points for `female` and one for `male`. 
 
-You can also **order** the groups in your chart by a variable. If you want to order states by population, use `reorder` inside `aes`:
+To do this, we can create a new dataset that just contains one observation each. Here, you're filtering the dataset to include _only_ the female/male observations that have the most people:
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), # reorder state by negative population
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6) + 
-        labs(x = "")
+label_data <- professionals %>% 
+  group_by(gender) %>% 
+  filter(workers == max(workers)) %>% 
+  ungroup()
+
+label_data
 ```
 
-![](Data_visualisation_files/figure-epub3/bar3-1.png)<!-- -->
+```
+## # A tibble: 2 x 14
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
+##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
+## 1 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
+## 2 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
+## # … with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## #   average_income <dbl>, total_income <dbl>, workers <dbl>
+```
 
-To flip the chart -- a useful move when you have long labels -- add `coord_flipped` (ie 'flip coordinates') and tell `theme_grattan` that the plot is flipped using `flipped = TRUE`. 
+And then tell `geom_text` to look at _that_ dataset:
+
+```r
+prof_chart +
+  geom_text(data = label_data,
+            aes(label = gender))
+```
+
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+
+Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the `label_data`:
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = reorder(state, -pop), 
-                   y = pop,
-                   fill = year)) +
-        geom_bar(stat = "identity",
-                 position = "dodge") +
-        coord_flip() +  # flip the coordinates
-        theme_grattan(flipped = TRUE) +  # tell theme_grattan
-        grattan_y_continuous(labels = comma) +
-        grattan_fill_manual(6) + 
-        labs(x = "")
+label_data_short <- label_data %>% 
+  mutate(gender_label = if_else(gender == "Females", 
+                             "Women", 
+                             "Men"))
+
+prof_chart +
+  geom_text(data = label_data_short,
+            aes(label = gender_label))
 ```
 
-![](Data_visualisation_files/figure-epub3/bar4-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
 
-
-### Line charts
-
-A line chart has one key aesthetic: `group`. This tells `ggplot` how to connect individual lines.
+_Or_ you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   colour = state,
-                   group = state)) +
-        geom_line() +
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(9) +
-        labs(x = "")
+prof_chart +
+  geom_text(data = label_data,
+            aes(label = c("Female", "Male")))
 ```
 
-```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
-## faded): Using more than six colours is not recommended.
-```
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
-![](Data_visualisation_files/figure-epub3/line1-1.png)<!-- -->
 
-You can also add dots for each year by layering `geom_point` on top of `geom_line`:
+To have more freedom over _where_ your labels are placed, you can create a dataset yourself. Add the `x` and `y` values for your labels, and the label names.^[We are using the `tribble` function here to make it a little bit clearer what values apply to which gender. The 'normal' way to create a tibble is with the `tibble` function: <br> `tibble(x = c(10, 100), y = c(100, 10))`, etc.]
 
 
 ```r
-population_table %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   colour = state,
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        theme_grattan() +
-        grattan_y_continuous(labels = comma) +
-        grattan_colour_manual(9) + 
-        labs(x = "")
+self_label <- tribble(
+  ~gender, ~workers,   ~median_income,
+  "Women",    23000,            55000,
+  "Men",      23000,           110000)
+
+
+self_label
 ```
 
 ```
-## Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =
-## faded): Using more than six colours is not recommended.
+## # A tibble: 2 x 3
+##   gender workers median_income
+##   <chr>    <dbl>         <dbl>
+## 1 Women    23000         55000
+## 2 Men      23000        110000
 ```
-
-![](Data_visualisation_files/figure-epub3/line2-1.png)<!-- -->
-
-If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
-
-
-```r
-population_table %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = year,
-                   y = pop,
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        theme_grattan() +
-        grattan_y_continuous() +
-        facet_wrap(state ~ .) + 
-        labs(x = "")
-```
-
-![](Data_visualisation_files/figure-epub3/line3-1.png)<!-- -->
-
-To tidy this up, we can: 
-
-  1. shorten the years to be "13", "14", etc instead of "2013", "2014", etc (via the `x` aesthetic)
-  1. shorten the y-axis labels to "millions" (via the `y` aesthetic)
-  1. add a black horizontal line at the bottom of each facet
-  1. give the facets a bit of room by adjusting `panel.spacing`
-  1. define our own x-axis label breaks to just show `13`, `15` and `17`
-
 
 
 
 ```r
-population_table %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = substr(year, 3, 4), # 1: just take the last two characters
-                   y = pop / 1e6, # 2: divide population by one million
-                   group = state)) +
-        geom_line() +
-        geom_point(size = 2) + 
-        geom_hline(yintercept = 0) + # 3: add horizontal line at the bottom
-        theme_grattan() +
-        theme(panel.spacing = unit(10, "mm")) + # 4: add panel spacing
-        grattan_y_continuous(labels = comma) +
-        scale_x_discrete(breaks = c("13", "15", "17")) + # 5: define our own label breaks
-        facet_wrap(state ~ .) + 
-        labs(x = "")
+prof_chart +
+  geom_text(data = self_label,
+            aes(label = gender), 
+            hjust = 1)
 ```
 
-![](Data_visualisation_files/figure-epub3/line4-1.png)<!-- -->
+![](Data_visualisation_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
-
-
-
-### Scatter plots
-
-Scatter plots require `x` and `y` aesthetics. These can then be coloured and facetted.
-
-First, create a dataset that we'll use for scatter plots. Take the `population_table` dataset and transform it to have one variable for population in 2013, and another for population in 2018:
-
-
-```r
-population_diff <- read_csv("data/population_sa4.csv") %>% 
-        mutate(state_long = state,
-               state = strayr::strayr(state_long),
-               pop = as.numeric(value),
-               year = as.factor(glue::glue("y{year}"))) %>% 
-        filter(year %in% c("y2013", "y2018"),
-               data_item == "Persons - Total (no.)",
-               sa4_name != "Other Territories") %>% 
-        group_by(year, state, sa4_name) %>% 
-        summarise(pop = sum(pop)) %>% 
-        spread(year, pop) %>% 
-        mutate(pop_change = 100 * (y2018 / y2013 - 1))
-```
-
- 
-
-```r
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,
-                   y = pop_change)) +
-        geom_point(size = 4) + 
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
-```
-
-![](Data_visualisation_files/figure-epub3/scatter1-1.png)<!-- -->
-
-
-It looks like the areas with the largest population grew the most between 2013 and 2018. To explore the relationship further, you can add a line-of-best-fit with `geom_smooth`:
-
-
-```r
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(size = 4) + 
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
-```
-
-![](Data_visualisation_files/figure-epub3/scatter2-1.png)<!-- -->
-
-
-You could colour-code positive and negative changes from within the `geom_point` aesthetic. Making a change there won't pass through to the `geom_smooth` aesthetic, so your line-of-best-fit will apply to all data points.
-
-
-```r
-population_diff %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(aes(colour = pop_change < 0),
-                   size = 4) + 
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        grattan_colour_manual(2) +
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands")
-```
-
-![](Data_visualisation_files/figure-epub3/scatter3-1.png)<!-- -->
-
-
-Like the charts above, you could facet this by state to see if there were any interesting patterns. We'll filter out ACT and NT because they only have one and two data points (SA4s) in them, respectively.
-
-
-```r
-population_diff %>% 
-        filter(state != "ACT",
-               state != "NT") %>% 
-        ggplot(aes(x = y2013/1000,  # display the x-axis as thousands
-                   y = pop_change)) +
-        geom_point(aes(colour = pop_change < 0),
-                   size = 2) +
-        geom_smooth() + 
-        geom_hline(yintercept = 0) +
-        theme_grattan() +
-        theme(axis.title.y = element_text(angle = 90)) +
-        grattan_y_continuous() + 
-        grattan_colour_manual(2) +
-        labs(y = "Population increase to 2018, per cent",
-             x = "Population in 2013, thousands") +
-        facet_wrap(state ~ .)
-```
-
-![](Data_visualisation_files/figure-epub3/scatter4-1.png)<!-- -->
-
-
-### Distributions
-
-`geom_histogram`
-`geom_density`
-
-`ggridges::`
-
-
-### Maps
-
-#### `sf` objects
-[what is]
-
-#### Using `absmapsdata`
-
-The `absmapsdata` contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
-
-  - Statistical Area 1 2011: `sa12011`
-  - Statistical Area 1 2016: `sa12016`
-  - Statistical Area 2 2011: `sa22011`
-  - Statistical Area 2 2016: `sa22016`
-  - Statistical Area 3 2011: `sa32011`
-  - Statistical Area 3 2016: `sa32016`
-  - Statistical Area 4 2011: `sa42011`
-  - Statistical Area 4 2016: `sa42016`
-  - Greater Capital Cities 2011: `gcc2011`
-  - Greater Capital Cities 2016: `gcc2016`
-  - Remoteness Areas 2011: `ra2011`
-  - Remoteness Areas 2016: `ra2016`
-  - State 2011: `state2011`
-  - State 2016: `state2016`
-  - Commonwealth Electoral Divisions 2018: `ced2018`
-  - State Electoral Divisions 2018:`sed2018`
-  - Local Government Areas 2016: `lga2016`
-  - Local Government Areas 2018: `lga2018`
-
-You can install the package from Github. You will also need the `sf` package installed to handle the `sf` objects.
-
-
-```r
-devtools::install_github("wfmackey/absmapsdata")
-library(absmapsdata)
-
-install.packages("sf")
-library(sf)
-```
-
-
-
-
-#### Making choropleth maps
-
-Choropleth maps break an area into 'bits', and colours each 'bit' according to a variable.
-
-SA4 is the largest non-state statistical area in the ABS ASGS standard. 
-
-You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa4_name` compared to `sa4_name_2016` -- so use the `by` function to match them.
-
-
-```r
-map_data <- population_diff %>% 
-        left_join(sa42016, by = c("sa4_name" = "sa4_name_2016"))
-
-head(map_data %>% 
-       select(sa4_name, geometry))
-```
-
-```
-## # A tibble: 6 x 3
-## # Groups:   state [2]
-##   state sa4_name                                                   geometry
-##   <chr> <chr>                                            <MULTIPOLYGON [°]>
-## 1 ACT   Australian Capita… (((148.8041 -35.71402, 148.8018 -35.7121, 148.7…
-## 2 NSW   Capital Region     (((150.3113 -35.66588, 150.3126 -35.66814, 150.…
-## 3 NSW   Central Coast      (((151.315 -33.55582, 151.3159 -33.55503, 151.3…
-## 4 NSW   Central West       (((150.6107 -33.06614, 150.6117 -33.07051, 150.…
-## 5 NSW   Coffs Harbour - G… (((153.2785 -29.91874, 153.2773 -29.92067, 153.…
-## 6 NSW   Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…
-```
-
-You then plot a map like you would any other `ggplot`: provide your data, choose your `aes` and your `geom`. For maps with `sf` objects, the key **aesthetic** is `geometry = geometry`, and the **geom** is `geom_sf`.
-
-
-
-```r
-map <- map_data %>% 
-        ggplot(aes(geometry = geometry,
-                   fill = pop_change)) +
-        geom_sf(lwd = 0) +
-        theme_void() +
-        grattan_fill_manual(discrete = FALSE, 
-                            palette = "diverging",
-                            limits = c(-20, 20),
-                            breaks = seq(-20, 20, 10)) +
-  labs(fill = "Population change")
-
-map
-```
-
-![](Data_visualisation_files/figure-epub3/map1-1.png)<!-- -->
-
-
-
-## Creating simple interactive graphs with `plotly`
-
-`plotly::ggplotly()`
-
-
-
-## bin: generate data used (before prior sections are constructed)
-
-
-```r
-library(tidyverse)
-library(janitor)
-library(absmapsdata)
-
-data <- read_csv("data/ABS_REGIONAL_ASGS2016_02082019164509969.csv") %>% 
-        clean_names() %>% 
-        select(data_code = measure,
-               data_item,
-               asgs = regiontype,
-               sa4_code_2016 = asgs_2016,
-               sa4_name_2016 = region,
-               year = time,
-               value) %>% 
-        mutate(sa4_code_2016 = as.character(sa4_code_2016)) %>% 
-        left_join(sa42016 %>% select(sa4_code_2016, state_name_2016)) %>% 
-        rename(state = state_name_2016,
-               sa4_code = sa4_code_2016,
-               sa4_name = sa4_name_2016) %>% 
-        mutate(state_long = state,
-               state = strayr::strayr(state_long))
-               
-write_csv(data, "data/population_sa4.csv")
-```
-
-
-
+[cover `annotate`]
