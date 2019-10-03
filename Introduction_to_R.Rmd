@@ -68,7 +68,7 @@ Like R itself, packages are free and open source. You can install them from with
 
 At Grattan, we make heavy use of a set of related packages known collectively as the `tidyverse`. We'll cover this more in a later chapter.
 
-### Installing packages
+### Installing packages {#install-packages}
 
 You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
 

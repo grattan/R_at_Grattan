@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Common packages at R | Using R at Grattan Institute</title>
+  <meta name="description" content="How to use R at Grattan good. In development." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Common packages at R | Using R at Grattan Institute" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta name="github-repo" content="grattan/R_at_Grattan" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Common packages at R | Using R at Grattan Institute" />
+  
+  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  
+
+<meta name="author" content="Will Mackey and Matt Cowgill" />
+
+
+<meta name="date" content="2019-09-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="coding-style.html"/>
+<link rel="next" href="data-visualisation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Using R at Grattan Institute</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>1.4</b> Packages</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>1.4.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-packages"><i class="fa fa-check"></i><b>1.4.2</b> Using packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#use-rstudio-projects-not-setwd"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a></li>
+<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.2</b> Keep your stuff together</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
+<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#rules_9a_final_final_mc"><i class="fa fa-check"></i><b>3.7</b> Rules_9a_FINAL_FINAL_MC</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
+<li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.1</b> Script preamble</a></li>
+<li class="chapter" data-level="4.2" data-path="coding-style.html"><a href="coding-style.html#use-comments"><i class="fa fa-check"></i><b>4.2</b> Use comments</a></li>
+<li class="chapter" data-level="4.3" data-path="coding-style.html"><a href="coding-style.html#breaking-your-script-into-chunks"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into chunks</a></li>
+<li class="chapter" data-level="4.4" data-path="coding-style.html"><a href="coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.4</b> Naming objects and variables</a></li>
+<li class="chapter" data-level="4.5" data-path="coding-style.html"><a href="coding-style.html#spacing"><i class="fa fa-check"></i><b>4.5</b> Spacing</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="coding-style.html"><a href="coding-style.html#assign-and-equals"><i class="fa fa-check"></i><b>4.5.1</b> Assign and equals</a></li>
+<li class="chapter" data-level="4.5.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.5.2</b> Commas</a></li>
+<li class="chapter" data-level="4.5.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.5.3</b> Parentheses</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>4.6</b> Short lines and line indentation</a></li>
+<li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#blocks-of-code"><i class="fa fa-check"></i><b>4.7</b> Blocks of code</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="common-packages-at-r.html"><a href="common-packages-at-r.html"><i class="fa fa-check"></i><b>5</b> Common packages at R</a><ul>
+<li class="chapter" data-level="5.1" data-path="common-packages-at-r.html"><a href="common-packages-at-r.html#tidyverse"><i class="fa fa-check"></i><b>5.1</b> The tidyverse</a></li>
+<li class="chapter" data-level="5.2" data-path="common-packages-at-r.html"><a href="common-packages-at-r.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>5.2</b> What is the tidyverse and why do we use it?</a></li>
+<li class="chapter" data-level="5.3" data-path="common-packages-at-r.html"><a href="common-packages-at-r.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>5.3</b> An introduction to RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>6</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>6.1</b> Set-up and packages</a></li>
+<li class="chapter" data-level="6.2" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3"><i class="fa fa-check"></i><b>6.2</b> # A tibble: 6 x 3</a></li>
+<li class="chapter" data-level="6.3" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-year-1"><i class="fa fa-check"></i><b>6.3</b> # Groups: year [1]</a></li>
+<li class="chapter" data-level="6.4" data-path="data-visualisation.html"><a href="data-visualisation.html#year-state-pop"><i class="fa fa-check"></i><b>6.4</b> year state pop</a></li>
+<li class="chapter" data-level="6.5" data-path="data-visualisation.html"><a href="data-visualisation.html#section"><i class="fa fa-check"></i><b>6.5</b> <fct> <chr> <dbl></a></li>
+<li class="chapter" data-level="6.6" data-path="data-visualisation.html"><a href="data-visualisation.html#australian-capital-territory-383257"><i class="fa fa-check"></i><b>6.6</b> 1 2013 Australian Capital Territory 383257</a></li>
+<li class="chapter" data-level="6.7" data-path="data-visualisation.html"><a href="data-visualisation.html#new-south-wales-7404032"><i class="fa fa-check"></i><b>6.7</b> 2 2013 New South Wales 7404032</a></li>
+<li class="chapter" data-level="6.8" data-path="data-visualisation.html"><a href="data-visualisation.html#northern-territory-241722"><i class="fa fa-check"></i><b>6.8</b> 3 2013 Northern Territory 241722</a></li>
+<li class="chapter" data-level="6.9" data-path="data-visualisation.html"><a href="data-visualisation.html#other-territories-2962"><i class="fa fa-check"></i><b>6.9</b> 4 2013 Other Territories 2962</a></li>
+<li class="chapter" data-level="6.10" data-path="data-visualisation.html"><a href="data-visualisation.html#queensland-4652824"><i class="fa fa-check"></i><b>6.10</b> 5 2013 Queensland 4652824</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualisation.html"><a href="data-visualisation.html#south-australia-1671488"><i class="fa fa-check"></i><b>6.11</b> 6 2013 South Australia 1671488</a></li>
+<li class="chapter" data-level="6.12" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>6.12</b> Concepts</a></li>
+<li class="chapter" data-level="6.13" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>6.13</b> Making Grattan-y charts</a><ul>
+<li class="chapter" data-level="6.13.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>6.13.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="6.13.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>6.13.2</b> Saving Grattan charts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.14" data-path="data-visualisation.html"><a href="data-visualisation.html#chart-cookbook"><i class="fa fa-check"></i><b>6.14</b> Chart cookbook</a><ul>
+<li class="chapter" data-level="6.14.1" data-path="data-visualisation.html"><a href="data-visualisation.html#bar-charts"><i class="fa fa-check"></i><b>6.14.1</b> Bar charts</a></li>
+<li class="chapter" data-level="6.14.2" data-path="data-visualisation.html"><a href="data-visualisation.html#line-charts"><i class="fa fa-check"></i><b>6.14.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.15" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded"><i class="fa fa-check"></i><b>6.15</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
+<li class="chapter" data-level="6.16" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended."><i class="fa fa-check"></i><b>6.16</b> faded): Using more than six colours is not recommended.</a></li>
+<li class="chapter" data-level="6.17" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded-1"><i class="fa fa-check"></i><b>6.17</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
+<li class="chapter" data-level="6.18" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended.-1"><i class="fa fa-check"></i><b>6.18</b> faded): Using more than six colours is not recommended.</a><ul>
+<li class="chapter" data-level="6.18.1" data-path="data-visualisation.html"><a href="data-visualisation.html#scatter-plots"><i class="fa fa-check"></i><b>6.18.1</b> Scatter plots</a></li>
+<li class="chapter" data-level="6.18.2" data-path="data-visualisation.html"><a href="data-visualisation.html#distributions"><i class="fa fa-check"></i><b>6.18.2</b> Distributions</a></li>
+<li class="chapter" data-level="6.18.3" data-path="data-visualisation.html"><a href="data-visualisation.html#maps"><i class="fa fa-check"></i><b>6.18.3</b> Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="6.19" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3-1"><i class="fa fa-check"></i><b>6.19</b> # A tibble: 6 x 3</a></li>
+<li class="chapter" data-level="6.20" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-state-2"><i class="fa fa-check"></i><b>6.20</b> # Groups: state [2]</a></li>
+<li class="chapter" data-level="6.21" data-path="data-visualisation.html"><a href="data-visualisation.html#state-sa4_name-geometry"><i class="fa fa-check"></i><b>6.21</b> state sa4_name geometry</a></li>
+<li class="chapter" data-level="6.22" data-path="data-visualisation.html"><a href="data-visualisation.html#multipolygon"><i class="fa fa-check"></i><b>6.22</b> <chr> <chr> &lt;MULTIPOLYGON [°]&gt;</a></li>
+<li class="chapter" data-level="6.23" data-path="data-visualisation.html"><a href="data-visualisation.html#act-australian-capita-148.8041--35.71402-148.8018--35.7121-148.7"><i class="fa fa-check"></i><b>6.23</b> 1 ACT Australian Capita… (((148.8041 -35.71402, 148.8018 -35.7121, 148.7…</a></li>
+<li class="chapter" data-level="6.24" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-capital-region-150.3113--35.66588-150.3126--35.66814-150."><i class="fa fa-check"></i><b>6.24</b> 2 NSW Capital Region (((150.3113 -35.66588, 150.3126 -35.66814, 150.…</a></li>
+<li class="chapter" data-level="6.25" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-coast-151.315--33.55582-151.3159--33.55503-151.3"><i class="fa fa-check"></i><b>6.25</b> 3 NSW Central Coast (((151.315 -33.55582, 151.3159 -33.55503, 151.3…</a></li>
+<li class="chapter" data-level="6.26" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-west-150.6107--33.06614-150.6117--33.07051-150."><i class="fa fa-check"></i><b>6.26</b> 4 NSW Central West (((150.6107 -33.06614, 150.6117 -33.07051, 150.…</a></li>
+<li class="chapter" data-level="6.27" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-coffs-harbour---g-153.2785--29.91874-153.2773--29.92067-153."><i class="fa fa-check"></i><b>6.27</b> 5 NSW Coffs Harbour - G… (((153.2785 -29.91874, 153.2773 -29.92067, 153.…</a></li>
+<li class="chapter" data-level="6.28" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-far-west-and-orana-150.1106--31.74613-150.1103--31.74892-150."><i class="fa fa-check"></i><b>6.28</b> 6 NSW Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…</a></li>
+<li class="chapter" data-level="6.29" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>6.29</b> Creating simple interactive graphs with <code>plotly</code></a></li>
+<li class="chapter" data-level="6.30" data-path="data-visualisation.html"><a href="data-visualisation.html#bin-generate-data-used-before-prior-sections-are-constructed"><i class="fa fa-check"></i><b>6.30</b> bin: generate data used (before prior sections are constructed)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>7</b> Reading data</a><ul>
+<li class="chapter" data-level="7.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>7.1</b> Importing data</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>7.1.1</b> Reading CSV files</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>7.1.2</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>7.1.3</b> <code>rio</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>7.1.4</b> <code>readabs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>7.2</b> Reading common files:</a></li>
+<li class="chapter" data-level="7.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>7.3</b> Appropriately renaming variables</a></li>
+<li class="chapter" data-level="7.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>7.4</b> Getting to tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>8</b> Different data types</a><ul>
+<li class="chapter" data-level="8.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>8.1</b> Tidy data</a></li>
+<li class="chapter" data-level="8.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>8.2</b> Dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="8.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>8.3</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="8.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>8.4</b> Factors with <code>forcats::</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>9</b> Data transformation</a><ul>
+<li class="chapter" data-level="9.1" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>9.1</b> The pipe</a></li>
+<li class="chapter" data-level="9.2" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>9.2</b> Key <code>dplyr</code> functions:</a></li>
+<li class="chapter" data-level="9.3" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>9.3</b> Filter with <code>filter()</code></a></li>
+<li class="chapter" data-level="9.4" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>9.4</b> Arrange with <code>arrange()</code></a></li>
+<li class="chapter" data-level="9.5" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>9.5</b> Select variables with <code>select()</code></a></li>
+<li class="chapter" data-level="9.6" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>9.6</b> Group data with <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.7" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>9.7</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="9.7.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>9.7.1</b> Cases when you should use <code>case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>9.8</b> Summarise data with <code>summarise()</code></a></li>
+<li class="chapter" data-level="9.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>9.9</b> Joining datasets with <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>10</b> Analysis</a></li>
+<li class="chapter" data-level="11" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>11</b> Creating functions</a><ul>
+<li class="chapter" data-level="11.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>11.1</b> It can be useful to make your own function</a></li>
+<li class="chapter" data-level="11.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>11.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="11.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>11.3</b> More complex functions</a></li>
+<li class="chapter" data-level="11.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>11.4</b> Sets of functions</a></li>
+<li class="chapter" data-level="11.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>11.5</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="11.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>11.6</b> Sharing your useful functions with Grattan</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>12</b> Version control</a><ul>
+<li class="chapter" data-level="12.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>12.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="12.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>12.2</b> Github</a></li>
+<li class="chapter" data-level="12.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>12.3</b> Git</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using R at Grattan Institute</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="common-packages-at-r" class="section level1">
+<h1><span class="header-section-number">5</span> Common packages at R</h1>
+<div id="tidyverse" class="section level2">
+<h2><span class="header-section-number">5.1</span> The tidyverse</h2>
+</div>
+<div id="what-is-the-tidyverse-and-why-do-we-use-it" class="section level2">
+<h2><span class="header-section-number">5.2</span> What is the tidyverse and why do we use it?</h2>
+</div>
+<div id="an-introduction-to-rmarkdown" class="section level2">
+<h2><span class="header-section-number">5.3</span> An introduction to RMarkdown</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="coding-style.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["r-at-grattan.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

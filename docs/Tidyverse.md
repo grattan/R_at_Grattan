@@ -1,7 +1,64 @@
-# The tidyverse 
+# Packages commonly used at Grattan
 
-## What is the tidyverse and why do we use it?
+R can do a lot out of the box, but a range of [packages](#packages) make our lives easier.
+
+Some packages - like the `tidyverse` collection of packages - are broadly popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+## The tidyverse! {#tidyverse}
+
+The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) that all work well together. You install it in the [usual way](#install-packages):
 
 
-## An introduction to RMarkdown
+```r
+install.packages("tidyverse")
+```
 
+The main packages in the tidyverse include:
+
+* *ggplot2* for making beautiful, customisable graphs
+* *dplyr* for manipulating data frames
+* *tidyr* for tidying your data
+* *readr* for importing data from a broad range of formats
+* *purrr* for functional programming
+* *stringr* for manipulating strings of text
+
+All these packages (and more!) will automatically be loaded for you when you run the command:
+
+
+```r
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+```
+
+```
+## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0
+```
+
+```
+## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+```
+
+A range of other packages are installed on your machine as part of the `tidyverse.` These include:
+
+* *readxl* for importing Excel spreadsheets into R
+* *haven* for importing Stata, SAS and SPSS data
+* *lubridate* for working with dates
+* *rvest* for scraping websites
+
+Although these packages are installed as part of the `tidyverse`, they aren't loaded automatically when you run `library(tidyverse)`. You'll need to load them individually, like:
+
+
+```r
+library(lubridate)
+```
+
+
+# Writing reproducible documents with RMarkdown
