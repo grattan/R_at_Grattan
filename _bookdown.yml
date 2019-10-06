@@ -13,7 +13,7 @@ rmd_files: [
   "Why_use_R.Rmd",
   "Organising_R_projects.Rmd",
   "Style_guide.Rmd",
-  "Tidyverse.Rmd",
+  "Packages_at_Grattan.Rmd",
   "Data_visualisation.Rmd",
   "Reading_data.Rmd",
   "Different_data_types.Rmd",

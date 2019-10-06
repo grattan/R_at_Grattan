@@ -72,21 +72,47 @@ transform(my_data[my_data$age >= 30, ],
 
 The base R code gets the job done, but it's clunkier, less expressive, and harder to read. 
 
-Code written with `tidyverse` functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern.^[When working with larger datasets, you can gain speed using other packages, such as [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html). Fortunately, using the `dtplyr` package you can get most of the speed benefits of `data.table` and stick to familiar `dplyr` syntax.]
+Code written with `tidyverse` functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern anyway.^[When working with very large datasets, it might be worth gaining speed using other packages, such as [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html). Fortunately, using the `dtplyr` package you can get most of the speed benefits of `data.table` and stick to familiar `dplyr` syntax.]
 
-The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The `tidyverse` packages strike a good balance between expressive, comprehensible code and computational efficiency.
+The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The `tidyverse` packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.
 
 Most R scripts at Grattan should start with `library(tidyverse)`. Most of your work will be in data frames, and most of the time the `tidyverse` contains the core tools you'll need to do that work.
 
-## Grattan-specific packages
+## Grattan-specific packages {#grattan-specific-packages}
 
-A range of Grattan people have written packages that come in handy at Grattan.
+A range of Grattan people have written packages that come in handy at Grattan. 
 
-* *grattan*
-* *grattantheme*
-* *grattandata*
+* *grattan* The `grattan` package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname "Grattax") is used for modelling the personal income tax system. Another set of functions ("Grattools") are useful for a lot of our work, like converting dates to financial years (`grattan::date2fy()`) or a version of `dplyr::ntile()` that uses weights (`grattan::weighted_ntile()`). 
 
+* *grattantheme* The `grattantheme` package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter. **NOTE: ADD LINK**.
+
+* *grattandata* The `grattandata` package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the [reading data](#reading-data) chapter.
+
+Install these Grattan-specific packages using this block of code:
+
+```{r install-grattan-packages, eval = FALSE}
+# This code checks to see if you have the `remotes` package installed; if not,
+# it will install `devtools` for you, which includes `remotes`
+if(!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+# Install the `grattan` package from CRAN:
+install.packages("grattan")
+
+# Install `grattantheme` and `grattandata` from GitHub:
+remotes::install_github("mattcowgill/grattantheme",
+                        upgrade = "always",
+                        dependencies = TRUE)
+
+remotes::install_github("mattcowgill/grattandata",
+                        upgrade = "always",
+                        dependencies = TRUE)
+
+```
 
 ## Other commonly-used packages
+
+
 
 # Writing reproducible documents with RMarkdown
