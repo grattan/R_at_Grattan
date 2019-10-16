@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-02}
+    \date{2019-10-16}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -154,9 +154,9 @@ It does two main things:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Shows you how to use R to complete common analytical tasks you'll face at Grattan.
-\item
   Sets out some guidelines and good practices when using R at Grattan.
+\item
+  Shows you how to use R to the sort of analytical tasks you're likely to undertake at Grattan.
 \end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
@@ -182,6 +182,8 @@ R has a lot in common with other statistical software like SAS, Stata, SPSS or E
 You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
 
 R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
+
+Anything you can do in spreadsheet software like Excel can be done in R, plus much, much more. See \protect\hyperlink{why-script}{the next page} for more on why we generally use R rather than Excel.
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
 
@@ -237,8 +239,8 @@ Like R itself, packages are free and open source. You can install them from with
 
 At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover this more in a later chapter.
 
-\hypertarget{installing-packages}{%
-\subsection{Installing packages}\label{installing-packages}}
+\hypertarget{install-packages}{%
+\subsection{Installing packages}\label{install-packages}}
 
 You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
 
@@ -297,6 +299,11 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 It usually makes sense to load a package with \texttt{library()}, unless you only need to use one of its function once or twice. There's no harm to using the \texttt{::} operator even if you have already loaded a package with \texttt{library()}. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
+\hypertarget{learning-more-about-r}{%
+\section{Learning more about R}\label{learning-more-about-r}}
+
+This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book \href{https://r4ds.had.co.nz}{R For Data Science} by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online.
+
 \hypertarget{why-use-r}{%
 \chapter{Why use R?}\label{why-use-r}}
 
@@ -316,40 +323,40 @@ We can break this question into two parts:
 
 It's important for our analyses to be \textbf{reproducible}. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary.
 
-Reproducibility is very important for QC, particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
+Reproducibility is very important for quality control (``QC''), particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
 
 Script-based analyses are more likely to be reproducible.\footnote{Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data ``cleaning'' in Excel - then it is not fully reproducible.} A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.
 
 Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the `raw data' and what has been modified in some way.
 
-Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
+Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
 Script-based analysis software also allows us to:
 * Work with larger data sets;
 * Work with data in a broader range of formats;
 * Easily combine different data sets;
 * Automate tasks and build from previous analyses; and
-* Estimate statistical models.
+* Estimate a broad range of statistical models.
 
 \hypertarget{why-R}{%
 \section{Why use R specifically?}\label{why-R}}
 
-Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though harder in SPSS, where data is primarily manipulated by clicking things).
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is primarily manipulated by clicking things).
 
 We use R specifically because:
 * It's free!
 * It's open source.
 * It's powerful, particularly when it comes to statistics and data science.
-* It's flexible.
+* It's flexible and customisable.
 * It has an active community extending its capabilities all the time and providing support online.
 * It is becoming the norm in academic research and common in the corporate world.
 
-Everything you can do in Excel can be done in R.
+Everything you can do in Excel can, and usually should, be done in R.
 
 \hypertarget{organising-projects}{%
 \chapter{Organising an R project at Grattan}\label{organising-projects}}
 
-All our work, in R or otherwise, should heed the ``hit by a bus'' rule - if you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
+All our work at Grattan, whether it's in R or some other software, should heed the ``hit by a bus'' rule. If you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
 
 Organising your analysis in a predictable, consistent way helps to make your work reproducible by others, including yourself in the future. This is really important! If your analysis is messy, you're more likely to make errors, and less likely to spot them. Other people will find it hard to check your analysis and you'll find it harder to return to it down the track.
 
@@ -358,21 +365,21 @@ This page sets out some guidelines for organising your work in R at Grattan. It 
 \begin{itemize}
 \tightlist
 \item
-  Using RStudio projects and relative filepaths
+  Using RStudio projects and relative filepaths;
 \item
-  Using a consistent subfolder structure
+  Using a consistent subfolder structure; and
 \item
-  Naming your scripts and keeping them manageable
-\item
-  Coding style at Grattan
+  Naming your scripts and keeping them manageable.
 \end{itemize}
+
+Using a consistent coding style also helps make our work more shareable; that's \protect\hyperlink{coding-style}{covered on the next page}.
 
 \hypertarget{use-rstudio-projects-not-setwd}{%
 \section{\texorpdfstring{Use RStudio projects, not \texttt{setwd()}}{Use RStudio projects, not setwd()}}\label{use-rstudio-projects-not-setwd}}
 
-You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory.
+You'll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command \texttt{getwd()}.
 
-One way to tell R which folder to use as your working directory is using the command \texttt{setwd()}, like \texttt{setwd("\textasciitilde{}/Desktop/some\ random\ folder")} or \texttt{setwd("C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Documents\textbackslash{}Somerandomfolder")}. \textbf{This is a bad idea!} If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
+You can tell R which folder to use as your working directory by using the command \texttt{setwd()}, as in \texttt{setwd("\textasciitilde{}/Desktop/some\ random\ folder")} or \texttt{setwd("C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Documents\textbackslash{}Somerandomfolder")}. \textbf{This is a bad idea that you should avoid!} If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
 In the \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{words of Jenny Bryan}:
 
@@ -387,6 +394,35 @@ Creating a `project' in RStudio sets your working directory in a way that's port
 \begin{center}\includegraphics[width=0.66\linewidth]{atlas/rstudio_newproject} \end{center}
 
 RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -\textgreater{} Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
+
+\hypertarget{use-relative-filepaths}{%
+\section{Use relative filepaths}\label{use-relative-filepaths}}
+
+A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths.
+Machine-specific filepaths not only stop you from sharing your work with others, they're also super annoying for! Who wants to type out a full filepath everytime you load or save a file?
+
+\textbf{Bad, machine-specific filepaths}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/hes1516.csv"}\NormalTok{)}
+\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csb}\NormalTok{(}\StringTok{"C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Desktop\textbackslash{}hes1516.csv"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
+
+\textbf{Good, relative filepaths}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
+\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/expenditure_by_income.pdf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The first example above tells R to look in the `data' subdirectory of your project folder, and then the `HES' subdirectory of `data', to find the `hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
 
 \hypertarget{keep-your-stuff-together}{%
 \section{Keep your stuff together}\label{keep-your-stuff-together}}
@@ -409,44 +445,7 @@ A good structure is to have a subfolder for:
   your non-graph output, like formatted tables, called `output'
 \end{itemize}
 
-Sometimes your data folder might have subfolders - `raw' for data that you've done nothing to, and `clean' for data you've modified in some way.\footnote{Other folder structures are OK and might make more sense for your project. The important thing is to \textbf{have} a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.}
-
-\hypertarget{README}{%
-\section{Include a README file}\label{README}}
-
-Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!
-
-Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.
-
-Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.
-
-\hypertarget{use-relative-filepaths}{%
-\section{Use relative filepaths}\label{use-relative-filepaths}}
-
-When you read or write files with R, don't use filepaths that are specific to your machine. For one thing, these machine-specific filepaths will fail when someone else tries to run your script. For another, they're super annoying! Who wants to type out a full filepath everytime you load or save a file?
-
-\textbf{Bad}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/hes1516.csv"}\NormalTok{)}
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csb}\NormalTok{(}\StringTok{"C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Desktop\textbackslash{}hes1516.csv"}\NormalTok{)}
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
-
-\textbf{Good}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/expenditure_by_income.pdf"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-The first example above tells R to look in the `data' subdirectory of your project folder, and then the `HES' subdirectory of `data', to find the `hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
+Sometimes your data folder might have subfolders - `raw' for data that you've done nothing to, and `clean' for data you've modified in some way.\footnote{Other folder structures are OK and might make more sense for your project. The important thing is to \textbf{have} a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.} Don't keep `raw' data together in the same place as data you've modified.
 
 \hypertarget{manageable}{%
 \section{Keep your scripts manageable}\label{manageable}}
@@ -467,34 +466,41 @@ Here's a useful structure:
   04\_visualise.R
 \end{itemize}
 
-It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things!
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more \protect\hyperlink{use-comments}{elsewhere in this guide}).
+
+\hypertarget{README}{%
+\section{Include a README file}\label{README}}
+
+Your analysis workflow might seem completely obvious to you. Let's say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!
+
+Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.
+
+Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn't clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.
 
 \hypertarget{omit-needless-code}{%
 \section{Omit needless code}\label{omit-needless-code}}
 
 Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named `archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
 
-When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with \texttt{View(mydf)} or \texttt{str(mydf)}. This is fine, and often necessary, when you're doing your analysis. \textbf{Don't keep these commands in your script}. These type of commands should usually be entered straight into the R console, not in a script.
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with \texttt{View(mydf)} or \texttt{str(mydf)}. This is fine, and often necessary, when you're doing your analysis. \textbf{Don't keep these commands in your script}. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them.
 
 \hypertarget{rules_9a_final_final_mc}{%
 \section{Rules\_9a\_FINAL\_FINAL\_MC}\label{rules_9a_final_final_mc}}
 
-We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like \texttt{cool\_word\_doc\_002.docx}. Try to avoid replicating this nightmare in R.
+We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like \texttt{cool\_word\_doc\_002.docx}. Try to avoid replicating this nightmare in R.
 
 \textbf{Don't} create multiple versions of the same script (like \texttt{analysis\_FINAL\_002\_MC.R} and \texttt{analysis\_FINALFINAL\_003\_MC\_WM.R}.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your ``R'' folder, called ``R/archive''. To avoid a horrible mess of \texttt{analysis\_FINAL\_002.R} type documents cluttering up your folder, consider using \protect\hyperlink{version-control}{Git for version control}.
 
-\hypertarget{grattan-coding-style}{%
-\chapter{Grattan coding style}\label{grattan-coding-style}}
+\hypertarget{coding-style}{%
+\chapter{Grattan coding style}\label{coding-style}}
 
-This Grattan style guide is a condensed and lightly adapted version of the Hadley Wickham's \texttt{tidyverse} style guide, found at \url{https://style.tidyverse.org/}.
-
-The benefits of a common coding style are well explained \href{http://r-pkgs.had.co.nz/style.html}{by Hadley}:
+The benefits of a common coding style are well explained \href{http://r-pkgs.had.co.nz/style.html}{by Hadley Wickham}:
 
 \begin{quote}
 Good style is important because while your code only has one author, it'll usually have multiple readers. This is especially true when you're writing code with others. In that case, it's a good idea to agree on a common style up-front.
 \end{quote}
 
-Below we describe the \textbf{key} code-style elements, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, \href{https://style.tidyverse.org/}{consult the \texttt{tidyverse} guide}.
+Below we describe the \textbf{key} elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, \href{https://style.tidyverse.org/}{consult the \texttt{tidyverse} guide}.
 
 You should also see the \protect\hyperlink{organising-projects}{Using R at Grattan} page for guidelines about setting up projects.
 
@@ -511,6 +517,18 @@ Describe what your script does in the first few lines using comments or within a
 \end{Highlighting}
 \end{Shaded}
 
+Your preamble might also pose a research question that the script will answer.
+
+\textbf{Good}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?}
+\end{Highlighting}
+\end{Shaded}
+
+Your preamble shouldn't be a terse, inscrutable comment.
+
 \textbf{Bad}
 
 \begin{Shaded}
@@ -519,7 +537,7 @@ Describe what your script does in the first few lines using comments or within a
 \end{Highlighting}
 \end{Shaded}
 
-If it's hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See \protect\hyperlink{organising-projects}{Organising R Projects at Grattan} for more.
+If it's hard to concisely describe what your script does in a few lines of plain English, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See \protect\hyperlink{organising-projects}{Organising R Projects at Grattan} for more.
 
 Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:
 
@@ -538,7 +556,7 @@ The preamble should pertain the the code contained in the specific script. If yo
 
 Comments are necessary where the code \emph{alone} doesn't tell the full story. Comments should tell the reader \textbf{why} you're doing something, rather than just \textbf{what} you're doing.
 
-For example, comments are important when groups are coded with numbers rather than character strings:
+For example, comments are important when groups are coded with numbers rather than character strings, because this might not be obvious to someone reading your script:
 
 \textbf{Necessary to comment}
 
@@ -553,6 +571,7 @@ For example, comments are important when groups are coded with numbers rather th
 Without the comment, readers of your code might not be aware that \texttt{1} in this dataset corresponds to \texttt{male}, or that \texttt{age\ ==\ "05"} refers to 35-39 year olds. Without the comment, the code is not self-explanatory.
 
 If your code \emph{is} self-explanatory, you can include or omit comments as you see fit.
+
 \textbf{Not necessary (but okay if included)}
 
 \begin{Shaded}
@@ -566,7 +585,9 @@ If your code \emph{is} self-explanatory, you can include or omit comments as you
 
 You should also include comments where your code is more complex and may not be easily understood by the reader. If you're using a function from a package that isn't commonly used at Grattan, include a comment to explain what it does.
 
-Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.
+\emph{Err on the side of commenting more}, rather than less, throughout your code. Something may seem obvious to you when you're writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.
+
+Comments can go above code chunks, or next to code - there are examples of both above.
 
 \hypertarget{breaking-your-script-into-chunks}{%
 \section{Breaking your script into chunks}\label{breaking-your-script-into-chunks}}
@@ -579,10 +600,15 @@ It's useful to break a lengthy script into chunks with \texttt{-\/-\/-\/-\/-}.
 \begin{Highlighting}[]
 \CommentTok{# Read file A -----}
 
+\NormalTok{a <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/a.csv"}\NormalTok{)}
 
 \CommentTok{# Read file B -----}
 
-\CommentTok{# Merge files A and B ----}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/b.csv"}\NormalTok{)}
+
+\CommentTok{# Combine files A and B ----}
+
+\NormalTok{c <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(a, b)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -595,11 +621,9 @@ Breaking your script into chunks with \texttt{-\/-\/-\/-\/-} also makes your cod
 \hypertarget{naming-objects-and-variables}{%
 \section{Naming objects and variables}\label{naming-objects-and-variables}}
 
-≥/
-It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called \texttt{ed\_by\_age} or \texttt{edByAge} or \texttt{ed.by.age}.
+It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called \texttt{ed\_by\_age} or \texttt{edByAge} or \texttt{ed.by.age}. Having a consistent naming convention across Grattan also makes it easy to read and QC each other's code.
 
-As with filenames, Grattan primarily uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{considered good practice across the Tidyverse}.
-
+Grattan primarily uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{considered good practice across the Tidyverse}.
 Object names should be descriptive and not-too-long. This is a trade-off, and one that's sometimes hard to get right. However, using snake\_case provides consistency:
 
 \textbf{Good object names}
@@ -648,17 +672,17 @@ Variable names face a similar trade-off. Again, try to be descriptive and short 
 
 When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to \href{https://dplyr.tidyverse.org/reference/select.html}{rename your variables}, giving them consistent, descriptive, short, snake\_case names.
 
-The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake\_case, which we strongly recommend, reduces friction for other people reading and editing your code.
+The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake\_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.
 
 \hypertarget{spacing}{%
-\chapter{Spacing}\label{spacing}}
+\section{Spacing}\label{spacing}}
 
-Giving you code room to breathe greatly helps readability for future-you and others who will have to read your code.
+Giving your code room to breathe greatly helps readability for future-you and others who will have to read your code. Code without ample whitespace is hard to read, justasitishardertoreadEnglishsentenceswithoutspaces.
 
 \hypertarget{assign-and-equals}{%
-\section{Assign and equals}\label{assign-and-equals}}
+\subsection{Assign and equals}\label{assign-and-equals}}
 
-Put a space each side of an assign operator \texttt{\textless{}-}, equals \texttt{=}, and other `infix operators' (\texttt{==}, \texttt{+}, \texttt{-}, etc.)
+Put a space each side of an assign operator \texttt{\textless{}-}, equals \texttt{=}, and other `infix operators' (\texttt{==}, \texttt{+}, \texttt{-}, and so on).
 
 \textbf{Good}
 
@@ -699,7 +723,7 @@ Exceptions are operators that \emph{directly connect} to an object, package or f
 \end{Shaded}
 
 \hypertarget{commas}{%
-\section{Commas}\label{commas}}
+\subsection{Commas}\label{commas}}
 
 Always put a space \emph{after} a comma and not before, just like in regular English.
 
@@ -720,7 +744,7 @@ Always put a space \emph{after} a comma and not before, just like in regular Eng
 \end{Shaded}
 
 \hypertarget{parentheses}{%
-\section{Parentheses}\label{parentheses}}
+\subsection{Parentheses}\label{parentheses}}
 
 Do not use spaces around parentheses in most cases:
 
@@ -746,25 +770,27 @@ For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{
 \hypertarget{short-lines-and-line-indentation}{%
 \section{Short lines and line indentation}\label{short-lines-and-line-indentation}}
 
-Tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
+It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
-Using pipes \texttt{\%\textgreater{}\%} instead of nesting functions also makes things clearer. The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
+Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also makes things clearer.{[}\^{}The pipe is from the \texttt{magrittr} package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the \protect\hyperlink{tidyverse}{\texttt{tidyverse}}.{]} The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
 \textbf{Good: short lines and indentation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA,}
-         \DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }
+         \DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
 \NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Less good: short lines, no indentation}
+Without indentation, the code is harder to read. It's not clear where the chunk starts and finishes, and which bits of code are arguments to which functions.
+
+\textbf{Bad: short lines, no indentation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -778,6 +804,7 @@ Using pipes \texttt{\%\textgreater{}\%} instead of nesting functions also makes 
 \end{Highlighting}
 \end{Shaded}
 
+Long lines are also bad and hard to read.
 \textbf{Bad: long lines}
 
 \begin{Shaded}
@@ -785,6 +812,8 @@ Using pipes \texttt{\%\textgreater{}\%} instead of nesting functions also makes 
 \NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA, }\DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+When you want to take the output of a function and pass it as the input to another function, use the pipe (\texttt{\%\textgreater{}\%}). Don't write ugly, inscrutable code like this, where multiple functions are wrapped around other functions.
 
 \textbf{War-crime bad: long lines without pipes}
 
@@ -795,20 +824,179 @@ Using pipes \texttt{\%\textgreater{}\%} instead of nesting functions also makes 
 \end{Shaded}
 
 \hypertarget{blocks-of-code}{%
-\chapter{Blocks of code}\label{blocks-of-code}}
+\section{Blocks of code}\label{blocks-of-code}}
 
 As shown above, the pipe function \texttt{\%\textgreater{}\%} can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.
 
-Resist the urge to use the pipe to make code blocks too long.
+Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things.
 
-\hypertarget{the-tidyverse}{%
-\chapter{The tidyverse}\label{the-tidyverse}}
+\hypertarget{packages-commonly-used-at-grattan}{%
+\chapter{Packages commonly used at Grattan}\label{packages-commonly-used-at-grattan}}
 
-\hypertarget{what-is-the-tidyverse-and-why-do-we-use-it}{%
-\section{What is the tidyverse and why do we use it?}\label{what-is-the-tidyverse-and-why-do-we-use-it}}
+R can do a lot out of the box, but a range of \protect\hyperlink{packages}{packages} make our lives easier.
 
-\hypertarget{an-introduction-to-rmarkdown}{%
-\section{An introduction to RMarkdown}\label{an-introduction-to-rmarkdown}}
+Some packages - like the \texttt{tidyverse} collection of packages - are broadly popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+\hypertarget{tidyverse}{%
+\section{The tidyverse!}\label{tidyverse}}
+
+The \texttt{tidyverse} is central to our work at Grattan. The \texttt{tidyverse} is a \href{https://www.tidyverse.org/packages/}{collection of related R packages} for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. You install the \texttt{tidyverse} in the \protect\hyperlink{install-packages}{usual way}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The main packages in the \texttt{tidyverse} include:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{ggplot2} for making beautiful, customisable graphs
+\item
+  \emph{dplyr} for manipulating data frames
+\item
+  \emph{tidyr} for tidying your data
+\item
+  \emph{readr} for importing data from a broad range of formats
+\item
+  \emph{purrr} for functional programming
+\item
+  \emph{stringr} for manipulating strings of text
+\end{itemize}
+
+All these packages (and more!) will automatically be loaded for you when you run the command\footnote{There's no need to install or load the individual \texttt{tidyverse} packages - like \texttt{dplyr} - separately. Just install them all together, and load them with the single \texttt{library(tidyverse)} command. That way, you don't need to remember which functions come from \texttt{tidyr} and which from \texttt{dplyr} - they're all just \texttt{tidyverse} functions.}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.2.1.9000 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.2.1.9000       v purrr   0.3.2.9000  
+## v tibble  2.99.99.9006     v dplyr   0.8.3.9000  
+## v tidyr   1.0.0.9000       v stringr 1.4.0.9000  
+## v readr   1.3.1.9000       v forcats 0.4.0.9000
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+A range of other packages are installed on your machine as part of the \texttt{tidyverse.} These include:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{readxl} for importing Excel spreadsheets into R
+\item
+  \emph{haven} for importing Stata, SAS and SPSS data
+\item
+  \emph{lubridate} for working with dates
+\item
+  \emph{rvest} for scraping websites
+\end{itemize}
+
+Although these packages are installed as part of the \texttt{tidyverse}, they aren't loaded automatically when you run \texttt{library(tidyverse)}. You'll need to load them individually, like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{why-do-we-use-the-tidyverse}{%
+\subsection{Why do we use the tidyverse?}\label{why-do-we-use-the-tidyverse}}
+
+The \texttt{tidyverse} makes life easier!
+
+The core \texttt{tidyverse} packages, like \texttt{ggplot2}, \texttt{dplyr}, and \texttt{tidyr}, are extremely popular. The \texttt{tidyverse} is probably the most popular `dialect' of R. This means that any problem you encounter with the \texttt{tidyverse} will have been encountered many times before by other R users, so a solution will only be a Google search away.
+
+The \texttt{tidyverse} packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one \texttt{tidyverse} package, like \texttt{dplyr}, are also applicable to other packages, like \texttt{tidyr}.
+
+They're designed to work with data frames\footnote{The tidyverse works with `tibbles', which are a tidyverse-specific variant of the data frame. Don't worry about the difference between tibbles and data frames.}, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the \texttt{tidyverse} is built around the concept of \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{\emph{tidy data}}, which has a specific meaning in this context that we'll come to later. The fact that \texttt{tidyverse} packages are all built around one type of data object makes them easier to work with.
+
+The creator of the \texttt{tidyverse}, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the \texttt{tidyverse} idiom is often able to be understood even if you haven't encountered the functions before. For example, look at this chunk of code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>=}\StringTok{ }\DecValTok{30}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{relative_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+Without knowing what \texttt{my\_data} looks like, and even if you haven't encountered these functions before, this should be reasonably intuitive. We're taking some data, and then\footnote{you can read the pipe, \texttt{\%\textgreater{}\%}, as `and then'} only keeping observations that relate to people aged 30 and older, then calculating a new variable, \texttt{relative\_income}. The name of a \texttt{tidyverse} function - like \texttt{filter}, \texttt{group\_by}, \texttt{summarise}, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn't always the case with other approaches.
+
+Here's one way to do the same thing in base R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{transform}\NormalTok{(my_data[my_data}\OperatorTok{$}\NormalTok{age }\OperatorTok{>=}\StringTok{ }\DecValTok{30}\NormalTok{, ],}
+          \DataTypeTok{relative_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+The base R code gets the job done, but it's clunkier, less expressive, and harder to read.
+
+Code written with \texttt{tidyverse} functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern anyway.\footnote{When working with very large datasets, it might be worth gaining speed using other packages, such as \href{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}{\texttt{data.table}}. Fortunately, using the \texttt{dtplyr} package you can get most of the speed benefits of \texttt{data.table} and stick to familiar \texttt{dplyr} syntax.}
+
+The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The \texttt{tidyverse} packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.
+
+Most R scripts at Grattan should start with \texttt{library(tidyverse)}. Most of your work will be in data frames, and most of the time the \texttt{tidyverse} contains the core tools you'll need to do that work.
+
+\hypertarget{grattan-specific-packages}{%
+\section{Grattan-specific packages}\label{grattan-specific-packages}}
+
+A range of Grattan people have written packages that come in handy at Grattan.
+
+\begin{itemize}
+\item
+  \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
+\item
+  \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter. \textbf{NOTE: ADD LINK}.
+\item
+  \emph{grattandata} The \texttt{grattandata} package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the \protect\hyperlink{reading-data}{reading data} chapter.
+\end{itemize}
+
+Install these Grattan-specific packages using this block of code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This code checks to see if you have the `remotes` package installed; if not,}
+\CommentTok{# it will install `devtools` for you, which includes `remotes`}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)) \{}
+  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{# Install the `grattan` package from CRAN:}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"grattan"}\NormalTok{)}
+
+\CommentTok{# Install `grattantheme` and `grattandata` from GitHub:}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{,}
+                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
+                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattandata"}\NormalTok{,}
+                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
+                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{other-commonly-used-packages}{%
+\section{Other commonly-used packages}\label{other-commonly-used-packages}}
+
+\hypertarget{writing-reproducible-documents-with-rmarkdown}{%
+\chapter{Writing reproducible documents with RMarkdown}\label{writing-reproducible-documents-with-rmarkdown}}
 
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
@@ -933,7 +1121,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{data}
+    e.g.~\texttt{data}
   \end{itemize}
 \item
   \textbf{Aesthetics}: what variables should be linked to what chart elements.
@@ -941,7 +1129,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+    e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
   \end{itemize}
 \item
   \textbf{Geoms}: how the data should be plotted.
@@ -949,7 +1137,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
+    e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
   \end{itemize}
 \end{itemize}
 
@@ -1525,7 +1713,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks magic: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks tremendous: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -1591,7 +1779,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks of high quality! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks smashing! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1642,7 +1830,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks superior: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks of the highest standard: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -1816,7 +2004,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks legit! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks sublime! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1963,7 +2151,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Eminent! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Great! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2249,7 +2437,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks pre-eminent. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks sublime. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2511,7 +2699,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks fine! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks out of this world! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2720,8 +2908,8 @@ Now you can view \texttt{sf} objects stored in \texttt{absmapsdata}:
 \end{Shaded}
 
 \begin{verbatim}
-## Observations: 358
-## Variables: 12
+## Rows: 358
+## Columns: 12
 ## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "...
 ## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast"...
 ## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102...

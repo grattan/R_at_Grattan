@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Grattan coding style | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Grattan coding style | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-09-15" />
+<meta name="date" content="2019-10-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="organising-projects.html"/>
-<link rel="next" href="the-tidyverse.html"/>
+<link rel="next" href="packages-commonly-used-at-grattan.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -135,9 +138,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>1.4</b> Packages</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>1.4.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#install-packages"><i class="fa fa-check"></i><b>1.4.1</b> Installing packages</a></li>
 <li class="chapter" data-level="1.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#using-packages"><i class="fa fa-check"></i><b>1.4.2</b> Using packages</a></li>
 </ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-more-about-r"><i class="fa fa-check"></i><b>1.5</b> Learning more about R</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
 <li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
@@ -145,10 +149,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a><ul>
 <li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#use-rstudio-projects-not-setwd"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a></li>
-<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.2</b> Keep your stuff together</a></li>
-<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.3</b> Include a README file</a></li>
-<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.4</b> Use relative filepaths</a></li>
-<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.5</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.2</b> Use relative filepaths</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.3</b> Keep your stuff together</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.4</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.5</b> Include a README file</a></li>
 <li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
 <li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#rules_9a_final_final_mc"><i class="fa fa-check"></i><b>3.7</b> Rules_9a_FINAL_FINAL_MC</a></li>
 </ul></li>
@@ -165,95 +169,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>4.6</b> Short lines and line indentation</a></li>
 <li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#blocks-of-code"><i class="fa fa-check"></i><b>4.7</b> Blocks of code</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>5</b> The tidyverse</a><ul>
-<li class="chapter" data-level="5.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#what-is-the-tidyverse-and-why-do-we-use-it"><i class="fa fa-check"></i><b>5.1</b> What is the tidyverse and why do we use it?</a></li>
-<li class="chapter" data-level="5.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#an-introduction-to-rmarkdown"><i class="fa fa-check"></i><b>5.2</b> An introduction to RMarkdown</a></li>
+<li class="chapter" data-level="5" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html"><i class="fa fa-check"></i><b>5</b> Packages commonly used at Grattan</a><ul>
+<li class="chapter" data-level="5.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#tidyverse"><i class="fa fa-check"></i><b>5.1</b> The tidyverse!</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#why-do-we-use-the-tidyverse"><i class="fa fa-check"></i><b>5.1.1</b> Why do we use the tidyverse?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>6</b> Data Visualisation</a><ul>
-<li class="chapter" data-level="6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>6.1</b> Set-up and packages</a></li>
-<li class="chapter" data-level="6.2" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3"><i class="fa fa-check"></i><b>6.2</b> # A tibble: 6 x 3</a></li>
-<li class="chapter" data-level="6.3" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-year-1"><i class="fa fa-check"></i><b>6.3</b> # Groups: year [1]</a></li>
-<li class="chapter" data-level="6.4" data-path="data-visualisation.html"><a href="data-visualisation.html#year-state-pop"><i class="fa fa-check"></i><b>6.4</b> year state pop</a></li>
-<li class="chapter" data-level="6.5" data-path="data-visualisation.html"><a href="data-visualisation.html#section"><i class="fa fa-check"></i><b>6.5</b> <fct> <chr> <dbl></a></li>
-<li class="chapter" data-level="6.6" data-path="data-visualisation.html"><a href="data-visualisation.html#australian-capital-territory-383257"><i class="fa fa-check"></i><b>6.6</b> 1 2013 Australian Capital Territory 383257</a></li>
-<li class="chapter" data-level="6.7" data-path="data-visualisation.html"><a href="data-visualisation.html#new-south-wales-7404032"><i class="fa fa-check"></i><b>6.7</b> 2 2013 New South Wales 7404032</a></li>
-<li class="chapter" data-level="6.8" data-path="data-visualisation.html"><a href="data-visualisation.html#northern-territory-241722"><i class="fa fa-check"></i><b>6.8</b> 3 2013 Northern Territory 241722</a></li>
-<li class="chapter" data-level="6.9" data-path="data-visualisation.html"><a href="data-visualisation.html#other-territories-2962"><i class="fa fa-check"></i><b>6.9</b> 4 2013 Other Territories 2962</a></li>
-<li class="chapter" data-level="6.10" data-path="data-visualisation.html"><a href="data-visualisation.html#queensland-4652824"><i class="fa fa-check"></i><b>6.10</b> 5 2013 Queensland 4652824</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualisation.html"><a href="data-visualisation.html#south-australia-1671488"><i class="fa fa-check"></i><b>6.11</b> 6 2013 South Australia 1671488</a></li>
-<li class="chapter" data-level="6.12" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>6.12</b> Concepts</a></li>
-<li class="chapter" data-level="6.13" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>6.13</b> Making Grattan-y charts</a><ul>
-<li class="chapter" data-level="6.13.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>6.13.1</b> Making Grattan charts</a></li>
-<li class="chapter" data-level="6.13.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>6.13.2</b> Saving Grattan charts</a></li>
+<li class="chapter" data-level="5.2" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#grattan-specific-packages"><i class="fa fa-check"></i><b>5.2</b> Grattan-specific packages</a></li>
+<li class="chapter" data-level="5.3" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#other-commonly-used-packages"><i class="fa fa-check"></i><b>5.3</b> Other commonly-used packages</a></li>
 </ul></li>
-<li class="chapter" data-level="6.14" data-path="data-visualisation.html"><a href="data-visualisation.html#chart-cookbook"><i class="fa fa-check"></i><b>6.14</b> Chart cookbook</a><ul>
-<li class="chapter" data-level="6.14.1" data-path="data-visualisation.html"><a href="data-visualisation.html#bar-charts"><i class="fa fa-check"></i><b>6.14.1</b> Bar charts</a></li>
-<li class="chapter" data-level="6.14.2" data-path="data-visualisation.html"><a href="data-visualisation.html#line-charts"><i class="fa fa-check"></i><b>6.14.2</b> Line charts</a></li>
+<li class="chapter" data-level="6" data-path="writing-reproducible-documents-with-rmarkdown.html"><a href="writing-reproducible-documents-with-rmarkdown.html"><i class="fa fa-check"></i><b>6</b> Writing reproducible documents with RMarkdown</a></li>
+<li class="chapter" data-level="7" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>7.1</b> Introduction to data visualisation</a></li>
+<li class="chapter" data-level="7.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>7.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="7.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>7.3</b> Concepts</a></li>
+<li class="chapter" data-level="7.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>7.4</b> Exploratory data visualisation</a></li>
+<li class="chapter" data-level="7.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>7.5</b> Making Grattan-y charts</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>7.5.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="7.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>7.5.2</b> Saving Grattan charts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.15" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded"><i class="fa fa-check"></i><b>6.15</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
-<li class="chapter" data-level="6.16" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended."><i class="fa fa-check"></i><b>6.16</b> faded): Using more than six colours is not recommended.</a></li>
-<li class="chapter" data-level="6.17" data-path="data-visualisation.html"><a href="data-visualisation.html#warning-in-grattanthemegrattan_paln-n-reverse-reverse-faded-1"><i class="fa fa-check"></i><b>6.17</b> Warning in grattantheme::grattan_pal(n = n, reverse = reverse, faded =</a></li>
-<li class="chapter" data-level="6.18" data-path="data-visualisation.html"><a href="data-visualisation.html#faded-using-more-than-six-colours-is-not-recommended.-1"><i class="fa fa-check"></i><b>6.18</b> faded): Using more than six colours is not recommended.</a><ul>
-<li class="chapter" data-level="6.18.1" data-path="data-visualisation.html"><a href="data-visualisation.html#scatter-plots"><i class="fa fa-check"></i><b>6.18.1</b> Scatter plots</a></li>
-<li class="chapter" data-level="6.18.2" data-path="data-visualisation.html"><a href="data-visualisation.html#distributions"><i class="fa fa-check"></i><b>6.18.2</b> Distributions</a></li>
-<li class="chapter" data-level="6.18.3" data-path="data-visualisation.html"><a href="data-visualisation.html#maps"><i class="fa fa-check"></i><b>6.18.3</b> Maps</a></li>
+<li class="chapter" data-level="7.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>7.6</b> Adding labels</a></li>
 </ul></li>
-<li class="chapter" data-level="6.19" data-path="data-visualisation.html"><a href="data-visualisation.html#a-tibble-6-x-3-1"><i class="fa fa-check"></i><b>6.19</b> # A tibble: 6 x 3</a></li>
-<li class="chapter" data-level="6.20" data-path="data-visualisation.html"><a href="data-visualisation.html#groups-state-2"><i class="fa fa-check"></i><b>6.20</b> # Groups: state [2]</a></li>
-<li class="chapter" data-level="6.21" data-path="data-visualisation.html"><a href="data-visualisation.html#state-sa4_name-geometry"><i class="fa fa-check"></i><b>6.21</b> state sa4_name geometry</a></li>
-<li class="chapter" data-level="6.22" data-path="data-visualisation.html"><a href="data-visualisation.html#multipolygon"><i class="fa fa-check"></i><b>6.22</b> <chr> <chr> &lt;MULTIPOLYGON [°]&gt;</a></li>
-<li class="chapter" data-level="6.23" data-path="data-visualisation.html"><a href="data-visualisation.html#act-australian-capita-148.8041--35.71402-148.8018--35.7121-148.7"><i class="fa fa-check"></i><b>6.23</b> 1 ACT Australian Capita… (((148.8041 -35.71402, 148.8018 -35.7121, 148.7…</a></li>
-<li class="chapter" data-level="6.24" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-capital-region-150.3113--35.66588-150.3126--35.66814-150."><i class="fa fa-check"></i><b>6.24</b> 2 NSW Capital Region (((150.3113 -35.66588, 150.3126 -35.66814, 150.…</a></li>
-<li class="chapter" data-level="6.25" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-coast-151.315--33.55582-151.3159--33.55503-151.3"><i class="fa fa-check"></i><b>6.25</b> 3 NSW Central Coast (((151.315 -33.55582, 151.3159 -33.55503, 151.3…</a></li>
-<li class="chapter" data-level="6.26" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-central-west-150.6107--33.06614-150.6117--33.07051-150."><i class="fa fa-check"></i><b>6.26</b> 4 NSW Central West (((150.6107 -33.06614, 150.6117 -33.07051, 150.…</a></li>
-<li class="chapter" data-level="6.27" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-coffs-harbour---g-153.2785--29.91874-153.2773--29.92067-153."><i class="fa fa-check"></i><b>6.27</b> 5 NSW Coffs Harbour - G… (((153.2785 -29.91874, 153.2773 -29.92067, 153.…</a></li>
-<li class="chapter" data-level="6.28" data-path="data-visualisation.html"><a href="data-visualisation.html#nsw-far-west-and-orana-150.1106--31.74613-150.1103--31.74892-150."><i class="fa fa-check"></i><b>6.28</b> 6 NSW Far West and Orana (((150.1106 -31.74613, 150.1103 -31.74892, 150.…</a></li>
-<li class="chapter" data-level="6.29" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>6.29</b> Creating simple interactive graphs with <code>plotly</code></a></li>
-<li class="chapter" data-level="6.30" data-path="data-visualisation.html"><a href="data-visualisation.html#bin-generate-data-used-before-prior-sections-are-constructed"><i class="fa fa-check"></i><b>6.30</b> bin: generate data used (before prior sections are constructed)</a></li>
+<li class="chapter" data-level="8" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>8</b> Chart cookbook</a><ul>
+<li class="chapter" data-level="8.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up"><i class="fa fa-check"></i><b>8.1</b> Set up</a></li>
+<li class="chapter" data-level="8.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>8.2</b> Bar charts</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>8.2.1</b> Simple bar plot</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>8.2.2</b> Bar plot with multiple series</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>8.2.3</b> Facetted bar charts</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>7</b> Reading data</a><ul>
-<li class="chapter" data-level="7.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>7.1</b> Importing data</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>7.1.1</b> Reading CSV files</a></li>
-<li class="chapter" data-level="7.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>7.1.2</b> <code>readxl::read_excel()</code></a></li>
-<li class="chapter" data-level="7.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>7.1.3</b> <code>rio</code></a></li>
-<li class="chapter" data-level="7.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>7.1.4</b> <code>readabs</code></a></li>
+<li class="chapter" data-level="8.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>8.3</b> Line charts</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>8.3.1</b> Simple line chart</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>8.3.2</b> Line chart with multiple series</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>7.2</b> Reading common files:</a></li>
-<li class="chapter" data-level="7.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>7.3</b> Appropriately renaming variables</a></li>
-<li class="chapter" data-level="7.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>7.4</b> Getting to tidy data</a></li>
+<li class="chapter" data-level="8.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>8.4</b> Scatter plots</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>8.4.1</b> Simple scatter plot</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>8.4.2</b> Scatter plot with reshaped data</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>8.4.3</b> Layered scatter plot</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>8.4.4</b> Scatter plots with trendlines</a></li>
+<li class="chapter" data-level="8.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>8.4.5</b> Facetted scatter plots</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>8</b> Different data types</a><ul>
-<li class="chapter" data-level="8.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>8.1</b> Tidy data</a></li>
-<li class="chapter" data-level="8.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>8.2</b> Dates with <code>lubridate::</code></a></li>
-<li class="chapter" data-level="8.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>8.3</b> Strings with <code>stringr::</code></a></li>
-<li class="chapter" data-level="8.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>8.4</b> Factors with <code>forcats::</code></a></li>
+<li class="chapter" data-level="8.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>8.5</b> Distributions</a></li>
+<li class="chapter" data-level="8.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>8.6</b> Maps</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>8.6.1</b> <code>sf</code> objects</a></li>
+<li class="chapter" data-level="8.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>8.6.2</b> Using <code>absmapsdata</code></a></li>
+<li class="chapter" data-level="8.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>8.6.3</b> Making choropleth maps</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>9</b> Data transformation</a><ul>
-<li class="chapter" data-level="9.1" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>9.1</b> The pipe</a></li>
-<li class="chapter" data-level="9.2" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>9.2</b> Key <code>dplyr</code> functions:</a></li>
-<li class="chapter" data-level="9.3" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>9.3</b> Filter with <code>filter()</code></a></li>
-<li class="chapter" data-level="9.4" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>9.4</b> Arrange with <code>arrange()</code></a></li>
-<li class="chapter" data-level="9.5" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>9.5</b> Select variables with <code>select()</code></a></li>
-<li class="chapter" data-level="9.6" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>9.6</b> Group data with <code>group_by()</code></a></li>
-<li class="chapter" data-level="9.7" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>9.7</b> Edit and add new variables with <code>mutate()</code></a><ul>
-<li class="chapter" data-level="9.7.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>9.7.1</b> Cases when you should use <code>case_when()</code></a></li>
+<li class="chapter" data-level="8.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>8.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>9.8</b> Summarise data with <code>summarise()</code></a></li>
-<li class="chapter" data-level="9.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>9.9</b> Joining datasets with <code>*_join()</code></a></li>
+<li class="chapter" data-level="9" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>9</b> Reading data</a><ul>
+<li class="chapter" data-level="9.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>9.1</b> Importing data</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>9.1.1</b> Reading CSV files</a></li>
+<li class="chapter" data-level="9.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>9.1.2</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="9.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>9.1.3</b> <code>rio</code></a></li>
+<li class="chapter" data-level="9.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>9.1.4</b> <code>readabs</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>10</b> Analysis</a></li>
-<li class="chapter" data-level="11" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>11</b> Creating functions</a><ul>
-<li class="chapter" data-level="11.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>11.1</b> It can be useful to make your own function</a></li>
-<li class="chapter" data-level="11.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>11.2</b> Defining simple functions</a></li>
-<li class="chapter" data-level="11.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>11.3</b> More complex functions</a></li>
-<li class="chapter" data-level="11.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>11.4</b> Sets of functions</a></li>
-<li class="chapter" data-level="11.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>11.5</b> Using <code>purrr::map</code></a></li>
-<li class="chapter" data-level="11.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>11.6</b> Sharing your useful functions with Grattan</a></li>
+<li class="chapter" data-level="9.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>9.2</b> Reading common files:</a></li>
+<li class="chapter" data-level="9.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>9.3</b> Appropriately renaming variables</a></li>
+<li class="chapter" data-level="9.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>9.4</b> Getting to tidy data</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>12</b> Version control</a><ul>
-<li class="chapter" data-level="12.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>12.1</b> Version control is important and intimidating</a></li>
-<li class="chapter" data-level="12.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>12.2</b> Github</a></li>
-<li class="chapter" data-level="12.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>12.3</b> Git</a></li>
+<li class="chapter" data-level="10" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>10</b> Different data types</a><ul>
+<li class="chapter" data-level="10.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>10.1</b> Tidy data</a></li>
+<li class="chapter" data-level="10.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>10.2</b> Dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="10.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>10.3</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="10.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>10.4</b> Factors with <code>forcats::</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>11</b> Data transformation</a><ul>
+<li class="chapter" data-level="11.1" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>11.1</b> The pipe</a></li>
+<li class="chapter" data-level="11.2" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>11.2</b> Key <code>dplyr</code> functions:</a></li>
+<li class="chapter" data-level="11.3" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>11.3</b> Filter with <code>filter()</code></a></li>
+<li class="chapter" data-level="11.4" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>11.4</b> Arrange with <code>arrange()</code></a></li>
+<li class="chapter" data-level="11.5" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>11.5</b> Select variables with <code>select()</code></a></li>
+<li class="chapter" data-level="11.6" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>11.6</b> Group data with <code>group_by()</code></a></li>
+<li class="chapter" data-level="11.7" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>11.7</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="11.7.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>11.7.1</b> Cases when you should use <code>case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>11.8</b> Summarise data with <code>summarise()</code></a></li>
+<li class="chapter" data-level="11.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>11.9</b> Joining datasets with <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>12</b> Analysis</a></li>
+<li class="chapter" data-level="13" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>13</b> Creating functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>13.1</b> It can be useful to make your own function</a></li>
+<li class="chapter" data-level="13.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>13.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="13.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>13.3</b> More complex functions</a></li>
+<li class="chapter" data-level="13.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>13.4</b> Sets of functions</a></li>
+<li class="chapter" data-level="13.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>13.5</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="13.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>13.6</b> Sharing your useful functions with Grattan</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>14</b> Version control</a><ul>
+<li class="chapter" data-level="14.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>14.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="14.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>14.2</b> Github</a></li>
+<li class="chapter" data-level="14.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>14.3</b> Git</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -275,153 +278,165 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="coding-style" class="section level1">
 <h1><span class="header-section-number">4</span> Grattan coding style</h1>
-<p>This Grattan style guide is a condensed and lightly adapted version of the Hadley Wickham’s <code>tidyverse</code> style guide, found at <a href="https://style.tidyverse.org/" class="uri">https://style.tidyverse.org/</a>.</p>
-<p>The benefits of a common coding style are well explained <a href="http://r-pkgs.had.co.nz/style.html">by Hadley</a>:</p>
+<p>The benefits of a common coding style are well explained <a href="http://r-pkgs.had.co.nz/style.html">by Hadley Wickham</a>:</p>
 <blockquote>
 <p>Good style is important because while your code only has one author, it’ll usually have multiple readers. This is especially true when you’re writing code with others. In that case, it’s a good idea to agree on a common style up-front.</p>
 </blockquote>
-<p>Below we describe the <strong>key</strong> code-style elements, without being too tedious about it all. There are many elements of coding style we don’t cover in this guide; if you’re unsure about anything, <a href="https://style.tidyverse.org/">consult the <code>tidyverse</code> guide</a>.</p>
+<p>Below we describe the <strong>key</strong> elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don’t cover in this guide; if you’re unsure about anything, <a href="https://style.tidyverse.org/">consult the <code>tidyverse</code> guide</a>.</p>
 <p>You should also see the <a href="organising-projects.html#organising-projects">Using R at Grattan</a> page for guidelines about setting up projects.</p>
 <div id="script-preamble" class="section level2">
 <h2><span class="header-section-number">4.1</span> Script preamble</h2>
 <p>Describe what your script does in the first few lines using comments or within an RMarkdown document.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coding-style.html#cb1-1"></a><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding-style.html#cb8-1"></a><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></span></code></pre></div>
+<p>Your preamble might also pose a research question that the script will answer.</p>
+<p><strong>Good</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coding-style.html#cb9-1"></a><span class="co"># Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?</span></span></code></pre></div>
+<p>Your preamble shouldn’t be a terse, inscrutable comment.</p>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding-style.html#cb2-1"></a><span class="co"># make ABS ed data graph</span></span></code></pre></div>
-<p>If it’s hard to concisely describe what your script does in a comment, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See <a href="organising-projects.html#organising-projects">Organising R Projects at Grattan</a> for more.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding-style.html#cb10-1"></a><span class="co"># make ABS ed data graph</span></span></code></pre></div>
+<p>If it’s hard to concisely describe what your script does in a few lines of plain English, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See <a href="organising-projects.html#organising-projects">Organising R Projects at Grattan</a> for more.</p>
 <p>Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="coding-style.html#cb3-1"></a><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding-style.html#cb11-1"></a><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></span></code></pre></div>
 <p>The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your <a href="organising-projects.html#README">README file</a>.</p>
 </div>
 <div id="use-comments" class="section level2">
 <h2><span class="header-section-number">4.2</span> Use comments</h2>
 <p>Comments are necessary where the code <em>alone</em> doesn’t tell the full story. Comments should tell the reader <strong>why</strong> you’re doing something, rather than just <strong>what</strong> you’re doing.</p>
-<p>For example, comments are important when groups are coded with numbers rather than character strings:</p>
+<p>For example, comments are important when groups are coded with numbers rather than character strings, because this might not be obvious to someone reading your script:</p>
 <p><strong>Necessary to comment</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coding-style.html#cb4-1"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-2"><a href="coding-style.html#cb4-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></span>
-<span id="cb4-3"><a href="coding-style.html#cb4-3"></a>         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="coding-style.html#cb12-1"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-2"><a href="coding-style.html#cb12-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></span>
+<span id="cb12-3"><a href="coding-style.html#cb12-3"></a>         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></span></code></pre></div>
 <p>Without the comment, readers of your code might not be aware that <code>1</code> in this dataset corresponds to <code>male</code>, or that <code>age == "05"</code> refers to 35-39 year olds. Without the comment, the code is not self-explanatory.</p>
-<p>If your code <em>is</em> self-explanatory, you can include or omit comments as you see fit.
-<strong>Not necessary (but okay if included)</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding-style.html#cb5-1"></a><span class="co"># We want to only look at women aged 35-39</span></span>
-<span id="cb5-2"><a href="coding-style.html#cb5-2"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="coding-style.html#cb5-3"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</span>
-<span id="cb5-4"><a href="coding-style.html#cb5-4"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</span></code></pre></div>
+<p>If your code <em>is</em> self-explanatory, you can include or omit comments as you see fit.</p>
+<p><strong>Not necessary (but okay if included)</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="coding-style.html#cb13-1"></a><span class="co"># We want to only look at women aged 35-39</span></span>
+<span id="cb13-2"><a href="coding-style.html#cb13-2"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-3"><a href="coding-style.html#cb13-3"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb13-4"><a href="coding-style.html#cb13-4"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</span></code></pre></div>
 <p>You should also include comments where your code is more complex and may not be easily understood by the reader. If you’re using a function from a package that isn’t commonly used at Grattan, include a comment to explain what it does.</p>
-<p>Err on the side of commenting more, rather than less, throughout your code. Something may seem obvious to you when you’re writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.</p>
+<p><em>Err on the side of commenting more</em>, rather than less, throughout your code. Something may seem obvious to you when you’re writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.</p>
+<p>Comments can go above code chunks, or next to code - there are examples of both above.</p>
 </div>
 <div id="breaking-your-script-into-chunks" class="section level2">
 <h2><span class="header-section-number">4.3</span> Breaking your script into chunks</h2>
 <p>It’s useful to break a lengthy script into chunks with <code>-----</code>.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coding-style.html#cb6-1"></a><span class="co"># Read file A -----</span></span>
-<span id="cb6-2"><a href="coding-style.html#cb6-2"></a></span>
-<span id="cb6-3"><a href="coding-style.html#cb6-3"></a></span>
-<span id="cb6-4"><a href="coding-style.html#cb6-4"></a><span class="co"># Read file B -----</span></span>
-<span id="cb6-5"><a href="coding-style.html#cb6-5"></a></span>
-<span id="cb6-6"><a href="coding-style.html#cb6-6"></a><span class="co"># Merge files A and B ----</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="coding-style.html#cb14-1"></a><span class="co"># Read file A -----</span></span>
+<span id="cb14-2"><a href="coding-style.html#cb14-2"></a></span>
+<span id="cb14-3"><a href="coding-style.html#cb14-3"></a>a &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/a.csv&quot;</span>)</span>
+<span id="cb14-4"><a href="coding-style.html#cb14-4"></a></span>
+<span id="cb14-5"><a href="coding-style.html#cb14-5"></a><span class="co"># Read file B -----</span></span>
+<span id="cb14-6"><a href="coding-style.html#cb14-6"></a></span>
+<span id="cb14-7"><a href="coding-style.html#cb14-7"></a>b &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/b.csv&quot;</span>)</span>
+<span id="cb14-8"><a href="coding-style.html#cb14-8"></a></span>
+<span id="cb14-9"><a href="coding-style.html#cb14-9"></a><span class="co"># Combine files A and B ----</span></span>
+<span id="cb14-10"><a href="coding-style.html#cb14-10"></a></span>
+<span id="cb14-11"><a href="coding-style.html#cb14-11"></a>c &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(a, b)</span></code></pre></div>
 <p>This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there’s a little navigation tool that helps you easily jump between named sections of your script.</p>
 <p><img src="atlas/rstudio_navigation.png" width="275" /></p>
 <p>Breaking your script into chunks with <code>-----</code> also makes your code easier to read.</p>
 </div>
 <div id="naming-objects-and-variables" class="section level2">
 <h2><span class="header-section-number">4.4</span> Naming objects and variables</h2>
-<p>It’s important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don’t need to stop to remember if your object is called <code>ed_by_age</code> or <code>edByAge</code> or <code>ed.by.age</code>.</p>
-<p>As with filenames, Grattan primarily uses <em>words separated by underscores</em> <code>_</code> (aka ‘snake_case’) to name objects and variables. This is <a href="https://style.tidyverse.org/syntax.html#object-names">considered good practice across the Tidyverse</a>.</p>
-<p>Object names should be descriptive and not-too-long. This is a trade-off, and one that’s sometimes hard to get right. However, using snake_case provides consistency:</p>
+<p>It’s important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don’t need to stop to remember if your object is called <code>ed_by_age</code> or <code>edByAge</code> or <code>ed.by.age</code>. Having a consistent naming convention across Grattan also makes it easy to read and QC each other’s code.</p>
+<p>Grattan primarily uses <em>words separated by underscores</em> <code>_</code> (aka ‘snake_case’) to name objects and variables. This is <a href="https://style.tidyverse.org/syntax.html#object-names">considered good practice across the Tidyverse</a>.
+Object names should be descriptive and not-too-long. This is a trade-off, and one that’s sometimes hard to get right. However, using snake_case provides consistency:</p>
 <p><strong>Good object names</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding-style.html#cb7-1"></a>sa3_population</span>
-<span id="cb7-2"><a href="coding-style.html#cb7-2"></a>gdp_growth_vic</span>
-<span id="cb7-3"><a href="coding-style.html#cb7-3"></a>uni_attainment</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="coding-style.html#cb15-1"></a>sa3_population</span>
+<span id="cb15-2"><a href="coding-style.html#cb15-2"></a>gdp_growth_vic</span>
+<span id="cb15-3"><a href="coding-style.html#cb15-3"></a>uni_attainment</span></code></pre></div>
 <p><strong>Bad object names</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding-style.html#cb8-1"></a>sa3Pop</span>
-<span id="cb8-2"><a href="coding-style.html#cb8-2"></a>GDPgrowthVIC</span>
-<span id="cb8-3"><a href="coding-style.html#cb8-3"></a>uni.attainment</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="coding-style.html#cb16-1"></a>sa3Pop</span>
+<span id="cb16-2"><a href="coding-style.html#cb16-2"></a>GDPgrowthVIC</span>
+<span id="cb16-3"><a href="coding-style.html#cb16-3"></a>uni.attainment</span></code></pre></div>
 <p>Variable names face a similar trade-off. Again, try to be descriptive and short using snake_case:</p>
 <p><strong>Good variable names</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coding-style.html#cb9-1"></a>gender</span>
-<span id="cb9-2"><a href="coding-style.html#cb9-2"></a>gdp_growth</span>
-<span id="cb9-3"><a href="coding-style.html#cb9-3"></a>highest_edu</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="coding-style.html#cb17-1"></a>gender</span>
+<span id="cb17-2"><a href="coding-style.html#cb17-2"></a>gdp_growth</span>
+<span id="cb17-3"><a href="coding-style.html#cb17-3"></a>highest_edu</span></code></pre></div>
 <p><strong>Bad variable names</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding-style.html#cb10-1"></a>s801LHSAA</span>
-<span id="cb10-2"><a href="coding-style.html#cb10-2"></a>gdp.growth</span>
-<span id="cb10-3"><a href="coding-style.html#cb10-3"></a>highEdu</span>
-<span id="cb10-4"><a href="coding-style.html#cb10-4"></a>chaosVar_name.silly</span>
-<span id="cb10-5"><a href="coding-style.html#cb10-5"></a>var2</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="coding-style.html#cb18-1"></a>s801LHSAA</span>
+<span id="cb18-2"><a href="coding-style.html#cb18-2"></a>gdp.growth</span>
+<span id="cb18-3"><a href="coding-style.html#cb18-3"></a>highEdu</span>
+<span id="cb18-4"><a href="coding-style.html#cb18-4"></a>chaosVar_name.silly</span>
+<span id="cb18-5"><a href="coding-style.html#cb18-5"></a>var2</span></code></pre></div>
 <p>When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to <a href="https://dplyr.tidyverse.org/reference/select.html">rename your variables</a>, giving them consistent, descriptive, short, snake_case names.</p>
-<p>The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code.</p>
+<p>The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.</p>
 </div>
 <div id="spacing" class="section level2">
 <h2><span class="header-section-number">4.5</span> Spacing</h2>
-<p>Giving you code room to breathe greatly helps readability for future-you and others who will have to read your code.</p>
+<p>Giving your code room to breathe greatly helps readability for future-you and others who will have to read your code. Code without ample whitespace is hard to read, justasitishardertoreadEnglishsentenceswithoutspaces.</p>
 <div id="assign-and-equals" class="section level3">
 <h3><span class="header-section-number">4.5.1</span> Assign and equals</h3>
-<p>Put a space each side of an assign operator <code>&lt;-</code>, equals <code>=</code>, and other ‘infix operators’ (<code>==</code>, <code>+</code>, <code>-</code>, etc.)</p>
+<p>Put a space each side of an assign operator <code>&lt;-</code>, equals <code>=</code>, and other ‘infix operators’ (<code>==</code>, <code>+</code>, <code>-</code>, and so on).</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding-style.html#cb11-1"></a>uni_attainment &lt;-<span class="st"> </span><span class="kw">filter</span>(data, age <span class="op">==</span><span class="st"> </span><span class="dv">25</span>, gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="coding-style.html#cb19-1"></a>uni_attainment &lt;-<span class="st"> </span><span class="kw">filter</span>(data, age <span class="op">==</span><span class="st"> </span><span class="dv">25</span>, gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="coding-style.html#cb12-1"></a>uni_attainment&lt;-<span class="kw">filter</span>(data,age<span class="op">==</span><span class="dv">25</span>,gender<span class="op">==</span><span class="st">&quot;Female&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="coding-style.html#cb20-1"></a>uni_attainment&lt;-<span class="kw">filter</span>(data,age<span class="op">==</span><span class="dv">25</span>,gender<span class="op">==</span><span class="st">&quot;Female&quot;</span>)</span></code></pre></div>
 <p>Exceptions are operators that <em>directly connect</em> to an object, package or function, which should <strong>not</strong> have spaces on either side: <code>::</code>, <code>$</code>, <code>@</code>, <code>[</code>, <code>[[</code>, etc.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="coding-style.html#cb13-1"></a>uni_attainment<span class="op">$</span>gender</span>
-<span id="cb13-2"><a href="coding-style.html#cb13-2"></a>uni_attainment<span class="op">$</span>age[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb13-3"><a href="coding-style.html#cb13-3"></a>readabs<span class="op">::</span><span class="kw">read_abs</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="coding-style.html#cb21-1"></a>uni_attainment<span class="op">$</span>gender</span>
+<span id="cb21-2"><a href="coding-style.html#cb21-2"></a>uni_attainment<span class="op">$</span>age[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
+<span id="cb21-3"><a href="coding-style.html#cb21-3"></a>readabs<span class="op">::</span><span class="kw">read_abs</span>()</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="coding-style.html#cb14-1"></a>uni_attainment <span class="op">$</span><span class="st"> </span>gender</span>
-<span id="cb14-2"><a href="coding-style.html#cb14-2"></a>uni_attainment<span class="op">$</span><span class="st"> </span>age [ <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>]</span>
-<span id="cb14-3"><a href="coding-style.html#cb14-3"></a>readabs <span class="op">::</span><span class="st"> </span><span class="kw">read_abs</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="coding-style.html#cb22-1"></a>uni_attainment <span class="op">$</span><span class="st"> </span>gender</span>
+<span id="cb22-2"><a href="coding-style.html#cb22-2"></a>uni_attainment<span class="op">$</span><span class="st"> </span>age [ <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>]</span>
+<span id="cb22-3"><a href="coding-style.html#cb22-3"></a>readabs <span class="op">::</span><span class="st"> </span><span class="kw">read_abs</span>()</span></code></pre></div>
 </div>
 <div id="commas" class="section level3">
 <h3><span class="header-section-number">4.5.2</span> Commas</h3>
 <p>Always put a space <em>after</em> a comma and not before, just like in regular English.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="coding-style.html#cb15-1"></a><span class="kw">select</span>(data, age, gender, sa2, sa3)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="coding-style.html#cb23-1"></a><span class="kw">select</span>(data, age, gender, sa2, sa3)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="coding-style.html#cb16-1"></a><span class="kw">select</span>(data,age,gender,sa2,sa3)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="coding-style.html#cb24-1"></a><span class="kw">select</span>(data,age,gender,sa2,sa3)</span></code></pre></div>
 </div>
 <div id="parentheses" class="section level3">
 <h3><span class="header-section-number">4.5.3</span> Parentheses</h3>
 <p>Do not use spaces around parentheses in most cases:</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="coding-style.html#cb17-1"></a><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="coding-style.html#cb25-1"></a><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="coding-style.html#cb18-1"></a><span class="kw">mean</span> (x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb18-2"><a href="coding-style.html#cb18-2"></a><span class="kw">mean</span>( x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="coding-style.html#cb26-1"></a><span class="kw">mean</span> (x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb26-2"><a href="coding-style.html#cb26-2"></a><span class="kw">mean</span>( x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span> )</span></code></pre></div>
 <p>For spacing rules around <code>if</code>, <code>for</code>, <code>while</code>, and <code>function</code>, see <a href="https://style.tidyverse.org/syntax.html#parentheses">the Tidyverse guide</a>.</p>
 </div>
 </div>
 <div id="short-lines-and-line-indentation" class="section level2">
 <h2><span class="header-section-number">4.6</span> Short lines and line indentation</h2>
-<p>Tedious – yes – but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it’s generally a good idea to put each argument on a new line - hit return after the comma, like in the <code>rename</code> and <code>filter</code> examples below. Indentation makes it clear where a code block starts and finishes.</p>
-<p>Using pipes <code>%&gt;%</code> instead of nesting functions also makes things clearer. The pipe should always have a space before it, and should generally be followed by a new line, as in this example:</p>
+<p>It’s tedious – yes – but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it’s generally a good idea to put each argument on a new line - hit return after the comma, like in the <code>rename</code> and <code>filter</code> examples below. Indentation makes it clear where a code block starts and finishes.</p>
+<p>Using pipes (<code>%&gt;%</code>) instead of nesting functions also makes things clearer.[^The pipe is from the <code>magrittr</code> package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the <a href="packages-commonly-used-at-grattan.html#tidyverse"><code>tidyverse</code></a>.] The pipe should always have a space before it, and should generally be followed by a new line, as in this example:</p>
 <p><strong>Good: short lines and indentation</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="coding-style.html#cb19-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb19-2"><a href="coding-style.html#cb19-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
-<span id="cb19-3"><a href="coding-style.html#cb19-3"></a>         <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb19-4"><a href="coding-style.html#cb19-4"></a><span class="st">  </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb19-5"><a href="coding-style.html#cb19-5"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
-<span id="cb19-6"><a href="coding-style.html#cb19-6"></a><span class="st">  </span><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb19-7"><a href="coding-style.html#cb19-7"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<p><strong>Less good: short lines, no indentation</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="coding-style.html#cb20-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-2"><a href="coding-style.html#cb20-2"></a><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
-<span id="cb20-3"><a href="coding-style.html#cb20-3"></a><span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-4"><a href="coding-style.html#cb20-4"></a><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb20-5"><a href="coding-style.html#cb20-5"></a>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
-<span id="cb20-6"><a href="coding-style.html#cb20-6"></a><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-7"><a href="coding-style.html#cb20-7"></a><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<p><strong>Bad: long lines</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="coding-style.html#cb21-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA, <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="coding-style.html#cb27-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb27-2"><a href="coding-style.html#cb27-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
+<span id="cb27-3"><a href="coding-style.html#cb27-3"></a>         <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span></span>
+<span id="cb27-4"><a href="coding-style.html#cb27-4"></a><span class="st">  </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb27-5"><a href="coding-style.html#cb27-5"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
+<span id="cb27-6"><a href="coding-style.html#cb27-6"></a><span class="st">  </span><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span></span>
+<span id="cb27-7"><a href="coding-style.html#cb27-7"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<p>Without indentation, the code is harder to read. It’s not clear where the chunk starts and finishes, and which bits of code are arguments to which functions.</p>
+<p><strong>Bad: short lines, no indentation</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="coding-style.html#cb28-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb28-2"><a href="coding-style.html#cb28-2"></a><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
+<span id="cb28-3"><a href="coding-style.html#cb28-3"></a><span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb28-4"><a href="coding-style.html#cb28-4"></a><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb28-5"><a href="coding-style.html#cb28-5"></a>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
+<span id="cb28-6"><a href="coding-style.html#cb28-6"></a><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb28-7"><a href="coding-style.html#cb28-7"></a><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<p>Long lines are also bad and hard to read.
+<strong>Bad: long lines</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="coding-style.html#cb29-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA, <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<p>When you want to take the output of a function and pass it as the input to another function, use the pipe (<code>%&gt;%</code>). Don’t write ugly, inscrutable code like this, where multiple functions are wrapped around other functions.</p>
 <p><strong>War-crime bad: long lines without pipes</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="coding-style.html#cb22-1"></a>young_qual_income&lt;-<span class="kw">summarise</span>(<span class="kw">group_by</span>(<span class="kw">filter</span>(<span class="kw">rename</span>(data,<span class="dt">gender=</span>s801LHSAA,<span class="dt">uni_attainment=</span>high.ed),income<span class="op">&gt;</span><span class="dv">0</span>,age<span class="op">&gt;=</span><span class="dv">25</span><span class="op">&amp;</span>age<span class="op">&lt;=</span><span class="dv">34</span>),uni_attainment),<span class="dt">mean_income=</span><span class="kw">mean</span>(income,<span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="coding-style.html#cb30-1"></a>young_qual_income&lt;-<span class="kw">summarise</span>(<span class="kw">group_by</span>(<span class="kw">filter</span>(<span class="kw">rename</span>(data,<span class="dt">gender=</span>s801LHSAA,<span class="dt">uni_attainment=</span>high.ed),income<span class="op">&gt;</span><span class="dv">0</span>,age<span class="op">&gt;=</span><span class="dv">25</span><span class="op">&amp;</span>age<span class="op">&lt;=</span><span class="dv">34</span>),uni_attainment),<span class="dt">mean_income=</span><span class="kw">mean</span>(income,<span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
 </div>
 <div id="blocks-of-code" class="section level2">
 <h2><span class="header-section-number">4.7</span> Blocks of code</h2>
 <p>As shown above, the pipe function <code>%&gt;%</code> can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.</p>
-<p>Resist the urge to use the pipe to make code blocks too long.</p>
+<p>Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things.</p>
 
 </div>
 </div>
@@ -431,16 +446,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="organising-projects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="packages-commonly-used-at-grattan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -476,6 +493,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

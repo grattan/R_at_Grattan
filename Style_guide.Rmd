@@ -2,7 +2,6 @@
 
 ```{r message = FALSE, echo = FALSE}
 library(tidyverse)
-
 ```
 
 The benefits of a common coding style are well explained [by Hadley Wickham](http://r-pkgs.had.co.nz/style.html):
@@ -83,7 +82,7 @@ Comments can go above code chunks, or next to code - there are examples of both 
 It's useful to break a lengthy script into chunks with `-----`. 
 
 **Good**
-```{r}
+```{r, eval = FALSE}
 
 # Read file A -----
 

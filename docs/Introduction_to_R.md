@@ -14,6 +14,8 @@ You interact with R by writing code. This is a little different to Stata or SPSS
 
 R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
 
+Anything you can do in spreadsheet software like Excel can be done in R, plus much, much more. See [the next page](#why-script) for more on why we generally use R rather than Excel.
+
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as 'packages' - that extend R's functionality in some way. We cover packages more [later in this page](#packages). 
 
 When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
@@ -63,7 +65,7 @@ Like R itself, packages are free and open source. You can install them from with
 
 At Grattan, we make heavy use of a set of related packages known collectively as the `tidyverse`. We'll cover this more in a later chapter.
 
-### Installing packages
+### Installing packages {#install-packages}
 
 You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
 
@@ -116,3 +118,6 @@ remotes::install_github("mattcowgill/grattantheme")
 
 It usually makes sense to load a package with `library()`, unless you only need to use one of its function once or twice. There's no harm to using the `::` operator even if you have already loaded a package with `library()`. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
+## Learning more about R
+
+This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online.
