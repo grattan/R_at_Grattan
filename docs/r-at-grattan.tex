@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-16}
+    \date{2019-10-17}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -143,8 +143,8 @@
 \tableofcontents
 }
 \hypertarget{welcome}{%
-\chapter*{Welcome}\label{welcome}}
-\addcontentsline{toc}{chapter}{Welcome}
+\chapter*{Welcome!}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome!}
 
 This guide is designed for everyone who uses - or would like to use - R at Grattan Institute.
 
@@ -156,7 +156,7 @@ It does two main things:
 \item
   Sets out some guidelines and good practices when using R at Grattan.
 \item
-  Shows you how to use R to the sort of analytical tasks you're likely to undertake at Grattan.
+  Shows you how to use R to undertake the sort of analytical tasks you're likely to undertake at Grattan.
 \end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
@@ -164,6 +164,9 @@ As a guide to using R, this website is helpful but incomplete. We can't possibly
 Any complaints or comments about this guide can be sent to Will or Matt, respectively.
 
 This site was written in R with RMarkdown and the \href{https://bookdown.org}{bookdown} package.
+
+\hypertarget{part-what-is-r-and-why-do-we-use-it}{%
+\part{What is R and why do we use it?}\label{part-what-is-r-and-why-do-we-use-it}}
 
 \hypertarget{introduction-to-r}{%
 \chapter{Introduction to R}\label{introduction-to-r}}
@@ -175,30 +178,24 @@ If you have used R before and are comfortable enough with it, you might want to 
 \hypertarget{what-is-r}{%
 \section{What is R?}\label{what-is-r}}
 
-R is a programming language that is designed by and for statisticians, data scientists, and other people who work with data. It's free - you can download R at no charge. It's also open source - you can view and (if you're game) modify the code that underlies the R language. R is available for all major computing platforms including Windows, macOS, and Linux.
+R is a programming language. That sounds scarier than it really is. R is software you use to work with data - everything you can do in Excel, you can (and should!) do in R. (See \protect\hyperlink{why-script}{the next page} for more on why we generally use R rather than Excel.) R is available for Windows, macOS and Linux.
+
+R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
 
 R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more.
 
-You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (\protect\hyperlink{why-script}{see the next page for more on this}).
-
-R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
-
-Anything you can do in spreadsheet software like Excel can be done in R, plus much, much more. See \protect\hyperlink{why-script}{the next page} for more on why we generally use R rather than Excel.
+You interact with R by writing code. This is a little different to Stata or SPSS (or Excel), which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (see \protect\hyperlink{why-script}{the next page for more on this}).
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
-
-When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
-
-\includegraphics[width=7.99in]{atlas/r_screenshot}
-
-This might look a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
 To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 \hypertarget{what-is-rstudio}{%
 \section{What is RStudio?}\label{what-is-rstudio}}
 
-RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} Like R itself, RStudio is available for Windows, macOS and Linux. In programmer jargon, RStudio is an ``integrated development environment'' or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things.
+RStudio is another piece of free software you can download and run on your computer.\footnote{RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.} Like R itself, RStudio is available for Windows, macOS and Linux.
+
+In programmer jargon, RStudio is an ``integrated development environment'' or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things.
 
 \includegraphics[width=18.4in]{atlas/rstudio_screenshot}
 
@@ -227,77 +224,6 @@ For Windows, you'll need to click on the `base' version, and then click again to
 Once you've installed R, you'll need to install RStudio. Go to the \href{https://www.rstudio.com/products/rstudio/download/\#download}{RStudio website and install the latest version} of RStudio Desktop (open source license).
 
 Once they're both installed, get started by opening RStudio.
-
-\hypertarget{packages}{%
-\section{Packages}\label{packages}}
-
-R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}.
-
-But a lot of our work at Grattan uses add-on software to base R, known as `packages'. Some packages, like the popular `dplyr', make it quicker and/or easier to do tasks that you could otherwise do in base R. Other packages expand the possibilities of what R can do - like fitting a machine learning model, for example.
-
-Like R itself, packages are free and open source. You can install them from within RStudio.
-
-At Grattan, we make heavy use of a set of related packages known collectively as the \texttt{tidyverse}. We'll cover this more in a later chapter.
-
-\hypertarget{install-packages}{%
-\subsection{Installing packages}\label{install-packages}}
-
-You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
-
-In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
-
-To install a package from CRAN, we use the command \texttt{install.packages()}.
-
-For example, this code will install the \texttt{ggplot2} package from CRAN:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-The easiest way to install a package from Github is to use the function \texttt{install\_github()}. Unfortunately, this function doesn't come with base R. The \texttt{install\_github()} function is part of the \texttt{remotes} package. To use it, we first need to install \texttt{remotes} from CRAN:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{using-packages}{%
-\subsection{Using packages}\label{using-packages}}
-
-Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.
-
-We can either load (aka `attach') the package by using the \texttt{library()} function. We typically do this at the top of a script.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(remotes)}
-
-\CommentTok{# Now that the `remotes` package is loaded, we can use its `install_github()` function:}
-
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Or, we can use two colons - \texttt{::} - to tell R to use an individual function from a package without loading it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-It usually makes sense to load a package with \texttt{library()}, unless you only need to use one of its function once or twice. There's no harm to using the \texttt{::} operator even if you have already loaded a package with \texttt{library()}. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
 \hypertarget{learning-more-about-r}{%
 \section{Learning more about R}\label{learning-more-about-r}}
@@ -352,6 +278,9 @@ We use R specifically because:
 * It is becoming the norm in academic research and common in the corporate world.
 
 Everything you can do in Excel can, and usually should, be done in R.
+
+\hypertarget{part-using-r-the-grattan-way}{%
+\part{Using R the Grattan way}\label{part-using-r-the-grattan-way}}
 
 \hypertarget{organising-projects}{%
 \chapter{Organising an R project at Grattan}\label{organising-projects}}
@@ -833,9 +762,69 @@ Resist the urge to use the pipe to make code blocks too long. A block of code sh
 \hypertarget{packages-commonly-used-at-grattan}{%
 \chapter{Packages commonly used at Grattan}\label{packages-commonly-used-at-grattan}}
 
-R can do a lot out of the box, but a range of \protect\hyperlink{packages}{packages} make our lives easier.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}. Like R itself, packages are free and open source. You can install them from within RStudio.
 
 Some packages - like the \texttt{tidyverse} collection of packages - are broadly popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+\hypertarget{install-packages}{%
+\section{Installing packages}\label{install-packages}}
+
+You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
+
+In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
+
+To install a package from CRAN, we use the command \texttt{install.packages()}.
+
+For example, this code will install the \texttt{ggplot2} package from CRAN:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The easiest way to install a package from Github is to use the function \texttt{install\_github()}. Unfortunately, this function doesn't come with base R. The \texttt{install\_github()} function is part of the \texttt{remotes} package. To use it, we first need to install \texttt{remotes} from CRAN:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{using-packages}{%
+\section{Using packages}\label{using-packages}}
+
+Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.
+
+We can either load (aka `attach') the package by using the \texttt{library()} function. We typically do this at the top of a script.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(remotes)}
+
+\CommentTok{# Now that the `remotes` package is loaded, we can use its `install_github()` function:}
+
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Or, we can use two colons - \texttt{::} - to tell R to use an individual function from a package without loading it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+It usually makes sense to load a package with \texttt{library()}, unless you only need to use one of its function once or twice. There's no harm to using the \texttt{::} operator even if you have already loaded a package with \texttt{library()}. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
 \hypertarget{tidyverse}{%
 \section{The tidyverse!}\label{tidyverse}}
@@ -875,7 +864,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------------------------- tidyverse 1.2.1.9000 --
+## -- Attaching packages --------------------------- tidyverse 1.2.1.9000 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -886,7 +875,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ----------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -995,8 +984,161 @@ Install these Grattan-specific packages using this block of code:
 \hypertarget{other-commonly-used-packages}{%
 \section{Other commonly-used packages}\label{other-commonly-used-packages}}
 
-\hypertarget{writing-reproducible-documents-with-rmarkdown}{%
-\chapter{Writing reproducible documents with RMarkdown}\label{writing-reproducible-documents-with-rmarkdown}}
+\hypertarget{part-load-manipulate-and-visualise-data}{%
+\part{Load, manipulate and visualise data}\label{part-load-manipulate-and-visualise-data}}
+
+\hypertarget{reading-data}{%
+\chapter{Reading data}\label{reading-data}}
+
+\hypertarget{importing-data}{%
+\section{Importing data}\label{importing-data}}
+
+\hypertarget{reading-csv-files}{%
+\subsection{Reading CSV files}\label{reading-csv-files}}
+
+\hypertarget{read_csv}{%
+\subsubsection{\texorpdfstring{\texttt{read\_csv()}}{read\_csv()}}\label{read_csv}}
+
+The \texttt{read\_csv()} function from the \texttt{tidyverse} is quicker and smarter than \texttt{read.csv} in base R.
+
+Pitfalls:
+1. read\_csv is quicker because it surveys a sample of the data
+
+We can also compress \texttt{.csv} files into \texttt{.zip} files and read them \emph{directly} using \texttt{read\_csv()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/my_data.zip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This is useful for two reasons:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The data takes up less room on your computer; and
+\item
+  The original data, which shouldn't ever be directly edited, is protected and cannot be directly edited.
+\end{enumerate}
+
+\hypertarget{data.tablefread}{%
+\subsubsection{\texorpdfstring{\texttt{data.table::fread()}}{data.table::fread()}}\label{data.tablefread}}
+
+The \texttt{fread} function from \texttt{data.table} is quicker than both \texttt{read.csv} and \texttt{read\_csv}.
+
+\hypertarget{readxlread_excel}{%
+\subsection{\texorpdfstring{\texttt{readxl::read\_excel()}}{readxl::read\_excel()}}\label{readxlread_excel}}
+
+\hypertarget{rio}{%
+\subsection{\texorpdfstring{\texttt{rio}}{rio}}\label{rio}}
+
+\hypertarget{readabs}{%
+\subsection{\texorpdfstring{\texttt{readabs}}{readabs}}\label{readabs}}
+
+\hypertarget{reading-common-files}{%
+\section{Reading common files:}\label{reading-common-files}}
+
+\begin{itemize}
+\tightlist
+\item
+  TableBuilder CSVSTRINGs
+\item
+  HES household file
+\item
+  SIH
+\item
+  LSAY and derivatives
+\end{itemize}
+
+See data directory for a list of microdata available to Grattan.
+
+\hypertarget{appropriately-renaming-variables}{%
+\section{Appropriately renaming variables}\label{appropriately-renaming-variables}}
+
+As shown in the style guide
+
+Add \texttt{rename\_abs} function to a common Grattan package?
+
+\hypertarget{getting-to-tidy-data}{%
+\section{Getting to tidy data}\label{getting-to-tidy-data}}
+
+\texttt{pivot\_long()} and \texttt{pivot\_wide()}
+\emph{Make sure these are stable btw}
+
+\hypertarget{different-data-types}{%
+\chapter{Different data types}\label{different-data-types}}
+
+\hypertarget{tidy-data}{%
+\section{Tidy data}\label{tidy-data}}
+
+Other data structures
+
+\hypertarget{dates-with-lubridate}{%
+\section{\texorpdfstring{Dates with \texttt{lubridate::}}{Dates with lubridate::}}\label{dates-with-lubridate}}
+
+The \texttt{lubridate::} package
+
+\hypertarget{strings-with-stringr}{%
+\section{\texorpdfstring{Strings with \texttt{stringr::}}{Strings with stringr::}}\label{strings-with-stringr}}
+
+\begin{itemize}
+\tightlist
+\item
+  Replacing values
+\item
+  Matching values
+\item
+  Separating columns
+\end{itemize}
+
+\hypertarget{factors-with-forcats}{%
+\section{\texorpdfstring{Factors with \texttt{forcats::}}{Factors with forcats::}}\label{factors-with-forcats}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dangers with factors
+\end{itemize}
+
+\hypertarget{data-transformation}{%
+\chapter{Data transformation}\label{data-transformation}}
+
+\hypertarget{the-pipe}{%
+\section{The pipe}\label{the-pipe}}
+
+\hypertarget{key-dplyr-functions}{%
+\section{\texorpdfstring{Key \texttt{dplyr} functions:}{Key dplyr functions:}}\label{key-dplyr-functions}}
+
+All have the same syntax structure, which enable pipe-chains.
+
+\hypertarget{filter-with-filter}{%
+\section{\texorpdfstring{Filter with \texttt{filter()}}{Filter with filter()}}\label{filter-with-filter}}
+
+\hypertarget{arrange-with-arrange}{%
+\section{\texorpdfstring{Arrange with \texttt{arrange()}}{Arrange with arrange()}}\label{arrange-with-arrange}}
+
+\hypertarget{select-variables-with-select}{%
+\section{\texorpdfstring{Select variables with \texttt{select()}}{Select variables with select()}}\label{select-variables-with-select}}
+
+\hypertarget{group-data-with-group_by}{%
+\section{\texorpdfstring{Group data with \texttt{group\_by()}}{Group data with group\_by()}}\label{group-data-with-group_by}}
+
+\hypertarget{edit-and-add-new-variables-with-mutate}{%
+\section{\texorpdfstring{Edit and add new variables with \texttt{mutate()}}{Edit and add new variables with mutate()}}\label{edit-and-add-new-variables-with-mutate}}
+
+\hypertarget{cases-when-you-should-use-case_when}{%
+\subsection{\texorpdfstring{Cases when you should use \texttt{case\_when()}}{Cases when you should use case\_when()}}\label{cases-when-you-should-use-case_when}}
+
+\hypertarget{summarise-data-with-summarise}{%
+\section{\texorpdfstring{Summarise data with \texttt{summarise()}}{Summarise data with summarise()}}\label{summarise-data-with-summarise}}
+
+\hypertarget{joining-datasets-with-_join}{%
+\section{\texorpdfstring{Joining datasets with \texttt{*\_join()}}{Joining datasets with *\_join()}}\label{joining-datasets-with-_join}}
+
+\hypertarget{analysis}{%
+\chapter{Analysis}\label{analysis}}
 
 \hypertarget{data-visualisation}{%
 \chapter{Data Visualisation}\label{data-visualisation}}
@@ -1713,7 +1855,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks class: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks sterling: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -1779,7 +1921,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks fantastic! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks sterling! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1830,7 +1972,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks magnificent: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks first-class: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -2004,7 +2146,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks on fleek! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks marvellous! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2151,7 +2293,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Fantastic! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Admirable! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2437,7 +2579,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks tip-top. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks too good to be true. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2699,7 +2841,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks fantastic! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks brill! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2991,158 +3133,8 @@ To use \texttt{geom\_(text\textbar{}label)\_repel}, you need to tell \texttt{ggr
 
 \texttt{plotly::ggplotly()}
 
-\hypertarget{reading-data}{%
-\chapter{Reading data}\label{reading-data}}
-
-\hypertarget{importing-data}{%
-\section{Importing data}\label{importing-data}}
-
-\hypertarget{reading-csv-files}{%
-\subsection{Reading CSV files}\label{reading-csv-files}}
-
-\hypertarget{read_csv}{%
-\subsubsection{\texorpdfstring{\texttt{read\_csv()}}{read\_csv()}}\label{read_csv}}
-
-The \texttt{read\_csv()} function from the \texttt{tidyverse} is quicker and smarter than \texttt{read.csv} in base R.
-
-Pitfalls:
-1. read\_csv is quicker because it surveys a sample of the data
-
-We can also compress \texttt{.csv} files into \texttt{.zip} files and read them \emph{directly} using \texttt{read\_csv()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/my_data.zip"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-This is useful for two reasons:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The data takes up less room on your computer; and
-\item
-  The original data, which shouldn't ever be directly edited, is protected and cannot be directly edited.
-\end{enumerate}
-
-\hypertarget{data.tablefread}{%
-\subsubsection{\texorpdfstring{\texttt{data.table::fread()}}{data.table::fread()}}\label{data.tablefread}}
-
-The \texttt{fread} function from \texttt{data.table} is quicker than both \texttt{read.csv} and \texttt{read\_csv}.
-
-\hypertarget{readxlread_excel}{%
-\subsection{\texorpdfstring{\texttt{readxl::read\_excel()}}{readxl::read\_excel()}}\label{readxlread_excel}}
-
-\hypertarget{rio}{%
-\subsection{\texorpdfstring{\texttt{rio}}{rio}}\label{rio}}
-
-\hypertarget{readabs}{%
-\subsection{\texorpdfstring{\texttt{readabs}}{readabs}}\label{readabs}}
-
-\hypertarget{reading-common-files}{%
-\section{Reading common files:}\label{reading-common-files}}
-
-\begin{itemize}
-\tightlist
-\item
-  TableBuilder CSVSTRINGs
-\item
-  HES household file
-\item
-  SIH
-\item
-  LSAY and derivatives
-\end{itemize}
-
-See data directory for a list of microdata available to Grattan.
-
-\hypertarget{appropriately-renaming-variables}{%
-\section{Appropriately renaming variables}\label{appropriately-renaming-variables}}
-
-As shown in the style guide
-
-Add \texttt{rename\_abs} function to a common Grattan package?
-
-\hypertarget{getting-to-tidy-data}{%
-\section{Getting to tidy data}\label{getting-to-tidy-data}}
-
-\texttt{pivot\_long()} and \texttt{pivot\_wide()}
-\emph{Make sure these are stable btw}
-
-\hypertarget{different-data-types}{%
-\chapter{Different data types}\label{different-data-types}}
-
-\hypertarget{tidy-data}{%
-\section{Tidy data}\label{tidy-data}}
-
-Other data structures
-
-\hypertarget{dates-with-lubridate}{%
-\section{\texorpdfstring{Dates with \texttt{lubridate::}}{Dates with lubridate::}}\label{dates-with-lubridate}}
-
-The \texttt{lubridate::} package
-
-\hypertarget{strings-with-stringr}{%
-\section{\texorpdfstring{Strings with \texttt{stringr::}}{Strings with stringr::}}\label{strings-with-stringr}}
-
-\begin{itemize}
-\tightlist
-\item
-  Replacing values
-\item
-  Matching values
-\item
-  Separating columns
-\end{itemize}
-
-\hypertarget{factors-with-forcats}{%
-\section{\texorpdfstring{Factors with \texttt{forcats::}}{Factors with forcats::}}\label{factors-with-forcats}}
-
-\begin{itemize}
-\tightlist
-\item
-  Dangers with factors
-\end{itemize}
-
-\hypertarget{data-transformation}{%
-\chapter{Data transformation}\label{data-transformation}}
-
-\hypertarget{the-pipe}{%
-\section{The pipe}\label{the-pipe}}
-
-\hypertarget{key-dplyr-functions}{%
-\section{\texorpdfstring{Key \texttt{dplyr} functions:}{Key dplyr functions:}}\label{key-dplyr-functions}}
-
-All have the same syntax structure, which enable pipe-chains.
-
-\hypertarget{filter-with-filter}{%
-\section{\texorpdfstring{Filter with \texttt{filter()}}{Filter with filter()}}\label{filter-with-filter}}
-
-\hypertarget{arrange-with-arrange}{%
-\section{\texorpdfstring{Arrange with \texttt{arrange()}}{Arrange with arrange()}}\label{arrange-with-arrange}}
-
-\hypertarget{select-variables-with-select}{%
-\section{\texorpdfstring{Select variables with \texttt{select()}}{Select variables with select()}}\label{select-variables-with-select}}
-
-\hypertarget{group-data-with-group_by}{%
-\section{\texorpdfstring{Group data with \texttt{group\_by()}}{Group data with group\_by()}}\label{group-data-with-group_by}}
-
-\hypertarget{edit-and-add-new-variables-with-mutate}{%
-\section{\texorpdfstring{Edit and add new variables with \texttt{mutate()}}{Edit and add new variables with mutate()}}\label{edit-and-add-new-variables-with-mutate}}
-
-\hypertarget{cases-when-you-should-use-case_when}{%
-\subsection{\texorpdfstring{Cases when you should use \texttt{case\_when()}}{Cases when you should use case\_when()}}\label{cases-when-you-should-use-case_when}}
-
-\hypertarget{summarise-data-with-summarise}{%
-\section{\texorpdfstring{Summarise data with \texttt{summarise()}}{Summarise data with summarise()}}\label{summarise-data-with-summarise}}
-
-\hypertarget{joining-datasets-with-_join}{%
-\section{\texorpdfstring{Joining datasets with \texttt{*\_join()}}{Joining datasets with *\_join()}}\label{joining-datasets-with-_join}}
-
-\hypertarget{analysis}{%
-\chapter{Analysis}\label{analysis}}
+\hypertarget{part-advanced-topics}{%
+\part{Advanced topics}\label{part-advanced-topics}}
 
 \hypertarget{creating-functions}{%
 \chapter{Creating functions}\label{creating-functions}}

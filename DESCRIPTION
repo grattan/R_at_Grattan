@@ -9,7 +9,7 @@ Authors@R: c(
     person(given = "Matt",
            family = "Cowgill",
            role = "aut",
-           email = "matthew.cowgill@grattaninstitute.du.au"))
+           email = "matthew.cowgill@grattaninstitute.edu.au"))
 Description: How to use R at Grattan Institute.
 License: GPL-3
 Encoding: UTF-8

@@ -1,3 +1,4 @@
+# (PART) What is R and why do we use it? {-}
 # Introduction to R
 
 Most people reading this guide will know what R is. But if you don't - that's OK! 
@@ -6,29 +7,23 @@ If you have used R before and are comfortable enough with it, you might want to 
 
 ## What is R?
 
-R is a programming language that is designed by and for statisticians, data scientists, and other people who work with data. It's free - you can download R at no charge. It's also open source - you can view and (if you're game) modify the code that underlies the R language. R is available for all major computing platforms including Windows, macOS, and Linux.
+R is a programming language. That sounds scarier than it really is. R is software you use to work with data - everything you can do in Excel, you can (and should!) do in R. (See [the next page](#why-script) for more on why we generally use R rather than Excel.) R is available for Windows, macOS and Linux.
+
+R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
 
 R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. 
 
-You interact with R by writing code. This is a little different to Stata or SPSS, which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis ([see the next page for more on this](#why-script)).
-
-R also has a fair bit of overlap with general purpose programming languages like Python. But R is more focused on the sort of tasks that statisticians, data scientists, and academic researchers do.
-
-Anything you can do in spreadsheet software like Excel can be done in R, plus much, much more. See [the next page](#why-script) for more on why we generally use R rather than Excel.
+You interact with R by writing code. This is a little different to Stata or SPSS (or Excel), which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (see [the next page for more on this](#why-script)).
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as 'packages' - that extend R's functionality in some way. We cover packages more [later in this page](#packages). 
-
-When you open R itself, you're confronted with a few disclaimers and a command prompt, similar in appearance to the Terminal on macOS or command prompt in Windows.
-
-<img src="atlas/r_screenshot.png" width="575" />
-
-This might look a bit intimidating, but you'll almost never open R directly and interact with it in that way.
 
 To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 ## What is RStudio?
 
-RStudio is another piece of free software you can download and run on your computer.^[RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.] Like R itself, RStudio is available for Windows, macOS and Linux. In programmer jargon, RStudio is an "integrated development environment" or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R 'console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things. 
+RStudio is another piece of free software you can download and run on your computer.^[RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we're referring to the desktop software unless we make it clear that we mean the company.] Like R itself, RStudio is available for Windows, macOS and Linux. 
+
+In programmer jargon, RStudio is an "integrated development environment" or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R 'console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things. 
 
 <img src="atlas/rstudio_screenshot.png" width="1325" />
 
@@ -54,69 +49,6 @@ For Windows, you'll need to click on the 'base' version, and then click again to
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 
 Once they're both installed, get started by opening RStudio. 
-
-## Packages {#packages}
-
-R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. 
-
-But a lot of our work at Grattan uses add-on software to base R, known as 'packages'. Some packages, like the popular 'dplyr', make it quicker and/or easier to do tasks that you could otherwise do in base R. Other packages expand the possibilities of what R can do - like fitting a machine learning model, for example.
-
-Like R itself, packages are free and open source. You can install them from within RStudio.
-
-At Grattan, we make heavy use of a set of related packages known collectively as the `tidyverse`. We'll cover this more in a later chapter.
-
-### Installing packages {#install-packages}
-
-You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
-
-In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
-
-To install a package from CRAN, we use the command `install.packages()`.
-
-For example, this code will install the `ggplot2` package from CRAN:
-
-
-```r
-install.packages("ggplot2")
-```
-
-The easiest way to install a package from Github is to use the function `install_github()`. Unfortunately, this function doesn't come with base R. The `install_github()` function is part of the `remotes` package. To use it, we first need to install `remotes` from CRAN:
-
-
-```r
-install.packages("remotes")
-```
-
-Now we can install packages from Github using the `install_github()` function from the `remotes` package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
-
-
-```r
-remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade = "always")
-```
-
-### Using packages
-
-Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that. 
-
-We can either load (aka 'attach') the package by using the `library()` function. We typically do this at the top of a script.
-
-
-```r
-library(remotes)
-
-# Now that the `remotes` package is loaded, we can use its `install_github()` function:
-
-install_github("mattcowgill/grattantheme")
-```
-
-Or, we can use two colons - `::` - to tell R to use an individual function from a package without loading it:
-
-
-```r
-remotes::install_github("mattcowgill/grattantheme")
-```
-
-It usually makes sense to load a package with `library()`, unless you only need to use one of its function once or twice. There's no harm to using the `::` operator even if you have already loaded a package with `library()`. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
 ## Learning more about R
 

@@ -1,8 +1,56 @@
 # Packages commonly used at Grattan
 
-R can do a lot out of the box, but a range of [packages](#packages) make our lives easier.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. Like R itself, packages are free and open source. You can install them from within RStudio.
 
 Some packages - like the `tidyverse` collection of packages - are broadly popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+## Installing packages {#install-packages}
+
+You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
+
+In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
+
+To install a package from CRAN, we use the command `install.packages()`.
+
+For example, this code will install the `ggplot2` package from CRAN:
+
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+
+The easiest way to install a package from Github is to use the function `install_github()`. Unfortunately, this function doesn't come with base R. The `install_github()` function is part of the `remotes` package. To use it, we first need to install `remotes` from CRAN:
+
+```{r eval=FALSE}
+install.packages("remotes")
+```
+
+Now we can install packages from Github using the `install_github()` function from the `remotes` package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+
+```{r eval=FALSE}
+remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade = "always")
+```
+
+## Using packages
+
+Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that. 
+
+We can either load (aka 'attach') the package by using the `library()` function. We typically do this at the top of a script.
+
+```{r eval=FALSE}
+library(remotes)
+
+# Now that the `remotes` package is loaded, we can use its `install_github()` function:
+
+install_github("mattcowgill/grattantheme")
+```
+
+Or, we can use two colons - `::` - to tell R to use an individual function from a package without loading it:
+
+```{r eval=FALSE}
+remotes::install_github("mattcowgill/grattantheme")
+```
+
+It usually makes sense to load a package with `library()`, unless you only need to use one of its function once or twice. There's no harm to using the `::` operator even if you have already loaded a package with `library()`. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
 ## The tidyverse! {#tidyverse}
 
@@ -114,5 +162,3 @@ remotes::install_github("mattcowgill/grattandata",
 ## Other commonly-used packages
 
 
-
-# Writing reproducible documents with RMarkdown

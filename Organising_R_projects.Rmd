@@ -1,3 +1,4 @@
+# (PART) Using R the Grattan way {-}
 # Organising an R project at Grattan {#organising-projects} 
 
 All our work at Grattan, whether it's in R or some other software, should heed the "hit by a bus" rule. If you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
