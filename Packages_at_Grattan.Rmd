@@ -161,4 +161,7 @@ remotes::install_github("mattcowgill/grattandata",
 
 ## Other commonly-used packages
 
+* *absmapsdata*
+* *readabs*
 
+SECTION UNFINISHED

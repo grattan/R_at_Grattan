@@ -287,6 +287,14 @@ When you want to take the output of a function and pass it as the input to anoth
 young_qual_income<-summarise(group_by(filter(rename(data,gender=s801LHSAA,uni_attainment=high.ed),income>0,age>=25&age<=34),uni_attainment),mean_income=mean(income,na.rm=TRUE))
 ```
 
+Writing clear code chunks, where functions are strung together with a pipe (`%>%`), makes your code much more expressive and able to be read and understood. This is another reason to favour R over something like Excel, which pushes people to piece together functions into Frankenstein's monsters like this:
+
+```{r, eval=FALSE}
+=IF($G16 = "All day", INDEX(metrics!$D$8:$H$66, MATCH(INDEX(correspondence!$B$2:$B$23, MATCH('convert to tibble'!M$4, correspondence!$A$2:$A$23, 0)), metrics!$B$8:$B$66, 0), MATCH('convert to tibble'!$E16, metrics!$D$4:$H$4, 0)), "NA")
+```
+
+I just threw up in my mouth a little bit.
+
 ## Blocks of code
 
 As shown above, the pipe function `%>%` can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand. 
