@@ -107,6 +107,37 @@ This helps you, and others, navigate your code better, using the navigation tool
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
+## Assigning values to objects
+
+In R, you work with objects. An object might be a data frame, or a vector of numbers or letters, or a list. Functions can be objects, too.
+
+ **Use the `<-` operator to assign values to objects**. Here are some **good** examples:
+
+```r
+schools <- read_csv("data/schools_data.csv")
+
+three_letters <- c("a", "b", "c")
+
+lf <- labour_force %>%
+  filter(status != "NILF")
+```
+
+Avoid `->`, `=` and `assign()`. Here are some **bad** examples::
+
+
+```r
+schools = read_csv("data/schools_data.csv")
+
+assign("three_letters", c("a", "b", "c"))
+
+labour_force %>%
+  filter(status != "NILF") -> lf
+```
+
+All these bad operators will work, but they are best avoided. The `=` operator is avoided for reasons of visual consistency, style, and to avoid confusion. `assign()` is avoided because it can lead to unexpected behaviour, and is usually not the best way to do what you want to do. The `->` operator is avoided because it's easy to miss when skimming over code.
+
+The `<<-` operator should also be avoided. 
+
 ## Naming objects and variables
 
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called `ed_by_age` or `edByAge` or `ed.by.age`. Having a consistent naming convention across Grattan also makes it easy to read and QC each other's code.
@@ -273,6 +304,15 @@ When you want to take the output of a function and pass it as the input to anoth
 ```r
 young_qual_income<-summarise(group_by(filter(rename(data,gender=s801LHSAA,uni_attainment=high.ed),income>0,age>=25&age<=34),uni_attainment),mean_income=mean(income,na.rm=TRUE))
 ```
+
+Writing clear code chunks, where functions are strung together with a pipe (`%>%`), makes your code much more expressive and able to be read and understood. This is another reason to favour R over something like Excel, which pushes people to piece together functions into Frankenstein's monsters like this:
+
+
+```r
+=IF($G16 = "All day", INDEX(metrics!$D$8:$H$66, MATCH(INDEX(correspondence!$B$2:$B$23, MATCH('convert to tibble'!M$4, correspondence!$A$2:$A$23, 0)), metrics!$B$8:$B$66, 0), MATCH('convert to tibble'!$E16, metrics!$D$4:$H$4, 0)), "NA")
+```
+
+I just threw up in my mouth a little bit.
 
 ## Blocks of code
 

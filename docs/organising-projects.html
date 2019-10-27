@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-10-17" />
+<meta name="date" content="2019-10-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,9 +53,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,16 +64,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +80,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -158,14 +156,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.1</b> Script preamble</a></li>
 <li class="chapter" data-level="4.2" data-path="coding-style.html"><a href="coding-style.html#use-comments"><i class="fa fa-check"></i><b>4.2</b> Use comments</a></li>
 <li class="chapter" data-level="4.3" data-path="coding-style.html"><a href="coding-style.html#breaking-your-script-into-chunks"><i class="fa fa-check"></i><b>4.3</b> Breaking your script into chunks</a></li>
-<li class="chapter" data-level="4.4" data-path="coding-style.html"><a href="coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.4</b> Naming objects and variables</a></li>
-<li class="chapter" data-level="4.5" data-path="coding-style.html"><a href="coding-style.html#spacing"><i class="fa fa-check"></i><b>4.5</b> Spacing</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="coding-style.html"><a href="coding-style.html#assign-and-equals"><i class="fa fa-check"></i><b>4.5.1</b> Assign and equals</a></li>
-<li class="chapter" data-level="4.5.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.5.2</b> Commas</a></li>
-<li class="chapter" data-level="4.5.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.5.3</b> Parentheses</a></li>
+<li class="chapter" data-level="4.4" data-path="coding-style.html"><a href="coding-style.html#assigning-values-to-objects"><i class="fa fa-check"></i><b>4.4</b> Assigning values to objects</a></li>
+<li class="chapter" data-level="4.5" data-path="coding-style.html"><a href="coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.5</b> Naming objects and variables</a></li>
+<li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#spacing"><i class="fa fa-check"></i><b>4.6</b> Spacing</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="coding-style.html"><a href="coding-style.html#assign-and-equals"><i class="fa fa-check"></i><b>4.6.1</b> Assign and equals</a></li>
+<li class="chapter" data-level="4.6.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.6.2</b> Commas</a></li>
+<li class="chapter" data-level="4.6.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.6.3</b> Parentheses</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>4.6</b> Short lines and line indentation</a></li>
-<li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#blocks-of-code"><i class="fa fa-check"></i><b>4.7</b> Blocks of code</a></li>
+<li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>4.7</b> Short lines and line indentation</a></li>
+<li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#blocks-of-code"><i class="fa fa-check"></i><b>4.8</b> Blocks of code</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html"><i class="fa fa-check"></i><b>5</b> Packages commonly used at Grattan</a><ul>
 <li class="chapter" data-level="5.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#install-packages"><i class="fa fa-check"></i><b>5.1</b> Installing packages</a></li>
@@ -290,7 +289,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Using a consistent coding style also helps make our work more shareable; that’s <a href="coding-style.html#coding-style">covered on the next page</a>.</p>
 <div id="use-rstudio-projects-not-setwd" class="section level2">
 <h2><span class="header-section-number">3.1</span> Use RStudio projects, not <code>setwd()</code></h2>
-<p>You’ll almost always be reading and/or writing files to disk as part of your analysis in R. To do this, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command <code>getwd()</code>.</p>
+<p>In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output.</p>
+<p>When it’s executing your script, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command <code>getwd()</code>.</p>
 <p>You can tell R which folder to use as your working directory by using the command <code>setwd()</code>, as in <code>setwd("~/Desktop/some random folder")</code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea that you should avoid!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
 <p>In the <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">words of Jenny Bryan</a>:</p>
 <blockquote>
@@ -306,18 +306,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths.
 Machine-specific filepaths not only stop you from sharing your work with others, they’re also super annoying for! Who wants to type out a full filepath everytime you load or save a file?</p>
 <p><strong>Bad, machine-specific filepaths</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="organising-projects.html#cb1-1"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/Users/mcowgill/Desktop/hes1516.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="organising-projects.html#cb1-2"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csb</span>(<span class="st">&quot;C:\Users\mcowgill\Desktop\hes1516.csv&quot;</span>)</span>
-<span id="cb1-3"><a href="organising-projects.html#cb1-3"></a><span class="kw">grattan_save</span>(<span class="st">&quot;/Users/mcowgill/Desktop/images/expenditure_by_income.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;/Users/mcowgill/Desktop/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">hes &lt;-<span class="st"> </span><span class="kw">read_csb</span>(<span class="st">&quot;C:\Users\mcowgill\Desktop\hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">grattan_save</span>(<span class="st">&quot;/Users/mcowgill/Desktop/images/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
 <p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
 <p><strong>Good, relative filepaths</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="organising-projects.html#cb2-1"></a>hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</span>
-<span id="cb2-2"><a href="organising-projects.html#cb2-2"></a><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/expenditure_by_income.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
 </div>
 <div id="keep-your-stuff-together" class="section level2">
 <h2><span class="header-section-number">3.3</span> Keep your stuff together</h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a href="references.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
+<p>Your script(s), data, and output should generally all live in the same place.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
@@ -326,7 +326,7 @@ Machine-specific filepaths not only stop you from sharing your work with others,
 <li>your graphs - called ‘atlas’, like in our LaTeX projects</li>
 <li>your non-graph output, like formatted tables, called ‘output’</li>
 </ul>
-<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.<a href="references.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Don’t keep ‘raw’ data together in the same place as data you’ve modified.</p>
+<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Don’t keep ‘raw’ data together in the same place as data you’ve modified.</p>
 </div>
 <div id="manageable" class="section level2">
 <h2><span class="header-section-number">3.4</span> Keep your scripts manageable</h2>
@@ -357,6 +357,13 @@ Machine-specific filepaths not only stop you from sharing your work with others,
 <p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive”. To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-projects.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.<a href="organising-projects.html#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

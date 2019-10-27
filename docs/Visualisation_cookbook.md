@@ -165,7 +165,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks wicked: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks supreme: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -229,7 +229,7 @@ simple_bar
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_bar_title-1.png)<!-- -->
 
-Looks superior! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks brill! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -283,7 +283,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks wicked: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks great: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -452,7 +452,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_multi_expand-1.png)<!-- -->
 
-Looks very good! Now you can add titles and a caption, and save using `grattan_save`:
+Looks outstanding! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -599,7 +599,7 @@ facet_bar +
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_facet_label-1.png)<!-- -->
 
-Class! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Champion! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -878,7 +878,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_scatter_grattan-1.png)<!-- -->
 
-Looks smashing. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks badass. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -1125,7 +1125,7 @@ base_chart
 
 ![](Visualisation_cookbook_files/figure-epub3/scatter_layer_base-1.png)<!-- -->
 
-Looks magic! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks admirable! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
@@ -1311,8 +1311,8 @@ glimpse(sa32016)
 ```
 
 ```
-## Rows: 358
-## Columns: 12
+## Observations: 358
+## Variables: 12
 ## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10…
 ## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", …
 ## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102",…
