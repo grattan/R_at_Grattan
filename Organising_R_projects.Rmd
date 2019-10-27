@@ -13,11 +13,11 @@ This page sets out some guidelines for organising your work in R at Grattan. It 
 
 Using a consistent coding style also helps make our work more shareable; that's [covered on the next page](#coding-style).
 
-## Use RStudio projects, not `setwd()`
+## Use RStudio projects, not `setwd()` {#rproj}
 
-In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. 
+In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. Your R script is like a recipe in a cookbook - when R is cooking your recipe, it needs to know where to find your ingredients (the data) and put the finished product (your delicious analysis).
 
-When it's executing your script, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command `getwd()`. 
+When it's executing your script, R needs to know where to read files from and save files to on your computer. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command `getwd()`. 
 
 You can tell R which folder to use as your working directory by using the command `setwd()`, as in `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. **This is a bad idea that you should avoid!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
@@ -110,3 +110,16 @@ We're all familiar with this hellish scenario: you do some work in a Word docume
 
 **Don't** create multiple versions of the same script (like `analysis_FINAL_002_MC.R` and `analysis_FINALFINAL_003_MC_WM.R`.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your "R" folder, called "R/archive". To avoid a horrible mess of `analysis_FINAL_002.R` type documents cluttering up your folder, consider using [Git for version control](#version-control).
 
+## Keep your workspace clean {#clean-workspace}
+
+Sometimes R doesn't behave the way you expect it to. You might run a script and find it works find, then run it again and find it's producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn't have originally, or some extra packages loaded.
+
+To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.
+
+*But*... don't clean your workspace within your analysis script. People sometimes do this using this command:
+
+```{r eval=FALSE}
+rm(list = ls())
+```
+
+This removes all objects from your environment. But it doesn't completely clear your R environment, and it doesn't do anything to any packages you have loaded. As [Jenny Bryan puts it](https://rstats.wtf/save-source.html#rm-list-ls), this command is "a red flag, because it is indicative of a non-reproducible workflow."

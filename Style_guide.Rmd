@@ -12,6 +12,27 @@ Below we describe the **key** elements of Grattan coding style, without being to
 
 You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
 
+## Load packages first
+
+Our analysis scripts will almost always involve loading some [packages](#packages). These should be laoded at the top of a script, in one block like this:
+
+```{r eval=FALSE}
+library(tidyverse)
+library(grattantheme)
+```
+
+If you're loading a package from Github, it's a good idea to leave a [comment](#use-comments) to say where it came from, like this:
+
+```{r eval=FALSE}
+library(tidyverse)
+library(grattantheme)
+library(strayr) # remotes::install_github("mattcowgill/strayr")
+```
+
+Don't scatter `library()` calls throughout your script - put them all at the top. 
+
+The only thing that should come before loading your packages is the script preamble.
+
 ## Script preamble
 
 Describe what your script does in the first few lines using comments or within an RMarkdown document.
