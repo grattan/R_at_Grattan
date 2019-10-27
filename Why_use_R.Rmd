@@ -11,7 +11,7 @@ It's important for our analyses to be **reproducible**. This means that all of t
 
 Reproducibility is very important for quality control ("QC"), particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
 
-Script-based analyses are more likely to be reproducible.^[Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data "cleaning" in Excel - then it is not fully reproducible.] A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output. 
+Script-based analyses are more likely to be reproducible.^[Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data "cleaning" in Excel - then it is not fully reproducible. If your script will only run on your machine - because there are undocumented options, for example - it is not reproducible.] A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output. 
 
 Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the 'raw data' and what has been modified in some way.
 
@@ -26,7 +26,7 @@ Script-based analysis software also allows us to:
 
 ## Why use R specifically? {#why-R}
 
-Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is primarily manipulated by clicking things).
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is often manipulated by clicking things).
 
 We use R specifically because:
 * It's free!
@@ -34,6 +34,5 @@ We use R specifically because:
 * It's powerful, particularly when it comes to statistics and data science.
 * It's flexible and customisable.
 * It has an active community extending its capabilities all the time and providing support online.
+* It can be used to make publication-quality graphs.
 * It is becoming the norm in academic research and common in the corporate world.
-
-Everything you can do in Excel can, and usually should, be done in R.

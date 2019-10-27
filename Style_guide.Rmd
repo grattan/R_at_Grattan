@@ -4,6 +4,8 @@
 library(tidyverse)
 ```
 
+*This page sets out the core elements of coding style we use at Grattan. If you're new to R, don't stress about remembering - or even understanding - everything on this page. Just be aware that we have a coding style, and come back to this when you're a bit further along.*
+
 The benefits of a common coding style are well explained [by Hadley Wickham](http://r-pkgs.had.co.nz/style.html):
 
 > Good style is important because while your code only has one author, it’ll usually have multiple readers. This is especially true when you’re writing code with others. In that case, it’s a good idea to agree on a common style up-front.

@@ -1,4 +1,4 @@
-# Packages commonly used at Grattan
+# Packages commonly used at Grattan {#packages}
 
 R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. Like R itself, packages are free and open source. You can install them from within RStudio.
 
@@ -83,7 +83,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+## ── Attaching packages ───────────────────── tidyverse 1.2.1 ──
 ```
 
 ```
@@ -94,7 +94,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ```
@@ -186,7 +186,26 @@ remotes::install_github("mattcowgill/grattandata",
 
 ## Other commonly-used packages
 
-* *absmapsdata*
-* *readabs*
+There are other packages we commonly use at Grattan, including some developed by Grattan staff. These include:
 
-SECTION UNFINISHED
+* *absmapsdata* This package, by Will Mackey, is very handy for working with spatial data. You'll want it if you're going to be making maps.
+
+* *readabs* The `readabs` package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.
+
+To install these packages, run this code:
+
+```r
+# Install the `readabs` package from CRAN
+install.packages("readabs")
+
+# This code checks to see if you have the `remotes` package installed; if not,
+# it will install `devtools` for you, which includes `remotes`
+if(!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+remotes::install_github("wfmackey/absmapsdata",
+                        upgrade = "always",
+                        dependencies = TRUE)
+```
+

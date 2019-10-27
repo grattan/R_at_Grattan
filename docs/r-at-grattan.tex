@@ -156,7 +156,7 @@ It does two main things:
 \item
   Sets out some guidelines and good practices when using R at Grattan.
 \item
-  Shows you how to use R to undertake the sort of analytical tasks you're likely to undertake at Grattan.
+  Shows you how to use R to undertake some of the analytical tasks you're likely to undertake at Grattan.
 \end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
@@ -178,17 +178,19 @@ If you have used R before and are comfortable enough with it, you might want to 
 \hypertarget{what-is-r}{%
 \section{What is R?}\label{what-is-r}}
 
-R is a programming language. That sounds scarier than it really is. R is software you use to work with data - everything you can do in Excel, you can (and should!) do in R. (See \protect\hyperlink{why-script}{the next page} for more on why we generally use R rather than Excel.) R is available for Windows, macOS and Linux.
+R is a programming language. \emph{That sounds scarier than it really is}. R is software you use to work with data. R is available for Windows, macOS and Linux.
 
 R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
 
-R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more.
+R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. Everything you can do in Excel, you can (and generally should!) do in R. (See \protect\hyperlink{why-script}{the next page} for more on why we usually use R rather than Excel.)
 
 You interact with R by writing code. This is a little different to Stata or SPSS (or Excel), which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (see \protect\hyperlink{why-script}{the next page for more on this}).
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as `packages' - that extend R's functionality in some way. We cover packages more \protect\hyperlink{packages}{later in this page}.
 
-To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
+To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. Your script is like a recipe from a cookbook - it tells R all the steps that are needed to go from the raw ingredients (your data) to the finished product (the graphs or other finished product).
+
+The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 \hypertarget{what-is-rstudio}{%
 \section{What is RStudio?}\label{what-is-rstudio}}
@@ -251,7 +253,7 @@ It's important for our analyses to be \textbf{reproducible}. This means that all
 
 Reproducibility is very important for quality control (``QC''), particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible.
 
-Script-based analyses are more likely to be reproducible.\footnote{Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data ``cleaning'' in Excel - then it is not fully reproducible.} A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.
+Script-based analyses are more likely to be reproducible.\footnote{Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data ``cleaning'' in Excel - then it is not fully reproducible. If your script will only run on your machine - because there are undocumented options, for example - it is not reproducible.} A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.
 
 Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the `raw data' and what has been modified in some way.
 
@@ -267,7 +269,7 @@ Script-based analysis software also allows us to:
 \hypertarget{why-R}{%
 \section{Why use R specifically?}\label{why-R}}
 
-Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is primarily manipulated by clicking things).
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is often manipulated by clicking things).
 
 We use R specifically because:
 * It's free!
@@ -275,9 +277,8 @@ We use R specifically because:
 * It's powerful, particularly when it comes to statistics and data science.
 * It's flexible and customisable.
 * It has an active community extending its capabilities all the time and providing support online.
+* It can be used to make publication-quality graphs.
 * It is becoming the norm in academic research and common in the corporate world.
-
-Everything you can do in Excel can, and usually should, be done in R.
 
 \hypertarget{part-using-r-the-grattan-way}{%
 \part{Using R the Grattan way}\label{part-using-r-the-grattan-way}}
@@ -303,12 +304,12 @@ This page sets out some guidelines for organising your work in R at Grattan. It 
 
 Using a consistent coding style also helps make our work more shareable; that's \protect\hyperlink{coding-style}{covered on the next page}.
 
-\hypertarget{use-rstudio-projects-not-setwd}{%
-\section{\texorpdfstring{Use RStudio projects, not \texttt{setwd()}}{Use RStudio projects, not setwd()}}\label{use-rstudio-projects-not-setwd}}
+\hypertarget{rproj}{%
+\section{\texorpdfstring{Use RStudio projects, not \texttt{setwd()}}{Use RStudio projects, not setwd()}}\label{rproj}}
 
-In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output.
+In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. Your R script is like a recipe in a cookbook - when R is cooking your recipe, it needs to know where to find your ingredients (the data) and put the finished product (your delicious analysis).
 
-When it's executing your script, R needs to know where to read files from and save files to. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command \texttt{getwd()}.
+When it's executing your script, R needs to know where to read files from and save files to on your computer. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command \texttt{getwd()}.
 
 You can tell R which folder to use as your working directory by using the command \texttt{setwd()}, as in \texttt{setwd("\textasciitilde{}/Desktop/some\ random\ folder")} or \texttt{setwd("C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Documents\textbackslash{}Somerandomfolder")}. \textbf{This is a bad idea that you should avoid!} If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
@@ -422,8 +423,27 @@ We're all familiar with this hellish scenario: you do some work in a Word docume
 
 \textbf{Don't} create multiple versions of the same script (like \texttt{analysis\_FINAL\_002\_MC.R} and \texttt{analysis\_FINALFINAL\_003\_MC\_WM.R}.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your ``R'' folder, called ``R/archive''. To avoid a horrible mess of \texttt{analysis\_FINAL\_002.R} type documents cluttering up your folder, consider using \protect\hyperlink{version-control}{Git for version control}.
 
+\hypertarget{clean-workspace}{%
+\section{Keep your workspace clean}\label{clean-workspace}}
+
+Sometimes R doesn't behave the way you expect it to. You might run a script and find it works find, then run it again and find it's producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn't have originally, or some extra packages loaded.
+
+To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.
+
+\emph{But}\ldots{} don't clean your workspace within your analysis script. People sometimes do this using this command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+This removes all objects from your environment. But it doesn't completely clear your R environment, and it doesn't do anything to any packages you have loaded. As \href{https://rstats.wtf/save-source.html\#rm-list-ls}{Jenny Bryan puts it}, this command is ``a red flag, because it is indicative of a non-reproducible workflow.''
+
 \hypertarget{coding-style}{%
 \chapter{Grattan coding style}\label{coding-style}}
+
+\emph{This page sets out the core elements of coding style we use at Grattan. If you're new to R, don't stress about remembering - or even understanding - everything on this page. Just be aware that we have a coding style, and come back to this when you're a bit further along.}
 
 The benefits of a common coding style are well explained \href{http://r-pkgs.had.co.nz/style.html}{by Hadley Wickham}:
 
@@ -434,6 +454,32 @@ Good style is important because while your code only has one author, it'll usual
 Below we describe the \textbf{key} elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, \href{https://style.tidyverse.org/}{consult the \texttt{tidyverse} guide}.
 
 You should also see the \protect\hyperlink{organising-projects}{Using R at Grattan} page for guidelines about setting up projects.
+
+\hypertarget{load-packages-first}{%
+\section{Load packages first}\label{load-packages-first}}
+
+Our analysis scripts will almost always involve loading some \protect\hyperlink{packages}{packages}. These should be laoded at the top of a script, in one block like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(grattantheme)}
+\end{Highlighting}
+\end{Shaded}
+
+If you're loading a package from Github, it's a good idea to leave a \protect\hyperlink{use-comments}{comment} to say where it came from, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(grattantheme)}
+\KeywordTok{library}\NormalTok{(strayr) }\CommentTok{# remotes::install_github("mattcowgill/strayr")}
+\end{Highlighting}
+\end{Shaded}
+
+Don't scatter \texttt{library()} calls throughout your script - put them all at the top.
+
+The only thing that should come before loading your packages is the script preamble.
 
 \hypertarget{script-preamble}{%
 \section{Script preamble}\label{script-preamble}}
@@ -806,8 +852,8 @@ As shown above, the pipe function \texttt{\%\textgreater{}\%} can make code more
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things.
 
-\hypertarget{packages-commonly-used-at-grattan}{%
-\chapter{Packages commonly used at Grattan}\label{packages-commonly-used-at-grattan}}
+\hypertarget{packages}{%
+\chapter{Packages commonly used at Grattan}\label{packages}}
 
 R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}. Like R itself, packages are free and open source. You can install them from within RStudio.
 
@@ -911,7 +957,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages ---------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages --------------------- tidyverse 1.2.1 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -922,7 +968,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1031,15 +1077,33 @@ Install these Grattan-specific packages using this block of code:
 \hypertarget{other-commonly-used-packages}{%
 \section{Other commonly-used packages}\label{other-commonly-used-packages}}
 
+There are other packages we commonly use at Grattan, including some developed by Grattan staff. These include:
+
 \begin{itemize}
-\tightlist
 \item
-  \emph{absmapsdata}
+  \emph{absmapsdata} This package, by Will Mackey, is very handy for working with spatial data. You'll want it if you're going to be making maps.
 \item
-  \emph{readabs}
+  \emph{readabs} The \texttt{readabs} package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.
 \end{itemize}
 
-SECTION UNFINISHED
+To install these packages, run this code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Install the `readabs` package from CRAN}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readabs"}\NormalTok{)}
+
+\CommentTok{# This code checks to see if you have the `remotes` package installed; if not,}
+\CommentTok{# it will install `devtools` for you, which includes `remotes`}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)) \{}
+  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{,}
+                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
+                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-load-manipulate-and-visualise-data}{%
 \part{Load, manipulate and visualise data}\label{part-load-manipulate-and-visualise-data}}
@@ -1978,7 +2042,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks fine! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks tremendous! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2029,7 +2093,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks fine: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks tip-top: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -2203,7 +2267,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks magic! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks tremendous! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2350,7 +2414,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Wicked! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Superb! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2636,7 +2700,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks brilliant. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks ace. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2898,7 +2962,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks swell! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks sterling! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]

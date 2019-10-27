@@ -7,17 +7,19 @@ If you have used R before and are comfortable enough with it, you might want to 
 
 ## What is R?
 
-R is a programming language. That sounds scarier than it really is. R is software you use to work with data - everything you can do in Excel, you can (and should!) do in R. (See [the next page](#why-script) for more on why we generally use R rather than Excel.) R is available for Windows, macOS and Linux.
+R is a programming language. *That sounds scarier than it really is*. R is software you use to work with data. R is available for Windows, macOS and Linux.
 
 R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
 
-R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. 
+R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. Everything you can do in Excel, you can (and generally should!) do in R. (See [the next page](#why-script) for more on why we usually use R rather than Excel.)
 
 You interact with R by writing code. This is a little different to Stata or SPSS (or Excel), which allow you to do at least part of your analyses by clicking on menus and buttons. This means the initial learning curve for R can be a little steeper than for something like SPSS, but there are great benefits to a code-based approach to data analysis (see [the next page for more on this](#why-script)).
 
 R is quite old, having been first released publicly in 1995, but it's also growing and changing rapidly. A lot of developments in R come in the form of new add-on pieces of software - known as 'packages' - that extend R's functionality in some way. We cover packages more [later in this page](#packages). 
 
-To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
+To analyse data with R, you will typically write out a text file containing code. This file - which we'll call a script - should be able to be read and executed by R from start to finish. Your script is like a recipe from a cookbook - it tells R all the steps that are needed to go from the raw ingredients (your data) to the finished product (the graphs or other finished product).
+
+The easiest way to write your code, run your script, and generate your outputs (whether that's a chart, a document, or a set of model results) is to use RStudio.
 
 ## What is RStudio?
 
