@@ -161,7 +161,27 @@ remotes::install_github("mattcowgill/grattandata",
 
 ## Other commonly-used packages
 
-* *absmapsdata*
-* *readabs*
+There are other packages we commonly use at Grattan, including some developed by Grattan staff. These include:
 
-SECTION UNFINISHED
+* *absmapsdata* This package, by Will Mackey, is very handy for working with spatial data. You'll want it if you're going to be making maps.
+
+* *readabs* The `readabs` package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.
+
+To install these packages, run this code:
+```{r install-other-packages, eval = FALSE}
+
+# Install the `readabs` package from CRAN
+install.packages("readabs")
+
+# This code checks to see if you have the `remotes` package installed; if not,
+# it will install `devtools` for you, which includes `remotes`
+if(!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+remotes::install_github("wfmackey/absmapsdata",
+                        upgrade = "always",
+                        dependencies = TRUE)
+
+```
+
