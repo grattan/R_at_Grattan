@@ -4,6 +4,8 @@
 library(tidyverse)
 ```
 
+*This page sets out the core elements of coding style we use at Grattan. If you're new to R, don't stress about remembering - or even understanding - everything on this page. Just be aware that we have a coding style, and come back to this when you're a bit further along.*
+
 The benefits of a common coding style are well explained [by Hadley Wickham](http://r-pkgs.had.co.nz/style.html):
 
 > Good style is important because while your code only has one author, it’ll usually have multiple readers. This is especially true when you’re writing code with others. In that case, it’s a good idea to agree on a common style up-front.
@@ -11,6 +13,27 @@ The benefits of a common coding style are well explained [by Hadley Wickham](htt
 Below we describe the **key** elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, [consult the `tidyverse` guide](https://style.tidyverse.org/). 
 
 You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
+
+## Load packages first
+
+Our analysis scripts will almost always involve loading some [packages](#packages). These should be laoded at the top of a script, in one block like this:
+
+```{r eval=FALSE}
+library(tidyverse)
+library(grattantheme)
+```
+
+If you're loading a package from Github, it's a good idea to leave a [comment](#use-comments) to say where it came from, like this:
+
+```{r eval=FALSE}
+library(tidyverse)
+library(grattantheme)
+library(strayr) # remotes::install_github("mattcowgill/strayr")
+```
+
+Don't scatter `library()` calls throughout your script - put them all at the top. 
+
+The only thing that should come before loading your packages is the script preamble.
 
 ## Script preamble
 
