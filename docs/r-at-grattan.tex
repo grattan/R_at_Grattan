@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-27}
+    \date{2019-11-04}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -260,11 +260,20 @@ Analysis that isn't script based, like work done in Excel, is almost never repro
 Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
 Script-based analysis software also allows us to:
-* Work with larger data sets;
-* Work with data in a broader range of formats;
-* Easily combine different data sets;
-* Automate tasks and build from previous analyses; and
-* Estimate a broad range of statistical models.
+
+\begin{itemize}
+\tightlist
+\item
+  Work with larger data sets;
+\item
+  Work with data in a broader range of formats;
+\item
+  Easily combine different data sets;
+\item
+  Automate tasks and build from previous analyses; and
+\item
+  Estimate a broad range of statistical models.
+\end{itemize}
 
 \hypertarget{why-R}{%
 \section{Why use R specifically?}\label{why-R}}
@@ -272,13 +281,24 @@ Script-based analysis software also allows us to:
 Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is often manipulated by clicking things).
 
 We use R specifically because:
-* It's free!
-* It's open source.
-* It's powerful, particularly when it comes to statistics and data science.
-* It's flexible and customisable.
-* It has an active community extending its capabilities all the time and providing support online.
-* It can be used to make publication-quality graphs.
-* It is becoming the norm in academic research and common in the corporate world.
+
+\begin{itemize}
+\tightlist
+\item
+  It's free!
+\item
+  It's open source.
+\item
+  It's powerful, particularly when it comes to statistics and data science.
+\item
+  It's flexible and customisable.
+\item
+  It has an active community extending its capabilities all the time and providing support online.
+\item
+  It can be used to make publication-quality graphs.
+\item
+  It is becoming the norm in academic research and common in the corporate world.
+\end{itemize}
 
 \hypertarget{part-using-r-the-grattan-way}{%
 \part{Using R the Grattan way}\label{part-using-r-the-grattan-way}}
@@ -779,12 +799,12 @@ Do not use spaces around parentheses in most cases:
 
 For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{function}, see \href{https://style.tidyverse.org/syntax.html\#parentheses}{the Tidyverse guide}.
 
-\hypertarget{short-lines-and-line-indentation}{%
-\section{Short lines and line indentation}\label{short-lines-and-line-indentation}}
+\hypertarget{short-lines-line-indentation-and-the-pipe}{%
+\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater\%}}\label{short-lines-line-indentation-and-the-pipe}}
 
 It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
-Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also makes things clearer.{[}\^{}The pipe is from the \texttt{magrittr} package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the \protect\hyperlink{tidyverse}{\texttt{tidyverse}}.{]} The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
+Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also makes things clearer.\footnote{The pipe is from the \texttt{magrittr} package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the \protect\hyperlink{tidyverse}{\texttt{tidyverse}}.} The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
 \textbf{Good: short lines and indentation}
 
@@ -957,7 +977,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------- tidyverse 1.2.1 --
+## -- Attaching packages ----------------------------- tidyverse 1.2.1 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -968,7 +988,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------ tidyverse_conflicts() --
+## -- Conflicts -------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1976,7 +1996,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks of the highest quality: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks brill: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -2042,7 +2062,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks tremendous! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks marvellous! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2093,7 +2113,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks tip-top: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks superlative: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -2267,7 +2287,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks tremendous! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks pre-eminent! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2414,7 +2434,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Superb! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Mind-blowing! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2700,7 +2720,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks ace. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks very good. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2962,7 +2982,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks sterling! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks very good! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]

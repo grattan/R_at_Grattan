@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-10-27" />
+<meta name="date" content="2019-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,9 +53,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -165,7 +167,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.7.2</b> Commas</a></li>
 <li class="chapter" data-level="4.7.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.7.3</b> Parentheses</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#short-lines-and-line-indentation"><i class="fa fa-check"></i><b>4.8</b> Short lines and line indentation</a></li>
+<li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#short-lines-line-indentation-and-the-pipe"><i class="fa fa-check"></i><b>4.8</b> Short lines, line indentation and the pipe <code>%&gt;%</code></a></li>
 <li class="chapter" data-level="4.9" data-path="coding-style.html"><a href="coding-style.html#blocks-of-code"><i class="fa fa-check"></i><b>4.9</b> Blocks of code</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>5</b> Packages commonly used at Grattan</a><ul>
@@ -280,7 +282,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="packages" class="section level1">
 <h1><span class="header-section-number">5</span> Packages commonly used at Grattan</h1>
-<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as ‘base R’<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Like R itself, packages are free and open source. You can install them from within RStudio.</p>
+<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as ‘base R’<a href="references.html#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Like R itself, packages are free and open source. You can install them from within RStudio.</p>
 <p>Some packages - like the <code>tidyverse</code> collection of packages - are broadly popular among R users. Some - like the <code>grattantheme</code> package - are specific to Grattan Institute. Others - like the <code>readabs</code> package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.</p>
 <div id="install-packages" class="section level2">
 <h2><span class="header-section-number">5.1</span> Installing packages</h2>
@@ -288,29 +290,29 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code>install.packages()</code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="packages.html#cb32-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
 <p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="packages.html#cb33-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan ggplot2 theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="packages.html#cb34-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-packages" class="section level2">
 <h2><span class="header-section-number">5.2</span> Using packages</h2>
 <p>Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code>library()</code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">library</span>(remotes)</a>
-<a class="sourceLine" id="cb35-2" title="2"></a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></a>
-<a class="sourceLine" id="cb35-4" title="4"></a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="packages.html#cb35-1"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb35-2"><a href="packages.html#cb35-2"></a></span>
+<span id="cb35-3"><a href="packages.html#cb35-3"></a><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></span>
+<span id="cb35-4"><a href="packages.html#cb35-4"></a></span>
+<span id="cb35-5"><a href="packages.html#cb35-5"></a><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>Or, we can use two colons - <code>::</code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="packages.html#cb36-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>It usually makes sense to load a package with <code>library()</code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code>::</code> operator even if you have already loaded a package with <code>library()</code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
 <div id="tidyverse" class="section level2">
 <h2><span class="header-section-number">5.3</span> The tidyverse!</h2>
 <p>The <code>tidyverse</code> is central to our work at Grattan. The <code>tidyverse</code> is a <a href="https://www.tidyverse.org/packages/">collection of related R packages</a> for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. You install the <code>tidyverse</code> in the <a href="packages.html#install-packages">usual way</a>:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="packages.html#cb37-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>The main packages in the <code>tidyverse</code> include:</p>
 <ul>
 <li><em>ggplot2</em> for making beautiful, customisable graphs</li>
@@ -320,14 +322,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><em>purrr</em> for functional programming</li>
 <li><em>stringr</em> for manipulating strings of text</li>
 </ul>
-<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ───────────────────── tidyverse 1.2.1 ──</code></pre>
+<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="references.html#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="packages.html#cb38-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ───────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
 ## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>A range of other packages are installed on your machine as part of the <code>tidyverse.</code> These include:</p>
@@ -338,24 +340,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><em>rvest</em> for scraping websites</li>
 </ul>
 <p>Although these packages are installed as part of the <code>tidyverse</code>, they aren’t loaded automatically when you run <code>library(tidyverse)</code>. You’ll need to load them individually, like:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="kw">library</span>(readxl)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="packages.html#cb42-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb42-2"><a href="packages.html#cb42-2"></a><span class="kw">library</span>(readxl)</span></code></pre></div>
 <div id="why-do-we-use-the-tidyverse" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Why do we use the tidyverse?</h3>
 <p>The <code>tidyverse</code> makes life easier!</p>
 <p>The core <code>tidyverse</code> packages, like <code>ggplot2</code>, <code>dplyr</code>, and <code>tidyr</code>, are extremely popular. The <code>tidyverse</code> is probably the most popular ‘dialect’ of R. This means that any problem you encounter with the <code>tidyverse</code> will have been encountered many times before by other R users, so a solution will only be a Google search away.</p>
 <p>The <code>tidyverse</code> packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one <code>tidyverse</code> package, like <code>dplyr</code>, are also applicable to other packages, like <code>tidyr</code>.</p>
-<p>They’re designed to work with data frames<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
+<p>They’re designed to work with data frames<a href="references.html#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
 <p>The creator of the <code>tidyverse</code>, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the <code>tidyverse</code> idiom is often able to be understood even if you haven’t encountered the functions before. For example, look at this chunk of code:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">my_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
-<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="packages.html#cb43-1"></a>my_data <span class="op">%&gt;%</span></span>
+<span id="cb43-2"><a href="packages.html#cb43-2"></a><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></span>
+<span id="cb43-3"><a href="packages.html#cb43-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</span></code></pre></div>
+<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="references.html#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
 <p>Here’s one way to do the same thing in base R:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</a>
-<a class="sourceLine" id="cb44-2" title="2">          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="packages.html#cb44-1"></a><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</span>
+<span id="cb44-2"><a href="packages.html#cb44-2"></a>          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</span></code></pre></div>
 <p>The base R code gets the job done, but it’s clunkier, less expressive, and harder to read.</p>
-<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="references.html#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The <code>tidyverse</code> packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.</p>
 <p>Most R scripts at Grattan should start with <code>library(tidyverse)</code>. Most of your work will be in data frames, and most of the time the <code>tidyverse</code> contains the core tools you’ll need to do that work.</p>
 </div>
@@ -369,23 +371,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><em>grattandata</em> The <code>grattandata</code> package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the <a href="reading-data.html#reading-data">reading data</a> chapter.</p></li>
 </ul>
 <p>Install these Grattan-specific packages using this block of code:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="co"># it will install `devtools` for you, which includes `remotes`</span></a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb45-4" title="4">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb45-5" title="5">}</a>
-<a class="sourceLine" id="cb45-6" title="6"></a>
-<a class="sourceLine" id="cb45-7" title="7"><span class="co"># Install the `grattan` package from CRAN:</span></a>
-<a class="sourceLine" id="cb45-8" title="8"><span class="kw">install.packages</span>(<span class="st">&quot;grattan&quot;</span>)</a>
-<a class="sourceLine" id="cb45-9" title="9"></a>
-<a class="sourceLine" id="cb45-10" title="10"><span class="co"># Install `grattantheme` and `grattandata` from GitHub:</span></a>
-<a class="sourceLine" id="cb45-11" title="11">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>,</a>
-<a class="sourceLine" id="cb45-12" title="12">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb45-13" title="13">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb45-14" title="14"></a>
-<a class="sourceLine" id="cb45-15" title="15">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattandata&quot;</span>,</a>
-<a class="sourceLine" id="cb45-16" title="16">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb45-17" title="17">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="packages.html#cb45-1"></a><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></span>
+<span id="cb45-2"><a href="packages.html#cb45-2"></a><span class="co"># it will install `devtools` for you, which includes `remotes`</span></span>
+<span id="cb45-3"><a href="packages.html#cb45-3"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</span>
+<span id="cb45-4"><a href="packages.html#cb45-4"></a>  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb45-5"><a href="packages.html#cb45-5"></a>}</span>
+<span id="cb45-6"><a href="packages.html#cb45-6"></a></span>
+<span id="cb45-7"><a href="packages.html#cb45-7"></a><span class="co"># Install the `grattan` package from CRAN:</span></span>
+<span id="cb45-8"><a href="packages.html#cb45-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;grattan&quot;</span>)</span>
+<span id="cb45-9"><a href="packages.html#cb45-9"></a></span>
+<span id="cb45-10"><a href="packages.html#cb45-10"></a><span class="co"># Install `grattantheme` and `grattandata` from GitHub:</span></span>
+<span id="cb45-11"><a href="packages.html#cb45-11"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>,</span>
+<span id="cb45-12"><a href="packages.html#cb45-12"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb45-13"><a href="packages.html#cb45-13"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb45-14"><a href="packages.html#cb45-14"></a></span>
+<span id="cb45-15"><a href="packages.html#cb45-15"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattandata&quot;</span>,</span>
+<span id="cb45-16"><a href="packages.html#cb45-16"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb45-17"><a href="packages.html#cb45-17"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="other-commonly-used-packages" class="section level2">
 <h2><span class="header-section-number">5.5</span> Other commonly-used packages</h2>
@@ -395,34 +397,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><em>readabs</em> The <code>readabs</code> package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.</p></li>
 </ul>
 <p>To install these packages, run this code:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># Install the `readabs` package from CRAN</span></a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;readabs&quot;</span>)</a>
-<a class="sourceLine" id="cb46-3" title="3"></a>
-<a class="sourceLine" id="cb46-4" title="4"><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></a>
-<a class="sourceLine" id="cb46-5" title="5"><span class="co"># it will install `devtools` for you, which includes `remotes`</span></a>
-<a class="sourceLine" id="cb46-6" title="6"><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb46-7" title="7">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb46-8" title="8">}</a>
-<a class="sourceLine" id="cb46-9" title="9"></a>
-<a class="sourceLine" id="cb46-10" title="10">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>,</a>
-<a class="sourceLine" id="cb46-11" title="11">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb46-12" title="12">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="packages.html#cb46-1"></a><span class="co"># Install the `readabs` package from CRAN</span></span>
+<span id="cb46-2"><a href="packages.html#cb46-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;readabs&quot;</span>)</span>
+<span id="cb46-3"><a href="packages.html#cb46-3"></a></span>
+<span id="cb46-4"><a href="packages.html#cb46-4"></a><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></span>
+<span id="cb46-5"><a href="packages.html#cb46-5"></a><span class="co"># it will install `devtools` for you, which includes `remotes`</span></span>
+<span id="cb46-6"><a href="packages.html#cb46-6"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</span>
+<span id="cb46-7"><a href="packages.html#cb46-7"></a>  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb46-8"><a href="packages.html#cb46-8"></a>}</span>
+<span id="cb46-9"><a href="packages.html#cb46-9"></a></span>
+<span id="cb46-10"><a href="packages.html#cb46-10"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>,</span>
+<span id="cb46-11"><a href="packages.html#cb46-11"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb46-12"><a href="packages.html#cb46-12"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 
 </div>
 </div>
 
 
 
-<div class="footnotes">
-<hr />
-<ol start="5">
-<li id="fn5"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages.html#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages.html#fnref9" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>

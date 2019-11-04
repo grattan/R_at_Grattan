@@ -283,11 +283,11 @@ mean( x, na.rm = TRUE )
 
 For spacing rules around `if`, `for`, `while`, and `function`, see [the Tidyverse guide](https://style.tidyverse.org/syntax.html#parentheses). 
 
-## Short lines and line indentation 
+## Short lines, line indentation and the pipe `%>%`
 
 It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the `rename` and `filter` examples below. Indentation makes it clear where a code block starts and finishes.
 
-Using pipes (`%>%`) instead of nesting functions also makes things clearer.[^The pipe is from the `magrittr` package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the [`tidyverse`](#tidyverse).] The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
+Using pipes (`%>%`) instead of nesting functions also makes things clearer.^[The pipe is from the `magrittr` package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the [`tidyverse`](#tidyverse).] The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
 **Good: short lines and indentation**
 
