@@ -1,18 +1,205 @@
 # Data transformation
 
-## The pipe
+This section focusses on transforming rectangular datasets. 
+
+
+## Set up
+
+
+```{r load_packages, message = FALSE}
+library(tidyverse)
+```
+
+
+The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
+
+```{r read_data}
+sa3_income <- read_csv("data/sa3_income.csv")
+
+head(sa3_income)
+```
+
+```{r remove_na, include=FALSE}
+sa3_income <- sa3_income %>% filter(!is.na(median_income))
+```
+
+
+
+## The pipe: %>%
+
+You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to 'nest' them inside. This nesting will be _painfully_ familiar to Excel users.
+
+Consider an example of baking and eating a cake.^[XXX cannot remember the source for this example; probably Hadley? Maybe somenone else?] You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:
+
+```{r, eval = FALSE}
+eat(bake(mix(combine(ingredients))))
+```
+
+In a nested formula, you need to start in the _middle_ and work your way out. This means anyone reading your code -- including you in the future! -- needs to start in the middle and work their way out. But because we're used to left-right reading, we're not particularly good at naturally interpreting nested functions like this one.
+
+This is where the 'pipe' can help. The pipe operator `%>%` (keyboard shortcut: `cmd + shift + m`)  takes an argument on the left and 'pipes' it into the function on the right. Each time you see `%>%`, you can read it as 'and then'. 
+
+So the baking example can then be equivalently expressed as:
+
+```{r, eval = FALSE}
+ingredients %>% 
+  combine() %>% 
+  mix() %>% 
+  bake() %>% 
+  eat()
+```
+
+Which reads as 'take the `ingredients`, then `combine`, then `mix`, then `bake`, then `eat` them'. 
+This does the same thing as `eat(bake(mix(combine(ingredients))))`. But it's much nicer to read, and it's more natural to _write_.
+
+In simple `R` code, the function `paste` takes arguments and combines them together into a single string. So you could use the pipe to:
+
+```{r}
+"hello" %>% paste("dear", "reader")
+```
+
+
+Or you could define a vector of numbers and pass^['pass' can also be used to mean 'pipe'.] them to the `sum()` function:
+
+```{r}
+my_numbers <- c(1, 2, 3, 5, 8, 100)
+
+my_numbers %>% sum()
+```
+
+Or you could skip the intermediate step altogether:
+```{r}
+c(1, 2, 3, 5, 8, 100) %>% 
+  sum()
+```
+
+
+The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to `filter` the observations in the `sa3_income` data to only `NSW`, before you `group_by` `gender` and `summarise` the `median_income` of these grops (these functions are explained in detail below). All of these functions take 'data' as the first argument, and are designed to be used with pipes.
+
+Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:
+
+```{r}
+summarise((group_by(filter(sa3_income, state == "NSW"), gender)), av_med_income = mean(median_income))
+```
+
+The original common way to avoid this unseemly nesting in `R` was to assign each 'step' its own object, which is definitely clearer:
+
+```{r}
+data1 <- filter(sa3_income, state == "NSW")
+data2 <- group_by(data1, gender)
+data3 <- summarise(data2, av_med_income = mean(median_income))
+data3
+```
+
+And using pipes make the steps clearer still: 
+
+1. take the `sa3_income` data, then %>% 
+2. `filter` it to only NSW, then %>% 
+3. `group` it by gender, then %>% 
+4. `summarise` it
+
+```{r}
+sa3_income %>% 
+  filter(state == "NSW") %>% 
+  group_by(gender) %>% 
+  summarise(av_med_income = mean(median_income))
+```
+
+ 
 
 ## Key `dplyr` functions:
 
 All have the same syntax structure, which enable pipe-chains. 
 
 
+## Select variables with `select()`
+
+The `select` function takes a dataset and **keeps** or **drops** variables (columns) that are specified.
+
+For example, look at the variables that are in the `sa3_income` dataset (using the `names()` function):
+
+```{r}
+names(sa3_income)
+```
+
+If you wanted to keep just the `state` and `total_income` variables, you could take the `sa3_income` dataset and select just those variables:
+
+```{r}
+sa3_income %>% 
+  select(state, total_income)
+```
+
+Or you could use `-` (minus) to remove the `sa3` and `sa3_name` variables:^[This is the same as **keeping everything except** the `sa3` and `sa3_name` variables.]
+
+```{r}
+sa3_income %>% 
+  select(-sa3, -sa3_name)
+```
+
+### Selecting groups of variables
+
+Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether. 
+
+You can use patterns and ['select helpers'](https://tidyselect.r-lib.org/reference/select_helpers.html)^[Explained in useful detail by the Tidyverse people at https://tidyselect.r-lib.org/reference/select_helpers.html] 
+from the Tidyverse to help deal with these sets of variables.
+
+For example, if you want to keep just the SA3 and SA4 variables -- ie the variables that start with `"sa"` -- you could: 
+
+```{r}
+sa3_income %>% 
+  select(starts_with("sa"))
+```
+
+Or, instead, if you wanted to keep just the variables that contain `"income"`, you could:
+
+```{r}
+sa3_income %>% 
+  select(contains("income"))
+```
+
+And if you wanted to keep **both** the `"sa"` variables and the `"income"` variables, you could:
+
+```{r}
+sa3_income %>% 
+  select(starts_with("sa"), contains("income"), )
+```
+
+The full list of these handy select functions are provided with the `?tidyselect::select_helpers` documentation, listed below:
+
+- `starts_with()`: Starts with a prefix.
+- `ends_with()`: Ends with a suffix.
+- `contains()`: Contains a literal string.
+- `matches()`: Matches a regular expression.
+- `num_range()`: Matches a numerical range like x01, x02, x03.
+- `one_of()`: Matches variable names in a character vector.
+- `everything()`: Matches all variables.
+- `last_col()`: Select last variable, possibly with an offset.
+
+
+
+
 
 ## Filter with `filter()`
 
+The `filter` function takes a dataset and **keeps** observations (rows) that meet the **rules**. 
+
+`filter` has one required first argument -- the data -- and then as many 'conditions' as you want to provide. 
+
+
+### Logical operations: `TRUE` or `FALSE`
+
+The **rules** are logical conditions. This means something that is either `TRUE` or `FALSE` by the computer's mind.^[Computers' mind, more likely.] 
+
+We know, for instance, that 1 + 2 does not equal 12. Which means if we type 1 + 2 == 12 into the console it will give `FALSE`:
+
+```{r}
+1 + 2 == 12
+```
+
+
+
 ## Arrange with `arrange()`
 
-## Select variables with `select()`
 
 ## Group data with `group_by()`
 

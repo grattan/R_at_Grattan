@@ -1,18 +1,386 @@
 # Data transformation
 
-## The pipe
+This section focusses on transforming rectangular datasets. 
+
+
+## Set up
+
+
+
+```r
+library(tidyverse)
+```
+
+
+The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
+
+
+```r
+sa3_income <- read_csv("data/sa3_income.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )
+```
+
+```r
+head(sa3_income)
+```
+
+```
+## # A tibble: 6 x 16
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state
+##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr>
+## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW  
+## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW  
+## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW  
+## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW  
+## # … with 9 more variables: occupation <chr>, occ_short <chr>, prof <chr>,
+## #   gender <chr>, year <dbl>, median_income <dbl>, average_income <dbl>,
+## #   total_income <dbl>, workers <dbl>
+```
+
+
+
+
+
+## The pipe: %>%
+
+You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to 'nest' them inside. This nesting will be _painfully_ familiar to Excel users.
+
+Consider an example of baking and eating a cake.^[XXX cannot remember the source for this example; probably Hadley? Maybe somenone else?] You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:
+
+
+```r
+eat(bake(mix(combine(ingredients))))
+```
+
+In a nested formula, you need to start in the _middle_ and work your way out. This means anyone reading your code -- including you in the future! -- needs to start in the middle and work their way out. But because we're used to left-right reading, we're not particularly good at naturally interpreting nested functions like this one.
+
+This is where the 'pipe' can help. The pipe operator `%>%` (keyboard shortcut: `cmd + shift + m`)  takes an argument on the left and 'pipes' it into the function on the right. Each time you see `%>%`, you can read it as 'and then'. 
+
+So the baking example can then be equivalently expressed as:
+
+
+```r
+ingredients %>% 
+  combine() %>% 
+  mix() %>% 
+  bake() %>% 
+  eat()
+```
+
+Which reads as 'take the `ingredients`, then `combine`, then `mix`, then `bake`, then `eat` them'. 
+This does the same thing as `eat(bake(mix(combine(ingredients))))`. But it's much nicer to read, and it's more natural to _write_.
+
+In simple `R` code, the function `paste` takes arguments and combines them together into a single string. So you could use the pipe to:
+
+
+```r
+"hello" %>% paste("dear", "reader")
+```
+
+```
+## [1] "hello dear reader"
+```
+
+
+Or you could define a vector of numbers and pass^['pass' can also be used to mean 'pipe'.] them to the `sum()` function:
+
+
+```r
+my_numbers <- c(1, 2, 3, 5, 8, 100)
+
+my_numbers %>% sum()
+```
+
+```
+## [1] 119
+```
+
+Or you could skip the intermediate step altogether:
+
+```r
+c(1, 2, 3, 5, 8, 100) %>% 
+  sum()
+```
+
+```
+## [1] 119
+```
+
+
+The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to `filter` the observations in the `sa3_income` data to only `NSW`, before you `group_by` `gender` and `summarise` the `median_income` of these grops (these functions are explained in detail below). All of these functions take 'data' as the first argument, and are designed to be used with pipes.
+
+Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:
+
+
+```r
+summarise((group_by(filter(sa3_income, state == "NSW"), gender)), av_med_income = mean(median_income))
+```
+
+```
+## # A tibble: 2 x 2
+##   gender av_med_income
+##   <chr>          <dbl>
+## 1 Men           51340.
+## 2 Women         37993.
+```
+
+The original common way to avoid this unseemly nesting in `R` was to assign each 'step' its own object, which is definitely clearer:
+
+
+```r
+data1 <- filter(sa3_income, state == "NSW")
+data2 <- group_by(data1, gender)
+data3 <- summarise(data2, av_med_income = mean(median_income))
+print(data3)
+```
+
+```
+## # A tibble: 2 x 2
+##   gender av_med_income
+##   <chr>          <dbl>
+## 1 Men           51340.
+## 2 Women         37993.
+```
+
+And using pipes make the steps clearer still: 
+
+1. take the `sa3_income` data, then %>% 
+2. `filter` it to only NSW, then %>% 
+3. `group` it by gender, then %>% 
+4. `summarise` it
+
+
+```r
+sa3_income %>% 
+  filter(state == "NSW") %>% 
+  group_by(gender) %>% 
+  summarise(av_med_income = mean(median_income))
+```
+
+```
+## # A tibble: 2 x 2
+##   gender av_med_income
+##   <chr>          <dbl>
+## 1 Men           51340.
+## 2 Women         37993.
+```
+
+ 
 
 ## Key `dplyr` functions:
 
 All have the same syntax structure, which enable pipe-chains. 
 
 
+## Select variables with `select()`
+
+The `select` function takes a dataset and **keeps** or **drops** variables (columns) that are specified.
+
+For example, look at the variables that are in the `sa3_income` dataset (using the `names()` function):
+
+
+```r
+names(sa3_income)
+```
+
+```
+##  [1] "sa3"                   "sa3_name"             
+##  [3] "sa3_sqkm"              "sa3_income_percentile"
+##  [5] "sa4_name"              "gcc_name"             
+##  [7] "state"                 "occupation"           
+##  [9] "occ_short"             "prof"                 
+## [11] "gender"                "year"                 
+## [13] "median_income"         "average_income"       
+## [15] "total_income"          "workers"
+```
+
+If you wanted to keep just the `state` and `total_income` variables, you could take the `sa3_income` dataset and select just those variables:
+
+
+```r
+sa3_income %>% 
+  select(state, total_income)
+```
+
+```
+## # A tibble: 47,832 x 2
+##    state total_income
+##    <chr>        <dbl>
+##  1 NSW      235853682
+##  2 NSW      253323356
+##  3 NSW      266908460
+##  4 NSW      264054166
+##  5 NSW      238214882
+##  6 NSW      273956768
+##  7 NSW       97561871
+##  8 NSW      102280707
+##  9 NSW      104914140
+## 10 NSW      104370174
+## # … with 47,822 more rows
+```
+
+Or you could use `-` (minus) to remove the `sa3` and `sa3_name` variables:^[This is the same as **keeping everything except** the `sa3` and `sa3_name` variables.]
+
+
+```r
+sa3_income %>% 
+  select(-sa3, -sa3_name)
+```
+
+```
+## # A tibble: 47,832 x 14
+##    sa3_sqkm sa3_income_perc… sa4_name gcc_name state occupation occ_short
+##       <dbl>            <dbl> <chr>    <chr>    <chr> <chr>      <chr>    
+##  1    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
+##  2    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  3    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
+##  4    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  5    6511.               74 Capital… Rest of… NSW   Clerical … Admin    
+##  6    6511.               79 Capital… Rest of… NSW   Clerical … Admin    
+##  7    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
+##  8    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  9    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
+## 10    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+## # … with 47,822 more rows, and 7 more variables: prof <chr>, gender <chr>,
+## #   year <dbl>, median_income <dbl>, average_income <dbl>,
+## #   total_income <dbl>, workers <dbl>
+```
+
+### Selecting groups of variables
+
+Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether. 
+
+You can use patterns and ['select helpers'](https://tidyselect.r-lib.org/reference/select_helpers.html)^[Explained in useful detail by the Tidyverse people at https://tidyselect.r-lib.org/reference/select_helpers.html] 
+from the Tidyverse to help deal with these sets of variables.
+
+For example, if you want to keep just the SA3 and SA4 variables -- ie the variables that start with `"sa"` -- you could: 
+
+
+```r
+sa3_income %>% 
+  select(starts_with("sa"))
+```
+
+```
+## # A tibble: 47,832 x 5
+##      sa3 sa3_name   sa3_sqkm sa3_income_percentile sa4_name      
+##    <dbl> <chr>         <dbl>                 <dbl> <chr>         
+##  1 10102 Queanbeyan    6511.                    80 Capital Region
+##  2 10102 Queanbeyan    6511.                    76 Capital Region
+##  3 10102 Queanbeyan    6511.                    78 Capital Region
+##  4 10102 Queanbeyan    6511.                    76 Capital Region
+##  5 10102 Queanbeyan    6511.                    74 Capital Region
+##  6 10102 Queanbeyan    6511.                    79 Capital Region
+##  7 10102 Queanbeyan    6511.                    80 Capital Region
+##  8 10102 Queanbeyan    6511.                    76 Capital Region
+##  9 10102 Queanbeyan    6511.                    78 Capital Region
+## 10 10102 Queanbeyan    6511.                    76 Capital Region
+## # … with 47,822 more rows
+```
+
+Or, instead, if you wanted to keep just the variables that contain `"income"`, you could:
+
+
+```r
+sa3_income %>% 
+  select(contains("income"))
+```
+
+```
+## # A tibble: 47,832 x 4
+##    sa3_income_percentile median_income average_income total_income
+##                    <dbl>         <dbl>          <dbl>        <dbl>
+##  1                    80         52127          51306    235853682
+##  2                    76         54894          53807    253323356
+##  3                    78         57868          56405    266908460
+##  4                    76         59025          57742    264054166
+##  5                    74         59041          58286    238214882
+##  6                    79         62741          61591    273956768
+##  7                    80         66900          66869     97561871
+##  8                    76         68943          69721    102280707
+##  9                    78         71998          71859    104914140
+## 10                    76         74277          74871    104370174
+## # … with 47,822 more rows
+```
+
+And if you wanted to keep **both** the `"sa"` variables and the `"income"` variables, you could:
+
+
+```r
+sa3_income %>% 
+  select(starts_with("sa"), contains("income"), )
+```
+
+```
+## # A tibble: 47,832 x 8
+##      sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name median_income
+##    <dbl> <chr>       <dbl>            <dbl> <chr>            <dbl>
+##  1 10102 Queanbe…    6511.               80 Capital…         52127
+##  2 10102 Queanbe…    6511.               76 Capital…         54894
+##  3 10102 Queanbe…    6511.               78 Capital…         57868
+##  4 10102 Queanbe…    6511.               76 Capital…         59025
+##  5 10102 Queanbe…    6511.               74 Capital…         59041
+##  6 10102 Queanbe…    6511.               79 Capital…         62741
+##  7 10102 Queanbe…    6511.               80 Capital…         66900
+##  8 10102 Queanbe…    6511.               76 Capital…         68943
+##  9 10102 Queanbe…    6511.               78 Capital…         71998
+## 10 10102 Queanbe…    6511.               76 Capital…         74277
+## # … with 47,822 more rows, and 2 more variables: average_income <dbl>,
+## #   total_income <dbl>
+```
+
+The full list of these handy select functions are provided with the `?tidyselect::select_helpers` documentation, listed below:
+
+- `starts_with()`: Starts with a prefix.
+- `ends_with()`: Ends with a suffix.
+- `contains()`: Contains a literal string.
+- `matches()`: Matches a regular expression.
+- `num_range()`: Matches a numerical range like x01, x02, x03.
+- `one_of()`: Matches variable names in a character vector.
+- `everything()`: Matches all variables.
+- `last_col()`: Select last variable, possibly with an offset.
+
+
+
+
 
 ## Filter with `filter()`
 
+The `filter` function takes a dataset and **keeps** observations (rows) that meet the **rules**. 
+
+`filter` has one required first argument -- the data -- and then as many 'conditions' as you want to provide.
+
+
+### Logical operations: `TRUE` or `FALSE`
+
+The **rules** are logical conditions. 
+
+
 ## Arrange with `arrange()`
 
-## Select variables with `select()`
 
 ## Group data with `group_by()`
 

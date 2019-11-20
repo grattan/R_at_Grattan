@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Data transformation | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Data transformation | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="different-data-types.html"/>
-<link rel="next" href="analysis.html"/>
+<link rel="prev" href="different-data-types.html">
+<link rel="next" href="analysis.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,9 +40,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
 
 
 
@@ -53,9 +50,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,16 +61,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +77,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -198,17 +193,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>7.4</b> Factors with <code>forcats::</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>8</b> Data transformation</a><ul>
-<li class="chapter" data-level="8.1" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>8.1</b> The pipe</a></li>
-<li class="chapter" data-level="8.2" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>8.2</b> Key <code>dplyr</code> functions:</a></li>
-<li class="chapter" data-level="8.3" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>8.3</b> Filter with <code>filter()</code></a></li>
-<li class="chapter" data-level="8.4" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>8.4</b> Arrange with <code>arrange()</code></a></li>
-<li class="chapter" data-level="8.5" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>8.5</b> Select variables with <code>select()</code></a></li>
-<li class="chapter" data-level="8.6" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>8.6</b> Group data with <code>group_by()</code></a></li>
-<li class="chapter" data-level="8.7" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>8.7</b> Edit and add new variables with <code>mutate()</code></a><ul>
-<li class="chapter" data-level="8.7.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>8.7.1</b> Cases when you should use <code>case_when()</code></a></li>
+<li class="chapter" data-level="8.1" data-path="data-transformation.html"><a href="data-transformation.html#set-up"><i class="fa fa-check"></i><b>8.1</b> Set up</a></li>
+<li class="chapter" data-level="8.2" data-path="data-transformation.html"><a href="data-transformation.html#the-pipe"><i class="fa fa-check"></i><b>8.2</b> The pipe: %&gt;%</a></li>
+<li class="chapter" data-level="8.3" data-path="data-transformation.html"><a href="data-transformation.html#key-dplyr-functions"><i class="fa fa-check"></i><b>8.3</b> Key <code>dplyr</code> functions:</a></li>
+<li class="chapter" data-level="8.4" data-path="data-transformation.html"><a href="data-transformation.html#select-variables-with-select"><i class="fa fa-check"></i><b>8.4</b> Select variables with <code>select()</code></a><ul>
+<li class="chapter" data-level="8.4.1" data-path="data-transformation.html"><a href="data-transformation.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>8.4.1</b> Selecting groups of variables</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>8.8</b> Summarise data with <code>summarise()</code></a></li>
-<li class="chapter" data-level="8.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>8.9</b> Joining datasets with <code>*_join()</code></a></li>
+<li class="chapter" data-level="8.5" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>8.5</b> Filter with <code>filter()</code></a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-transformation.html"><a href="data-transformation.html#logical-operations-true-or-false"><i class="fa fa-check"></i><b>8.5.1</b> Logical operations: <code>TRUE</code> or <code>FALSE</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>8.6</b> Arrange with <code>arrange()</code></a></li>
+<li class="chapter" data-level="8.7" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>8.7</b> Group data with <code>group_by()</code></a></li>
+<li class="chapter" data-level="8.8" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>8.8</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="8.8.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>8.8.1</b> Cases when you should use <code>case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>8.9</b> Summarise data with <code>summarise()</code></a></li>
+<li class="chapter" data-level="8.10" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>8.10</b> Joining datasets with <code>*_join()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>9</b> Analysis</a></li>
 <li class="chapter" data-level="10" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>10</b> Data Visualisation</a><ul>
@@ -223,7 +223,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>10.6</b> Adding labels</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>11</b> Chart cookbook</a><ul>
-<li class="chapter" data-level="11.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up"><i class="fa fa-check"></i><b>11.1</b> Set up</a></li>
+<li class="chapter" data-level="11.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up-1"><i class="fa fa-check"></i><b>11.1</b> Set up</a></li>
 <li class="chapter" data-level="11.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>11.2</b> Bar charts</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>11.2.1</b> Simple bar plot</a></li>
 <li class="chapter" data-level="11.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>11.2.2</b> Bar plot with multiple series</a></li>
@@ -282,38 +282,268 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">8</span> Data transformation</h1>
+<p>This section focusses on transforming rectangular datasets.</p>
+<div id="set-up" class="section level2">
+<h2><span class="header-section-number">8.1</span> Set up</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">sa3_income &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">head</span>(sa3_income)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 16
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW  
+## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW  
+## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW  
+## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW  
+## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW  
+## # … with 9 more variables: occupation &lt;chr&gt;, occ_short &lt;chr&gt;, prof &lt;chr&gt;,
+## #   gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;,
+## #   total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
+</div>
 <div id="the-pipe" class="section level2">
-<h2><span class="header-section-number">8.1</span> The pipe</h2>
+<h2><span class="header-section-number">8.2</span> The pipe: %&gt;%</h2>
+<p>You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to ‘nest’ them inside. This nesting will be <em>painfully</em> familiar to Excel users.</p>
+<p>Consider an example of baking and eating a cake.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">eat</span>(<span class="kw">bake</span>(<span class="kw">mix</span>(<span class="kw">combine</span>(ingredients))))</a></code></pre></div>
+<p>In a nested formula, you need to start in the <em>middle</em> and work your way out. This means anyone reading your code – including you in the future! – needs to start in the middle and work their way out. But because we’re used to left-right reading, we’re not particularly good at naturally interpreting nested functions like this one.</p>
+<p>This is where the ‘pipe’ can help. The pipe operator <code>%&gt;%</code> (keyboard shortcut: <code>cmd + shift + m</code>) takes an argument on the left and ‘pipes’ it into the function on the right. Each time you see <code>%&gt;%</code>, you can read it as ‘and then’.</p>
+<p>So the baking example can then be equivalently expressed as:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ingredients <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">combine</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">mix</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">bake</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">eat</span>()</a></code></pre></div>
+<p>Which reads as ‘take the <code>ingredients</code>, then <code>combine</code>, then <code>mix</code>, then <code>bake</code>, then <code>eat</code> them’.
+This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. But it’s much nicer to read, and it’s more natural to <em>write</em>.</p>
+<p>In simple <code>R</code> code, the function <code>paste</code> takes arguments and combines them together into a single string. So you could use the pipe to:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="st">&quot;hello&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;dear&quot;</span>, <span class="st">&quot;reader&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;hello dear reader&quot;</code></pre>
+<p>Or you could define a vector of numbers and pass<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> them to the <code>sum()</code> function:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">my_numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">my_numbers <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</a></code></pre></div>
+<pre><code>## [1] 119</code></pre>
+<p>Or you could skip the intermediate step altogether:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw">sum</span>()</a></code></pre></div>
+<pre><code>## [1] 119</code></pre>
+<p>The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to <code>filter</code> the observations in the <code>sa3_income</code> data to only <code>NSW</code>, before you <code>group_by</code> <code>gender</code> and <code>summarise</code> the <code>median_income</code> of these grops (these functions are explained in detail below). All of these functions take ‘data’ as the first argument, and are designed to be used with pipes.</p>
+<p>Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">summarise</span>((<span class="kw">group_by</span>(<span class="kw">filter</span>(sa3_income, state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>), gender)), <span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   gender av_med_income
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 Men           51340.
+## 2 Women         37993.</code></pre>
+<p>The original common way to avoid this unseemly nesting in <code>R</code> was to assign each ‘step’ its own object, which is definitely clearer:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">data1 &lt;-<span class="st"> </span><span class="kw">filter</span>(sa3_income, state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">data2 &lt;-<span class="st"> </span><span class="kw">group_by</span>(data1, gender)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">data3 &lt;-<span class="st"> </span><span class="kw">summarise</span>(data2, <span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">print</span>(data3)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   gender av_med_income
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 Men           51340.
+## 2 Women         37993.</code></pre>
+<p>And using pipes make the steps clearer still:</p>
+<ol style="list-style-type: decimal">
+<li>take the <code>sa3_income</code> data, then %&gt;%</li>
+<li><code>filter</code> it to only NSW, then %&gt;%</li>
+<li><code>group</code> it by gender, then %&gt;%</li>
+<li><code>summarise</code> it</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   gender av_med_income
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 Men           51340.
+## 2 Women         37993.</code></pre>
 </div>
 <div id="key-dplyr-functions" class="section level2">
-<h2><span class="header-section-number">8.2</span> Key <code>dplyr</code> functions:</h2>
+<h2><span class="header-section-number">8.3</span> Key <code>dplyr</code> functions:</h2>
 <p>All have the same syntax structure, which enable pipe-chains.</p>
 </div>
+<div id="select-variables-with-select" class="section level2">
+<h2><span class="header-section-number">8.4</span> Select variables with <code>select()</code></h2>
+<p>The <code>select</code> function takes a dataset and <strong>keeps</strong> or <strong>drops</strong> variables (columns) that are specified.</p>
+<p>For example, look at the variables that are in the <code>sa3_income</code> dataset (using the <code>names()</code> function):</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">names</span>(sa3_income)</a></code></pre></div>
+<pre><code>##  [1] &quot;sa3&quot;                   &quot;sa3_name&quot;             
+##  [3] &quot;sa3_sqkm&quot;              &quot;sa3_income_percentile&quot;
+##  [5] &quot;sa4_name&quot;              &quot;gcc_name&quot;             
+##  [7] &quot;state&quot;                 &quot;occupation&quot;           
+##  [9] &quot;occ_short&quot;             &quot;prof&quot;                 
+## [11] &quot;gender&quot;                &quot;year&quot;                 
+## [13] &quot;median_income&quot;         &quot;average_income&quot;       
+## [15] &quot;total_income&quot;          &quot;workers&quot;</code></pre>
+<p>If you wanted to keep just the <code>state</code> and <code>total_income</code> variables, you could take the <code>sa3_income</code> dataset and select just those variables:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(state, total_income)</a></code></pre></div>
+<pre><code>## # A tibble: 47,832 x 2
+##    state total_income
+##    &lt;chr&gt;        &lt;dbl&gt;
+##  1 NSW      235853682
+##  2 NSW      253323356
+##  3 NSW      266908460
+##  4 NSW      264054166
+##  5 NSW      238214882
+##  6 NSW      273956768
+##  7 NSW       97561871
+##  8 NSW      102280707
+##  9 NSW      104914140
+## 10 NSW      104370174
+## # … with 47,822 more rows</code></pre>
+<p>Or you could use <code>-</code> (minus) to remove the <code>sa3</code> and <code>sa3_name</code> variables:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>sa3, <span class="op">-</span>sa3_name)</a></code></pre></div>
+<pre><code>## # A tibble: 47,832 x 14
+##    sa3_sqkm sa3_income_perc… sa4_name gcc_name state occupation occ_short
+##       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    
+##  1    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
+##  2    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  3    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
+##  4    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  5    6511.               74 Capital… Rest of… NSW   Clerical … Admin    
+##  6    6511.               79 Capital… Rest of… NSW   Clerical … Admin    
+##  7    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
+##  8    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+##  9    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
+## 10    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
+## # … with 47,822 more rows, and 7 more variables: prof &lt;chr&gt;, gender &lt;chr&gt;,
+## #   year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;,
+## #   total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
+<div id="selecting-groups-of-variables" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Selecting groups of variables</h3>
+<p>Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether.</p>
+<p>You can use patterns and <a href="https://tidyselect.r-lib.org/reference/select_helpers.html">‘select helpers’</a><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+from the Tidyverse to help deal with these sets of variables.</p>
+<p>For example, if you want to keep just the SA3 and SA4 variables – ie the variables that start with <code>&quot;sa&quot;</code> – you could:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;sa&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 47,832 x 5
+##      sa3 sa3_name   sa3_sqkm sa3_income_percentile sa4_name      
+##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;         
+##  1 10102 Queanbeyan    6511.                    80 Capital Region
+##  2 10102 Queanbeyan    6511.                    76 Capital Region
+##  3 10102 Queanbeyan    6511.                    78 Capital Region
+##  4 10102 Queanbeyan    6511.                    76 Capital Region
+##  5 10102 Queanbeyan    6511.                    74 Capital Region
+##  6 10102 Queanbeyan    6511.                    79 Capital Region
+##  7 10102 Queanbeyan    6511.                    80 Capital Region
+##  8 10102 Queanbeyan    6511.                    76 Capital Region
+##  9 10102 Queanbeyan    6511.                    78 Capital Region
+## 10 10102 Queanbeyan    6511.                    76 Capital Region
+## # … with 47,822 more rows</code></pre>
+<p>Or, instead, if you wanted to keep just the variables that contain <code>&quot;income&quot;</code>, you could:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">contains</span>(<span class="st">&quot;income&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 47,832 x 4
+##    sa3_income_percentile median_income average_income total_income
+##                    &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;
+##  1                    80         52127          51306    235853682
+##  2                    76         54894          53807    253323356
+##  3                    78         57868          56405    266908460
+##  4                    76         59025          57742    264054166
+##  5                    74         59041          58286    238214882
+##  6                    79         62741          61591    273956768
+##  7                    80         66900          66869     97561871
+##  8                    76         68943          69721    102280707
+##  9                    78         71998          71859    104914140
+## 10                    76         74277          74871    104370174
+## # … with 47,822 more rows</code></pre>
+<p>And if you wanted to keep <strong>both</strong> the <code>&quot;sa&quot;</code> variables and the <code>&quot;income&quot;</code> variables, you could:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;sa&quot;</span>), <span class="kw">contains</span>(<span class="st">&quot;income&quot;</span>), )</a></code></pre></div>
+<pre><code>## # A tibble: 47,832 x 8
+##      sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name median_income
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+##  1 10102 Queanbe…    6511.               80 Capital…         52127
+##  2 10102 Queanbe…    6511.               76 Capital…         54894
+##  3 10102 Queanbe…    6511.               78 Capital…         57868
+##  4 10102 Queanbe…    6511.               76 Capital…         59025
+##  5 10102 Queanbe…    6511.               74 Capital…         59041
+##  6 10102 Queanbe…    6511.               79 Capital…         62741
+##  7 10102 Queanbe…    6511.               80 Capital…         66900
+##  8 10102 Queanbe…    6511.               76 Capital…         68943
+##  9 10102 Queanbe…    6511.               78 Capital…         71998
+## 10 10102 Queanbe…    6511.               76 Capital…         74277
+## # … with 47,822 more rows, and 2 more variables: average_income &lt;dbl&gt;,
+## #   total_income &lt;dbl&gt;</code></pre>
+<p>The full list of these handy select functions are provided with the <code>?tidyselect::select_helpers</code> documentation, listed below:</p>
+<ul>
+<li><code>starts_with()</code>: Starts with a prefix.</li>
+<li><code>ends_with()</code>: Ends with a suffix.</li>
+<li><code>contains()</code>: Contains a literal string.</li>
+<li><code>matches()</code>: Matches a regular expression.</li>
+<li><code>num_range()</code>: Matches a numerical range like x01, x02, x03.</li>
+<li><code>one_of()</code>: Matches variable names in a character vector.</li>
+<li><code>everything()</code>: Matches all variables.</li>
+<li><code>last_col()</code>: Select last variable, possibly with an offset.</li>
+</ul>
+</div>
+</div>
 <div id="filter-with-filter" class="section level2">
-<h2><span class="header-section-number">8.3</span> Filter with <code>filter()</code></h2>
+<h2><span class="header-section-number">8.5</span> Filter with <code>filter()</code></h2>
+<p>The <code>filter</code> function takes a dataset and <strong>keeps</strong> observations (rows) that meet the <strong>rules</strong>.</p>
+<p><code>filter</code> has one required first argument – the data – and then as many ‘conditions’ as you want to provide.</p>
+<div id="logical-operations-true-or-false" class="section level3">
+<h3><span class="header-section-number">8.5.1</span> Logical operations: <code>TRUE</code> or <code>FALSE</code></h3>
+<p>The <strong>rules</strong> are logical conditions.</p>
+</div>
 </div>
 <div id="arrange-with-arrange" class="section level2">
-<h2><span class="header-section-number">8.4</span> Arrange with <code>arrange()</code></h2>
-</div>
-<div id="select-variables-with-select" class="section level2">
-<h2><span class="header-section-number">8.5</span> Select variables with <code>select()</code></h2>
+<h2><span class="header-section-number">8.6</span> Arrange with <code>arrange()</code></h2>
 </div>
 <div id="group-data-with-group_by" class="section level2">
-<h2><span class="header-section-number">8.6</span> Group data with <code>group_by()</code></h2>
+<h2><span class="header-section-number">8.7</span> Group data with <code>group_by()</code></h2>
 </div>
 <div id="edit-and-add-new-variables-with-mutate" class="section level2">
-<h2><span class="header-section-number">8.7</span> Edit and add new variables with <code>mutate()</code></h2>
+<h2><span class="header-section-number">8.8</span> Edit and add new variables with <code>mutate()</code></h2>
 <div id="cases-when-you-should-use-case_when" class="section level3">
-<h3><span class="header-section-number">8.7.1</span> Cases when you should use <code>case_when()</code></h3>
+<h3><span class="header-section-number">8.8.1</span> Cases when you should use <code>case_when()</code></h3>
 </div>
 </div>
 <div id="summarise-data-with-summarise" class="section level2">
-<h2><span class="header-section-number">8.8</span> Summarise data with <code>summarise()</code></h2>
+<h2><span class="header-section-number">8.9</span> Summarise data with <code>summarise()</code></h2>
 </div>
 <div id="joining-datasets-with-_join" class="section level2">
-<h2><span class="header-section-number">8.9</span> Joining datasets with <code>*_join()</code></h2>
+<h2><span class="header-section-number">8.10</span> Joining datasets with <code>*_join()</code></h2>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a><a href="data-transformation.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>XXX cannot remember the source for this example; probably Hadley? Maybe somenone else?<a href="data-transformation.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>‘pass’ can also be used to mean ‘pipe’.<a href="data-transformation.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>This is the same as <strong>keeping everything except</strong> the <code>sa3</code> and <code>sa3_name</code> variables.<a href="data-transformation.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Explained in useful detail by the Tidyverse people at <a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri">https://tidyselect.r-lib.org/reference/select_helpers.html</a><a href="data-transformation.html#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -326,13 +556,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -368,20 +596,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
