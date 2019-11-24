@@ -11,7 +11,7 @@ library(tidyverse)
 ```
 
 
-The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
+The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
 
 ```{r read_data}
 sa3_income <- read_csv("data/sa3_income.csv")
@@ -20,7 +20,10 @@ head(sa3_income)
 ```
 
 ```{r remove_na, include=FALSE}
-sa3_income <- sa3_income %>% filter(!is.na(median_income))
+sa3_income <- sa3_income %>% 
+  filter(!is.na(average_income)) %>% 
+  select(year, sa3_name, state, occupation = occ_short, gender, average_income, workers, sa3_sqkm)
+
 ```
 
 
@@ -29,7 +32,7 @@ sa3_income <- sa3_income %>% filter(!is.na(median_income))
 
 You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to 'nest' them inside. This nesting will be _painfully_ familiar to Excel users.
 
-Consider an example of baking and eating a cake.^[XXX cannot remember the source for this example; probably Hadley? Maybe somenone else?] You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:
+Consider an example of baking and eating a cake.^[XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?] You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:
 
 ```{r, eval = FALSE}
 eat(bake(mix(combine(ingredients))))
@@ -39,7 +42,7 @@ In a nested formula, you need to start in the _middle_ and work your way out. Th
 
 This is where the 'pipe' can help. The pipe operator `%>%` (keyboard shortcut: `cmd + shift + m`)  takes an argument on the left and 'pipes' it into the function on the right. Each time you see `%>%`, you can read it as 'and then'. 
 
-So the baking example can then be equivalently expressed as:
+So the you could express the baking example as:
 
 ```{r, eval = FALSE}
 ingredients %>% 
@@ -49,8 +52,10 @@ ingredients %>%
   eat()
 ```
 
-Which reads as 'take the `ingredients`, then `combine`, then `mix`, then `bake`, then `eat` them'. 
-This does the same thing as `eat(bake(mix(combine(ingredients))))`. But it's much nicer to read, and it's more natural to _write_.
+Which reads as:
+> take the `ingredients`, then `combine`, then `mix`, then `bake`, then `eat` them.
+
+This does the same thing as `eat(bake(mix(combine(ingredients))))`. But it's much nicer and more natural to read, and to _write_.
 
 In simple `R` code, the function `paste` takes arguments and combines them together into a single string. So you could use the pipe to:
 
@@ -74,12 +79,12 @@ c(1, 2, 3, 5, 8, 100) %>%
 ```
 
 
-The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to `filter` the observations in the `sa3_income` data to only `NSW`, before you `group_by` `gender` and `summarise` the `median_income` of these grops (these functions are explained in detail below). All of these functions take 'data' as the first argument, and are designed to be used with pipes.
+The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to `filter` the observations in the `sa3_income` data to only `NSW`, before you `group_by` `gender` and `summarise` the `average_income` of these grops (these functions are explained in detail below). All of these functions take 'data' as the first argument, and are designed to be used with pipes.
 
 Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:
 
 ```{r}
-summarise((group_by(filter(sa3_income, state == "NSW"), gender)), av_med_income = mean(median_income))
+summarise((group_by(filter(sa3_income, state == "NSW"), gender)), av_mean_income = mean(average_income))
 ```
 
 The original common way to avoid this unseemly nesting in `R` was to assign each 'step' its own object, which is definitely clearer:
@@ -87,7 +92,7 @@ The original common way to avoid this unseemly nesting in `R` was to assign each
 ```{r}
 data1 <- filter(sa3_income, state == "NSW")
 data2 <- group_by(data1, gender)
-data3 <- summarise(data2, av_med_income = mean(median_income))
+data3 <- summarise(data2, av_mean_income = mean(average_income))
 data3
 ```
 
@@ -102,7 +107,7 @@ And using pipes make the steps clearer still:
 sa3_income %>% 
   filter(state == "NSW") %>% 
   group_by(gender) %>% 
-  summarise(av_med_income = mean(median_income))
+  summarise(av_mean_income = mean(average_income))
 ```
 
  
@@ -122,18 +127,18 @@ For example, look at the variables that are in the `sa3_income` dataset (using t
 names(sa3_income)
 ```
 
-If you wanted to keep just the `state` and `total_income` variables, you could take the `sa3_income` dataset and select just those variables:
+If you wanted to keep just the `state` and `average_income` variables, you could take the `sa3_income` dataset and select just those variables:
 
 ```{r}
 sa3_income %>% 
-  select(state, total_income)
+  select(state, average_income)
 ```
 
-Or you could use `-` (minus) to remove the `sa3` and `sa3_name` variables:^[This is the same as **keeping everything except** the `sa3` and `sa3_name` variables.]
+Or you could use `-` (minus) to remove the `state` and `sa3_name` variables:^[This is the same as **keeping everything except** the `state` and `sa3_name` variables.]
 
 ```{r}
 sa3_income %>% 
-  select(-sa3, -sa3_name)
+  select(-state, -sa3_name)
 ```
 
 ### Selecting groups of variables
@@ -181,33 +186,180 @@ The full list of these handy select functions are provided with the `?tidyselect
 
 ## Filter with `filter()`
 
-The `filter` function takes a dataset and **keeps** observations (rows) that meet the **rules**. 
+The `filter` function takes a dataset and **keeps** observations (rows) that meet the **conditions**. 
 
 `filter` has one required first argument -- the data -- and then as many 'conditions' as you want to provide. 
 
 
-### Logical operations: `TRUE` or `FALSE`
+### Conditions; logical operations; `TRUE` or `FALSE`
 
-The **rules** are logical conditions. This means something that is either `TRUE` or `FALSE` by the computer's mind.^[Computers' mind, more likely.] 
+The **conditions** are logical operations, meaning they are a statement that return either `TRUE` or `FALSE` in the computer's mind.^[Computers' mind, more likely.] 
 
-We know, for instance, that 1 + 2 does not equal 12. Which means if we type 1 + 2 == 12 into the console it will give `FALSE`:
+We know, for instance, that `1 + 2` does not equal `12`. Which means if we type `1 + 2 == 12` into the console it should give `FALSE`:
 
 ```{r}
 1 + 2 == 12
 ```
 
+Or, we can see if `1 + 2` is equal `5` or `9` or `3` by providing a vector of those numbers:
+
+```{r}
+1 + 2 == c(5, 9, 3)
+```
+
+This works for character strings, too:
+
+```{r}
+"apple" == c("orange", "apple", 7)
+```
+
+
+A lot of what we do in 'data science' is based on these `TRUE` and `FALSE` conditions. 
+
+### Filtering data with `filter`
+
+Turning back to the `sa3_income` data, if you just wanted to see observations people in `NT`:
+
+```{r}
+sa3_income %>% 
+  filter(state == "NT")
+```
+
+Or you might just want to look at high-income (`average_income > 100,000`) areas from Victoria in 2015:
+
+```{r}
+sa3_income %>% 
+  filter(state == "Vic",
+         average_income > 100000,
+         year == 2015)
+```
+
+
+Each of the commas in the `filter` function represent an 'and' `&`. So you can read the steps above as: 
+
+> take the `sa3_income` data and filter to keep only the observations that are from Victoria`,` and that have a average income above 100k`,` and are from the year 2015.
+
+
+Sometimes you might want to relax a little, keeping observations from one category **or** another. You can do this with the **or** symbol: `|`^[On the keyboard: `shift` + `backslash`]
+
+```{r}
+sa3_income %>% 
+  filter(state == "Vic" | state == "Tas",
+         average_income > 100000,
+         year == 2015 | year == 2016)
+
+```
+
+Which reads:
+
+> take the `sa3_income` data and filter to keep only the observations that are from Victoria OR NSW, and that have a average income above 100k, and are from the year 2015 OR 2016.
+
+
+### Grouped filtering with `group_by()` 
+
+The `group_by` function groups a dataset by given variables. This effectively generates one dataset per group within your main dataset. Any function you then apply -- like `filter()` -- will be applied to _each_ of the grouped datasets. 
+
+For example, you could filter the `sa3_income` dataset to keep just the observation with the highest average income:
+
+```{r}
+sa3_income %>% 
+  filter(average_income == max(average_income))
+```
+
+To keep the observations that have the highest average incomes _in each state_, you can `group_by` state, then `filter`:^[Wow they are all men!]
+
+```{r}
+sa3_income %>% 
+  group_by(state) %>% 
+  filter(average_income == max(average_income))
+```
+
+From the description of the tibble above, you can learn that your data has 8 unique groups of state: 
+
+`## #Groups:       state [8]`
+
+Or you could keep the observations with the _lowest_ average incomes in _each state and year_:^[Wow they are all women!]
+
+```{r}
+sa3_income %>% 
+  group_by(state, year) %>% 
+  filter(average_income == min(average_income))
+```
+
+The dataset remains grouped after your function(s). To explicitly 'ungroup' your data, add the `ungroup` function to your chain (the 'Groups' note has disappeared in the below):
+
+```{r}
+sa3_income %>% 
+  group_by(state, year) %>% 
+  filter(average_income == min(average_income)) %>% 
+  ungroup()
+```
+
+
+
+
+
+## Edit and add new variables with `mutate()`
+
+To add new variables to your dataset, use the `mutate` function. Like all `dplyr` verbs, the first argument to `mutate` is your data. Then define variables using a `new_variable_name = x` format, where `x` can be a single number or character string, or simple operation or function using current variables. 
+
+
+To add a new variable to the `sa3_income` dataset that shows the log the number of workers:
+
+```{r}
+sa3_income %>% 
+  mutate(log_workers = log(workers))
+```
+
+
+To add a new variable that shows the number of workers in the observation (ie by gender and occupation) per square kilometer area of the region:
+
+```{r}
+sa3_income %>% 
+  mutate(worker_density = workers / sa3_sqkm)
+```
+
+
+
+### Using `case_when()` or `if_else()`
+
+
+
+
+### Grouped mutates with `group_by()` 
+
+
+
+## Summarise data with `summarise()`
+
+Summarising data is our ultimate goal. We'll want to clean data using the steps above -- but often so we can 'summairse' the data 
+
+### Grouped summaries with `group_by()` 
 
 
 ## Arrange with `arrange()`
 
 
-## Group data with `group_by()`
+Sorting data in one way or another is useful because XXXX.
 
-## Edit and add new variables with `mutate()`
+```{r}
+sa3_income %>%
+  filter(year == 2016) %>% 
+  arrange(sa3_sqkm)
+```
 
-### Cases when you should use `case_when()`
+Or:
 
-## Summarise data with `summarise()`
+```{r}
+sa3_income %>%
+  filter(year == 2016) %>% 
+  arrange(-sa3_sqkm)
+```
+
+
+
+
+
 
 ## Joining datasets with `*_join()` 
 

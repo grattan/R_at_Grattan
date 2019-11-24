@@ -200,15 +200,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4.1" data-path="data-transformation.html"><a href="data-transformation.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>8.4.1</b> Selecting groups of variables</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="data-transformation.html"><a href="data-transformation.html#filter-with-filter"><i class="fa fa-check"></i><b>8.5</b> Filter with <code>filter()</code></a><ul>
-<li class="chapter" data-level="8.5.1" data-path="data-transformation.html"><a href="data-transformation.html#logical-operations-true-or-false"><i class="fa fa-check"></i><b>8.5.1</b> Logical operations: <code>TRUE</code> or <code>FALSE</code></a></li>
+<li class="chapter" data-level="8.5.1" data-path="data-transformation.html"><a href="data-transformation.html#conditions-logical-operations-true-or-false"><i class="fa fa-check"></i><b>8.5.1</b> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-transformation.html"><a href="data-transformation.html#filtering-data-with-filter"><i class="fa fa-check"></i><b>8.5.2</b> Filtering data with <code>filter</code></a></li>
+<li class="chapter" data-level="8.5.3" data-path="data-transformation.html"><a href="data-transformation.html#grouped-filtering-with-group_by"><i class="fa fa-check"></i><b>8.5.3</b> Grouped filtering with <code>group_by()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>8.6</b> Arrange with <code>arrange()</code></a></li>
-<li class="chapter" data-level="8.7" data-path="data-transformation.html"><a href="data-transformation.html#group-data-with-group_by"><i class="fa fa-check"></i><b>8.7</b> Group data with <code>group_by()</code></a></li>
-<li class="chapter" data-level="8.8" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>8.8</b> Edit and add new variables with <code>mutate()</code></a><ul>
-<li class="chapter" data-level="8.8.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>8.8.1</b> Cases when you should use <code>case_when()</code></a></li>
+<li class="chapter" data-level="8.6" data-path="data-transformation.html"><a href="data-transformation.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>8.6</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="8.6.1" data-path="data-transformation.html"><a href="data-transformation.html#cases-when-you-should-use-case_when"><i class="fa fa-check"></i><b>8.6.1</b> Cases when you should use <code>case_when()</code></a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-transformation.html"><a href="data-transformation.html#grouped-mutates-with-group_by"><i class="fa fa-check"></i><b>8.6.2</b> Grouped mutates with <code>group_by()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>8.9</b> Summarise data with <code>summarise()</code></a></li>
-<li class="chapter" data-level="8.10" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>8.10</b> Joining datasets with <code>*_join()</code></a></li>
+<li class="chapter" data-level="8.7" data-path="data-transformation.html"><a href="data-transformation.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>8.7</b> Summarise data with <code>summarise()</code></a><ul>
+<li class="chapter" data-level="8.7.1" data-path="data-transformation.html"><a href="data-transformation.html#grouped-summaries-with-group_by"><i class="fa fa-check"></i><b>8.7.1</b> Grouped summaries with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="data-transformation.html"><a href="data-transformation.html#arrange-with-arrange"><i class="fa fa-check"></i><b>8.8</b> Arrange with <code>arrange()</code></a></li>
+<li class="chapter" data-level="8.9" data-path="data-transformation.html"><a href="data-transformation.html#joining-datasets-with-_join"><i class="fa fa-check"></i><b>8.9</b> Joining datasets with <code>*_join()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>9</b> Analysis</a></li>
 <li class="chapter" data-level="10" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>10</b> Data Visualisation</a><ul>
@@ -286,7 +290,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="set-up" class="section level2">
 <h2><span class="header-section-number">8.1</span> Set up</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.</p>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">sa3_income &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -328,14 +332,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">eat</span>(<span class="kw">bake</span>(<span class="kw">mix</span>(<span class="kw">combine</span>(ingredients))))</a></code></pre></div>
 <p>In a nested formula, you need to start in the <em>middle</em> and work your way out. This means anyone reading your code – including you in the future! – needs to start in the middle and work their way out. But because we’re used to left-right reading, we’re not particularly good at naturally interpreting nested functions like this one.</p>
 <p>This is where the ‘pipe’ can help. The pipe operator <code>%&gt;%</code> (keyboard shortcut: <code>cmd + shift + m</code>) takes an argument on the left and ‘pipes’ it into the function on the right. Each time you see <code>%&gt;%</code>, you can read it as ‘and then’.</p>
-<p>So the baking example can then be equivalently expressed as:</p>
+<p>So the you could express the baking example as:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ingredients <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">combine</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">mix</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">bake</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">eat</span>()</a></code></pre></div>
-<p>Which reads as ‘take the <code>ingredients</code>, then <code>combine</code>, then <code>mix</code>, then <code>bake</code>, then <code>eat</code> them’.
-This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. But it’s much nicer to read, and it’s more natural to <em>write</em>.</p>
+<p>Which reads as:
+&gt; take the <code>ingredients</code>, then <code>combine</code>, then <code>mix</code>, then <code>bake</code>, then <code>eat</code> them.</p>
+<p>This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. But it’s much nicer and more natural to read, and to <em>write</em>.</p>
 <p>In simple <code>R</code> code, the function <code>paste</code> takes arguments and combines them together into a single string. So you could use the pipe to:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="st">&quot;hello&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;dear&quot;</span>, <span class="st">&quot;reader&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;hello dear reader&quot;</code></pre>
@@ -348,24 +353,24 @@ This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. B
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw">sum</span>()</a></code></pre></div>
 <pre><code>## [1] 119</code></pre>
-<p>The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to <code>filter</code> the observations in the <code>sa3_income</code> data to only <code>NSW</code>, before you <code>group_by</code> <code>gender</code> and <code>summarise</code> the <code>median_income</code> of these grops (these functions are explained in detail below). All of these functions take ‘data’ as the first argument, and are designed to be used with pipes.</p>
+<p>The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to <code>filter</code> the observations in the <code>sa3_income</code> data to only <code>NSW</code>, before you <code>group_by</code> <code>gender</code> and <code>summarise</code> the <code>average_income</code> of these grops (these functions are explained in detail below). All of these functions take ‘data’ as the first argument, and are designed to be used with pipes.</p>
 <p>Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">summarise</span>((<span class="kw">group_by</span>(<span class="kw">filter</span>(sa3_income, state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>), gender)), <span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">summarise</span>((<span class="kw">group_by</span>(<span class="kw">filter</span>(sa3_income, state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>), gender)), <span class="dt">av_mean_income =</span> <span class="kw">mean</span>(average_income))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
-##   gender av_med_income
-##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 Men           51340.
-## 2 Women         37993.</code></pre>
+##   gender av_mean_income
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 Men            58296.
+## 2 Women          41694.</code></pre>
 <p>The original common way to avoid this unseemly nesting in <code>R</code> was to assign each ‘step’ its own object, which is definitely clearer:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">data1 &lt;-<span class="st"> </span><span class="kw">filter</span>(sa3_income, state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">data2 &lt;-<span class="st"> </span><span class="kw">group_by</span>(data1, gender)</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">data3 &lt;-<span class="st"> </span><span class="kw">summarise</span>(data2, <span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">print</span>(data3)</a></code></pre></div>
+<a class="sourceLine" id="cb16-3" data-line-number="3">data3 &lt;-<span class="st"> </span><span class="kw">summarise</span>(data2, <span class="dt">av_mean_income =</span> <span class="kw">mean</span>(average_income))</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">data3</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
-##   gender av_med_income
-##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 Men           51340.
-## 2 Women         37993.</code></pre>
+##   gender av_mean_income
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 Men            58296.
+## 2 Women          41694.</code></pre>
 <p>And using pipes make the steps clearer still:</p>
 <ol style="list-style-type: decimal">
 <li>take the <code>sa3_income</code> data, then %&gt;%</li>
@@ -376,12 +381,12 @@ This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. B
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;NSW&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">av_med_income =</span> <span class="kw">mean</span>(median_income))</a></code></pre></div>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">av_mean_income =</span> <span class="kw">mean</span>(average_income))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
-##   gender av_med_income
-##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 Men           51340.
-## 2 Women         37993.</code></pre>
+##   gender av_mean_income
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 Men            58296.
+## 2 Women          41694.</code></pre>
 </div>
 <div id="key-dplyr-functions" class="section level2">
 <h2><span class="header-section-number">8.3</span> Key <code>dplyr</code> functions:</h2>
@@ -392,50 +397,42 @@ This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. B
 <p>The <code>select</code> function takes a dataset and <strong>keeps</strong> or <strong>drops</strong> variables (columns) that are specified.</p>
 <p>For example, look at the variables that are in the <code>sa3_income</code> dataset (using the <code>names()</code> function):</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">names</span>(sa3_income)</a></code></pre></div>
-<pre><code>##  [1] &quot;sa3&quot;                   &quot;sa3_name&quot;             
-##  [3] &quot;sa3_sqkm&quot;              &quot;sa3_income_percentile&quot;
-##  [5] &quot;sa4_name&quot;              &quot;gcc_name&quot;             
-##  [7] &quot;state&quot;                 &quot;occupation&quot;           
-##  [9] &quot;occ_short&quot;             &quot;prof&quot;                 
-## [11] &quot;gender&quot;                &quot;year&quot;                 
-## [13] &quot;median_income&quot;         &quot;average_income&quot;       
-## [15] &quot;total_income&quot;          &quot;workers&quot;</code></pre>
-<p>If you wanted to keep just the <code>state</code> and <code>total_income</code> variables, you could take the <code>sa3_income</code> dataset and select just those variables:</p>
+<pre><code>## [1] &quot;year&quot;           &quot;sa3_name&quot;       &quot;state&quot;          &quot;occupation&quot;    
+## [5] &quot;gender&quot;         &quot;average_income&quot; &quot;workers&quot;        &quot;sa3_sqkm&quot;</code></pre>
+<p>If you wanted to keep just the <code>state</code> and <code>average_income</code> variables, you could take the <code>sa3_income</code> dataset and select just those variables:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(state, total_income)</a></code></pre></div>
-<pre><code>## # A tibble: 47,832 x 2
-##    state total_income
-##    &lt;chr&gt;        &lt;dbl&gt;
-##  1 NSW      235853682
-##  2 NSW      253323356
-##  3 NSW      266908460
-##  4 NSW      264054166
-##  5 NSW      238214882
-##  6 NSW      273956768
-##  7 NSW       97561871
-##  8 NSW      102280707
-##  9 NSW      104914140
-## 10 NSW      104370174
-## # … with 47,822 more rows</code></pre>
-<p>Or you could use <code>-</code> (minus) to remove the <code>sa3</code> and <code>sa3_name</code> variables:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(state, average_income)</a></code></pre></div>
+<pre><code>## # A tibble: 47,899 x 2
+##    state average_income
+##    &lt;chr&gt;          &lt;dbl&gt;
+##  1 NSW            51306
+##  2 NSW            53807
+##  3 NSW            56405
+##  4 NSW            57742
+##  5 NSW            58286
+##  6 NSW            61591
+##  7 NSW            66869
+##  8 NSW            69721
+##  9 NSW            71859
+## 10 NSW            74871
+## # … with 47,889 more rows</code></pre>
+<p>Or you could use <code>-</code> (minus) to remove the <code>state</code> and <code>sa3_name</code> variables:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>sa3, <span class="op">-</span>sa3_name)</a></code></pre></div>
-<pre><code>## # A tibble: 47,832 x 14
-##    sa3_sqkm sa3_income_perc… sa4_name gcc_name state occupation occ_short
-##       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    
-##  1    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
-##  2    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
-##  3    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
-##  4    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
-##  5    6511.               74 Capital… Rest of… NSW   Clerical … Admin    
-##  6    6511.               79 Capital… Rest of… NSW   Clerical … Admin    
-##  7    6511.               80 Capital… Rest of… NSW   Clerical … Admin    
-##  8    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
-##  9    6511.               78 Capital… Rest of… NSW   Clerical … Admin    
-## 10    6511.               76 Capital… Rest of… NSW   Clerical … Admin    
-## # … with 47,822 more rows, and 7 more variables: prof &lt;chr&gt;, gender &lt;chr&gt;,
-## #   year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;,
-## #   total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>state, <span class="op">-</span>sa3_name)</a></code></pre></div>
+<pre><code>## # A tibble: 47,899 x 6
+##     year occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2011 Admin      Women           51306    4597    6511.
+##  2  2012 Admin      Women           53807    4708    6511.
+##  3  2013 Admin      Women           56405    4732    6511.
+##  4  2014 Admin      Women           57742    4573    6511.
+##  5  2015 Admin      Women           58286    4087    6511.
+##  6  2016 Admin      Women           61591    4448    6511.
+##  7  2011 Admin      Men             66869    1459    6511.
+##  8  2012 Admin      Men             69721    1467    6511.
+##  9  2013 Admin      Men             71859    1460    6511.
+## 10  2014 Admin      Men             74871    1394    6511.
+## # … with 47,889 more rows</code></pre>
 <div id="selecting-groups-of-variables" class="section level3">
 <h3><span class="header-section-number">8.4.1</span> Selecting groups of variables</h3>
 <p>Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether.</p>
@@ -444,55 +441,54 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p>For example, if you want to keep just the SA3 and SA4 variables – ie the variables that start with <code>&quot;sa&quot;</code> – you could:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;sa&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 47,832 x 5
-##      sa3 sa3_name   sa3_sqkm sa3_income_percentile sa4_name      
-##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;         
-##  1 10102 Queanbeyan    6511.                    80 Capital Region
-##  2 10102 Queanbeyan    6511.                    76 Capital Region
-##  3 10102 Queanbeyan    6511.                    78 Capital Region
-##  4 10102 Queanbeyan    6511.                    76 Capital Region
-##  5 10102 Queanbeyan    6511.                    74 Capital Region
-##  6 10102 Queanbeyan    6511.                    79 Capital Region
-##  7 10102 Queanbeyan    6511.                    80 Capital Region
-##  8 10102 Queanbeyan    6511.                    76 Capital Region
-##  9 10102 Queanbeyan    6511.                    78 Capital Region
-## 10 10102 Queanbeyan    6511.                    76 Capital Region
-## # … with 47,822 more rows</code></pre>
+<pre><code>## # A tibble: 47,899 x 2
+##    sa3_name   sa3_sqkm
+##    &lt;chr&gt;         &lt;dbl&gt;
+##  1 Queanbeyan    6511.
+##  2 Queanbeyan    6511.
+##  3 Queanbeyan    6511.
+##  4 Queanbeyan    6511.
+##  5 Queanbeyan    6511.
+##  6 Queanbeyan    6511.
+##  7 Queanbeyan    6511.
+##  8 Queanbeyan    6511.
+##  9 Queanbeyan    6511.
+## 10 Queanbeyan    6511.
+## # … with 47,889 more rows</code></pre>
 <p>Or, instead, if you wanted to keep just the variables that contain <code>&quot;income&quot;</code>, you could:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">contains</span>(<span class="st">&quot;income&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 47,832 x 4
-##    sa3_income_percentile median_income average_income total_income
-##                    &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-##  1                    80         52127          51306    235853682
-##  2                    76         54894          53807    253323356
-##  3                    78         57868          56405    266908460
-##  4                    76         59025          57742    264054166
-##  5                    74         59041          58286    238214882
-##  6                    79         62741          61591    273956768
-##  7                    80         66900          66869     97561871
-##  8                    76         68943          69721    102280707
-##  9                    78         71998          71859    104914140
-## 10                    76         74277          74871    104370174
-## # … with 47,822 more rows</code></pre>
+<pre><code>## # A tibble: 47,899 x 1
+##    average_income
+##             &lt;dbl&gt;
+##  1          51306
+##  2          53807
+##  3          56405
+##  4          57742
+##  5          58286
+##  6          61591
+##  7          66869
+##  8          69721
+##  9          71859
+## 10          74871
+## # … with 47,889 more rows</code></pre>
 <p>And if you wanted to keep <strong>both</strong> the <code>&quot;sa&quot;</code> variables and the <code>&quot;income&quot;</code> variables, you could:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;sa&quot;</span>), <span class="kw">contains</span>(<span class="st">&quot;income&quot;</span>), )</a></code></pre></div>
-<pre><code>## # A tibble: 47,832 x 8
-##      sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name median_income
-##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
-##  1 10102 Queanbe…    6511.               80 Capital…         52127
-##  2 10102 Queanbe…    6511.               76 Capital…         54894
-##  3 10102 Queanbe…    6511.               78 Capital…         57868
-##  4 10102 Queanbe…    6511.               76 Capital…         59025
-##  5 10102 Queanbe…    6511.               74 Capital…         59041
-##  6 10102 Queanbe…    6511.               79 Capital…         62741
-##  7 10102 Queanbe…    6511.               80 Capital…         66900
-##  8 10102 Queanbe…    6511.               76 Capital…         68943
-##  9 10102 Queanbe…    6511.               78 Capital…         71998
-## 10 10102 Queanbe…    6511.               76 Capital…         74277
-## # … with 47,822 more rows, and 2 more variables: average_income &lt;dbl&gt;,
-## #   total_income &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 47,899 x 3
+##    sa3_name   sa3_sqkm average_income
+##    &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+##  1 Queanbeyan    6511.          51306
+##  2 Queanbeyan    6511.          53807
+##  3 Queanbeyan    6511.          56405
+##  4 Queanbeyan    6511.          57742
+##  5 Queanbeyan    6511.          58286
+##  6 Queanbeyan    6511.          61591
+##  7 Queanbeyan    6511.          66869
+##  8 Queanbeyan    6511.          69721
+##  9 Queanbeyan    6511.          71859
+## 10 Queanbeyan    6511.          74871
+## # … with 47,889 more rows</code></pre>
 <p>The full list of these handy select functions are provided with the <code>?tidyselect::select_helpers</code> documentation, listed below:</p>
 <ul>
 <li><code>starts_with()</code>: Starts with a prefix.</li>
@@ -508,30 +504,231 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </div>
 <div id="filter-with-filter" class="section level2">
 <h2><span class="header-section-number">8.5</span> Filter with <code>filter()</code></h2>
-<p>The <code>filter</code> function takes a dataset and <strong>keeps</strong> observations (rows) that meet the <strong>rules</strong>.</p>
+<p>The <code>filter</code> function takes a dataset and <strong>keeps</strong> observations (rows) that meet the <strong>conditions</strong>.</p>
 <p><code>filter</code> has one required first argument – the data – and then as many ‘conditions’ as you want to provide.</p>
-<div id="logical-operations-true-or-false" class="section level3">
-<h3><span class="header-section-number">8.5.1</span> Logical operations: <code>TRUE</code> or <code>FALSE</code></h3>
-<p>The <strong>rules</strong> are logical conditions.</p>
+<div id="conditions-logical-operations-true-or-false" class="section level3">
+<h3><span class="header-section-number">8.5.1</span> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></h3>
+<p>The <strong>conditions</strong> are logical operations, meaning they are a statement that return either <code>TRUE</code> or <code>FALSE</code> in the computer’s mind.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<p>We know, for instance, that <code>1 + 2</code> does not equal <code>12</code>. Which means if we type <code>1 + 2 == 12</code> into the console it should give <code>FALSE</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">12</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Or, we can see if <code>1 + 2</code> is equal <code>5</code> or <code>9</code> or <code>3</code> by providing a vector of those numbers:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE</code></pre>
+<p>This works for character strings, too:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="st">&quot;apple&quot;</span> <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="dv">7</span>)</a></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
+<p>A lot of what we do in ‘data science’ is based on these <code>TRUE</code> and <code>FALSE</code> conditions.</p>
 </div>
+<div id="filtering-data-with-filter" class="section level3">
+<h3><span class="header-section-number">8.5.2</span> Filtering data with <code>filter</code></h3>
+<p>Turning back to the <code>sa3_income</code> data, if you just wanted to see observations people in <code>NT</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;NT&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1,403 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2011 Darwin Ci… NT    Admin      Women           46533    1846     40.6
+##  2  2012 Darwin Ci… NT    Admin      Women           49584    1922     40.6
+##  3  2013 Darwin Ci… NT    Admin      Women           51334    1892     40.6
+##  4  2014 Darwin Ci… NT    Admin      Women           53309    1870     40.6
+##  5  2015 Darwin Ci… NT    Admin      Women           56489    1745     40.6
+##  6  2016 Darwin Ci… NT    Admin      Women           60115    1765     40.6
+##  7  2011 Darwin Ci… NT    Admin      Men             62476     599     40.6
+##  8  2012 Darwin Ci… NT    Admin      Men             66488     603     40.6
+##  9  2013 Darwin Ci… NT    Admin      Men             77042     601     40.6
+## 10  2014 Darwin Ci… NT    Admin      Men             86273     583     40.6
+## # … with 1,393 more rows</code></pre>
+<p>Or you might just want to look at high-income (<code>average_income &gt; 100,000</code>) areas from Victoria in 2015:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;Vic&quot;</span>,</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">         average_income <span class="op">&gt;</span><span class="st"> </span><span class="dv">100000</span>,</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">         year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 43 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2015 Darebin -… Vic   Manager    Men            108957    2028     14.0
+##  2  2015 Essendon   Vic   Manager    Men            118590    3060     18.2
+##  3  2015 Essendon   Vic   Manager    Men            103482    5154     18.2
+##  4  2015 Essendon   Vic   Professio… Men            104808    4517     18.2
+##  5  2015 Melbourne… Vic   Manager    Men            127012    4878     31.5
+##  6  2015 Melbourne… Vic   Manager    Men            107598    8353     31.5
+##  7  2015 Port Phil… Vic   Manager    Men            132143    6103     25.7
+##  8  2015 Port Phil… Vic   Manager    Men            115392   11055     25.7
+##  9  2015 Port Phil… Vic   Professio… Men            103645    8984     25.7
+## 10  2015 Stonningt… Vic   Manager    Men            170056    3765     11.9
+## # … with 33 more rows</code></pre>
+<p>Each of the commas in the <code>filter</code> function represent an ‘and’ <code>&amp;</code>. So you can read the steps above as:</p>
+<blockquote>
+<p>take the <code>sa3_income</code> data and filter to keep only the observations that are from Victoria<code>,</code> and that have a average income above 100k<code>,</code> and are from the year 2015.</p>
+</blockquote>
+<p>Sometimes you might want to relax a little, keeping observations from one category <strong>or</strong> another. You can do this with the <strong>or</strong> symbol: <code>|</code><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> &quot;Vic&quot;</span> <span class="op">|</span><span class="st"> </span>state <span class="op">==</span><span class="st"> &quot;Tas&quot;</span>,</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">         average_income <span class="op">&gt;</span><span class="st"> </span><span class="dv">100000</span>,</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">         year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 98 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2015 Darebin -… Vic   Manager    Men            108957    2028     14.0
+##  2  2016 Darebin -… Vic   Manager    Men            113062    2104     14.0
+##  3  2015 Essendon   Vic   Manager    Men            118590    3060     18.2
+##  4  2016 Essendon   Vic   Manager    Men            122965    3154     18.2
+##  5  2015 Essendon   Vic   Manager    Men            103482    5154     18.2
+##  6  2016 Essendon   Vic   Manager    Men            107895    5345     18.2
+##  7  2015 Essendon   Vic   Professio… Men            104808    4517     18.2
+##  8  2016 Essendon   Vic   Professio… Men            104054    4723     18.2
+##  9  2015 Melbourne… Vic   Manager    Men            127012    4878     31.5
+## 10  2016 Melbourne… Vic   Manager    Men            124118    4933     31.5
+## # … with 88 more rows</code></pre>
+<p>Which reads:</p>
+<blockquote>
+<p>take the <code>sa3_income</code> data and filter to keep only the observations that are from Victoria OR NSW, and that have a average income above 100k, and are from the year 2015 OR 2016.</p>
+</blockquote>
 </div>
-<div id="arrange-with-arrange" class="section level2">
-<h2><span class="header-section-number">8.6</span> Arrange with <code>arrange()</code></h2>
+<div id="grouped-filtering-with-group_by" class="section level3">
+<h3><span class="header-section-number">8.5.3</span> Grouped filtering with <code>group_by()</code></h3>
+<p>The <code>group_by</code> function groups a dataset by given variables. This effectively generates one dataset per group within your main dataset. Any function you then apply – like <code>filter()</code> – will be applied to <em>each</em> of the grouped datasets.</p>
+<p>For example, you could filter the <code>sa3_income</code> dataset to keep just the observation with the highest average income:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(average_income <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(average_income))</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 8
+##    year sa3_name    state occupation gender average_income workers sa3_sqkm
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+## 1  2016 North Sydn… NSW   Manager    Men            250629    6869     19.0</code></pre>
+<p>To keep the observations that have the highest average incomes <em>in each state</em>, you can <code>group_by</code> state, then <code>filter</code>:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(state) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(average_income <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(average_income))</a></code></pre></div>
+<pre><code>## # A tibble: 8 x 8
+## # Groups:   state [8]
+##    year sa3_name    state occupation gender average_income workers sa3_sqkm
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+## 1  2016 North Sydn… NSW   Manager    Men            250629    6869     19.0
+## 2  2016 Bayside     Vic   Manager    Men            193455    6605     37.2
+## 3  2016 Brisbane I… Qld   Manager    Men            162648    2354     15.6
+## 4  2016 Burnside    SA    Manager    Men            128236    1994     27.5
+## 5  2015 Cottesloe … WA    Manager    Men            240260    3458     48.7
+## 6  2015 Hobart Inn… Tas   Manager    Men             99148    1741     62.2
+## 7  2016 Darwin City NT    Manager    Men            137086    1720     40.6
+## 8  2016 South Canb… ACT   Manager    Men            152109    2019     44.4</code></pre>
+<p>From the description of the tibble above, you can learn that your data has 8 unique groups of state:</p>
+<p><code>## #Groups:       state [8]</code></p>
+<p>Or you could keep the observations with the <em>lowest</em> average incomes in <em>each state and year</em>:<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(state, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(average_income <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(average_income))</a></code></pre></div>
+<pre><code>## # A tibble: 48 x 8
+## # Groups:   state, year [48]
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2014 Sydney In… NSW   Labourer   Women           19397    3021     25.1
+##  2  2015 Sydney In… NSW   Labourer   Women           19784    3399     25.1
+##  3  2011 Manly      NSW   Labourer   Women           17094     289     14.3
+##  4  2012 Manly      NSW   Labourer   Women           15510     346     14.3
+##  5  2013 Manly      NSW   Labourer   Women           16449     359     14.3
+##  6  2016 Manly      NSW   Labourer   Women           18919     223     14.3
+##  7  2011 Melbourne… Vic   Labourer   Women           17783     857     31.5
+##  8  2012 Melbourne… Vic   Labourer   Women           16311    1006     31.5
+##  9  2013 Melbourne… Vic   Labourer   Women           16034    1262     31.5
+## 10  2014 Melbourne… Vic   Labourer   Women           16571    1311     31.5
+## # … with 38 more rows</code></pre>
+<p>The dataset remains grouped after your function(s). To explicitly ‘ungroup’ your data, add the <code>ungroup</code> function to your chain (note that the ‘Groups’ note has disappeared):</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(state, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(average_income <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(average_income)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 48 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2014 Sydney In… NSW   Labourer   Women           19397    3021     25.1
+##  2  2015 Sydney In… NSW   Labourer   Women           19784    3399     25.1
+##  3  2011 Manly      NSW   Labourer   Women           17094     289     14.3
+##  4  2012 Manly      NSW   Labourer   Women           15510     346     14.3
+##  5  2013 Manly      NSW   Labourer   Women           16449     359     14.3
+##  6  2016 Manly      NSW   Labourer   Women           18919     223     14.3
+##  7  2011 Melbourne… Vic   Labourer   Women           17783     857     31.5
+##  8  2012 Melbourne… Vic   Labourer   Women           16311    1006     31.5
+##  9  2013 Melbourne… Vic   Labourer   Women           16034    1262     31.5
+## 10  2014 Melbourne… Vic   Labourer   Women           16571    1311     31.5
+## # … with 38 more rows</code></pre>
 </div>
-<div id="group-data-with-group_by" class="section level2">
-<h2><span class="header-section-number">8.7</span> Group data with <code>group_by()</code></h2>
 </div>
 <div id="edit-and-add-new-variables-with-mutate" class="section level2">
-<h2><span class="header-section-number">8.8</span> Edit and add new variables with <code>mutate()</code></h2>
+<h2><span class="header-section-number">8.6</span> Edit and add new variables with <code>mutate()</code></h2>
+<p>To add new variables to your dataset, use the <code>mutate</code> function. Like all <code>dplyr</code> verbs, the first argument to <code>mutate</code> is your data. Then define variables using a <code>new_variable_name = x</code> format, where <code>x</code> can be a single number or character string, or simple operation or function using current variables.</p>
+<p>To add a new variable to the <code>sa3_income</code> dataset that shows the number of workers (by gender and occupation) per square kilometer area of the region:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">worker_density =</span> workers <span class="op">/</span><span class="st"> </span>sa3_sqkm)</a></code></pre></div>
+<pre><code>## # A tibble: 47,899 x 9
+##     year sa3_name state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2011 Queanbe… NSW   Admin      Women           51306    4597    6511.
+##  2  2012 Queanbe… NSW   Admin      Women           53807    4708    6511.
+##  3  2013 Queanbe… NSW   Admin      Women           56405    4732    6511.
+##  4  2014 Queanbe… NSW   Admin      Women           57742    4573    6511.
+##  5  2015 Queanbe… NSW   Admin      Women           58286    4087    6511.
+##  6  2016 Queanbe… NSW   Admin      Women           61591    4448    6511.
+##  7  2011 Queanbe… NSW   Admin      Men             66869    1459    6511.
+##  8  2012 Queanbe… NSW   Admin      Men             69721    1467    6511.
+##  9  2013 Queanbe… NSW   Admin      Men             71859    1460    6511.
+## 10  2014 Queanbe… NSW   Admin      Men             74871    1394    6511.
+## # … with 47,889 more rows, and 1 more variable: worker_density &lt;dbl&gt;</code></pre>
 <div id="cases-when-you-should-use-case_when" class="section level3">
-<h3><span class="header-section-number">8.8.1</span> Cases when you should use <code>case_when()</code></h3>
+<h3><span class="header-section-number">8.6.1</span> Cases when you should use <code>case_when()</code></h3>
+</div>
+<div id="grouped-mutates-with-group_by" class="section level3">
+<h3><span class="header-section-number">8.6.2</span> Grouped mutates with <code>group_by()</code></h3>
 </div>
 </div>
 <div id="summarise-data-with-summarise" class="section level2">
-<h2><span class="header-section-number">8.9</span> Summarise data with <code>summarise()</code></h2>
+<h2><span class="header-section-number">8.7</span> Summarise data with <code>summarise()</code></h2>
+<p>Summarising data is our ultimate goal. We’ll want to clean data using the steps above – but often so we can ‘summairse’ the data</p>
+<div id="grouped-summaries-with-group_by" class="section level3">
+<h3><span class="header-section-number">8.7.1</span> Grouped summaries with <code>group_by()</code></h3>
+</div>
+</div>
+<div id="arrange-with-arrange" class="section level2">
+<h2><span class="header-section-number">8.8</span> Arrange with <code>arrange()</code></h2>
+<p>Sorting data in one way or another is useful because XXXX.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(sa3_sqkm)</a></code></pre></div>
+<pre><code>## # A tibble: 7,995 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2016 Leichhardt NSW   Admin      Women           65700    2711     10.7
+##  2  2016 Leichhardt NSW   Admin      Men            110770    1102     10.7
+##  3  2016 Leichhardt NSW   Admin      Men             78651    3811     10.7
+##  4  2016 Leichhardt NSW   Service    Women           37144    1253     10.7
+##  5  2016 Leichhardt NSW   Service    Men             48746     849     10.7
+##  6  2016 Leichhardt NSW   Service    Men             41858    2102     10.7
+##  7  2016 Leichhardt NSW   Labourer   Women           28531     209     10.7
+##  8  2016 Leichhardt NSW   Labourer   Men             46097     668     10.7
+##  9  2016 Leichhardt NSW   Labourer   Men             41910     879     10.7
+## 10  2016 Leichhardt NSW   Driver     Women           37262      31     10.7
+## # … with 7,985 more rows</code></pre>
+<p>Or:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">sa3_income <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb56-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>sa3_sqkm)</a></code></pre></div>
+<pre><code>## # A tibble: 7,995 x 8
+##     year sa3_name   state occupation gender average_income workers sa3_sqkm
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2016 Goldfields WA    Admin      Women           49563    1830  714513.
+##  2  2016 Goldfields WA    Admin      Men             79834     248  714513.
+##  3  2016 Goldfields WA    Admin      Men             53197    2080  714513.
+##  4  2016 Goldfields WA    Service    Women           39578    1337  714513.
+##  5  2016 Goldfields WA    Service    Men             76979     468  714513.
+##  6  2016 Goldfields WA    Service    Men             49249    1800  714513.
+##  7  2016 Goldfields WA    Labourer   Women           33953     886  714513.
+##  8  2016 Goldfields WA    Labourer   Men             64614    1494  714513.
+##  9  2016 Goldfields WA    Labourer   Men             53193    2381  714513.
+## 10  2016 Goldfields WA    Driver     Women           75251     431  714513.
+## # … with 7,985 more rows</code></pre>
 </div>
 <div id="joining-datasets-with-_join" class="section level2">
-<h2><span class="header-section-number">8.10</span> Joining datasets with <code>*_join()</code></h2>
+<h2><span class="header-section-number">8.9</span> Joining datasets with <code>*_join()</code></h2>
 
 </div>
 </div>
@@ -539,10 +736,14 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <hr />
 <ol start="1">
 <li id="fn1"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a><a href="data-transformation.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>XXX cannot remember the source for this example; probably Hadley? Maybe somenone else?<a href="data-transformation.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?<a href="data-transformation.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>‘pass’ can also be used to mean ‘pipe’.<a href="data-transformation.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>This is the same as <strong>keeping everything except</strong> the <code>sa3</code> and <code>sa3_name</code> variables.<a href="data-transformation.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>This is the same as <strong>keeping everything except</strong> the <code>state</code> and <code>sa3_name</code> variables.<a href="data-transformation.html#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Explained in useful detail by the Tidyverse people at <a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri">https://tidyselect.r-lib.org/reference/select_helpers.html</a><a href="data-transformation.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Computers’ mind, more likely.<a href="data-transformation.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>On the keyboard: <code>shift</code> + <code>backslash</code><a href="data-transformation.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Wow they are all men!<a href="data-transformation.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Wow they are all women!<a href="data-transformation.html#fnref9" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
