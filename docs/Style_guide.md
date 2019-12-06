@@ -339,9 +339,7 @@ Writing clear code chunks, where functions are strung together with a pipe (`%>%
 
 I just threw up in my mouth a little bit.
 
-## Blocks of code
-
-As shown above, the pipe function `%>%` can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand. 
+The pipe function `%>%` can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand. 
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things. 
 
