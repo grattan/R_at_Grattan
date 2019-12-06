@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,30 +9,31 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{hyperref}
-\hypersetup{unicode=true,
+\hypersetup{
             pdftitle={Using R at Grattan Institute},
             pdfauthor={Will Mackey and Matt Cowgill},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -71,6 +75,8 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -80,12 +86,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -100,32 +100,17 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
-
-\setlength{\droptitle}{-2em}
-
-  \title{Using R at Grattan Institute}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Will Mackey and Matt Cowgill}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2019-11-04}
-
+\makeatother
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -134,6 +119,28 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+% https://github.com/rstudio/rmarkdown/issues/337
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+% https://github.com/rstudio/rmarkdown/pull/252
+\usepackage{titling}
+\setlength{\droptitle}{-2em}
+
+\pretitle{\vspace{\droptitle}\centering\huge}
+\posttitle{\par}
+
+\preauthor{\centering\large\emph}
+\postauthor{\par}
+
+\predate{\centering\large\emph}
+\postdate{\par}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Using R at Grattan Institute}
+\author{Will Mackey and Matt Cowgill}
+\date{2019-12-06}
 
 \begin{document}
 \maketitle
@@ -800,7 +807,7 @@ Do not use spaces around parentheses in most cases:
 For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{function}, see \href{https://style.tidyverse.org/syntax.html\#parentheses}{the Tidyverse guide}.
 
 \hypertarget{short-lines-line-indentation-and-the-pipe}{%
-\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater\%}}\label{short-lines-line-indentation-and-the-pipe}}
+\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater{}\%}}\label{short-lines-line-indentation-and-the-pipe}}
 
 It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
@@ -865,10 +872,7 @@ Writing clear code chunks, where functions are strung together with a pipe (\tex
 
 I just threw up in my mouth a little bit.
 
-\hypertarget{blocks-of-code}{%
-\section{Blocks of code}\label{blocks-of-code}}
-
-As shown above, the pipe function \texttt{\%\textgreater{}\%} can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.
+The pipe function \texttt{\%\textgreater{}\%} can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things.
 
@@ -977,7 +981,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages ----------------------------- tidyverse 1.2.1 --
+## -- Attaching packages ------------------
 \end{verbatim}
 
 \begin{verbatim}
@@ -988,7 +992,7 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts -------------------------------- tidyverse_conflicts() --
+## -- Conflicts -- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1243,40 +1247,1332 @@ The \texttt{lubridate::} package
   Dangers with factors
 \end{itemize}
 
-\hypertarget{data-transformation}{%
-\chapter{Data transformation}\label{data-transformation}}
+\hypertarget{data-transformation-with-dplyr}{%
+\chapter{\texorpdfstring{Data transformation with \texttt{dplyr}}{Data transformation with dplyr}}\label{data-transformation-with-dplyr}}
+
+This section focusses on transforming rectangular datasets.
+
+The \texttt{dplyr} verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of \emph{\href{https://r4ds.had.co.nz/}{R for Data Science}} with Hadley Wickham).
+
+\begin{verbatim}
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
+
+\hypertarget{set-up}{%
+\section{Set up}\label{set-up}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{sa3\_income} dataset will be used for all key examples in this chapter.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and sex, 2010-11 to 2016-16}} It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(sa3_income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##    year sa3_name  state gender income workers
+##   <dbl> <chr>     <chr> <chr>   <dbl>   <dbl>
+## 1  2011 Belconnen ACT   Men    54105.   67774
+## 2  2012 Belconnen ACT   Men    56724.   69435
+## 3  2013 Belconnen ACT   Men    58918.   69697
+## 4  2014 Belconnen ACT   Men    60525.   68613
+## 5  2015 Belconnen ACT   Men    60964.   63428
+## 6  2016 Belconnen ACT   Men    63389.   69828
+\end{verbatim}
 
 \hypertarget{the-pipe}{%
-\section{The pipe}\label{the-pipe}}
+\section{\texorpdfstring{The pipe: \texttt{\%\textgreater{}\%}}{The pipe: \%\textgreater{}\%}}\label{the-pipe}}
 
-\hypertarget{key-dplyr-functions}{%
-\section{\texorpdfstring{Key \texttt{dplyr} functions:}{Key dplyr functions:}}\label{key-dplyr-functions}}
+You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to `nest' them inside. This nesting will be \emph{painfully} familiar to Excel users.
 
-All have the same syntax structure, which enable pipe-chains.
+Consider an example of baking and eating a cake.\footnote{XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?} You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:
 
-\hypertarget{filter-with-filter}{%
-\section{\texorpdfstring{Filter with \texttt{filter()}}{Filter with filter()}}\label{filter-with-filter}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eat}\NormalTok{(}\KeywordTok{bake}\NormalTok{(}\KeywordTok{mix}\NormalTok{(}\KeywordTok{combine}\NormalTok{(ingredients))))}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{arrange-with-arrange}{%
-\section{\texorpdfstring{Arrange with \texttt{arrange()}}{Arrange with arrange()}}\label{arrange-with-arrange}}
+In a nested formula, you need to start in the \emph{middle} and work your way out. This means anyone reading your code -- including you in the future! -- needs to start in the middle and work their way out. But because we're used to left-right reading, we're not particularly good at naturally interpreting nested functions like this one.
+
+This is where the `pipe' can help. The pipe operator \texttt{\%\textgreater{}\%} (keyboard shortcut: \texttt{cmd\ +\ shift\ +\ m}) takes an argument on the left and `pipes' it into the function on the right. Each time you see \texttt{\%\textgreater{}\%}, you can read it as `and then'.
+
+So the you could express the baking example as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ingredients }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{combine}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{mix}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{bake}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{eat}\NormalTok{() }\CommentTok{# yum!}
+\end{Highlighting}
+\end{Shaded}
+
+Which reads as:
+
+\begin{quote}
+take the \texttt{ingredients}, then \texttt{combine}, then \texttt{mix}, then \texttt{bake}, then \texttt{eat} them.
+\end{quote}
+
+This does the same thing as \texttt{eat(bake(mix(combine(ingredients))))}. But it's much nicer and more natural to read, and to \emph{write}.
+
+Another example: the function \texttt{paste} takes arguments and combines them together into a single string. So you could use the pipe to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"hello"} \OperatorTok{%>%}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"dear"}\NormalTok{, }\StringTok{"reader"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello dear reader"
+\end{verbatim}
+
+which is the same as
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\StringTok{"dear"}\NormalTok{, }\StringTok{"reader"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello dear reader"
+\end{verbatim}
+
+Or you could define a vector of numbers and pass\footnote{`pass' can also be used to mean `pipe'.} them to the \texttt{sum()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_numbers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{)}
+
+\NormalTok{my_numbers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32
+\end{verbatim}
+
+Or you could skip the intermediate step altogether:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32
+\end{verbatim}
+
+This is the same as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32
+\end{verbatim}
+
+The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to \texttt{filter} the observations in the \texttt{sa3\_income} data to only \texttt{NSW}, before you \texttt{group\_by} \texttt{gender} and \texttt{summarise} the \texttt{income} of these grops (these functions are explained in detail below). All of these functions take `data' as the first argument, and are designed to be used with pipes.
+
+Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summarise}\NormalTok{((}\KeywordTok{group_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(sa3_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{), gender)), }\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender av_mean_income
+##   <chr>           <dbl>
+## 1 Men            58202.
+## 2 Women          41662.
+\end{verbatim}
+
+The original common way to avoid this unseemly nesting in \texttt{R} was to assign each `step' its own object, which is definitely clearer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data1 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(sa3_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{)}
+\NormalTok{data2 <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(data1, gender)}
+\NormalTok{data3 <-}\StringTok{ }\KeywordTok{summarise}\NormalTok{(data2, }\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\NormalTok{data3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender av_mean_income
+##   <chr>           <dbl>
+## 1 Men            58202.
+## 2 Women          41662.
+\end{verbatim}
+
+And using pipes make the steps clearer still:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  take the \texttt{sa3\_income} data, and then \%\textgreater{}\%
+\item
+  \texttt{filter} it to only NSW, and then \%\textgreater{}\%
+\item
+  \texttt{group} it by gender, and then \%\textgreater{}\%
+\item
+  \texttt{summarise} it
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{  }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender av_mean_income
+##   <chr>           <dbl>
+## 1 Men            58202.
+## 2 Women          41662.
+\end{verbatim}
 
 \hypertarget{select-variables-with-select}{%
 \section{\texorpdfstring{Select variables with \texttt{select()}}{Select variables with select()}}\label{select-variables-with-select}}
 
-\hypertarget{group-data-with-group_by}{%
-\section{\texorpdfstring{Group data with \texttt{group\_by()}}{Group data with group\_by()}}\label{group-data-with-group_by}}
+The \texttt{select} function takes a dataset and \textbf{keeps} or \textbf{drops} variables (columns) that are specified.
+
+For example, look at the variables that are in the \texttt{sa3\_income} dataset (using the \texttt{names()} function):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(sa3_income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "year"     "sa3_name" "state"    "gender"   "income"   "workers"
+\end{verbatim}
+
+If you wanted to keep just the \texttt{state} and \texttt{income} variables, you could take the \texttt{sa3\_income} dataset and select just those variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(state, income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 2
+##    state income
+##    <chr>  <dbl>
+##  1 ACT   54105.
+##  2 ACT   56724.
+##  3 ACT   58918.
+##  4 ACT   60525.
+##  5 ACT   60964.
+##  6 ACT   63389.
+##  7 ACT   53139.
+##  8 ACT   54515.
+##  9 ACT   58132.
+## 10 ACT   56247.
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Or you could use \texttt{-} (minus) to remove the \texttt{state} and \texttt{sa3\_name} variables:\footnote{This is the same as \textbf{keeping everything except} the \texttt{state} and \texttt{sa3\_name} variables.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{state, }\OperatorTok{-}\NormalTok{sa3_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 4
+##     year gender income workers
+##    <dbl> <chr>   <dbl>   <dbl>
+##  1  2011 Men    54105.   67774
+##  2  2012 Men    56724.   69435
+##  3  2013 Men    58918.   69697
+##  4  2014 Men    60525.   68613
+##  5  2015 Men    60964.   63428
+##  6  2016 Men    63389.   69828
+##  7  2011 Men    53139.     666
+##  8  2012 Men    54515.     647
+##  9  2013 Men    58132.     641
+## 10  2014 Men    56247.     561
+## # ... with 4,009 more rows
+\end{verbatim}
+
+\hypertarget{selecting-groups-of-variables}{%
+\subsection{Selecting groups of variables}\label{selecting-groups-of-variables}}
+
+Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether.
+
+You can use patterns and \href{https://tidyselect.r-lib.org/reference/select_helpers.html}{`select helpers'}\footnote{Explained in useful detail by the Tidyverse people at \url{https://tidyselect.r-lib.org/reference/select_helpers.html}}
+from the Tidyverse to help deal with these sets of variables.
+
+For example, if you want to keep just the SA3 and state variables -- ie the variables that start with \texttt{"s"} -- you could:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"s"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 2
+##    sa3_name      state
+##    <chr>         <chr>
+##  1 Belconnen     ACT  
+##  2 Belconnen     ACT  
+##  3 Belconnen     ACT  
+##  4 Belconnen     ACT  
+##  5 Belconnen     ACT  
+##  6 Belconnen     ACT  
+##  7 Canberra East ACT  
+##  8 Canberra East ACT  
+##  9 Canberra East ACT  
+## 10 Canberra East ACT  
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Or, instead, if you wanted to keep just the variables that contain \texttt{"er"}, you could:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"er"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 2
+##    gender workers
+##    <chr>    <dbl>
+##  1 Men      67774
+##  2 Men      69435
+##  3 Men      69697
+##  4 Men      68613
+##  5 Men      63428
+##  6 Men      69828
+##  7 Men        666
+##  8 Men        647
+##  9 Men        641
+## 10 Men        561
+## # ... with 4,009 more rows
+\end{verbatim}
+
+And if you wanted to keep \textbf{both} the \texttt{"s"} variables and the \texttt{"er"} variables, you could:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"s"}\NormalTok{), }\KeywordTok{contains}\NormalTok{(}\StringTok{"er"}\NormalTok{), )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 4
+##    sa3_name      state gender workers
+##    <chr>         <chr> <chr>    <dbl>
+##  1 Belconnen     ACT   Men      67774
+##  2 Belconnen     ACT   Men      69435
+##  3 Belconnen     ACT   Men      69697
+##  4 Belconnen     ACT   Men      68613
+##  5 Belconnen     ACT   Men      63428
+##  6 Belconnen     ACT   Men      69828
+##  7 Canberra East ACT   Men        666
+##  8 Canberra East ACT   Men        647
+##  9 Canberra East ACT   Men        641
+## 10 Canberra East ACT   Men        561
+## # ... with 4,009 more rows
+\end{verbatim}
+
+The full list of these handy select functions are provided with the \texttt{?tidyselect::select\_helpers} documentation, listed below:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{starts\_with()}: Starts with a prefix.
+\item
+  \texttt{ends\_with()}: Ends with a suffix.
+\item
+  \texttt{contains()}: Contains a literal string.
+\item
+  \texttt{matches()}: Matches a regular expression.
+\item
+  \texttt{num\_range()}: Matches a numerical range like x01, x02, x03.
+\item
+  \texttt{one\_of()}: Matches variable names in a character vector.
+\item
+  \texttt{everything()}: Matches all variables.
+\item
+  \texttt{last\_col()}: Select last variable, possibly with an offset.
+\end{itemize}
+
+\hypertarget{filter-with-filter}{%
+\section{\texorpdfstring{Filter with \texttt{filter()}}{Filter with filter()}}\label{filter-with-filter}}
+
+The \texttt{filter} function takes a dataset and \textbf{keeps} observations (rows) that meet the \textbf{conditions}.
+
+\texttt{filter} has one required first argument -- the data -- and then as many `conditions' as you want to provide.
+
+\hypertarget{conditions-logical-operations-true-or-false}{%
+\subsection{\texorpdfstring{Conditions; logical operations; \texttt{TRUE} or \texttt{FALSE}}{Conditions; logical operations; TRUE or FALSE}}\label{conditions-logical-operations-true-or-false}}
+
+The \textbf{conditions} are logical operations, meaning they are a statement that return either \texttt{TRUE} or \texttt{FALSE} in the computer's mind.\footnote{Computers' mind, more likely.}
+
+We know, for instance, that \texttt{12} is equal to \texttt{12} and that \texttt{1\ +\ 2} does not equal \texttt{12}. Which means if we type \texttt{12\ ==\ 12} or \texttt{1\ +\ 2\ ==\ 12} into the console it should give \texttt{FALSE}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{12} \OperatorTok{==}\StringTok{ }\DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{2} \OperatorTok{==}\StringTok{ }\DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+Or, we can see if \texttt{1\ +\ 2} is equal \texttt{5} or \texttt{9} or \texttt{3} by providing a vector of those numbers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{2} \OperatorTok{==}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE  TRUE
+\end{verbatim}
+
+This works for character strings, too:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"apple"} \OperatorTok{==}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{, }\StringTok{"apple"}\NormalTok{, }\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE FALSE
+\end{verbatim}
+
+A lot of what we do in `data science' is based on these \texttt{TRUE} and \texttt{FALSE} conditions.
+
+\hypertarget{filtering-data-with-filter}{%
+\subsection{\texorpdfstring{Filtering data with \texttt{filter}}{Filtering data with filter}}\label{filtering-data-with-filter}}
+
+Turning back to the \texttt{sa3\_income} data, if you just wanted to see observations people in \texttt{NT}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "NT"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 123 x 6
+##     year sa3_name      state gender income workers
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>
+##  1  2011 Alice Springs NT    Men    52602.   23663
+##  2  2012 Alice Springs NT    Men    55050.   24065
+##  3  2013 Alice Springs NT    Men    57251.   24218
+##  4  2014 Alice Springs NT    Men    58403.   24566
+##  5  2015 Alice Springs NT    Men    60084.   24562
+##  6  2016 Alice Springs NT    Men    64330.   22048
+##  7  2011 Barkly        NT    Men    50517.    2272
+##  8  2012 Barkly        NT    Men    52474.    2321
+##  9  2013 Barkly        NT    Men    55006.    2364
+## 10  2014 Barkly        NT    Men    56543.    2234
+## # ... with 113 more rows
+\end{verbatim}
+
+Or you might just want to look at high-income (\texttt{income\ \textgreater{}\ 70,000}) areas from Victoria in 2015:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{,}
+\NormalTok{         income }\OperatorTok{>}\StringTok{ }\DecValTok{70000}\NormalTok{,}
+\NormalTok{         year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 6
+##    year sa3_name           state gender income workers
+##   <dbl> <chr>              <chr> <chr>   <dbl>   <dbl>
+## 1  2015 Bayside            Vic   Men    77175.   62460
+## 2  2015 Stonnington - East Vic   Men    70652.   27922
+## 3  2015 Stonnington - West Vic   Men    70234.   47597
+\end{verbatim}
+
+Each of the commas in the \texttt{filter} function represent an `and' \texttt{\&}. So you can read the steps above as:
+
+\begin{quote}
+take the \texttt{sa3\_income} data and filter to keep only the observations that are from Victoria\texttt{,} and that have a average income above 70k\texttt{,} and are from the year 2015.
+\end{quote}
+
+Sometimes you might want to relax a little, keeping observations from one category \textbf{or} another. You can do this with the \textbf{or} symbol: \texttt{\textbar{}}\footnote{On the keyboard: \texttt{shift} + \texttt{backslash}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"} \OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{==}\StringTok{ "Tas"}\NormalTok{,}
+\NormalTok{         income }\OperatorTok{>}\StringTok{ }\DecValTok{100000}\NormalTok{,}
+\NormalTok{         year }\OperatorTok{==}\StringTok{ }\DecValTok{2015} \OperatorTok{|}\StringTok{ }\NormalTok{year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 6
+## # ... with 6 variables: year <dbl>, sa3_name <chr>, state <chr>, gender <chr>,
+## #   income <dbl>, workers <dbl>
+\end{verbatim}
+
+Which reads:
+
+\begin{quote}
+take the \texttt{sa3\_income} data and filter to keep only the observations that are from Victoria OR NSW, and that have a average income above 100k, and are from the year 2015 OR 2016.
+\end{quote}
+
+\hypertarget{grouped-filtering-with-group_by}{%
+\subsection{\texorpdfstring{Grouped filtering with \texttt{group\_by()}}{Grouped filtering with group\_by()}}\label{grouped-filtering-with-group_by}}
+
+The \texttt{group\_by} function groups a dataset by given variables. This effectively generates one dataset per group within your main dataset. Any function you then apply -- like \texttt{filter()} -- will be applied to \emph{each} of the grouped datasets.
+
+For example, you could filter the \texttt{sa3\_income} dataset to keep just the observation with the highest average income:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##    year sa3_name     state gender  income workers
+##   <dbl> <chr>        <chr> <chr>    <dbl>   <dbl>
+## 1  2015 West Pilbara WA    Men    107844.   22928
+\end{verbatim}
+
+To keep the observations that have the highest average incomes \emph{in each state}, you can \texttt{group\_by} state, then \texttt{filter}:\footnote{Wow they are all men!}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 6
+## # Groups:   state [8]
+##    year sa3_name                 state gender  income workers
+##   <dbl> <chr>                    <chr> <chr>    <dbl>   <dbl>
+## 1  2013 Molonglo                 ACT   Men     92947.     227
+## 2  2016 North Sydney - Mosman    NSW   Men     90668.   74702
+## 3  2016 Christmas Island         NT    Men     84474.     621
+## 4  2015 Gladstone                Qld   Men     97282.   48026
+## 5  2015 Outback - North and East SA    Men     71791.   15849
+## 6  2016 West Coast               Tas   Men     58116.   11117
+## 7  2016 Bayside                  Vic   Men     78624.   64541
+## 8  2015 West Pilbara             WA    Men    107844.   22928
+\end{verbatim}
+
+From the description of the tibble above, you can learn that your data has 8 unique groups of state:
+
+\texttt{\#\#\ \#\ Groups:\ \ \ \ \ \ \ state\ {[}8{]}}
+
+Or you could keep the observations with the \emph{lowest} average incomes in \emph{each state and year}:\footnote{Wow they are all women!}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 48 x 6
+## # Groups:   state, year [48]
+##     year sa3_name                state gender income workers
+##    <dbl> <chr>                   <chr> <chr>   <dbl>   <dbl>
+##  1  2014 Cocos (Keeling) Islands NT    Men    32652.      45
+##  2  2011 Belconnen               ACT   Women  43235    22708
+##  3  2014 Belconnen               ACT   Women  48399.   22750
+##  4  2015 Belconnen               ACT   Women  48814.   20577
+##  5  2016 Belconnen               ACT   Women  50756.   22982
+##  6  2012 Gungahlin               ACT   Women  45241    13647
+##  7  2013 North Canberra          ACT   Women  45844.   11965
+##  8  2012 Great Lakes             NSW   Women  32590     4730
+##  9  2015 Lord Howe Island        NSW   Women  34173.      75
+## 10  2011 Lower Murray            NSW   Women  30800.    2122
+## # ... with 38 more rows
+\end{verbatim}
+
+The dataset remains grouped after your function(s). To explicitly `ungroup' your data, add the \texttt{ungroup} function to your chain (the `Groups' note has disappeared in the below):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(income)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 48 x 6
+##     year sa3_name                state gender income workers
+##    <dbl> <chr>                   <chr> <chr>   <dbl>   <dbl>
+##  1  2014 Cocos (Keeling) Islands NT    Men    32652.      45
+##  2  2011 Belconnen               ACT   Women  43235    22708
+##  3  2014 Belconnen               ACT   Women  48399.   22750
+##  4  2015 Belconnen               ACT   Women  48814.   20577
+##  5  2016 Belconnen               ACT   Women  50756.   22982
+##  6  2012 Gungahlin               ACT   Women  45241    13647
+##  7  2013 North Canberra          ACT   Women  45844.   11965
+##  8  2012 Great Lakes             NSW   Women  32590     4730
+##  9  2015 Lord Howe Island        NSW   Women  34173.      75
+## 10  2011 Lower Murray            NSW   Women  30800.    2122
+## # ... with 38 more rows
+\end{verbatim}
 
 \hypertarget{edit-and-add-new-variables-with-mutate}{%
 \section{\texorpdfstring{Edit and add new variables with \texttt{mutate()}}{Edit and add new variables with mutate()}}\label{edit-and-add-new-variables-with-mutate}}
 
-\hypertarget{cases-when-you-should-use-case_when}{%
-\subsection{\texorpdfstring{Cases when you should use \texttt{case\_when()}}{Cases when you should use case\_when()}}\label{cases-when-you-should-use-case_when}}
+To add new variables to your dataset, use the \texttt{mutate} function. Like all \texttt{dplyr} verbs, the first argument to \texttt{mutate} is your data. Then define variables using a \texttt{new\_variable\_name\ =\ x} format, where \texttt{x} can be a single number or character string, or simple operation or function using current variables.
+
+To add a new variable to the \texttt{sa3\_income} dataset that shows the log the number of workers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{log_workers =} \KeywordTok{log}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers log_workers
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>       <dbl>
+##  1  2011 Belconnen     ACT   Men    54105.   67774       11.1 
+##  2  2012 Belconnen     ACT   Men    56724.   69435       11.1 
+##  3  2013 Belconnen     ACT   Men    58918.   69697       11.2 
+##  4  2014 Belconnen     ACT   Men    60525.   68613       11.1 
+##  5  2015 Belconnen     ACT   Men    60964.   63428       11.1 
+##  6  2016 Belconnen     ACT   Men    63389.   69828       11.2 
+##  7  2011 Canberra East ACT   Men    53139.     666        6.50
+##  8  2012 Canberra East ACT   Men    54515.     647        6.47
+##  9  2013 Canberra East ACT   Men    58132.     641        6.46
+## 10  2014 Canberra East ACT   Men    56247.     561        6.33
+## # ... with 4,009 more rows
+\end{verbatim}
+
+To edit a variable, redefine it in \texttt{mutate}. For example, if you wanted to take the last two digits of year:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{as.integer}\NormalTok{(year }\OperatorTok{-}\StringTok{ }\DecValTok{2000}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 6
+##     year sa3_name      state gender income workers
+##    <int> <chr>         <chr> <chr>   <dbl>   <dbl>
+##  1    11 Belconnen     ACT   Men    54105.   67774
+##  2    12 Belconnen     ACT   Men    56724.   69435
+##  3    13 Belconnen     ACT   Men    58918.   69697
+##  4    14 Belconnen     ACT   Men    60525.   68613
+##  5    15 Belconnen     ACT   Men    60964.   63428
+##  6    16 Belconnen     ACT   Men    63389.   69828
+##  7    11 Canberra East ACT   Men    53139.     666
+##  8    12 Canberra East ACT   Men    54515.     647
+##  9    13 Canberra East ACT   Men    58132.     641
+## 10    14 Canberra East ACT   Men    56247.     561
+## # ... with 4,009 more rows
+\end{verbatim}
+
+\hypertarget{using-if_else-or-case_when}{%
+\subsection{\texorpdfstring{Using \texttt{if\_else()} or \texttt{case\_when()}}{Using if\_else() or case\_when()}}\label{using-if_else-or-case_when}}
+
+Sometimes you want to create a new variable based on some sort of condition. Like, if the number of workers in an \texttt{sa3} is more than \texttt{2,000}, set the new \texttt{many\_workers} variable to \texttt{TRUE}, and set it to \texttt{FALSE} otherwise.
+
+This kind of operation can be thought of as \texttt{if\_else}: \texttt{if} (some condition), do this, otherwise do that.
+
+That's what the \texttt{if\_else()} function does. It takes three arguments: a condition, a value if that condition is true, and a value if that condition is false.
+
+You can use the \texttt{if\_else()} function when you are creating new variables in a \texttt{mutate} command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{many_workers =} \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"Many workers"}\NormalTok{, }\StringTok{"Not many workers"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers many_workers    
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>           
+##  1  2011 Belconnen     ACT   Men    54105.   67774 Many workers    
+##  2  2012 Belconnen     ACT   Men    56724.   69435 Many workers    
+##  3  2013 Belconnen     ACT   Men    58918.   69697 Many workers    
+##  4  2014 Belconnen     ACT   Men    60525.   68613 Many workers    
+##  5  2015 Belconnen     ACT   Men    60964.   63428 Many workers    
+##  6  2016 Belconnen     ACT   Men    63389.   69828 Many workers    
+##  7  2011 Canberra East ACT   Men    53139.     666 Not many workers
+##  8  2012 Canberra East ACT   Men    54515.     647 Not many workers
+##  9  2013 Canberra East ACT   Men    58132.     641 Not many workers
+## 10  2014 Canberra East ACT   Men    56247.     561 Not many workers
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Which reads:
+
+\begin{quote}
+Take the \texttt{sa3\_income} dataset, and then add a variable that says `Many workers' if there are more than 2,000 workers, and `Not many workers' if there are fewer-or-equal than 2,000 workers.
+\end{quote}
+
+With the \texttt{if\_else} function, you take one conditional statement and return something based on that. But \textbf{often} you don't want to be so binary; you want to do this if this is true, that if that is true, and the other if the other is true, etc.
+
+This could be done by nesting \texttt{if\_else} statements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"More than 2000 workers"}\NormalTok{, }
+                                \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{1000}\NormalTok{, }\StringTok{"1000-2000 workers"}\NormalTok{,}
+                                        \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{500}\NormalTok{, }\StringTok{"500-1000 workers"}\NormalTok{,}
+                                                \StringTok{"500 workers or less"}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers worker_group          
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                 
+##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 2000 workers
+##  2  2012 Belconnen     ACT   Men    56724.   69435 More than 2000 workers
+##  3  2013 Belconnen     ACT   Men    58918.   69697 More than 2000 workers
+##  4  2014 Belconnen     ACT   Men    60525.   68613 More than 2000 workers
+##  5  2015 Belconnen     ACT   Men    60964.   63428 More than 2000 workers
+##  6  2016 Belconnen     ACT   Men    63389.   69828 More than 2000 workers
+##  7  2011 Canberra East ACT   Men    53139.     666 500-1000 workers      
+##  8  2012 Canberra East ACT   Men    54515.     647 500-1000 workers      
+##  9  2013 Canberra East ACT   Men    58132.     641 500-1000 workers      
+## 10  2014 Canberra East ACT   Men    56247.     561 500-1000 workers      
+## # ... with 4,009 more rows
+\end{verbatim}
+
+But that syntax can be a bit difficult to read. You can do this in a clearer way using \texttt{case\_when}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{<=}\StringTok{ }\DecValTok{5000} \OperatorTok{~}\StringTok{ "5,000 or fewer workers"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers worker_group            
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                   
+##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 20,000 workers
+##  2  2012 Belconnen     ACT   Men    56724.   69435 More than 20,000 workers
+##  3  2013 Belconnen     ACT   Men    58918.   69697 More than 20,000 workers
+##  4  2014 Belconnen     ACT   Men    60525.   68613 More than 20,000 workers
+##  5  2015 Belconnen     ACT   Men    60964.   63428 More than 20,000 workers
+##  6  2016 Belconnen     ACT   Men    63389.   69828 More than 20,000 workers
+##  7  2011 Canberra East ACT   Men    53139.     666 5,000 or fewer workers  
+##  8  2012 Canberra East ACT   Men    54515.     647 5,000 or fewer workers  
+##  9  2013 Canberra East ACT   Men    58132.     641 5,000 or fewer workers  
+## 10  2014 Canberra East ACT   Men    56247.     561 5,000 or fewer workers  
+## # ... with 4,009 more rows
+\end{verbatim}
+
+The \texttt{case\_when} function takes the first condition (LHS) and applies some value (RHS) if it is true. It then moves to the next condition, and so on. Once an observation has been classified -- eg an observation has more than 20,000 workers -- it is ignored in proceeding conditions.
+
+Ending a \texttt{case\_when} statement with \texttt{TRUE\ \textasciitilde{}\ {[}some\ value{]}} is a catch all, and will apply the RHS \texttt{{[}some\ value{]}} to any observations that did not meet an explicit condition. For example, you could end the worker classification with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
+    \OtherTok{TRUE} \OperatorTok{~}\StringTok{ "5,000 or fewer workers"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers worker_group            
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                   
+##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 20,000 workers
+##  2  2012 Belconnen     ACT   Men    56724.   69435 More than 20,000 workers
+##  3  2013 Belconnen     ACT   Men    58918.   69697 More than 20,000 workers
+##  4  2014 Belconnen     ACT   Men    60525.   68613 More than 20,000 workers
+##  5  2015 Belconnen     ACT   Men    60964.   63428 More than 20,000 workers
+##  6  2016 Belconnen     ACT   Men    63389.   69828 More than 20,000 workers
+##  7  2011 Canberra East ACT   Men    53139.     666 5,000 or fewer workers  
+##  8  2012 Canberra East ACT   Men    54515.     647 5,000 or fewer workers  
+##  9  2013 Canberra East ACT   Men    58132.     641 5,000 or fewer workers  
+## 10  2014 Canberra East ACT   Men    56247.     561 5,000 or fewer workers  
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Meaning, for any observation that did not have workers more than 20,000 or more than 10,000 or more than 5,000, assign the value \texttt{"5,000\ or\ fewer\ workers"}.
+
+Observations that do not meet a condition will be set to \texttt{NA}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\FloatTok{10e6} \OperatorTok{~}\StringTok{ "More than 10 million workers"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers worker_group
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>       
+##  1  2011 Belconnen     ACT   Men    54105.   67774 <NA>        
+##  2  2012 Belconnen     ACT   Men    56724.   69435 <NA>        
+##  3  2013 Belconnen     ACT   Men    58918.   69697 <NA>        
+##  4  2014 Belconnen     ACT   Men    60525.   68613 <NA>        
+##  5  2015 Belconnen     ACT   Men    60964.   63428 <NA>        
+##  6  2016 Belconnen     ACT   Men    63389.   69828 <NA>        
+##  7  2011 Canberra East ACT   Men    53139.     666 <NA>        
+##  8  2012 Canberra East ACT   Men    54515.     647 <NA>        
+##  9  2013 Canberra East ACT   Men    58132.     641 <NA>        
+## 10  2014 Canberra East ACT   Men    56247.     561 <NA>        
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Like any \texttt{if} or \texttt{if\_else}, you can provide more than one condition to your conditional statement:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{women_group =} \KeywordTok{case_when}\NormalTok{(}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"}                  \OperatorTok{~}\StringTok{ "5,000 or fewer women"}\NormalTok{,}
+    \OtherTok{TRUE} \OperatorTok{~}\StringTok{ "Men"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers women_group
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>      
+##  1  2011 Belconnen     ACT   Men    54105.   67774 Men        
+##  2  2012 Belconnen     ACT   Men    56724.   69435 Men        
+##  3  2013 Belconnen     ACT   Men    58918.   69697 Men        
+##  4  2014 Belconnen     ACT   Men    60525.   68613 Men        
+##  5  2015 Belconnen     ACT   Men    60964.   63428 Men        
+##  6  2016 Belconnen     ACT   Men    63389.   69828 Men        
+##  7  2011 Canberra East ACT   Men    53139.     666 Men        
+##  8  2012 Canberra East ACT   Men    54515.     647 Men        
+##  9  2013 Canberra East ACT   Men    58132.     641 Men        
+## 10  2014 Canberra East ACT   Men    56247.     561 Men        
+## # ... with 4,009 more rows
+\end{verbatim}
+
+\hypertarget{grouped-mutates-with-group_by}{%
+\subsection{\texorpdfstring{Grouped mutates with \texttt{group\_by()}}{Grouped mutates with group\_by()}}\label{grouped-mutates-with-group_by}}
+
+Like filtering, you can add or edit variables on grouped data. For example, you could get the average number of workers in each SA3 over the 6 years:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+## # Groups:   sa3_name, gender [672]
+##     year sa3_name      state gender income workers av_workers
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>
+##  1  2011 Belconnen     ACT   Men    54105.   67774     68129.
+##  2  2012 Belconnen     ACT   Men    56724.   69435     68129.
+##  3  2013 Belconnen     ACT   Men    58918.   69697     68129.
+##  4  2014 Belconnen     ACT   Men    60525.   68613     68129.
+##  5  2015 Belconnen     ACT   Men    60964.   63428     68129.
+##  6  2016 Belconnen     ACT   Men    63389.   69828     68129.
+##  7  2011 Canberra East ACT   Men    53139.     666       641.
+##  8  2012 Canberra East ACT   Men    54515.     647       641.
+##  9  2013 Canberra East ACT   Men    58132.     641       641.
+## 10  2014 Canberra East ACT   Men    56247.     561       641.
+## # ... with 4,009 more rows
+\end{verbatim}
+
+Above, the \texttt{mean()} function is applied separately to each unique group of \texttt{sa3\_name} and \texttt{gender}, taking one average for women in Queanbeyan, one average for men in Queanbeyan, and so on.
+
+Grouping a dataset does not prohibit operations that don't utilise the grouping. For example, you could get each year's workers relative to the SA3/gender average in the same call to \texttt{mutate}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers),}
+         \DataTypeTok{worker_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av_workers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 8
+## # Groups:   sa3_name, gender [672]
+##     year sa3_name      state gender income workers av_workers worker_diff
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>       <dbl>
+##  1  2011 Belconnen     ACT   Men    54105.   67774     68129.       0.995
+##  2  2012 Belconnen     ACT   Men    56724.   69435     68129.       1.02 
+##  3  2013 Belconnen     ACT   Men    58918.   69697     68129.       1.02 
+##  4  2014 Belconnen     ACT   Men    60525.   68613     68129.       1.01 
+##  5  2015 Belconnen     ACT   Men    60964.   63428     68129.       0.931
+##  6  2016 Belconnen     ACT   Men    63389.   69828     68129.       1.02 
+##  7  2011 Canberra East ACT   Men    53139.     666       641.       1.04 
+##  8  2012 Canberra East ACT   Men    54515.     647       641.       1.01 
+##  9  2013 Canberra East ACT   Men    58132.     641       641.       1.00 
+## 10  2014 Canberra East ACT   Men    56247.     561       641.       0.875
+## # ... with 4,009 more rows
+\end{verbatim}
+
+See that the data remains grouped after the \texttt{mutate}. You can explicitly \texttt{ungroup()} afterwards:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers),}
+         \DataTypeTok{worker_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av_workers) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 8
+##     year sa3_name      state gender income workers av_workers worker_diff
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>       <dbl>
+##  1  2011 Belconnen     ACT   Men    54105.   67774     68129.       0.995
+##  2  2012 Belconnen     ACT   Men    56724.   69435     68129.       1.02 
+##  3  2013 Belconnen     ACT   Men    58918.   69697     68129.       1.02 
+##  4  2014 Belconnen     ACT   Men    60525.   68613     68129.       1.01 
+##  5  2015 Belconnen     ACT   Men    60964.   63428     68129.       0.931
+##  6  2016 Belconnen     ACT   Men    63389.   69828     68129.       1.02 
+##  7  2011 Canberra East ACT   Men    53139.     666       641.       1.04 
+##  8  2012 Canberra East ACT   Men    54515.     647       641.       1.01 
+##  9  2013 Canberra East ACT   Men    58132.     641       641.       1.00 
+## 10  2014 Canberra East ACT   Men    56247.     561       641.       0.875
+## # ... with 4,009 more rows
+\end{verbatim}
 
 \hypertarget{summarise-data-with-summarise}{%
 \section{\texorpdfstring{Summarise data with \texttt{summarise()}}{Summarise data with summarise()}}\label{summarise-data-with-summarise}}
 
-\hypertarget{joining-datasets-with-_join}{%
-\section{\texorpdfstring{Joining datasets with \texttt{*\_join()}}{Joining datasets with *\_join()}}\label{joining-datasets-with-_join}}
+Summarising is a useful way to assess and present data. The \texttt{summarise} function collapses your data down into a single row, performing the operation(s) you provide:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income),}
+            \DataTypeTok{total_workers =} \KeywordTok{sum}\NormalTok{(workers))  }\CommentTok{# this is a silly statistic}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   mean_income total_workers
+##         <dbl>         <dbl>
+## 1      50272.     117002608
+\end{verbatim}
+
+Summarising is usually only useful when combined with \texttt{group\_by}.
+
+\hypertarget{grouped-summaries-with-group_by}{%
+\subsection{\texorpdfstring{Grouped summaries with \texttt{group\_by()}}{Grouped summaries with group\_by()}}\label{grouped-summaries-with-group_by}}
+
+Grouped summaries can help change the \emph{detail} of your data. In the original \texttt{sa3\_income} data, there is a unique \texttt{workers} observation for each year, SA3 and gender. If you wanted to aggregate that information up see the total number of workers for each year and SA3:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, sa3_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,010 x 3
+## # Groups:   year [6]
+##     year sa3_name                             workers
+##    <dbl> <chr>                                  <dbl>
+##  1  2011 Adelaide City                          18048
+##  2  2011 Adelaide Hills                         59794
+##  3  2011 Albany                                 43811
+##  4  2011 Albury                                 50490
+##  5  2011 Alice Springs                          31563
+##  6  2011 Armadale                               56088
+##  7  2011 Armidale                               27957
+##  8  2011 Auburn                                 57298
+##  9  2011 Augusta - Margaret River - Busselton   35852
+## 10  2011 Bald Hills - Everton Park              36273
+## # ... with 2,000 more rows
+\end{verbatim}
+
+After the \texttt{summarise} function, the dataset grouping remains but is reduced by one -- so the right-hand-side grouping is lost. This enables a common combination to find a proportion of a group. For example, if you
+
+\textbf{Common functions to use with summarise}
+
+Grouped summaries generate summary statistics for grouped data. It uses the same \texttt{summarise} function, but is preceded with a \texttt{group\_by}. For example, if you want to find the average income for women and men:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender mean_income
+##   <chr>        <dbl>
+## 1 Men         58780.
+## 2 Women       41760.
+\end{verbatim}
+
+Or the total workers in each year and state by gender:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 96 x 4
+## # Groups:   year, state [48]
+##     year state gender workers
+##    <dbl> <chr> <chr>    <dbl>
+##  1  2011 ACT   Men     265281
+##  2  2011 ACT   Women    88632
+##  3  2011 NSW   Men    4438272
+##  4  2011 NSW   Women  1415914
+##  5  2011 NT    Men     140946
+##  6  2011 NT    Women    44413
+##  7  2011 Qld   Men    2859150
+##  8  2011 Qld   Women   918841
+##  9  2011 SA    Men     997160
+## 10  2011 SA    Women   325980
+## # ... with 86 more rows
+\end{verbatim}
+
+\hypertarget{arrange-with-arrange}{%
+\section{\texorpdfstring{Arrange with \texttt{arrange()}}{Arrange with arrange()}}\label{arrange-with-arrange}}
+
+`doesn't add or subtract to your data'
+
+Sorting data in one way or another can be useful. Use the \texttt{arrange} function to sort data by the provided variable(s). Like with \texttt{select}, you can use the minus sign \texttt{-} to reverse the order.
+
+For example, to find the areas in 2016 with the \textbf{least} workers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(workers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 670 x 6
+##     year sa3_name                  state gender income workers
+##    <dbl> <chr>                     <chr> <chr>   <dbl>   <dbl>
+##  1  2016 Lord Howe Island          NSW   Women  37944       74
+##  2  2016 Urriarra - Namadgi        ACT   Women  86672.      90
+##  3  2016 Christmas Island          NT    Women  57640      141
+##  4  2016 Canberra East             ACT   Women  52091.     182
+##  5  2016 Lord Howe Island          NSW   Men    40292      255
+##  6  2016 Urriarra - Namadgi        ACT   Men    86747.     296
+##  7  2016 Christmas Island          NT    Men    84474.     621
+##  8  2016 Barkly                    NT    Women  52552.     704
+##  9  2016 Canberra East             ACT   Men    58035.     711
+## 10  2016 Daly - Tiwi - West Arnhem NT    Women  50096.    1075
+## # ... with 660 more rows
+\end{verbatim}
+
+You can provide more than one variable. To sort the data first by \texttt{state} and, within each state, by the most workers (ie sorting by negative workers):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(state, }\OperatorTok{-}\NormalTok{workers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 670 x 6
+##     year sa3_name       state gender income workers
+##    <dbl> <chr>          <chr> <chr>   <dbl>   <dbl>
+##  1  2016 Belconnen      ACT   Men    63389.   69828
+##  2  2016 Tuggeranong    ACT   Men    66921.   65248
+##  3  2016 Gungahlin      ACT   Men    66714.   55176
+##  4  2016 North Canberra ACT   Men    62258.   37481
+##  5  2016 Woden Valley   ACT   Men    66853.   24690
+##  6  2016 Belconnen      ACT   Women  50756.   22982
+##  7  2016 Tuggeranong    ACT   Women  52058.   21949
+##  8  2016 South Canberra ACT   Men    72437.   20998
+##  9  2016 Gungahlin      ACT   Women  50908.   18134
+## 10  2016 Weston Creek   ACT   Men    67242.   15500
+## # ... with 660 more rows
+\end{verbatim}
+
+\hypertarget{lead-and-lag-functions-with-arrange}{%
+\subsection{\texorpdfstring{\texttt{lead} and \texttt{lag} functions with \texttt{arrange}}{lead and lag functions with arrange}}\label{lead-and-lag-functions-with-arrange}}
+
+Having your data arranged in the way you want lets you use the \texttt{lead} (looking forward) and \texttt{lag} (looking backward) functions.
+
+Both the \texttt{lead} and \texttt{lag} functions take a variable as their only requried argument. The default number of lags or leads is \texttt{1}, and this can be changed with the second argument. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{last_workers =} \KeywordTok{lag}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+##     year sa3_name      state gender income workers last_workers
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>        <dbl>
+##  1  2011 Belconnen     ACT   Men    54105.   67774           NA
+##  2  2012 Belconnen     ACT   Men    56724.   69435        67774
+##  3  2013 Belconnen     ACT   Men    58918.   69697        69435
+##  4  2014 Belconnen     ACT   Men    60525.   68613        69697
+##  5  2015 Belconnen     ACT   Men    60964.   63428        68613
+##  6  2016 Belconnen     ACT   Men    63389.   69828        63428
+##  7  2011 Canberra East ACT   Men    53139.     666        69828
+##  8  2012 Canberra East ACT   Men    54515.     647          666
+##  9  2013 Canberra East ACT   Men    58132.     641          647
+## 10  2014 Canberra East ACT   Men    56247.     561          641
+## # ... with 4,009 more rows
+\end{verbatim}
+
+If you wanted to see the growth rate of income over time, you could \texttt{arrange} then \texttt{group\_by} your data before creating an \texttt{income\_growth} variable that is \texttt{income\ /\ lag(income)}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(sa3_name, gender, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{income_growth =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(income) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,019 x 7
+## # Groups:   sa3_name, gender [672]
+##     year sa3_name      state gender income workers income_growth
+##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>         <dbl>
+##  1  2011 Adelaide City SA    Men    48760.   13737       NA     
+##  2  2012 Adelaide City SA    Men    49974.   13730        0.0249
+##  3  2013 Adelaide City SA    Men    52975.   13955        0.0601
+##  4  2014 Adelaide City SA    Men    54818.   13782        0.0348
+##  5  2015 Adelaide City SA    Men    54185.   13930       -0.0115
+##  6  2016 Adelaide City SA    Men    56689.   15300        0.0462
+##  7  2011 Adelaide City SA    Women  38359.    4311       NA     
+##  8  2012 Adelaide City SA    Women  40409.    4219        0.0534
+##  9  2013 Adelaide City SA    Women  41287.    4281        0.0217
+## 10  2014 Adelaide City SA    Women  42872     4200        0.0384
+## # ... with 4,009 more rows
+\end{verbatim}
+
+\hypertarget{putting-it-all-together}{%
+\section{Putting it all together}\label{putting-it-all-together}}
+
+You will often use a combination of the above \texttt{dplyr} functions to get your data into shape.
+
+For example, say you want to get the total workers and total income in each state and year by gender. You could start with the \texttt{sa3\_income} dataset, and then filter to year 2016, then create a new variable equal to \texttt{workers\ *\ income}, then group by year, state and gender before you summarise to get the statistics you want. With pipes, it could look something like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total_income =}\NormalTok{ workers }\OperatorTok{*}\StringTok{ }\NormalTok{income) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state, gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{total_workers =} \KeywordTok{sum}\NormalTok{(workers),}
+            \DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income),}
+            \DataTypeTok{total_income =} \KeywordTok{sum}\NormalTok{(total_income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 6
+## # Groups:   year, state [8]
+##     year state gender total_workers mean_income  total_income
+##    <dbl> <chr> <chr>          <dbl>       <dbl>         <dbl>
+##  1  2016 ACT   Men           293558      67901.  19336462167.
+##  2  2016 ACT   Women          97565      58222.   5180698359.
+##  3  2016 NSW   Men          4952353      62207. 314145522637 
+##  4  2016 NSW   Women        1575308      45003.  72633515399.
+##  5  2016 NT    Men           157954      70961.  11488404531.
+##  6  2016 NT    Women          48107      54143.   2607187917.
+##  7  2016 Qld   Men          3110067      61794. 194644704512.
+##  8  2016 Qld   Women         994436      44251.  44474845486.
+##  9  2016 SA    Men          1041747      58602.  60710695691.
+## 10  2016 SA    Women         340699      43034.  14705553952 
+## 11  2016 Tas   Men           316727      54427.  17485898880.
+## 12  2016 Tas   Women         104040      40685.   4305640148.
+## 13  2016 Vic   Men          3926751      59814. 236830412049.
+## 14  2016 Vic   Women        1264225      42816.  55273320473.
+## 15  2016 WA    Men          1756314      72582. 127679046129.
+## 16  2016 WA    Women         540767      48537.  26179412110.
+\end{verbatim}
+
+Or say you want to see the annual growth rate of female workers in the SA3 with the highest female income. You could filter to keep women, and then group by SA3, then get the highest income for each of SA3, then ungroup and filter to keep only the SA3 with the highest income, then arrange by year and get the annual worker growth:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Women"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{highest_income =} \KeywordTok{max}\NormalTok{(income)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(highest_income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(highest_income)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_growth =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(workers) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 8
+##    year sa3_name        state gender income workers highest_income worker_growth
+##   <dbl> <chr>           <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
+## 1  2011 Urriarra - Nam~ ACT   Women  48525.      84         86672.        NA    
+## 2  2012 Urriarra - Nam~ ACT   Women  51648.      96         86672.         0.143
+## 3  2013 Urriarra - Nam~ ACT   Women  61858.     124         86672.         0.292
+## 4  2014 Urriarra - Nam~ ACT   Women  72980.      99         86672.        -0.202
+## 5  2015 Urriarra - Nam~ ACT   Women  68534.      72         86672.        -0.273
+## 6  2016 Urriarra - Nam~ ACT   Women  86672.      90         86672.         0.25
+\end{verbatim}
+
+\hypertarget{joining-datasets-with-left_join}{%
+\section{\texorpdfstring{Joining datasets with \texttt{left\_join()}}{Joining datasets with left\_join()}}\label{joining-datasets-with-left_join}}
+
+Joining one dataset with another is incredibly useful and can be a difficult concept to grasp. The concept of joining one dataset to another is well introduced in \href{https://r4ds.had.co.nz/relational-data.html}{Chapter 13 of R for Data Science}:
+
+\begin{quote}
+It's rare that a data analysis involves only a single table of data. Typically you have many tables of data, and you must combine them to answer the questions that you're interested in. Collectively, multiple tables of data are called \textbf{relational data} because it is the relations, not just the individual datasets, that are important.
+\end{quote}
+
+The \texttt{dplyr} package \href{https://dplyr.tidyverse.org/reference/join.html}{`Join two tbls together'} page provides a comprehensive summary of all join types. We will explore the key use of joins in our line of work -- \texttt{left\_join} -- below.
+
+A `left' join takes your main dataset, and adds variables from a new dataset based on a matching condition \textbf{that's unhelpful, fix}. If an observation in the new dataset is not found in the main dataset, it is ignored.
+
+It is probably easier to show this with an example. Say that we had the income percentiles of each SA3 in each year from a different data source:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3_percentiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_percentiles.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   sa3_name = col_character(),
+##   year = col_double(),
+##   sa3_income_percentile = col_double()
+## )
+\end{verbatim}
 
 \hypertarget{analysis}{%
 \chapter{Analysis}\label{analysis}}
@@ -1384,9 +2680,8 @@ For most charts in this chapter, we'll use the \texttt{sa3\_income} data summari
 ## 4 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
 ## 5 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
 ## 6 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
-## # ... with 6 more variables: gender <chr>, year <dbl>,
-## #   median_income <dbl>, average_income <dbl>, total_income <dbl>,
-## #   workers <dbl>
+## # ... with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## #   average_income <dbl>, total_income <dbl>, workers <dbl>
 \end{verbatim}
 
 \hypertarget{concepts}{%
@@ -1404,7 +2699,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g.~\texttt{data}
+    e.g. \texttt{data}
   \end{itemize}
 \item
   \textbf{Aesthetics}: what variables should be linked to what chart elements.
@@ -1412,7 +2707,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+    e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
   \end{itemize}
 \item
   \textbf{Geoms}: how the data should be plotted.
@@ -1420,7 +2715,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
+    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
   \end{itemize}
 \end{itemize}
 
@@ -1735,9 +3030,8 @@ To do this, we can create a new dataset that just contains one observation each.
 ##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
 ## 1 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
 ## 2 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
-## # ... with 6 more variables: gender <chr>, year <dbl>,
-## #   median_income <dbl>, average_income <dbl>, total_income <dbl>,
-## #   workers <dbl>
+## # ... with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## #   average_income <dbl>, total_income <dbl>, workers <dbl>
 \end{verbatim}
 
 And then tell \texttt{geom\_text} to look at \emph{that} dataset:
@@ -1821,8 +3115,8 @@ To have more freedom over \emph{where} your labels are placed, you can create a 
 
 This section takes you through a few often-used chart types.
 
-\hypertarget{set-up}{%
-\section{Set up}\label{set-up}}
+\hypertarget{set-up-1}{%
+\section{Set up}\label{set-up-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1906,17 +3200,17 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 
 \begin{verbatim}
 ## # A tibble: 6 x 16
-##     sa3 sa3_name sa3_sqkm sa3_income_perc~ sa4_name gcc_name state
-##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr>
-## 1 10102 Queanbe~    6511.               80 Capital~ Rest of~ NSW  
-## 2 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW  
-## 3 10102 Queanbe~    6511.               78 Capital~ Rest of~ NSW  
-## 4 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW  
-## 5 10102 Queanbe~    6511.               74 Capital~ Rest of~ NSW  
-## 6 10102 Queanbe~    6511.               79 Capital~ Rest of~ NSW  
-## # ... with 9 more variables: occupation <chr>, occ_short <chr>,
-## #   prof <chr>, gender <chr>, year <dbl>, median_income <dbl>,
-## #   average_income <dbl>, total_income <dbl>, workers <dbl>
+##     sa3 sa3_name sa3_sqkm sa3_income_perc~ sa4_name gcc_name state occupation
+##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr> <chr>     
+## 1 10102 Queanbe~    6511.               80 Capital~ Rest of~ NSW   Clerical ~
+## 2 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW   Clerical ~
+## 3 10102 Queanbe~    6511.               78 Capital~ Rest of~ NSW   Clerical ~
+## 4 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW   Clerical ~
+## 5 10102 Queanbe~    6511.               74 Capital~ Rest of~ NSW   Clerical ~
+## 6 10102 Queanbe~    6511.               79 Capital~ Rest of~ NSW   Clerical ~
+## # ... with 8 more variables: occ_short <chr>, prof <chr>, gender <chr>,
+## #   year <dbl>, median_income <dbl>, average_income <dbl>, total_income <dbl>,
+## #   workers <dbl>
 \end{verbatim}
 
 \hypertarget{bar-charts}{%
@@ -1996,7 +3290,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks brill: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks on fleek: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -2062,7 +3356,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks marvellous! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks worthy! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2113,7 +3407,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks superlative: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks smashing: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -2287,7 +3581,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks pre-eminent! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks too good to be true! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2434,7 +3728,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Mind-blowing! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Swell! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2720,7 +4014,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks very good. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks fab. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2925,14 +4219,14 @@ Get the data you want to plot:
 \begin{verbatim}
 ## # A tibble: 6 x 7
 ## # Groups:   sa3_name, sa3_income_percentile, prof [1]
-##   sa3_name  sa3_income_perce~ prof  occ_short income workers average_income
-##   <chr>                 <dbl> <chr> <chr>      <dbl>   <dbl>          <dbl>
-## 1 Adelaide~                66 Non-~ Admin     1.44e8    2674         53979.
-## 2 Adelaide~                66 Non-~ Driver    1.85e7     396         46762.
-## 3 Adelaide~                66 Non-~ Labourer  3.92e7    1516         25868.
-## 4 Adelaide~                66 Non-~ Sales     5.05e7    1546         32680.
-## 5 Adelaide~                66 Non-~ Service   7.75e7    2346         33034.
-## 6 Adelaide~                66 Non-~ Trades    7.85e7    1525         51448.
+##   sa3_name   sa3_income_percen~ prof     occ_short income workers average_income
+##   <chr>                   <dbl> <chr>    <chr>      <dbl>   <dbl>          <dbl>
+## 1 Adelaide ~                 66 Non-pro~ Admin     1.44e8    2674         53979.
+## 2 Adelaide ~                 66 Non-pro~ Driver    1.85e7     396         46762.
+## 3 Adelaide ~                 66 Non-pro~ Labourer  3.92e7    1516         25868.
+## 4 Adelaide ~                 66 Non-pro~ Sales     5.05e7    1546         32680.
+## 5 Adelaide ~                 66 Non-pro~ Service   7.75e7    2346         33034.
+## 6 Adelaide ~                 66 Non-pro~ Trades    7.85e7    1525         51448.
 \end{verbatim}
 
 To make a scatter plot with \texttt{average\_income} against \texttt{sa3\_income\_percentile}, pass the \texttt{income} dataset to \texttt{ggplot}, add \texttt{x\ =\ sa3\_income\_percentile}, \texttt{y\ =\ average\_income} and \texttt{colour\ =\ gender} aesthetics, then plot it with \texttt{geom\_point}. Tell \texttt{geom\_point} to reduce the opacity with \texttt{alpha\ =\ 0.2}, as these individual points are more of the `background' to the plot:
@@ -2982,7 +4276,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks very good! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks on fleek! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3193,18 +4487,18 @@ Now you can view \texttt{sf} objects stored in \texttt{absmapsdata}:
 \begin{verbatim}
 ## Observations: 358
 ## Variables: 12
-## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "...
-## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast"...
-## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102...
-## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital R...
-## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "...
-## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "...
-## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "...
-## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New Sou...
-## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 1...
-## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.67...
-## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -3...
-## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., M...
+## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201...
+## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Go...
+## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "1...
+## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Region...
+## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1GSYD...
+## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Rest ...
+## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "...
+## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South Wa...
+## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136....
+## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 1...
+## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.580...
+## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MULTIP...
 \end{verbatim}
 
 \hypertarget{making-choropleth-maps}{%
@@ -3319,6 +4613,5 @@ We use Github to version-control and share reports in LaTeX, so you're already a
 Using Git within R Studio\ldots{}
 
 \bibliography{book.bib,packages.bib}
-
 
 \end{document}
