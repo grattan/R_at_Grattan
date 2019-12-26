@@ -185,3 +185,21 @@ remotes::install_github("wfmackey/absmapsdata",
 
 ```
 
+## Upgrading packages
+
+It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
+
+```{r eval = FALSE}
+devtools::update_packages()
+```
+
+This will upgrade all your packages - including those you've installed from CRAN and Github. 
+
+Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out ('deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the `install_version()` function, like this:
+
+```{r eval = FALSE}
+devtools::install_version("devtools", "1.13.3")
+```
+
+
+

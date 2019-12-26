@@ -84,7 +84,26 @@ Here's a useful structure:
 - 03_model.R
 - 04_visualise.R
 
-It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more [elsewhere in this guide](#use-comments)).
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more [elsewhere in this guide](#use-comments)). At the end of each script, you can save the script's output, and then load the file you create in the next script.
+
+## Make your filenames readable by both machines and humans
+
+Have another look at the example filenames set out above:
+
+- 01_import.R
+- 02_tidy.R
+- 03_model.R
+- 04_visualise.R
+
+They're sortable - they start with a number. They don't have spaces, so any and all software should be able to handle them. And, even though they're short and minimal, they give humans a good idea about what the files do. These are what you should strive for when choosing filenames.
+
+For more on good principles for naming files, see [this excellent presentation by Jenny Bryan](https://speakerdeck.com/jennybc/how-to-name-files), which includes the following examples:
+
+<img src="atlas/jenny_bryan_filenames.png" width="66%" style="display: block; margin: auto;" />
+
+**Don't** create multiple versions of the same script (like `analysis_FINAL_002_MC.R` and `analysis_FINALFINAL_003_MC_WM.R`.) We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like `cool_word_doc_002.docx`. Try to avoid replicating this nightmare in R.
+
+If you do end up with multiple versions, put everything other than the latest version in a subfolder of your "R" folder, called "R/archive". To avoid a horrible mess of `analysis_FINAL_002.R` type documents cluttering up your folder, consider using [Git for version control](#version-control).
 
 ## Include a README file {#README}
 
@@ -99,13 +118,6 @@ Make things easier by including a short text file - called README - in the proje
 Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
 
 When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with `View(mydf)` or `str(mydf)`. This is fine, and often necessary, when you're doing your analysis. **Don't keep these commands in your script**. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them. 
-
-## Rules_9a_FINAL_FINAL_MC
-
-We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like `cool_word_doc_002.docx`. Try to avoid replicating this nightmare in R.
-
-**Don't** create multiple versions of the same script (like `analysis_FINAL_002_MC.R` and `analysis_FINALFINAL_003_MC_WM.R`.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your "R" folder, called "R/archive". To avoid a horrible mess of `analysis_FINAL_002.R` type documents cluttering up your folder, consider using [Git for version control](#version-control).
-
 ## Keep your workspace clean {#clean-workspace}
 
 Sometimes R doesn't behave the way you expect it to. You might run a script and find it works find, then run it again and find it's producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn't have originally, or some extra packages loaded.

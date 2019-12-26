@@ -1,39 +1,46 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Using R at Grattan Institute},
-            pdfauthor={Will Mackey and Matt Cowgill},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Using R at Grattan Institute},
+  pdfauthor={Will Mackey and Matt Cowgill},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -75,8 +82,14 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -86,31 +99,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -119,43 +115,31 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
-% https://github.com/rstudio/rmarkdown/issues/337
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-% https://github.com/rstudio/rmarkdown/pull/252
-\usepackage{titling}
-\setlength{\droptitle}{-2em}
-
-\pretitle{\vspace{\droptitle}\centering\huge}
-\posttitle{\par}
-
-\preauthor{\centering\large\emph}
-\postauthor{\par}
-
-\predate{\centering\large\emph}
-\postdate{\par}
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \title{Using R at Grattan Institute}
 \author{Will Mackey and Matt Cowgill}
-\date{2019-12-06}
+\date{2019-12-27}
 
 \begin{document}
+\frontmatter
 \maketitle
 
 {
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\mainmatter
 \hypertarget{welcome}{%
 \chapter*{Welcome!}\label{welcome}}
 \addcontentsline{toc}{chapter}{Welcome!}
 
 This guide is designed for everyone who uses - or would like to use - R at Grattan Institute.
 
-It does two main things:
+The goal of this guide is to make it easy - even fun! - to use R at Grattan, whether you're doing analysis or reviewing someone else's analysis.
+
+The guide does two main things:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -167,6 +151,8 @@ It does two main things:
 \end{enumerate}
 
 As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
+
+Because the guide is intended for everyone who uses R at Grattan, there may be some material that is too basic for more experienced users, or material that goes over the heads of beginners. That's OK - just skip those bits for now.
 
 Any complaints or comments about this guide can be sent to Will or Matt, respectively.
 
@@ -425,7 +411,34 @@ Here's a useful structure:
   04\_visualise.R
 \end{itemize}
 
-It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more \protect\hyperlink{use-comments}{elsewhere in this guide}).
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more \protect\hyperlink{use-comments}{elsewhere in this guide}). At the end of each script, you can save the script's output, and then load the file you create in the next script.
+
+\hypertarget{make-your-filenames-readable-by-both-machines-and-humans}{%
+\section{Make your filenames readable by both machines and humans}\label{make-your-filenames-readable-by-both-machines-and-humans}}
+
+Have another look at the example filenames set out above:
+
+\begin{itemize}
+\tightlist
+\item
+  01\_import.R
+\item
+  02\_tidy.R
+\item
+  03\_model.R
+\item
+  04\_visualise.R
+\end{itemize}
+
+They're sortable - they start with a number. They don't have spaces, so any and all software should be able to handle them. And, even though they're short and minimal, they give humans a good idea about what the files do. These are what you should strive for when choosing filenames.
+
+For more on good principles for naming files, see \href{https://speakerdeck.com/jennybc/how-to-name-files}{this excellent presentation by Jenny Bryan}, which includes the following examples:
+
+\begin{center}\includegraphics[width=0.66\linewidth]{atlas/jenny_bryan_filenames} \end{center}
+
+\textbf{Don't} create multiple versions of the same script (like \texttt{analysis\_FINAL\_002\_MC.R} and \texttt{analysis\_FINALFINAL\_003\_MC\_WM.R}.) We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like \texttt{cool\_word\_doc\_002.docx}. Try to avoid replicating this nightmare in R.
+
+If you do end up with multiple versions, put everything other than the latest version in a subfolder of your ``R'' folder, called ``R/archive''. To avoid a horrible mess of \texttt{analysis\_FINAL\_002.R} type documents cluttering up your folder, consider using \protect\hyperlink{version-control}{Git for version control}.
 
 \hypertarget{README}{%
 \section{Include a README file}\label{README}}
@@ -442,16 +455,7 @@ Make things easier by including a short text file - called README - in the proje
 Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named `archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
 
 When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with \texttt{View(mydf)} or \texttt{str(mydf)}. This is fine, and often necessary, when you're doing your analysis. \textbf{Don't keep these commands in your script}. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them.
-
-\hypertarget{rules_9a_final_final_mc}{%
-\section{Rules\_9a\_FINAL\_FINAL\_MC}\label{rules_9a_final_final_mc}}
-
-We're all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like \texttt{cool\_word\_doc\_002.docx}. Try to avoid replicating this nightmare in R.
-
-\textbf{Don't} create multiple versions of the same script (like \texttt{analysis\_FINAL\_002\_MC.R} and \texttt{analysis\_FINALFINAL\_003\_MC\_WM.R}.) If you do end up with multiple versions, put everything other than the latest version in a subfolder of your ``R'' folder, called ``R/archive''. To avoid a horrible mess of \texttt{analysis\_FINAL\_002.R} type documents cluttering up your folder, consider using \protect\hyperlink{version-control}{Git for version control}.
-
-\hypertarget{clean-workspace}{%
-\section{Keep your workspace clean}\label{clean-workspace}}
+\#\# Keep your workspace clean \{\#clean-workspace\}
 
 Sometimes R doesn't behave the way you expect it to. You might run a script and find it works find, then run it again and find it's producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn't have originally, or some extra packages loaded.
 
@@ -807,7 +811,7 @@ Do not use spaces around parentheses in most cases:
 For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{function}, see \href{https://style.tidyverse.org/syntax.html\#parentheses}{the Tidyverse guide}.
 
 \hypertarget{short-lines-line-indentation-and-the-pipe}{%
-\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater{}\%}}\label{short-lines-line-indentation-and-the-pipe}}
+\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater\%}}\label{short-lines-line-indentation-and-the-pipe}}
 
 It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
@@ -981,18 +985,18 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages ------------------
+## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──
 \end{verbatim}
 
 \begin{verbatim}
-## v ggplot2 3.2.1     v purrr   0.3.3
-## v tibble  2.1.3     v dplyr   0.8.3
-## v tidyr   1.0.0     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.4.0
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts -- tidyverse_conflicts() --
+## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1129,6 +1133,47 @@ To install these packages, run this code:
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{upgrading-packages}{%
+\section{Upgrading packages}\label{upgrading-packages}}
+
+It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{update_packages}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+This will upgrade all your packages - including those you've installed from CRAN and Github.
+
+Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (`deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the \texttt{install\_version()} function, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_version}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"1.13.3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{getting-help-with-r}{%
+\chapter{Getting help with R}\label{getting-help-with-r}}
+
+\hypertarget{resources-for-learning-r}{%
+\section{Resources for learning R}\label{resources-for-learning-r}}
+
+R4DS, et al.
+
+\hypertarget{getting-help-with-r-problems-in-general}{%
+\section{Getting help with R problems in general}\label{getting-help-with-r-problems-in-general}}
+
+A guide to Googling well
+
+\hypertarget{getting-help-with-r-problems-at-grattan}{%
+\section{Getting help with R problems at Grattan}\label{getting-help-with-r-problems-at-grattan}}
+
+This guide
+Package vignettes
+Matt, Will, others
+
 \hypertarget{part-load-manipulate-and-visualise-data}{%
 \part{Load, manipulate and visualise data}\label{part-load-manipulate-and-visualise-data}}
 
@@ -1254,9 +1299,7 @@ This section focusses on transforming rectangular datasets.
 
 The \texttt{dplyr} verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of \emph{\href{https://r4ds.had.co.nz/}{R for Data Science}} with Hadley Wickham).
 
-\begin{verbatim}
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-\end{verbatim}
+\href{https://www.youtube.com/embed/y9KJmUGc8SE}{\includegraphics{Data_transformation_files/figure-latex/unnamed-chunk-1-1.pdf}}
 
 \hypertarget{set-up}{%
 \section{Set up}\label{set-up}}
@@ -1316,7 +1359,7 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 \end{verbatim}
 
 \hypertarget{the-pipe}{%
-\section{\texorpdfstring{The pipe: \texttt{\%\textgreater{}\%}}{The pipe: \%\textgreater{}\%}}\label{the-pipe}}
+\section{\texorpdfstring{The pipe: \texttt{\%\textgreater{}\%}}{The pipe: \%\textgreater\%}}\label{the-pipe}}
 
 You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to `nest' them inside. This nesting will be \emph{painfully} familiar to Excel users.
 
@@ -1458,11 +1501,11 @@ And using pipes make the steps clearer still:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  take the \texttt{sa3\_income} data, and then \%\textgreater{}\%
+  take the \texttt{sa3\_income} data, and then \%\textgreater\%
 \item
-  \texttt{filter} it to only NSW, and then \%\textgreater{}\%
+  \texttt{filter} it to only NSW, and then \%\textgreater\%
 \item
-  \texttt{group} it by gender, and then \%\textgreater{}\%
+  \texttt{group} it by gender, and then \%\textgreater\%
 \item
   \texttt{summarise} it
 \end{enumerate}
@@ -1524,7 +1567,7 @@ If you wanted to keep just the \texttt{state} and \texttt{income} variables, you
 ##  8 ACT   54515.
 ##  9 ACT   58132.
 ## 10 ACT   56247.
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Or you could use \texttt{-} (minus) to remove the \texttt{state} and \texttt{sa3\_name} variables:\footnote{This is the same as \textbf{keeping everything except} the \texttt{state} and \texttt{sa3\_name} variables.}
@@ -1550,7 +1593,7 @@ Or you could use \texttt{-} (minus) to remove the \texttt{state} and \texttt{sa3
 ##  8  2012 Men    54515.     647
 ##  9  2013 Men    58132.     641
 ## 10  2014 Men    56247.     561
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 \hypertarget{selecting-groups-of-variables}{%
@@ -1584,7 +1627,7 @@ For example, if you want to keep just the SA3 and state variables -- ie the vari
 ##  8 Canberra East ACT  
 ##  9 Canberra East ACT  
 ## 10 Canberra East ACT  
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Or, instead, if you wanted to keep just the variables that contain \texttt{"er"}, you could:
@@ -1610,7 +1653,7 @@ Or, instead, if you wanted to keep just the variables that contain \texttt{"er"}
 ##  8 Men        647
 ##  9 Men        641
 ## 10 Men        561
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 And if you wanted to keep \textbf{both} the \texttt{"s"} variables and the \texttt{"er"} variables, you could:
@@ -1636,7 +1679,7 @@ And if you wanted to keep \textbf{both} the \texttt{"s"} variables and the \text
 ##  8 Canberra East ACT   Men        647
 ##  9 Canberra East ACT   Men        641
 ## 10 Canberra East ACT   Men        561
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 The full list of these handy select functions are provided with the \texttt{?tidyselect::select\_helpers} documentation, listed below:
@@ -1747,7 +1790,7 @@ Turning back to the \texttt{sa3\_income} data, if you just wanted to see observa
 ##  8  2012 Barkly        NT    Men    52474.    2321
 ##  9  2013 Barkly        NT    Men    55006.    2364
 ## 10  2014 Barkly        NT    Men    56543.    2234
-## # ... with 113 more rows
+## # … with 113 more rows
 \end{verbatim}
 
 Or you might just want to look at high-income (\texttt{income\ \textgreater{}\ 70,000}) areas from Victoria in 2015:
@@ -1789,7 +1832,7 @@ Sometimes you might want to relax a little, keeping observations from one catego
 
 \begin{verbatim}
 ## # A tibble: 0 x 6
-## # ... with 6 variables: year <dbl>, sa3_name <chr>, state <chr>, gender <chr>,
+## # … with 6 variables: year <dbl>, sa3_name <chr>, state <chr>, gender <chr>,
 ## #   income <dbl>, workers <dbl>
 \end{verbatim}
 
@@ -1874,7 +1917,7 @@ Or you could keep the observations with the \emph{lowest} average incomes in \em
 ##  8  2012 Great Lakes             NSW   Women  32590     4730
 ##  9  2015 Lord Howe Island        NSW   Women  34173.      75
 ## 10  2011 Lower Murray            NSW   Women  30800.    2122
-## # ... with 38 more rows
+## # … with 38 more rows
 \end{verbatim}
 
 The dataset remains grouped after your function(s). To explicitly `ungroup' your data, add the \texttt{ungroup} function to your chain (the `Groups' note has disappeared in the below):
@@ -1902,7 +1945,7 @@ The dataset remains grouped after your function(s). To explicitly `ungroup' your
 ##  8  2012 Great Lakes             NSW   Women  32590     4730
 ##  9  2015 Lord Howe Island        NSW   Women  34173.      75
 ## 10  2011 Lower Murray            NSW   Women  30800.    2122
-## # ... with 38 more rows
+## # … with 38 more rows
 \end{verbatim}
 
 \hypertarget{edit-and-add-new-variables-with-mutate}{%
@@ -1933,7 +1976,7 @@ To add a new variable to the \texttt{sa3\_income} dataset that shows the log the
 ##  8  2012 Canberra East ACT   Men    54515.     647        6.47
 ##  9  2013 Canberra East ACT   Men    58132.     641        6.46
 ## 10  2014 Canberra East ACT   Men    56247.     561        6.33
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 To edit a variable, redefine it in \texttt{mutate}. For example, if you wanted to take the last two digits of year:
@@ -1959,7 +2002,7 @@ To edit a variable, redefine it in \texttt{mutate}. For example, if you wanted t
 ##  8    12 Canberra East ACT   Men    54515.     647
 ##  9    13 Canberra East ACT   Men    58132.     641
 ## 10    14 Canberra East ACT   Men    56247.     561
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 \hypertarget{using-if_else-or-case_when}{%
@@ -1994,7 +2037,7 @@ You can use the \texttt{if\_else()} function when you are creating new variables
 ##  8  2012 Canberra East ACT   Men    54515.     647 Not many workers
 ##  9  2013 Canberra East ACT   Men    58132.     641 Not many workers
 ## 10  2014 Canberra East ACT   Men    56247.     561 Not many workers
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Which reads:
@@ -2031,7 +2074,7 @@ This could be done by nesting \texttt{if\_else} statements:
 ##  8  2012 Canberra East ACT   Men    54515.     647 500-1000 workers      
 ##  9  2013 Canberra East ACT   Men    58132.     641 500-1000 workers      
 ## 10  2014 Canberra East ACT   Men    56247.     561 500-1000 workers      
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 But that syntax can be a bit difficult to read. You can do this in a clearer way using \texttt{case\_when}:
@@ -2062,7 +2105,7 @@ But that syntax can be a bit difficult to read. You can do this in a clearer way
 ##  8  2012 Canberra East ACT   Men    54515.     647 5,000 or fewer workers  
 ##  9  2013 Canberra East ACT   Men    58132.     641 5,000 or fewer workers  
 ## 10  2014 Canberra East ACT   Men    56247.     561 5,000 or fewer workers  
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 The \texttt{case\_when} function takes the first condition (LHS) and applies some value (RHS) if it is true. It then moves to the next condition, and so on. Once an observation has been classified -- eg an observation has more than 20,000 workers -- it is ignored in proceeding conditions.
@@ -2095,7 +2138,7 @@ Ending a \texttt{case\_when} statement with \texttt{TRUE\ \textasciitilde{}\ {[}
 ##  8  2012 Canberra East ACT   Men    54515.     647 5,000 or fewer workers  
 ##  9  2013 Canberra East ACT   Men    58132.     641 5,000 or fewer workers  
 ## 10  2014 Canberra East ACT   Men    56247.     561 5,000 or fewer workers  
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Meaning, for any observation that did not have workers more than 20,000 or more than 10,000 or more than 5,000, assign the value \texttt{"5,000\ or\ fewer\ workers"}.
@@ -2125,7 +2168,7 @@ Observations that do not meet a condition will be set to \texttt{NA}:
 ##  8  2012 Canberra East ACT   Men    54515.     647 <NA>        
 ##  9  2013 Canberra East ACT   Men    58132.     641 <NA>        
 ## 10  2014 Canberra East ACT   Men    56247.     561 <NA>        
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Like any \texttt{if} or \texttt{if\_else}, you can provide more than one condition to your conditional statement:
@@ -2157,7 +2200,7 @@ Like any \texttt{if} or \texttt{if\_else}, you can provide more than one conditi
 ##  8  2012 Canberra East ACT   Men    54515.     647 Men        
 ##  9  2013 Canberra East ACT   Men    58132.     641 Men        
 ## 10  2014 Canberra East ACT   Men    56247.     561 Men        
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 \hypertarget{grouped-mutates-with-group_by}{%
@@ -2188,7 +2231,7 @@ Like filtering, you can add or edit variables on grouped data. For example, you 
 ##  8  2012 Canberra East ACT   Men    54515.     647       641.
 ##  9  2013 Canberra East ACT   Men    58132.     641       641.
 ## 10  2014 Canberra East ACT   Men    56247.     561       641.
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 Above, the \texttt{mean()} function is applied separately to each unique group of \texttt{sa3\_name} and \texttt{gender}, taking one average for women in Queanbeyan, one average for men in Queanbeyan, and so on.
@@ -2219,7 +2262,7 @@ Grouping a dataset does not prohibit operations that don't utilise the grouping.
 ##  8  2012 Canberra East ACT   Men    54515.     647       641.       1.01 
 ##  9  2013 Canberra East ACT   Men    58132.     641       641.       1.00 
 ## 10  2014 Canberra East ACT   Men    56247.     561       641.       0.875
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 See that the data remains grouped after the \texttt{mutate}. You can explicitly \texttt{ungroup()} afterwards:
@@ -2248,7 +2291,7 @@ See that the data remains grouped after the \texttt{mutate}. You can explicitly 
 ##  8  2012 Canberra East ACT   Men    54515.     647       641.       1.01 
 ##  9  2013 Canberra East ACT   Men    58132.     641       641.       1.00 
 ## 10  2014 Canberra East ACT   Men    56247.     561       641.       0.875
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 \hypertarget{summarise-data-with-summarise}{%
@@ -2301,7 +2344,7 @@ Grouped summaries can help change the \emph{detail} of your data. In the origina
 ##  8  2011 Auburn                                 57298
 ##  9  2011 Augusta - Margaret River - Busselton   35852
 ## 10  2011 Bald Hills - Everton Park              36273
-## # ... with 2,000 more rows
+## # … with 2,000 more rows
 \end{verbatim}
 
 After the \texttt{summarise} function, the dataset grouping remains but is reduced by one -- so the right-hand-side grouping is lost. This enables a common combination to find a proportion of a group. For example, if you
@@ -2351,7 +2394,7 @@ Or the total workers in each year and state by gender:
 ##  8  2011 Qld   Women   918841
 ##  9  2011 SA    Men     997160
 ## 10  2011 SA    Women   325980
-## # ... with 86 more rows
+## # … with 86 more rows
 \end{verbatim}
 
 \hypertarget{arrange-with-arrange}{%
@@ -2385,7 +2428,7 @@ For example, to find the areas in 2016 with the \textbf{least} workers:
 ##  8  2016 Barkly                    NT    Women  52552.     704
 ##  9  2016 Canberra East             ACT   Men    58035.     711
 ## 10  2016 Daly - Tiwi - West Arnhem NT    Women  50096.    1075
-## # ... with 660 more rows
+## # … with 660 more rows
 \end{verbatim}
 
 You can provide more than one variable. To sort the data first by \texttt{state} and, within each state, by the most workers (ie sorting by negative workers):
@@ -2412,7 +2455,7 @@ You can provide more than one variable. To sort the data first by \texttt{state}
 ##  8  2016 South Canberra ACT   Men    72437.   20998
 ##  9  2016 Gungahlin      ACT   Women  50908.   18134
 ## 10  2016 Weston Creek   ACT   Men    67242.   15500
-## # ... with 660 more rows
+## # … with 660 more rows
 \end{verbatim}
 
 \hypertarget{lead-and-lag-functions-with-arrange}{%
@@ -2443,7 +2486,7 @@ Both the \texttt{lead} and \texttt{lag} functions take a variable as their only 
 ##  8  2012 Canberra East ACT   Men    54515.     647          666
 ##  9  2013 Canberra East ACT   Men    58132.     641          647
 ## 10  2014 Canberra East ACT   Men    56247.     561          641
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 If you wanted to see the growth rate of income over time, you could \texttt{arrange} then \texttt{group\_by} your data before creating an \texttt{income\_growth} variable that is \texttt{income\ /\ lag(income)}.
@@ -2472,7 +2515,7 @@ If you wanted to see the growth rate of income over time, you could \texttt{arra
 ##  8  2012 Adelaide City SA    Women  40409.    4219        0.0534
 ##  9  2013 Adelaide City SA    Women  41287.    4281        0.0217
 ## 10  2014 Adelaide City SA    Women  42872     4200        0.0384
-## # ... with 4,009 more rows
+## # … with 4,009 more rows
 \end{verbatim}
 
 \hypertarget{putting-it-all-together}{%
@@ -2536,12 +2579,12 @@ Or say you want to see the annual growth rate of female workers in the SA3 with 
 ## # A tibble: 6 x 8
 ##    year sa3_name        state gender income workers highest_income worker_growth
 ##   <dbl> <chr>           <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
-## 1  2011 Urriarra - Nam~ ACT   Women  48525.      84         86672.        NA    
-## 2  2012 Urriarra - Nam~ ACT   Women  51648.      96         86672.         0.143
-## 3  2013 Urriarra - Nam~ ACT   Women  61858.     124         86672.         0.292
-## 4  2014 Urriarra - Nam~ ACT   Women  72980.      99         86672.        -0.202
-## 5  2015 Urriarra - Nam~ ACT   Women  68534.      72         86672.        -0.273
-## 6  2016 Urriarra - Nam~ ACT   Women  86672.      90         86672.         0.25
+## 1  2011 Urriarra - Nam… ACT   Women  48525.      84         86672.        NA    
+## 2  2012 Urriarra - Nam… ACT   Women  51648.      96         86672.         0.143
+## 3  2013 Urriarra - Nam… ACT   Women  61858.     124         86672.         0.292
+## 4  2014 Urriarra - Nam… ACT   Women  72980.      99         86672.        -0.202
+## 5  2015 Urriarra - Nam… ACT   Women  68534.      72         86672.        -0.273
+## 6  2016 Urriarra - Nam… ACT   Women  86672.      90         86672.         0.25
 \end{verbatim}
 
 \hypertarget{joining-datasets-with-left_join}{%
@@ -2672,15 +2715,15 @@ For most charts in this chapter, we'll use the \texttt{sa3\_income} data summari
 
 \begin{verbatim}
 ## # A tibble: 6 x 14
-##     sa3 sa3_name sa3_sqkm sa3_income_perc~ state occupation occ_short prof 
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
 ##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
-## 1 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
-## 2 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
-## 3 10102 Queanbe~    6511.               74 NSW   Professio~ Professi~ Prof~
-## 4 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
-## 5 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
-## 6 10103 Snowy M~   14283.                7 NSW   Professio~ Professi~ Prof~
-## # ... with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## 1 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 2 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 3 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
+## 4 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## 5 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## 6 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+## # … with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
 ## #   average_income <dbl>, total_income <dbl>, workers <dbl>
 \end{verbatim}
 
@@ -2699,7 +2742,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{data}
+    e.g.~\texttt{data}
   \end{itemize}
 \item
   \textbf{Aesthetics}: what variables should be linked to what chart elements.
@@ -2707,7 +2750,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
+    e.g.~\texttt{aes(x\ =\ population,\ y\ =\ age)} to connect the \texttt{population} variable to the \texttt{x} axis, and the \texttt{age} variable to the \texttt{y} axis.
   \end{itemize}
 \item
   \textbf{Geoms}: how the data should be plotted.
@@ -2715,7 +2758,7 @@ The main ingredients to a \texttt{ggplot} chart are:
   \begin{itemize}
   \tightlist
   \item
-    e.g. \texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
+    e.g.~\texttt{geom\_point()} will produce a scatter plot, \texttt{geom\_col} will produce a column chart, \texttt{geom\_line()} will produce a line chart.
   \end{itemize}
 \end{itemize}
 
@@ -3026,11 +3069,11 @@ To do this, we can create a new dataset that just contains one observation each.
 
 \begin{verbatim}
 ## # A tibble: 2 x 14
-##     sa3 sa3_name sa3_sqkm sa3_income_perc~ state occupation occ_short prof 
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
 ##   <dbl> <chr>       <dbl>            <dbl> <chr> <chr>      <chr>     <chr>
-## 1 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
-## 2 11703 Sydney ~     25.1               84 NSW   Professio~ Professi~ Prof~
-## # ... with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
+## 1 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
+## 2 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
+## # … with 6 more variables: gender <chr>, year <dbl>, median_income <dbl>,
 ## #   average_income <dbl>, total_income <dbl>, workers <dbl>
 \end{verbatim}
 
@@ -3200,15 +3243,15 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 
 \begin{verbatim}
 ## # A tibble: 6 x 16
-##     sa3 sa3_name sa3_sqkm sa3_income_perc~ sa4_name gcc_name state occupation
+##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state occupation
 ##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr> <chr>     
-## 1 10102 Queanbe~    6511.               80 Capital~ Rest of~ NSW   Clerical ~
-## 2 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW   Clerical ~
-## 3 10102 Queanbe~    6511.               78 Capital~ Rest of~ NSW   Clerical ~
-## 4 10102 Queanbe~    6511.               76 Capital~ Rest of~ NSW   Clerical ~
-## 5 10102 Queanbe~    6511.               74 Capital~ Rest of~ NSW   Clerical ~
-## 6 10102 Queanbe~    6511.               79 Capital~ Rest of~ NSW   Clerical ~
-## # ... with 8 more variables: occ_short <chr>, prof <chr>, gender <chr>,
+## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW   Clerical …
+## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW   Clerical …
+## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW   Clerical …
+## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW   Clerical …
+## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW   Clerical …
+## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW   Clerical …
+## # … with 8 more variables: occ_short <chr>, prof <chr>, gender <chr>,
 ## #   year <dbl>, median_income <dbl>, average_income <dbl>, total_income <dbl>,
 ## #   workers <dbl>
 \end{verbatim}
@@ -3290,7 +3333,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks on fleek: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks ace: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -3356,7 +3399,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks worthy! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks shit hot! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3407,7 +3450,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks smashing: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks superlative: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -3581,7 +3624,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks too good to be true! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks perfect! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3649,7 +3692,7 @@ Start by creating the dataset you want to plot:
 ##  8 NSW   Women  Professional             68445.
 ##  9 NT    Men    Non-professional         58844.
 ## 10 NT    Men    Professional             87666.
-## # ... with 22 more rows
+## # … with 22 more rows
 \end{verbatim}
 
 Then plot a bar chart with \texttt{geom\_col} and \texttt{theme\_grattan} elements, using a similar chain to the final plot of \ref{bar-multi} (without the labelling). We'll build on this chart:
@@ -3728,7 +3771,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Swell! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Terrific! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4014,7 +4057,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks fab. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks admirable. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4219,14 +4262,14 @@ Get the data you want to plot:
 \begin{verbatim}
 ## # A tibble: 6 x 7
 ## # Groups:   sa3_name, sa3_income_percentile, prof [1]
-##   sa3_name   sa3_income_percen~ prof     occ_short income workers average_income
+##   sa3_name   sa3_income_percen… prof     occ_short income workers average_income
 ##   <chr>                   <dbl> <chr>    <chr>      <dbl>   <dbl>          <dbl>
-## 1 Adelaide ~                 66 Non-pro~ Admin     1.44e8    2674         53979.
-## 2 Adelaide ~                 66 Non-pro~ Driver    1.85e7     396         46762.
-## 3 Adelaide ~                 66 Non-pro~ Labourer  3.92e7    1516         25868.
-## 4 Adelaide ~                 66 Non-pro~ Sales     5.05e7    1546         32680.
-## 5 Adelaide ~                 66 Non-pro~ Service   7.75e7    2346         33034.
-## 6 Adelaide ~                 66 Non-pro~ Trades    7.85e7    1525         51448.
+## 1 Adelaide …                 66 Non-pro… Admin     1.44e8    2674         53979.
+## 2 Adelaide …                 66 Non-pro… Driver    1.85e7     396         46762.
+## 3 Adelaide …                 66 Non-pro… Labourer  3.92e7    1516         25868.
+## 4 Adelaide …                 66 Non-pro… Sales     5.05e7    1546         32680.
+## 5 Adelaide …                 66 Non-pro… Service   7.75e7    2346         33034.
+## 6 Adelaide …                 66 Non-pro… Trades    7.85e7    1525         51448.
 \end{verbatim}
 
 To make a scatter plot with \texttt{average\_income} against \texttt{sa3\_income\_percentile}, pass the \texttt{income} dataset to \texttt{ggplot}, add \texttt{x\ =\ sa3\_income\_percentile}, \texttt{y\ =\ average\_income} and \texttt{colour\ =\ gender} aesthetics, then plot it with \texttt{geom\_point}. Tell \texttt{geom\_point} to reduce the opacity with \texttt{alpha\ =\ 0.2}, as these individual points are more of the `background' to the plot:
@@ -4276,7 +4319,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks on fleek! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks first-rate! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4487,18 +4530,18 @@ Now you can view \texttt{sf} objects stored in \texttt{absmapsdata}:
 \begin{verbatim}
 ## Observations: 358
 ## Variables: 12
-## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201...
-## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Go...
-## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "1...
-## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Region...
-## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1GSYD...
-## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Rest ...
-## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "...
-## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South Wa...
-## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136....
-## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 1...
-## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.580...
-## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MULTIP...
+## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201",…
+## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Goul…
+## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "103…
+## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Region",…
+## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1GSYD",…
+## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Rest of…
+## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…
+## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South Wale…
+## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136.17…
+## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 151…
+## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.58077…
+## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MULTIPOL…
 \end{verbatim}
 
 \hypertarget{making-choropleth-maps}{%
@@ -4612,6 +4655,7 @@ We use Github to version-control and share reports in LaTeX, so you're already a
 
 Using Git within R Studio\ldots{}
 
-\bibliography{book.bib,packages.bib}
+\backmatter
+  \bibliography{book.bib,packages.bib}
 
 \end{document}

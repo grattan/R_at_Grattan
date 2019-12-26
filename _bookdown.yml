@@ -14,6 +14,7 @@ rmd_files: [
   "Organising_R_projects.Rmd",
   "Style_guide.Rmd",
   "Packages_at_Grattan.Rmd",
+  "Getting_help_with_R.Rmd",
   "Reading_data.Rmd",
   "Different_data_types.Rmd",
   "Data_transformation.Rmd",

@@ -1,0 +1,15 @@
+# Getting help with R 
+
+## Resources for learning R
+
+R4DS, et al.
+
+## Getting help with R problems in general
+
+A guide to Googling well
+
+## Getting help with R problems at Grattan
+
+This guide
+Package vignettes
+Matt, Will, others

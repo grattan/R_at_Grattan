@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-12-06" />
+<meta name="date" content="2019-12-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="coding-style.html"/>
-<link rel="next" href="reading-data.html"/>
+<link rel="next" href="getting-help-with-r.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,9 +53,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -148,10 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.2</b> Use relative filepaths</a></li>
 <li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.3</b> Keep your stuff together</a></li>
 <li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.4</b> Keep your scripts manageable</a></li>
-<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.5</b> Include a README file</a></li>
-<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.6</b> Omit needless code</a></li>
-<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#rules_9a_final_final_mc"><i class="fa fa-check"></i><b>3.7</b> Rules_9a_FINAL_FINAL_MC</a></li>
-<li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.8</b> Keep your workspace clean</a></li>
+<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#make-your-filenames-readable-by-both-machines-and-humans"><i class="fa fa-check"></i><b>3.5</b> Make your filenames readable by both machines and humans</a></li>
+<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.7</b> Omit needless code</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
 <li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#load-packages-first"><i class="fa fa-check"></i><b>4.1</b> Load packages first</a></li>
@@ -175,100 +176,106 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="packages.html"><a href="packages.html#grattan-specific-packages"><i class="fa fa-check"></i><b>5.4</b> Grattan-specific packages</a></li>
 <li class="chapter" data-level="5.5" data-path="packages.html"><a href="packages.html#other-commonly-used-packages"><i class="fa fa-check"></i><b>5.5</b> Other commonly-used packages</a></li>
+<li class="chapter" data-level="5.6" data-path="packages.html"><a href="packages.html#upgrading-packages"><i class="fa fa-check"></i><b>5.6</b> Upgrading packages</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html"><i class="fa fa-check"></i><b>6</b> Getting help with R</a><ul>
+<li class="chapter" data-level="6.1" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#resources-for-learning-r"><i class="fa fa-check"></i><b>6.1</b> Resources for learning R</a></li>
+<li class="chapter" data-level="6.2" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-in-general"><i class="fa fa-check"></i><b>6.2</b> Getting help with R problems in general</a></li>
+<li class="chapter" data-level="6.3" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-at-grattan"><i class="fa fa-check"></i><b>6.3</b> Getting help with R problems at Grattan</a></li>
 </ul></li>
 <li class="part"><span><b>III Load, manipulate and visualise data</b></span></li>
-<li class="chapter" data-level="6" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>6</b> Reading data</a><ul>
-<li class="chapter" data-level="6.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>6.1</b> Importing data</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>6.1.1</b> Reading CSV files</a></li>
-<li class="chapter" data-level="6.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>6.1.2</b> <code>readxl::read_excel()</code></a></li>
-<li class="chapter" data-level="6.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>6.1.3</b> <code>rio</code></a></li>
-<li class="chapter" data-level="6.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>6.1.4</b> <code>readabs</code></a></li>
+<li class="chapter" data-level="7" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>7</b> Reading data</a><ul>
+<li class="chapter" data-level="7.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>7.1</b> Importing data</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>7.1.1</b> Reading CSV files</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>7.1.2</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>7.1.3</b> <code>rio</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>7.1.4</b> <code>readabs</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>6.2</b> Reading common files:</a></li>
-<li class="chapter" data-level="6.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>6.3</b> Appropriately renaming variables</a></li>
-<li class="chapter" data-level="6.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>6.4</b> Getting to tidy data</a></li>
+<li class="chapter" data-level="7.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>7.2</b> Reading common files:</a></li>
+<li class="chapter" data-level="7.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>7.3</b> Appropriately renaming variables</a></li>
+<li class="chapter" data-level="7.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>7.4</b> Getting to tidy data</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>7</b> Different data types</a><ul>
-<li class="chapter" data-level="7.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>7.1</b> Tidy data</a></li>
-<li class="chapter" data-level="7.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>7.2</b> Dates with <code>lubridate::</code></a></li>
-<li class="chapter" data-level="7.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>7.3</b> Strings with <code>stringr::</code></a></li>
-<li class="chapter" data-level="7.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>7.4</b> Factors with <code>forcats::</code></a></li>
+<li class="chapter" data-level="8" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>8</b> Different data types</a><ul>
+<li class="chapter" data-level="8.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>8.1</b> Tidy data</a></li>
+<li class="chapter" data-level="8.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>8.2</b> Dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="8.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>8.3</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="8.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>8.4</b> Factors with <code>forcats::</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>8</b> Data transformation with <code>dplyr</code></a><ul>
-<li class="chapter" data-level="8.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#set-up"><i class="fa fa-check"></i><b>8.1</b> Set up</a></li>
-<li class="chapter" data-level="8.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe"><i class="fa fa-check"></i><b>8.2</b> The pipe: <code>%&gt;%</code></a></li>
-<li class="chapter" data-level="8.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-variables-with-select"><i class="fa fa-check"></i><b>8.3</b> Select variables with <code>select()</code></a><ul>
-<li class="chapter" data-level="8.3.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>8.3.1</b> Selecting groups of variables</a></li>
+<li class="chapter" data-level="9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>9</b> Data transformation with <code>dplyr</code></a><ul>
+<li class="chapter" data-level="9.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#set-up"><i class="fa fa-check"></i><b>9.1</b> Set up</a></li>
+<li class="chapter" data-level="9.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe"><i class="fa fa-check"></i><b>9.2</b> The pipe: <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="9.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-variables-with-select"><i class="fa fa-check"></i><b>9.3</b> Select variables with <code>select()</code></a><ul>
+<li class="chapter" data-level="9.3.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>9.3.1</b> Selecting groups of variables</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filter-with-filter"><i class="fa fa-check"></i><b>8.4</b> Filter with <code>filter()</code></a><ul>
-<li class="chapter" data-level="8.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#conditions-logical-operations-true-or-false"><i class="fa fa-check"></i><b>8.4.1</b> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></a></li>
-<li class="chapter" data-level="8.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-data-with-filter"><i class="fa fa-check"></i><b>8.4.2</b> Filtering data with <code>filter</code></a></li>
-<li class="chapter" data-level="8.4.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-filtering-with-group_by"><i class="fa fa-check"></i><b>8.4.3</b> Grouped filtering with <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filter-with-filter"><i class="fa fa-check"></i><b>9.4</b> Filter with <code>filter()</code></a><ul>
+<li class="chapter" data-level="9.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#conditions-logical-operations-true-or-false"><i class="fa fa-check"></i><b>9.4.1</b> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></a></li>
+<li class="chapter" data-level="9.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-data-with-filter"><i class="fa fa-check"></i><b>9.4.2</b> Filtering data with <code>filter</code></a></li>
+<li class="chapter" data-level="9.4.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-filtering-with-group_by"><i class="fa fa-check"></i><b>9.4.3</b> Grouped filtering with <code>group_by()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>8.5</b> Edit and add new variables with <code>mutate()</code></a><ul>
-<li class="chapter" data-level="8.5.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#using-if_else-or-case_when"><i class="fa fa-check"></i><b>8.5.1</b> Using <code>if_else()</code> or <code>case_when()</code></a></li>
-<li class="chapter" data-level="8.5.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-mutates-with-group_by"><i class="fa fa-check"></i><b>8.5.2</b> Grouped mutates with <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>9.5</b> Edit and add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="9.5.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#using-if_else-or-case_when"><i class="fa fa-check"></i><b>9.5.1</b> Using <code>if_else()</code> or <code>case_when()</code></a></li>
+<li class="chapter" data-level="9.5.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-mutates-with-group_by"><i class="fa fa-check"></i><b>9.5.2</b> Grouped mutates with <code>group_by()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>8.6</b> Summarise data with <code>summarise()</code></a><ul>
-<li class="chapter" data-level="8.6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-group_by"><i class="fa fa-check"></i><b>8.6.1</b> Grouped summaries with <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>9.6</b> Summarise data with <code>summarise()</code></a><ul>
+<li class="chapter" data-level="9.6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-group_by"><i class="fa fa-check"></i><b>9.6.1</b> Grouped summaries with <code>group_by()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-with-arrange"><i class="fa fa-check"></i><b>8.7</b> Arrange with <code>arrange()</code></a><ul>
-<li class="chapter" data-level="8.7.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#lead-and-lag-functions-with-arrange"><i class="fa fa-check"></i><b>8.7.1</b> <code>lead</code> and <code>lag</code> functions with <code>arrange</code></a></li>
+<li class="chapter" data-level="9.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-with-arrange"><i class="fa fa-check"></i><b>9.7</b> Arrange with <code>arrange()</code></a><ul>
+<li class="chapter" data-level="9.7.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#lead-and-lag-functions-with-arrange"><i class="fa fa-check"></i><b>9.7.1</b> <code>lead</code> and <code>lag</code> functions with <code>arrange</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#putting-it-all-together"><i class="fa fa-check"></i><b>8.8</b> Putting it all together</a></li>
-<li class="chapter" data-level="8.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#joining-datasets-with-left_join"><i class="fa fa-check"></i><b>8.9</b> Joining datasets with <code>left_join()</code></a></li>
+<li class="chapter" data-level="9.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#putting-it-all-together"><i class="fa fa-check"></i><b>9.8</b> Putting it all together</a></li>
+<li class="chapter" data-level="9.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#joining-datasets-with-left_join"><i class="fa fa-check"></i><b>9.9</b> Joining datasets with <code>left_join()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>9</b> Analysis</a></li>
-<li class="chapter" data-level="10" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>10</b> Data Visualisation</a><ul>
-<li class="chapter" data-level="10.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>10.1</b> Introduction to data visualisation</a></li>
-<li class="chapter" data-level="10.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>10.2</b> Set-up and packages</a></li>
-<li class="chapter" data-level="10.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>10.3</b> Concepts</a></li>
-<li class="chapter" data-level="10.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>10.4</b> Exploratory data visualisation</a></li>
-<li class="chapter" data-level="10.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>10.5</b> Making Grattan-y charts</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>10.5.1</b> Making Grattan charts</a></li>
-<li class="chapter" data-level="10.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>10.5.2</b> Saving Grattan charts</a></li>
+<li class="chapter" data-level="10" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>10</b> Analysis</a></li>
+<li class="chapter" data-level="11" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>11</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="11.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>11.1</b> Introduction to data visualisation</a></li>
+<li class="chapter" data-level="11.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>11.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="11.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>11.3</b> Concepts</a></li>
+<li class="chapter" data-level="11.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>11.4</b> Exploratory data visualisation</a></li>
+<li class="chapter" data-level="11.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>11.5</b> Making Grattan-y charts</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>11.5.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="11.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>11.5.2</b> Saving Grattan charts</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>10.6</b> Adding labels</a></li>
+<li class="chapter" data-level="11.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>11.6</b> Adding labels</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>11</b> Chart cookbook</a><ul>
-<li class="chapter" data-level="11.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up-1"><i class="fa fa-check"></i><b>11.1</b> Set up</a></li>
-<li class="chapter" data-level="11.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>11.2</b> Bar charts</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>11.2.1</b> Simple bar plot</a></li>
-<li class="chapter" data-level="11.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>11.2.2</b> Bar plot with multiple series</a></li>
-<li class="chapter" data-level="11.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>11.2.3</b> Facetted bar charts</a></li>
+<li class="chapter" data-level="12" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>12</b> Chart cookbook</a><ul>
+<li class="chapter" data-level="12.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up-1"><i class="fa fa-check"></i><b>12.1</b> Set up</a></li>
+<li class="chapter" data-level="12.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>12.2</b> Bar charts</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>12.2.1</b> Simple bar plot</a></li>
+<li class="chapter" data-level="12.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>12.2.2</b> Bar plot with multiple series</a></li>
+<li class="chapter" data-level="12.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>12.2.3</b> Facetted bar charts</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>11.3</b> Line charts</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>11.3.1</b> Simple line chart</a></li>
-<li class="chapter" data-level="11.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>11.3.2</b> Line chart with multiple series</a></li>
+<li class="chapter" data-level="12.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>12.3</b> Line charts</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>12.3.1</b> Simple line chart</a></li>
+<li class="chapter" data-level="12.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>12.3.2</b> Line chart with multiple series</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>11.4</b> Scatter plots</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>11.4.1</b> Simple scatter plot</a></li>
-<li class="chapter" data-level="11.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>11.4.2</b> Scatter plot with reshaped data</a></li>
-<li class="chapter" data-level="11.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>11.4.3</b> Layered scatter plot</a></li>
-<li class="chapter" data-level="11.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>11.4.4</b> Scatter plots with trendlines</a></li>
-<li class="chapter" data-level="11.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>11.4.5</b> Facetted scatter plots</a></li>
+<li class="chapter" data-level="12.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>12.4</b> Scatter plots</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>12.4.1</b> Simple scatter plot</a></li>
+<li class="chapter" data-level="12.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>12.4.2</b> Scatter plot with reshaped data</a></li>
+<li class="chapter" data-level="12.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>12.4.3</b> Layered scatter plot</a></li>
+<li class="chapter" data-level="12.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>12.4.4</b> Scatter plots with trendlines</a></li>
+<li class="chapter" data-level="12.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>12.4.5</b> Facetted scatter plots</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>11.5</b> Distributions</a></li>
-<li class="chapter" data-level="11.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>11.6</b> Maps</a><ul>
-<li class="chapter" data-level="11.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>11.6.1</b> <code>sf</code> objects</a></li>
-<li class="chapter" data-level="11.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>11.6.2</b> Using <code>absmapsdata</code></a></li>
-<li class="chapter" data-level="11.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>11.6.3</b> Making choropleth maps</a></li>
+<li class="chapter" data-level="12.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>12.5</b> Distributions</a></li>
+<li class="chapter" data-level="12.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>12.6</b> Maps</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>12.6.1</b> <code>sf</code> objects</a></li>
+<li class="chapter" data-level="12.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>12.6.2</b> Using <code>absmapsdata</code></a></li>
+<li class="chapter" data-level="12.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>12.6.3</b> Making choropleth maps</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>11.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
+<li class="chapter" data-level="12.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>12.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced topics</b></span></li>
-<li class="chapter" data-level="12" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>12</b> Creating functions</a><ul>
-<li class="chapter" data-level="12.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>12.1</b> It can be useful to make your own function</a></li>
-<li class="chapter" data-level="12.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>12.2</b> Defining simple functions</a></li>
-<li class="chapter" data-level="12.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>12.3</b> More complex functions</a></li>
-<li class="chapter" data-level="12.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>12.4</b> Sets of functions</a></li>
-<li class="chapter" data-level="12.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>12.5</b> Using <code>purrr::map</code></a></li>
-<li class="chapter" data-level="12.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>12.6</b> Sharing your useful functions with Grattan</a></li>
+<li class="chapter" data-level="13" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>13</b> Creating functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>13.1</b> It can be useful to make your own function</a></li>
+<li class="chapter" data-level="13.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>13.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="13.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>13.3</b> More complex functions</a></li>
+<li class="chapter" data-level="13.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>13.4</b> Sets of functions</a></li>
+<li class="chapter" data-level="13.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>13.5</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="13.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>13.6</b> Sharing your useful functions with Grattan</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>13</b> Version control</a><ul>
-<li class="chapter" data-level="13.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>13.1</b> Version control is important and intimidating</a></li>
-<li class="chapter" data-level="13.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>13.2</b> Github</a></li>
-<li class="chapter" data-level="13.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>13.3</b> Git</a></li>
+<li class="chapter" data-level="14" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>14</b> Version control</a><ul>
+<li class="chapter" data-level="14.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>14.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="14.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>14.2</b> Github</a></li>
+<li class="chapter" data-level="14.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>14.3</b> Git</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -298,29 +305,29 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code>install.packages()</code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="packages.html#cb32-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
 <p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="packages.html#cb33-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan ggplot2 theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="packages.html#cb34-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-packages" class="section level2">
 <h2><span class="header-section-number">5.2</span> Using packages</h2>
 <p>Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code>library()</code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">library</span>(remotes)</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="packages.html#cb35-1"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb35-2"><a href="packages.html#cb35-2"></a></span>
+<span id="cb35-3"><a href="packages.html#cb35-3"></a><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></span>
+<span id="cb35-4"><a href="packages.html#cb35-4"></a></span>
+<span id="cb35-5"><a href="packages.html#cb35-5"></a><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>Or, we can use two colons - <code>::</code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="packages.html#cb36-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>It usually makes sense to load a package with <code>library()</code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code>::</code> operator even if you have already loaded a package with <code>library()</code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
 <div id="tidyverse" class="section level2">
 <h2><span class="header-section-number">5.3</span> The tidyverse!</h2>
 <p>The <code>tidyverse</code> is central to our work at Grattan. The <code>tidyverse</code> is a <a href="https://www.tidyverse.org/packages/">collection of related R packages</a> for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. You install the <code>tidyverse</code> in the <a href="packages.html#install-packages">usual way</a>:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="packages.html#cb37-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>The main packages in the <code>tidyverse</code> include:</p>
 <ul>
 <li><em>ggplot2</em> for making beautiful, customisable graphs</li>
@@ -331,15 +338,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><em>stringr</em> for manipulating strings of text</li>
 </ul>
 <p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ──────────────────</code></pre>
-<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="packages.html#cb38-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>A range of other packages are installed on your machine as part of the <code>tidyverse.</code> These include:</p>
 <ul>
 <li><em>readxl</em> for importing Excel spreadsheets into R</li>
@@ -348,8 +355,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><em>rvest</em> for scraping websites</li>
 </ul>
 <p>Although these packages are installed as part of the <code>tidyverse</code>, they aren’t loaded automatically when you run <code>library(tidyverse)</code>. You’ll need to load them individually, like:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">library</span>(readxl)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="packages.html#cb42-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb42-2"><a href="packages.html#cb42-2"></a><span class="kw">library</span>(readxl)</span></code></pre></div>
 <div id="why-do-we-use-the-tidyverse" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Why do we use the tidyverse?</h3>
 <p>The <code>tidyverse</code> makes life easier!</p>
@@ -357,13 +364,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>tidyverse</code> packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one <code>tidyverse</code> package, like <code>dplyr</code>, are also applicable to other packages, like <code>tidyr</code>.</p>
 <p>They’re designed to work with data frames<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
 <p>The creator of the <code>tidyverse</code>, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the <code>tidyverse</code> idiom is often able to be understood even if you haven’t encountered the functions before. For example, look at this chunk of code:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">my_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="packages.html#cb43-1"></a>my_data <span class="op">%&gt;%</span></span>
+<span id="cb43-2"><a href="packages.html#cb43-2"></a><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></span>
+<span id="cb43-3"><a href="packages.html#cb43-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</span></code></pre></div>
 <p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
 <p>Here’s one way to do the same thing in base R:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="packages.html#cb44-1"></a><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</span>
+<span id="cb44-2"><a href="packages.html#cb44-2"></a>          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</span></code></pre></div>
 <p>The base R code gets the job done, but it’s clunkier, less expressive, and harder to read.</p>
 <p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The <code>tidyverse</code> packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.</p>
@@ -379,23 +386,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><em>grattandata</em> The <code>grattandata</code> package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the <a href="reading-data.html#reading-data">reading data</a> chapter.</p></li>
 </ul>
 <p>Install these Grattan-specific packages using this block of code:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co"># it will install `devtools` for you, which includes `remotes`</span></a>
-<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb45-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb45-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb45-7" data-line-number="7"><span class="co"># Install the `grattan` package from CRAN:</span></a>
-<a class="sourceLine" id="cb45-8" data-line-number="8"><span class="kw">install.packages</span>(<span class="st">&quot;grattan&quot;</span>)</a>
-<a class="sourceLine" id="cb45-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb45-10" data-line-number="10"><span class="co"># Install `grattantheme` and `grattandata` from GitHub:</span></a>
-<a class="sourceLine" id="cb45-11" data-line-number="11">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>,</a>
-<a class="sourceLine" id="cb45-12" data-line-number="12">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb45-13" data-line-number="13">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb45-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb45-15" data-line-number="15">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattandata&quot;</span>,</a>
-<a class="sourceLine" id="cb45-16" data-line-number="16">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb45-17" data-line-number="17">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="packages.html#cb45-1"></a><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></span>
+<span id="cb45-2"><a href="packages.html#cb45-2"></a><span class="co"># it will install `devtools` for you, which includes `remotes`</span></span>
+<span id="cb45-3"><a href="packages.html#cb45-3"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</span>
+<span id="cb45-4"><a href="packages.html#cb45-4"></a>  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb45-5"><a href="packages.html#cb45-5"></a>}</span>
+<span id="cb45-6"><a href="packages.html#cb45-6"></a></span>
+<span id="cb45-7"><a href="packages.html#cb45-7"></a><span class="co"># Install the `grattan` package from CRAN:</span></span>
+<span id="cb45-8"><a href="packages.html#cb45-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;grattan&quot;</span>)</span>
+<span id="cb45-9"><a href="packages.html#cb45-9"></a></span>
+<span id="cb45-10"><a href="packages.html#cb45-10"></a><span class="co"># Install `grattantheme` and `grattandata` from GitHub:</span></span>
+<span id="cb45-11"><a href="packages.html#cb45-11"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>,</span>
+<span id="cb45-12"><a href="packages.html#cb45-12"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb45-13"><a href="packages.html#cb45-13"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb45-14"><a href="packages.html#cb45-14"></a></span>
+<span id="cb45-15"><a href="packages.html#cb45-15"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattandata&quot;</span>,</span>
+<span id="cb45-16"><a href="packages.html#cb45-16"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb45-17"><a href="packages.html#cb45-17"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="other-commonly-used-packages" class="section level2">
 <h2><span class="header-section-number">5.5</span> Other commonly-used packages</h2>
@@ -405,32 +412,37 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><em>readabs</em> The <code>readabs</code> package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.</p></li>
 </ul>
 <p>To install these packages, run this code:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># Install the `readabs` package from CRAN</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;readabs&quot;</span>)</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co"># it will install `devtools` for you, which includes `remotes`</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6"><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb46-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>,</a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</a>
-<a class="sourceLine" id="cb46-12" data-line-number="12">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="packages.html#cb46-1"></a><span class="co"># Install the `readabs` package from CRAN</span></span>
+<span id="cb46-2"><a href="packages.html#cb46-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;readabs&quot;</span>)</span>
+<span id="cb46-3"><a href="packages.html#cb46-3"></a></span>
+<span id="cb46-4"><a href="packages.html#cb46-4"></a><span class="co"># This code checks to see if you have the `remotes` package installed; if not,</span></span>
+<span id="cb46-5"><a href="packages.html#cb46-5"></a><span class="co"># it will install `devtools` for you, which includes `remotes`</span></span>
+<span id="cb46-6"><a href="packages.html#cb46-6"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</span>
+<span id="cb46-7"><a href="packages.html#cb46-7"></a>  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb46-8"><a href="packages.html#cb46-8"></a>}</span>
+<span id="cb46-9"><a href="packages.html#cb46-9"></a></span>
+<span id="cb46-10"><a href="packages.html#cb46-10"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>,</span>
+<span id="cb46-11"><a href="packages.html#cb46-11"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>,</span>
+<span id="cb46-12"><a href="packages.html#cb46-12"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="upgrading-packages" class="section level2">
+<h2><span class="header-section-number">5.6</span> Upgrading packages</h2>
+<p>It’s generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="packages.html#cb47-1"></a>devtools<span class="op">::</span><span class="kw">update_packages</span>()</span></code></pre></div>
+<p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
+<p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code>install_version()</code> function, like this:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="packages.html#cb48-1"></a>devtools<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;1.13.3&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="6">
-<li id="fn6"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages.html#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages.html#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -439,7 +451,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="coding-style.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="reading-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-help-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -83,20 +83,20 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ──────────────────
+## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
-## ── Conflicts ── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 A range of other packages are installed on your machine as part of the `tidyverse.` These include:
@@ -208,4 +208,24 @@ remotes::install_github("wfmackey/absmapsdata",
                         upgrade = "always",
                         dependencies = TRUE)
 ```
+
+## Upgrading packages
+
+It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
+
+
+```r
+devtools::update_packages()
+```
+
+This will upgrade all your packages - including those you've installed from CRAN and Github. 
+
+Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out ('deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the `install_version()` function, like this:
+
+
+```r
+devtools::install_version("devtools", "1.13.3")
+```
+
+
 
