@@ -3,13 +3,17 @@
 
 Most people reading this guide will know what R is. But if you don't - that's OK! 
 
-If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R.
+If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R. Soon, this will be you!
+
+![](https://user-images.githubusercontent.com/8002951/72567131-5dd5c100-3909-11ea-8d2a-a6469bf4f432.gif)<!-- -->
 
 ## What is R?
 
-R is a programming language. *That sounds scarier than it really is*. R is software you use to work with data. R is available for Windows, macOS and Linux.
+R is a programming language. *That sounds scarier than it really is!* Don't freak out. R is software you use to work with data, just like Excel, Stata, or SPSS. 
 
-R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
+R is available for Windows, macOS and Linux. One of R's best features: it's free!
+
+One of R's strengths is that it was designed by and for statisticians, data scientists, and other people who work with data. This can also be one of its weaknesses - statisticians aren't always the best at designing software that's easy to use out of the box. 
 
 R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. Everything you can do in Excel, you can (and generally should!) do in R. (See [the next page](#why-script) for more on why we usually use R rather than Excel.)
 
@@ -46,7 +50,7 @@ For macOS, the page will look like this:
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-<img src="atlas/r_cran_windows_1.png" width="1130" /><img src="atlas/r_cran_windows_2.png" width="1128" />
+<img src="atlas/r_cran_windows_1.png" width="565" /><img src="atlas/r_cran_windows_2.png" width="564" />
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 

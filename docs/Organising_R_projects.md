@@ -27,28 +27,34 @@ In the [words of Jenny Bryan](https://www.tidyverse.org/articles/2017/12/workflo
 
 Seems fair. 
 
-Creating a 'project' in RStudio sets your working directory in a way that's portable across machines. Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
+Creating a 'project' in RStudio sets your working directory in a way that's portable across machines.
+
+### How to create a project 
+
+Creating an RStudio project is straightforward: **click File, then New Project**. You can then choose to start your project in a new directory, or an existing directory. Simple!
 
 <img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;" />
 
-RStudio will then create a file with an .Rproj extension in the folder you've chosen. When you want to work in this project, just open the .Rproj file, or click File -> Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
+RStudio will then create a file with an .Rproj extension in the folder you've chosen. 
+
+### Opening a project
+When you want to work on a particular project, just open the `.Rproj` file, or click File -> Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.
 
 ## Use relative filepaths
 
-A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths. 
-Machine-specific filepaths not only stop you from sharing your work with others, they're also super annoying for! Who wants to type out a full filepath everytime you load or save a file? 
+A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths. Machine-specific filepaths not only stop you from sharing your work with others, they're also super annoying for you! Who wants to type out a full filepath everytime you load or save a file? 
 
-**Bad, machine-specific filepaths**
+**Bad, machine-specific filepaths, boo, hiss**
 
 ```r
 hes <- read_csv("/Users/mcowgill/Desktop/hes1516.csv")
-hes <- read_csb("C:\Users\mcowgill\Desktop\hes1516.csv")
+hes <- read_csv("C:\Users\mcowgill\Desktop\hes1516.csv")
 grattan_save("/Users/mcowgill/Desktop/images/expenditure_by_income.pdf")
 ```
 
 Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.
 
-**Good, relative filepaths**
+**Good, relative filepaths, cool, yay**
 
 
 ```r
@@ -56,7 +62,9 @@ hes <- read_csv("data/HES/hes1516.csv")
 grattan_save("atlas/expenditure_by_income.pdf")
 ```
 
-The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way.
+The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way. 
+
+At Grattan, we even have our own R package, called [grattandata](https://github.com/grattan/grattandata) that helps load certain types of data in R in a way that makes your script portable and reusable by colleagues. We cover that more in the [Reading Data chapter](#read_microdata).
 
 ## Keep your stuff together
 

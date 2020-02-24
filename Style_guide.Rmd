@@ -12,7 +12,7 @@ The benefits of a common coding style are well explained [by Hadley Wickham](htt
 
 Below we describe the **key** elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, [consult the `tidyverse` guide](https://style.tidyverse.org/). 
 
-You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
+You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up your project.
 
 ## Load packages first
 
@@ -322,3 +322,8 @@ The pipe function `%>%` can make code more easy to write and read. The pipe can 
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things. 
 
+## Omit needless code
+
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
+
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with `View(mydf)` or `str(mydf)`. This is fine, and often necessary, when you're doing your analysis. **Don't keep these commands in your script**. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them. 

@@ -128,7 +128,7 @@ c <- bind_rows(a, b)
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="550" />
+<img src="atlas/rstudio_navigation.png" width="275" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
@@ -343,3 +343,8 @@ The pipe function `%>%` can make code more easy to write and read. The pipe can 
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things. 
 
+## Omit needless code
+
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
+
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with `View(mydf)` or `str(mydf)`. This is fine, and often necessary, when you're doing your analysis. **Don't keep these commands in your script**. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them. 
