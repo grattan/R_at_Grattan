@@ -5,8 +5,6 @@ Most people reading this guide will know what R is. But if you don't - that's OK
 
 If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R. Soon, this will be you!
 
-![](https://user-images.githubusercontent.com/8002951/72567131-5dd5c100-3909-11ea-8d2a-a6469bf4f432.gif)<!-- -->
-
 ## What is R?
 
 R is a programming language. *That sounds scarier than it really is!* Don't freak out. R is software you use to work with data, just like Excel, Stata, or SPSS. 
@@ -50,7 +48,7 @@ For macOS, the page will look like this:
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-<img src="atlas/r_cran_windows_1.png" width="565" /><img src="atlas/r_cran_windows_2.png" width="564" />
+<img src="atlas/r_cran_windows_1.png" width="1130" /><img src="atlas/r_cran_windows_2.png" width="1128" />
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 
@@ -58,4 +56,10 @@ Once they're both installed, get started by opening RStudio.
 
 ## Learning more about R
 
-This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online.
+This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online. There's even an active [R for Data Science community online](https://www.rfordatasci.com) that shares tips and solutions to R problems.
+
+
+## `#r_at_grattan`
+A great way to learn about R is to ask a Grattan person! Pose a question in the `#r_at_grattan` channel in Grattan Slack and someone will be sure to answer it.
+
+At Grattan, none of us is a programmer first and foremost. We're a motley crew of economists, lawyers, doctors, scientists and philopsophers who have learned how to code so we can work with data. Don't feel bad if you don't know what you're doing yet -- we've all been there and are happy to help you get up to speed.

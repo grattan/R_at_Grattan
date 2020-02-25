@@ -144,3 +144,20 @@ rm(list = ls())
 ```
 
 This removes all objects from your environment. But it doesn't completely clear your R environment, and it doesn't do anything to any packages you have loaded. As [Jenny Bryan puts it](https://rstats.wtf/save-source.html#rm-list-ls), this command is "a red flag, because it is indicative of a non-reproducible workflow."
+
+## Quick guide to starting a project {#quick-guide}
+
+When you're starting a new project:
+
+1. Open RStudio;
+2. Click 'File -> New project'
+3. Click 'New Directory'
+4. Click 'New Project'
+5. Give your new project a name, choose where it should go, and click 'Create Project'
+6. Create subfolders in your project folder using the 'New Folder' button (by default in the lower-right pane of RStudio) - start with an 'R' folder
+7. Click 'File -> New File -> R Script'
+8. Save your R script in your R folder.
+
+Now you've got a good shell of a project - a dedicated folder, with an associated RStudio project, and at least one subfolder. This is a good base to start your work.
+
+

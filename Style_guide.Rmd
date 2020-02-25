@@ -14,6 +14,8 @@ Below we describe the **key** elements of Grattan coding style, without being to
 
 You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up your project.
 
+A core principle for coding at Grattan is that your code should be **readable by humans**. 
+
 ## Load packages first
 
 Our analysis scripts will almost always involve loading some [packages](#packages). These should be laoded at the top of a script, in one block like this:

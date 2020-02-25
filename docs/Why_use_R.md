@@ -39,4 +39,4 @@ We use R specifically because:
 * It's flexible and customisable.
 * It has an active community extending its capabilities all the time and providing support online.
 * It can be used to make publication-quality graphs.
-* It is becoming the norm in academic research and common in the corporate world.
+* It's becoming the norm in academic research and common in the corporate world.

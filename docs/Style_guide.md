@@ -10,7 +10,9 @@ The benefits of a common coding style are well explained [by Hadley Wickham](htt
 
 Below we describe the **key** elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, [consult the `tidyverse` guide](https://style.tidyverse.org/). 
 
-You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
+You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up your project.
+
+A core principle for coding at Grattan is that your code should be **readable by humans**. 
 
 ## Load packages first
 
@@ -128,7 +130,7 @@ c <- bind_rows(a, b)
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="275" />
+<img src="atlas/rstudio_navigation.png" width="550" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Will Mackey and Matt Cowgill" />
 
 
-<meta name="date" content="2019-12-27" />
+<meta name="date" content="2020-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,6 +137,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-more-about-r"><i class="fa fa-check"></i><b>1.4</b> Learning more about R</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r_at_grattan"><i class="fa fa-check"></i><b>1.5</b> <code>#r_at_grattan</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a><ul>
 <li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
@@ -153,7 +154,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.4</b> Keep your scripts manageable</a></li>
 <li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#make-your-filenames-readable-by-both-machines-and-humans"><i class="fa fa-check"></i><b>3.5</b> Make your filenames readable by both machines and humans</a></li>
 <li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
-<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#omit-needless-code"><i class="fa fa-check"></i><b>3.7</b> Omit needless code</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.7</b> Keep your workspace clean</a></li>
+<li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#quick-guide"><i class="fa fa-check"></i><b>3.8</b> Quick guide to starting a project</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a><ul>
 <li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#load-packages-first"><i class="fa fa-check"></i><b>4.1</b> Load packages first</a></li>
@@ -168,9 +170,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.7.3</b> Parentheses</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#short-lines-line-indentation-and-the-pipe"><i class="fa fa-check"></i><b>4.8</b> Short lines, line indentation and the pipe <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="4.9" data-path="coding-style.html"><a href="coding-style.html#omit-needless-code"><i class="fa fa-check"></i><b>4.9</b> Omit needless code</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>5</b> Packages commonly used at Grattan</a><ul>
-<li class="chapter" data-level="5.1" data-path="packages.html"><a href="packages.html#install-packages"><i class="fa fa-check"></i><b>5.1</b> Installing packages</a></li>
+<li class="chapter" data-level="5.1" data-path="packages.html"><a href="packages.html#install-packages"><i class="fa fa-check"></i><b>5.1</b> How to install packages</a></li>
 <li class="chapter" data-level="5.2" data-path="packages.html"><a href="packages.html#using-packages"><i class="fa fa-check"></i><b>5.2</b> Using packages</a></li>
 <li class="chapter" data-level="5.3" data-path="packages.html"><a href="packages.html#tidyverse"><i class="fa fa-check"></i><b>5.3</b> The tidyverse!</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="packages.html"><a href="packages.html#why-do-we-use-the-tidyverse"><i class="fa fa-check"></i><b>5.3.1</b> Why do we use the tidyverse?</a></li>
@@ -188,9 +191,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>7</b> Reading data</a><ul>
 <li class="chapter" data-level="7.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>7.1</b> Importing data</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>7.1.1</b> Reading CSV files</a></li>
-<li class="chapter" data-level="7.1.2" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>7.1.2</b> <code>readxl::read_excel()</code></a></li>
-<li class="chapter" data-level="7.1.3" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>7.1.3</b> <code>rio</code></a></li>
-<li class="chapter" data-level="7.1.4" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>7.1.4</b> <code>readabs</code></a></li>
+<li class="chapter" data-level="7.1.2" data-path="reading-data.html"><a href="reading-data.html#read_microdata"><i class="fa fa-check"></i><b>7.1.2</b> <code>grattandata::read_microdata()</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>7.1.3</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>7.1.4</b> <code>rio</code></a></li>
+<li class="chapter" data-level="7.1.5" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>7.1.5</b> <code>readabs</code></a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>7.2</b> Reading common files:</a></li>
 <li class="chapter" data-level="7.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>7.3</b> Appropriately renaming variables</a></li>
@@ -278,7 +282,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>14.2</b> Github</a></li>
 <li class="chapter" data-level="14.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>14.3</b> Git</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -341,11 +344,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">hes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/HES/hes1516.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/expenditure_by_income.pdf&quot;</span>)</a></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
-<p>At Grattan, we even have our own R package, called <a href="https://github.com/grattan/grattandata">grattandata</a> that helps load certain types of data in R in a way that makes your script portable and reusable by colleagues. We cover that more in the <a href="#read_microdata">Reading Data chapter</a>.</p>
+<p>At Grattan, we even have our own R package, called <a href="https://github.com/grattan/grattandata">grattandata</a> that helps load certain types of data in R in a way that makes your script portable and reusable by colleagues. We cover that more in the <a href="reading-data.html#read_microdata">Reading Data chapter</a>.</p>
 </div>
 <div id="keep-your-stuff-together" class="section level2">
 <h2><span class="header-section-number">3.3</span> Keep your stuff together</h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> That place should be the folder that contains the .Rproj file that was created when you created an RStudio project, and subfolders of that folder.</p>
+<p>Your script(s), data, and output should generally all live in the same place.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
@@ -354,7 +357,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>your graphs - called ‘atlas’, like in our LaTeX projects</li>
 <li>your non-graph output, like formatted tables, called ‘output’</li>
 </ul>
-<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Don’t keep ‘raw’ data together in the same place as data you’ve modified.</p>
+<p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way. Don’t keep ‘raw’ data together in the same place as data you’ve modified.</p>
+<p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.</p>
 </div>
 <div id="manageable" class="section level2">
 <h2><span class="header-section-number">3.4</span> Keep your scripts manageable</h2>
@@ -366,6 +370,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>03_model.R</li>
 <li>04_visualise.R</li>
 </ul>
+<p>You don’t need to use these filenames. Think about what works best for your project.</p>
 <p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more <a href="coding-style.html#use-comments">elsewhere in this guide</a>). At the end of each script, you can save the script’s output, and then load the file you create in the next script.</p>
 </div>
 <div id="make-your-filenames-readable-by-both-machines-and-humans" class="section level2">
@@ -380,7 +385,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>They’re sortable - they start with a number. They don’t have spaces, so any and all software should be able to handle them. And, even though they’re short and minimal, they give humans a good idea about what the files do. These are what you should strive for when choosing filenames.</p>
 <p>For more on good principles for naming files, see <a href="https://speakerdeck.com/jennybc/how-to-name-files">this excellent presentation by Jenny Bryan</a>, which includes the following examples:</p>
 <p><img src="atlas/jenny_bryan_filenames.png" width="66%" style="display: block; margin: auto;" /></p>
-<p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) We’re all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like <code>cool_word_doc_002.docx</code>. Try to avoid replicating this nightmare in R.</p>
+<p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) We’re all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like <code>cool_word_doc_002.docx</code>. Soon enough your hard drive and email client is cluttered with endless iterations of your document. Try to avoid replicating this nightmare in R.</p>
 <p>If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive”. To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
 </div>
 <div id="README" class="section level2">
@@ -389,24 +394,35 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.</p>
 <p>Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn’t clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.</p>
 </div>
-<div id="omit-needless-code" class="section level2">
-<h2><span class="header-section-number">3.7</span> Omit needless code</h2>
-<p>Don’t retain code that ultimately didn’t lead anywhere. If you produced a graph that ended up not being used, don’t keep the code in your script - if you want to save it, move it to a subfolder named ‘archive’ or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn’t have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.</p>
-<p>When you’re doing data analysis, you’ll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with <code>View(mydf)</code> or <code>str(mydf)</code>. This is fine, and often necessary, when you’re doing your analysis. <strong>Don’t keep these commands in your script</strong>. These type of commands should usually be entered straight into the R console, not in a script. If they’re in your script, delete them.
-## Keep your workspace clean {#clean-workspace}</p>
-<p>Sometimes R doesn’t behave the way you expect it to. You might run a script and find it works find, then run it again and find it’s producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn’t have originally, or some extra packages loaded.</p>
+<div id="clean-workspace" class="section level2">
+<h2><span class="header-section-number">3.7</span> Keep your workspace clean</h2>
+<p>Sometimes R doesn’t behave the way you expect it to. You might run a script and find it works fine, then run it again and find it’s producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn’t have originally, or some extra packages loaded.</p>
 <p>To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.</p>
 <p><em>But</em>… don’t clean your workspace within your analysis script. People sometimes do this using this command:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow.”</p>
+</div>
+<div id="quick-guide" class="section level2">
+<h2><span class="header-section-number">3.8</span> Quick guide to starting a project</h2>
+<p>When you’re starting a new project:</p>
+<ol style="list-style-type: decimal">
+<li>Open RStudio;</li>
+<li>Click ‘File -&gt; New project’</li>
+<li>Click ‘New Directory’</li>
+<li>Click ‘New Project’</li>
+<li>Give your new project a name, choose where it should go, and click ‘Create Project’</li>
+<li>Create subfolders in your project folder using the ‘New Folder’ button (by default in the lower-right pane of RStudio) - start with an ‘R’ folder</li>
+<li>Click ‘File -&gt; New File -&gt; R Script’</li>
+<li>Save your R script in your R folder.</li>
+</ol>
+<p>Now you’ve got a good shell of a project - a dedicated folder, with an associated RStudio project, and at least one subfolder. This is a good base to start your work.</p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-projects.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.<a href="organising-projects.html#fnref2" class="footnote-back">↩</a></p></li>
+<ol start="3">
+<li id="fn3"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-projects.html#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -465,6 +481,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

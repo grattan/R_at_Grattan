@@ -1,14 +1,16 @@
 # Packages commonly used at Grattan {#packages}
 
-R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. Like R itself, packages are free and open source. You can install them from within RStudio.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. But using packages will make your life easier.
 
-Some packages - like the `tidyverse` collection of packages - are broadly popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+Like R itself, packages are free and open source. You can install them from within RStudio.
 
-## Installing packages {#install-packages}
+Some packages we use - like the `tidyverse` collection of packages - are very popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+## How to install packages {#install-packages}
 
 You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
 
-In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
+In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
 
 To install a package from CRAN, we use the command `install.packages()`.
 
@@ -35,7 +37,7 @@ remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade
 
 ## Using packages
 
-Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that. 
+Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that. 
 
 We can either load (aka 'attach') the package by using the `library()` function. We typically do this at the top of a script.
 
@@ -83,18 +85,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ───────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
-## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
-## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.4.0
+## ✓ ggplot2 3.3.0.9000     ✓ purrr   0.3.3     
+## ✓ tibble  2.1.3          ✓ dplyr   0.8.4     
+## ✓ tidyr   1.0.0          ✓ stringr 1.4.0     
+## ✓ readr   1.3.1          ✓ forcats 0.4.0
 ```
 
 ```
-## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```

@@ -5,8 +5,6 @@ Most people reading this guide will know what R is. But if you don't - that's OK
 
 If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R. Soon, this will be you!
 
-`r knitr::include_graphics("https://user-images.githubusercontent.com/8002951/72567131-5dd5c100-3909-11ea-8d2a-a6469bf4f432.gif")`
-
 ## What is R?
 
 R is a programming language. *That sounds scarier than it really is!* Don't freak out. R is software you use to work with data, just like Excel, Stata, or SPSS. 

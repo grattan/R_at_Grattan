@@ -1,5 +1,9 @@
 # Getting help with R 
 
+https://mobile.twitter.com/sctyner/status/1206986161434058752
+
+https://sctyner.github.io/rhelp.html
+
 ## Resources for learning R
 
 R4DS, et al.
