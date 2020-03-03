@@ -10,7 +10,9 @@ The benefits of a common coding style are well explained [by Hadley Wickham](htt
 
 Below we describe the **key** elements of Grattan coding style, without being too tedious about it all. There are many elements of coding style we don't cover in this guide; if you're unsure about anything, [consult the `tidyverse` guide](https://style.tidyverse.org/). 
 
-You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up projects.
+You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up your project.
+
+A core principle for coding at Grattan is that your code should be **readable by humans**. 
 
 ## Load packages first
 
@@ -126,6 +128,8 @@ b <- read_csv("data/b.csv")
 c <- bind_rows(a, b)
 ```
 
+(In practice, you'll have more than one line of code in each block.)
+
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
 <img src="atlas/rstudio_navigation.png" width="550" />
@@ -167,7 +171,7 @@ The `<<-` operator should also be avoided.
 
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called `ed_by_age` or `edByAge` or `ed.by.age`. Having a consistent naming convention across Grattan also makes it easy to read and QC each other's code.
 
-Grattan primarily uses _words separated by underscores_ `_` (aka 'snake_case') to name objects and variables. This is [considered good practice across the Tidyverse](https://style.tidyverse.org/syntax.html#object-names). 
+Grattan uses _words separated by underscores_ `_` (aka 'snake_case') to name objects and variables. This is [common practice across the Tidyverse](https://style.tidyverse.org/syntax.html#object-names). 
 Object names should be descriptive and not-too-long. This is a trade-off, and one that's sometimes hard to get right. However, using snake_case provides consistency:
 
 **Good object names**
@@ -206,7 +210,25 @@ chaosVar_name.silly
 var2
 ```
 
-When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. 
+When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. An easy way to do this is using `clean_names()` function from the `janitor` package:
+
+
+
+```r
+df_with_bad_names <- data.frame(firstColumn = c(1:3),
+                                Second.column = c(4:6))
+
+df_with_good_names <- janitor::clean_names(df_with_bad_names)
+
+df_with_good_names
+```
+
+```
+##   first_column second_column
+## 1            1             4
+## 2            2             5
+## 3            3             6
+```
 
 The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.
 
@@ -248,7 +270,6 @@ uni_attainment$ age [ 1 : 10]
 readabs :: read_abs()
 ```
 
-
 ### Commas
 Always put a space _after_ a comma and not before, just like in regular English.
 
@@ -262,6 +283,7 @@ select(data, age, gender, sa2, sa3)
 
 ```r
 select(data,age,gender,sa2,sa3)
+select(data ,age ,gender ,sa2 ,sa3)
 ```
 
 ### Parentheses
@@ -285,7 +307,7 @@ For spacing rules around `if`, `for`, `while`, and `function`, see [the Tidyvers
 
 ## Short lines, line indentation and the pipe `%>%`
 
-It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the `rename` and `filter` examples below. Indentation makes it clear where a code block starts and finishes.
+Keeping your lines of code short and indenting them in a consistent way can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit enter/return after the comma, like in the `rename` and `filter` examples below. Indentation makes it clear where a code block starts and finishes.
 
 Using pipes (`%>%`) instead of nesting functions also makes things clearer.^[The pipe is from the `magrittr` package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the [`tidyverse`](#tidyverse).] The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
@@ -297,8 +319,10 @@ young_qual_income <- data %>%
          uni_attainment = high.ed) %>%
   filter(income > 0,
          age >= 25 & age <= 34) %>%
-  group_by(gender, uni_attainment) %>%
-  summarise(mean_income = mean(income, na.rm = TRUE))
+  group_by(gender, 
+           uni_attainment) %>%
+  summarise(mean_income = mean(income, 
+                               na.rm = TRUE))
 ```
 
 Without indentation, the code is harder to read. It's not clear where the chunk starts and finishes, and which bits of code are arguments to which functions.
@@ -343,3 +367,8 @@ The pipe function `%>%` can make code more easy to write and read. The pipe can 
 
 Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things. 
 
+## Omit needless code
+
+Don't retain code that ultimately didn't lead anywhere. If you produced a graph that ended up not being used, don't keep the code in your script - if you want to save it, move it to a subfolder named 'archive' or similar. Your code should include the steps needed to go from your raw data to your output - and not extraneous steps. If you ask someone to QC your work, they shouldn't have to wade through 1000 lines of code just to find the 200 lines that are actually required to produce your output.
+
+When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with `View(mydf)` or `str(mydf)`. This is fine, and often necessary, when you're doing your analysis. **Don't keep these commands in your script**. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them. 

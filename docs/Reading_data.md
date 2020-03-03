@@ -28,7 +28,7 @@ This is useful for two reasons:
 
 The `fread` function from `data.table` is quicker than both `read.csv` and `read_csv`. 
 
-
+### `grattandata::read_microdata()` {#read_microdata}
 
 ### `readxl::read_excel()`
 

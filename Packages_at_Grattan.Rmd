@@ -1,14 +1,14 @@
-# Packages commonly used at Grattan {#packages}
+# What are packages? {#packages}
 
-R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot all using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. Like R itself, packages are free and open source. You can install them from within RStudio.
+R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. But using packages will make your life easier.
 
-Some packages - like the `tidyverse` collection of packages - are broadly popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+Like R itself, packages are free and open source. You can install them from within RStudio.
 
-## Installing packages {#install-packages}
+## How to install packages {#install-packages}
 
 You'll typically install packages using the console in RStudio. That's the part of the window that, by default, sits in the bottom-left corner of the screen.
 
-In our work at Grattan, we use packages from two different source: CRAN and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
+In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.
 
 To install a package from CRAN, we use the command `install.packages()`.
 
@@ -30,9 +30,28 @@ Now we can install packages from Github using the `install_github()` function fr
 remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade = "always")
 ```
 
+## Get set up: install packages for Grattan
+
+Just starting out or setting up a new machine? Run this block of code to get yourself all set up:
+
+```{r eval = FALSE}
+cran_packages <- c("devtools", "tidyverse", "readabs", "janitor", "grattan",
+                   "rio")
+
+install.packages(cran_packages)
+
+github_packages <- c("grattan/grattantheme", "grattan/grattandata",
+                     "wfmackey/absmapsdata")
+
+remotes::install_github(github_packages,
+                        dependencies = TRUE,
+                        upgrade = "always")
+
+```
+
 ## Using packages
 
-Before using a function that comes from a package, as opposed to base R, you need to tell R where to look for the function. There are two main ways to do that. 
+Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that. 
 
 We can either load (aka 'attach') the package by using the `library()` function. We typically do this at the top of a script.
 
@@ -52,14 +71,37 @@ remotes::install_github("mattcowgill/grattantheme")
 
 It usually makes sense to load a package with `library()`, unless you only need to use one of its function once or twice. There's no harm to using the `::` operator even if you have already loaded a package with `library()`. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
-## The tidyverse! {#tidyverse}
+## Upgrading packages
 
-The `tidyverse` is central to our work at Grattan. The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. You install the `tidyverse` in the [usual way](#install-packages):
+It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
 
-```{r, eval = FALSE}
-install.packages("tidyverse")
+```{r eval = FALSE}
+devtools::update_packages()
 ```
 
+This will upgrade all your packages - including those you've installed from CRAN and Github. 
+
+When you run the above command, it will prompt you to ask which packages you want to update - press 1 for 'All'. 
+
+If it asks you 'Do you want to install from sources the package which needs compilation?' type 'no' and press enter.[^Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.]
+
+## Downgrading packages 
+
+Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out ('deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the `install_version()` function, like this:
+
+```{r eval = FALSE}
+devtools::install_version("devtools", "1.13.3")
+```
+
+It's rare that you'd need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.
+
+# Packages commonly used at Grattan
+
+Some packages we use at Grattan - like the `tidyverse` collection of packages - are very popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+## The tidyverse! {#tidyverse}
+
+The `tidyverse` is central to our work at Grattan. The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. 
 The main packages in the `tidyverse` include:
 
 * *ggplot2* for making beautiful, customisable graphs
@@ -118,11 +160,11 @@ transform(my_data[my_data$age >= 30, ],
 
 ```
 
-The base R code gets the job done, but it's clunkier, less expressive, and harder to read. 
+The base R code gets the job done, but it's clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work **human readable**.
 
 Code written with `tidyverse` functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern anyway.^[When working with very large datasets, it might be worth gaining speed using other packages, such as [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html). Fortunately, using the `dtplyr` package you can get most of the speed benefits of `data.table` and stick to familiar `dplyr` syntax.]
 
-The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The `tidyverse` packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.
+The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The `tidyverse` packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan. This balance is the right one for most of our work, most of the time.
 
 Most R scripts at Grattan should start with `library(tidyverse)`. Most of your work will be in data frames, and most of the time the `tidyverse` contains the core tools you'll need to do that work.
 
@@ -132,32 +174,11 @@ A range of Grattan people have written packages that come in handy at Grattan.
 
 * *grattan* The `grattan` package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname "Grattax") is used for modelling the personal income tax system. Another set of functions ("Grattools") are useful for a lot of our work, like converting dates to financial years (`grattan::date2fy()`) or a version of `dplyr::ntile()` that uses weights (`grattan::weighted_ntile()`). 
 
-* *grattantheme* The `grattantheme` package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter. **NOTE: ADD LINK**.
+* *grattantheme* The `grattantheme` package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 
-* *grattandata* The `grattandata` package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the [reading data](#reading-data) chapter.
+* *grattandata* The `grattandata` package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the [reading data](#reading-data) chapter.
 
 Install these Grattan-specific packages using this block of code:
-
-```{r install-grattan-packages, eval = FALSE}
-# This code checks to see if you have the `remotes` package installed; if not,
-# it will install `devtools` for you, which includes `remotes`
-if(!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("devtools")
-}
-
-# Install the `grattan` package from CRAN:
-install.packages("grattan")
-
-# Install `grattantheme` and `grattandata` from GitHub:
-remotes::install_github("mattcowgill/grattantheme",
-                        upgrade = "always",
-                        dependencies = TRUE)
-
-remotes::install_github("mattcowgill/grattandata",
-                        upgrade = "always",
-                        dependencies = TRUE)
-
-```
 
 ## Other commonly-used packages
 
@@ -166,22 +187,3 @@ There are other packages we commonly use at Grattan, including some developed by
 * *absmapsdata* This package, by Will Mackey, is very handy for working with spatial data. You'll want it if you're going to be making maps.
 
 * *readabs* The `readabs` package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.
-
-To install these packages, run this code:
-```{r install-other-packages, eval = FALSE}
-
-# Install the `readabs` package from CRAN
-install.packages("readabs")
-
-# This code checks to see if you have the `remotes` package installed; if not,
-# it will install `devtools` for you, which includes `remotes`
-if(!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("devtools")
-}
-
-remotes::install_github("wfmackey/absmapsdata",
-                        upgrade = "always",
-                        dependencies = TRUE)
-
-```
-

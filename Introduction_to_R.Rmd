@@ -3,13 +3,15 @@
 
 Most people reading this guide will know what R is. But if you don't - that's OK! 
 
-If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R.
+If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page is intended for people who are unfamiliar with R. Soon, this will be you!
 
 ## What is R?
 
-R is a programming language. *That sounds scarier than it really is*. R is software you use to work with data. R is available for Windows, macOS and Linux.
+R is a programming language. *That sounds scarier than it really is!* Don't freak out. R is software you use to work with data, just like Excel, Stata, or SPSS. 
 
-R was designed by and for statisticians, data scientists, and other people who work with data. One of R's best features: it's free!
+R is available for Windows, macOS and Linux. One of R's best features: it's free!
+
+One of R's strengths is that it was designed by and for statisticians, data scientists, and other people who work with data. This can also be one of its weaknesses - statisticians aren't always the best at designing software that's easy to use out of the box. 
 
 R has a lot in common with other statistical software like SAS, Stata, SPSS or Eviews. You can use those software packages to read data, manipulate it, generate summary statistics, estimate models, and so on. You can use R for all those things and more. Everything you can do in Excel, you can (and generally should!) do in R. (See [the next page](#why-script) for more on why we usually use R rather than Excel.)
 
@@ -57,4 +59,10 @@ Once they're both installed, get started by opening RStudio.
 
 ## Learning more about R
 
-This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online.
+This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online. There's even an active [R for Data Science community online](https://www.rfordatasci.com) that shares tips and solutions to R problems.
+
+
+## `#r_at_grattan`
+A great way to learn about R is to ask a Grattan person! Pose a question in the `#r_at_grattan` channel in Grattan Slack and someone will be sure to answer it.
+
+At Grattan, none of us is a programmer first and foremost. We're a motley crew of economists, lawyers, doctors, scientists and philopsophers who have learned how to code so we can work with data. Don't feel bad if you don't know what you're doing yet -- we've all been there and are happy to help you get up to speed.
