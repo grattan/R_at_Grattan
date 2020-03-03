@@ -305,7 +305,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="packages" class="section level1">
 <h1><span class="header-section-number">5</span> What are packages?</h1>
-<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. But using packages will make your life easier.</p>
+<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. But using packages will make your life easier.</p>
 <p>Like R itself, packages are free and open source. You can install them from within RStudio.</p>
 <div id="install-packages" class="section level2">
 <h2><span class="header-section-number">5.1</span> How to install packages</h2>
@@ -313,44 +313,44 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code>install.packages()</code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan ggplot2 theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
 </div>
 <div id="get-set-up-install-packages-for-grattan" class="section level2">
 <h2><span class="header-section-number">5.2</span> Get set up: install packages for Grattan</h2>
 <p>Just starting out or setting up a new machine? Run this block of code to get yourself all set up:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">cran_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;readabs&quot;</span>, <span class="st">&quot;janitor&quot;</span>, <span class="st">&quot;grattan&quot;</span>,</a>
-<a class="sourceLine" id="cb37-2" title="2">                   <span class="st">&quot;rio&quot;</span>)</a>
-<a class="sourceLine" id="cb37-3" title="3"></a>
-<a class="sourceLine" id="cb37-4" title="4"><span class="kw">install.packages</span>(cran_packages)</a>
-<a class="sourceLine" id="cb37-5" title="5"></a>
-<a class="sourceLine" id="cb37-6" title="6">github_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;grattan/grattantheme&quot;</span>, <span class="st">&quot;grattan/grattandata&quot;</span>,</a>
-<a class="sourceLine" id="cb37-7" title="7">                     <span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
-<a class="sourceLine" id="cb37-8" title="8"></a>
-<a class="sourceLine" id="cb37-9" title="9">remotes<span class="op">::</span><span class="kw">install_github</span>(github_packages,</a>
-<a class="sourceLine" id="cb37-10" title="10">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb37-11" title="11">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">cran_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;readabs&quot;</span>, <span class="st">&quot;janitor&quot;</span>, <span class="st">&quot;grattan&quot;</span>,</a>
+<a class="sourceLine" id="cb4-2" title="2">                   <span class="st">&quot;rio&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">install.packages</span>(cran_packages)</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">github_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;grattan/grattantheme&quot;</span>, <span class="st">&quot;grattan/grattandata&quot;</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">                     <span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">remotes<span class="op">::</span><span class="kw">install_github</span>(github_packages,</a>
+<a class="sourceLine" id="cb4-10" title="10">                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-11" title="11">                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
 </div>
 <div id="using-packages" class="section level2">
 <h2><span class="header-section-number">5.3</span> Using packages</h2>
 <p>Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code>library()</code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">library</span>(remotes)</a>
-<a class="sourceLine" id="cb38-2" title="2"></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></a>
-<a class="sourceLine" id="cb38-4" title="4"></a>
-<a class="sourceLine" id="cb38-5" title="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(remotes)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
 <p>Or, we can use two colons - <code>::</code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</a></code></pre></div>
 <p>It usually makes sense to load a package with <code>library()</code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code>::</code> operator even if you have already loaded a package with <code>library()</code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
 <div id="upgrading-packages" class="section level2">
 <h2><span class="header-section-number">5.4</span> Upgrading packages</h2>
 <p>It’s generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">devtools<span class="op">::</span><span class="kw">update_packages</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">devtools<span class="op">::</span><span class="kw">update_packages</span>()</a></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
 <p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All’.</p>
 <p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.[^Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.]</p>
@@ -358,14 +358,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="downgrading-packages" class="section level2">
 <h2><span class="header-section-number">5.5</span> Downgrading packages</h2>
 <p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code>install_version()</code> function, like this:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">devtools<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;1.13.3&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">devtools<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;1.13.3&quot;</span>)</a></code></pre></div>
 <p>It’s rare that you’d need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref5" class="footnote-back">↩</a></p></li>
+<ol start="1">
+<li id="fn1"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -424,20 +424,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

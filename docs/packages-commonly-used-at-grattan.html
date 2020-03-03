@@ -318,14 +318,14 @@ The main packages in the <code>tidyverse</code> include:</p>
 <li><em>purrr</em> for functional programming</li>
 <li><em>stringr</em> for manipulating strings of text</li>
 </ul>
-<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.0.9000     ✓ purrr   0.3.3     
 ## ✓ tibble  2.1.3          ✓ dplyr   0.8.4     
 ## ✓ tidyr   1.0.2          ✓ stringr 1.4.0     
 ## ✓ readr   1.3.1          ✓ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>A range of other packages are installed on your machine as part of the <code>tidyverse.</code> These include:</p>
@@ -336,24 +336,24 @@ The main packages in the <code>tidyverse</code> include:</p>
 <li><em>rvest</em> for scraping websites</li>
 </ul>
 <p>Although these packages are installed as part of the <code>tidyverse</code>, they aren’t loaded automatically when you run <code>library(tidyverse)</code>. You’ll need to load them individually, like:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="kw">library</span>(readxl)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">library</span>(readxl)</a></code></pre></div>
 <div id="why-do-we-use-the-tidyverse" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Why do we use the tidyverse?</h3>
 <p>The <code>tidyverse</code> makes life easier!</p>
 <p>The core <code>tidyverse</code> packages, like <code>ggplot2</code>, <code>dplyr</code>, and <code>tidyr</code>, are extremely popular. The <code>tidyverse</code> is probably the most popular ‘dialect’ of R. This means that any problem you encounter with the <code>tidyverse</code> will have been encountered many times before by other R users, so a solution will only be a Google search away.</p>
 <p>The <code>tidyverse</code> packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one <code>tidyverse</code> package, like <code>dplyr</code>, are also applicable to other packages, like <code>tidyr</code>.</p>
-<p>They’re designed to work with data frames<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
+<p>They’re designed to work with data frames<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
 <p>The creator of the <code>tidyverse</code>, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the <code>tidyverse</code> idiom is often able to be understood even if you haven’t encountered the functions before. For example, look at this chunk of code:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">my_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
-<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">my_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
+<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
 <p>Here’s one way to do the same thing in base R:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</a>
-<a class="sourceLine" id="cb48-2" title="2">          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">transform</span>(my_data[my_data<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, ],</a>
+<a class="sourceLine" id="cb15-2" title="2">          <span class="dt">relative_income =</span> income <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(income))</a></code></pre></div>
 <p>The base R code gets the job done, but it’s clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work <strong>human readable</strong>.</p>
-<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The <code>tidyverse</code> packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan. This balance is the right one for most of our work, most of the time.</p>
 <p>Most R scripts at Grattan should start with <code>library(tidyverse)</code>. Most of your work will be in data frames, and most of the time the <code>tidyverse</code> contains the core tools you’ll need to do that work.</p>
 </div>
@@ -380,11 +380,11 @@ The main packages in the <code>tidyverse</code> include:</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="6">
-<li id="fn6"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages-commonly-used-at-grattan.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages-commonly-used-at-grattan.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages-commonly-used-at-grattan.html#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages-commonly-used-at-grattan.html#fnref9" class="footnote-back">↩</a></p></li>
+<ol start="2">
+<li id="fn2"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages-commonly-used-at-grattan.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages-commonly-used-at-grattan.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages-commonly-used-at-grattan.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages-commonly-used-at-grattan.html#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -443,20 +443,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
