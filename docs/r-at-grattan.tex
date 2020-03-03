@@ -118,7 +118,7 @@
 
 \title{Using R at Grattan Institute}
 \author{Will Mackey and Matt Cowgill}
-\date{2020-02-25}
+\date{2020-03-03}
 
 \begin{document}
 \maketitle
@@ -415,7 +415,7 @@ Other folder structures are OK and might make more sense for your project. The i
 \hypertarget{manageable}{%
 \section{Keep your scripts manageable}\label{manageable}}
 
-Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
+Unless your project is very simple, it's not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
 
 Here's a useful structure:
 
@@ -433,7 +433,7 @@ Here's a useful structure:
 
 You don't need to use these filenames. Think about what works best for your project.
 
-It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more \protect\hyperlink{use-comments}{elsewhere in this guide}). At the end of each script, you can save the script's output, and then load the file you create in the next script.
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more \protect\hyperlink{use-comments}{elsewhere in this guide}). At the end of each script, you can save the script's output, and then load the file you create in the next script.{[}\^{}Alternatively, \texttt{source()} the previous script.{]}
 
 \hypertarget{make-your-filenames-readable-by-both-machines-and-humans}{%
 \section{Make your filenames readable by both machines and humans}\label{make-your-filenames-readable-by-both-machines-and-humans}}
@@ -667,6 +667,8 @@ It's useful to break a lengthy script into chunks with \texttt{-\/-\/-\/-\/-}.
 \end{Highlighting}
 \end{Shaded}
 
+(In practice, you'll have more than one line of code in each block.)
+
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script.
 
 \includegraphics[width=7.64in]{atlas/rstudio_navigation}
@@ -713,7 +715,7 @@ The \texttt{\textless{}\textless{}-} operator should also be avoided.
 
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called \texttt{ed\_by\_age} or \texttt{edByAge} or \texttt{ed.by.age}. Having a consistent naming convention across Grattan also makes it easy to read and QC each other's code.
 
-Grattan primarily uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{considered good practice across the Tidyverse}.
+Grattan uses \emph{words separated by underscores} \texttt{\_} (aka `snake\_case') to name objects and variables. This is \href{https://style.tidyverse.org/syntax.html\#object-names}{common practice across the Tidyverse}.
 Object names should be descriptive and not-too-long. This is a trade-off, and one that's sometimes hard to get right. However, using snake\_case provides consistency:
 
 \textbf{Good object names}
@@ -760,7 +762,25 @@ Variable names face a similar trade-off. Again, try to be descriptive and short 
 \end{Highlighting}
 \end{Shaded}
 
-When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to \href{https://dplyr.tidyverse.org/reference/select.html}{rename your variables}, giving them consistent, descriptive, short, snake\_case names.
+When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to \href{https://dplyr.tidyverse.org/reference/select.html}{rename your variables}, giving them consistent, descriptive, short, snake\_case names. An easy way to do this is using \texttt{clean\_names()} function from the \texttt{janitor} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_with_bad_names <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{firstColumn =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{),}
+                                \DataTypeTok{Second.column =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{))}
+
+\NormalTok{df_with_good_names <-}\StringTok{ }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{(df_with_bad_names)}
+
+\NormalTok{df_with_good_names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   first_column second_column
+## 1            1             4
+## 2            2             5
+## 3            3             6
+\end{verbatim}
 
 The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake\_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.
 
@@ -830,6 +850,7 @@ Always put a space \emph{after} a comma and not before, just like in regular Eng
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{select}\NormalTok{(data,age,gender,sa2,sa3)}
+\KeywordTok{select}\NormalTok{(data ,age ,gender ,sa2 ,sa3)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -860,7 +881,7 @@ For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{
 \hypertarget{short-lines-line-indentation-and-the-pipe}{%
 \section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater{}\%}}\label{short-lines-line-indentation-and-the-pipe}}
 
-It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
+Keeping your lines of code short and indenting them in a consistent way can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit enter/return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
 Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also makes things clearer.\footnote{The pipe is from the \texttt{magrittr} package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the \protect\hyperlink{tidyverse}{\texttt{tidyverse}}.} The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
@@ -873,8 +894,10 @@ Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also make
          \DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
 \NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, }
+\NormalTok{           uni_attainment) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }
+                               \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -935,13 +958,11 @@ Don't retain code that ultimately didn't lead anywhere. If you produced a graph 
 When you're doing data analysis, you'll often give R interactive commands to help you understand what your data looks like. For example, you might view a dataframe with \texttt{View(mydf)} or \texttt{str(mydf)}. This is fine, and often necessary, when you're doing your analysis. \textbf{Don't keep these commands in your script}. These type of commands should usually be entered straight into the R console, not in a script. If they're in your script, delete them.
 
 \hypertarget{packages}{%
-\chapter{Packages commonly used at Grattan}\label{packages}}
+\chapter{What are packages?}\label{packages}}
 
 R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as `base R'\footnote{Technically some of the `built-in' functions are part of packages, like the \texttt{tools}, \texttt{utils} and \texttt{stats} packages that come with R. We'll refer to all these as base R.}. But using packages will make your life easier.
 
 Like R itself, packages are free and open source. You can install them from within RStudio.
-
-Some packages we use - like the \texttt{tidyverse} collection of packages - are very popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
 
 \hypertarget{install-packages}{%
 \section{How to install packages}\label{install-packages}}
@@ -976,6 +997,27 @@ Now we can install packages from Github using the \texttt{install\_github()} fun
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{get-set-up-install-packages-for-grattan}{%
+\section{Get set up: install packages for Grattan}\label{get-set-up-install-packages-for-grattan}}
+
+Just starting out or setting up a new machine? Run this block of code to get yourself all set up:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cran_packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"readabs"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }\StringTok{"grattan"}\NormalTok{,}
+                   \StringTok{"rio"}\NormalTok{)}
+
+\KeywordTok{install.packages}\NormalTok{(cran_packages)}
+
+\NormalTok{github_packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{, }\StringTok{"grattan/grattandata"}\NormalTok{,}
+                     \StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(github_packages,}
+                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{,}
+                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{using-packages}{%
 \section{Using packages}\label{using-packages}}
 
@@ -1003,17 +1045,45 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 It usually makes sense to load a package with \texttt{library()}, unless you only need to use one of its function once or twice. There's no harm to using the \texttt{::} operator even if you have already loaded a package with \texttt{library()}. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
 
-\hypertarget{tidyverse}{%
-\section{The tidyverse!}\label{tidyverse}}
+\hypertarget{upgrading-packages}{%
+\section{Upgrading packages}\label{upgrading-packages}}
 
-The \texttt{tidyverse} is central to our work at Grattan. The \texttt{tidyverse} is a \href{https://www.tidyverse.org/packages/}{collection of related R packages} for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. You install the \texttt{tidyverse} in the \protect\hyperlink{install-packages}{usual way}:
+It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{update_packages}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
+This will upgrade all your packages - including those you've installed from CRAN and Github.
+
+When you run the above command, it will prompt you to ask which packages you want to update - press 1 for `All'.
+
+If it asks you `Do you want to install from sources the package which needs compilation?' type `no' and press enter.{[}\^{}Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.{]}
+
+\hypertarget{downgrading-packages}{%
+\section{Downgrading packages}\label{downgrading-packages}}
+
+Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (`deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the \texttt{install\_version()} function, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_version}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"1.13.3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+It's rare that you'd need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.
+
+\hypertarget{packages-commonly-used-at-grattan}{%
+\chapter{Packages commonly used at Grattan}\label{packages-commonly-used-at-grattan}}
+
+Some packages we use at Grattan - like the \texttt{tidyverse} collection of packages - are very popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+
+\hypertarget{tidyverse}{%
+\section{The tidyverse!}\label{tidyverse}}
+
+The \texttt{tidyverse} is central to our work at Grattan. The \texttt{tidyverse} is a \href{https://www.tidyverse.org/packages/}{collection of related R packages} for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together.
 The main packages in the \texttt{tidyverse} include:
 
 \begin{itemize}
@@ -1041,18 +1111,18 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------- tidyverse 1.3.0 --
+## -- Attaching packages ------------------------------ tidyverse 1.3.0 --
 \end{verbatim}
 
 \begin{verbatim}
 ## v ggplot2 3.3.0.9000     v purrr   0.3.3     
 ## v tibble  2.1.3          v dplyr   0.8.4     
-## v tidyr   1.0.0          v stringr 1.4.0     
+## v tidyr   1.0.2          v stringr 1.4.0     
 ## v readr   1.3.1          v forcats 0.4.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------ tidyverse_conflicts() --
+## -- Conflicts --------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1112,11 +1182,11 @@ Here's one way to do the same thing in base R:
 \end{Highlighting}
 \end{Shaded}
 
-The base R code gets the job done, but it's clunkier, less expressive, and harder to read.
+The base R code gets the job done, but it's clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work \textbf{human readable}.
 
 Code written with \texttt{tidyverse} functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern anyway.\footnote{When working with very large datasets, it might be worth gaining speed using other packages, such as \href{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}{\texttt{data.table}}. Fortunately, using the \texttt{dtplyr} package you can get most of the speed benefits of \texttt{data.table} and stick to familiar \texttt{dplyr} syntax.}
 
-The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The \texttt{tidyverse} packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan.
+The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The \texttt{tidyverse} packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan. This balance is the right one for most of our work, most of the time.
 
 Most R scripts at Grattan should start with \texttt{library(tidyverse)}. Most of your work will be in data frames, and most of the time the \texttt{tidyverse} contains the core tools you'll need to do that work.
 
@@ -1129,34 +1199,12 @@ A range of Grattan people have written packages that come in handy at Grattan.
 \item
   \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
 \item
-  \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter. \textbf{NOTE: ADD LINK}.
+  \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 \item
-  \emph{grattandata} The \texttt{grattandata} package, by Matt Cowgill, Will Mackey, and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the \protect\hyperlink{reading-data}{reading data} chapter.
+  \emph{grattandata} The \texttt{grattandata} package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the \protect\hyperlink{reading-data}{reading data} chapter.
 \end{itemize}
 
 Install these Grattan-specific packages using this block of code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# This code checks to see if you have the `remotes` package installed; if not,}
-\CommentTok{# it will install `devtools` for you, which includes `remotes`}
-\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)) \{}
-  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\NormalTok{\}}
-
-\CommentTok{# Install the `grattan` package from CRAN:}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"grattan"}\NormalTok{)}
-
-\CommentTok{# Install `grattantheme` and `grattandata` from GitHub:}
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{,}
-                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
-                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
-
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattandata"}\NormalTok{,}
-                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
-                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{other-commonly-used-packages}{%
 \section{Other commonly-used packages}\label{other-commonly-used-packages}}
@@ -1170,69 +1218,35 @@ There are other packages we commonly use at Grattan, including some developed by
   \emph{readabs} The \texttt{readabs} package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R.
 \end{itemize}
 
-To install these packages, run this code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Install the `readabs` package from CRAN}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readabs"}\NormalTok{)}
-
-\CommentTok{# This code checks to see if you have the `remotes` package installed; if not,}
-\CommentTok{# it will install `devtools` for you, which includes `remotes`}
-\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)) \{}
-  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\NormalTok{\}}
-
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{,}
-                        \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{,}
-                        \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{upgrading-packages}{%
-\section{Upgrading packages}\label{upgrading-packages}}
-
-It's generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{update_packages}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-This will upgrade all your packages - including those you've installed from CRAN and Github.
-
-Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (`deprecated') in favour of another. You can usually just adapt your workflow to the package's new version without much fuss. If you find this isn't the case, and you want to downgrade to an earlier version of a package, it's straightforward. Just use the \texttt{install\_version()} function, like this:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_version}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"1.13.3"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{getting-help-with-r}{%
 \chapter{Getting help with R}\label{getting-help-with-r}}
 
-\url{https://mobile.twitter.com/sctyner/status/1206986161434058752}
+The most important skill you need to learn to use R well is how to get help. This is a great list of steps to try:
 
-\url{https://sctyner.github.io/rhelp.html}
+\href{https://mobile.twitter.com/sctyner/status/1206986161434058752}{\includegraphics{atlas/getting_help_tweet.png}}
 
-\hypertarget{resources-for-learning-r}{%
-\section{Resources for learning R}\label{resources-for-learning-r}}
+\href{https://sctyner.github.io/rhelp.html}{This blog post} explains those steps at a bit more length.
 
-R4DS, et al.
+The most important step is often breaking your problem down into a small, reproducible example - a \texttt{reprex} in R jargon. Often, the process of making a reprex can make your problem appear more clearly to you, so you'll solve it yourself before you even have to ask someone else!
+
+\hypertarget{getting-help-with-r-problems-at-grattan}{%
+\section{Getting help with R problems at Grattan}\label{getting-help-with-r-problems-at-grattan}}
+
+The channel \texttt{\#r\_at\_grattan} on Grattan Slack is a great place to get answers to R questions
+
+This guide
+Package vignettes
+Matt, Will, others
 
 \hypertarget{getting-help-with-r-problems-in-general}{%
 \section{Getting help with R problems in general}\label{getting-help-with-r-problems-in-general}}
 
 A guide to Googling well
 
-\hypertarget{getting-help-with-r-problems-at-grattan}{%
-\section{Getting help with R problems at Grattan}\label{getting-help-with-r-problems-at-grattan}}
+\hypertarget{resources-for-learning-r}{%
+\section{Resources for learning R}\label{resources-for-learning-r}}
 
-This guide
-Package vignettes
-Matt, Will, others
+R4DS, et al.
 
 \hypertarget{part-load-manipulate-and-visualise-data}{%
 \part{Load, manipulate and visualise data}\label{part-load-manipulate-and-visualise-data}}
@@ -3394,7 +3408,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks out of this world: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks awesomesauce: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -3460,7 +3474,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks swell! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks wonderful! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3511,7 +3525,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks superior: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks too good to be true: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -3832,7 +3846,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Sterling! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Sublime! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4118,7 +4132,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks cool. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks champion. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4380,7 +4394,7 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks fantastic! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks of the highest quality! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]

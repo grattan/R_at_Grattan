@@ -132,7 +132,7 @@ c <- bind_rows(a, b)
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="275" />
+<img src="atlas/rstudio_navigation.png" width="550" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
@@ -210,7 +210,7 @@ chaosVar_name.silly
 var2
 ```
 
-When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. An easy way to do this is using the `janitor` package:
+When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. An easy way to do this is using `clean_names()` function from the `janitor` package:
 
 
 
@@ -229,7 +229,6 @@ df_with_good_names
 ## 2            2             5
 ## 3            3             6
 ```
-
 
 The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.
 
@@ -271,7 +270,6 @@ uni_attainment$ age [ 1 : 10]
 readabs :: read_abs()
 ```
 
-
 ### Commas
 Always put a space _after_ a comma and not before, just like in regular English.
 
@@ -285,6 +283,7 @@ select(data, age, gender, sa2, sa3)
 
 ```r
 select(data,age,gender,sa2,sa3)
+select(data ,age ,gender ,sa2 ,sa3)
 ```
 
 ### Parentheses
@@ -308,7 +307,7 @@ For spacing rules around `if`, `for`, `while`, and `function`, see [the Tidyvers
 
 ## Short lines, line indentation and the pipe `%>%`
 
-It's tedious -- yes -- but short lines and consistent line indentation can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit return after the comma, like in the `rename` and `filter` examples below. Indentation makes it clear where a code block starts and finishes.
+Keeping your lines of code short and indenting them in a consistent way can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit enter/return after the comma, like in the `rename` and `filter` examples below. Indentation makes it clear where a code block starts and finishes.
 
 Using pipes (`%>%`) instead of nesting functions also makes things clearer.^[The pipe is from the `magrittr` package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the [`tidyverse`](#tidyverse).] The pipe should always have a space before it, and should generally be followed by a new line, as in this example:
 
@@ -320,8 +319,10 @@ young_qual_income <- data %>%
          uni_attainment = high.ed) %>%
   filter(income > 0,
          age >= 25 & age <= 34) %>%
-  group_by(gender, uni_attainment) %>%
-  summarise(mean_income = mean(income, na.rm = TRUE))
+  group_by(gender, 
+           uni_attainment) %>%
+  summarise(mean_income = mean(income, 
+                               na.rm = TRUE))
 ```
 
 Without indentation, the code is harder to read. It's not clear where the chunk starts and finishes, and which bits of code are arguments to which functions.
