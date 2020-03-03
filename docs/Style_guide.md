@@ -128,9 +128,11 @@ b <- read_csv("data/b.csv")
 c <- bind_rows(a, b)
 ```
 
+(In practice, you'll have more than one line of code in each block.)
+
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-<img src="atlas/rstudio_navigation.png" width="550" />
+<img src="atlas/rstudio_navigation.png" width="275" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 
@@ -169,7 +171,7 @@ The `<<-` operator should also be avoided.
 
 It's important to be consistent when naming things. This saves you time when writing code. If you use a consistent naming convention, you don't need to stop to remember if your object is called `ed_by_age` or `edByAge` or `ed.by.age`. Having a consistent naming convention across Grattan also makes it easy to read and QC each other's code.
 
-Grattan primarily uses _words separated by underscores_ `_` (aka 'snake_case') to name objects and variables. This is [considered good practice across the Tidyverse](https://style.tidyverse.org/syntax.html#object-names). 
+Grattan uses _words separated by underscores_ `_` (aka 'snake_case') to name objects and variables. This is [common practice across the Tidyverse](https://style.tidyverse.org/syntax.html#object-names). 
 Object names should be descriptive and not-too-long. This is a trade-off, and one that's sometimes hard to get right. However, using snake_case provides consistency:
 
 **Good object names**
@@ -208,7 +210,26 @@ chaosVar_name.silly
 var2
 ```
 
-When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. 
+When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to [rename your variables](https://dplyr.tidyverse.org/reference/select.html), giving them consistent, descriptive, short, snake_case names. An easy way to do this is using the `janitor` package:
+
+
+
+```r
+df_with_bad_names <- data.frame(firstColumn = c(1:3),
+                                Second.column = c(4:6))
+
+df_with_good_names <- janitor::clean_names(df_with_bad_names)
+
+df_with_good_names
+```
+
+```
+##   first_column second_column
+## 1            1             4
+## 2            2             5
+## 3            3             6
+```
+
 
 The most important thing is that your code is internally consistent - you should stick to one naming convention for all your objects and variables. Using snake_case, which we strongly recommend, reduces friction for other people reading and editing your code. Using short names saves effort when coding. Using descriptive names makes your code easier to read and understand.
 

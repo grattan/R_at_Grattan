@@ -89,7 +89,7 @@ Other folder structures are OK and might make more sense for your project. The i
 
 ## Keep your scripts manageable {#manageable}
 
-Unless your project is very simple, it's probably not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
+Unless your project is very simple, it's not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they're supposed to be run in.
 
 Here's a useful structure: 
 
@@ -100,7 +100,7 @@ Here's a useful structure:
 
 You don't need to use these filenames. Think about what works best for your project.
 
-It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more [elsewhere in this guide](#use-comments)). At the end of each script, you can save the script's output, and then load the file you create in the next script.
+It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you're doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more [elsewhere in this guide](#use-comments)). At the end of each script, you can save the script's output, and then load the file you create in the next script.[^Alternatively, `source()` the previous script.]
 
 ## Make your filenames readable by both machines and humans
 
