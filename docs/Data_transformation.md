@@ -5,11 +5,17 @@ This section focusses on transforming rectangular datasets.
 
 The `dplyr` verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of _[R for Data Science](https://r4ds.had.co.nz/)_ with Hadley Wickham). 
 
+
+```
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+```
+
 <iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="100%" height="400px"></iframe>
 
 
 ## Set up
 
+Load your packages first. This chapter just uses the packages contained in the `tidyverse`:
 
 
 ```r
@@ -17,7 +23,17 @@ library(tidyverse)
 ```
 
 
-The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+The `sa3_income` dataset will be used for all key examples in this chapter.^[This is a tidied version of the [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument) dataset.] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+
+If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
+
+
+```r
+download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
+              destfile = "data/sa3_income.csv")
+```
+
+Then read it using the `read_csv` function:
 
 
 ```r

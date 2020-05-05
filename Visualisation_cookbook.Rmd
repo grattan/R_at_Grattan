@@ -45,35 +45,16 @@ library(grattan)
 ```
 
 
-```{r grattan_label}
-# note: to be added to grattantheme; remove this when done
-grattan_label_repel <- function(..., size = 18) {
+The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
 
-  .size = size / ggplot2::.pt
-  
-  geom_label_repel(..., 
-                   fill = "white",
-                   label.padding = unit(0.1, "lines"), 
-                   label.size = 0,
-                   size = .size)
-}
+If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
 
-
-grattan_label <- function(..., size = 18) {
-
-  .size = size / ggplot2::.pt
-  
-  geom_label(..., 
-                   fill = "white",
-                   label.padding = unit(0.1, "lines"), 
-                   label.size = 0,
-                   size = .size)
-}
-
+```{r download_data, eval = FALSE}
+download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
+              destfile = "data/sa3_income.csv")
 ```
 
-
-The `sa3_income` dataset will be used for all key examples in this chapter.^[From [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
+Then read it using the `read_csv` function, removing any rows missing average or median income values:
 
 ```{r read_data}
 sa3_income <- read_csv("data/sa3_income.csv") %>% 

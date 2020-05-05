@@ -1,39 +1,46 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Using R at Grattan Institute},
-            pdfauthor={Will Mackey and Matt Cowgill},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Using R at Grattan Institute},
+  pdfauthor={Matt Cowgill and Will Mackey},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -75,9 +82,15 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
-\usepackage{graphicx,grffile}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -86,25 +99,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -117,8 +119,8 @@
 \bibliographystyle{apalike}
 
 \title{Using R at Grattan Institute}
-\author{Will Mackey and Matt Cowgill}
-\date{2020-03-03}
+\author{Matt Cowgill and Will Mackey}
+\date{2020-05-05}
 
 \begin{document}
 \maketitle
@@ -366,9 +368,9 @@ A benefit of using RStudio projects is that you can use relative filepaths rathe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/hes1516.csv"}\NormalTok{)}
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Desktop\textbackslash{}hes1516.csv"}\NormalTok{)}
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"}\NormalTok{)}
+\NormalTok{hes \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/hes1516.csv"}\NormalTok{)}
+\NormalTok{hes \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"C:\textbackslash{}Users\textbackslash{}mcowgill\textbackslash{}Desktop\textbackslash{}hes1516.csv"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"/Users/mcowgill/Desktop/images/expenditure\_by\_income.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -378,8 +380,8 @@ Instead, use relative filepaths. These are filepaths that are relative (hence th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{hes <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/expenditure_by_income.pdf"}\NormalTok{)}
+\NormalTok{hes \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/HES/hes1516.csv"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/expenditure\_by\_income.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -551,7 +553,7 @@ If you're loading a package from Github, it's a good idea to leave a \protect\hy
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(grattantheme)}
-\KeywordTok{library}\NormalTok{(strayr) }\CommentTok{# remotes::install_github("mattcowgill/strayr")}
+\KeywordTok{library}\NormalTok{(strayr) }\CommentTok{\# remotes::install\_github("mattcowgill/strayr")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -568,7 +570,7 @@ Describe what your script does in the first few lines using comments or within a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. }
+\CommentTok{\# This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post{-}secondary education levels by age and gender by SA3. }
 \end{Highlighting}
 \end{Shaded}
 
@@ -578,7 +580,7 @@ Your preamble might also pose a research question that the script will answer.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?}
+\CommentTok{\# Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?}
 \end{Highlighting}
 \end{Shaded}
 
@@ -588,7 +590,7 @@ Your preamble shouldn't be a terse, inscrutable comment.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# make ABS ed data graph}
+\CommentTok{\# make ABS ed data graph}
 \end{Highlighting}
 \end{Shaded}
 
@@ -600,7 +602,7 @@ Your preamble should anticipate and answer any questions other people might have
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can't use the income variable in the NHS for this purpose, as it only contains information about respondents' income decile, not the income itself.}
+\CommentTok{\# This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can\textquotesingle{}t use the income variable in the NHS for this purpose, as it only contains information about respondents\textquotesingle{} income decile, not the income itself.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -617,9 +619,9 @@ For example, comments are important when groups are coded with numbers rather th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{,   }\CommentTok{# Keep only male observations}
-\NormalTok{         age }\OperatorTok{==}\StringTok{ "05"}\NormalTok{)   }\CommentTok{# Keep only 35-39 year-olds. }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{,   }\CommentTok{\# Keep only male observations}
+\NormalTok{         age }\OperatorTok{==}\StringTok{ "05"}\NormalTok{)   }\CommentTok{\# Keep only 35{-}39 year{-}olds. }
 \end{Highlighting}
 \end{Shaded}
 
@@ -631,10 +633,10 @@ If your code \emph{is} self-explanatory, you can include or omit comments as you
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# We want to only look at women aged 35-39}
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\CommentTok{\# We want to only look at women aged 35{-}39}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{,}
-\NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{35} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{39}\NormalTok{)}
+\NormalTok{         age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{35} \OperatorTok{\&}\StringTok{ }\NormalTok{age }\OperatorTok{\textless{}=}\StringTok{ }\DecValTok{39}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -653,17 +655,17 @@ It's useful to break a lengthy script into chunks with \texttt{-\/-\/-\/-\/-}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Read file A -----}
+\CommentTok{\# Read file A {-}{-}{-}{-}{-}}
 
-\NormalTok{a <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/a.csv"}\NormalTok{)}
+\NormalTok{a \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/a.csv"}\NormalTok{)}
 
-\CommentTok{# Read file B -----}
+\CommentTok{\# Read file B {-}{-}{-}{-}{-}}
 
-\NormalTok{b <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/b.csv"}\NormalTok{)}
+\NormalTok{b \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/b.csv"}\NormalTok{)}
 
-\CommentTok{# Combine files A and B ----}
+\CommentTok{\# Combine files A and B {-}{-}{-}{-}}
 
-\NormalTok{c <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(a, b)}
+\NormalTok{c \textless{}{-}}\StringTok{ }\KeywordTok{bind\_rows}\NormalTok{(a, b)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -684,11 +686,11 @@ In R, you work with objects. An object might be a data frame, or a vector of num
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{schools <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/schools_data.csv"}\NormalTok{)}
+\NormalTok{schools \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/schools\_data.csv"}\NormalTok{)}
 
-\NormalTok{three_letters <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\NormalTok{three\_letters \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
 
-\NormalTok{lf <-}\StringTok{ }\NormalTok{labour_force }\OperatorTok{%>%}
+\NormalTok{lf \textless{}{-}}\StringTok{ }\NormalTok{labour\_force }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(status }\OperatorTok{!=}\StringTok{ "NILF"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -697,12 +699,12 @@ Avoid \texttt{-\textgreater{}}, \texttt{=} and \texttt{assign()}. Here are some 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{schools =}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/schools_data.csv"}\NormalTok{)}
+\NormalTok{schools =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/schools\_data.csv"}\NormalTok{)}
 
-\KeywordTok{assign}\NormalTok{(}\StringTok{"three_letters"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{))}
+\KeywordTok{assign}\NormalTok{(}\StringTok{"three\_letters"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{))}
 
-\NormalTok{labour_force }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(status }\OperatorTok{!=}\StringTok{ "NILF"}\NormalTok{) ->}\StringTok{ }\NormalTok{lf}
+\NormalTok{labour\_force }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(status }\OperatorTok{!=}\StringTok{ "NILF"}\NormalTok{) {-}\textgreater{}}\StringTok{ }\NormalTok{lf}
 \end{Highlighting}
 \end{Shaded}
 
@@ -722,9 +724,9 @@ Object names should be descriptive and not-too-long. This is a trade-off, and on
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_population}
-\NormalTok{gdp_growth_vic}
-\NormalTok{uni_attainment}
+\NormalTok{sa3\_population}
+\NormalTok{gdp\_growth\_vic}
+\NormalTok{uni\_attainment}
 \end{Highlighting}
 \end{Shaded}
 
@@ -745,8 +747,8 @@ Variable names face a similar trade-off. Again, try to be descriptive and short 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{gender}
-\NormalTok{gdp_growth}
-\NormalTok{highest_edu}
+\NormalTok{gdp\_growth}
+\NormalTok{highest\_edu}
 \end{Highlighting}
 \end{Shaded}
 
@@ -757,7 +759,7 @@ Variable names face a similar trade-off. Again, try to be descriptive and short 
 \NormalTok{s801LHSAA}
 \NormalTok{gdp.growth}
 \NormalTok{highEdu}
-\NormalTok{chaosVar_name.silly}
+\NormalTok{chaosVar\_name.silly}
 \NormalTok{var2}
 \end{Highlighting}
 \end{Shaded}
@@ -766,12 +768,12 @@ When you load data from outside Grattan, such as ABS microdata, variables will o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df_with_bad_names <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{firstColumn =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{),}
+\NormalTok{df\_with\_bad\_names \textless{}{-}}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{firstColumn =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{),}
                                 \DataTypeTok{Second.column =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{))}
 
-\NormalTok{df_with_good_names <-}\StringTok{ }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{(df_with_bad_names)}
+\NormalTok{df\_with\_good\_names \textless{}{-}}\StringTok{ }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean\_names}\NormalTok{(df\_with\_bad\_names)}
 
-\NormalTok{df_with_good_names}
+\NormalTok{df\_with\_good\_names}
 \end{Highlighting}
 \end{Shaded}
 
@@ -798,7 +800,7 @@ Put a space each side of an assign operator \texttt{\textless{}-}, equals \textt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{uni_attainment <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(data, age }\OperatorTok{==}\StringTok{ }\DecValTok{25}\NormalTok{, gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{)}
+\NormalTok{uni\_attainment \textless{}{-}}\StringTok{ }\KeywordTok{filter}\NormalTok{(data, age }\OperatorTok{==}\StringTok{ }\DecValTok{25}\NormalTok{, gender }\OperatorTok{==}\StringTok{ "Female"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -806,7 +808,7 @@ Put a space each side of an assign operator \texttt{\textless{}-}, equals \textt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{uni_attainment<-}\KeywordTok{filter}\NormalTok{(data,age}\OperatorTok{==}\DecValTok{25}\NormalTok{,gender}\OperatorTok{==}\StringTok{"Female"}\NormalTok{)}
+\NormalTok{uni\_attainment\textless{}{-}}\KeywordTok{filter}\NormalTok{(data,age}\OperatorTok{==}\DecValTok{25}\NormalTok{,gender}\OperatorTok{==}\StringTok{"Female"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -816,9 +818,9 @@ Exceptions are operators that \emph{directly connect} to an object, package or f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{uni_attainment}\OperatorTok{$}\NormalTok{gender}
-\NormalTok{uni_attainment}\OperatorTok{$}\NormalTok{age[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
-\NormalTok{readabs}\OperatorTok{::}\KeywordTok{read_abs}\NormalTok{()}
+\NormalTok{uni\_attainment}\OperatorTok{$}\NormalTok{gender}
+\NormalTok{uni\_attainment}\OperatorTok{$}\NormalTok{age[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{readabs}\OperatorTok{::}\KeywordTok{read\_abs}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -826,9 +828,9 @@ Exceptions are operators that \emph{directly connect} to an object, package or f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{uni_attainment }\OperatorTok{$}\StringTok{ }\NormalTok{gender}
-\NormalTok{uni_attainment}\OperatorTok{$}\StringTok{ }\NormalTok{age [ }\DecValTok{1} \OperatorTok{:}\StringTok{ }\DecValTok{10}\NormalTok{]}
-\NormalTok{readabs }\OperatorTok{::}\StringTok{ }\KeywordTok{read_abs}\NormalTok{()}
+\NormalTok{uni\_attainment }\OperatorTok{$}\StringTok{ }\NormalTok{gender}
+\NormalTok{uni\_attainment}\OperatorTok{$}\StringTok{ }\NormalTok{age [ }\DecValTok{1} \OperatorTok{:}\StringTok{ }\DecValTok{10}\NormalTok{]}
+\NormalTok{readabs }\OperatorTok{::}\StringTok{ }\KeywordTok{read\_abs}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -879,7 +881,7 @@ Do not use spaces around parentheses in most cases:
 For spacing rules around \texttt{if}, \texttt{for}, \texttt{while}, and \texttt{function}, see \href{https://style.tidyverse.org/syntax.html\#parentheses}{the Tidyverse guide}.
 
 \hypertarget{short-lines-line-indentation-and-the-pipe}{%
-\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater{}\%}}\label{short-lines-line-indentation-and-the-pipe}}
+\section{\texorpdfstring{Short lines, line indentation and the pipe \texttt{\%\textgreater{}\%}}{Short lines, line indentation and the pipe \%\textgreater\%}}\label{short-lines-line-indentation-and-the-pipe}}
 
 Keeping your lines of code short and indenting them in a consistent way can help make reading code much easier. If you are supplying multiple arguments to a function, it's generally a good idea to put each argument on a new line - hit enter/return after the comma, like in the \texttt{rename} and \texttt{filter} examples below. Indentation makes it clear where a code block starts and finishes.
 
@@ -889,14 +891,14 @@ Using pipes (\texttt{\%\textgreater{}\%}) instead of nesting functions also make
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\NormalTok{young\_qual\_income \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA,}
-         \DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
-\NormalTok{         age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender, }
-\NormalTok{           uni_attainment) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }
+         \DataTypeTok{uni\_attainment =}\NormalTok{ high.ed) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{         age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{25} \OperatorTok{\&}\StringTok{ }\NormalTok{age }\OperatorTok{\textless{}=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(gender, }
+\NormalTok{           uni\_attainment) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income, }
                                \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -907,13 +909,13 @@ Without indentation, the code is harder to read. It's not clear where the chunk 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{young\_qual\_income \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA,}
-\DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{,}
-\NormalTok{age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}
-\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\DataTypeTok{uni\_attainment =}\NormalTok{ high.ed) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(income }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{25} \OperatorTok{\&}\StringTok{ }\NormalTok{age }\OperatorTok{\textless{}=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\KeywordTok{group\_by}\NormalTok{(gender, uni\_attainment) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -922,7 +924,7 @@ Long lines are also bad and hard to read.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{young_qual_income <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA, }\DataTypeTok{uni_attainment =}\NormalTok{ high.ed) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{>=}\StringTok{ }\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(gender, uni_attainment) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{young\_qual\_income \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{gender =}\NormalTok{ s801LHSAA, }\DataTypeTok{uni\_attainment =}\NormalTok{ high.ed) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{, age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{25} \OperatorTok{\&}\StringTok{ }\NormalTok{age }\OperatorTok{\textless{}=}\StringTok{ }\DecValTok{34}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{group\_by}\NormalTok{(gender, uni\_attainment) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -932,7 +934,7 @@ When you want to take the output of a function and pass it as the input to anoth
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{young_qual_income<-}\KeywordTok{summarise}\NormalTok{(}\KeywordTok{group_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(}\KeywordTok{rename}\NormalTok{(data,}\DataTypeTok{gender=}\NormalTok{s801LHSAA,}\DataTypeTok{uni_attainment=}\NormalTok{high.ed),income}\OperatorTok{>}\DecValTok{0}\NormalTok{,age}\OperatorTok{>=}\DecValTok{25}\OperatorTok{&}\NormalTok{age}\OperatorTok{<=}\DecValTok{34}\NormalTok{),uni_attainment),}\DataTypeTok{mean_income=}\KeywordTok{mean}\NormalTok{(income,}\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
+\NormalTok{young\_qual\_income\textless{}{-}}\KeywordTok{summarise}\NormalTok{(}\KeywordTok{group\_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(}\KeywordTok{rename}\NormalTok{(data,}\DataTypeTok{gender=}\NormalTok{s801LHSAA,}\DataTypeTok{uni\_attainment=}\NormalTok{high.ed),income}\OperatorTok{\textgreater{}}\DecValTok{0}\NormalTok{,age}\OperatorTok{\textgreater{}=}\DecValTok{25}\OperatorTok{\&}\NormalTok{age}\OperatorTok{\textless{}=}\DecValTok{34}\NormalTok{),uni\_attainment),}\DataTypeTok{mean\_income=}\KeywordTok{mean}\NormalTok{(income,}\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -940,7 +942,7 @@ Writing clear code chunks, where functions are strung together with a pipe (\tex
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{=}\KeywordTok{IF}\NormalTok{(}\OperatorTok{$}\DataTypeTok{G16 =} \StringTok{"All day"}\NormalTok{, }\KeywordTok{INDEX}\NormalTok{(metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{D}\OperatorTok{$}\DecValTok{8}\OperatorTok{:}\ErrorTok{$}\NormalTok{H}\OperatorTok{$}\DecValTok{66}\NormalTok{, }\KeywordTok{MATCH}\NormalTok{(}\KeywordTok{INDEX}\NormalTok{(correspondence}\OperatorTok{!}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{2}\OperatorTok{:}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{23}\NormalTok{, }\KeywordTok{MATCH}\NormalTok{(}\StringTok{'convert to tibble'}\OperatorTok{!}\NormalTok{M}\OperatorTok{$}\DecValTok{4}\NormalTok{, correspondence}\OperatorTok{!}\ErrorTok{$}\NormalTok{A}\OperatorTok{$}\DecValTok{2}\OperatorTok{:}\ErrorTok{$}\NormalTok{A}\OperatorTok{$}\DecValTok{23}\NormalTok{, }\DecValTok{0}\NormalTok{)), metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{8}\OperatorTok{:}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{66}\NormalTok{, }\DecValTok{0}\NormalTok{), }\KeywordTok{MATCH}\NormalTok{(}\StringTok{'convert to tibble'}\OperatorTok{!}\ErrorTok{$}\NormalTok{E16, metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{D}\OperatorTok{$}\DecValTok{4}\OperatorTok{:}\ErrorTok{$}\NormalTok{H}\OperatorTok{$}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{)), }\StringTok{"NA"}\NormalTok{)}
+\NormalTok{=}\KeywordTok{IF}\NormalTok{(}\OperatorTok{$}\DataTypeTok{G16 =} \StringTok{"All day"}\NormalTok{, }\KeywordTok{INDEX}\NormalTok{(metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{D}\OperatorTok{$}\DecValTok{8}\OperatorTok{:}\ErrorTok{$}\NormalTok{H}\OperatorTok{$}\DecValTok{66}\NormalTok{, }\KeywordTok{MATCH}\NormalTok{(}\KeywordTok{INDEX}\NormalTok{(correspondence}\OperatorTok{!}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{2}\OperatorTok{:}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{23}\NormalTok{, }\KeywordTok{MATCH}\NormalTok{(}\StringTok{\textquotesingle{}convert to tibble\textquotesingle{}}\OperatorTok{!}\NormalTok{M}\OperatorTok{$}\DecValTok{4}\NormalTok{, correspondence}\OperatorTok{!}\ErrorTok{$}\NormalTok{A}\OperatorTok{$}\DecValTok{2}\OperatorTok{:}\ErrorTok{$}\NormalTok{A}\OperatorTok{$}\DecValTok{23}\NormalTok{, }\DecValTok{0}\NormalTok{)), metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{8}\OperatorTok{:}\ErrorTok{$}\NormalTok{B}\OperatorTok{$}\DecValTok{66}\NormalTok{, }\DecValTok{0}\NormalTok{), }\KeywordTok{MATCH}\NormalTok{(}\StringTok{\textquotesingle{}convert to tibble\textquotesingle{}}\OperatorTok{!}\ErrorTok{$}\NormalTok{E16, metrics}\OperatorTok{!}\ErrorTok{$}\NormalTok{D}\OperatorTok{$}\DecValTok{4}\OperatorTok{:}\ErrorTok{$}\NormalTok{H}\OperatorTok{$}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{)), }\StringTok{"NA"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -993,26 +995,26 @@ Now we can install packages from Github using the \texttt{install\_github()} fun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{get-set-up-install-packages-for-grattan}{%
-\section{Get set up: install packages for Grattan}\label{get-set-up-install-packages-for-grattan}}
+\hypertarget{install-grattan-packages}{%
+\section{Get set up: install packages for Grattan}\label{install-grattan-packages}}
 
 Just starting out or setting up a new machine? Run this block of code to get yourself all set up:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cran_packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"readabs"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }\StringTok{"grattan"}\NormalTok{,}
-                   \StringTok{"rio"}\NormalTok{)}
+\NormalTok{cran\_packages \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"readabs"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }\StringTok{"grattan"}\NormalTok{,}
+                   \StringTok{"rio"}\NormalTok{, }\StringTok{"sf"}\NormalTok{)}
 
-\KeywordTok{install.packages}\NormalTok{(cran_packages)}
+\KeywordTok{install.packages}\NormalTok{(cran\_packages)}
 
-\NormalTok{github_packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{, }\StringTok{"grattan/grattandata"}\NormalTok{,}
-                     \StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+\NormalTok{github\_packages \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{, }\StringTok{"grattan/grattandata"}\NormalTok{,}
+                     \StringTok{"wfmackey/absmapsdata"}\NormalTok{, }\StringTok{"grattan/grattanReporter"}\NormalTok{)}
 
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(github_packages,}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(github\_packages,}
                         \DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{,}
                         \DataTypeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
@@ -1029,9 +1031,9 @@ We can either load (aka `attach') the package by using the \texttt{library()} fu
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(remotes)}
 
-\CommentTok{# Now that the `remotes` package is loaded, we can use its `install_github()` function:}
+\CommentTok{\# Now that the \textasciigrave{}remotes\textasciigrave{} package is loaded, we can use its \textasciigrave{}install\_github()\textasciigrave{} function:}
 
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\KeywordTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1039,7 +1041,7 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1052,7 +1054,7 @@ It's generally a good idea to keep your packages up-to-date. The easiest way to 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{update_packages}\NormalTok{()}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{update\_packages}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1069,7 +1071,7 @@ Sometimes, when packages change, their functions evolve. The arguments to a func
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_version}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"1.13.3"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"1.13.3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1078,7 +1080,7 @@ It's rare that you'd need to downgrade. Better to stay up to date, and adapt you
 \hypertarget{packages-commonly-used-at-grattan}{%
 \chapter{Packages commonly used at Grattan}\label{packages-commonly-used-at-grattan}}
 
-Some packages we use at Grattan - like the \texttt{tidyverse} collection of packages - are very popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+Some packages we use at Grattan - like the \texttt{tidyverse} collection of packages - are very popular among R users. Some - like the \texttt{grattantheme} package - are specific to Grattan Institute. Others - like the \texttt{readabs} package - are made by Grattan people, useful at Grattan, but also used outside of the Institute. To install a core set of packages we use at Grattan, \protect\hyperlink{install-grattan-packages}{click here and run the code chunk}.
 
 \hypertarget{tidyverse}{%
 \section{The tidyverse!}\label{tidyverse}}
@@ -1111,18 +1113,18 @@ All these packages (and more!) will automatically be loaded for you when you run
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages ------------------------------ tidyverse 1.3.0 --
+## -- Attaching packages ----------- tidyverse 1.3.0.9000 --
 \end{verbatim}
 
 \begin{verbatim}
-## v ggplot2 3.3.0.9000     v purrr   0.3.3     
-## v tibble  2.1.3          v dplyr   0.8.4     
-## v tidyr   1.0.2          v stringr 1.4.0     
-## v readr   1.3.1          v forcats 0.4.0
+## v ggplot2 3.3.0     v purrr   0.3.4
+## v tibble  3.0.1     v dplyr   0.8.5
+## v tidyr   1.0.2     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts --------------------------------- tidyverse_conflicts() --
+## -- Conflicts ------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1165,9 +1167,9 @@ The creator of the \texttt{tidyverse}, Hadley Wickham, places great value on cod
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my_data }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{>=}\StringTok{ }\DecValTok{30}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{relative_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
+\NormalTok{my\_data }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{30}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{relative\_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1177,8 +1179,8 @@ Here's one way to do the same thing in base R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{transform}\NormalTok{(my_data[my_data}\OperatorTok{$}\NormalTok{age }\OperatorTok{>=}\StringTok{ }\DecValTok{30}\NormalTok{, ],}
-          \DataTypeTok{relative_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
+\KeywordTok{transform}\NormalTok{(my\_data[my\_data}\OperatorTok{$}\NormalTok{age }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{30}\NormalTok{, ],}
+          \DataTypeTok{relative\_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{mean}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1194,17 +1196,14 @@ Most R scripts at Grattan should start with \texttt{library(tidyverse)}. Most of
 \section{Grattan-specific packages}\label{grattan-specific-packages}}
 
 A range of Grattan people have written packages that come in handy at Grattan.
+* \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
 
 \begin{itemize}
-\item
-  \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
 \item
   \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 \item
   \emph{grattandata} The \texttt{grattandata} package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the \protect\hyperlink{reading-data}{reading data} chapter.
 \end{itemize}
-
-Install these Grattan-specific packages using this block of code:
 
 \hypertarget{other-commonly-used-packages}{%
 \section{Other commonly-used packages}\label{other-commonly-used-packages}}
@@ -1272,7 +1271,7 @@ We can also compress \texttt{.csv} files into \texttt{.zip} files and read them 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/my_data.zip"}\NormalTok{)}
+\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/my\_data.zip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1376,8 +1375,14 @@ This section focusses on transforming rectangular datasets.
 
 The \texttt{dplyr} verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of \emph{\href{https://r4ds.had.co.nz/}{R for Data Science}} with Hadley Wickham).
 
+\begin{verbatim}
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
+
 \hypertarget{set-up}{%
 \section{Set up}\label{set-up}}
+
+Load your packages first. This chapter just uses the packages contained in the \texttt{tidyverse}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1385,11 +1390,22 @@ The \texttt{dplyr} verbs and concepts covered in this chapter are also covered i
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{sa3\_income} dataset will be used for all key examples in this chapter.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and sex, 2010-11 to 2016-16}} It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+The \texttt{sa3\_income} dataset will be used for all key examples in this chapter.\footnote{This is a tidied version of the \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and sex, 2010-11 to 2016-16} dataset.} It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+
+If you haven't already, download the \texttt{sa3\_income.csv} file to your own \texttt{data} folder:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{)}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://raw.githubusercontent.com/grattan/R\_at\_Grattan/master/data/sa3\_income.csv"}\NormalTok{,}
+              \DataTypeTok{destfile =} \StringTok{"data/sa3\_income.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then read it using the \texttt{read\_csv} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3\_income \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/sa3\_income.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1417,7 +1433,7 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(sa3_income)}
+\KeywordTok{head}\NormalTok{(sa3\_income)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1434,7 +1450,7 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 \end{verbatim}
 
 \hypertarget{the-pipe}{%
-\section{\texorpdfstring{The pipe: \texttt{\%\textgreater{}\%}}{The pipe: \%\textgreater{}\%}}\label{the-pipe}}
+\section{\texorpdfstring{The pipe: \texttt{\%\textgreater{}\%}}{The pipe: \%\textgreater\%}}\label{the-pipe}}
 
 You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to `nest' them inside. This nesting will be \emph{painfully} familiar to Excel users.
 
@@ -1454,11 +1470,11 @@ So the you could express the baking example as:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ingredients }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{combine}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{mix}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{bake}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{eat}\NormalTok{() }\CommentTok{# yum!}
+\NormalTok{ingredients }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{combine}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{mix}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{bake}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{eat}\NormalTok{() }\CommentTok{\# yum!}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1474,7 +1490,7 @@ Another example: the function \texttt{paste} takes arguments and combines them t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"hello"} \OperatorTok{%>%}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"dear"}\NormalTok{, }\StringTok{"reader"}\NormalTok{)}
+\StringTok{"hello"} \OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"dear"}\NormalTok{, }\StringTok{"reader"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1498,9 +1514,9 @@ Or you could define a vector of numbers and pass\footnote{`pass' can also be use
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my_numbers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{)}
+\NormalTok{my\_numbers \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{)}
 
-\NormalTok{my_numbers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+\NormalTok{my\_numbers }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1512,7 +1528,7 @@ Or you could skip the intermediate step altogether:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{sum}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1539,7 +1555,7 @@ Like the income differential it shows, writing this process as a nested function
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{summarise}\NormalTok{((}\KeywordTok{group_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(sa3_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{), gender)), }\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\KeywordTok{summarise}\NormalTok{((}\KeywordTok{group\_by}\NormalTok{(}\KeywordTok{filter}\NormalTok{(sa3\_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{), gender)), }\DataTypeTok{av\_mean\_income =} \KeywordTok{mean}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1555,9 +1571,9 @@ The original common way to avoid this unseemly nesting in \texttt{R} was to assi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data1 <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(sa3_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{)}
-\NormalTok{data2 <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(data1, gender)}
-\NormalTok{data3 <-}\StringTok{ }\KeywordTok{summarise}\NormalTok{(data2, }\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\NormalTok{data1 \textless{}{-}}\StringTok{ }\KeywordTok{filter}\NormalTok{(sa3\_income, state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{)}
+\NormalTok{data2 \textless{}{-}}\StringTok{ }\KeywordTok{group\_by}\NormalTok{(data1, gender)}
+\NormalTok{data3 \textless{}{-}}\StringTok{ }\KeywordTok{summarise}\NormalTok{(data2, }\DataTypeTok{av\_mean\_income =} \KeywordTok{mean}\NormalTok{(income))}
 \NormalTok{data3}
 \end{Highlighting}
 \end{Shaded}
@@ -1576,21 +1592,21 @@ And using pipes make the steps clearer still:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  take the \texttt{sa3\_income} data, and then \%\textgreater{}\%
+  take the \texttt{sa3\_income} data, and then \%\textgreater\%
 \item
-  \texttt{filter} it to only NSW, and then \%\textgreater{}\%
+  \texttt{filter} it to only NSW, and then \%\textgreater\%
 \item
-  \texttt{group} it by gender, and then \%\textgreater{}\%
+  \texttt{group} it by gender, and then \%\textgreater\%
 \item
   \texttt{summarise} it
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{  }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# and then}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{av_mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{  }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "NSW"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\CommentTok{\# and then}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{av\_mean\_income =} \KeywordTok{mean}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1611,7 +1627,7 @@ For example, look at the variables that are in the \texttt{sa3\_income} dataset 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(sa3_income)}
+\KeywordTok{names}\NormalTok{(sa3\_income)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1623,7 +1639,7 @@ If you wanted to keep just the \texttt{state} and \texttt{income} variables, you
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(state, income)}
 \end{Highlighting}
 \end{Shaded}
@@ -1649,8 +1665,8 @@ Or you could use \texttt{-} (minus) to remove the \texttt{state} and \texttt{sa3
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{state, }\OperatorTok{-}\NormalTok{sa3_name)}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{state, }\OperatorTok{{-}}\NormalTok{sa3\_name)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1683,8 +1699,8 @@ For example, if you want to keep just the SA3 and state variables -- ie the vari
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"s"}\NormalTok{))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts\_with}\NormalTok{(}\StringTok{"s"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1709,7 +1725,7 @@ Or, instead, if you wanted to keep just the variables that contain \texttt{"er"}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"er"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1735,8 +1751,8 @@ And if you wanted to keep \textbf{both} the \texttt{"s"} variables and the \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"s"}\NormalTok{), }\KeywordTok{contains}\NormalTok{(}\StringTok{"er"}\NormalTok{), )}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts\_with}\NormalTok{(}\StringTok{"s"}\NormalTok{), }\KeywordTok{contains}\NormalTok{(}\StringTok{"er"}\NormalTok{), )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1846,7 +1862,7 @@ Turning back to the \texttt{sa3\_income} data, if you just wanted to see observa
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "NT"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1872,9 +1888,9 @@ Or you might just want to look at high-income (\texttt{income\ \textgreater{}\ 7
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{,}
-\NormalTok{         income }\OperatorTok{>}\StringTok{ }\DecValTok{70000}\NormalTok{,}
+\NormalTok{         income }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{70000}\NormalTok{,}
 \NormalTok{         year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1898,9 +1914,9 @@ Sometimes you might want to relax a little, keeping observations from one catego
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"} \OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{==}\StringTok{ "Tas"}\NormalTok{,}
-\NormalTok{         income }\OperatorTok{>}\StringTok{ }\DecValTok{100000}\NormalTok{,}
+\NormalTok{         income }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{100000}\NormalTok{,}
 \NormalTok{         year }\OperatorTok{==}\StringTok{ }\DecValTok{2015} \OperatorTok{|}\StringTok{ }\NormalTok{year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1926,7 +1942,7 @@ For example, you could filter the \texttt{sa3\_income} dataset to keep just the 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
@@ -1942,8 +1958,8 @@ To keep the observations that have the highest average incomes \emph{in each sta
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
@@ -1971,8 +1987,8 @@ Or you could keep the observations with the \emph{lowest} average incomes in \em
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, year) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state, year) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
@@ -1999,9 +2015,9 @@ The dataset remains grouped after your function(s). To explicitly `ungroup' your
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, year) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(income)) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state, year) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(income }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(income)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2032,8 +2048,8 @@ To add a new variable to the \texttt{sa3\_income} dataset that shows the log the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{log_workers =} \KeywordTok{log}\NormalTok{(workers))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{log\_workers =} \KeywordTok{log}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2058,8 +2074,8 @@ To edit a variable, redefine it in \texttt{mutate}. For example, if you wanted t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{as.integer}\NormalTok{(year }\OperatorTok{-}\StringTok{ }\DecValTok{2000}\NormalTok{))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{as.integer}\NormalTok{(year }\OperatorTok{{-}}\StringTok{ }\DecValTok{2000}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2093,8 +2109,8 @@ You can use the \texttt{if\_else()} function when you are creating new variables
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{many_workers =} \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"Many workers"}\NormalTok{, }\StringTok{"Not many workers"}\NormalTok{))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{many\_workers =} \KeywordTok{if\_else}\NormalTok{(workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"Many workers"}\NormalTok{, }\StringTok{"Not many workers"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2127,10 +2143,10 @@ This could be done by nesting \texttt{if\_else} statements:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"More than 2000 workers"}\NormalTok{, }
-                                \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{1000}\NormalTok{, }\StringTok{"1000-2000 workers"}\NormalTok{,}
-                                        \KeywordTok{if_else}\NormalTok{(workers }\OperatorTok{>}\StringTok{ }\DecValTok{500}\NormalTok{, }\StringTok{"500-1000 workers"}\NormalTok{,}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker\_group =} \KeywordTok{if\_else}\NormalTok{(workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{2000}\NormalTok{, }\StringTok{"More than 2000 workers"}\NormalTok{, }
+                                \KeywordTok{if\_else}\NormalTok{(workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{1000}\NormalTok{, }\StringTok{"1000{-}2000 workers"}\NormalTok{,}
+                                        \KeywordTok{if\_else}\NormalTok{(workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{500}\NormalTok{, }\StringTok{"500{-}1000 workers"}\NormalTok{,}
                                                 \StringTok{"500 workers or less"}\NormalTok{))))}
 \end{Highlighting}
 \end{Shaded}
@@ -2156,12 +2172,12 @@ But that syntax can be a bit difficult to read. You can do this in a clearer way
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
-\NormalTok{    workers }\OperatorTok{<=}\StringTok{ }\DecValTok{5000} \OperatorTok{~}\StringTok{ "5,000 or fewer workers"}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker\_group =} \KeywordTok{case\_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{20000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{10000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{  }\DecValTok{5000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{\textless{}=}\StringTok{ }\DecValTok{5000} \OperatorTok{\textasciitilde{}}\StringTok{ "5,000 or fewer workers"}
 \NormalTok{  ))}
 \end{Highlighting}
 \end{Shaded}
@@ -2189,12 +2205,12 @@ Ending a \texttt{case\_when} statement with \texttt{TRUE\ \textasciitilde{}\ {[}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
-    \OtherTok{TRUE} \OperatorTok{~}\StringTok{ "5,000 or fewer workers"}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker\_group =} \KeywordTok{case\_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{20000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 20,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{10000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 10,000 workers"}\NormalTok{,}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{  }\DecValTok{5000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 5,000 workers"}\NormalTok{,}
+    \OtherTok{TRUE} \OperatorTok{\textasciitilde{}}\StringTok{ "5,000 or fewer workers"}
 \NormalTok{  ))}
 \end{Highlighting}
 \end{Shaded}
@@ -2222,9 +2238,9 @@ Observations that do not meet a condition will be set to \texttt{NA}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_group =} \KeywordTok{case_when}\NormalTok{(}
-\NormalTok{    workers }\OperatorTok{>}\StringTok{ }\FloatTok{10e6} \OperatorTok{~}\StringTok{ "More than 10 million workers"}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker\_group =} \KeywordTok{case\_when}\NormalTok{(}
+\NormalTok{    workers }\OperatorTok{\textgreater{}}\StringTok{ }\FloatTok{10e6} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 10 million workers"}
 \NormalTok{  ))}
 \end{Highlighting}
 \end{Shaded}
@@ -2250,13 +2266,13 @@ Like any \texttt{if} or \texttt{if\_else}, you can provide more than one conditi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{women_group =} \KeywordTok{case_when}\NormalTok{(}
-\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{ }\DecValTok{20000} \OperatorTok{~}\StringTok{ "More than 20,000 women"}\NormalTok{,}
-\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{ }\DecValTok{10000} \OperatorTok{~}\StringTok{ "More than 10,000 women"}\NormalTok{,}
-\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{&}\StringTok{ }\NormalTok{workers }\OperatorTok{>}\StringTok{  }\DecValTok{5000} \OperatorTok{~}\StringTok{ "More than 5,000 women"}\NormalTok{,}
-\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"}                  \OperatorTok{~}\StringTok{ "5,000 or fewer women"}\NormalTok{,}
-    \OtherTok{TRUE} \OperatorTok{~}\StringTok{ "Men"}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{women\_group =} \KeywordTok{case\_when}\NormalTok{(}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{\&}\StringTok{ }\NormalTok{workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{20000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 20,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{\&}\StringTok{ }\NormalTok{workers }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{10000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 10,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"} \OperatorTok{\&}\StringTok{ }\NormalTok{workers }\OperatorTok{\textgreater{}}\StringTok{  }\DecValTok{5000} \OperatorTok{\textasciitilde{}}\StringTok{ "More than 5,000 women"}\NormalTok{,}
+\NormalTok{    gender }\OperatorTok{==}\StringTok{ "Women"}                  \OperatorTok{\textasciitilde{}}\StringTok{ "5,000 or fewer women"}\NormalTok{,}
+    \OtherTok{TRUE} \OperatorTok{\textasciitilde{}}\StringTok{ "Men"}
 \NormalTok{  ))}
 \end{Highlighting}
 \end{Shaded}
@@ -2285,9 +2301,9 @@ Like filtering, you can add or edit variables on grouped data. For example, you 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av\_workers =} \KeywordTok{mean}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2315,10 +2331,10 @@ Grouping a dataset does not prohibit operations that don't utilise the grouping.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers),}
-         \DataTypeTok{worker_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av_workers)}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av\_workers =} \KeywordTok{mean}\NormalTok{(workers),}
+         \DataTypeTok{worker\_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av\_workers)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2344,10 +2360,10 @@ See that the data remains grouped after the \texttt{mutate}. You can explicitly 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av_workers =} \KeywordTok{mean}\NormalTok{(workers),}
-         \DataTypeTok{worker_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av_workers) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{av\_workers =} \KeywordTok{mean}\NormalTok{(workers),}
+         \DataTypeTok{worker\_diff =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\NormalTok{av\_workers) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2376,9 +2392,9 @@ Summarising is a useful way to assess and present data. The \texttt{summarise} f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income),}
-            \DataTypeTok{total_workers =} \KeywordTok{sum}\NormalTok{(workers))  }\CommentTok{# this is a silly statistic}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income),}
+            \DataTypeTok{total\_workers =} \KeywordTok{sum}\NormalTok{(workers))  }\CommentTok{\# this is a silly statistic}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2398,8 +2414,8 @@ Grouped summaries can help change the \emph{detail} of your data. In the origina
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, sa3_name) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(year, sa3\_name) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
@@ -2430,9 +2446,9 @@ Grouped summaries generate summary statistics for grouped data. It uses the same
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2448,8 +2464,8 @@ Or the total workers in each year and state by gender:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state, gender) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(year, state, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
@@ -2483,8 +2499,8 @@ For example, to find the areas in 2016 with the \textbf{least} workers:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(workers)}
 \end{Highlighting}
 \end{Shaded}
@@ -2510,9 +2526,9 @@ You can provide more than one variable. To sort the data first by \texttt{state}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(state, }\OperatorTok{-}\NormalTok{workers)}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(state, }\OperatorTok{{-}}\NormalTok{workers)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2542,8 +2558,8 @@ Both the \texttt{lead} and \texttt{lag} functions take a variable as their only 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{last_workers =} \KeywordTok{lag}\NormalTok{(workers))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{last\_workers =} \KeywordTok{lag}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2568,10 +2584,10 @@ If you wanted to see the growth rate of income over time, you could \texttt{arra
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(sa3_name, gender, year) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{income_growth =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(income) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(sa3\_name, gender, year) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{income\_growth =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(income) }\OperatorTok{{-}}\StringTok{ }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2602,13 +2618,13 @@ For example, say you want to get the total workers and total income in each stat
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total_income =}\NormalTok{ workers }\OperatorTok{*}\StringTok{ }\NormalTok{income) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state, gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{total_workers =} \KeywordTok{sum}\NormalTok{(workers),}
-            \DataTypeTok{mean_income =} \KeywordTok{mean}\NormalTok{(income),}
-            \DataTypeTok{total_income =} \KeywordTok{sum}\NormalTok{(total_income))}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total\_income =}\NormalTok{ workers }\OperatorTok{*}\StringTok{ }\NormalTok{income) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(year, state, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{total\_workers =} \KeywordTok{sum}\NormalTok{(workers),}
+            \DataTypeTok{mean\_income =} \KeywordTok{mean}\NormalTok{(income),}
+            \DataTypeTok{total\_income =} \KeywordTok{sum}\NormalTok{(total\_income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2639,14 +2655,14 @@ Or say you want to see the annual growth rate of female workers in the SA3 with 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Women"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{highest_income =} \KeywordTok{max}\NormalTok{(income)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(highest_income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(highest_income)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(year) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker_growth =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(workers) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Women"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{highest\_income =} \KeywordTok{max}\NormalTok{(income)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(highest\_income }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(highest\_income)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(year) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{worker\_growth =}\NormalTok{ workers }\OperatorTok{/}\StringTok{ }\KeywordTok{lag}\NormalTok{(workers) }\OperatorTok{{-}}\StringTok{ }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2679,7 +2695,7 @@ It is probably easier to show this with an example. Say that we had the income p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_percentiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_percentiles.csv"}\NormalTok{)}
+\NormalTok{sa3\_percentiles \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/sa3\_percentiles.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2754,36 +2770,31 @@ The \texttt{grattantheme} package is used to make charts look Grattan-y. The \te
 \end{Highlighting}
 \end{Shaded}
 
+For most charts in this chapter, we'll use the \texttt{sa3\_income} data summarised below.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and gender, 2010-11 to 2015-16}} It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a \texttt{professionals} subset that only includes people in professional occupations in 2015:
+
+If you haven't already, download the \texttt{sa3\_income.csv} file to your own \texttt{data} folder:
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# note: to be added to grattantheme; remove this when done}
-\NormalTok{grattan_label <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
-
-\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
-  
-\KeywordTok{geom_label}\NormalTok{(..., }
-           \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
-           \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
-           \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
-           \DataTypeTok{size =}\NormalTok{ .size)}
-\NormalTok{\}}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://raw.githubusercontent.com/grattan/R\_at\_Grattan/master/data/sa3\_income.csv"}\NormalTok{,}
+              \DataTypeTok{destfile =} \StringTok{"data/sa3\_income.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-For most charts in this chapter, we'll use the \texttt{sa3\_income} data summarised below.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and gender, 2010-11 to 2015-16}} It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a \texttt{professionals} subset that only includes people in professional occupations in 2015:
+Then read it using the \texttt{read\_csv} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{)}
+\NormalTok{sa3\_income \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/sa3\_income.csv"}\NormalTok{)}
 
-\NormalTok{professionals <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{sa4_name, }\OperatorTok{-}\NormalTok{gcc_name) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{professionals \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{sa4\_name, }\OperatorTok{{-}}\NormalTok{gcc\_name) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{,}
 \NormalTok{         occupation }\OperatorTok{==}\StringTok{ "Professionals"}\NormalTok{,}
-         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median_income),}
+         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median\_income),}
          \OperatorTok{!}\NormalTok{gender }\OperatorTok{==}\StringTok{ "Persons"}\NormalTok{) }
 
-\CommentTok{# Show the first six rows of the new dataset}
+\CommentTok{\# Show the first six rows of the new dataset}
 \KeywordTok{head}\NormalTok{(professionals)}
 \end{Highlighting}
 \end{Shaded}
@@ -2847,7 +2858,7 @@ For example, you can plot a column chart by passing the \texttt{sa3\_income} dat
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2860,9 +2871,9 @@ If we just plot that, you'll see that \texttt{ggplot} knows a little bit more ab
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{y =}\NormalTok{ median\_income,}
                    \DataTypeTok{colour =}\NormalTok{ gender))}
 \end{Highlighting}
 \end{Shaded}
@@ -2873,11 +2884,11 @@ Now that \texttt{ggplot} knows where things should go, it needs to how to \emph{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{professionals }\OperatorTok{%>%}
+\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{y =}\NormalTok{ median\_income,}
                    \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{()}
+\StringTok{        }\KeywordTok{geom\_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2887,12 +2898,12 @@ Great! There are a couple of quick things we can do to make the chart a bit clea
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{y =}\NormalTok{ median\_income,}
                    \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{()}
+\StringTok{        }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{scale\_x\_log10}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2933,7 +2944,7 @@ You can install it with \texttt{remotes::install\_github} from the package:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2962,18 +2973,18 @@ Start with a scatterplot, similar to the one made above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart <-}\StringTok{ }\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{base\_chart \textless{}{-}}\StringTok{ }\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-                   \DataTypeTok{y =}\NormalTok{ median_income,}
+                   \DataTypeTok{y =}\NormalTok{ median\_income,}
                    \DataTypeTok{colour =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{        }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{        }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{        }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"More professionals, the more they earn"}\NormalTok{,}
              \DataTypeTok{subtitle =} \StringTok{"Median income of professional workers in SA3s"}\NormalTok{,}
              \DataTypeTok{x =} \StringTok{"Number of professional workers"}\NormalTok{,}
              \DataTypeTok{y =} \StringTok{"Median income"}\NormalTok{,}
-             \DataTypeTok{caption =} \StringTok{"Source: ABS Estimates of Personal Income for Small Areas, 2011-2016"}\NormalTok{)}
+             \DataTypeTok{caption =} \StringTok{"Source: ABS Estimates of Personal Income for Small Areas, 2011{-}2016"}\NormalTok{)}
 
-\NormalTok{base_chart}
+\NormalTok{base\_chart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2983,8 +2994,8 @@ Let's make it Grattany. First, add \texttt{theme\_grattan} to your plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{)}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2995,10 +3006,10 @@ Also add \texttt{scale\_x\_log10} to make the x-axis a log10 scale, telling it t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{scale\_x\_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -3008,13 +3019,13 @@ To define \texttt{colour} colours, use \texttt{grattan\_colour\_manual} with the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prof_chart <-}\StringTok{ }\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }
+\NormalTok{prof\_chart \textless{}{-}}\StringTok{ }\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{        }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\FloatTok{50e3}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{scale\_x\_log10}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }
 
-\NormalTok{prof_chart}
+\NormalTok{prof\_chart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3071,7 +3082,7 @@ To save the \texttt{prof\_chart} plot created above as a whole-column chart for 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_report.pdf"}\NormalTok{, prof_chart, }\DataTypeTok{type =} \StringTok{"wholecolumn"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/professionals\_chart\_report.pdf"}\NormalTok{, prof\_chart, }\DataTypeTok{type =} \StringTok{"wholecolumn"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3081,7 +3092,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_presentation.pdf"}\NormalTok{, prof_chart, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/professionals\_chart\_presentation.pdf"}\NormalTok{, prof\_chart, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3091,7 +3102,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/professionals_chart_blog.png"}\NormalTok{, prof_chart, }
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/professionals\_chart\_blog.png"}\NormalTok{, prof\_chart, }
              \DataTypeTok{type =} \StringTok{"blog"}\NormalTok{, }\DataTypeTok{height =} \DecValTok{30}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3120,8 +3131,8 @@ We'll look at the first approach so you can get a feel for how the labelling geo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prof_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender))}
+\NormalTok{prof\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3133,12 +3144,12 @@ To do this, we can create a new dataset that just contains one observation each.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_data <-}\StringTok{ }\NormalTok{professionals }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(gender) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(workers }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(workers)) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{label\_data \textless{}{-}}\StringTok{ }\NormalTok{professionals }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(workers }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(workers)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
-\NormalTok{label_data}
+\NormalTok{label\_data}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3156,8 +3167,8 @@ And then tell \texttt{geom\_text} to look at \emph{that} dataset:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prof_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+\NormalTok{prof\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data,}
             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender))}
 \end{Highlighting}
 \end{Shaded}
@@ -3168,14 +3179,14 @@ Okay, not bad. The labels go off the chart. You could fix this by shortening the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_data_short <-}\StringTok{ }\NormalTok{label_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{gender_label =} \KeywordTok{if_else}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Females"}\NormalTok{, }
+\NormalTok{label\_data\_short \textless{}{-}}\StringTok{ }\NormalTok{label\_data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{gender\_label =} \KeywordTok{if\_else}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Females"}\NormalTok{, }
                              \StringTok{"Women"}\NormalTok{, }
                              \StringTok{"Men"}\NormalTok{))}
 
-\NormalTok{prof_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data_short,}
-            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender_label))}
+\NormalTok{prof\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data\_short,}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender\_label))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3185,8 +3196,8 @@ Okay, not bad. The labels go off the chart. You could fix this by shortening the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prof_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+\NormalTok{prof\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data,}
             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
@@ -3197,13 +3208,13 @@ To have more freedom over \emph{where} your labels are placed, you can create a 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{self_label <-}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
-  \OperatorTok{~}\NormalTok{gender, }\OperatorTok{~}\NormalTok{workers,   }\OperatorTok{~}\NormalTok{median_income,}
+\NormalTok{self\_label \textless{}{-}}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
+  \OperatorTok{\textasciitilde{}}\NormalTok{gender, }\OperatorTok{\textasciitilde{}}\NormalTok{workers,   }\OperatorTok{\textasciitilde{}}\NormalTok{median\_income,}
   \StringTok{"Women"}\NormalTok{,    }\DecValTok{23000}\NormalTok{,            }\DecValTok{55000}\NormalTok{,}
   \StringTok{"Men"}\NormalTok{,      }\DecValTok{23000}\NormalTok{,           }\DecValTok{110000}\NormalTok{)}
 
 
-\NormalTok{self_label}
+\NormalTok{self\_label}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3217,8 +3228,8 @@ To have more freedom over \emph{where} your labels are placed, you can create a 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prof_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ self_label,}
+\NormalTok{prof\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ self\_label,}
             \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender), }
             \DataTypeTok{hjust =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
@@ -3245,46 +3256,29 @@ This section takes you through a few often-used chart types.
 \KeywordTok{library}\NormalTok{(sf)}
 \KeywordTok{library}\NormalTok{(scales)}
 \KeywordTok{library}\NormalTok{(janitor)}
-\CommentTok{# this might be hairy; should get `grattools` happening:}
+\CommentTok{\# this might be hairy; should get \textasciigrave{}grattools\textasciigrave{} happening:}
 \KeywordTok{library}\NormalTok{(grattan)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# note: to be added to grattantheme; remove this when done}
-\NormalTok{grattan_label_repel <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
-
-\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
-  
-  \KeywordTok{geom_label_repel}\NormalTok{(..., }
-                   \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
-                   \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
-                   \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
-                   \DataTypeTok{size =}\NormalTok{ .size)}
-\NormalTok{\}}
-
-
-\NormalTok{grattan_label <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(..., }\DataTypeTok{size =} \DecValTok{18}\NormalTok{) \{}
-
-\NormalTok{  .size =}\StringTok{ }\NormalTok{size }\OperatorTok{/}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\NormalTok{.pt}
-  
-  \KeywordTok{geom_label}\NormalTok{(..., }
-                   \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{,}
-                   \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{), }
-                   \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{,}
-                   \DataTypeTok{size =}\NormalTok{ .size)}
-\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 The \texttt{sa3\_income} dataset will be used for all key examples in this chapter.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and sex, 2010-11 to 2016-16}} It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.
 
+If you haven't already, download the \texttt{sa3\_income.csv} file to your own \texttt{data} folder:
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sa3_income <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/sa3_income.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median_income),}
-         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(average_income))}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://raw.githubusercontent.com/grattan/R\_at\_Grattan/master/data/sa3\_income.csv"}\NormalTok{,}
+              \DataTypeTok{destfile =} \StringTok{"data/sa3\_income.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then read it using the \texttt{read\_csv} function, removing any rows missing average or median income values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3\_income \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"data/sa3\_income.csv"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(median\_income),}
+         \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(average\_income))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3312,7 +3306,7 @@ The \texttt{sa3\_income} dataset will be used for all key examples in this chapt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(sa3_income)}
+\KeywordTok{head}\NormalTok{(sa3\_income)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3338,10 +3332,10 @@ Bar charts are made with \texttt{geom\_bar} or \texttt{geom\_col}. Creating a ba
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{<}\NormalTok{data}\OperatorTok{>}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \OperatorTok{<}\NormalTok{xvar}\OperatorTok{>}\NormalTok{, }\DataTypeTok{y =} \OperatorTok{<}\NormalTok{yvar}\OperatorTok{>}\NormalTok{),}
-     \DataTypeTok{stat =} \OperatorTok{<}\NormalTok{STAT}\OperatorTok{>}\NormalTok{, }
-     \DataTypeTok{position =} \OperatorTok{<}\NormalTok{POSITION}\OperatorTok{>}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OperatorTok{\textless{}}\NormalTok{data}\OperatorTok{\textgreater{}}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \OperatorTok{\textless{}}\NormalTok{xvar}\OperatorTok{\textgreater{}}\NormalTok{, }\DataTypeTok{y =} \OperatorTok{\textless{}}\NormalTok{yvar}\OperatorTok{\textgreater{}}\NormalTok{),}
+     \DataTypeTok{stat =} \OperatorTok{\textless{}}\NormalTok{STAT}\OperatorTok{\textgreater{}}\NormalTok{, }
+     \DataTypeTok{position =} \OperatorTok{\textless{}}\NormalTok{POSITION}\OperatorTok{\textgreater{}}
 \StringTok{  }\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3385,9 +3379,9 @@ First, create the data you want to plot.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers))}
 
 \NormalTok{data}
@@ -3408,16 +3402,16 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks awesomesauce: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks sterling: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
              \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3427,12 +3421,12 @@ Make it Grattany by adjusting general theme defaults with \texttt{theme\_grattan
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
              \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3442,12 +3436,12 @@ To order the states by number of workers, you can tell the \texttt{x} aesthetic 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, workers), }\CommentTok{# reorder states by workers}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, workers), }\CommentTok{\# reorder states by workers}
              \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3457,28 +3451,28 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{simple_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{simple\_bar \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, workers),}
              \DataTypeTok{y =}\NormalTok{ workers)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Most workers are on the east coast"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Number people in employment, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 
-\NormalTok{simple_bar}
+\NormalTok{simple\_bar}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks wonderful! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks of the highest standard! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/simple_bar.pdf"}\NormalTok{, simple_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/simple\_bar.pdf"}\NormalTok{, simple\_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3493,10 +3487,10 @@ First create the dataset you want to plot, getting the average income by state a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{   }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, gender) }\OperatorTok{%>%}\StringTok{   }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{   }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{   }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(total\_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
 \NormalTok{data}
 \end{Highlighting}
@@ -3525,17 +3519,17 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks too good to be true: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks legit: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3545,11 +3539,11 @@ The two series -- women and men -- created by \texttt{fill} are stacked on-top o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\CommentTok{# 'dodge' the series}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\CommentTok{\# \textquotesingle{}dodge\textquotesingle{} the series}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3561,12 +3555,12 @@ However, while the \emph{coordinates} have been flipped, the underlying data has
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ state,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\CommentTok{# rotate the chart}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\CommentTok{\# rotate the chart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3576,12 +3570,12 @@ And reorder the states by average income, so that the state with the highest (co
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }\CommentTok{# reorder}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income), }\CommentTok{\# reorder}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3591,15 +3585,15 @@ Wonderful -- that's how you want our \emph{data} to look. Now you can Grattanise
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income), }
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# grattan theme}
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }\CommentTok{# y axis}
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\CommentTok{# grattan fill colours}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{\# grattan theme}
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }\CommentTok{\# y axis}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\CommentTok{\# grattan fill colours}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3611,20 +3605,20 @@ Section \ref{adding-labels} shows how labels are treated like data points: they 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income), }
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,  }\CommentTok{# colour the text according to gender}
-                    \DataTypeTok{label =}\NormalTok{ gender),  }\CommentTok{# label the text according to gender}
-            \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{),  }\CommentTok{# position dodge with width 1}
-            \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# horizontally align the label so its outside the bar}
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)   }\CommentTok{# define colour as two grattan colours}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,  }\CommentTok{\# colour the text according to gender}
+                    \DataTypeTok{label =}\NormalTok{ gender),  }\CommentTok{\# label the text according to gender}
+            \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{),  }\CommentTok{\# position dodge with width 1}
+            \DataTypeTok{hjust =} \FloatTok{{-}0.1}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{\# horizontally align the label so its outside the bar}
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)   }\CommentTok{\# define colour as two grattan colours}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3634,10 +3628,10 @@ To just label \emph{one} of the plots -- ie the first one, ACT in this case -- w
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_gender <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{)  }\CommentTok{# just want Tasmania observations}
+\NormalTok{label\_gender \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{)  }\CommentTok{\# just want Tasmania observations}
 
-\NormalTok{label_gender}
+\NormalTok{label\_gender}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3654,21 +3648,21 @@ So you can pass that \texttt{label\_gender} dataset to \texttt{grattan\_label}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income), }
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender,  }\CommentTok{# supply the new dataset}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_gender,  }\CommentTok{\# supply the new dataset}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
                     \DataTypeTok{label =}\NormalTok{ gender), }
-                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
-                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+                \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{{-}0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3678,58 +3672,58 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income),}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
-                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# expand the plot}
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender,}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand\_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{\# expand the plot}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_gender,}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
                     \DataTypeTok{label =}\NormalTok{ gender), }
-                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
-                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+                \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{{-}0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks tip-top! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks great! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{multiple_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income), }
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{multiple\_bar \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income), }
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
-                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_gender, }
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand\_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_gender, }
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ gender,}
                     \DataTypeTok{label =}\NormalTok{ gender), }
-                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
-                \DataTypeTok{hjust =} \FloatTok{-0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+                \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{hjust =} \FloatTok{{-}0.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Women earn less than men in every state"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/multiple_bar.pdf"}\NormalTok{, multiple_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/multiple\_bar.pdf"}\NormalTok{, multiple\_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3744,9 +3738,9 @@ Start by creating the dataset you want to plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(state, gender, prof) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(state, gender, prof) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(total\_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
 \NormalTok{data}
 \end{Highlighting}
@@ -3774,22 +3768,22 @@ Then plot a bar chart with \texttt{geom\_col} and \texttt{theme\_grattan} elemen
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{facet_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{facet\_bar \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income),}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
-                       \DataTypeTok{expand_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+                       \DataTypeTok{expand\_top =} \FloatTok{.1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Professional workers earn more in every state"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3797,8 +3791,8 @@ You can `facet' bar charts -- and any other chart type -- with the \texttt{facet
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{facet_bar }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof))}
+\NormalTok{facet\_bar }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3810,11 +3804,11 @@ Create labels in the same way you have done before: you only want to label one `
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{label\_data \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{,}
-\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non-professional"}\NormalTok{)}
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non{-}professional"}\NormalTok{)}
 
-\NormalTok{label_data}
+\NormalTok{label\_data}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3833,57 +3827,57 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{facet_bar }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{# add black line}
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data, }\CommentTok{# supply label data}
+\NormalTok{facet\_bar }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{  }\CommentTok{\# add black line}
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data, }\CommentTok{\# supply label data}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender,}
                     \DataTypeTok{colour =}\NormalTok{ gender),}
-                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
                 \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Sublime! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Of the highest standard! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Create label data}
-\NormalTok{label_data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\CommentTok{\# Create label data}
+\NormalTok{label\_data \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "ACT"}\NormalTok{,}
-\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non-professional"}\NormalTok{)}
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Non{-}professional"}\NormalTok{)}
 
-\CommentTok{# Create plot}
-\NormalTok{facet_bar <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average_income),}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\CommentTok{\# Create plot}
+\NormalTok{facet\_bar \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{reorder}\NormalTok{(state, average\_income),}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{fill =}\NormalTok{ gender)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar,}
-                       \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{25e3}\NormalTok{, }\FloatTok{50e3}\NormalTok{, }\FloatTok{75e3}\NormalTok{)) }\OperatorTok{+}\StringTok{  }\CommentTok{# change breaks}
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{flipped =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar,}
+                       \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{25e3}\NormalTok{, }\FloatTok{50e3}\NormalTok{, }\FloatTok{75e3}\NormalTok{)) }\OperatorTok{+}\StringTok{  }\CommentTok{\# change breaks}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Professional workers earn more in every state"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income of workers, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{""}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{""}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(prof)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data,}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ gender,}
                     \DataTypeTok{colour =}\NormalTok{ gender),}
-                \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
+                \DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{), }
                 \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/facet_bar.pdf"}\NormalTok{, facet_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/facet\_bar.pdf"}\NormalTok{, facet\_bar, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3908,10 +3902,10 @@ First, take the \texttt{sa3\_income} dataset and create a summary table average 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\NormalTok{state }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"ACT"}\NormalTok{, }\StringTok{"NT"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, state) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\NormalTok{state }\OperatorTok{\%in\%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"ACT"}\NormalTok{, }\StringTok{"NT"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(year, state) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(total\_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
 \KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
@@ -3936,11 +3930,11 @@ Plot a line chart by taking the \texttt{data}, passing it to \texttt{ggplot} wit
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{group =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3950,12 +3944,12 @@ Now you can represent each \texttt{state} by colour:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{group =}\NormalTok{ state,}
              \DataTypeTok{colour =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3965,19 +3959,19 @@ Cooler! Adding some Grattan formatting to it and define it as our `base chart':
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart <-data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{base\_chart \textless{}{-}data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{group =}\NormalTok{ state,}
              \DataTypeTok{colour =}\NormalTok{ state)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{6}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{""}\NormalTok{)}
 
-\NormalTok{base_chart}
+\NormalTok{base\_chart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3987,8 +3981,8 @@ You can add `dots' for each year by layering \texttt{geom\_point} on top of \tex
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3998,8 +3992,8 @@ To add labels to the end of each line, you would expand the x-axis to make room 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_right =} \FloatTok{.3}\NormalTok{,}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{expand\_right =} \FloatTok{.3}\NormalTok{,}
                        \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
                        \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }
 \end{Highlighting}
@@ -4011,17 +4005,17 @@ Then add labels, using
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_line <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{label\_line \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2010}\NormalTok{)}
 
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_left =} \FloatTok{.1}\NormalTok{,}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{expand\_left =} \FloatTok{.1}\NormalTok{,}
                        \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
                        \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_line,}
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_line,}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ state),}
-                \DataTypeTok{nudge_x =} \OperatorTok{-}\OtherTok{Inf}\NormalTok{,}
+                \DataTypeTok{nudge\_x =} \OperatorTok{{-}}\OtherTok{Inf}\NormalTok{,}
                 \DataTypeTok{segment.colour =} \OtherTok{NA}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4035,14 +4029,14 @@ If you wanted to show each state individually, you could \textbf{facet} your cha
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{    }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{expand_left =} \FloatTok{.1}\NormalTok{, }
-                         \DataTypeTok{expand_right =} \FloatTok{.1}\NormalTok{,}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{expand\_left =} \FloatTok{.1}\NormalTok{, }
+                         \DataTypeTok{expand\_right =} \FloatTok{.1}\NormalTok{,}
                          \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{2011}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{1}\NormalTok{),}
                          \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"12"}\NormalTok{, }\StringTok{"13"}\NormalTok{, }\StringTok{"14"}\NormalTok{, }\StringTok{"15"}\NormalTok{, }\StringTok{"16"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.spacing.x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{10}\NormalTok{, }\StringTok{"mm"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(state }\OperatorTok{~}\StringTok{ }\NormalTok{.)}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(state }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{.)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4060,7 +4054,7 @@ The first simple scatter plot will show the relationship between average incomes
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/simple_scatter.png"}\NormalTok{)}
+\KeywordTok{include\_graphics}\NormalTok{(}\StringTok{"atlas/simple\_scatter.png"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4070,12 +4064,12 @@ Create the dataset you want to plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{,}
-\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Professional"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{         prof }\OperatorTok{==}\StringTok{ "Professional"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers),}
-            \DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
+            \DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(total\_income) }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
 
 \KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
@@ -4097,10 +4091,10 @@ The dataset has one observation per SA3, and the two variables you want to plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+             \DataTypeTok{y =}\NormalTok{ average\_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4120,30 +4114,30 @@ Then add Grattan theme elements:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
+             \DataTypeTok{y =}\NormalTok{ average\_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks champion. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks tremendous. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
-                       \DataTypeTok{expand_right =} \FloatTok{.05}\NormalTok{) }\CommentTok{# expand the right by 5%}
+             \DataTypeTok{y =}\NormalTok{ average\_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
+                       \DataTypeTok{expand\_right =} \FloatTok{.05}\NormalTok{) }\CommentTok{\# expand the right by 5\%}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4153,25 +4147,25 @@ Finally, add titles and save the plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{simple_scatter <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{simple\_scatter \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ workers,}
-             \DataTypeTok{y =}\NormalTok{ average_income)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()  }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
-                       \DataTypeTok{expand_right =} \FloatTok{.05}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+             \DataTypeTok{y =}\NormalTok{ average\_income)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{()  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ comma,}
+                       \DataTypeTok{expand\_right =} \FloatTok{.05}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"More workers, more income"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income and number of workers by SA3, 2016"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Workers"}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/simple_scatter.pdf"}\NormalTok{, simple_scatter, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/simple\_scatter.pdf"}\NormalTok{, simple\_scatter, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4186,7 +4180,7 @@ The chart will show the wages of professional workers and non-professional worke
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/scatter_reshape.png"}\NormalTok{)}
+\KeywordTok{include\_graphics}\NormalTok{(}\StringTok{"atlas/scatter\_reshape.png"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4196,12 +4190,12 @@ First prepare your data. You want to find the average incomes of all professiona
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_prep <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, prof) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(total_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\NormalTok{data\_prep \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, prof) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(total\_income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
-\KeywordTok{head}\NormalTok{(data_prep)}
+\KeywordTok{head}\NormalTok{(data\_prep)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4236,11 +4230,11 @@ After the \texttt{pivot\_wider} step is complete, use \texttt{janitor::clean\_na
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{data_prep }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{id_cols =}\NormalTok{ sa3_name,  }\CommentTok{# variables that will stay the same}
-              \DataTypeTok{names_from =}\NormalTok{ prof,   }\CommentTok{# variables that will dictate the new names}
-              \DataTypeTok{values_from =}\NormalTok{ average_income) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# these will be the values}
-\StringTok{  }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{() }\CommentTok{# tidy up the new variable names}
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{data\_prep }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{pivot\_wider}\NormalTok{(}\DataTypeTok{id\_cols =}\NormalTok{ sa3\_name,  }\CommentTok{\# variables that will stay the same}
+              \DataTypeTok{names\_from =}\NormalTok{ prof,   }\CommentTok{\# variables that will dictate the new names}
+              \DataTypeTok{values\_from =}\NormalTok{ average\_income) }\OperatorTok{\%\textgreater{}\%}\StringTok{  }\CommentTok{\# these will be the values}
+\StringTok{  }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean\_names}\NormalTok{() }\CommentTok{\# tidy up the new variable names}
 
 \KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
@@ -4265,10 +4259,10 @@ Now you have a dataset in the format you want to plot, you can pass it to \textt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non_professional,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non\_professional,}
              \DataTypeTok{y =}\NormalTok{ professional)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\CommentTok{# make the points a little transparent}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\CommentTok{\# make the points a little transparent}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4282,24 +4276,24 @@ Then, like you've done before, add Grattan theme elements and titles, and save w
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{scatter_reshape <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non_professional,}
+\NormalTok{scatter\_reshape \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ non\_professional,}
              \DataTypeTok{y =}\NormalTok{ professional)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professionals tend to earn more when professionals do"}\NormalTok{,}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non{-}professionals tend to earn more when professionals do"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income for workers by SA3, 2016"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"Professional incomes"}\NormalTok{,}
-       \DataTypeTok{x =} \StringTok{"Non-professional incomes"}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{x =} \StringTok{"Non{-}professional incomes"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/scatter_reshape.pdf"}\NormalTok{, scatter_reshape, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/scatter\_reshape.pdf"}\NormalTok{, scatter\_reshape, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4312,7 +4306,7 @@ For the third plot, look at the incomes of non-professional workers by their are
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"atlas/scatter_layer.png"}\NormalTok{)}
+\KeywordTok{include\_graphics}\NormalTok{(}\StringTok{"atlas/scatter\_layer.png"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4322,13 +4316,13 @@ Get the data you want to plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total_income =}\NormalTok{ average_income }\OperatorTok{*}\StringTok{ }\NormalTok{workers) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sa3_name, sa3_income_percentile, prof, occ_short) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{income =} \KeywordTok{sum}\NormalTok{(total_income),}
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2016}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{total\_income =}\NormalTok{ average\_income }\OperatorTok{*}\StringTok{ }\NormalTok{workers) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(sa3\_name, sa3\_income\_percentile, prof, occ\_short) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{income =} \KeywordTok{sum}\NormalTok{(total\_income),}
             \DataTypeTok{workers =} \KeywordTok{sum}\NormalTok{(workers),}
-            \DataTypeTok{average_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
+            \DataTypeTok{average\_income =}\NormalTok{ income }\OperatorTok{/}\StringTok{ }\NormalTok{workers)}
 
 \KeywordTok{head}\NormalTok{(data)}
 \end{Highlighting}
@@ -4351,11 +4345,11 @@ To make a scatter plot with \texttt{average\_income} against \texttt{sa3\_income
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3\_income\_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{)}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4377,32 +4371,32 @@ Now add your Grattan theme elements:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\NormalTok{base\_chart \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3\_income\_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
                        \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{()}
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{()}
 
-\NormalTok{base_chart}
+\NormalTok{base\_chart}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks of the highest quality! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks magic! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{perc_average <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(prof, sa3_income_percentile) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\NormalTok{perc\_average \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(prof, sa3\_income\_percentile) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
-\KeywordTok{head}\NormalTok{(perc_average)}
+\KeywordTok{head}\NormalTok{(perc\_average)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4424,13 +4418,13 @@ Make the outline of the circle black with \texttt{colour} and make the \texttt{s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc\_average,}
              \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
              \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
              \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
              \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4442,10 +4436,10 @@ Like labelling before, you should create a new dataset with your label informati
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{label_data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{sa3_income_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-  \DataTypeTok{average_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
-  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non-professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
+\NormalTok{label\_data \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{sa3\_income\_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
+  \DataTypeTok{average\_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
+  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non{-}professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4453,20 +4447,20 @@ Finally, add the labels to the plot and give some titles:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{base_chart }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+\NormalTok{base\_chart }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc\_average,}
              \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
              \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
              \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
              \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data,}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ prof)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professional workers earn about the same, regardless of area income"}\NormalTok{,}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non{-}professional workers earn about the same, regardless of area income"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income of workers by area income percentile, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Area total income percentile"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4476,48 +4470,48 @@ Putting that all together, your code will look something like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Create percentage data}
-\NormalTok{perc_average <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(prof, sa3_income_percentile) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
+\CommentTok{\# Create percentage data}
+\NormalTok{perc\_average \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(prof, sa3\_income\_percentile) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{average\_income =} \KeywordTok{sum}\NormalTok{(income) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(workers))}
 
-\CommentTok{# Create label data}
-\NormalTok{label_data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{sa3_income_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-  \DataTypeTok{average_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
-  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non-professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
+\CommentTok{\# Create label data}
+\NormalTok{label\_data \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{sa3\_income\_percentile =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
+  \DataTypeTok{average\_income =} \KeywordTok{c}\NormalTok{(}\FloatTok{15e3}\NormalTok{, }\FloatTok{120e3}\NormalTok{),}
+  \DataTypeTok{prof =}  \KeywordTok{c}\NormalTok{(}\StringTok{"Non{-}professional"}\NormalTok{, }\StringTok{"Professional"}\NormalTok{))}
 
 
-\CommentTok{# Plot }
-\NormalTok{scatter_layer <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3_income_percentile,}
-             \DataTypeTok{y =}\NormalTok{ average_income,}
+\CommentTok{\# Plot }
+\NormalTok{scatter\_layer \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sa3\_income\_percentile,}
+             \DataTypeTok{y =}\NormalTok{ average\_income,}
              \DataTypeTok{colour =}\NormalTok{ prof)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme_grattan}\NormalTok{(}\DataTypeTok{chart_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_colour_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme\_grattan}\NormalTok{(}\DataTypeTok{chart\_type =} \StringTok{"scatter"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_colour\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ dollar, }
                        \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\OtherTok{NA}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_x_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc_average,}
+\StringTok{  }\KeywordTok{grattan\_x\_continuous}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ perc\_average,}
              \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ prof),}
              \DataTypeTok{shape =} \DecValTok{21}\NormalTok{,}
              \DataTypeTok{size =} \DecValTok{3}\NormalTok{, }
              \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{grattan_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label_data,}
+\StringTok{  }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{grattan\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ label\_data,}
                 \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ prof)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non-professional workers earn about the same, regardless of area income"}\NormalTok{,}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Non{-}professional workers earn about the same, regardless of area income"}\NormalTok{,}
        \DataTypeTok{subtitle =} \StringTok{"Average income of workers by area income percentile, 2016"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Area total income percentile"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"Average income"}\NormalTok{,}
-       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"}\NormalTok{)}
+       \DataTypeTok{caption =} \StringTok{"Notes: Only includes people who submitted a tax return in 2016{-}16. Source: ABS (2018)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grattan_save}\NormalTok{(}\StringTok{"atlas/scatter_layer.pdf"}\NormalTok{, scatter_layer, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
+\KeywordTok{grattan\_save}\NormalTok{(}\StringTok{"atlas/scatter\_layer.pdf"}\NormalTok{, scatter\_layer, }\DataTypeTok{type =} \StringTok{"fullslide"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4580,7 +4574,7 @@ The package is \href{https://github.com/wfmackey/absmapsdata}{hosted on Github} 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"wfmackey/absmapsdata"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(absmapsdata)}
 \end{Highlighting}
 \end{Shaded}
@@ -4603,8 +4597,8 @@ Now you can view \texttt{sf} objects stored in \texttt{absmapsdata}:
 \end{Shaded}
 
 \begin{verbatim}
-## Observations: 358
-## Variables: 12
+## Rows: 358
+## Columns: 12
 ## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201...
 ## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Go...
 ## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "1...
@@ -4630,8 +4624,8 @@ First, take the \texttt{sa3\_income} dataset and join the \texttt{sf} object \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{map_data <-}\StringTok{ }\NormalTok{sa3_income }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{left_join}\NormalTok{(sa32016, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"sa3_name"}\NormalTok{ =}\StringTok{ "sa3_name_2016"}\NormalTok{))}
+\NormalTok{map\_data \textless{}{-}}\StringTok{ }\NormalTok{sa3\_income }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{left\_join}\NormalTok{(sa32016, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"sa3\_name"}\NormalTok{ =}\StringTok{ "sa3\_name\_2016"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4654,26 +4648,26 @@ To use \texttt{geom\_(text\textbar{}label)\_repel}, you need to tell \texttt{ggr
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{map <-}\StringTok{ }\NormalTok{map_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{map \textless{}{-}}\StringTok{ }\NormalTok{map\_data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{        }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ "Vic"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{        }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry =}\NormalTok{ geometry)) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{geom_sf}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ pop_change),}
+\StringTok{        }\KeywordTok{geom\_sf}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ pop\_change),}
                 \DataTypeTok{lwd =} \FloatTok{.1}\NormalTok{,}
                 \DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_void}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{grattan_fill_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
+\StringTok{        }\KeywordTok{theme\_void}\NormalTok{() }\OperatorTok{+}
+\StringTok{        }\KeywordTok{grattan\_fill\_manual}\NormalTok{(}\DataTypeTok{discrete =} \OtherTok{FALSE}\NormalTok{, }
                             \DataTypeTok{palette =} \StringTok{"diverging"}\NormalTok{,}
-                            \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
-                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ sa3_name),}
-                  \DataTypeTok{stat =} \StringTok{"sf_coordinates"}\NormalTok{, }\DataTypeTok{nudge_x =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{segment.alpha =} \FloatTok{.5}\NormalTok{,}
+                            \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+                            \DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{{-}}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_label\_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ sa3\_name),}
+                  \DataTypeTok{stat =} \StringTok{"sf\_coordinates"}\NormalTok{, }\DataTypeTok{nudge\_x =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{segment.alpha =} \FloatTok{.5}\NormalTok{,}
                   \DataTypeTok{size =} \DecValTok{4}\NormalTok{, }
                   \DataTypeTok{direction =} \StringTok{"y"}\NormalTok{,}
                   \DataTypeTok{label.size =} \DecValTok{0}\NormalTok{, }
                   \DataTypeTok{label.padding =} \KeywordTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
                   \DataTypeTok{colour =} \StringTok{"grey50"}\NormalTok{,}
                   \DataTypeTok{segment.color =} \StringTok{"grey50"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{expand_scale}\NormalTok{(}\DataTypeTok{mult =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{.2}\NormalTok{))) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale\_y\_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{expand\_scale}\NormalTok{(}\DataTypeTok{mult =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{.2}\NormalTok{))) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"Population }\CharTok{\textbackslash{}n}\StringTok{change"}\NormalTok{)}
 
@@ -4730,6 +4724,6 @@ We use Github to version-control and share reports in LaTeX, so you're already a
 
 Using Git within R Studio\ldots{}
 
-\bibliography{book.bib,packages.bib}
+  \bibliography{book.bib,packages.bib}
 
 \end{document}

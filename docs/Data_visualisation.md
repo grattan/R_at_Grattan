@@ -52,24 +52,17 @@ library(ggrepel)
 library(scales)
 ```
 
+For most charts in this chapter, we'll use the `sa3_income` data summarised below.^[From [ABS Employee income by occupation and gender, 2010-11 to 2015-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a `professionals` subset that only includes people in professional occupations in 2015:
+
+If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
 
 
 ```r
-# note: to be added to grattantheme; remove this when done
-grattan_label <- function(..., size = 18) {
-
-  .size = size / ggplot2::.pt
-  
-geom_label(..., 
-           fill = "white",
-           label.padding = unit(0.01, "lines"), 
-           label.size = 0,
-           size = .size)
-}
+download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
+              destfile = "data/sa3_income.csv")
 ```
 
-
-For most charts in this chapter, we'll use the `sa3_income` data summarised below.^[From [ABS Employee income by occupation and gender, 2010-11 to 2015-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument)] It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a `professionals` subset that only includes people in professional occupations in 2015:
+Then read it using the `read_csv` function:
 
 
 ```r

@@ -33,19 +33,19 @@ Now we can install packages from Github using the `install_github()` function fr
 remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade = "always")
 ```
 
-## Get set up: install packages for Grattan
+## Get set up: install packages for Grattan {#install-grattan-packages}
 
 Just starting out or setting up a new machine? Run this block of code to get yourself all set up:
 
 
 ```r
 cran_packages <- c("devtools", "tidyverse", "readabs", "janitor", "grattan",
-                   "rio")
+                   "rio", "sf")
 
 install.packages(cran_packages)
 
 github_packages <- c("grattan/grattantheme", "grattan/grattandata",
-                     "wfmackey/absmapsdata")
+                     "wfmackey/absmapsdata", "grattan/grattanReporter")
 
 remotes::install_github(github_packages,
                         dependencies = TRUE,
@@ -104,7 +104,7 @@ It's rare that you'd need to downgrade. Better to stay up to date, and adapt you
 
 # Packages commonly used at Grattan
 
-Some packages we use at Grattan - like the `tidyverse` collection of packages - are very popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute.
+Some packages we use at Grattan - like the `tidyverse` collection of packages - are very popular among R users. Some - like the `grattantheme` package - are specific to Grattan Institute. Others - like the `readabs` package - are made by Grattan people, useful at Grattan, but also used outside of the Institute. To install a core set of packages we use at Grattan, [click here and run the code chunk](#install-grattan-packages).
 
 ## The tidyverse! {#tidyverse}
 
@@ -126,18 +126,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ─────────── tidyverse 1.3.0.9000 ──
 ```
 
 ```
-## ✓ ggplot2 3.3.0.9000     ✓ purrr   0.3.3     
-## ✓ tibble  2.1.3          ✓ dplyr   0.8.4     
-## ✓ tidyr   1.0.2          ✓ stringr 1.4.0     
-## ✓ readr   1.3.1          ✓ forcats 0.4.0
+## ✓ ggplot2 3.3.0     ✓ purrr   0.3.4
+## ✓ tibble  3.0.1     ✓ dplyr   0.8.5
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0
 ```
 
 ```
-## ── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ─────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -197,14 +197,11 @@ Most R scripts at Grattan should start with `library(tidyverse)`. Most of your w
 ## Grattan-specific packages {#grattan-specific-packages}
 
 A range of Grattan people have written packages that come in handy at Grattan. 
-
 * *grattan* The `grattan` package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname "Grattax") is used for modelling the personal income tax system. Another set of functions ("Grattools") are useful for a lot of our work, like converting dates to financial years (`grattan::date2fy()`) or a version of `dplyr::ntile()` that uses weights (`grattan::weighted_ntile()`). 
 
 * *grattantheme* The `grattantheme` package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 
 * *grattandata* The `grattandata` package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the [reading data](#reading-data) chapter.
-
-Install these Grattan-specific packages using this block of code:
 
 ## Other commonly-used packages
 
