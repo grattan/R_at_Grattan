@@ -1,12 +1,381 @@
 # (PART) Advanced topics {-}
+
 # Creating functions
-
-
-## It can be useful to make your own function
 
 Why on earth would you create your own function?
 
+It can be useful to make your own function
+
+## Set up
+
+We will use the `tidyverse` and `purrr` and...
+
+
+```r
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.3.0           ✓ purrr   0.3.4      
+## ✓ tibble  3.0.1           ✓ dplyr   0.8.99.9003
+## ✓ tidyr   1.0.2           ✓ stringr 1.4.0      
+## ✓ readr   1.3.1           ✓ forcats 0.5.0
+```
+
+```
+## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
+library(purrr)
+```
+
+
 ## Defining simple functions
+
+Like your data, a function is an `object` that is defined. 
+
+Let's say you wanted to take whatever value you had and add one to it. 
+We could define a function called `add_one` to do this:
+
+
+```r
+add_one <- function(x) {
+  x + 1
+}
+```
+
+There are four elements to what we just did:
+
+1. Created a new function using the `function()` function.
+1. Defined one argument (input) to the new function: `x`
+1. Gave the function instructions to 'take `x` and add one':  `x + 1`. 
+1. Assigned this function to the object `add_one`.
+
+Now that you've done all that, you can call the function like you would any other:
+
+
+```r
+add_one(1)
+```
+
+```
+## [1] 2
+```
+
+```r
+add_one(2)
+```
+
+```
+## [1] 3
+```
+
+```r
+add_one(100)
+```
+
+```
+## [1] 101
+```
+
+You can define functions can take more than one argument: 
+
+
+```r
+add_together_plus_one <- function(x, y, z) {
+  x + y + z + 1
+}
+
+add_together_plus_one(1, 2, 3)
+```
+
+```
+## [1] 7
+```
+
+As the above takes three arguments, no there are no defaults provided,
+we'll get an error if we fotget one:
+
+
+```r
+add_together_plus_one(1, 2)
+```
+
+```
+## Error in add_together_plus_one(1, 2): argument "z" is missing, with no default
+```
+
+So you can also provide _default_ values to your function when you define it:
+
+
+```r
+make_power <- function(x, n = 2) {
+ x^n 
+}
+```
+
+If you don't provide a value for `n` when you call the `make_power` function,
+it will default to `2`:
+
+
+```r
+make_power(10)
+```
+
+```
+## [1] 100
+```
+
+And you can override that by providing your own value:
+
+
+```r
+make_power(10, 4)
+```
+
+```
+## [1] 10000
+```
+
+We can also assign the result of this function (10^{4} above) to 
+an object of its own:
+
+
+```r
+my_power_number <- make_power(10, 4)
+```
+
+For this reason, and a few others described in the next section, a function
+can only return one _thing_ (a number, or a vector or dataset, or `ggplot` object, or a list, and so on).
+
+
+## What is 'returned' from a function?
+
+A function can do lots of things in the background.
+For example, you might want to take a vector, square every number,
+and then add all those numbers up:
+
+
+```r
+sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+  # then return the summed object
+  summed
+}
+```
+
+Running that function on a vector of numbers \(1, 2, 3, ..., 10\) (created with `1:10`) does what we want:
+
+
+```r
+sum_squares(1:10)
+```
+
+```
+## [1] 65
+```
+
+But look in your **Environment** window. The two objects that were created in the
+function -- `added` and `summed` -- aren't there! They are instead calculated,
+stored in the background, and removed when the function is finished. 
+
+A function only returns **one thing**; everything else that is created in it 
+is discarded.^[Unless they are explicitly stored in your environment, but this is not recommended.] 
+This behaviour keeps your environment clean and tidy, but it can cause some frustration when you're getting started. 
+
+The **one thing** that is returned is -- by default -- the last thing printed in
+the function.  _this is a bad explanation that I need to make better_
+For `sum_squares` above, we defined two objects and then passed the `summed` to 
+the end of the function. If we omitted the last step, the function wouldn't return _anything_:
+
+
+```r
+empty_sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+}
+
+empty_sum_squares(1:10)
+```
+
+The `empty_sum_squares` function took the `1:10` vector, then added one, then
+summed the resulting numbers. But it didn't _return_ anything.
+It just assigned values to the `added` and `summed` objects, then the function
+finished and those objects were wiped.
+
+The `return()` function can help you make this behaviour clear. Using `return()`
+will stop your function in its tracks and pass the object out of the function.
+We can use it in the `sum_squares` function:
+
+
+```r
+sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+  # then return the summed object
+  return(summed)
+}
+```
+
+Ensuring your function _returns_ the object you want in the form you want is the second step in writing your own functions.
+
+## Using conditional statements and categorical arguments
+
+Sometimes you will want your function to behave differently under different 
+circumstances. For example, you might want to do one thing if your input is a 
+REALLY BIG number, and another if it's very small.
+
+Conditional statements -- that return either `TRUE` or `FALSE` -- can be useful
+for these occasions (see section x). 
+The function below takes one argument -- x -- and transforms it depending on 
+how large it is:
+
+
+```r
+make_smaller <- function(x) {
+  if (x > 10) {
+    return_number <- x - 10
+  }
+  if (x <= 10) {
+    return_number <- x - 5
+  }
+  return_number
+}
+```
+
+If the input number is greater than 10, the `make_smaller` function will take
+`10` off it; if it's 10 or less, it will just take `5` off:
+
+
+```r
+make_smaller(7)
+```
+
+```
+## [1] 2
+```
+
+```r
+make_smaller(13)
+```
+
+```
+## [1] 3
+```
+
+Making use of the `return()` function could make this clearer.
+If `x` is greater than `10`, the `make_smaller` function will now subtract `10`
+and immediately return the value, ignoring everything else below it:
+
+
+```r
+make_smaller <- function(x) {
+  if (x > 10) {
+    return(x - 10)
+  }
+  if (x <= 10) {
+    return(x - 5)
+  }
+}
+
+make_smaller(7)
+```
+
+```
+## [1] 2
+```
+
+```r
+make_smaller(13)
+```
+
+```
+## [1] 3
+```
+
+These conditional statements can be used for input options to your functions. 
+Let's say you had a vector of ages of people in your office:
+
+
+```r
+ages <- c(-6, 12, 21, 36, 56, 67, 200)
+ages
+```
+
+```
+## [1]  -6  12  21  36  56  67 200
+```
+
+To summarise your office by age, you wanted a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
+using the `round()` function with `digits` set to `-1` (ie round to the nearest `10`):
+
+
+```r
+make_age10 <- function(age) {
+  round(age, digits = -1)
+}
+
+make_age10(ages)
+```
+
+```
+## [1] -10  10  20  40  60  70 200
+```
+
+Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and `100`. You could let `validate_ages` be an argument, defaulting to `TRUE`, and _if itis `TRUE`_, then you could perform the validation:
+
+
+```r
+make_age10 <- function(age,
+                       validate_ages = TRUE) {
+  
+  # First, validate ages IF ASKED FOR
+  if (validate_ages) {
+    age <- if_else(age > 100, 100, age)
+    age <- if_else(age < 0, 0, age)
+  }
+  
+  # Then round ages to the nearest 10:
+  round(age, digits = -1)
+}
+```
+
+Now, if `validate_ages == TRUE` (the default), the numbers over `100` will be replaced with `100`, and those less than `0` with `0`:
+
+
+```r
+make_age10(ages)
+```
+
+```
+## [1]   0  10  20  40  60  70 100
+```
+
+And you can turn that behaviour off by setting `validate_ages` to `FALSE`:
+
+
+```r
+make_age10(ages, validate_ages = FALSE)
+```
+
+```
+## [1] -10  10  20  40  60  70 200
+```
+
 
 
 ## More complex functions
@@ -16,3 +385,73 @@ Why on earth would you create your own function?
 ## Using `purrr::map`
 
 ## Sharing your useful functions with Grattan
+
+
+## Set up
+
+Load your packages first. This chapter just uses the packages contained in the `tidyverse`:
+
+
+```r
+library(tidyverse)
+```
+
+
+The `sa3_income` dataset will be used for all key examples in this chapter.^[This is a tidied version of the [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument) dataset.] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
+
+If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
+
+
+```r
+download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
+              destfile = "data/sa3_income.csv")
+```
+
+Then read it using the `read_csv` function:
+
+
+```r
+sa3_income <- read_csv("data/sa3_income.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )
+```
+
+
+
+
+```r
+head(sa3_income)
+```
+
+```
+## # A tibble: 6 x 6
+##    year sa3_name  state gender income workers
+##   <dbl> <chr>     <chr> <chr>   <dbl>   <dbl>
+## 1  2011 Belconnen ACT   Men    54105.   67774
+## 2  2012 Belconnen ACT   Men    56724.   69435
+## 3  2013 Belconnen ACT   Men    58918.   69697
+## 4  2014 Belconnen ACT   Men    60525.   68613
+## 5  2015 Belconnen ACT   Men    60964.   63428
+## 6  2016 Belconnen ACT   Men    63389.   69828
+```
+
