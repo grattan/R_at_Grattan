@@ -16,7 +16,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ───────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -27,7 +27,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -35,6 +35,8 @@ library(tidyverse)
 ```r
 library(purrr)
 ```
+
+
 
 
 ## Defining simple functions
@@ -100,7 +102,7 @@ add_together_plus_one(1, 2, 3)
 ## [1] 7
 ```
 
-As the above takes three arguments, no there are no defaults provided,
+As the above takes three arguments, and there are no defaults provided,
 we'll get an error if we fotget one:
 
 
@@ -144,7 +146,7 @@ make_power(10, 4)
 ## [1] 10000
 ```
 
-We can also assign the result of this function (10^{4} above) to 
+We can also assign the result of this function (`10000` above) to 
 an object of its own:
 
 
@@ -193,7 +195,7 @@ A function only returns **one thing**; everything else that is created in it
 is discarded.^[Unless they are explicitly stored in your environment, but this is not recommended.] 
 This behaviour keeps your environment clean and tidy, but it can cause some frustration when you're getting started. 
 
-The **one thing** that is returned is -- by default -- the last thing printed in
+That **one thing** that is returned is -- by default -- the last thing printed in
 the function.  _this is a bad explanation that I need to make better_
 For `sum_squares` above, we defined two objects and then passed the `summed` to 
 the end of the function. If we omitted the last step, the function wouldn't return _anything_:
@@ -213,7 +215,7 @@ empty_sum_squares(1:10)
 The `empty_sum_squares` function took the `1:10` vector, then added one, then
 summed the resulting numbers. But it didn't _return_ anything.
 It just assigned values to the `added` and `summed` objects, then the function
-finished and those objects were wiped.
+finished and those objects vanished.
 
 The `return()` function can help you make this behaviour clear. Using `return()`
 will stop your function in its tracks and pass the object out of the function.
@@ -227,11 +229,12 @@ sum_squares <- function(x) {
   # then sum all the numbers in the vector
   summed <- sum(added)
   # then return the summed object
-  return(summed)
+  return(summed) # function stops here!
 }
 ```
 
 Ensuring your function _returns_ the object you want in the form you want is the second step in writing your own functions.
+
 
 ## Using conditional statements and categorical arguments
 
@@ -308,19 +311,19 @@ make_smaller(13)
 ```
 
 These conditional statements can be used for input options to your functions. 
-Let's say you had a vector of ages of people in your office:
+Let's say you had a vector of ages of people in your office, `office_ages`:
 
 
 ```r
-ages <- c(-6, 12, 21, 36, 56, 67, 200)
-ages
+office_ages <- c(-6, 12, 21, 36, 56, 67, 200)
+office_ages
 ```
 
 ```
 ## [1]  -6  12  21  36  56  67 200
 ```
 
-To summarise your office by age, you wanted a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
+To summarise your office by age, you might want a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
 using the `round()` function with `digits` set to `-1` (ie round to the nearest `10`):
 
 
@@ -329,14 +332,14 @@ make_age10 <- function(age) {
   round(age, digits = -1)
 }
 
-make_age10(ages)
+make_age10(office_ages)
 ```
 
 ```
 ## [1] -10  10  20  40  60  70 200
 ```
 
-Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and `100`. You could let `validate_ages` be an argument, defaulting to `TRUE`, and _if itis `TRUE`_, then you could perform the validation:
+Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and `100`. You could let `validate_ages` be an argument, defaulting to `TRUE`, and _if it is `TRUE`_, then you could perform the validation:
 
 
 ```r
@@ -358,7 +361,7 @@ Now, if `validate_ages == TRUE` (the default), the numbers over `100` will be re
 
 
 ```r
-make_age10(ages)
+make_age10(office_ages)
 ```
 
 ```
@@ -369,22 +372,104 @@ And you can turn that behaviour off by setting `validate_ages` to `FALSE`:
 
 
 ```r
-make_age10(ages, validate_ages = FALSE)
+make_age10(office_ages, validate_ages = FALSE)
 ```
 
 ```
 ## [1] -10  10  20  40  60  70 200
 ```
 
+However, we might not trust an age entry of `-6` or `200` at all, and might want to give the user the option to remove them rather than assume they are `0` or `100`. We could provide that option in one of two ways. 
+
+The first is to add another argument, shown below.
 
 
-## More complex functions
+```r
+make_age10 <- function(age,
+                       validate_ages = TRUE,
+                       remove_implausible = FALSE) {
+  
+  # First, validate ages
+  if (validate_ages) {
+    if (remove_implausible) {
+      # Replace implausible ages with NAs
+      age <- if_else(age > 100 | age < 0, NA_real_, age)
+    }
+    if (!remove_implausible) {
+      # Replace implausible ages with their nearest plausible age
+      age <- if_else(age > 100, 100, age)
+      age <- if_else(age < 0, 0, age)
+    }
+  }
+  
+  # Then round ages to the nearest 10:
+  round(age, digits = -1)
+}
+```
+
+
+This is fine! By default, the function still works like it did previously:
+
+
+```r
+make_age10(office_ages, validate_ages = TRUE)
+```
+
+```
+## [1]   0  10  20  40  60  70 100
+```
+
+
+And if the user wants to validate ages **and** they want to remove the 
+implausible ages, then they will be replaced with `NA`:^[Note that when _creating_ 
+an `NA` value, like we've done above, we have to specify what _type_ of `NA` 
+value it is: a number `NA_real_`, an integer `NA_integer`, or a character 
+`NA_character_`.] 
+
+
+```r
+make_age10(office_ages, validate_ages = TRUE, remove_implausible = TRUE)
+```
+
+```
+## [1] NA 10 20 40 60 70 NA
+```
+
+
+But those nested conditional statements -- which are often 
+needed! -- can be a bit of a headache.
+There is another way we can do this, which might be neater in this instance.
+The `validate_ages` argument could take a character string that tells it which 
+validation method to use. We could use `"remove"` and `"adjust"` to indicate the
+validation methods:
+
+
+```r
+make_age10 <- function(age,
+                       validate_ages = "remove") {
+  
+  # First, validate ages
+  if (validate_ages == "remove") {
+    age <- if_else(age > 100 | age < 0, NA_real_, age)
+  }
+  
+  if (validate_ages == "adjust") {
+    # Replace implausible ages with their nearest plausible age
+    age <- if_else(age > 100, 100, age)
+    age <- if_else(age < 0, 0, age)
+  }
+  
+  # Then round ages to the nearest 10:
+  round(age, digits = -1)
+}
+```
+
 
 ## Sets of functions
 
 ## Using `purrr::map`
 
-## Sharing your useful functions with Grattan
+# # Sharing your useful functions with Grattan
 
 
 ## Set up

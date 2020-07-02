@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 Creating functions | Using R at Grattan Institute</title>
+  <title>14 # Sharing your useful functions with Grattan | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 Creating functions | Using R at Grattan Institute" />
+  <meta property="og:title" content="14 # Sharing your useful functions with Grattan | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="grattan/R_at_Grattan" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 Creating functions | Using R at Grattan Institute" />
+  <meta name="twitter:title" content="14 # Sharing your useful functions with Grattan | Using R at Grattan Institute" />
   
   <meta name="twitter:description" content="How to use R at Grattan good. In development." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chart-cookbook.html"/>
-<link rel="next" href="sharing-your-useful-functions-with-grattan.html"/>
+<link rel="prev" href="creating-functions.html"/>
+<link rel="next" href="version-control.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -304,265 +304,54 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="creating-functions" class="section level1">
-<h1><span class="header-section-number">13</span> Creating functions</h1>
-<p>Why on earth would you create your own function?</p>
-<p>It can be useful to make your own function</p>
-<div id="set-up-2" class="section level2">
-<h2><span class="header-section-number">13.1</span> Set up</h2>
-<p>We will use the <code>tidyverse</code> and <code>purrr</code> and…</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.0           ✓ purrr   0.3.4      
-## ✓ tibble  3.0.1           ✓ dplyr   0.8.99.9003
-## ✓ tidyr   1.0.2           ✓ stringr 1.4.0      
-## ✓ readr   1.3.1           ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(purrr)</a></code></pre></div>
-</div>
-<div id="defining-simple-functions" class="section level2">
-<h2><span class="header-section-number">13.2</span> Defining simple functions</h2>
-<p>Like your data, a function is an <code>object</code> that is defined.</p>
-<p>Let’s say you wanted to take whatever value you had and add one to it.
-We could define a function called <code>add_one</code> to do this:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">}</a></code></pre></div>
-<p>There are four elements to what we just did:</p>
-<ol style="list-style-type: decimal">
-<li>Created a new function using the <code>function()</code> function.</li>
-<li>Defined one argument (input) to the new function: <code>x</code></li>
-<li>Gave the function instructions to ‘take <code>x</code> and add one’: <code>x + 1</code>.</li>
-<li>Assigned this function to the object <code>add_one</code>.</li>
-</ol>
-<p>Now that you’ve done all that, you can call the function like you would any other:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">add_one</span>(<span class="dv">1</span>)</a></code></pre></div>
-<pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">add_one</span>(<span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">add_one</span>(<span class="dv">100</span>)</a></code></pre></div>
-<pre><code>## [1] 101</code></pre>
-<p>You can define functions can take more than one argument:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">add_together_plus_one &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  x <span class="op">+</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span>z <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">add_together_plus_one</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
-<pre><code>## [1] 7</code></pre>
-<p>As the above takes three arguments, and there are no defaults provided,
-we’ll get an error if we fotget one:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">add_together_plus_one</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## Error in add_together_plus_one(1, 2): argument &quot;z&quot; is missing, with no default</code></pre>
-<p>So you can also provide <em>default</em> values to your function when you define it:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">make_power &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">n =</span> <span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"> x<span class="op">^</span>n </a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">}</a></code></pre></div>
-<p>If you don’t provide a value for <code>n</code> when you call the <code>make_power</code> function,
-it will default to <code>2</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">make_power</span>(<span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## [1] 100</code></pre>
-<p>And you can override that by providing your own value:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">make_power</span>(<span class="dv">10</span>, <span class="dv">4</span>)</a></code></pre></div>
-<pre><code>## [1] 10000</code></pre>
-<p>We can also assign the result of this function (<code>10000</code> above) to
-an object of its own:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">my_power_number &lt;-<span class="st"> </span><span class="kw">make_power</span>(<span class="dv">10</span>, <span class="dv">4</span>)</a></code></pre></div>
-<p>For this reason, and a few others described in the next section, a function
-can only return one <em>thing</em> (a number, or a vector or dataset, or <code>ggplot</code> object, or a list, and so on).</p>
-</div>
-<div id="what-is-returned-from-a-function" class="section level2">
-<h2><span class="header-section-number">13.3</span> What is ‘returned’ from a function?</h2>
-<p>A function can do lots of things in the background.
-For example, you might want to take a vector, square every number,
-and then add all those numbers up:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">sum_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="co"># first, add one to each using the function we defined above</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">  added &lt;-<span class="st"> </span><span class="kw">add_one</span>(x)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="co"># then sum all the numbers in the vector</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">  summed &lt;-<span class="st"> </span><span class="kw">sum</span>(added)</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">  <span class="co"># then return the summed object</span></a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">  summed</a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">}</a></code></pre></div>
-<p>Running that function on a vector of numbers <span class="math inline">\(1, 2, 3, ..., 10\)</span> (created with <code>1:10</code>) does what we want:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">sum_squares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## [1] 65</code></pre>
-<p>But look in your <strong>Environment</strong> window. The two objects that were created in the
-function – <code>added</code> and <code>summed</code> – aren’t there! They are instead calculated,
-stored in the background, and removed when the function is finished.</p>
-<p>A function only returns <strong>one thing</strong>; everything else that is created in it
-is discarded.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
-This behaviour keeps your environment clean and tidy, but it can cause some frustration when you’re getting started.</p>
-<p>That <strong>one thing</strong> that is returned is – by default – the last thing printed in
-the function. <em>this is a bad explanation that I need to make better</em>
-For <code>sum_squares</code> above, we defined two objects and then passed the <code>summed</code> to
-the end of the function. If we omitted the last step, the function wouldn’t return <em>anything</em>:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">empty_sum_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">  <span class="co"># first, add one to each using the function we defined above</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">  added &lt;-<span class="st"> </span><span class="kw">add_one</span>(x)</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">  <span class="co"># then sum all the numbers in the vector</span></a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">  summed &lt;-<span class="st"> </span><span class="kw">sum</span>(added)</a>
-<a class="sourceLine" id="cb26-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb26-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="kw">empty_sum_squares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
-<p>The <code>empty_sum_squares</code> function took the <code>1:10</code> vector, then added one, then
-summed the resulting numbers. But it didn’t <em>return</em> anything.
-It just assigned values to the <code>added</code> and <code>summed</code> objects, then the function
-finished and those objects vanished.</p>
-<p>The <code>return()</code> function can help you make this behaviour clear. Using <code>return()</code>
-will stop your function in its tracks and pass the object out of the function.
-We can use it in the <code>sum_squares</code> function:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">sum_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">  <span class="co"># first, add one to each using the function we defined above</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">  added &lt;-<span class="st"> </span><span class="kw">add_one</span>(x)</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">  <span class="co"># then sum all the numbers in the vector</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">  summed &lt;-<span class="st"> </span><span class="kw">sum</span>(added)</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">  <span class="co"># then return the summed object</span></a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">  <span class="kw">return</span>(summed) <span class="co"># function stops here!</span></a>
-<a class="sourceLine" id="cb27-8" data-line-number="8">}</a></code></pre></div>
-<p>Ensuring your function <em>returns</em> the object you want in the form you want is the second step in writing your own functions.</p>
-</div>
-<div id="using-conditional-statements-and-categorical-arguments" class="section level2">
-<h2><span class="header-section-number">13.4</span> Using conditional statements and categorical arguments</h2>
-<p>Sometimes you will want your function to behave differently under different
-circumstances. For example, you might want to do one thing if your input is a
-REALLY BIG number, and another if it’s very small.</p>
-<p>Conditional statements – that return either <code>TRUE</code> or <code>FALSE</code> – can be useful
-for these occasions (see section x).
-The function below takes one argument – x – and transforms it depending on
-how large it is:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">make_smaller &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">    return_number &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">  }</a>
-<a class="sourceLine" id="cb28-5" data-line-number="5">  <span class="cf">if</span> (x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6">    return_number &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb28-8" data-line-number="8">  return_number</a>
-<a class="sourceLine" id="cb28-9" data-line-number="9">}</a></code></pre></div>
-<p>If the input number is greater than 10, the <code>make_smaller</code> function will take
-<code>10</code> off it; if it’s 10 or less, it will just take <code>5</code> off:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">make_smaller</span>(<span class="dv">7</span>)</a></code></pre></div>
-<pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">make_smaller</span>(<span class="dv">13</span>)</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
-<p>Making use of the <code>return()</code> function could make this clearer.
-If <code>x</code> is greater than <code>10</code>, the <code>make_smaller</code> function will now subtract <code>10</code>
-and immediately return the value, ignoring everything else below it:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">make_smaller &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">  <span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">    <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb33-4" data-line-number="4">  }</a>
-<a class="sourceLine" id="cb33-5" data-line-number="5">  <span class="cf">if</span> (x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb33-6" data-line-number="6">    <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb33-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb33-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb33-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb33-10" data-line-number="10"><span class="kw">make_smaller</span>(<span class="dv">7</span>)</a></code></pre></div>
-<pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">make_smaller</span>(<span class="dv">13</span>)</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
-<p>These conditional statements can be used for input options to your functions.
-Let’s say you had a vector of ages of people in your office, <code>office_ages</code>:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">office_ages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">21</span>, <span class="dv">36</span>, <span class="dv">56</span>, <span class="dv">67</span>, <span class="dv">200</span>)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">office_ages</a></code></pre></div>
-<pre><code>## [1]  -6  12  21  36  56  67 200</code></pre>
-<p>To summarise your office by age, you might want a function that would round each age to the nearest <code>10</code>. You could make a function that rounds a number to the nearest <code>10</code>,
-using the <code>round()</code> function with <code>digits</code> set to <code>-1</code> (ie round to the nearest <code>10</code>):</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">make_age10 &lt;-<span class="st"> </span><span class="cf">function</span>(age) {</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">  <span class="kw">round</span>(age, <span class="dt">digits =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="kw">make_age10</span>(office_ages)</a></code></pre></div>
-<pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
-<p>Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and <code>100</code>. You could let <code>validate_ages</code> be an argument, defaulting to <code>TRUE</code>, and <em>if it is <code>TRUE</code></em>, then you could perform the validation:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">make_age10 &lt;-<span class="st"> </span><span class="cf">function</span>(age,</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">                       <span class="dt">validate_ages =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">  <span class="co"># First, validate ages IF ASKED FOR</span></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">  <span class="cf">if</span> (validate_ages) {</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">    age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">100</span>, age)</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7">    age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, age)</a>
-<a class="sourceLine" id="cb41-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb41-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">  <span class="co"># Then round ages to the nearest 10:</span></a>
-<a class="sourceLine" id="cb41-11" data-line-number="11">  <span class="kw">round</span>(age, <span class="dt">digits =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb41-12" data-line-number="12">}</a></code></pre></div>
-<p>Now, if <code>validate_ages == TRUE</code> (the default), the numbers over <code>100</code> will be replaced with <code>100</code>, and those less than <code>0</code> with <code>0</code>:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages)</a></code></pre></div>
-<pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
-<p>And you can turn that behaviour off by setting <code>validate_ages</code> to <code>FALSE</code>:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages, <span class="dt">validate_ages =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
-<p>However, we might not trust an age entry of <code>-6</code> or <code>200</code> at all, and might want to give the user the option to remove them rather than assume they are <code>0</code> or <code>100</code>. We could provide that option in one of two ways.</p>
-<p>The first is to add another argument, shown below.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">make_age10 &lt;-<span class="st"> </span><span class="cf">function</span>(age,</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">                       <span class="dt">validate_ages =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">                       <span class="dt">remove_implausible =</span> <span class="ot">FALSE</span>) {</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb46-5" data-line-number="5">  <span class="co"># First, validate ages</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">  <span class="cf">if</span> (validate_ages) {</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">    <span class="cf">if</span> (remove_implausible) {</a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">      <span class="co"># Replace implausible ages with NAs</span></a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">      age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">|</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="ot">NA_real_</span>, age)</a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">    }</a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">    <span class="cf">if</span> (<span class="op">!</span>remove_implausible) {</a>
-<a class="sourceLine" id="cb46-12" data-line-number="12">      <span class="co"># Replace implausible ages with their nearest plausible age</span></a>
-<a class="sourceLine" id="cb46-13" data-line-number="13">      age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">100</span>, age)</a>
-<a class="sourceLine" id="cb46-14" data-line-number="14">      age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, age)</a>
-<a class="sourceLine" id="cb46-15" data-line-number="15">    }</a>
-<a class="sourceLine" id="cb46-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb46-17" data-line-number="17">  </a>
-<a class="sourceLine" id="cb46-18" data-line-number="18">  <span class="co"># Then round ages to the nearest 10:</span></a>
-<a class="sourceLine" id="cb46-19" data-line-number="19">  <span class="kw">round</span>(age, <span class="dt">digits =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb46-20" data-line-number="20">}</a></code></pre></div>
-<p>This is fine! By default, the function still works like it did previously:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages, <span class="dt">validate_ages =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
-<p>And if the user wants to validate ages <strong>and</strong> they want to remove the
-implausible ages, then they will be replaced with <code>NA</code>:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages, <span class="dt">validate_ages =</span> <span class="ot">TRUE</span>, <span class="dt">remove_implausible =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
-<p>But those nested conditional statements – which are often
-needed! – can be a bit of a headache.
-There is another way we can do this, which might be neater in this instance.
-The <code>validate_ages</code> argument could take a character string that tells it which
-validation method to use. We could use <code>&quot;remove&quot;</code> and <code>&quot;adjust&quot;</code> to indicate the
-validation methods:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">make_age10 &lt;-<span class="st"> </span><span class="cf">function</span>(age,</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">                       <span class="dt">validate_ages =</span> <span class="st">&quot;remove&quot;</span>) {</a>
-<a class="sourceLine" id="cb51-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb51-4" data-line-number="4">  <span class="co"># First, validate ages</span></a>
-<a class="sourceLine" id="cb51-5" data-line-number="5">  <span class="cf">if</span> (validate_ages <span class="op">==</span><span class="st"> &quot;remove&quot;</span>) {</a>
-<a class="sourceLine" id="cb51-6" data-line-number="6">    age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">|</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="ot">NA_real_</span>, age)</a>
-<a class="sourceLine" id="cb51-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb51-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb51-9" data-line-number="9">  <span class="cf">if</span> (validate_ages <span class="op">==</span><span class="st"> &quot;adjust&quot;</span>) {</a>
-<a class="sourceLine" id="cb51-10" data-line-number="10">    <span class="co"># Replace implausible ages with their nearest plausible age</span></a>
-<a class="sourceLine" id="cb51-11" data-line-number="11">    age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">100</span>, age)</a>
-<a class="sourceLine" id="cb51-12" data-line-number="12">    age &lt;-<span class="st"> </span><span class="kw">if_else</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, age)</a>
-<a class="sourceLine" id="cb51-13" data-line-number="13">  }</a>
-<a class="sourceLine" id="cb51-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb51-15" data-line-number="15">  <span class="co"># Then round ages to the nearest 10:</span></a>
-<a class="sourceLine" id="cb51-16" data-line-number="16">  <span class="kw">round</span>(age, <span class="dt">digits =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb51-17" data-line-number="17">}</a></code></pre></div>
-</div>
-<div id="sets-of-functions" class="section level2">
-<h2><span class="header-section-number">13.5</span> Sets of functions</h2>
-</div>
-<div id="using-purrrmap" class="section level2">
-<h2><span class="header-section-number">13.6</span> Using <code>purrr::map</code></h2>
+<div id="sharing-your-useful-functions-with-grattan" class="section level1">
+<h1><span class="header-section-number">14</span> # Sharing your useful functions with Grattan</h1>
+<div id="set-up-3" class="section level2">
+<h2><span class="header-section-number">14.1</span> Set up</h2>
+<p>Load your packages first. This chapter just uses the packages contained in the <code>tidyverse</code>:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.</p>
+<p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">              <span class="dt">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</a></code></pre></div>
+<p>Then read it using the <code>read_csv</code> function:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">sa3_income &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   sa3 = col_double(),
+##   sa3_name = col_character(),
+##   sa3_sqkm = col_double(),
+##   sa3_income_percentile = col_double(),
+##   sa4_name = col_character(),
+##   gcc_name = col_character(),
+##   state = col_character(),
+##   occupation = col_character(),
+##   occ_short = col_character(),
+##   prof = col_character(),
+##   gender = col_character(),
+##   year = col_double(),
+##   median_income = col_double(),
+##   average_income = col_double(),
+##   total_income = col_double(),
+##   workers = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">head</span>(sa3_income)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##    year sa3_name  state gender income workers
+##   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1  2011 Belconnen ACT   Men    54105.   67774
+## 2  2012 Belconnen ACT   Men    56724.   69435
+## 3  2013 Belconnen ACT   Men    58918.   69697
+## 4  2014 Belconnen ACT   Men    60525.   68613
+## 5  2015 Belconnen ACT   Men    60964.   63428
+## 6  2016 Belconnen ACT   Men    63389.   69828</code></pre>
+
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Unless they are explicitly stored in your environment, but this is not recommended.<a href="creating-functions.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Note that when <em>creating</em>
-an <code>NA</code> value, like we’ve done above, we have to specify what <em>type</em> of <code>NA</code>
-value it is: a number <code>NA_real_</code>, an integer <code>NA_integer</code>, or a character
-<code>NA_character_</code>.<a href="creating-functions.html#fnref2" class="footnote-back">↩</a></p></li>
+<ol start="3">
+<li id="fn3"><p>This is a tidied version of the <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a> dataset.<a href="sharing-your-useful-functions-with-grattan.html#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -570,8 +359,8 @@ value it is: a number <code>NA_real_</code>, an integer <code>NA_integer</code>,
           </div>
         </div>
       </div>
-<a href="chart-cookbook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sharing-your-useful-functions-with-grattan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
