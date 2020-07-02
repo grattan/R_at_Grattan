@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="chart-cookbook.html"/>
-<link rel="next" href="sharing-your-useful-functions-with-grattan.html"/>
+<link rel="next" href="using-purrrmap.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -276,16 +276,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>13.2</b> Defining simple functions</a></li>
 <li class="chapter" data-level="13.3" data-path="creating-functions.html"><a href="creating-functions.html#what-is-returned-from-a-function"><i class="fa fa-check"></i><b>13.3</b> What is ‘returned’ from a function?</a></li>
 <li class="chapter" data-level="13.4" data-path="creating-functions.html"><a href="creating-functions.html#using-conditional-statements-and-categorical-arguments"><i class="fa fa-check"></i><b>13.4</b> Using conditional statements and categorical arguments</a></li>
-<li class="chapter" data-level="13.5" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>13.5</b> Sets of functions</a></li>
-<li class="chapter" data-level="13.6" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>13.6</b> Using <code>purrr::map</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="sharing-your-useful-functions-with-grattan.html"><a href="sharing-your-useful-functions-with-grattan.html"><i class="fa fa-check"></i><b>14</b> # Sharing your useful functions with Grattan</a><ul>
-<li class="chapter" data-level="14.1" data-path="sharing-your-useful-functions-with-grattan.html"><a href="sharing-your-useful-functions-with-grattan.html#set-up-3"><i class="fa fa-check"></i><b>14.1</b> Set up</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a><ul>
-<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a></li>
-<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
-<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+<li class="chapter" data-level="14" data-path="using-purrrmap.html"><a href="using-purrrmap.html"><i class="fa fa-check"></i><b>14</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="15" data-path="using-functions-for-visualisations.html"><a href="using-functions-for-visualisations.html"><i class="fa fa-check"></i><b>15</b> Using functions for visualisations</a></li>
+<li class="chapter" data-level="16" data-path="sharing-your-useful-functions-with-grattan.html"><a href="sharing-your-useful-functions-with-grattan.html"><i class="fa fa-check"></i><b>16</b> # Sharing your useful functions with Grattan</a></li>
+<li class="chapter" data-level="17" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>17</b> Version control</a><ul>
+<li class="chapter" data-level="17.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>17.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="17.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>17.2</b> Github</a></li>
+<li class="chapter" data-level="17.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>17.3</b> Git</a></li>
 </ul></li>
 </ul>
 
@@ -547,12 +545,11 @@ validation methods:</p>
 <a class="sourceLine" id="cb51-15" data-line-number="15">  <span class="co"># Then round ages to the nearest 10:</span></a>
 <a class="sourceLine" id="cb51-16" data-line-number="16">  <span class="kw">round</span>(age, <span class="dt">digits =</span> <span class="dv">-1</span>)</a>
 <a class="sourceLine" id="cb51-17" data-line-number="17">}</a></code></pre></div>
-</div>
-<div id="sets-of-functions" class="section level2">
-<h2><span class="header-section-number">13.5</span> Sets of functions</h2>
-</div>
-<div id="using-purrrmap" class="section level2">
-<h2><span class="header-section-number">13.6</span> Using <code>purrr::map</code></h2>
+<p>Now we can use the <code>validate_ages</code> argument by itself to get the results we want:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages, <span class="dt">validate_ages =</span> <span class="st">&quot;adjust&quot;</span>)</a></code></pre></div>
+<pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">make_age10</span>(office_ages, <span class="dt">validate_ages =</span> <span class="st">&quot;remove&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 </div>
 </div>
 <div class="footnotes">
@@ -571,7 +568,7 @@ value it is: a number <code>NA_real_</code>, an integer <code>NA_integer</code>,
         </div>
       </div>
 <a href="chart-cookbook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sharing-your-useful-functions-with-grattan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="using-purrrmap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

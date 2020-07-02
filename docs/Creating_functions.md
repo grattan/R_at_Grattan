@@ -464,79 +464,31 @@ make_age10 <- function(age,
 }
 ```
 
+Now we can use the `validate_ages` argument by itself to get the results we want:
 
-## Sets of functions
 
-## Using `purrr::map`
+```r
+make_age10(office_ages, validate_ages = "adjust")
+```
+
+```
+## [1]   0  10  20  40  60  70 100
+```
+
+```r
+make_age10(office_ages, validate_ages = "remove")
+```
+
+```
+## [1] NA 10 20 40 60 70 NA
+```
+
+# Using `purrr::map`
+
+asdasdasd
+
+# Using functions for visualisations
 
 # # Sharing your useful functions with Grattan
 
-
-## Set up
-
-Load your packages first. This chapter just uses the packages contained in the `tidyverse`:
-
-
-```r
-library(tidyverse)
-```
-
-
-The `sa3_income` dataset will be used for all key examples in this chapter.^[This is a tidied version of the [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument) dataset.] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
-
-If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
-
-
-```r
-download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
-              destfile = "data/sa3_income.csv")
-```
-
-Then read it using the `read_csv` function:
-
-
-```r
-sa3_income <- read_csv("data/sa3_income.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   sa3 = col_double(),
-##   sa3_name = col_character(),
-##   sa3_sqkm = col_double(),
-##   sa3_income_percentile = col_double(),
-##   sa4_name = col_character(),
-##   gcc_name = col_character(),
-##   state = col_character(),
-##   occupation = col_character(),
-##   occ_short = col_character(),
-##   prof = col_character(),
-##   gender = col_character(),
-##   year = col_double(),
-##   median_income = col_double(),
-##   average_income = col_double(),
-##   total_income = col_double(),
-##   workers = col_double()
-## )
-```
-
-
-
-
-```r
-head(sa3_income)
-```
-
-```
-## # A tibble: 6 x 6
-##    year sa3_name  state gender income workers
-##   <dbl> <chr>     <chr> <chr>   <dbl>   <dbl>
-## 1  2011 Belconnen ACT   Men    54105.   67774
-## 2  2012 Belconnen ACT   Men    56724.   69435
-## 3  2013 Belconnen ACT   Men    58918.   69697
-## 4  2014 Belconnen ACT   Men    60525.   68613
-## 5  2015 Belconnen ACT   Men    60964.   63428
-## 6  2016 Belconnen ACT   Men    63389.   69828
-```
 

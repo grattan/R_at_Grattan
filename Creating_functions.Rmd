@@ -10,12 +10,12 @@ It can be useful to make your own function
 
 We will use the `tidyverse` and `purrr` and...
 
-```{r}
+```{r setup}
 library(tidyverse)
 library(purrr)
 ```
 
-```{r, include = FALSE}
+```{r options, include = FALSE}
 options(scipen = 999)
 ```
 
@@ -76,20 +76,20 @@ make_power <- function(x, n = 2) {
 If you don't provide a value for `n` when you call the `make_power` function,
 it will default to `2`:
 
-```{r}
+```{r power1}
 make_power(10)
 ```
 
 And you can override that by providing your own value:
 
-```{r}
+```{r power2}
 make_power(10, 4)
 ```
 
 We can also assign the result of this function (`10000` above) to 
 an object of its own:
 
-```{r}
+```{r power3}
 my_power_number <- make_power(10, 4)
 ```
 
@@ -134,7 +134,7 @@ the function.  _this is a bad explanation that I need to make better_
 For `sum_squares` above, we defined two objects and then passed the `summed` to 
 the end of the function. If we omitted the last step, the function wouldn't return _anything_:
 
-```{r}
+```{r return3}
 empty_sum_squares <- function(x) {
   # first, add one to each using the function we defined above
   added <- add_one(x)
@@ -154,7 +154,7 @@ The `return()` function can help you make this behaviour clear. Using `return()`
 will stop your function in its tracks and pass the object out of the function.
 We can use it in the `sum_squares` function:
 
-```{r}
+```{r return4}
 sum_squares <- function(x) {
   # first, add one to each using the function we defined above
   added <- add_one(x)
@@ -179,7 +179,7 @@ for these occasions (see section x).
 The function below takes one argument -- x -- and transforms it depending on 
 how large it is:
 
-```{r}
+```{r cond1}
 make_smaller <- function(x) {
   if (x > 10) {
     return_number <- x - 10
@@ -194,7 +194,7 @@ make_smaller <- function(x) {
 If the input number is greater than 10, the `make_smaller` function will take
 `10` off it; if it's 10 or less, it will just take `5` off:
 
-```{r}
+```{r cond2}
 make_smaller(7)
 make_smaller(13)
 ```
@@ -203,7 +203,7 @@ Making use of the `return()` function could make this clearer.
 If `x` is greater than `10`, the `make_smaller` function will now subtract `10`
 and immediately return the value, ignoring everything else below it:
 
-```{r}
+```{r cond3}
 make_smaller <- function(x) {
   if (x > 10) {
     return(x - 10)
@@ -220,7 +220,7 @@ make_smaller(13)
 These conditional statements can be used for input options to your functions. 
 Let's say you had a vector of ages of people in your office, `office_ages`:
 
-```{r}
+```{r cond4}
 office_ages <- c(-6, 12, 21, 36, 56, 67, 200)
 office_ages
 ```
@@ -228,7 +228,7 @@ office_ages
 To summarise your office by age, you might want a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
 using the `round()` function with `digits` set to `-1` (ie round to the nearest `10`):
 
-```{r}
+```{r cond5}
 make_age10 <- function(age) {
   round(age, digits = -1)
 }
@@ -238,7 +238,7 @@ make_age10(office_ages)
 
 Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and `100`. You could let `validate_ages` be an argument, defaulting to `TRUE`, and _if it is `TRUE`_, then you could perform the validation:
 
-```{r}
+```{r cond6}
 make_age10 <- function(age,
                        validate_ages = TRUE) {
   
@@ -255,13 +255,13 @@ make_age10 <- function(age,
 
 Now, if `validate_ages == TRUE` (the default), the numbers over `100` will be replaced with `100`, and those less than `0` with `0`:
 
-```{r}
+```{r cond7}
 make_age10(office_ages)
 ```
 
 And you can turn that behaviour off by setting `validate_ages` to `FALSE`:
 
-```{r}
+```{r cond8}
 make_age10(office_ages, validate_ages = FALSE)
 ```
 
@@ -269,7 +269,7 @@ However, we might not trust an age entry of `-6` or `200` at all, and might want
 
 The first is to add another argument, shown below.
 
-```{r}
+```{r cond9}
 make_age10 <- function(age,
                        validate_ages = TRUE,
                        remove_implausible = FALSE) {
@@ -296,7 +296,7 @@ make_age10 <- function(age,
 
 This is fine! By default, the function still works like it did previously:
 
-```{r}
+```{r cond10}
 make_age10(office_ages, validate_ages = TRUE)
 ```
 
@@ -307,7 +307,7 @@ an `NA` value, like we've done above, we have to specify what _type_ of `NA`
 value it is: a number `NA_real_`, an integer `NA_integer`, or a character 
 `NA_character_`.] 
 
-```{r}
+```{r cond11}
 make_age10(office_ages, validate_ages = TRUE, remove_implausible = TRUE)
 ```
 
@@ -319,7 +319,7 @@ The `validate_ages` argument could take a character string that tells it which
 validation method to use. We could use `"remove"` and `"adjust"` to indicate the
 validation methods:
 
-```{r}
+```{r cond12}
 make_age10 <- function(age,
                        validate_ages = "remove") {
   
@@ -340,55 +340,19 @@ make_age10 <- function(age,
 
 ```
 
+Now we can use the `validate_ages` argument by itself to get the results we want:
 
-## Sets of functions
+```{r cond13}
+make_age10(office_ages, validate_ages = "adjust")
+make_age10(office_ages, validate_ages = "remove")
+```
 
-## Using `purrr::map`
+# Using `purrr::map`
+
+asdasdasd
+
+# Using functions for visualisations
 
 # # Sharing your useful functions with Grattan
 
-
-## Set up
-
-Load your packages first. This chapter just uses the packages contained in the `tidyverse`:
-
-```{r load_packages, message = FALSE}
-library(tidyverse)
-```
-
-
-The `sa3_income` dataset will be used for all key examples in this chapter.^[This is a tidied version of the [ABS Employee income by occupation and sex, 2010-11 to 2016-16](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument) dataset.] It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.
-
-If you haven't already, download the `sa3_income.csv` file to your own `data` folder:
-
-```{r download_data, eval = FALSE}
-download.file(url = "https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv",
-              destfile = "data/sa3_income.csv")
-```
-
-Then read it using the `read_csv` function:
-
-```{r read_data}
-sa3_income <- read_csv("data/sa3_income.csv")
-```
-
-```{r remove_na, include=FALSE}
-sa3_income <- sa3_income %>% 
-  filter(!is.na(average_income)) %>% 
-  select(year, 
-         sa3_name, 
-         state, 
-         gender, 
-         income = average_income, 
-         workers) %>% 
-  group_by(year, sa3_name, state, gender) %>% 
-  summarise(income = mean(income),
-            workers = sum(workers)) %>% 
-  ungroup() %>% 
-  arrange(gender, state, sa3_name, year)
-```
-
-```{r}
-head(sa3_income)
-```
 
