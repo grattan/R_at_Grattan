@@ -293,6 +293,8 @@ Of course, if you get stuck, ask!</p>
 <h2><span class="header-section-number">14.4</span> Using Git</h2>
 <p>Chapter 15 onwards of <a href="https://happygitwithr.com/install-intro.html">Happy Git with R</a> will walk you through some early examples of how to use Git.</p>
 <p>Another good option is to prod a Grattan staff member to run a tank-time on version control. If it’s a been a while, and there’s more than one new staff member, then this might be the most efficient way to get associates/fellows engaged in the topic and improve organisation-wide practice.</p>
+<p>If you’re using SSH to log into Git, you may run into an unexpected error when trying to clone a project from Github to your machine (this has happened to James twice). The solution is clone the project using the command line, rather than the RStudio interface. You can access the command line directly from RStudio, however. Go to <code>Tools</code> -&gt; <code>Terminal</code> -&gt; <code>New Terminal</code>, and then use the command</p>
+<pre><code>git clone git@github.com:grattan/MyRepoNameHere ~/path_to_the_folder_where_i_want_the_project_on_my_machine</code></pre>
 <p>Some guiding principles to leave you with:</p>
 <ol style="list-style-type: decimal">
 <li>Commit early, commit often

@@ -69,6 +69,11 @@ Chapter 15 onwards of [Happy Git with R](https://happygitwithr.com/install-intro
 
 Another good option is to prod a Grattan staff member to run a tank-time on version control. If it's a been a while, and there's more than one new staff member, then this might be the most efficient way to get associates/fellows engaged in the topic and improve organisation-wide practice.
 
+If you're using SSH to log into Git, you may run into an unexpected error when trying to clone a project from Github to your machine (this has happened to James twice). The solution is clone the project using the command line, rather than the RStudio interface. You can access the command line directly from RStudio, however. Go to `Tools` -> `Terminal` -> `New Terminal`, and then use the command 
+```{}
+git clone git@github.com:grattan/MyRepoNameHere ~/path_to_the_folder_where_i_want_the_project_on_my_machine
+```
+
 Some guiding principles to leave you with: 
 
 1. Commit early, commit often
