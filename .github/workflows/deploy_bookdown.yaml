@@ -14,7 +14,7 @@ name: Build site and deploy
 
 jobs:
   build-and-deploy:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -32,7 +32,7 @@ jobs:
       - name: Cache Renv packages
         uses: actions/cache@v2
         with:
-          path: ~/Library/Application Support/renv
+          path: ~/.local/share/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
