@@ -28,9 +28,10 @@ jobs:
         run: |
           brew install pandoc
 
-      - name: Install libcurl
+      - name: Install libcurl and libudunits
         run: |
           sudo apt install libcurl4-openssl-dev
+          sudo apt install libudunits2-dev
           
       # renv details from https://github.com/actions/cache/blob/master/examples.md#r---renv
       - name: Cache Renv packages
