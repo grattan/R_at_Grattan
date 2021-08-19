@@ -41,25 +41,20 @@ sa3_income <- read_csv("data/sa3_income.csv")
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   sa3 = col_double(),
-##   sa3_name = col_character(),
-##   sa3_sqkm = col_double(),
-##   sa3_income_percentile = col_double(),
-##   sa4_name = col_character(),
-##   gcc_name = col_character(),
-##   state = col_character(),
-##   occupation = col_character(),
-##   occ_short = col_character(),
-##   prof = col_character(),
-##   gender = col_character(),
-##   year = col_double(),
-##   median_income = col_double(),
-##   average_income = col_double(),
-##   total_income = col_double(),
-##   workers = col_double()
-## )
+## Rows: 47899 Columns: 16
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (8): sa3_name, sa4_name, gcc_name, state, occupation, occ_short, prof, g...
+## dbl (8): sa3, sa3_sqkm, sa3_income_percentile, year, median_income, average_...
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 
@@ -70,7 +65,7 @@ head(sa3_income)
 ```
 
 ```
-## # A tibble: 6 x 6
+## # A tibble: 6 × 6
 ##    year sa3_name  state gender income workers
 ##   <dbl> <chr>     <chr> <chr>   <dbl>   <dbl>
 ## 1  2011 Belconnen ACT   Men    54105.   67774
@@ -183,7 +178,7 @@ summarise((group_by(filter(sa3_income, state == "NSW"), gender)), av_mean_income
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender av_mean_income
 ##   <chr>           <dbl>
 ## 1 Men            58202.
@@ -201,7 +196,7 @@ data3
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender av_mean_income
 ##   <chr>           <dbl>
 ## 1 Men            58202.
@@ -224,7 +219,7 @@ sa3_income %>%  # and then
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender av_mean_income
 ##   <chr>           <dbl>
 ## 1 Men            58202.
@@ -258,7 +253,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 2
+## # A tibble: 4,019 × 2
 ##    state income
 ##    <chr>  <dbl>
 ##  1 ACT   54105.
@@ -283,7 +278,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 4
+## # A tibble: 4,019 × 4
 ##     year gender income workers
 ##    <dbl> <chr>   <dbl>   <dbl>
 ##  1  2011 Men    54105.   67774
@@ -315,7 +310,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 2
+## # A tibble: 4,019 × 2
 ##    sa3_name      state
 ##    <chr>         <chr>
 ##  1 Belconnen     ACT  
@@ -340,7 +335,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 2
+## # A tibble: 4,019 × 2
 ##    gender workers
 ##    <chr>    <dbl>
 ##  1 Men      67774
@@ -365,7 +360,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 4
+## # A tibble: 4,019 × 4
 ##    sa3_name      state gender workers
 ##    <chr>         <chr> <chr>    <dbl>
 ##  1 Belconnen     ACT   Men      67774
@@ -462,7 +457,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 123 x 6
+## # A tibble: 123 × 6
 ##     year sa3_name      state gender income workers
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>
 ##  1  2011 Alice Springs NT    Men    52602.   23663
@@ -489,7 +484,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 3 x 6
+## # A tibble: 3 × 6
 ##    year sa3_name           state gender income workers
 ##   <dbl> <chr>              <chr> <chr>   <dbl>   <dbl>
 ## 1  2015 Bayside            Vic   Men    77175.   62460
@@ -514,7 +509,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 0 x 6
+## # A tibble: 0 × 6
 ## # … with 6 variables: year <dbl>, sa3_name <chr>, state <chr>, gender <chr>,
 ## #   income <dbl>, workers <dbl>
 ```
@@ -537,7 +532,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 1 x 6
+## # A tibble: 1 × 6
 ##    year sa3_name     state gender  income workers
 ##   <dbl> <chr>        <chr> <chr>    <dbl>   <dbl>
 ## 1  2015 West Pilbara WA    Men    107844.   22928
@@ -553,7 +548,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 8 x 6
+## # A tibble: 8 × 6
 ## # Groups:   state [8]
 ##    year sa3_name                 state gender  income workers
 ##   <dbl> <chr>                    <chr> <chr>    <dbl>   <dbl>
@@ -581,7 +576,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 48 x 6
+## # A tibble: 48 × 6
 ## # Groups:   state, year [48]
 ##     year sa3_name                state gender income workers
 ##    <dbl> <chr>                   <chr> <chr>   <dbl>   <dbl>
@@ -609,7 +604,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 48 x 6
+## # A tibble: 48 × 6
 ##     year sa3_name                state gender income workers
 ##    <dbl> <chr>                   <chr> <chr>   <dbl>   <dbl>
 ##  1  2014 Cocos (Keeling) Islands NT    Men    32652.      45
@@ -643,7 +638,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers log_workers
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>       <dbl>
 ##  1  2011 Belconnen     ACT   Men    54105.   67774       11.1 
@@ -668,7 +663,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 6
+## # A tibble: 4,019 × 6
 ##     year sa3_name      state gender income workers
 ##    <int> <chr>         <chr> <chr>   <dbl>   <dbl>
 ##  1    11 Belconnen     ACT   Men    54105.   67774
@@ -706,7 +701,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers many_workers    
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>           
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 Many workers    
@@ -741,7 +736,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers worker_group          
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                 
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 2000 workers
@@ -771,7 +766,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers worker_group            
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                   
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 20,000 workers
@@ -803,7 +798,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers worker_group            
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>                   
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 More than 20,000 workers
@@ -832,7 +827,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers worker_group
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>       
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 <NA>        
@@ -864,7 +859,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers women_group
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl> <chr>      
 ##  1  2011 Belconnen     ACT   Men    54105.   67774 Men        
@@ -897,7 +892,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ## # Groups:   sa3_name, gender [672]
 ##     year sa3_name      state gender income workers av_workers
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>
@@ -927,7 +922,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 8
+## # A tibble: 4,019 × 8
 ## # Groups:   sa3_name, gender [672]
 ##     year sa3_name      state gender income workers av_workers worker_diff
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>       <dbl>
@@ -957,7 +952,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 8
+## # A tibble: 4,019 × 8
 ##     year sa3_name      state gender income workers av_workers worker_diff
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>      <dbl>       <dbl>
 ##  1  2011 Belconnen     ACT   Men    54105.   67774     68129.       0.995
@@ -991,7 +986,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 1 x 2
+## # A tibble: 1 × 2
 ##   mean_income total_workers
 ##         <dbl>         <dbl>
 ## 1      50272.     117002608
@@ -1013,7 +1008,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 2,010 x 3
+## # A tibble: 2,010 × 3
 ## # Groups:   year [6]
 ##     year sa3_name                             workers
 ##    <dbl> <chr>                                  <dbl>
@@ -1044,7 +1039,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender mean_income
 ##   <chr>        <dbl>
 ## 1 Men         58780.
@@ -1061,7 +1056,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 96 x 4
+## # A tibble: 96 × 4
 ## # Groups:   year, state [48]
 ##     year state gender workers
 ##    <dbl> <chr> <chr>    <dbl>
@@ -1097,7 +1092,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 670 x 6
+## # A tibble: 670 × 6
 ##     year sa3_name                  state gender income workers
 ##    <dbl> <chr>                     <chr> <chr>   <dbl>   <dbl>
 ##  1  2016 Lord Howe Island          NSW   Women  37944       74
@@ -1123,7 +1118,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 670 x 6
+## # A tibble: 670 × 6
 ##     year sa3_name       state gender income workers
 ##    <dbl> <chr>          <chr> <chr>   <dbl>   <dbl>
 ##  1  2016 Belconnen      ACT   Men    63389.   69828
@@ -1152,7 +1147,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ##     year sa3_name      state gender income workers last_workers
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>        <dbl>
 ##  1  2011 Belconnen     ACT   Men    54105.   67774           NA
@@ -1180,7 +1175,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 4,019 x 7
+## # A tibble: 4,019 × 7
 ## # Groups:   sa3_name, gender [672]
 ##     year sa3_name      state gender income workers income_growth
 ##    <dbl> <chr>         <chr> <chr>   <dbl>   <dbl>         <dbl>
@@ -1218,7 +1213,7 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 16 x 6
+## # A tibble: 16 × 6
 ## # Groups:   year, state [8]
 ##     year state gender total_workers mean_income  total_income
 ##    <dbl> <chr> <chr>          <dbl>       <dbl>         <dbl>
@@ -1255,15 +1250,15 @@ sa3_income %>%
 ```
 
 ```
-## # A tibble: 6 x 8
-##    year sa3_name        state gender income workers highest_income worker_growth
-##   <dbl> <chr>           <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
-## 1  2011 Urriarra - Nam… ACT   Women  48525.      84         86672.        NA    
-## 2  2012 Urriarra - Nam… ACT   Women  51648.      96         86672.         0.143
-## 3  2013 Urriarra - Nam… ACT   Women  61858.     124         86672.         0.292
-## 4  2014 Urriarra - Nam… ACT   Women  72980.      99         86672.        -0.202
-## 5  2015 Urriarra - Nam… ACT   Women  68534.      72         86672.        -0.273
-## 6  2016 Urriarra - Nam… ACT   Women  86672.      90         86672.         0.25
+## # A tibble: 6 × 8
+##    year sa3_name           state gender income workers highest_income worker_growth
+##   <dbl> <chr>              <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
+## 1  2011 Urriarra - Namadgi ACT   Women  48525.      84         86672.        NA    
+## 2  2012 Urriarra - Namadgi ACT   Women  51648.      96         86672.         0.143
+## 3  2013 Urriarra - Namadgi ACT   Women  61858.     124         86672.         0.292
+## 4  2014 Urriarra - Namadgi ACT   Women  72980.      99         86672.        -0.202
+## 5  2015 Urriarra - Namadgi ACT   Women  68534.      72         86672.        -0.273
+## 6  2016 Urriarra - Namadgi ACT   Women  86672.      90         86672.         0.25
 ```
 
 
@@ -1289,12 +1284,20 @@ sa3_percentiles <- read_csv("data/sa3_percentiles.csv")
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   sa3_name = col_character(),
-##   year = col_double(),
-##   sa3_income_percentile = col_double()
-## )
+## Rows: 2010 Columns: 3
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (1): sa3_name
+## dbl (2): year, sa3_income_percentile
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 

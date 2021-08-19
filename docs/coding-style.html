@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Grattan coding style | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Grattan coding style | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill and Will Mackey" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2021-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="organising-projects.html"/>
 <link rel="next" href="packages.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -115,6 +118,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -312,9 +316,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
+<li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
+</ul></li>
 <li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
 <li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
 </ul></li>
 </ul>
 
@@ -346,12 +355,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-packages-first" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Load packages first</h2>
 <p>Our analysis scripts will almost always involve loading some <a href="packages.html#packages">packages</a>. These should be laoded at the top of a script, in one block like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coding-style.html#cb4-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb4-2"><a href="coding-style.html#cb4-2"></a><span class="kw">library</span>(grattantheme)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coding-style.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="coding-style.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span></code></pre></div>
 <p>If you’re loading a package from Github, it’s a good idea to leave a <a href="coding-style.html#use-comments">comment</a> to say where it came from, like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding-style.html#cb5-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="coding-style.html#cb5-2"></a><span class="kw">library</span>(grattantheme)</span>
-<span id="cb5-3"><a href="coding-style.html#cb5-3"></a><span class="kw">library</span>(strayr) <span class="co"># remotes::install_github(&quot;mattcowgill/strayr&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding-style.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="coding-style.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span>
+<span id="cb5-3"><a href="coding-style.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strayr) <span class="co"># remotes::install_github(&quot;mattcowgill/strayr&quot;)</span></span></code></pre></div>
 <p>Don’t scatter <code>library()</code> calls throughout your script - put them all at the top.</p>
 <p>The only thing that should come before loading your packages is the script preamble.</p>
 </div>
@@ -359,17 +368,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.2</span> Script preamble</h2>
 <p>Describe what your script does in the first few lines using comments or within an RMarkdown document.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coding-style.html#cb6-1"></a><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coding-style.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script reads ABS data downloaded from TableBuilder and combines into a single data object containing post-secondary education levels by age and gender by SA3. </span></span></code></pre></div>
 <p>Your preamble might also pose a research question that the script will answer.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding-style.html#cb7-1"></a><span class="co"># Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding-style.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do women have higher levels of educational attainment than men, within the same geographical areas and age groups?</span></span></code></pre></div>
 <p>Your preamble shouldn’t be a terse, inscrutable comment.</p>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding-style.html#cb8-1"></a><span class="co"># make ABS ed data graph</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding-style.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make ABS ed data graph</span></span></code></pre></div>
 <p>If it’s hard to concisely describe what your script does in a few lines of plain English, that might be a sign that your script does too many things. Consider breaking your analysis into a series of scripts. See <a href="organising-projects.html#organising-projects">Organising R Projects at Grattan</a> for more.</p>
 <p>Your preamble should anticipate and answer any questions other people might have when reviewing your script. For example:</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coding-style.html#cb9-1"></a><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coding-style.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script calculates average income by age group and sex using the ABS Household Expenditure Survey and joins this to health information by age groups and sex from the National Health Survey. Note that we can&#39;t use the income variable in the NHS for this purpose, as it only contains information about respondents&#39; income decile, not the income itself.</span></span></code></pre></div>
 <p>The preamble should pertain the the code contained in the specific script. If you have comments or information about your analysis as a whole, put it in your <a href="organising-projects.html#README">README file</a>.</p>
 </div>
 <div id="use-comments" class="section level2" number="4.3">
@@ -377,16 +386,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Comments are necessary where the code <em>alone</em> doesn’t tell the full story. Comments should tell the reader <strong>why</strong> you’re doing something, rather than just <strong>what</strong> you’re doing.</p>
 <p>For example, comments are important when groups are coded with numbers rather than character strings, because this might not be obvious to someone reading your script:</p>
 <p><strong>Necessary to comment</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding-style.html#cb10-1"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-2"><a href="coding-style.html#cb10-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,   <span class="co"># Keep only male observations</span></span>
-<span id="cb10-3"><a href="coding-style.html#cb10-3"></a>         age <span class="op">==</span><span class="st"> &quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding-style.html#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="coding-style.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="dv">1</span>,   <span class="co"># Keep only male observations</span></span>
+<span id="cb10-3"><a href="coding-style.html#cb10-3" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">==</span> <span class="st">&quot;05&quot;</span>)   <span class="co"># Keep only 35-39 year-olds. </span></span></code></pre></div>
 <p>Without the comment, readers of your code might not be aware that <code>1</code> in this dataset corresponds to <code>male</code>, or that <code>age == "05"</code> refers to 35-39 year olds. Without the comment, the code is not self-explanatory.</p>
 <p>If your code <em>is</em> self-explanatory, you can include or omit comments as you see fit.</p>
 <p><strong>Not necessary (but okay if included)</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding-style.html#cb11-1"></a><span class="co"># We want to only look at women aged 35-39</span></span>
-<span id="cb11-2"><a href="coding-style.html#cb11-2"></a>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb11-3"><a href="coding-style.html#cb11-3"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>,</span>
-<span id="cb11-4"><a href="coding-style.html#cb11-4"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">39</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding-style.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We want to only look at women aged 35-39</span></span>
+<span id="cb11-2"><a href="coding-style.html#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="coding-style.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb11-4"><a href="coding-style.html#cb11-4" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">&gt;=</span> <span class="dv">35</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">39</span>)</span></code></pre></div>
 <p>You should also include comments where your code is more complex and may not be easily understood by the reader. If you’re using a function from a package that isn’t commonly used at Grattan, include a comment to explain what it does.</p>
 <p><em>Err on the side of commenting more</em>, rather than less, throughout your code. Something may seem obvious to you when you’re writing your code, but it might not be obvious to the person reading your code, even if that person is you in the future. Better to over-comment than under-comment.</p>
 <p>Comments can go above code chunks, or next to code - there are examples of both above.</p>
@@ -395,17 +404,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> Breaking your script into chunks</h2>
 <p>It’s useful to break a lengthy script into chunks with <code>-----</code>.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="coding-style.html#cb12-1"></a><span class="co"># Read file A -----</span></span>
-<span id="cb12-2"><a href="coding-style.html#cb12-2"></a></span>
-<span id="cb12-3"><a href="coding-style.html#cb12-3"></a>a &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/a.csv&quot;</span>)</span>
-<span id="cb12-4"><a href="coding-style.html#cb12-4"></a></span>
-<span id="cb12-5"><a href="coding-style.html#cb12-5"></a><span class="co"># Read file B -----</span></span>
-<span id="cb12-6"><a href="coding-style.html#cb12-6"></a></span>
-<span id="cb12-7"><a href="coding-style.html#cb12-7"></a>b &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/b.csv&quot;</span>)</span>
-<span id="cb12-8"><a href="coding-style.html#cb12-8"></a></span>
-<span id="cb12-9"><a href="coding-style.html#cb12-9"></a><span class="co"># Combine files A and B ----</span></span>
-<span id="cb12-10"><a href="coding-style.html#cb12-10"></a></span>
-<span id="cb12-11"><a href="coding-style.html#cb12-11"></a>c &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(a, b)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="coding-style.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read file A -----</span></span>
+<span id="cb12-2"><a href="coding-style.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="coding-style.html#cb12-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/a.csv&quot;</span>)</span>
+<span id="cb12-4"><a href="coding-style.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="coding-style.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read file B -----</span></span>
+<span id="cb12-6"><a href="coding-style.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="coding-style.html#cb12-7" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/b.csv&quot;</span>)</span>
+<span id="cb12-8"><a href="coding-style.html#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="coding-style.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine files A and B ----</span></span>
+<span id="cb12-10"><a href="coding-style.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="coding-style.html#cb12-11" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(a, b)</span></code></pre></div>
 <p>(In practice, you’ll have more than one line of code in each block.)</p>
 <p>This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there’s a little navigation tool that helps you easily jump between named sections of your script.</p>
 <p><img src="atlas/rstudio_navigation.png" width="275" /></p>
@@ -415,19 +424,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.5</span> Assigning values to objects</h2>
 <p>In R, you work with objects. An object might be a data frame, or a vector of numbers or letters, or a list. Functions can be objects, too.</p>
 <p><strong>Use the <code>&lt;-</code> operator to assign values to objects</strong>. Here are some <strong>good</strong> examples:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="coding-style.html#cb13-1"></a>schools &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/schools_data.csv&quot;</span>)</span>
-<span id="cb13-2"><a href="coding-style.html#cb13-2"></a></span>
-<span id="cb13-3"><a href="coding-style.html#cb13-3"></a>three_letters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
-<span id="cb13-4"><a href="coding-style.html#cb13-4"></a></span>
-<span id="cb13-5"><a href="coding-style.html#cb13-5"></a>lf &lt;-<span class="st"> </span>labour_force <span class="op">%&gt;%</span></span>
-<span id="cb13-6"><a href="coding-style.html#cb13-6"></a><span class="st">  </span><span class="kw">filter</span>(status <span class="op">!=</span><span class="st"> &quot;NILF&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="coding-style.html#cb13-1" aria-hidden="true" tabindex="-1"></a>schools <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/schools_data.csv&quot;</span>)</span>
+<span id="cb13-2"><a href="coding-style.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="coding-style.html#cb13-3" aria-hidden="true" tabindex="-1"></a>three_letters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb13-4"><a href="coding-style.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="coding-style.html#cb13-5" aria-hidden="true" tabindex="-1"></a>lf <span class="ot">&lt;-</span> labour_force <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="coding-style.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="st">&quot;NILF&quot;</span>)</span></code></pre></div>
 <p>Avoid <code>-&gt;</code>, <code>=</code> and <code>assign()</code>. Here are some <strong>bad</strong> examples::</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="coding-style.html#cb14-1"></a>schools =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/schools_data.csv&quot;</span>)</span>
-<span id="cb14-2"><a href="coding-style.html#cb14-2"></a></span>
-<span id="cb14-3"><a href="coding-style.html#cb14-3"></a><span class="kw">assign</span>(<span class="st">&quot;three_letters&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
-<span id="cb14-4"><a href="coding-style.html#cb14-4"></a></span>
-<span id="cb14-5"><a href="coding-style.html#cb14-5"></a>labour_force <span class="op">%&gt;%</span></span>
-<span id="cb14-6"><a href="coding-style.html#cb14-6"></a><span class="st">  </span><span class="kw">filter</span>(status <span class="op">!=</span><span class="st"> &quot;NILF&quot;</span>) -&gt;<span class="st"> </span>lf</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="coding-style.html#cb14-1" aria-hidden="true" tabindex="-1"></a>schools <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/schools_data.csv&quot;</span>)</span>
+<span id="cb14-2"><a href="coding-style.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="coding-style.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">assign</span>(<span class="st">&quot;three_letters&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb14-4"><a href="coding-style.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="coding-style.html#cb14-5" aria-hidden="true" tabindex="-1"></a>labour_force <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="coding-style.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="st">&quot;NILF&quot;</span>) <span class="ot">-&gt;</span> lf</span></code></pre></div>
 <p>All these bad operators will work, but they are best avoided. The <code>=</code> operator is avoided for reasons of visual consistency, style, and to avoid confusion. <code>assign()</code> is avoided because it can lead to unexpected behaviour, and is usually not the best way to do what you want to do. The <code>-&gt;</code> operator is avoided because it’s easy to miss when skimming over code.</p>
 <p>The <code>&lt;&lt;-</code> operator should also be avoided.</p>
 </div>
@@ -437,31 +446,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Grattan uses <em>words separated by underscores</em> <code>_</code> (aka ‘snake_case’) to name objects and variables. This is <a href="https://style.tidyverse.org/syntax.html#object-names">common practice across the Tidyverse</a>.
 Object names should be descriptive and not-too-long. This is a trade-off, and one that’s sometimes hard to get right. However, using snake_case provides consistency:</p>
 <p><strong>Good object names</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="coding-style.html#cb15-1"></a>sa3_population</span>
-<span id="cb15-2"><a href="coding-style.html#cb15-2"></a>gdp_growth_vic</span>
-<span id="cb15-3"><a href="coding-style.html#cb15-3"></a>uni_attainment</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="coding-style.html#cb15-1" aria-hidden="true" tabindex="-1"></a>sa3_population</span>
+<span id="cb15-2"><a href="coding-style.html#cb15-2" aria-hidden="true" tabindex="-1"></a>gdp_growth_vic</span>
+<span id="cb15-3"><a href="coding-style.html#cb15-3" aria-hidden="true" tabindex="-1"></a>uni_attainment</span></code></pre></div>
 <p><strong>Bad object names</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="coding-style.html#cb16-1"></a>sa3Pop</span>
-<span id="cb16-2"><a href="coding-style.html#cb16-2"></a>GDPgrowthVIC</span>
-<span id="cb16-3"><a href="coding-style.html#cb16-3"></a>uni.attainment</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="coding-style.html#cb16-1" aria-hidden="true" tabindex="-1"></a>sa3Pop</span>
+<span id="cb16-2"><a href="coding-style.html#cb16-2" aria-hidden="true" tabindex="-1"></a>GDPgrowthVIC</span>
+<span id="cb16-3"><a href="coding-style.html#cb16-3" aria-hidden="true" tabindex="-1"></a>uni.attainment</span></code></pre></div>
 <p>Variable names face a similar trade-off. Again, try to be descriptive and short using snake_case:</p>
 <p><strong>Good variable names</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="coding-style.html#cb17-1"></a>gender</span>
-<span id="cb17-2"><a href="coding-style.html#cb17-2"></a>gdp_growth</span>
-<span id="cb17-3"><a href="coding-style.html#cb17-3"></a>highest_edu</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="coding-style.html#cb17-1" aria-hidden="true" tabindex="-1"></a>gender</span>
+<span id="cb17-2"><a href="coding-style.html#cb17-2" aria-hidden="true" tabindex="-1"></a>gdp_growth</span>
+<span id="cb17-3"><a href="coding-style.html#cb17-3" aria-hidden="true" tabindex="-1"></a>highest_edu</span></code></pre></div>
 <p><strong>Bad variable names</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="coding-style.html#cb18-1"></a>s801LHSAA</span>
-<span id="cb18-2"><a href="coding-style.html#cb18-2"></a>gdp.growth</span>
-<span id="cb18-3"><a href="coding-style.html#cb18-3"></a>highEdu</span>
-<span id="cb18-4"><a href="coding-style.html#cb18-4"></a>chaosVar_name.silly</span>
-<span id="cb18-5"><a href="coding-style.html#cb18-5"></a>var2</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="coding-style.html#cb18-1" aria-hidden="true" tabindex="-1"></a>s801LHSAA</span>
+<span id="cb18-2"><a href="coding-style.html#cb18-2" aria-hidden="true" tabindex="-1"></a>gdp.growth</span>
+<span id="cb18-3"><a href="coding-style.html#cb18-3" aria-hidden="true" tabindex="-1"></a>highEdu</span>
+<span id="cb18-4"><a href="coding-style.html#cb18-4" aria-hidden="true" tabindex="-1"></a>chaosVar_name.silly</span>
+<span id="cb18-5"><a href="coding-style.html#cb18-5" aria-hidden="true" tabindex="-1"></a>var2</span></code></pre></div>
 <p>When you load data from outside Grattan, such as ABS microdata, variables will often have bad names. It is worth taking the time at the top of your script to <a href="https://dplyr.tidyverse.org/reference/select.html">rename your variables</a>, giving them consistent, descriptive, short, snake_case names. An easy way to do this is using <code>clean_names()</code> function from the <code>janitor</code> package:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="coding-style.html#cb19-1"></a>df_with_bad_names &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">firstColumn =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),</span>
-<span id="cb19-2"><a href="coding-style.html#cb19-2"></a>                                <span class="dt">Second.column =</span> <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>))</span>
-<span id="cb19-3"><a href="coding-style.html#cb19-3"></a></span>
-<span id="cb19-4"><a href="coding-style.html#cb19-4"></a>df_with_good_names &lt;-<span class="st"> </span>janitor<span class="op">::</span><span class="kw">clean_names</span>(df_with_bad_names)</span>
-<span id="cb19-5"><a href="coding-style.html#cb19-5"></a></span>
-<span id="cb19-6"><a href="coding-style.html#cb19-6"></a>df_with_good_names</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="coding-style.html#cb19-1" aria-hidden="true" tabindex="-1"></a>df_with_bad_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">firstColumn =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb19-2"><a href="coding-style.html#cb19-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">Second.column =</span> <span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>))</span>
+<span id="cb19-3"><a href="coding-style.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="coding-style.html#cb19-4" aria-hidden="true" tabindex="-1"></a>df_with_good_names <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(df_with_bad_names)</span>
+<span id="cb19-5"><a href="coding-style.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="coding-style.html#cb19-6" aria-hidden="true" tabindex="-1"></a>df_with_good_names</span></code></pre></div>
 <pre><code>##   first_column second_column
 ## 1            1             4
 ## 2            2             5
@@ -475,36 +484,36 @@ Object names should be descriptive and not-too-long. This is a trade-off, and on
 <h3><span class="header-section-number">4.7.1</span> Assign and equals</h3>
 <p>Put a space each side of an assign operator <code>&lt;-</code>, equals <code>=</code>, and other ‘infix operators’ (<code>==</code>, <code>+</code>, <code>-</code>, and so on).</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="coding-style.html#cb21-1"></a>uni_attainment &lt;-<span class="st"> </span><span class="kw">filter</span>(data, age <span class="op">==</span><span class="st"> </span><span class="dv">25</span>, gender <span class="op">==</span><span class="st"> &quot;Female&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="coding-style.html#cb21-1" aria-hidden="true" tabindex="-1"></a>uni_attainment <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, age <span class="sc">==</span> <span class="dv">25</span>, gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="coding-style.html#cb22-1"></a>uni_attainment&lt;-<span class="kw">filter</span>(data,age<span class="op">==</span><span class="dv">25</span>,gender<span class="op">==</span><span class="st">&quot;Female&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="coding-style.html#cb22-1" aria-hidden="true" tabindex="-1"></a>uni_attainment<span class="ot">&lt;-</span><span class="fu">filter</span>(data,age<span class="sc">==</span><span class="dv">25</span>,gender<span class="sc">==</span><span class="st">&quot;Female&quot;</span>)</span></code></pre></div>
 <p>Exceptions are operators that <em>directly connect</em> to an object, package or function, which should <strong>not</strong> have spaces on either side: <code>::</code>, <code>$</code>, <code>@</code>, <code>[</code>, <code>[[</code>, etc.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="coding-style.html#cb23-1"></a>uni_attainment<span class="op">$</span>gender</span>
-<span id="cb23-2"><a href="coding-style.html#cb23-2"></a>uni_attainment<span class="op">$</span>age[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb23-3"><a href="coding-style.html#cb23-3"></a>readabs<span class="op">::</span><span class="kw">read_abs</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="coding-style.html#cb23-1" aria-hidden="true" tabindex="-1"></a>uni_attainment<span class="sc">$</span>gender</span>
+<span id="cb23-2"><a href="coding-style.html#cb23-2" aria-hidden="true" tabindex="-1"></a>uni_attainment<span class="sc">$</span>age[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb23-3"><a href="coding-style.html#cb23-3" aria-hidden="true" tabindex="-1"></a>readabs<span class="sc">::</span><span class="fu">read_abs</span>()</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="coding-style.html#cb24-1"></a>uni_attainment <span class="op">$</span><span class="st"> </span>gender</span>
-<span id="cb24-2"><a href="coding-style.html#cb24-2"></a>uni_attainment<span class="op">$</span><span class="st"> </span>age [ <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>]</span>
-<span id="cb24-3"><a href="coding-style.html#cb24-3"></a>readabs <span class="op">::</span><span class="st"> </span><span class="kw">read_abs</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="coding-style.html#cb24-1" aria-hidden="true" tabindex="-1"></a>uni_attainment <span class="sc">$</span> gender</span>
+<span id="cb24-2"><a href="coding-style.html#cb24-2" aria-hidden="true" tabindex="-1"></a>uni_attainment<span class="sc">$</span> age [ <span class="dv">1</span> <span class="sc">:</span> <span class="dv">10</span>]</span>
+<span id="cb24-3"><a href="coding-style.html#cb24-3" aria-hidden="true" tabindex="-1"></a>readabs <span class="sc">::</span> <span class="fu">read_abs</span>()</span></code></pre></div>
 </div>
 <div id="commas" class="section level3" number="4.7.2">
 <h3><span class="header-section-number">4.7.2</span> Commas</h3>
 <p>Always put a space <em>after</em> a comma and not before, just like in regular English.</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="coding-style.html#cb25-1"></a><span class="kw">select</span>(data, age, gender, sa2, sa3)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="coding-style.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data, age, gender, sa2, sa3)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="coding-style.html#cb26-1"></a><span class="kw">select</span>(data,age,gender,sa2,sa3)</span>
-<span id="cb26-2"><a href="coding-style.html#cb26-2"></a><span class="kw">select</span>(data ,age ,gender ,sa2 ,sa3)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="coding-style.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data,age,gender,sa2,sa3)</span>
+<span id="cb26-2"><a href="coding-style.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data ,age ,gender ,sa2 ,sa3)</span></code></pre></div>
 </div>
 <div id="parentheses" class="section level3" number="4.7.3">
 <h3><span class="header-section-number">4.7.3</span> Parentheses</h3>
 <p>Do not use spaces around parentheses in most cases:</p>
 <p><strong>Good</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="coding-style.html#cb27-1"></a><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="coding-style.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><strong>Bad</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="coding-style.html#cb28-1"></a><span class="kw">mean</span> (x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb28-2"><a href="coding-style.html#cb28-2"></a><span class="kw">mean</span>( x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="coding-style.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span> (x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-2"><a href="coding-style.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( x, <span class="at">na.rm =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
 <p>For spacing rules around <code>if</code>, <code>for</code>, <code>while</code>, and <code>function</code>, see <a href="https://style.tidyverse.org/syntax.html#parentheses">the Tidyverse guide</a>.</p>
 </div>
 </div>
@@ -513,32 +522,32 @@ Object names should be descriptive and not-too-long. This is a trade-off, and on
 <p>Keeping your lines of code short and indenting them in a consistent way can help make reading code much easier. If you are supplying multiple arguments to a function, it’s generally a good idea to put each argument on a new line - hit enter/return after the comma, like in the <code>rename</code> and <code>filter</code> examples below. Indentation makes it clear where a code block starts and finishes.</p>
 <p>Using pipes (<code>%&gt;%</code>) instead of nesting functions also makes things clearer.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The pipe should always have a space before it, and should generally be followed by a new line, as in this example:</p>
 <p><strong>Good: short lines and indentation</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="coding-style.html#cb29-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb29-2"><a href="coding-style.html#cb29-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
-<span id="cb29-3"><a href="coding-style.html#cb29-3"></a>         <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span></span>
-<span id="cb29-4"><a href="coding-style.html#cb29-4"></a><span class="st">  </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb29-5"><a href="coding-style.html#cb29-5"></a>         age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
-<span id="cb29-6"><a href="coding-style.html#cb29-6"></a><span class="st">  </span><span class="kw">group_by</span>(gender, </span>
-<span id="cb29-7"><a href="coding-style.html#cb29-7"></a>           uni_attainment) <span class="op">%&gt;%</span></span>
-<span id="cb29-8"><a href="coding-style.html#cb29-8"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, </span>
-<span id="cb29-9"><a href="coding-style.html#cb29-9"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="coding-style.html#cb29-1" aria-hidden="true" tabindex="-1"></a>young_qual_income <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="coding-style.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">gender =</span> s801LHSAA,</span>
+<span id="cb29-3"><a href="coding-style.html#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">uni_attainment =</span> high.ed) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="coding-style.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb29-5"><a href="coding-style.html#cb29-5" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">34</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-6"><a href="coding-style.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, </span>
+<span id="cb29-7"><a href="coding-style.html#cb29-7" aria-hidden="true" tabindex="-1"></a>           uni_attainment) <span class="sc">%&gt;%</span></span>
+<span id="cb29-8"><a href="coding-style.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_income =</span> <span class="fu">mean</span>(income, </span>
+<span id="cb29-9"><a href="coding-style.html#cb29-9" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <p>Without indentation, the code is harder to read. It’s not clear where the chunk starts and finishes, and which bits of code are arguments to which functions.</p>
 <p><strong>Bad: short lines, no indentation</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="coding-style.html#cb30-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-2"><a href="coding-style.html#cb30-2"></a><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA,</span>
-<span id="cb30-3"><a href="coding-style.html#cb30-3"></a><span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-4"><a href="coding-style.html#cb30-4"></a><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb30-5"><a href="coding-style.html#cb30-5"></a>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span></span>
-<span id="cb30-6"><a href="coding-style.html#cb30-6"></a><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-7"><a href="coding-style.html#cb30-7"></a><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="coding-style.html#cb30-1" aria-hidden="true" tabindex="-1"></a>young_qual_income <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="coding-style.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="at">gender =</span> s801LHSAA,</span>
+<span id="cb30-3"><a href="coding-style.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="at">uni_attainment =</span> high.ed) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="coding-style.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb30-5"><a href="coding-style.html#cb30-5" aria-hidden="true" tabindex="-1"></a>age <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">34</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="coding-style.html#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(gender, uni_attainment) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="coding-style.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">mean_income =</span> <span class="fu">mean</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <p>Long lines are also bad and hard to read.
 <strong>Bad: long lines</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="coding-style.html#cb31-1"></a>young_qual_income &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">gender =</span> s801LHSAA, <span class="dt">uni_attainment =</span> high.ed) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(income <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">34</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gender, uni_attainment) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_income =</span> <span class="kw">mean</span>(income, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="coding-style.html#cb31-1" aria-hidden="true" tabindex="-1"></a>young_qual_income <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">gender =</span> s801LHSAA, <span class="at">uni_attainment =</span> high.ed) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>, age <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">34</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(gender, uni_attainment) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean_income =</span> <span class="fu">mean</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <p>When you want to take the output of a function and pass it as the input to another function, use the pipe (<code>%&gt;%</code>). Don’t write ugly, inscrutable code like this, where multiple functions are wrapped around other functions.</p>
 <p><strong>War-crime bad: long lines without pipes</strong></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="coding-style.html#cb32-1"></a>young_qual_income&lt;-<span class="kw">summarise</span>(<span class="kw">group_by</span>(<span class="kw">filter</span>(<span class="kw">rename</span>(data,<span class="dt">gender=</span>s801LHSAA,<span class="dt">uni_attainment=</span>high.ed),income<span class="op">&gt;</span><span class="dv">0</span>,age<span class="op">&gt;=</span><span class="dv">25</span><span class="op">&amp;</span>age<span class="op">&lt;=</span><span class="dv">34</span>),uni_attainment),<span class="dt">mean_income=</span><span class="kw">mean</span>(income,<span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="coding-style.html#cb32-1" aria-hidden="true" tabindex="-1"></a>young_qual_income<span class="ot">&lt;-</span><span class="fu">summarise</span>(<span class="fu">group_by</span>(<span class="fu">filter</span>(<span class="fu">rename</span>(data,<span class="at">gender=</span>s801LHSAA,<span class="at">uni_attainment=</span>high.ed),income<span class="sc">&gt;</span><span class="dv">0</span>,age<span class="sc">&gt;=</span><span class="dv">25</span><span class="sc">&amp;</span>age<span class="sc">&lt;=</span><span class="dv">34</span>),uni_attainment),<span class="at">mean_income=</span><span class="fu">mean</span>(income,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <p>Writing clear code chunks, where functions are strung together with a pipe (<code>%&gt;%</code>), makes your code much more expressive and able to be read and understood. This is another reason to favour R over something like Excel, which pushes people to piece together functions into Frankenstein’s monsters like this:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="coding-style.html#cb33-1"></a>=<span class="kw">IF</span>(<span class="op">$</span><span class="dt">G16 =</span> <span class="st">&quot;All day&quot;</span>, <span class="kw">INDEX</span>(metrics<span class="op">!</span><span class="er">$</span>D<span class="op">$</span><span class="dv">8</span><span class="op">:</span><span class="er">$</span>H<span class="op">$</span><span class="dv">66</span>, <span class="kw">MATCH</span>(<span class="kw">INDEX</span>(correspondence<span class="op">!</span><span class="er">$</span>B<span class="op">$</span><span class="dv">2</span><span class="op">:</span><span class="er">$</span>B<span class="op">$</span><span class="dv">23</span>, <span class="kw">MATCH</span>(<span class="st">&#39;convert to tibble&#39;</span><span class="op">!</span>M<span class="op">$</span><span class="dv">4</span>, correspondence<span class="op">!</span><span class="er">$</span>A<span class="op">$</span><span class="dv">2</span><span class="op">:</span><span class="er">$</span>A<span class="op">$</span><span class="dv">23</span>, <span class="dv">0</span>)), metrics<span class="op">!</span><span class="er">$</span>B<span class="op">$</span><span class="dv">8</span><span class="op">:</span><span class="er">$</span>B<span class="op">$</span><span class="dv">66</span>, <span class="dv">0</span>), <span class="kw">MATCH</span>(<span class="st">&#39;convert to tibble&#39;</span><span class="op">!</span><span class="er">$</span>E16, metrics<span class="op">!</span><span class="er">$</span>D<span class="op">$</span><span class="dv">4</span><span class="op">:</span><span class="er">$</span>H<span class="op">$</span><span class="dv">4</span>, <span class="dv">0</span>)), <span class="st">&quot;NA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="coding-style.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">IF</span>(<span class="sc">$</span><span class="at">G16 =</span> <span class="st">&quot;All day&quot;</span>, <span class="fu">INDEX</span>(metrics<span class="sc">!</span><span class="er">$</span>D<span class="sc">$</span><span class="dv">8</span><span class="sc">:</span><span class="er">$</span>H<span class="sc">$</span><span class="dv">66</span>, <span class="fu">MATCH</span>(<span class="fu">INDEX</span>(correspondence<span class="sc">!</span><span class="er">$</span>B<span class="sc">$</span><span class="dv">2</span><span class="sc">:</span><span class="er">$</span>B<span class="sc">$</span><span class="dv">23</span>, <span class="fu">MATCH</span>(<span class="st">&#39;convert to tibble&#39;</span><span class="sc">!</span>M<span class="sc">$</span><span class="dv">4</span>, correspondence<span class="sc">!</span><span class="er">$</span>A<span class="sc">$</span><span class="dv">2</span><span class="sc">:</span><span class="er">$</span>A<span class="sc">$</span><span class="dv">23</span>, <span class="dv">0</span>)), metrics<span class="sc">!</span><span class="er">$</span>B<span class="sc">$</span><span class="dv">8</span><span class="sc">:</span><span class="er">$</span>B<span class="sc">$</span><span class="dv">66</span>, <span class="dv">0</span>), <span class="fu">MATCH</span>(<span class="st">&#39;convert to tibble&#39;</span><span class="sc">!</span><span class="er">$</span>E16, metrics<span class="sc">!</span><span class="er">$</span>D<span class="sc">$</span><span class="dv">4</span><span class="sc">:</span><span class="er">$</span>H<span class="sc">$</span><span class="dv">4</span>, <span class="dv">0</span>)), <span class="st">&quot;NA&quot;</span>)</span></code></pre></div>
 <p>I just threw up in my mouth a little bit.</p>
 <p>The pipe function <code>%&gt;%</code> can make code more easy to write and read. The pipe can create the temptation to string together lots and lots of functions into one block of code. This can make things harder to read and understand.</p>
 <p>Resist the urge to use the pipe to make code blocks too long. A block of code should generally do one thing, or a small number of things.</p>
@@ -585,6 +594,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -605,6 +615,10 @@ gitbook.start({
 "text": null
 },
 "download": ["r-at-grattan.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

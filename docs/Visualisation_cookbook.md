@@ -42,25 +42,20 @@ sa3_income <- read_csv("data/sa3_income.csv") %>%
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   sa3 = col_double(),
-##   sa3_name = col_character(),
-##   sa3_sqkm = col_double(),
-##   sa3_income_percentile = col_double(),
-##   sa4_name = col_character(),
-##   gcc_name = col_character(),
-##   state = col_character(),
-##   occupation = col_character(),
-##   occ_short = col_character(),
-##   prof = col_character(),
-##   gender = col_character(),
-##   year = col_double(),
-##   median_income = col_double(),
-##   average_income = col_double(),
-##   total_income = col_double(),
-##   workers = col_double()
-## )
+## Rows: 47899 Columns: 16
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (8): sa3_name, sa4_name, gcc_name, state, occupation, occ_short, prof, g...
+## dbl (8): sa3, sa3_sqkm, sa3_income_percentile, year, median_income, average_...
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ```r
@@ -68,15 +63,15 @@ head(sa3_income)
 ```
 
 ```
-## # A tibble: 6 x 16
-##     sa3 sa3_name sa3_sqkm sa3_income_perc… sa4_name gcc_name state occupation
-##   <dbl> <chr>       <dbl>            <dbl> <chr>    <chr>    <chr> <chr>     
-## 1 10102 Queanbe…    6511.               80 Capital… Rest of… NSW   Clerical …
-## 2 10102 Queanbe…    6511.               76 Capital… Rest of… NSW   Clerical …
-## 3 10102 Queanbe…    6511.               78 Capital… Rest of… NSW   Clerical …
-## 4 10102 Queanbe…    6511.               76 Capital… Rest of… NSW   Clerical …
-## 5 10102 Queanbe…    6511.               74 Capital… Rest of… NSW   Clerical …
-## 6 10102 Queanbe…    6511.               79 Capital… Rest of… NSW   Clerical …
+## # A tibble: 6 × 16
+##     sa3 sa3_name   sa3_sqkm sa3_income_perce… sa4_name gcc_name state occupation
+##   <dbl> <chr>         <dbl>             <dbl> <chr>    <chr>    <chr> <chr>     
+## 1 10102 Queanbeyan    6511.                80 Capital… Rest of… NSW   Clerical …
+## 2 10102 Queanbeyan    6511.                76 Capital… Rest of… NSW   Clerical …
+## 3 10102 Queanbeyan    6511.                78 Capital… Rest of… NSW   Clerical …
+## 4 10102 Queanbeyan    6511.                76 Capital… Rest of… NSW   Clerical …
+## 5 10102 Queanbeyan    6511.                74 Capital… Rest of… NSW   Clerical …
+## 6 10102 Queanbeyan    6511.                79 Capital… Rest of… NSW   Clerical …
 ## # … with 8 more variables: occ_short <chr>, prof <chr>, gender <chr>,
 ## #   year <dbl>, median_income <dbl>, average_income <dbl>, total_income <dbl>,
 ## #   workers <dbl>
@@ -134,7 +129,7 @@ data
 ```
 
 ```
-## # A tibble: 8 x 2
+## # A tibble: 8 × 2
 ##   state workers
 ##   <chr>   <dbl>
 ## 1 ACT    386989
@@ -147,7 +142,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks supreme: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks sublime: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -211,7 +206,7 @@ simple_bar
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_bar_title-1.png)<!-- -->
 
-Looks wonderful! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks of the highest quality! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -243,7 +238,7 @@ data
 ```
 
 ```
-## # A tibble: 16 x 3
+## # A tibble: 16 × 3
 ## # Groups:   state [8]
 ##    state gender average_income
 ##    <chr> <chr>           <dbl>
@@ -265,7 +260,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks legit: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks outstanding: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -379,7 +374,7 @@ label_gender
 ```
 
 ```
-## # A tibble: 2 x 3
+## # A tibble: 2 × 3
 ## # Groups:   state [1]
 ##   state gender average_income
 ##   <chr> <chr>           <dbl>
@@ -434,7 +429,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_multi_expand-1.png)<!-- -->
 
-Looks first-class! Now you can add titles and a caption, and save using `grattan_save`:
+Looks shit hot! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -490,7 +485,7 @@ data
 ```
 
 ```
-## # A tibble: 32 x 4
+## # A tibble: 32 × 4
 ## # Groups:   state, gender [16]
 ##    state gender prof             average_income
 ##    <chr> <chr>  <chr>                     <dbl>
@@ -555,7 +550,7 @@ label_data
 ```
 
 ```
-## # A tibble: 2 x 4
+## # A tibble: 2 × 4
 ## # Groups:   state, gender [2]
 ##   state gender prof             average_income
 ##   <chr> <chr>  <chr>                     <dbl>
@@ -581,7 +576,7 @@ facet_bar +
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_facet_label-1.png)<!-- -->
 
-Beaut! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Superlative! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -658,7 +653,7 @@ head(data)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 × 3
 ## # Groups:   year [1]
 ##    year state average_income
 ##   <dbl> <chr>          <dbl>
@@ -817,7 +812,7 @@ head(data)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 × 3
 ##   sa3_name       workers average_income
 ##   <chr>            <dbl>          <dbl>
 ## 1 Adelaide City    10005         90115.
@@ -860,7 +855,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_scatter_grattan-1.png)<!-- -->
 
-Looks awesomesauce. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks mind-blowing. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -934,7 +929,7 @@ head(data_prep)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 × 3
 ## # Groups:   sa3_name [3]
 ##   sa3_name       prof             average_income
 ##   <chr>          <chr>                     <dbl>
@@ -968,7 +963,7 @@ head(data)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 × 3
 ## # Groups:   sa3_name [6]
 ##   sa3_name       non_professional professional
 ##   <chr>                     <dbl>        <dbl>
@@ -1054,16 +1049,16 @@ head(data)
 ```
 
 ```
-## # A tibble: 6 x 7
+## # A tibble: 6 × 7
 ## # Groups:   sa3_name, sa3_income_percentile, prof [1]
-##   sa3_name   sa3_income_percen… prof     occ_short income workers average_income
-##   <chr>                   <dbl> <chr>    <chr>      <dbl>   <dbl>          <dbl>
-## 1 Adelaide …                 66 Non-pro… Admin     1.44e8    2674         53979.
-## 2 Adelaide …                 66 Non-pro… Driver    1.85e7     396         46762.
-## 3 Adelaide …                 66 Non-pro… Labourer  3.92e7    1516         25868.
-## 4 Adelaide …                 66 Non-pro… Sales     5.05e7    1546         32680.
-## 5 Adelaide …                 66 Non-pro… Service   7.75e7    2346         33034.
-## 6 Adelaide …                 66 Non-pro… Trades    7.85e7    1525         51448.
+##   sa3_name      sa3_income_perce… prof   occ_short income workers average_income
+##   <chr>                     <dbl> <chr>  <chr>      <dbl>   <dbl>          <dbl>
+## 1 Adelaide City                66 Non-p… Admin     1.44e8    2674         53979.
+## 2 Adelaide City                66 Non-p… Driver    1.85e7     396         46762.
+## 3 Adelaide City                66 Non-p… Labourer  3.92e7    1516         25868.
+## 4 Adelaide City                66 Non-p… Sales     5.05e7    1546         32680.
+## 5 Adelaide City                66 Non-p… Service   7.75e7    2346         33034.
+## 6 Adelaide City                66 Non-p… Trades    7.85e7    1525         51448.
 ```
 
 To make a scatter plot with `average_income` against `sa3_income_percentile`, pass the `income` dataset to `ggplot`, add `x = sa3_income_percentile`, `y = average_income` and `colour = gender` aesthetics, then plot it with `geom_point`. Tell `geom_point` to reduce the opacity with `alpha = 0.2`, as these individual points are more of the 'background' to the plot:
@@ -1107,7 +1102,7 @@ base_chart
 
 ![](Visualisation_cookbook_files/figure-epub3/scatter_layer_base-1.png)<!-- -->
 
-Looks fab! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks tip-top! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
@@ -1119,7 +1114,7 @@ head(perc_average)
 ```
 
 ```
-## # A tibble: 6 x 3
+## # A tibble: 6 × 3
 ## # Groups:   prof [1]
 ##   prof             sa3_income_percentile average_income
 ##   <chr>                            <dbl>          <dbl>
@@ -1295,18 +1290,18 @@ glimpse(sa32016)
 ```
 ## Rows: 358
 ## Columns: 12
-## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201",…
-## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Goul…
-## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "103…
-## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Region",…
-## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1GSYD",…
-## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Rest of…
-## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…
-## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South Wale…
-## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136.17…
-## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 151…
-## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.58077…
-## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MULTIPOL…
+## $ sa3_code_2016   <chr> "10102", "10103", "10104", "10105", "10106", "10201", …
+## $ sa3_name_2016   <chr> "Queanbeyan", "Snowy Mountains", "South Coast", "Goulb…
+## $ sa4_code_2016   <chr> "101", "101", "101", "101", "101", "102", "102", "103"…
+## $ sa4_name_2016   <chr> "Capital Region", "Capital Region", "Capital Region", …
+## $ gcc_code_2016   <chr> "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1RNSW", "1GSYD", …
+## $ gcc_name_2016   <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Rest of …
+## $ state_code_2016 <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",…
+## $ state_name_2016 <chr> "New South Wales", "New South Wales", "New South Wales…
+## $ areasqkm_2016   <dbl> 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136.173…
+## $ cent_long       <dbl> 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 151.…
+## $ cent_lat        <dbl> -35.44939, -36.43952, -36.49933, -34.51814, -34.58077,…
+## $ geometry        <MULTIPOLYGON [°]> MULTIPOLYGON (((149.979 -35..., MULTIPOLY…
 ```
 
 

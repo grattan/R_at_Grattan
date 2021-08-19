@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 What are packages? | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 What are packages? | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill and Will Mackey" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2021-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="coding-style.html"/>
 <link rel="next" href="packages-commonly-used-at-grattan.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -115,6 +118,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -312,9 +316,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
+<li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
+</ul></li>
 <li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
 <li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
 </ul></li>
 </ul>
 
@@ -343,52 +352,52 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code>install.packages()</code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="packages.html#cb34-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="packages.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
 <p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="packages.html#cb35-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="packages.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan ggplot2 theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="packages.html#cb36-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="packages.html#cb36-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>, <span class="at">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 </div>
 <div id="install-grattan-packages" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Get set up: install packages for Grattan</h2>
 <p>Just starting out or setting up a new machine? Run this block of code to get yourself all set up:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="packages.html#cb37-1"></a>cran_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;readabs&quot;</span>, <span class="st">&quot;janitor&quot;</span>, <span class="st">&quot;grattan&quot;</span>,</span>
-<span id="cb37-2"><a href="packages.html#cb37-2"></a>                   <span class="st">&quot;rio&quot;</span>, <span class="st">&quot;sf&quot;</span>)</span>
-<span id="cb37-3"><a href="packages.html#cb37-3"></a></span>
-<span id="cb37-4"><a href="packages.html#cb37-4"></a><span class="kw">install.packages</span>(cran_packages)</span>
-<span id="cb37-5"><a href="packages.html#cb37-5"></a></span>
-<span id="cb37-6"><a href="packages.html#cb37-6"></a>github_packages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;grattan/grattantheme&quot;</span>, <span class="st">&quot;grattan/grattandata&quot;</span>,</span>
-<span id="cb37-7"><a href="packages.html#cb37-7"></a>                     <span class="st">&quot;wfmackey/absmapsdata&quot;</span>, <span class="st">&quot;grattan/grattanReporter&quot;</span>)</span>
-<span id="cb37-8"><a href="packages.html#cb37-8"></a></span>
-<span id="cb37-9"><a href="packages.html#cb37-9"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(github_packages,</span>
-<span id="cb37-10"><a href="packages.html#cb37-10"></a>                        <span class="dt">dependencies =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb37-11"><a href="packages.html#cb37-11"></a>                        <span class="dt">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="packages.html#cb37-1" aria-hidden="true" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;readabs&quot;</span>, <span class="st">&quot;janitor&quot;</span>, <span class="st">&quot;grattan&quot;</span>,</span>
+<span id="cb37-2"><a href="packages.html#cb37-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;rio&quot;</span>, <span class="st">&quot;sf&quot;</span>)</span>
+<span id="cb37-3"><a href="packages.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="packages.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(cran_packages)</span>
+<span id="cb37-5"><a href="packages.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="packages.html#cb37-6" aria-hidden="true" tabindex="-1"></a>github_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;grattan/grattantheme&quot;</span>, <span class="st">&quot;grattan/grattandata&quot;</span>,</span>
+<span id="cb37-7"><a href="packages.html#cb37-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;wfmackey/absmapsdata&quot;</span>, <span class="st">&quot;grattan/grattanReporter&quot;</span>)</span>
+<span id="cb37-8"><a href="packages.html#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="packages.html#cb37-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(github_packages,</span>
+<span id="cb37-10"><a href="packages.html#cb37-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dependencies =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-11"><a href="packages.html#cb37-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">upgrade =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-packages" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Using packages</h2>
 <p>Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code>library()</code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="packages.html#cb38-1"></a><span class="kw">library</span>(remotes)</span>
-<span id="cb38-2"><a href="packages.html#cb38-2"></a></span>
-<span id="cb38-3"><a href="packages.html#cb38-3"></a><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></span>
-<span id="cb38-4"><a href="packages.html#cb38-4"></a></span>
-<span id="cb38-5"><a href="packages.html#cb38-5"></a><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="packages.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
+<span id="cb38-2"><a href="packages.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="packages.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span></span>
+<span id="cb38-4"><a href="packages.html#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="packages.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>Or, we can use two colons - <code>::</code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="packages.html#cb39-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="packages.html#cb39-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>It usually makes sense to load a package with <code>library()</code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code>::</code> operator even if you have already loaded a package with <code>library()</code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
 <div id="upgrading-packages" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Upgrading packages</h2>
 <p>It’s generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="packages.html#cb40-1"></a>devtools<span class="op">::</span><span class="kw">update_packages</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="packages.html#cb40-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">update_packages</span>()</span></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
-<p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All’.</p>
+<p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All.’</p>
 <p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.[^Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.]</p>
 </div>
 <div id="downgrading-packages" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Downgrading packages</h2>
 <p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code>install_version()</code> function, like this:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="packages.html#cb41-1"></a>devtools<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;1.13.3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="packages.html#cb41-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_version</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;1.13.3&quot;</span>)</span></code></pre></div>
 <p>It’s rare that you’d need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.</p>
 </div>
 </div>
@@ -427,6 +436,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -447,6 +457,10 @@ gitbook.start({
 "text": null
 },
 "download": ["r-at-grattan.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

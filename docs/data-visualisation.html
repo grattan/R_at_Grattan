@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Data Visualisation | Using R at Grattan Institute</title>
   <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Data Visualisation | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill and Will Mackey" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2021-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="analysis.html"/>
 <link rel="next" href="chart-cookbook.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -115,6 +118,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -312,9 +316,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a></li>
+<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
+<li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
+</ul></li>
 <li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
 <li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
 </ul></li>
 </ul>
 
@@ -355,41 +364,41 @@ Through this process, you can become confident your data is <em>what you think i
 <p>At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart’s impact.</p>
 <p>Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to <em>earn</em> their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p>
 <p>The way we design charts – much like our writing – should always be honest, clear and engaging to the reader.</p>
-<p>This chapter shows how you can do this with R. It starts with the ‘grammar of graphics’ concepts of a package called <code>ggplot</code>, and explains how to make those charts ‘Grattan-y’. The next chapter gives you the when-to-use and how-to-make particular charts.</p>
+<p>This chapter shows how you can do this with R. It starts with the ‘grammar of graphics’ concepts of a package called <code>ggplot</code>, and explains how to make those charts ‘Grattan-y.’ The next chapter gives you the when-to-use and how-to-make particular charts.</p>
 </div>
 <div id="set-up-and-packages" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Set-up and packages</h2>
 <p>This section uses the package <code>ggplot2</code> to visualise data, and <code>dplyr</code> functions to manipulate data. Both of these packages are loaded with <code>tidyverse</code>. The <code>scales</code> package helps with labelling your axes.</p>
 <p>The <code>grattantheme</code> package is used to make charts look Grattan-y. The <code>absmapsdata</code> package is used to help make maps.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="data-visualisation.html#cb152-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb152-2"><a href="data-visualisation.html#cb152-2"></a><span class="kw">library</span>(grattantheme)</span>
-<span id="cb152-3"><a href="data-visualisation.html#cb152-3"></a><span class="kw">library</span>(ggrepel)</span>
-<span id="cb152-4"><a href="data-visualisation.html#cb152-4"></a><span class="kw">library</span>(scales)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="data-visualisation.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb156-2"><a href="data-visualisation.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span>
+<span id="cb156-3"><a href="data-visualisation.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb156-4"><a href="data-visualisation.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
 <p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a <code>professionals</code> subset that only includes people in professional occupations in 2015:</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="data-visualisation.html#cb153-1"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</span>
-<span id="cb153-2"><a href="data-visualisation.html#cb153-2"></a>              <span class="dt">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="data-visualisation.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</span>
+<span id="cb157-2"><a href="data-visualisation.html#cb157-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</span></code></pre></div>
 <p>Then read it using the <code>read_csv</code> function:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="data-visualisation.html#cb154-1"></a>sa3_income &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>)</span>
-<span id="cb154-2"><a href="data-visualisation.html#cb154-2"></a></span>
-<span id="cb154-3"><a href="data-visualisation.html#cb154-3"></a>professionals &lt;-<span class="st"> </span>sa3_income <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-4"><a href="data-visualisation.html#cb154-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>sa4_name, <span class="op">-</span>gcc_name) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-5"><a href="data-visualisation.html#cb154-5"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>,</span>
-<span id="cb154-6"><a href="data-visualisation.html#cb154-6"></a>         occupation <span class="op">==</span><span class="st"> &quot;Professionals&quot;</span>,</span>
-<span id="cb154-7"><a href="data-visualisation.html#cb154-7"></a>         <span class="op">!</span><span class="kw">is.na</span>(median_income),</span>
-<span id="cb154-8"><a href="data-visualisation.html#cb154-8"></a>         <span class="op">!</span>gender <span class="op">==</span><span class="st"> &quot;Persons&quot;</span>) </span>
-<span id="cb154-9"><a href="data-visualisation.html#cb154-9"></a></span>
-<span id="cb154-10"><a href="data-visualisation.html#cb154-10"></a><span class="co"># Show the first six rows of the new dataset</span></span>
-<span id="cb154-11"><a href="data-visualisation.html#cb154-11"></a><span class="kw">head</span>(professionals)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 14
-##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
-##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;
-## 1 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
-## 2 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
-## 3 10102 Queanbe…    6511.               74 NSW   Professio… Professi… Prof…
-## 4 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
-## 5 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
-## 6 10103 Snowy M…   14283.                7 NSW   Professio… Professi… Prof…
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="data-visualisation.html#cb158-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>)</span>
+<span id="cb158-2"><a href="data-visualisation.html#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="data-visualisation.html#cb158-3" aria-hidden="true" tabindex="-1"></a>professionals <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb158-4"><a href="data-visualisation.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sa4_name, <span class="sc">-</span>gcc_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-5"><a href="data-visualisation.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2015</span>,</span>
+<span id="cb158-6"><a href="data-visualisation.html#cb158-6" aria-hidden="true" tabindex="-1"></a>         occupation <span class="sc">==</span> <span class="st">&quot;Professionals&quot;</span>,</span>
+<span id="cb158-7"><a href="data-visualisation.html#cb158-7" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(median_income),</span>
+<span id="cb158-8"><a href="data-visualisation.html#cb158-8" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>gender <span class="sc">==</span> <span class="st">&quot;Persons&quot;</span>) </span>
+<span id="cb158-9"><a href="data-visualisation.html#cb158-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-10"><a href="data-visualisation.html#cb158-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first six rows of the new dataset</span></span>
+<span id="cb158-11"><a href="data-visualisation.html#cb158-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(professionals)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 14
+##     sa3 sa3_name   sa3_sqkm sa3_income_perce… state occupation  occ_short prof  
+##   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt; 
+## 1 10102 Queanbeyan    6511.                74 NSW   Profession… Professi… Profe…
+## 2 10102 Queanbeyan    6511.                74 NSW   Profession… Professi… Profe…
+## 3 10102 Queanbeyan    6511.                74 NSW   Profession… Professi… Profe…
+## 4 10103 Snowy Mou…   14283.                 7 NSW   Profession… Professi… Profe…
+## 5 10103 Snowy Mou…   14283.                 7 NSW   Profession… Professi… Profe…
+## 6 10103 Snowy Mou…   14283.                 7 NSW   Profession… Professi… Profe…
 ## # … with 6 more variables: gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;,
 ## #   average_income &lt;dbl&gt;, total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
 </div>
@@ -415,30 +424,30 @@ Through this process, you can become confident your data is <em>what you think i
 <p><code>ggplot</code> also has a ‘cheat sheet’ that contains many of the often-used elements of a plot, which you can download <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">here</a>.</p>
 <p><img src="atlas/ggplot_cheat_sheet.png" width="615" style="display: block; margin: auto;" /></p>
 <p>For example, you can plot a column chart by passing the <code>sa3_income</code> dataset into <code>ggplot()</code> (“make a chart with this data”). This completes the first step – data – and produces an empty plot:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="data-visualisation.html#cb156-1"></a>professionals <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb156-2"><a href="data-visualisation.html#cb156-2"></a><span class="st">        </span><span class="kw">ggplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="data-visualisation.html#cb160-1" aria-hidden="true" tabindex="-1"></a>professionals <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="data-visualisation.html#cb160-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>()</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="672" /></p>
 <p>Next, set the <code>aes</code> (aesthetics) to <code>x = state</code> (“make the x-axis represent state”), <code>y = pop</code> (“the y-axis should represent population”), and <code>fill = year</code> (“the fill colour represents year”). Now <code>ggplot</code> knows where things should <em>go</em>.</p>
 <p>If we just plot that, you’ll see that <code>ggplot</code> knows a little bit more about what we’re trying to do. It has the states on the x-axis and range of populations on the y-axis:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="data-visualisation.html#cb157-1"></a>professionals <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb157-2"><a href="data-visualisation.html#cb157-2"></a><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> workers,</span>
-<span id="cb157-3"><a href="data-visualisation.html#cb157-3"></a>                   <span class="dt">y =</span> median_income,</span>
-<span id="cb157-4"><a href="data-visualisation.html#cb157-4"></a>                   <span class="dt">colour =</span> gender))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="data-visualisation.html#cb161-1" aria-hidden="true" tabindex="-1"></a>professionals <span class="sc">%&gt;%</span> </span>
+<span id="cb161-2"><a href="data-visualisation.html#cb161-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb161-3"><a href="data-visualisation.html#cb161-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> median_income,</span>
+<span id="cb161-4"><a href="data-visualisation.html#cb161-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colour =</span> gender))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="672" /></p>
 <p>Now that <code>ggplot</code> knows where things should go, it needs to how to <em>plot</em> them on the chart. For this we use <code>geoms</code>. Tell <code>ggplot</code> to take the things it knows and plot them as a column chart by using <code>geom_col</code>:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="data-visualisation.html#cb158-1"></a>professionals <span class="op">%&gt;%</span></span>
-<span id="cb158-2"><a href="data-visualisation.html#cb158-2"></a><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> workers,</span>
-<span id="cb158-3"><a href="data-visualisation.html#cb158-3"></a>                   <span class="dt">y =</span> median_income,</span>
-<span id="cb158-4"><a href="data-visualisation.html#cb158-4"></a>                   <span class="dt">colour =</span> gender)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb158-5"><a href="data-visualisation.html#cb158-5"></a><span class="st">        </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="data-visualisation.html#cb162-1" aria-hidden="true" tabindex="-1"></a>professionals <span class="sc">%&gt;%</span></span>
+<span id="cb162-2"><a href="data-visualisation.html#cb162-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb162-3"><a href="data-visualisation.html#cb162-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> median_income,</span>
+<span id="cb162-4"><a href="data-visualisation.html#cb162-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colour =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb162-5"><a href="data-visualisation.html#cb162-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672" /></p>
 <p>Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don’t need. So filter the data before you pass it to <code>ggplot</code> to just include 2015: <code>filter(year == 2015)</code>. There will still be lots of overlapping points, so set the opacity to below one with <code>alpha = 0.5</code>. The <code>workers</code> x-axis can be changed to a log scale with <code>scale_x_log10</code>.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="data-visualisation.html#cb159-1"></a>professionals <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb159-2"><a href="data-visualisation.html#cb159-2"></a><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> workers,</span>
-<span id="cb159-3"><a href="data-visualisation.html#cb159-3"></a>                   <span class="dt">y =</span> median_income,</span>
-<span id="cb159-4"><a href="data-visualisation.html#cb159-4"></a>                   <span class="dt">colour =</span> gender)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb159-5"><a href="data-visualisation.html#cb159-5"></a><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb159-6"><a href="data-visualisation.html#cb159-6"></a><span class="st">        </span><span class="kw">scale_x_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="data-visualisation.html#cb163-1" aria-hidden="true" tabindex="-1"></a>professionals <span class="sc">%&gt;%</span> </span>
+<span id="cb163-2"><a href="data-visualisation.html#cb163-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb163-3"><a href="data-visualisation.html#cb163-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> median_income,</span>
+<span id="cb163-4"><a href="data-visualisation.html#cb163-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colour =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb163-5"><a href="data-visualisation.html#cb163-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb163-6"><a href="data-visualisation.html#cb163-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_log10</span>()</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/with_changes-1.png" width="672" /></p>
 <p>That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of <code>data</code>, <code>aes</code>, and <code>geom</code>.</p>
 <p>The rest of the chapter will explore:</p>
@@ -459,8 +468,8 @@ Through this process, you can become confident your data is <em>what you think i
 <h2><span class="header-section-number">12.5</span> Making Grattan-y charts</h2>
 <p>The <code>grattantheme</code> package contains functions that help <em>Grattanise</em> your charts. It is hosted here: <a href="https://github.com/mattcowgill/grattantheme" class="uri">https://github.com/mattcowgill/grattantheme</a></p>
 <p>You can install it with <code>remotes::install_github</code> from the package:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="data-visualisation.html#cb160-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb160-2"><a href="data-visualisation.html#cb160-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="data-visualisation.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb164-2"><a href="data-visualisation.html#cb164-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
 <p>The key functions of <code>grattantheme</code> are:</p>
 <ul>
 <li><code>theme_grattan</code>: set size, font and colour defaults that adhere to the Grattan style guide.</li>
@@ -473,38 +482,38 @@ Through this process, you can become confident your data is <em>what you think i
 <div id="making-grattan-charts" class="section level3" number="12.5.1">
 <h3><span class="header-section-number">12.5.1</span> Making Grattan charts</h3>
 <p>Start with a scatterplot, similar to the one made above:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="data-visualisation.html#cb161-1"></a>base_chart &lt;-<span class="st"> </span>professionals <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb161-2"><a href="data-visualisation.html#cb161-2"></a><span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> workers,</span>
-<span id="cb161-3"><a href="data-visualisation.html#cb161-3"></a>                   <span class="dt">y =</span> median_income,</span>
-<span id="cb161-4"><a href="data-visualisation.html#cb161-4"></a>                   <span class="dt">colour =</span> gender)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb161-5"><a href="data-visualisation.html#cb161-5"></a><span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb161-6"><a href="data-visualisation.html#cb161-6"></a><span class="st">        </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;More professionals, the more they earn&quot;</span>,</span>
-<span id="cb161-7"><a href="data-visualisation.html#cb161-7"></a>             <span class="dt">subtitle =</span> <span class="st">&quot;Median income of professional workers in SA3s&quot;</span>,</span>
-<span id="cb161-8"><a href="data-visualisation.html#cb161-8"></a>             <span class="dt">x =</span> <span class="st">&quot;Number of professional workers&quot;</span>,</span>
-<span id="cb161-9"><a href="data-visualisation.html#cb161-9"></a>             <span class="dt">y =</span> <span class="st">&quot;Median income&quot;</span>,</span>
-<span id="cb161-10"><a href="data-visualisation.html#cb161-10"></a>             <span class="dt">caption =</span> <span class="st">&quot;Source: ABS Estimates of Personal Income for Small Areas, 2011-2016&quot;</span>)</span>
-<span id="cb161-11"><a href="data-visualisation.html#cb161-11"></a></span>
-<span id="cb161-12"><a href="data-visualisation.html#cb161-12"></a>base_chart</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="data-visualisation.html#cb165-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="ot">&lt;-</span> professionals <span class="sc">%&gt;%</span> </span>
+<span id="cb165-2"><a href="data-visualisation.html#cb165-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb165-3"><a href="data-visualisation.html#cb165-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> median_income,</span>
+<span id="cb165-4"><a href="data-visualisation.html#cb165-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">colour =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb165-5"><a href="data-visualisation.html#cb165-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb165-6"><a href="data-visualisation.html#cb165-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;More professionals, the more they earn&quot;</span>,</span>
+<span id="cb165-7"><a href="data-visualisation.html#cb165-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">&quot;Median income of professional workers in SA3s&quot;</span>,</span>
+<span id="cb165-8"><a href="data-visualisation.html#cb165-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">&quot;Number of professional workers&quot;</span>,</span>
+<span id="cb165-9"><a href="data-visualisation.html#cb165-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Median income&quot;</span>,</span>
+<span id="cb165-10"><a href="data-visualisation.html#cb165-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">caption =</span> <span class="st">&quot;Source: ABS Estimates of Personal Income for Small Areas, 2011-2016&quot;</span>)</span>
+<span id="cb165-11"><a href="data-visualisation.html#cb165-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-12"><a href="data-visualisation.html#cb165-12" aria-hidden="true" tabindex="-1"></a>base_chart</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672" /></p>
 <p>Let’s make it Grattany. First, add <code>theme_grattan</code> to your plot:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="data-visualisation.html#cb162-1"></a>base_chart <span class="op">+</span></span>
-<span id="cb162-2"><a href="data-visualisation.html#cb162-2"></a><span class="st">        </span><span class="kw">theme_grattan</span>(<span class="dt">chart_type =</span> <span class="st">&quot;scatter&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="data-visualisation.html#cb166-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb166-2"><a href="data-visualisation.html#cb166-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>)</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" /></p>
 <p>Then use <code>grattan_y_continuous</code> to adjust the y-axis. This takes the same arguments as the standard <code>scale_y_continuous</code> function, but has Grattan defaults built in. Use it to set the labels as dollars (with <code>scales::dollar()</code>) and to give the y-axis some breathing room (starting at $50,000 rather than the minimum point).
 Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using <code>scales::comma()</code>).<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="data-visualisation.html#cb163-1"></a>base_chart <span class="op">+</span></span>
-<span id="cb163-2"><a href="data-visualisation.html#cb163-2"></a><span class="st">        </span><span class="kw">theme_grattan</span>(<span class="dt">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="op">+</span></span>
-<span id="cb163-3"><a href="data-visualisation.html#cb163-3"></a><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">50e3</span>, <span class="ot">NA</span>)) <span class="op">+</span></span>
-<span id="cb163-4"><a href="data-visualisation.html#cb163-4"></a><span class="st">        </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> comma) </span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="data-visualisation.html#cb167-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb167-2"><a href="data-visualisation.html#cb167-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb167-3"><a href="data-visualisation.html#cb167-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">50e3</span>, <span class="cn">NA</span>)) <span class="sc">+</span></span>
+<span id="cb167-4"><a href="data-visualisation.html#cb167-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> comma) </span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672" /></p>
 <p>To define <code>colour</code> colours, use <code>grattan_colour_manual</code> with the number of colours you need (two, in this case):</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="data-visualisation.html#cb164-1"></a>prof_chart &lt;-<span class="st"> </span>base_chart <span class="op">+</span></span>
-<span id="cb164-2"><a href="data-visualisation.html#cb164-2"></a><span class="st">        </span><span class="kw">theme_grattan</span>(<span class="dt">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="op">+</span></span>
-<span id="cb164-3"><a href="data-visualisation.html#cb164-3"></a><span class="st">        </span><span class="kw">grattan_y_continuous</span>(<span class="dt">labels =</span> dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">50e3</span>, <span class="ot">NA</span>)) <span class="op">+</span></span>
-<span id="cb164-4"><a href="data-visualisation.html#cb164-4"></a><span class="st">        </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> comma) <span class="op">+</span></span>
-<span id="cb164-5"><a href="data-visualisation.html#cb164-5"></a><span class="st">        </span><span class="kw">grattan_colour_manual</span>(<span class="dv">2</span>) </span>
-<span id="cb164-6"><a href="data-visualisation.html#cb164-6"></a></span>
-<span id="cb164-7"><a href="data-visualisation.html#cb164-7"></a>prof_chart</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="data-visualisation.html#cb168-1" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="ot">&lt;-</span> base_chart <span class="sc">+</span></span>
+<span id="cb168-2"><a href="data-visualisation.html#cb168-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-3"><a href="data-visualisation.html#cb168-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">50e3</span>, <span class="cn">NA</span>)) <span class="sc">+</span></span>
+<span id="cb168-4"><a href="data-visualisation.html#cb168-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb168-5"><a href="data-visualisation.html#cb168-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) </span>
+<span id="cb168-6"><a href="data-visualisation.html#cb168-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-7"><a href="data-visualisation.html#cb168-7" aria-hidden="true" tabindex="-1"></a>prof_chart</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" /></p>
 <p>Nice chart! Now you can save it and share it with the world.</p>
 </div>
@@ -523,7 +532,7 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <li><code>"fullpage"</code> Fills a whole page of a Grattan report. Width: 44.3cm, height: 22.2cm.</li>
 <li><code>"fullslide"</code> Creates an image that looks like a 4:3 Grattan PowerPoint slide, complete with logo. Width: 25.4cm, height: 19.0cm.</li>
 <li><code>"fullslide_169"</code> Creates` an image that looks like a 16:9 Grattan PowerPoint slide, complete with logo. Use this to drop into standard presentations. Width: 33.9cm, height: 19.0cm</li>
-<li><code>"blog"</code> Creates a 4:3 image that looks like a Grattan PowerPoint slide, but with less border whitespace than ‘fullslide’."</li>
+<li><code>"blog"</code> Creates a 4:3 image that looks like a Grattan PowerPoint slide, but with less border whitespace than ‘fullslide.’"</li>
 <li><code>"fullslide_44" Creates</code> an image that looks like a 4:4 Grattan PowerPoint slide. This may be useful for taller charts for the Grattan blog; not useful for any other purpose. Width: 25.4cm, height: 25.4cm.</li>
 <li>Set <code>type = "all"</code> to save your chart in all available sizes.</li>
 </ul></li>
@@ -532,16 +541,16 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <li><code>force_labs</code>: override the removal of labels for a particular <code>type</code>. eg <code>force_labs = TRUE</code> will keep the y-axis label.</li>
 </ul>
 <p>To save the <code>prof_chart</code> plot created above as a whole-column chart for a <strong>report</strong>:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="data-visualisation.html#cb165-1"></a><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_report.pdf&quot;</span>, prof_chart, <span class="dt">type =</span> <span class="st">&quot;wholecolumn&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="data-visualisation.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_report.pdf&quot;</span>, prof_chart, <span class="at">type =</span> <span class="st">&quot;wholecolumn&quot;</span>)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/professionals_chart_report.png" width="1396" /></p>
 <p>To save it as a <strong>presentation</strong> slide instead, use <code>type = "fullslide"</code>:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="data-visualisation.html#cb166-1"></a><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_presentation.pdf&quot;</span>, prof_chart, <span class="dt">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="data-visualisation.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_presentation.pdf&quot;</span>, prof_chart, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/professionals_chart_presentation.png" width="1600" /></p>
 <p>Or, if you want to emphasise the point in a <em>really tall</em> chart for a <strong>blogpost</strong>, you can use <code>type = "blog"</code> and adjust the <code>height</code> to be 50cm. Also note that because this is for the blog, you should save it as a <code>png</code> file:</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="data-visualisation.html#cb167-1"></a><span class="kw">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_blog.png&quot;</span>, prof_chart, </span>
-<span id="cb167-2"><a href="data-visualisation.html#cb167-2"></a>             <span class="dt">type =</span> <span class="st">&quot;blog&quot;</span>, <span class="dt">height =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="data-visualisation.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/professionals_chart_blog.png&quot;</span>, prof_chart, </span>
+<span id="cb171-2"><a href="data-visualisation.html#cb171-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">type =</span> <span class="st">&quot;blog&quot;</span>, <span class="at">height =</span> <span class="dv">30</span>)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 <p><img src="atlas/professionals_chart_blog.png" width="1600" /></p>
 <p>And that’s it! The following sections will go into more detail about different chart types in R, but you’ll mostly use the same basic <code>grattantheme</code> formatting you’ve used here.</p>
@@ -556,61 +565,61 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <li>Labelling some of the data points on your chart. This is how you label Grattan charts: label on item in a group and let the reader join the dots.</li>
 </ol>
 <p>We’ll look at the first approach so you can get a feel for how the labelling geoms – <code>geom_label</code> and <code>geom_text</code> (and some useful extensions) – work. It won’t be pretty.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="data-visualisation.html#cb168-1"></a>prof_chart <span class="op">+</span></span>
-<span id="cb168-2"><a href="data-visualisation.html#cb168-2"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> gender))</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="data-visualisation.html#cb172-1" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="sc">+</span></span>
+<span id="cb172-2"><a href="data-visualisation.html#cb172-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> gender))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="672" /></p>
 <p>Great! That looks <em>terrible</em>. <code>geom_text</code> is labelling each individual point because it has been told to do so. Just like <code>geom_point</code>, it takes the <code>x</code> and <code>y</code> aesthetics of each observation, then plots the <code>label</code> at that location. But we just want to label one of the points for <code>female</code> and one for <code>male</code>.</p>
 <p>To do this, we can create a new dataset that just contains one observation each. Here, you’re filtering the dataset to include <em>only</em> the female/male observations that have the most people:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="data-visualisation.html#cb169-1"></a>label_data &lt;-<span class="st"> </span>professionals <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-2"><a href="data-visualisation.html#cb169-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-3"><a href="data-visualisation.html#cb169-3"></a><span class="st">  </span><span class="kw">filter</span>(workers <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(workers)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-4"><a href="data-visualisation.html#cb169-4"></a><span class="st">  </span><span class="kw">ungroup</span>()</span>
-<span id="cb169-5"><a href="data-visualisation.html#cb169-5"></a></span>
-<span id="cb169-6"><a href="data-visualisation.html#cb169-6"></a>label_data</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 14
-##     sa3 sa3_name sa3_sqkm sa3_income_perc… state occupation occ_short prof 
-##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;
-## 1 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
-## 2 11703 Sydney …     25.1               84 NSW   Professio… Professi… Prof…
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="data-visualisation.html#cb173-1" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> professionals <span class="sc">%&gt;%</span> </span>
+<span id="cb173-2"><a href="data-visualisation.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-3"><a href="data-visualisation.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(workers <span class="sc">==</span> <span class="fu">max</span>(workers)) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-4"><a href="data-visualisation.html#cb173-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb173-5"><a href="data-visualisation.html#cb173-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-6"><a href="data-visualisation.html#cb173-6" aria-hidden="true" tabindex="-1"></a>label_data</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 14
+##     sa3 sa3_name   sa3_sqkm sa3_income_perce… state occupation  occ_short prof  
+##   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt; 
+## 1 11703 Sydney In…     25.1                84 NSW   Profession… Professi… Profe…
+## 2 11703 Sydney In…     25.1                84 NSW   Profession… Professi… Profe…
 ## # … with 6 more variables: gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;,
 ## #   average_income &lt;dbl&gt;, total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
 <p>And then tell <code>geom_text</code> to look at <em>that</em> dataset:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="data-visualisation.html#cb171-1"></a>prof_chart <span class="op">+</span></span>
-<span id="cb171-2"><a href="data-visualisation.html#cb171-2"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> label_data,</span>
-<span id="cb171-3"><a href="data-visualisation.html#cb171-3"></a>            <span class="kw">aes</span>(<span class="dt">label =</span> gender))</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="data-visualisation.html#cb175-1" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="sc">+</span></span>
+<span id="cb175-2"><a href="data-visualisation.html#cb175-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb175-3"><a href="data-visualisation.html#cb175-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> gender))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the <code>label_data</code>:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="data-visualisation.html#cb172-1"></a>label_data_short &lt;-<span class="st"> </span>label_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb172-2"><a href="data-visualisation.html#cb172-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gender_label =</span> <span class="kw">if_else</span>(gender <span class="op">==</span><span class="st"> &quot;Females&quot;</span>, </span>
-<span id="cb172-3"><a href="data-visualisation.html#cb172-3"></a>                             <span class="st">&quot;Women&quot;</span>, </span>
-<span id="cb172-4"><a href="data-visualisation.html#cb172-4"></a>                             <span class="st">&quot;Men&quot;</span>))</span>
-<span id="cb172-5"><a href="data-visualisation.html#cb172-5"></a></span>
-<span id="cb172-6"><a href="data-visualisation.html#cb172-6"></a>prof_chart <span class="op">+</span></span>
-<span id="cb172-7"><a href="data-visualisation.html#cb172-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> label_data_short,</span>
-<span id="cb172-8"><a href="data-visualisation.html#cb172-8"></a>            <span class="kw">aes</span>(<span class="dt">label =</span> gender_label))</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="data-visualisation.html#cb176-1" aria-hidden="true" tabindex="-1"></a>label_data_short <span class="ot">&lt;-</span> label_data <span class="sc">%&gt;%</span> </span>
+<span id="cb176-2"><a href="data-visualisation.html#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender_label =</span> <span class="fu">if_else</span>(gender <span class="sc">==</span> <span class="st">&quot;Females&quot;</span>, </span>
+<span id="cb176-3"><a href="data-visualisation.html#cb176-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Women&quot;</span>, </span>
+<span id="cb176-4"><a href="data-visualisation.html#cb176-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Men&quot;</span>))</span>
+<span id="cb176-5"><a href="data-visualisation.html#cb176-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-6"><a href="data-visualisation.html#cb176-6" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="sc">+</span></span>
+<span id="cb176-7"><a href="data-visualisation.html#cb176-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> label_data_short,</span>
+<span id="cb176-8"><a href="data-visualisation.html#cb176-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> gender_label))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p><em>Or</em> you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="data-visualisation.html#cb173-1"></a>prof_chart <span class="op">+</span></span>
-<span id="cb173-2"><a href="data-visualisation.html#cb173-2"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> label_data,</span>
-<span id="cb173-3"><a href="data-visualisation.html#cb173-3"></a>            <span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="data-visualisation.html#cb177-1" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="sc">+</span></span>
+<span id="cb177-2"><a href="data-visualisation.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb177-3"><a href="data-visualisation.html#cb177-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>)))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>To have more freedom over <em>where</em> your labels are placed, you can create a dataset yourself. Add the <code>x</code> and <code>y</code> values for your labels, and the label names.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="data-visualisation.html#cb174-1"></a>self_label &lt;-<span class="st"> </span><span class="kw">tribble</span>(</span>
-<span id="cb174-2"><a href="data-visualisation.html#cb174-2"></a>  <span class="op">~</span>gender, <span class="op">~</span>workers,   <span class="op">~</span>median_income,</span>
-<span id="cb174-3"><a href="data-visualisation.html#cb174-3"></a>  <span class="st">&quot;Women&quot;</span>,    <span class="dv">23000</span>,            <span class="dv">55000</span>,</span>
-<span id="cb174-4"><a href="data-visualisation.html#cb174-4"></a>  <span class="st">&quot;Men&quot;</span>,      <span class="dv">23000</span>,           <span class="dv">110000</span>)</span>
-<span id="cb174-5"><a href="data-visualisation.html#cb174-5"></a></span>
-<span id="cb174-6"><a href="data-visualisation.html#cb174-6"></a></span>
-<span id="cb174-7"><a href="data-visualisation.html#cb174-7"></a>self_label</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 3
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="data-visualisation.html#cb178-1" aria-hidden="true" tabindex="-1"></a>self_label <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb178-2"><a href="data-visualisation.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>gender, <span class="sc">~</span>workers,   <span class="sc">~</span>median_income,</span>
+<span id="cb178-3"><a href="data-visualisation.html#cb178-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Women&quot;</span>,    <span class="dv">23000</span>,            <span class="dv">55000</span>,</span>
+<span id="cb178-4"><a href="data-visualisation.html#cb178-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Men&quot;</span>,      <span class="dv">23000</span>,           <span class="dv">110000</span>)</span>
+<span id="cb178-5"><a href="data-visualisation.html#cb178-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-6"><a href="data-visualisation.html#cb178-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-7"><a href="data-visualisation.html#cb178-7" aria-hidden="true" tabindex="-1"></a>self_label</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
 ##   gender workers median_income
 ##   &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt;
 ## 1 Women    23000         55000
 ## 2 Men      23000        110000</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="data-visualisation.html#cb176-1"></a>prof_chart <span class="op">+</span></span>
-<span id="cb176-2"><a href="data-visualisation.html#cb176-2"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> self_label,</span>
-<span id="cb176-3"><a href="data-visualisation.html#cb176-3"></a>            <span class="kw">aes</span>(<span class="dt">label =</span> gender), </span>
-<span id="cb176-4"><a href="data-visualisation.html#cb176-4"></a>            <span class="dt">hjust =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="data-visualisation.html#cb180-1" aria-hidden="true" tabindex="-1"></a>prof_chart <span class="sc">+</span></span>
+<span id="cb180-2"><a href="data-visualisation.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> self_label,</span>
+<span id="cb180-3"><a href="data-visualisation.html#cb180-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> gender), </span>
+<span id="cb180-4"><a href="data-visualisation.html#cb180-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>[cover <code>annotate</code>]</p>
 
@@ -655,6 +664,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -675,6 +685,10 @@ gitbook.start({
 "text": null
 },
 "download": ["r-at-grattan.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
