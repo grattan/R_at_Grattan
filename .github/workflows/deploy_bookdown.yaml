@@ -54,7 +54,7 @@ jobs:
           name: _book
           path: docs/
 
- checkout-and-deploy:
+  checkout-and-deploy:
     runs-on: ubuntu-latest
     needs: renderbook
     steps:
