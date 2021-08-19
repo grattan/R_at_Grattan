@@ -27,18 +27,12 @@ jobs:
       - name: Install pandoc
         run: |
           brew install pandoc
-
-      - name: Install libcurl, libudunits, libgdal
-        run: |
-          sudo apt install libcurl4-openssl-dev
-          sudo apt install libudunits2-dev
-          sudo apt install libgdal-dev
           
       # renv details from https://github.com/actions/cache/blob/master/examples.md#r---renv
       - name: Cache Renv packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
+          path: ~/Library/Application Support/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
@@ -50,8 +44,30 @@ jobs:
           renv::restore()      
 
       - name: Build site
-        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
+        run: |
+          Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: _book
+          path: docs/
+
+ checkout-and-deploy:
+    runs-on: ubuntu-latest
+    needs: renderbook
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Download artifact
+        uses: actions/download-artifact@v1
+        with:
+          # Artifact name
+          name: _book
+          # Destination path
+          path: docs
       # deploy to Github pages from https://github.com/Cecilapp/GitHub-Pages-deploy
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@v3
