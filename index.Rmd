@@ -1,6 +1,6 @@
 --- 
 title: "Using R at Grattan Institute"
-author: "Matt Cowgill and Will Mackey"
+author: "Matt Cowgill, Will Mackey, and James Ha"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
