@@ -24,6 +24,12 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
 
+      - name: Install libcurl, libudunits, libgdal
+        run: |
+          sudo apt install libcurl4-openssl-dev
+          sudo apt install libudunits2-dev
+          sudo apt install libgdal-dev
+
       - name: Install pandoc
         run: |
           brew install pandoc
