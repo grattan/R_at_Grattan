@@ -10,16 +10,16 @@ on:
       - main
       - master
 
-name: Build site
+name: Build site and deploy
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
@@ -27,34 +27,30 @@ jobs:
       - name: Install pandoc
         run: |
           brew install pandoc
+          
+      # renv details from https://github.com/actions/cache/blob/master/examples.md#r---renv
       - name: Cache Renv packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
-          path: $HOME/.local/share/renv
-          key: r-${{ hashFiles('renv.lock') }}
-          restore-keys: r-
+          path: ~/Library/Application Support/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
 
-      - name: Cache bookdown results
-        uses: actions/cache@v1
-        with:
-          path: _bookdown_files
-          key: bookdown-${{ hashFiles('**/*Rmd') }}
-          restore-keys: bookdown-
-
-      - name: Install packages
+      - name: Restore packages
+        shell: Rscript {0}
         run: |
-          R -e 'install.packages(c("renv", "bookdown"))'
-          R -e 'renv::restore()'
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()      
+
       - name: Build site
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: _book
-          path: _book/
+
+      # deploy to Github pages from https://github.com/Cecilapp/GitHub-Pages-deploy
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           email: wfmackey@gmail.com
-          build_dir: _site
+          build_dir: docs
