@@ -11,7 +11,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: grattan/R_at_Grattan
-description: "How to use R at Grattan good. In development."
+description: "How to use R at Grattan good"
 ---
 
 # Welcome! {-}

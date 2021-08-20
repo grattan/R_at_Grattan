@@ -24,10 +24,10 @@ The easiest way to install a package from Github is to use the function `install
 install.packages("remotes")
 ```
 
-Now we can install packages from Github using the `install_github()` function from the `remotes` package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+Now we can install packages from Github using the `install_github()` function from the `remotes` package. For example, here's how we would install the Grattan `ggplot2` theme, which we'll discuss later in this website:
 
 ```{r eval=FALSE}
-remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade = "always")
+remotes::install_github("grattan/grattantheme", dependencies = TRUE, upgrade = "always")
 ```
 
 ## Get set up: install packages for Grattan {#install-grattan-packages}
@@ -35,7 +35,7 @@ remotes::install_github("mattcowgill/grattantheme", dependencies = TRUE, upgrade
 Just starting out or setting up a new machine? Run this block of code to get yourself all set up:
 
 ```{r eval = FALSE}
-cran_packages <- c("devtools", "tidyverse", "readabs", "janitor", "grattan",
+cran_packages <- c("devtools", "tidyverse", "readabs", "janitor", 
                    "rio", "sf")
 
 install.packages(cran_packages)
@@ -60,13 +60,13 @@ library(remotes)
 
 # Now that the `remotes` package is loaded, we can use its `install_github()` function:
 
-install_github("mattcowgill/grattantheme")
+install_github("grattan/grattantheme")
 ```
 
 Or, we can use two colons - `::` - to tell R to use an individual function from a package without loading it:
 
 ```{r eval=FALSE}
-remotes::install_github("mattcowgill/grattantheme")
+remotes::install_github("grattan/grattantheme")
 ```
 
 It usually makes sense to load a package with `library()`, unless you only need to use one of its function once or twice. There's no harm to using the `::` operator even if you have already loaded a package with `library()`. This can remove ambiguity both for R and for humans reading your code, particularly if you're using an obscure function - it makes it clearer where the function comes from.
@@ -83,7 +83,7 @@ This will upgrade all your packages - including those you've installed from CRAN
 
 When you run the above command, it will prompt you to ask which packages you want to update - press 1 for 'All'. 
 
-If it asks you 'Do you want to install from sources the package which needs compilation?' type 'no' and press enter.[^Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.]
+If it asks you 'Do you want to install from sources the package which needs compilation?' type 'no' and press enter.^[Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.]
 
 ## Downgrading packages 
 
@@ -171,11 +171,11 @@ Most R scripts at Grattan should start with `library(tidyverse)`. Most of your w
 ## Grattan-specific packages {#grattan-specific-packages}
 
 A range of Grattan people have written packages that come in handy at Grattan. 
-* *grattan* The `grattan` package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname "Grattax") is used for modelling the personal income tax system. Another set of functions ("Grattools") are useful for a lot of our work, like converting dates to financial years (`grattan::date2fy()`) or a version of `dplyr::ntile()` that uses weights (`grattan::weighted_ntile()`). 
-
 * *grattantheme* The `grattantheme` package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 
 * *grattandata* The `grattandata` package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the [reading data](#reading-data) chapter.
+
+* *grattan* The `grattan` package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname "Grattax") is used for modelling the personal income tax system. Another set of functions ("Grattools") are useful for a lot of our work, like converting dates to financial years (`grattan::date2fy()`) or a version of `dplyr::ntile()` that uses weights (`grattan::weighted_ntile()`). 
 
 ## Other commonly-used packages
 
