@@ -224,10 +224,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>9</b> Different data types</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>9.1</b> Tidy data</a></li>
-<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>9.2</b> Dates with <code>lubridate::</code></a></li>
-<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.3</b> Strings with <code>stringr::</code></a></li>
-<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.4</b> Factors with <code>forcats::</code></a></li>
+<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#set-up-and-packages"><i class="fa fa-check"></i><b>9.1</b> Set-up and packages</a></li>
+<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#why-data-types-matter"><i class="fa fa-check"></i><b>9.2</b> Why data types matter</a></li>
+<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types"><i class="fa fa-check"></i><b>9.3</b> Checking and changing data types</a></li>
+<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types-in-vectors-and-tibbles"><i class="fa fa-check"></i><b>9.4</b> Checking and changing data types in vectors and <code>tibbles</code></a></li>
+<li class="chapter" data-level="9.5" data-path="different-data-types.html"><a href="different-data-types.html#asserting-data-types-when-importing-data"><i class="fa fa-check"></i><b>9.5</b> Asserting data types when importing data</a></li>
+<li class="chapter" data-level="9.6" data-path="different-data-types.html"><a href="different-data-types.html#changing-the-data-types-of-lots-of-variables"><i class="fa fa-check"></i><b>9.6</b> Changing the data types of lots of variables</a></li>
+<li class="chapter" data-level="9.7" data-path="different-data-types.html"><a href="different-data-types.html#using-character-vectors"><i class="fa fa-check"></i><b>9.7</b> Using character vectors</a></li>
+<li class="chapter" data-level="9.8" data-path="different-data-types.html"><a href="different-data-types.html#using-dates-with-lubridate"><i class="fa fa-check"></i><b>9.8</b> Using dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="9.9" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.9</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="9.10" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.10</b> Factors with <code>forcats::</code></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>10</b> Data transformation with <code>dplyr</code></a>
 <ul>
@@ -263,7 +269,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>12</b> Data Visualisation</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>12.1</b> Introduction to data visualisation</a></li>
-<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages-1"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
 <li class="chapter" data-level="12.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>12.3</b> Concepts</a></li>
 <li class="chapter" data-level="12.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>12.4</b> Exploratory data visualisation</a></li>
 <li class="chapter" data-level="12.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>12.5</b> Making Grattan-y charts</a>
@@ -376,7 +382,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="git" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Git</h2>
-<p>Git is our preferred version control software. And what’s nice is that you can set up RStudio to allow you use Git seamlessly.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
+<p>Git is our preferred version control software. And what’s nice is that you can set up RStudio to allow you use Git seamlessly.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
 <p>Jenny Bryan from RStudio will walk you through the installation steps in Chatpers 4-7 (they’re extremely short chapters):</p>
 <p><a href="https://happygitwithr.com/install-intro.html">Click here to access the definitive Git installation guide.</a>
 Of course, if you get stuck, ask!</p>
@@ -447,10 +453,13 @@ Of course, if you get stuck, ask!</p>
 
 
 
+
+
+
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p>The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you’d rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.<a href="version-control.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<ol start="34">
+<li id="fn34"><p>The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you’d rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.<a href="version-control.html#fnref34" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
