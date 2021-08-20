@@ -14,7 +14,7 @@ name: Build site and deploy
 
 jobs:
   renderbook:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -23,12 +23,6 @@ jobs:
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
-
-      - name: Install libcurl, libudunits, libgdal
-        run: |
-          sudo apt install libcurl4-openssl-dev
-          sudo apt install libudunits2-dev
-          sudo apt install libgdal-dev
 
       - name: Install pandoc
         run: |
@@ -47,18 +41,24 @@ jobs:
         shell: Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()      
+          renv::restore()
+
+      - name: Cache bookdown results
+        uses: actions/cache@v1
+        with:
+          path: _bookdown_files
+          key: bookdown-${{ hashFiles('**/*Rmd') }}
+          restore-keys: bookdown-
 
       - name: Build site
-        run: |
-          Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
-
+        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
           name: _book
           path: docs/
+
 
   checkout-and-deploy:
     runs-on: ubuntu-latest
