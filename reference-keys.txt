@@ -18,6 +18,7 @@ make-your-filenames-readable-by-both-machines-and-humans
 README
 clean-workspace
 quick-guide
+analysis-template
 coding-style
 load-packages-first
 script-preamble
@@ -127,7 +128,7 @@ functions-returned
 using-functions-on-datasets-within-mutate
 using-the-purrr-family-of-functions
 using-functions-for-visualisations
-sharing-your-useful-functions-with-grattan
+sharing-your-useful-functions-with-grattan-and-the-world
 version-control
 version-control-is-important-and-intimidating
 step-back-in-time
