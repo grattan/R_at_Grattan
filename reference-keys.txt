@@ -119,13 +119,13 @@ using-absmapsdata
 making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
-creating-functions
+functional-programming-making-and-using-your-own-functions
 set-up-2
 defining-simple-functions
-using-conditional-statements-and-categorical-arguments
-using-functions-on-datasets
-what-is-returned-from-a-function
-using-purrrmap
+functions-conditionals
+functions-returned
+using-functions-on-datasets-within-mutate
+using-the-purrr-family-of-functions
 using-functions-for-visualisations
 sharing-your-useful-functions-with-grattan
 version-control
@@ -135,3 +135,4 @@ get-outta-my-way
 github
 git
 using-git
+adding-to-this-book

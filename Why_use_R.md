@@ -1,5 +1,7 @@
 # Why use R?
 
+![](atlas/hadley_typing_r_code.gif)<!-- -->
+
 We can break this question into two parts:
 
 1. Why use script-based software to analyse data?

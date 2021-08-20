@@ -1,6 +1,6 @@
 # (PART) Advanced topics {-}
 
-# Creating functions
+# Functional programming: making and using your own functions
 
 Why on earth would you create your own function?
 
@@ -154,22 +154,18 @@ an object of its own:
 my_power_number <- make_power(10, 4)
 ```
 
-For this reason, and a few others described in the next section, a function
-can only return one _thing_ (a number, or a vector or dataset, or `ggplot` object, or a list, and so on).
+For this reason, and a few others described in a [section to follow](#functions-returned), a function
+can only return one _thing_ (a number, or a vector, or dataset, or list, and so on).
 
 
-
-
-# Using conditional statements and categorical arguments
+## Using conditional statements and categorical arguments {#functions-conditionals}
 
 Sometimes you will want your function to behave differently under different 
 circumstances. For example, you might want to do one thing if your input is a 
-REALLY BIG number, and another if it's very small.
+<b style='font-size:bigger'>REALLY BIG</b> number, and another if it's <span style='font-size:smaller'>very small</span>.
 
-Conditional statements -- that return either `TRUE` or `FALSE` -- can be useful
-for these occasions (see section x). 
-The function below takes one argument -- x -- and transforms it depending on 
-how large it is:
+Conditional `if` statements -- which evaluate an expression and proceed _if_ `TRUE` -- can be useful for these occasions. 
+The function below takes one argument -- `x` -- and transforms it depending on how large it is:
 
 
 ```r
@@ -248,7 +244,7 @@ office_ages
 ```
 
 To summarise your office by age, you might want a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
-using the `round()` function with `digits` set to `-1` (ie round to the nearest `10`):
+using the `round()` function with `digits` set to `-1` (i.e. round to the nearest `10`):
 
 
 ```r
@@ -408,29 +404,8 @@ make_age10(office_ages, validate_ages = "remove")
 ```
 
 
-# Using functions on datasets
 
-Above, we created the `make_age10` function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:
-
-
-```r
-office_ages %>% length()
-```
-
-```
-## [1] 7
-```
-
-```r
-make_age10(office_ages) %>% length()
-```
-
-```
-## [1] 7
-```
-
-
-## What is 'returned' from a function?
+## What is 'returned' from a function? {#functions-returned}
 
 
 
@@ -510,7 +485,105 @@ sum_squares <- function(x) {
 Ensuring your function _returns_ the object you want in the form you want is the second step in writing your own functions.
 
 
-# Using `purrr::map`
+
+
+## Using functions on datasets within `mutate()`
+
+Recall that when you are adding (or changing) a variable in a dataset with `mutate`, the length of the output must be either the length of the dataset or one (which is then repeated). Anything else will throw an error:
+
+
+```r
+office_df <- tibble(office_ages)
+office_df
+```
+
+```
+## # A tibble: 7 × 1
+##   office_ages
+##         <dbl>
+## 1          -6
+## 2          12
+## 3          21
+## 4          36
+## 5          56
+## 6          67
+## 7         200
+```
+
+```r
+# A single element will be repeated:
+office_df %>% 
+  mutate(fave_colour = "#F68B33")
+```
+
+```
+## # A tibble: 7 × 2
+##   office_ages fave_colour
+##         <dbl> <chr>      
+## 1          -6 #F68B33    
+## 2          12 #F68B33    
+## 3          21 #F68B33    
+## 4          36 #F68B33    
+## 5          56 #F68B33    
+## 6          67 #F68B33    
+## 7         200 #F68B33
+```
+
+```r
+# A vector of length of the dataset is fine:
+office_df %>% 
+  mutate(fave_number = c(10, 4, 1, 4, 0, 99, 100))
+```
+
+```
+## # A tibble: 7 × 2
+##   office_ages fave_number
+##         <dbl>       <dbl>
+## 1          -6          10
+## 2          12           4
+## 3          21           1
+## 4          36           4
+## 5          56           0
+## 6          67          99
+## 7         200         100
+```
+
+```r
+# BUT a vector of a different length will cause an error:
+office_df %>% 
+  mutate(fave_lunch = c("pasta salad", "a variety"))
+```
+
+```
+## Error: Problem with `mutate()` column `fave_lunch`.
+## ℹ `fave_lunch = c("pasta salad", "a variety")`.
+## ℹ `fave_lunch` must be size 7 or 1, not 2.
+```
+
+In [the section above](#functions-conditionals), we created the `make_age10` function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:
+
+
+```r
+office_ages %>% length()
+```
+
+```
+## [1] 7
+```
+
+```r
+make_age10(office_ages) %>% length()
+```
+
+```
+## [1] 7
+```
+
+
+
+
+# Using the `purrr` family of functions
+
 
 
 # Using functions for visualisations
