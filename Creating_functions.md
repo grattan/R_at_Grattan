@@ -582,15 +582,15 @@ make_age10(office_ages) %>% length()
 
 
 
-# Using the `purrr` family of functions
+## Using the `purrr` family of functions
 
 
 _Section to be finished_; see https://github.com/grattan/R_at_Grattan/issues/59
 
 
-# Using functions for visualisations
+## Using functions for visualisations
 
 
-# Sharing your useful functions with Grattan and the world
+## Sharing your useful functions with Grattan and the world
 
 
