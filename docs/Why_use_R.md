@@ -17,7 +17,7 @@ Analysis that isn't script based, like work done in Excel, is almost never repro
 
 Using scripts makes us less susceptible to the sort of errors [famously made by the economists Reinhart and Rogoff](https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt#Methodological_flaws) in their Excel-based analysis of the effect of public debt on economic growth. It's still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
-<img src="atlas/reinhart_rogoff.jpg" width="2298" />
+![](atlas/reinhart_rogoff.jpg)<!-- -->
 
 Script-based analysis software also allows us to:
 

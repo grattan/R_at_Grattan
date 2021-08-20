@@ -29,7 +29,7 @@ RStudio is another piece of free software you can download and run on your compu
 
 In programmer jargon, RStudio is an "integrated development environment" or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R 'console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things. 
 
-<img src="atlas/rstudio_screenshot.png" width="1325" />
+![](atlas/rstudio_screenshot.png)<!-- -->
 
 You'll almost always interact with R by opening RStudio. 
 
@@ -39,16 +39,16 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to [CRAN](https://cran.r-project.org), the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages. 
 
-<img src="atlas/r_cran.png" width="1130" />
+![](atlas/r_cran.png)<!-- -->
 
 You want to download the latest base R release, as a 'binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-<img src="atlas/r_cran_macos.png" width="1129" />
+![](atlas/r_cran_macos.png)<!-- -->
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-<img src="atlas/r_cran_windows_1.png" width="1130" /><img src="atlas/r_cran_windows_2.png" width="1128" />
+![](atlas/r_cran_windows_1.png)<!-- -->![](atlas/r_cran_windows_2.png)<!-- -->
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 

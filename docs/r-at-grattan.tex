@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Using R at Grattan Institute},
-  pdfauthor={Matt Cowgill and Will Mackey},
+  pdfauthor={Matt Cowgill, Will Mackey, and James Ha},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -123,8 +123,8 @@
 \bibliographystyle{apalike}
 
 \title{Using R at Grattan Institute}
-\author{Matt Cowgill and Will Mackey}
-\date{2021-08-19}
+\author{Matt Cowgill, Will Mackey, and James Ha}
+\date{2021-08-20}
 
 \begin{document}
 \maketitle
@@ -152,11 +152,11 @@ The guide does two main things:
   Shows you how to use R to undertake some of the analytical tasks you're likely to undertake at Grattan.
 \end{enumerate}
 
-As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free.
+As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading \href{https://r4ds.had.co.nz}{R for Data Science} by Hadley Wickham and Garrett Grolemund. It's free, and it is very good.
 
 Because the guide is intended for everyone who uses R at Grattan, there may be some material that is too basic for more experienced users, or material that goes over the heads of beginners. That's OK - just skip those bits for now.
 
-Any complaints or comments about this guide can be sent to Will or Matt, respectively.
+Any complaints or comments about this guide can be sent to Will or James, respectively.
 
 This site was written in R with RMarkdown and the \href{https://bookdown.org}{bookdown} package.
 
@@ -196,7 +196,7 @@ RStudio is another piece of free software you can download and run on your compu
 
 In programmer jargon, RStudio is an ``integrated development environment'' or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R `console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things.
 
-\includegraphics[width=18.4in]{atlas/rstudio_screenshot}
+\includegraphics{atlas/rstudio_screenshot.png}
 
 You'll almost always interact with R by opening RStudio.
 
@@ -207,18 +207,16 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to \href{https://cran.r-project.org}{CRAN}, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.
 
-\includegraphics[width=15.69in]{atlas/r_cran}
+\includegraphics{atlas/r_cran.png}
 
 You want to download the latest base R release, as a `binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-
-\includegraphics[width=15.68in]{atlas/r_cran_macos}
+\includegraphics{atlas/r_cran_macos.png}
 
 For Windows, you'll need to click on the `base' version, and then click again to start the download.
 
-\includegraphics[width=15.69in]{atlas/r_cran_windows_1}
-\includegraphics[width=15.67in]{atlas/r_cran_windows_2}
+\includegraphics{atlas/r_cran_windows_1.png} \includegraphics{atlas/r_cran_windows_2.png}
 
 Once you've installed R, you'll need to install RStudio. Go to the \href{https://www.rstudio.com/products/rstudio/download/\#download}{RStudio website and install the latest version} of RStudio Desktop (open source license).
 
@@ -263,7 +261,7 @@ Analysis that isn't script based, like work done in Excel, is almost never repro
 
 Using scripts makes us less susceptible to the sort of errors \href{https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt\#Methodological_flaws}{famously made by the economists Reinhart and Rogoff} in their Excel-based analysis of the effect of public debt on economic growth. It's still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
-\includegraphics[width=31.92in]{atlas/reinhart_rogoff}
+\includegraphics{atlas/reinhart_rogoff.jpg}
 
 Script-based analysis software also allows us to:
 
@@ -557,7 +555,7 @@ If you're loading a package from Github, it's a good idea to leave a \protect\hy
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(grattantheme)}
-\FunctionTok{library}\NormalTok{(strayr) }\CommentTok{\# remotes::install\_github("mattcowgill/strayr")}
+\FunctionTok{library}\NormalTok{(strayr) }\CommentTok{\# remotes::install\_github("runapp{-}aus/strayr")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -677,7 +675,7 @@ It's useful to break a lengthy script into chunks with \texttt{-\/-\/-\/-\/-}.
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script.
 
-\includegraphics[width=7.64in]{atlas/rstudio_navigation}
+\includegraphics{atlas/rstudio_navigation.png}
 
 Breaking your script into chunks with \texttt{-\/-\/-\/-\/-} also makes your code easier to read.
 
@@ -995,11 +993,11 @@ The easiest way to install a package from Github is to use the function \texttt{
 \end{Highlighting}
 \end{Shaded}
 
-Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan ggplot2 theme, which we'll discuss later in this website:
+Now we can install packages from Github using the \texttt{install\_github()} function from the \texttt{remotes} package. For example, here's how we would install the Grattan \texttt{ggplot2} theme, which we'll discuss later in this website:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{upgrade =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1010,7 +1008,7 @@ Just starting out or setting up a new machine? Run this block of code to get you
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cran\_packages }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"readabs"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }\StringTok{"grattan"}\NormalTok{,}
+\NormalTok{cran\_packages }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"readabs"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }
                    \StringTok{"rio"}\NormalTok{, }\StringTok{"sf"}\NormalTok{)}
 
 \FunctionTok{install.packages}\NormalTok{(cran\_packages)}
@@ -1037,7 +1035,7 @@ We can either load (aka `attach') the package by using the \texttt{library()} fu
 
 \CommentTok{\# Now that the \textasciigrave{}remotes\textasciigrave{} package is loaded, we can use its \textasciigrave{}install\_github()\textasciigrave{} function:}
 
-\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\FunctionTok{install\_github}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1045,7 +1043,7 @@ Or, we can use two colons - \texttt{::} - to tell R to use an individual functio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1066,7 +1064,7 @@ This will upgrade all your packages - including those you've installed from CRAN
 
 When you run the above command, it will prompt you to ask which packages you want to update - press 1 for `All'.
 
-If it asks you `Do you want to install from sources the package which needs compilation?' type `no' and press enter.{[}\^{}Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.{]}
+If it asks you `Do you want to install from sources the package which needs compilation?' type `no' and press enter.\footnote{Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.}
 
 \hypertarget{downgrading-packages}{%
 \section{Downgrading packages}\label{downgrading-packages}}
@@ -1200,13 +1198,13 @@ Most R scripts at Grattan should start with \texttt{library(tidyverse)}. Most of
 \section{Grattan-specific packages}\label{grattan-specific-packages}}
 
 A range of Grattan people have written packages that come in handy at Grattan.
-* \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
+* \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
 
 \begin{itemize}
 \item
-  \emph{grattantheme} The \texttt{grattantheme} package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter.
-\item
   \emph{grattandata} The \texttt{grattandata} package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the \protect\hyperlink{reading-data}{reading data} chapter.
+\item
+  \emph{grattan} The \texttt{grattan} package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname ``Grattax'') is used for modelling the personal income tax system. Another set of functions (``Grattools'') are useful for a lot of our work, like converting dates to financial years (\texttt{grattan::date2fy()}) or a version of \texttt{dplyr::ntile()} that uses weights (\texttt{grattan::weighted\_ntile()}).
 \end{itemize}
 
 \hypertarget{other-commonly-used-packages}{%
@@ -1340,13 +1338,468 @@ Add \texttt{rename\_abs} function to a common Grattan package?
 \hypertarget{different-data-types}{%
 \chapter{Different data types}\label{different-data-types}}
 
-\hypertarget{tidy-data}{%
-\section{Tidy data}\label{tidy-data}}
+Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them.
 
-Other data structures
+It's useful to make a distinction between data \textbf{structures} and data \textbf{types}. This is a simplification but is all we need to think about for now.
 
-\hypertarget{dates-with-lubridate}{%
-\section{\texorpdfstring{Dates with \texttt{lubridate::}}{Dates with lubridate::}}\label{dates-with-lubridate}}
+\textbf{Data structures} are the objects that hold your data. A \texttt{vector} stores elements in one dimension. A \texttt{data.frame} (or \texttt{tibble}\footnote{A \texttt{tibble} is the \texttt{tidyverse} version of a standard R \texttt{data.frame}. They are basically the same; a \texttt{tibble} just has some more sensible default behaviours. If you want to learn more about this, see \href{https://adv-r.hadley.nz/vectors-chap.html\#tibble}{Section 3.6 in Advanced R}.}) combines vectors of the same length into two dimensions with rows and columns. A \texttt{list} can store data in any way you like.
+
+For our work at Grattan, tidy data within \texttt{tibbles} -- where each row is an observation, and each column is a variable -- is usually preferred.
+
+By picking a common structure for our data, we are able to transform, plot and analyse it using a common set of functions. We don't need to move from one method to another depending our what our data looks like.
+
+Each \texttt{tibble} is a collection of \texttt{vectors} of the same length. And each \texttt{vector} must have a single data \textbf{type}.
+
+The key data types we use are:
+
+\begin{itemize}
+\tightlist
+\item
+  Numerics (numbers) with the sub-types of doubles and integers.
+\item
+  Characters, also known as strings, to deal with text variables.
+\item
+  Factors, a stricter type for characters to use with categorical variables.
+\item
+  Dates, which are notoriously hard to deal with in statistical software.
+\end{itemize}
+
+The following sections will walk you through these data types and how to best handle them. We'll first load the required packages and read in some data.
+
+\hypertarget{set-up-and-packages}{%
+\section{Set-up and packages}\label{set-up-and-packages}}
+
+This chapter uses packages that are designed to help with different data types.
+
+The \texttt{stringr} package helps deal with characters. The \texttt{forcats} package helps with factors. The \texttt{lubridate} package helps -- a lot! -- with dates.
+
+These three packages are \emph{installed} part of the \texttt{tidyverse} and are installed with it. \texttt{stringr} and \texttt{forcats} are \emph{loaded} with \texttt{library(tidyverse)}, but \texttt{lubridate} isn't and needs to be loaded seprately.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+For most charts in this chapter, we'll use the \texttt{sa3\_income} data summarised below.\footnote{From \href{https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument}{ABS Employee income by occupation and gender, 2010-11 to 2015-16}} It is a tidy dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sa3\_income }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/sa3\_income.csv"}\NormalTok{)}
+
+\FunctionTok{glimpse}\NormalTok{(sa3\_income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 47,899
+## Columns: 16
+## $ sa3                   <dbl> 10102, 10102, 10102, 10102, 10102, 10102, 10102,~
+## $ sa3_name              <chr> "Queanbeyan", "Queanbeyan", "Queanbeyan", "Quean~
+## $ sa3_sqkm              <dbl> 6511.191, 6511.191, 6511.191, 6511.191, 6511.191~
+## $ sa3_income_percentile <dbl> 80, 76, 78, 76, 74, 79, 80, 76, 78, 76, 74, 79, ~
+## $ sa4_name              <chr> "Capital Region", "Capital Region", "Capital Reg~
+## $ gcc_name              <chr> "Rest of NSW", "Rest of NSW", "Rest of NSW", "Re~
+## $ state                 <chr> "NSW", "NSW", "NSW", "NSW", "NSW", "NSW", "NSW",~
+## $ occupation            <chr> "Clerical and Administrative Workers", "Clerical~
+## $ occ_short             <chr> "Admin", "Admin", "Admin", "Admin", "Admin", "Ad~
+## $ prof                  <chr> "Non-professional", "Non-professional", "Non-pro~
+## $ gender                <chr> "Women", "Women", "Women", "Women", "Women", "Wo~
+## $ year                  <dbl> 2011, 2012, 2013, 2014, 2015, 2016, 2011, 2012, ~
+## $ median_income         <dbl> 52127, 54894, 57868, 59025, 59041, 62741, 66900,~
+## $ average_income        <dbl> 51306, 53807, 56405, 57742, 58286, 61591, 66869,~
+## $ total_income          <dbl> 235853682, 253323356, 266908460, 264054166, 2382~
+## $ workers               <dbl> 4597, 4708, 4732, 4573, 4087, 4448, 1459, 1467, ~
+\end{verbatim}
+
+\hypertarget{why-data-types-matter}{%
+\section{Why data types matter}\label{why-data-types-matter}}
+
+Data `types' define how your data is stored and what you can (or cannot) do with it.
+
+You can do maths on numbers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num1 }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{num2 }\OtherTok{\textless{}{-}} \DecValTok{5}
+
+\NormalTok{num1 }\SpecialCharTok{+}\NormalTok{ num2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num1 }\SpecialCharTok{/}\NormalTok{ num2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+And you can perform string operations on characters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{char1 }\OtherTok{\textless{}{-}} \StringTok{"Hello"}
+
+\FunctionTok{substring}\NormalTok{(char1, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "lo"
+\end{verbatim}
+
+But you can't perform maths on characters, because that doesn't really make sense:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"Hello"} \SpecialCharTok{*} \DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in "Hello" * 2: non-numeric argument to binary operator
+\end{verbatim}
+
+Even when you kind of think it should:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"100"} \SpecialCharTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in "100" * 2: non-numeric argument to binary operator
+\end{verbatim}
+
+Above, R is trying to multiply the \emph{character} ``100'' by the \emph{number} \texttt{2}. Which -- because of the types of these data -- makes as much sense as \texttt{"Hello"\ \$\textbackslash{}times\$\ 2}.
+
+Defining and checking and being aware of the `type' of your data is a boring and tedious task common to all statistical languages/software.
+Sorry -- it's just something you need to do.
+
+But knowing this information will save you countless errors, like the ones above, in the future.
+We'll get through it breifly, focussing on the things you need to know and on how to solve the problems you are likely to encounter.
+
+\hypertarget{checking-and-changing-data-types}{%
+\section{Checking and changing data types}\label{checking-and-changing-data-types}}
+
+You can use the \texttt{str} function to check the type of an object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob1 }\OtherTok{\textless{}{-}} \StringTok{"Hello"}
+\FunctionTok{str}\NormalTok{(ob1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr "Hello"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob2 }\OtherTok{\textless{}{-}} \DecValTok{10}
+\FunctionTok{str}\NormalTok{(ob2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob3 }\OtherTok{\textless{}{-}} \StringTok{"10"}
+\FunctionTok{str}\NormalTok{(ob3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr "10"
+\end{verbatim}
+
+You can also change or assert the data type explicitly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob4 }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\StringTok{"10"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(ob4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob5 }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(ob5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr "10"
+\end{verbatim}
+
+But be cautious: forcing data from one type to another can lead to \texttt{NA} values when the conversion isn't possible. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ob6 }\OtherTok{\textless{}{-}} \StringTok{"Hello"}
+\FunctionTok{as.numeric}\NormalTok{(ob6)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+The characters ``Hello'' can't be converted to a number, so R replaces it with \texttt{NA} and throws you a warning message.
+
+The next section extends these concepts from single elements to whole variables in your data.
+
+\hypertarget{checking-and-changing-data-types-in-vectors-and-tibbles}{%
+\section{\texorpdfstring{Checking and changing data types in vectors and \texttt{tibbles}}{Checking and changing data types in vectors and tibbles}}\label{checking-and-changing-data-types-in-vectors-and-tibbles}}
+
+In a \texttt{tibble}, each variable is a vector that can have \emph{one-and-only-one} data type.
+
+A variable can be a numeric, or character, or factor, or date, or something else entirely.
+But it can only be of one type.\footnote{There are ways around this using `list' variables, but this is rarely useful or necessary.}
+This means that every observation in a variable must be of the same type.
+
+Below is an example \texttt{tibble} to explore how we can check, change and use different data types.
+This \texttt{tibble} is constructed by defining four vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Kate"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Emily"}\NormalTok{, }\StringTok{"James"}\NormalTok{),}
+  \AttributeTok{numb1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{numb2 =} \FunctionTok{c}\NormalTok{(}\StringTok{"{-}10"}\NormalTok{, }\StringTok{"10"}\NormalTok{, }\StringTok{"{-}20"}\NormalTok{, }\StringTok{"20"}\NormalTok{),}
+  \AttributeTok{numb3 =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{10000}\NormalTok{, }\StringTok{"None"}\NormalTok{),}
+  \AttributeTok{messy =} \FunctionTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"  1  "}\NormalTok{, }\StringTok{"0. 1"}\NormalTok{, }\StringTok{"1\%"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{eg}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   name     numb1 numb2 numb3 messy  
+##   <chr>    <dbl> <chr> <chr> <chr>  
+## 1 Kate         1 -10   100   "1"    
+## 2 Jonathan     2 10    1000  "  1  "
+## 3 Emily        3 -20   10000 "0. 1" 
+## 4 James        4 20    None  "1%"
+\end{verbatim}
+
+The first two variables are easy.
+\texttt{name} contains only strings and so is set to a character variable.
+\texttt{numb1} contains numbers is set to a double.
+
+The \texttt{numb2} and \texttt{messy} variables are also all strings, so R will store them as character variables (even if a human \emph{may} be able to decipher some of the strings as numbers),
+
+\texttt{numb3} contains \textbf{both} numbers and strings. When this is the case, R converts everything to a character to preserve all the information.
+
+We can check the types of the variables in the \texttt{eg} dataset with the \texttt{str} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(eg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tibble [4 x 5] (S3: tbl_df/tbl/data.frame)
+##  $ name : chr [1:4] "Kate" "Jonathan" "Emily" "James"
+##  $ numb1: num [1:4] 1 2 3 4
+##  $ numb2: chr [1:4] "-10" "10" "-20" "20"
+##  $ numb3: chr [1:4] "100" "1000" "10000" "None"
+##  $ messy: chr [1:4] "1" "  1  " "0. 1" "1%"
+\end{verbatim}
+
+This tells us that our data \textbf{structure} is \texttt{tbl\_df}, \texttt{tbl} and \texttt{data.frame} (ie a \texttt{tibble}), and the data \textbf{types} of our variables are: character, numeric, character, character and character.
+
+The first two variables are classified as we want them. \texttt{names} should be stored as characters; \texttt{numb1} should be stored as doubles.
+
+But we can see that \texttt{numb2} is a set of numbers that have been stored as characters. And this means we can't use their wonderful numeric powers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{numb2\_div10 =}\NormalTok{ numb2 }\SpecialCharTok{/} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error: Problem with `mutate()` column `numb2_div10`.
+## i `numb2_div10 = numb2/10`.
+## x non-numeric argument to binary operator
+\end{verbatim}
+
+If we want to change that, we redefine the \texttt{numb2} variable using the \texttt{mutate} function (from the previous chapter) and the \texttt{as.numeric} function descibed in the previous section:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{numb2 =} \FunctionTok{as.numeric}\NormalTok{(numb2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   name     numb1 numb2 numb3 messy  
+##   <chr>    <dbl> <dbl> <chr> <chr>  
+## 1 Kate         1   -10 100   "1"    
+## 2 Jonathan     2    10 1000  "  1  "
+## 3 Emily        3   -20 10000 "0. 1" 
+## 4 James        4    20 None  "1%"
+\end{verbatim}
+
+The \texttt{tibble} output shows that \texttt{numb2} is now a double. Yay! And this means we can do maths on it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{numb2 =} \FunctionTok{as.numeric}\NormalTok{(numb2),}
+         \AttributeTok{numb2\_div10 =}\NormalTok{ numb2 }\SpecialCharTok{/} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 6
+##   name     numb1 numb2 numb3 messy   numb2_div10
+##   <chr>    <dbl> <dbl> <chr> <chr>         <dbl>
+## 1 Kate         1   -10 100   "1"              -1
+## 2 Jonathan     2    10 1000  "  1  "           1
+## 3 Emily        3   -20 10000 "0. 1"           -2
+## 4 James        4    20 None  "1%"              2
+\end{verbatim}
+
+What about \texttt{numb3}? It has a numbers and a string that are stored as a character variable. If we use the same approach as above:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{numb3 =} \FunctionTok{as.numeric}\NormalTok{(numb3))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   name     numb1 numb2 numb3 messy  
+##   <chr>    <dbl> <chr> <dbl> <chr>  
+## 1 Kate         1 -10     100 "1"    
+## 2 Jonathan     2 10     1000 "  1  "
+## 3 Emily        3 -20   10000 "0. 1" 
+## 4 James        4 20       NA "1%"
+\end{verbatim}
+
+We do convert the \texttt{numb3} variable to a numeric, which is what we wanted. But there are casualites. Because \texttt{"None"} cannot be neatly converted to a number, the string in the last observation is removed and replaced with \texttt{NA} (and we get a warning that there were \texttt{NAs\ introduced\ by\ coercion}).
+
+Converting strings to numerics made harder by data that is stored messily. The \texttt{messy} variable is made up of numbers that humans could decipher. The \texttt{as.numeric} function tries its best:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{messy =} \FunctionTok{as.numeric}\NormalTok{(messy))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   name     numb1 numb2 numb3 messy
+##   <chr>    <dbl> <chr> <chr> <dbl>
+## 1 Kate         1 -10   100       1
+## 2 Jonathan     2 10    1000      1
+## 3 Emily        3 -20   10000    NA
+## 4 James        4 20    None     NA
+\end{verbatim}
+
+We again convert the variable to a numeric. The \texttt{as.numeric} function nails \texttt{"1"} and removes the leading and trailing white-spaces of \texttt{"\ \ 1\ \ "}. But it doesn't understand the space in the middle of \texttt{"0.\ 1"}, and doesn't convert the percentage in \texttt{"1\%"}. Luckily, we have the \texttt{warning} message that tells us this has happened.
+
+Complications like these mean we have to watch out for how our data is read.
+
+\hypertarget{asserting-data-types-when-importing-data}{%
+\section{Asserting data types when importing data}\label{asserting-data-types-when-importing-data}}
+
+\hypertarget{changing-the-data-types-of-lots-of-variables}{%
+\section{Changing the data types of lots of variables}\label{changing-the-data-types-of-lots-of-variables}}
+
+\hypertarget{using-character-vectors}{%
+\section{Using character vectors}\label{using-character-vectors}}
+
+Characters contain information between quotes, like a letter or word or sentence. They can contain (almost) anything. They have no `rules', unlike numerics, factors or dates. This freedom can be good or bad depending on your situation: sometimes restrictions are good!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"hello"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello"
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.66\linewidth]{atlas/rstudio_newproject} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{typeof}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{class}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{str}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:2] "hello" "1"
+\end{verbatim}
+
+\hypertarget{using-dates-with-lubridate}{%
+\section{\texorpdfstring{Using dates with \texttt{lubridate::}}{Using dates with lubridate::}}\label{using-dates-with-lubridate}}
+
+Dates are hard, and dealing with dates in statistical software like R, Excel
 
 The \texttt{lubridate::} package
 
@@ -1378,10 +1831,6 @@ The \texttt{lubridate::} package
 This section focusses on transforming rectangular datasets.
 
 The \texttt{dplyr} verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of \emph{\href{https://r4ds.had.co.nz/}{R for Data Science}} with Hadley Wickham).
-
-\begin{verbatim}
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-\end{verbatim}
 
 \hypertarget{set-up}{%
 \section{Set up}\label{set-up}}
@@ -2420,6 +2869,10 @@ Grouped summaries can help change the \emph{detail} of your data. In the origina
 \end{Shaded}
 
 \begin{verbatim}
+## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
 ## # A tibble: 2,010 x 3
 ## # Groups:   year [6]
 ##     year sa3_name                             workers
@@ -2468,6 +2921,10 @@ Or the total workers in each year and state by gender:
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{workers =} \FunctionTok{sum}\NormalTok{(workers))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
+\end{verbatim}
 
 \begin{verbatim}
 ## # A tibble: 96 x 4
@@ -2628,6 +3085,10 @@ For example, say you want to get the total workers and total income in each stat
 \end{Shaded}
 
 \begin{verbatim}
+## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
 ## # A tibble: 16 x 6
 ## # Groups:   year, state [8]
 ##     year state gender total_workers mean_income  total_income
@@ -2761,8 +3222,8 @@ The way we design charts -- much like our writing -- should always be honest, cl
 
 This chapter shows how you can do this with R. It starts with the `grammar of graphics' concepts of a package called \texttt{ggplot}, and explains how to make those charts `Grattan-y'. The next chapter gives you the when-to-use and how-to-make particular charts.
 
-\hypertarget{set-up-and-packages}{%
-\section{Set-up and packages}\label{set-up-and-packages}}
+\hypertarget{set-up-and-packages-1}{%
+\section{Set-up and packages}\label{set-up-and-packages-1}}
 
 This section uses the package \texttt{ggplot2} to visualise data, and \texttt{dplyr} functions to manipulate data. Both of these packages are loaded with \texttt{tidyverse}. The \texttt{scales} package helps with labelling your axes.
 
@@ -2859,7 +3320,7 @@ Each plot you make will be made up of these three elements. The \href{https://gg
 
 \texttt{ggplot} also has a `cheat sheet' that contains many of the often-used elements of a plot, which you can download \href{https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf}{here}.
 
-\begin{center}\includegraphics[width=17.08in]{atlas/ggplot_cheat_sheet} \end{center}
+\begin{center}\includegraphics{atlas/ggplot_cheat_sheet} \end{center}
 
 For example, you can plot a column chart by passing the \texttt{sa3\_income} dataset into \texttt{ggplot()} (``make a chart with this data''). This completes the first step -- data -- and produces an empty plot:
 
@@ -2944,14 +3405,14 @@ Plotting your data early in the analysis stage can help you quickly identify out
 \hypertarget{making-grattan-y-charts}{%
 \section{Making Grattan-y charts}\label{making-grattan-y-charts}}
 
-The \texttt{grattantheme} package contains functions that help \emph{Grattanise} your charts. It is hosted here: \url{https://github.com/mattcowgill/grattantheme}
+The \texttt{grattantheme} package contains functions that help \emph{Grattanise} your charts. It is hosted here: \url{https://github.com/grattan/grattantheme}
 
 You can install it with \texttt{remotes::install\_github} from the package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mattcowgill/grattantheme"}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"grattan/grattantheme"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3093,7 +3554,7 @@ To save the \texttt{prof\_chart} plot created above as a whole-column chart for 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=38.76in]{atlas/professionals_chart_report}
+\includegraphics{atlas/professionals_chart_report.png}
 
 To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fullslide"}:
 
@@ -3103,7 +3564,7 @@ To save it as a \textbf{presentation} slide instead, use \texttt{type\ =\ "fulls
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/professionals_chart_presentation}
+\includegraphics{atlas/professionals_chart_presentation.png}
 
 Or, if you want to emphasise the point in a \emph{really tall} chart for a \textbf{blogpost}, you can use \texttt{type\ =\ "blog"} and adjust the \texttt{height} to be 50cm. Also note that because this is for the blog, you should save it as a \texttt{png} file:
 
@@ -3114,7 +3575,7 @@ Or, if you want to emphasise the point in a \emph{really tall} chart for a \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/professionals_chart_blog}
+\includegraphics{atlas/professionals_chart_blog.png}
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic \texttt{grattantheme} formatting you've used here.
 
@@ -3375,7 +3836,7 @@ Second, \texttt{position}, dictates how multiple bars occupying the same x-axis 
 
 This section will create the following vertical bar plot showing number of workers by state in 2016:
 
-\includegraphics[width=44.44in]{atlas/simple_bar}
+\includegraphics{atlas/simple_bar.png}
 
 First, create the data you want to plot.
 
@@ -3404,7 +3865,7 @@ First, create the data you want to plot.
 ## 8 WA    2297081
 \end{verbatim}
 
-Looks superior: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks out of this world: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to \texttt{ggplot} and add aesthetics so that \texttt{x} represents \texttt{state}, and \texttt{y} represents \texttt{workers}. Then, because the dataset contains the \emph{actual} numbers you want on the chart, you can plot the data with \texttt{geom\_col}:\footnote{Remember that \texttt{geom\_col} is just shorthand for \texttt{geom\_bar(stat\ =\ "identity")}}
 
@@ -3470,7 +3931,7 @@ You can probably drop the x-axis label -- people will understand that they're st
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_bar_title-1.pdf}
 
-Looks badass! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
+Looks swell! Now you can export as a full-slide Grattan chart using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3478,7 +3939,7 @@ Looks badass! Now you can export as a full-slide Grattan chart using \texttt{gra
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/simple_bar}
+\includegraphics{atlas/simple_bar.png}
 
 \hypertarget{bar-multi}{%
 \subsection{Bar plot with multiple series}\label{bar-multi}}
@@ -3493,7 +3954,15 @@ First create the dataset you want to plot, getting the average income by state a
   \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2016}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}   
   \FunctionTok{group\_by}\NormalTok{(state, gender) }\SpecialCharTok{\%\textgreater{}\%}   
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{average\_income =} \FunctionTok{sum}\NormalTok{(total\_income) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` has grouped output by 'state'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{data}
 \end{Highlighting}
 \end{Shaded}
@@ -3521,7 +3990,7 @@ First create the dataset you want to plot, getting the average income by state a
 ## 16 WA    Women          51578.
 \end{verbatim}
 
-Looks too good to be true: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
+Looks champion: you have one observation (row) for each state \(\times\) gender group you want to plot, and a value for their average income. Put \texttt{state} on the x-axis, \texttt{average\_income} on the y-axis, and split gender by fill-colour (\texttt{fill}).
 
 Pass the data to \texttt{ggplot}, give it the appropriate \texttt{x} and \texttt{y} aesthetics, along with \texttt{fill} (the fill colour\footnote{The aesthetic \texttt{fill} represents the `fill' colour -- the colour that fills the bars in your chart. The \texttt{colour} aesthetic controls the colours of the \emph{lines}.}) representing \texttt{gender}. And because you have the \emph{actual} values for \texttt{average\_income} you want to plot, use \texttt{geom\_col}:\footnote{\texttt{geom\_col} is shorthand for \texttt{geom\_bar(stat\ =\ "identity"}}
 
@@ -3695,7 +4164,7 @@ Almost there! The labels go out of range a little bit, and we can fix this by ex
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_multi_expand-1.pdf}
 
-Looks swell! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
+Looks fantastic! Now you can add titles and a caption, and save using \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3729,7 +4198,7 @@ Looks swell! Now you can add titles and a caption, and save using \texttt{gratta
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/multiple_bar}
+\includegraphics{atlas/multiple_bar.png}
 
 \hypertarget{facet-bar}{%
 \subsection{Facetted bar charts}\label{facet-bar}}
@@ -3743,7 +4212,15 @@ Start by creating the dataset you want to plot:
 \NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ sa3\_income }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(state, gender, prof) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{average\_income =} \FunctionTok{sum}\NormalTok{(total\_income) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` has grouped output by 'state', 'gender'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{data}
 \end{Highlighting}
 \end{Shaded}
@@ -3842,7 +4319,7 @@ To give each plot a black base axis, you can add \texttt{geom\_hline()} with \te
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/bar_facet_label-1.pdf}
 
-Superior! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
+Class! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizontal axis. To tidy these up, we redefine the \texttt{breaks} -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside \texttt{grattan\_y\_continuous}. Putting everything together and saving the plot as a fullslide chart with \texttt{grattan\_save}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3883,7 +4360,7 @@ Superior! But the ``\$0'' and ``\$100,000'' labels are clashing along the horizo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/facet_bar}
+\includegraphics{atlas/facet_bar.png}
 
 \hypertarget{line-charts}{%
 \section{Line charts}\label{line-charts}}
@@ -4060,7 +4537,7 @@ The first simple scatter plot will show the relationship between average incomes
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/simple_scatter}
+\includegraphics{atlas/simple_scatter.png}
 
 Create the dataset you want to plot:
 
@@ -4128,7 +4605,7 @@ Then add Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/simple_scatter_grattan-1.pdf}
 
-Looks too good to be true. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
+Looks fantastic. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the \texttt{grattan\_x\_continuous} element:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4171,7 +4648,7 @@ Finally, add titles and save the plot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/simple_scatter}
+\includegraphics{atlas/simple_scatter.png}
 
 \hypertarget{scatter-plot-with-reshaped-data}{%
 \subsection{Scatter plot with reshaped data}\label{scatter-plot-with-reshaped-data}}
@@ -4186,7 +4663,7 @@ The chart will show the wages of professional workers and non-professional worke
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/scatter_reshape}
+\includegraphics{atlas/scatter_reshape.png}
 
 First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:
 
@@ -4196,7 +4673,15 @@ First prepare your data. You want to find the average incomes of all professiona
   \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2016}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(sa3\_name, prof) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{average\_income =} \FunctionTok{sum}\NormalTok{(total\_income) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` has grouped output by 'sa3_name'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(data\_prep)}
 \end{Highlighting}
 \end{Shaded}
@@ -4299,7 +4784,7 @@ Then, like you've done before, add Grattan theme elements and titles, and save w
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/scatter_reshape}
+\includegraphics{atlas/scatter_reshape.png}
 
 \hypertarget{layered-scatter-plot}{%
 \subsection{Layered scatter plot}\label{layered-scatter-plot}}
@@ -4312,7 +4797,7 @@ For the third plot, look at the incomes of non-professional workers by their are
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/scatter_layer}
+\includegraphics{atlas/scatter_layer.png}
 
 Get the data you want to plot:
 
@@ -4390,14 +4875,22 @@ Now add your Grattan theme elements:
 
 \includegraphics{Visualisation_cookbook_files/figure-latex/scatter_layer_base-1.pdf}
 
-Looks brill! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks ace! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{perc\_average }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(prof, sa3\_income\_percentile) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{average\_income =} \FunctionTok{sum}\NormalTok{(income) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(perc\_average)}
 \end{Highlighting}
 \end{Shaded}
@@ -4476,7 +4969,15 @@ Putting that all together, your code will look something like this:
 \NormalTok{perc\_average }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(prof, sa3\_income\_percentile) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{average\_income =} \FunctionTok{sum}\NormalTok{(income) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(workers))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Create label data}
 \NormalTok{label\_data }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
   \AttributeTok{sa3\_income\_percentile =} \FunctionTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{),}
@@ -4517,7 +5018,7 @@ Putting that all together, your code will look something like this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=44.44in]{atlas/scatter_layer}
+\includegraphics{atlas/scatter_layer.png}
 
 \hypertarget{scatter-plots-with-trendlines}{%
 \subsection{Scatter plots with trendlines}\label{scatter-plots-with-trendlines}}

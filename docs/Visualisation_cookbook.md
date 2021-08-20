@@ -114,7 +114,7 @@ Second, `position`, dictates how multiple bars occupying the same x-axis positio
 
 This section will create the following vertical bar plot showing number of workers by state in 2016:
 
-<img src="atlas/simple_bar.png" width="3200" />
+![](atlas/simple_bar.png)<!-- -->
 
 First, create the data you want to plot. 
 
@@ -142,7 +142,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks sublime: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks beaut: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -206,7 +206,7 @@ simple_bar
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_bar_title-1.png)<!-- -->
 
-Looks of the highest quality! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks fab! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -215,7 +215,7 @@ grattan_save("atlas/simple_bar.pdf", simple_bar, type = "fullslide")
 
 
 
-<img src="atlas/simple_bar.png" width="3200" />
+![](atlas/simple_bar.png)<!-- -->
 
 
 
@@ -233,7 +233,13 @@ data <- sa3_income %>%
   filter(year == 2016) %>%   
   group_by(state, gender) %>%   
   summarise(average_income = sum(total_income) / sum(workers))
+```
 
+```
+## `summarise()` has grouped output by 'state'. You can override using the `.groups` argument.
+```
+
+```r
 data
 ```
 
@@ -260,7 +266,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks outstanding: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks badass: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -429,7 +435,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_multi_expand-1.png)<!-- -->
 
-Looks shit hot! Now you can add titles and a caption, and save using `grattan_save`:
+Looks out of this world! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -463,7 +469,7 @@ grattan_save("atlas/multiple_bar.pdf", multiple_bar, type = "fullslide")
 
 
 
-<img src="atlas/multiple_bar.png" width="3200" />
+![](atlas/multiple_bar.png)<!-- -->
 
 
 
@@ -480,7 +486,13 @@ Start by creating the dataset you want to plot:
 data <- sa3_income %>% 
   group_by(state, gender, prof) %>% 
   summarise(average_income = sum(total_income) / sum(workers))
+```
 
+```
+## `summarise()` has grouped output by 'state', 'gender'. You can override using the `.groups` argument.
+```
+
+```r
 data
 ```
 
@@ -576,7 +588,7 @@ facet_bar +
 
 ![](Visualisation_cookbook_files/figure-epub3/bar_facet_label-1.png)<!-- -->
 
-Superlative! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Fab! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -619,7 +631,7 @@ grattan_save("atlas/facet_bar.pdf", facet_bar, type = "fullslide")
 
 
 
-<img src="atlas/facet_bar.png" width="3200" />
+![](atlas/facet_bar.png)<!-- -->
 
 
 
@@ -795,7 +807,7 @@ The first simple scatter plot will show the relationship between average incomes
 include_graphics("atlas/simple_scatter.png")
 ```
 
-<img src="atlas/simple_scatter.png" width="3200" />
+![](atlas/simple_scatter.png)<!-- -->
 
 Create the dataset you want to plot:
 
@@ -855,7 +867,7 @@ data %>%
 
 ![](Visualisation_cookbook_files/figure-epub3/simple_scatter_grattan-1.png)<!-- -->
 
-Looks mind-blowing. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks awesomesauce. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -898,7 +910,7 @@ grattan_save("atlas/simple_scatter.pdf", simple_scatter, type = "fullslide")
 
 
 
-<img src="atlas/simple_scatter.png" width="3200" />
+![](atlas/simple_scatter.png)<!-- -->
 
 
 
@@ -914,7 +926,7 @@ The chart will show the wages of professional workers and non-professional worke
 include_graphics("atlas/scatter_reshape.png")
 ```
 
-<img src="atlas/scatter_reshape.png" width="3200" />
+![](atlas/scatter_reshape.png)<!-- -->
 
 First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:
 
@@ -924,7 +936,13 @@ data_prep <- sa3_income %>%
   filter(year == 2016) %>% 
   group_by(sa3_name, prof) %>% 
   summarise(average_income = sum(total_income) / sum(workers))
+```
 
+```
+## `summarise()` has grouped output by 'sa3_name'. You can override using the `.groups` argument.
+```
+
+```r
 head(data_prep)
 ```
 
@@ -1019,7 +1037,7 @@ grattan_save("atlas/scatter_reshape.pdf", scatter_reshape, type = "fullslide")
 
 
 
-<img src="atlas/scatter_reshape.png" width="3200" />
+![](atlas/scatter_reshape.png)<!-- -->
 
 
 ### Layered scatter plot 
@@ -1031,7 +1049,7 @@ For the third plot, look at the incomes of non-professional workers by their are
 include_graphics("atlas/scatter_layer.png")
 ```
 
-<img src="atlas/scatter_layer.png" width="3200" />
+![](atlas/scatter_layer.png)<!-- -->
 
 Get the data you want to plot:
 
@@ -1102,14 +1120,20 @@ base_chart
 
 ![](Visualisation_cookbook_files/figure-epub3/scatter_layer_base-1.png)<!-- -->
 
-Looks tip-top! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks super! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
 perc_average <- data %>% 
   group_by(prof, sa3_income_percentile) %>% 
   summarise(average_income = sum(income) / sum(workers))
+```
 
+```
+## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+```
+
+```r
 head(perc_average)
 ```
 
@@ -1184,7 +1208,13 @@ Putting that all together, your code will look something like this:
 perc_average <- data %>% 
   group_by(prof, sa3_income_percentile) %>% 
   summarise(average_income = sum(income) / sum(workers))
+```
 
+```
+## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+```
+
+```r
 # Create label data
 label_data <- tibble(
   sa3_income_percentile = c(50, 50),
@@ -1227,7 +1257,7 @@ grattan_save("atlas/scatter_layer.pdf", scatter_layer, type = "fullslide")
 
 
 
-<img src="atlas/scatter_layer.png" width="3200" />
+![](atlas/scatter_layer.png)<!-- -->
 
 
 ### Scatter plots with trendlines

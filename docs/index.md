@@ -1,7 +1,7 @@
 --- 
 title: "Using R at Grattan Institute"
-author: "Matt Cowgill and Will Mackey"
-date: "2021-08-19"
+author: "Matt Cowgill, Will Mackey, and James Ha"
+date: "2021-08-20"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -11,7 +11,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: grattan/R_at_Grattan
-description: "How to use R at Grattan good. In development."
+description: "How to use R at Grattan good"
 ---
 
 # Welcome! {-}
@@ -25,10 +25,10 @@ The guide does two main things:
 1. Sets out some guidelines and good practices when using R at Grattan.
 2. Shows you how to use R to undertake some of the analytical tasks you're likely to undertake at Grattan.
 
-As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free.
+As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free, and it is very good.
 
 Because the guide is intended for everyone who uses R at Grattan, there may be some material that is too basic for more experienced users, or material that goes over the heads of beginners. That's OK - just skip those bits for now.
 
-Any complaints or comments about this guide can be sent to Will or Matt, respectively. 
+Any complaints or comments about this guide can be sent to Will or James, respectively. 
 
 This site was written in R with RMarkdown and the [bookdown](https://bookdown.org) package.

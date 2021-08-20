@@ -5,11 +5,6 @@ This section focusses on transforming rectangular datasets.
 
 The `dplyr` verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of _[R for Data Science](https://r4ds.had.co.nz/)_ with Hadley Wickham). 
 
-
-```
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-```
-
 <iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="100%" height="400px"></iframe>
 
 
@@ -1008,6 +1003,10 @@ sa3_income %>%
 ```
 
 ```
+## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+```
+
+```
 ## # A tibble: 2,010 × 3
 ## # Groups:   year [6]
 ##     year sa3_name                             workers
@@ -1053,6 +1052,10 @@ Or the total workers in each year and state by gender:
 sa3_income %>% 
   group_by(year, state, gender) %>% 
   summarise(workers = sum(workers))
+```
+
+```
+## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
 ```
 
 ```
@@ -1210,6 +1213,10 @@ sa3_income %>%
   summarise(total_workers = sum(workers),
             mean_income = mean(income),
             total_income = sum(total_income))
+```
+
+```
+## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
 ```
 
 ```

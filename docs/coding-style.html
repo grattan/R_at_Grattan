@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Grattan coding style | Using R at Grattan Institute</title>
-  <meta name="description" content="How to use R at Grattan good. In development." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="description" content="How to use R at Grattan good" />
+  <meta name="generator" content="bookdown 0.23.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Grattan coding style | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta property="og:description" content="How to use R at Grattan good" />
   <meta name="github-repo" content="grattan/R_at_Grattan" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4 Grattan coding style | Using R at Grattan Institute" />
   
-  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  <meta name="twitter:description" content="How to use R at Grattan good" />
   
 
-<meta name="author" content="Matt Cowgill and Will Mackey" />
+<meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
 
 
-<meta name="date" content="2021-08-19" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,10 +224,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>9</b> Different data types</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>9.1</b> Tidy data</a></li>
-<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>9.2</b> Dates with <code>lubridate::</code></a></li>
-<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.3</b> Strings with <code>stringr::</code></a></li>
-<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.4</b> Factors with <code>forcats::</code></a></li>
+<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#set-up-and-packages"><i class="fa fa-check"></i><b>9.1</b> Set-up and packages</a></li>
+<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#why-data-types-matter"><i class="fa fa-check"></i><b>9.2</b> Why data types matter</a></li>
+<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types"><i class="fa fa-check"></i><b>9.3</b> Checking and changing data types</a></li>
+<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types-in-vectors-and-tibbles"><i class="fa fa-check"></i><b>9.4</b> Checking and changing data types in vectors and <code>tibbles</code></a></li>
+<li class="chapter" data-level="9.5" data-path="different-data-types.html"><a href="different-data-types.html#asserting-data-types-when-importing-data"><i class="fa fa-check"></i><b>9.5</b> Asserting data types when importing data</a></li>
+<li class="chapter" data-level="9.6" data-path="different-data-types.html"><a href="different-data-types.html#changing-the-data-types-of-lots-of-variables"><i class="fa fa-check"></i><b>9.6</b> Changing the data types of lots of variables</a></li>
+<li class="chapter" data-level="9.7" data-path="different-data-types.html"><a href="different-data-types.html#using-character-vectors"><i class="fa fa-check"></i><b>9.7</b> Using character vectors</a></li>
+<li class="chapter" data-level="9.8" data-path="different-data-types.html"><a href="different-data-types.html#using-dates-with-lubridate"><i class="fa fa-check"></i><b>9.8</b> Using dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="9.9" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.9</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="9.10" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.10</b> Factors with <code>forcats::</code></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>10</b> Data transformation with <code>dplyr</code></a>
 <ul>
@@ -263,7 +269,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>12</b> Data Visualisation</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>12.1</b> Introduction to data visualisation</a></li>
-<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages-1"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
 <li class="chapter" data-level="12.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>12.3</b> Concepts</a></li>
 <li class="chapter" data-level="12.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>12.4</b> Exploratory data visualisation</a></li>
 <li class="chapter" data-level="12.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>12.5</b> Making Grattan-y charts</a>
@@ -360,7 +366,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>If you’re loading a package from Github, it’s a good idea to leave a <a href="coding-style.html#use-comments">comment</a> to say where it came from, like this:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding-style.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-2"><a href="coding-style.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span>
-<span id="cb5-3"><a href="coding-style.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strayr) <span class="co"># remotes::install_github(&quot;mattcowgill/strayr&quot;)</span></span></code></pre></div>
+<span id="cb5-3"><a href="coding-style.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(strayr) <span class="co"># remotes::install_github(&quot;runapp-aus/strayr&quot;)</span></span></code></pre></div>
 <p>Don’t scatter <code>library()</code> calls throughout your script - put them all at the top.</p>
 <p>The only thing that should come before loading your packages is the script preamble.</p>
 </div>
@@ -417,7 +423,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-11"><a href="coding-style.html#cb12-11" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(a, b)</span></code></pre></div>
 <p>(In practice, you’ll have more than one line of code in each block.)</p>
 <p>This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there’s a little navigation tool that helps you easily jump between named sections of your script.</p>
-<p><img src="atlas/rstudio_navigation.png" width="275" /></p>
+<p><img src="atlas/rstudio_navigation.png" /><!-- --></p>
 <p>Breaking your script into chunks with <code>-----</code> also makes your code easier to read.</p>
 </div>
 <div id="assigning-values-to-objects" class="section level2" number="4.5">

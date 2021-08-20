@@ -111,7 +111,7 @@ Each plot you make will be made up of these three elements. The [full list of st
 
 `ggplot` also has a 'cheat sheet' that contains many of the often-used elements of a plot, which you can download [here](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
 
-<img src="atlas/ggplot_cheat_sheet.png" width="1230" style="display: block; margin: auto;" />
+<img src="atlas/ggplot_cheat_sheet.png" style="display: block; margin: auto;" />
 
 
 
@@ -189,14 +189,14 @@ Plotting your data early in the analysis stage can help you quickly identify out
 
 ## Making Grattan-y charts
 
-The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/mattcowgill/grattantheme
+The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/grattan/grattantheme
  
 You can install it with `remotes::install_github` from the package:
 
 
 ```r
 install.packages("remotes")
-remotes::install_github("mattcowgill/grattantheme")
+remotes::install_github("grattan/grattantheme")
 ```
  
 The key functions of `grattantheme` are:
@@ -304,7 +304,7 @@ grattan_save("atlas/professionals_chart_report.pdf", prof_chart, type = "wholeco
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<img src="atlas/professionals_chart_report.png" width="2791" />
+![](atlas/professionals_chart_report.png)<!-- -->
 
 
 To save it as a **presentation** slide instead, use `type = "fullslide"`:
@@ -317,7 +317,7 @@ grattan_save("atlas/professionals_chart_presentation.pdf", prof_chart, type = "f
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/professionals_chart_presentation.png" width="3200" />
+![](atlas/professionals_chart_presentation.png)<!-- -->
 
 
 Or, if you want to emphasise the point in a _really tall_ chart for a **blogpost**, you can use `type = "blog"` and adjust the `height` to be 50cm. Also note that because this is for the blog, you should save it as a `png` file:
@@ -331,7 +331,7 @@ grattan_save("atlas/professionals_chart_blog.png", prof_chart,
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
 
 
-<img src="atlas/professionals_chart_blog.png" width="3200" />
+![](atlas/professionals_chart_blog.png)<!-- -->
 
 And that's it! The following sections will go into more detail about different chart types in R, but you'll mostly use the same basic `grattantheme` formatting you've used here.
 

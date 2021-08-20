@@ -59,8 +59,14 @@ reading-common-files
 appropriately-renaming-variables
 getting-to-tidy-data
 different-data-types
-tidy-data
-dates-with-lubridate
+set-up-and-packages
+why-data-types-matter
+checking-and-changing-data-types
+checking-and-changing-data-types-in-vectors-and-tibbles
+asserting-data-types-when-importing-data
+changing-the-data-types-of-lots-of-variables
+using-character-vectors
+using-dates-with-lubridate
 strings-with-stringr
 factors-with-forcats
 data-transformation-with-dplyr
@@ -84,7 +90,7 @@ joining-datasets-with-left_join
 analysis
 data-visualisation
 introduction-to-data-visualisation
-set-up-and-packages
+set-up-and-packages-1
 concepts
 exploratory-data-visualisation
 making-grattan-y-charts
