@@ -22,6 +22,7 @@ rmd_files: [
   "Data_visualisation.Rmd",
   "Visualisation_cookbook.Rmd",
   "Creating_functions.Rmd",
-  "Version_control.Rmd"
+  "Version_control.Rmd",
+  "Adding_to_book.Rmd"
 
 ]

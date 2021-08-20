@@ -37,7 +37,6 @@ install-grattan-packages
 using-packages
 upgrading-packages
 downgrading-packages
-packages-commonly-used-at-grattan
 tidyverse
 why-do-we-use-the-tidyverse
 grattan-specific-packages
@@ -120,12 +119,11 @@ making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
 creating-functions
-it-can-be-useful-to-make-your-own-function
+set-up-2
 defining-simple-functions
-more-complex-functions
-sets-of-functions
-using-purrrmap
-sharing-your-useful-functions-with-grattan
+functions-conditionals
+functions-returned
+using-functions-on-datasets-within-mutate
 version-control
 version-control-is-important-and-intimidating
 step-back-in-time
@@ -133,3 +131,4 @@ get-outta-my-way
 github
 git
 using-git
+adding-to-this-book
