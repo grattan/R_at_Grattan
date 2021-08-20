@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13 Chart cookbook | Using R at Grattan Institute</title>
+  <meta name="description" content="How to use R at Grattan good. In development." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13 Chart cookbook | Using R at Grattan Institute" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta name="github-repo" content="grattan/R_at_Grattan" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13 Chart cookbook | Using R at Grattan Institute" />
+  
+  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  
+
+<meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
+
+
+<meta name="date" content="2021-08-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualisation.html"/>
+<link rel="next" href="creating-functions.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Using R at Grattan Institute</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="part"><span><b>I What is R and why do we use it?</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-more-about-r"><i class="fa fa-check"></i><b>1.4</b> Learning more about R</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r_at_grattan"><i class="fa fa-check"></i><b>1.5</b> <code>#r_at_grattan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
+<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
+</ul></li>
+<li class="part"><span><b>II Using R the Grattan way</b></span></li>
+<li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#rproj"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="organising-projects.html"><a href="organising-projects.html#how-to-create-a-project"><i class="fa fa-check"></i><b>3.1.1</b> How to create a project</a></li>
+<li class="chapter" data-level="3.1.2" data-path="organising-projects.html"><a href="organising-projects.html#opening-a-project"><i class="fa fa-check"></i><b>3.1.2</b> Opening a project</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.2</b> Use relative filepaths</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.3</b> Keep your stuff together</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.4</b> Keep your scripts manageable</a></li>
+<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#make-your-filenames-readable-by-both-machines-and-humans"><i class="fa fa-check"></i><b>3.5</b> Make your filenames readable by both machines and humans</a></li>
+<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
+<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.7</b> Keep your workspace clean</a></li>
+<li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#quick-guide"><i class="fa fa-check"></i><b>3.8</b> Quick guide to starting a project</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#load-packages-first"><i class="fa fa-check"></i><b>4.1</b> Load packages first</a></li>
+<li class="chapter" data-level="4.2" data-path="coding-style.html"><a href="coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.2</b> Script preamble</a></li>
+<li class="chapter" data-level="4.3" data-path="coding-style.html"><a href="coding-style.html#use-comments"><i class="fa fa-check"></i><b>4.3</b> Use comments</a></li>
+<li class="chapter" data-level="4.4" data-path="coding-style.html"><a href="coding-style.html#breaking-your-script-into-chunks"><i class="fa fa-check"></i><b>4.4</b> Breaking your script into chunks</a></li>
+<li class="chapter" data-level="4.5" data-path="coding-style.html"><a href="coding-style.html#assigning-values-to-objects"><i class="fa fa-check"></i><b>4.5</b> Assigning values to objects</a></li>
+<li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.6</b> Naming objects and variables</a></li>
+<li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#spacing"><i class="fa fa-check"></i><b>4.7</b> Spacing</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="coding-style.html"><a href="coding-style.html#assign-and-equals"><i class="fa fa-check"></i><b>4.7.1</b> Assign and equals</a></li>
+<li class="chapter" data-level="4.7.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.7.2</b> Commas</a></li>
+<li class="chapter" data-level="4.7.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.7.3</b> Parentheses</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#short-lines-line-indentation-and-the-pipe"><i class="fa fa-check"></i><b>4.8</b> Short lines, line indentation and the pipe <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="4.9" data-path="coding-style.html"><a href="coding-style.html#omit-needless-code"><i class="fa fa-check"></i><b>4.9</b> Omit needless code</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>5</b> What are packages?</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="packages.html"><a href="packages.html#install-packages"><i class="fa fa-check"></i><b>5.1</b> How to install packages</a></li>
+<li class="chapter" data-level="5.2" data-path="packages.html"><a href="packages.html#install-grattan-packages"><i class="fa fa-check"></i><b>5.2</b> Get set up: install packages for Grattan</a></li>
+<li class="chapter" data-level="5.3" data-path="packages.html"><a href="packages.html#using-packages"><i class="fa fa-check"></i><b>5.3</b> Using packages</a></li>
+<li class="chapter" data-level="5.4" data-path="packages.html"><a href="packages.html#upgrading-packages"><i class="fa fa-check"></i><b>5.4</b> Upgrading packages</a></li>
+<li class="chapter" data-level="5.5" data-path="packages.html"><a href="packages.html#downgrading-packages"><i class="fa fa-check"></i><b>5.5</b> Downgrading packages</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html"><i class="fa fa-check"></i><b>6</b> Packages commonly used at Grattan</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#tidyverse"><i class="fa fa-check"></i><b>6.1</b> The tidyverse!</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#why-do-we-use-the-tidyverse"><i class="fa fa-check"></i><b>6.1.1</b> Why do we use the tidyverse?</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#grattan-specific-packages"><i class="fa fa-check"></i><b>6.2</b> Grattan-specific packages</a></li>
+<li class="chapter" data-level="6.3" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#other-commonly-used-packages"><i class="fa fa-check"></i><b>6.3</b> Other commonly-used packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html"><i class="fa fa-check"></i><b>7</b> Getting help with R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-at-grattan"><i class="fa fa-check"></i><b>7.1</b> Getting help with R problems at Grattan</a></li>
+<li class="chapter" data-level="7.2" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-in-general"><i class="fa fa-check"></i><b>7.2</b> Getting help with R problems in general</a></li>
+<li class="chapter" data-level="7.3" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#resources-for-learning-r"><i class="fa fa-check"></i><b>7.3</b> Resources for learning R</a></li>
+</ul></li>
+<li class="part"><span><b>III Load, manipulate and visualise data</b></span></li>
+<li class="chapter" data-level="8" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>8</b> Reading data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>8.1</b> Importing data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>8.1.1</b> Reading CSV files</a></li>
+<li class="chapter" data-level="8.1.2" data-path="reading-data.html"><a href="reading-data.html#read_microdata"><i class="fa fa-check"></i><b>8.1.2</b> <code>grattandata::read_microdata()</code></a></li>
+<li class="chapter" data-level="8.1.3" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>8.1.3</b> <code>readxl::read_excel()</code></a></li>
+<li class="chapter" data-level="8.1.4" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>8.1.4</b> <code>rio</code></a></li>
+<li class="chapter" data-level="8.1.5" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>8.1.5</b> <code>readabs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>8.2</b> Reading common files:</a></li>
+<li class="chapter" data-level="8.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>8.3</b> Appropriately renaming variables</a></li>
+<li class="chapter" data-level="8.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>8.4</b> Getting to tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>9</b> Different data types</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#tidy-data"><i class="fa fa-check"></i><b>9.1</b> Tidy data</a></li>
+<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#dates-with-lubridate"><i class="fa fa-check"></i><b>9.2</b> Dates with <code>lubridate::</code></a></li>
+<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.3</b> Strings with <code>stringr::</code></a></li>
+<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.4</b> Factors with <code>forcats::</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>10</b> Data transformation with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#set-up"><i class="fa fa-check"></i><b>10.1</b> Set up</a></li>
+<li class="chapter" data-level="10.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe"><i class="fa fa-check"></i><b>10.2</b> The pipe: <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="10.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-variables-with-select"><i class="fa fa-check"></i><b>10.3</b> Select variables with <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>10.3.1</b> Selecting groups of variables</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filter-with-filter"><i class="fa fa-check"></i><b>10.4</b> Filter with <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#conditions-logical-operations-true-or-false"><i class="fa fa-check"></i><b>10.4.1</b> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></a></li>
+<li class="chapter" data-level="10.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-data-with-filter"><i class="fa fa-check"></i><b>10.4.2</b> Filtering data with <code>filter</code></a></li>
+<li class="chapter" data-level="10.4.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-filtering-with-group_by"><i class="fa fa-check"></i><b>10.4.3</b> Grouped filtering with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>10.5</b> Edit and add new variables with <code>mutate()</code></a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#using-if_else-or-case_when"><i class="fa fa-check"></i><b>10.5.1</b> Using <code>if_else()</code> or <code>case_when()</code></a></li>
+<li class="chapter" data-level="10.5.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-mutates-with-group_by"><i class="fa fa-check"></i><b>10.5.2</b> Grouped mutates with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>10.6</b> Summarise data with <code>summarise()</code></a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-group_by"><i class="fa fa-check"></i><b>10.6.1</b> Grouped summaries with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-with-arrange"><i class="fa fa-check"></i><b>10.7</b> Arrange with <code>arrange()</code></a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#lead-and-lag-functions-with-arrange"><i class="fa fa-check"></i><b>10.7.1</b> <code>lead</code> and <code>lag</code> functions with <code>arrange</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#putting-it-all-together"><i class="fa fa-check"></i><b>10.8</b> Putting it all together</a></li>
+<li class="chapter" data-level="10.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#joining-datasets-with-left_join"><i class="fa fa-check"></i><b>10.9</b> Joining datasets with <code>left_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>11</b> Analysis</a></li>
+<li class="chapter" data-level="12" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>12</b> Data Visualisation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>12.1</b> Introduction to data visualisation</a></li>
+<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
+<li class="chapter" data-level="12.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>12.3</b> Concepts</a></li>
+<li class="chapter" data-level="12.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>12.4</b> Exploratory data visualisation</a></li>
+<li class="chapter" data-level="12.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>12.5</b> Making Grattan-y charts</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>12.5.1</b> Making Grattan charts</a></li>
+<li class="chapter" data-level="12.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>12.5.2</b> Saving Grattan charts</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>12.6</b> Adding labels</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>13</b> Chart cookbook</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up-1"><i class="fa fa-check"></i><b>13.1</b> Set up</a></li>
+<li class="chapter" data-level="13.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>13.2</b> Bar charts</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>13.2.1</b> Simple bar plot</a></li>
+<li class="chapter" data-level="13.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>13.2.2</b> Bar plot with multiple series</a></li>
+<li class="chapter" data-level="13.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>13.2.3</b> Facetted bar charts</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>13.3</b> Line charts</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>13.3.1</b> Simple line chart</a></li>
+<li class="chapter" data-level="13.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>13.3.2</b> Line chart with multiple series</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>13.4</b> Scatter plots</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>13.4.1</b> Simple scatter plot</a></li>
+<li class="chapter" data-level="13.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>13.4.2</b> Scatter plot with reshaped data</a></li>
+<li class="chapter" data-level="13.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>13.4.3</b> Layered scatter plot</a></li>
+<li class="chapter" data-level="13.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>13.4.4</b> Scatter plots with trendlines</a></li>
+<li class="chapter" data-level="13.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>13.4.5</b> Facetted scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>13.5</b> Distributions</a></li>
+<li class="chapter" data-level="13.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>13.6</b> Maps</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>13.6.1</b> <code>sf</code> objects</a></li>
+<li class="chapter" data-level="13.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>13.6.2</b> Using <code>absmapsdata</code></a></li>
+<li class="chapter" data-level="13.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>13.6.3</b> Making choropleth maps</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>13.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
+</ul></li>
+<li class="part"><span><b>IV Advanced topics</b></span></li>
+<li class="chapter" data-level="14" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>14</b> Creating functions</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>14.1</b> It can be useful to make your own function</a></li>
+<li class="chapter" data-level="14.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="14.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>14.3</b> More complex functions</a></li>
+<li class="chapter" data-level="14.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>14.4</b> Sets of functions</a></li>
+<li class="chapter" data-level="14.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>14.5</b> Using <code>purrr::map</code></a></li>
+<li class="chapter" data-level="14.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>14.6</b> Sharing your useful functions with Grattan</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
+<li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
+<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using R at Grattan Institute</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chart-cookbook" class="section level1" number="13">
+<h1><span class="header-section-number">13</span> Chart cookbook</h1>
+<p>This section takes you through a few often-used chart types.</p>
+<div id="set-up-1" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Set up</h2>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="chart-cookbook.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb184-2"><a href="chart-cookbook.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span>
+<span id="cb184-3"><a href="chart-cookbook.html#cb184-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb184-4"><a href="chart-cookbook.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(absmapsdata)</span>
+<span id="cb184-5"><a href="chart-cookbook.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb184-6"><a href="chart-cookbook.html#cb184-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb184-7"><a href="chart-cookbook.html#cb184-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb184-8"><a href="chart-cookbook.html#cb184-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this might be hairy; should get `grattools` happening:</span></span>
+<span id="cb184-9"><a href="chart-cookbook.html#cb184-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattan)</span></code></pre></div>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.</p>
+<p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="chart-cookbook.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</span>
+<span id="cb185-2"><a href="chart-cookbook.html#cb185-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</span></code></pre></div>
+<p>Then read it using the <code>read_csv</code> function, removing any rows missing average or median income values:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="chart-cookbook.html#cb186-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/sa3_income.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb186-2"><a href="chart-cookbook.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(median_income),</span>
+<span id="cb186-3"><a href="chart-cookbook.html#cb186-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(average_income))</span></code></pre></div>
+<pre><code>## Rows: 47899 Columns: 16</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (8): sa3_name, sa4_name, gcc_name, state, occupation, occ_short, prof, g...
+## dbl (8): sa3, sa3_sqkm, sa3_income_percentile, year, median_income, average_...</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="chart-cookbook.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sa3_income)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 16
+##     sa3 sa3_name   sa3_sqkm sa3_income_perce… sa4_name gcc_name state occupation
+##   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;     
+## 1 10102 Queanbeyan    6511.                80 Capital… Rest of… NSW   Clerical …
+## 2 10102 Queanbeyan    6511.                76 Capital… Rest of… NSW   Clerical …
+## 3 10102 Queanbeyan    6511.                78 Capital… Rest of… NSW   Clerical …
+## 4 10102 Queanbeyan    6511.                76 Capital… Rest of… NSW   Clerical …
+## 5 10102 Queanbeyan    6511.                74 Capital… Rest of… NSW   Clerical …
+## 6 10102 Queanbeyan    6511.                79 Capital… Rest of… NSW   Clerical …
+## # … with 8 more variables: occ_short &lt;chr&gt;, prof &lt;chr&gt;, gender &lt;chr&gt;,
+## #   year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;, total_income &lt;dbl&gt;,
+## #   workers &lt;dbl&gt;</code></pre>
+</div>
+<div id="bar-charts" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Bar charts</h2>
+<p>Bar charts are made with <code>geom_bar</code> or <code>geom_col</code>. Creating a bar chart will look something like this:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="chart-cookbook.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb192-2"><a href="chart-cookbook.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">&lt;</span>xvar<span class="sc">&gt;</span>, <span class="at">y =</span> <span class="sc">&lt;</span>yvar<span class="sc">&gt;</span>),</span>
+<span id="cb192-3"><a href="chart-cookbook.html#cb192-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
+<span id="cb192-4"><a href="chart-cookbook.html#cb192-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
+<span id="cb192-5"><a href="chart-cookbook.html#cb192-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>It has two key arguments: <code>stat</code> and <code>position</code>.</p>
+<p>First, <code>stat</code> defines what kind of <em>operation</em> the function will do on the dataset before plotting. Some options are:</p>
+<ul>
+<li><code>"count"</code>, the <strong>default</strong>: count the number of observations in a particular group, and plot that number. This is useful when you’re using microdata. When this is the case, there is no need for a <code>y</code> aesthetic.</li>
+<li><code>"sum"</code>: sum the values of the <code>y</code> aesthetic.</li>
+<li><code>"identity"</code>: directly report the values of the <code>y</code> aesthetic. This is how PowerPoint and Excel charts work.</li>
+</ul>
+<p>You can use <strong><code>geom_col</code></strong> instead, as a shortcut for <code>geom_bar(stat = "identity)</code>.</p>
+<p>Second, <code>position</code>, dictates how multiple bars occupying the same x-axis position will positioned. The options are:</p>
+<ul>
+<li><code>"stack"</code>, the default: bars in the same group are stacked atop one another.</li>
+<li><code>"dodge"</code>: bars in the same group are positioned next to one another.</li>
+<li><code>"fill"</code>: bars in the same group are stacked and all fill to 100 per cent.</li>
+</ul>
+<div id="simple-bar-plot" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Simple bar plot</h3>
+<p>This section will create the following vertical bar plot showing number of workers by state in 2016:</p>
+<p><img src="atlas/simple_bar.png" /><!-- --></p>
+<p>First, create the data you want to plot.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="chart-cookbook.html#cb193-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb193-2"><a href="chart-cookbook.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2016</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-3"><a href="chart-cookbook.html#cb193-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-4"><a href="chart-cookbook.html#cb193-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">workers =</span> <span class="fu">sum</span>(workers))</span>
+<span id="cb193-5"><a href="chart-cookbook.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-6"><a href="chart-cookbook.html#cb193-6" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 2
+##   state workers
+##   &lt;chr&gt;   &lt;dbl&gt;
+## 1 ACT    386989
+## 2 NSW   6527661
+## 3 NT     206061
+## 4 Qld   4104503
+## 5 SA    1382446
+## 6 Tas    420767
+## 7 Vic   5190976
+## 8 WA    2297081</code></pre>
+<p>Looks exceptional: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="chart-cookbook.html#cb195-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb195-2"><a href="chart-cookbook.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
+<span id="cb195-3"><a href="chart-cookbook.html#cb195-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> workers)) <span class="sc">+</span> </span>
+<span id="cb195-4"><a href="chart-cookbook.html#cb195-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_bar_base-1.png" width="839.04" /></p>
+<p>Make it Grattany by adjusting general theme defaults with <code>theme_grattan</code>, and use <code>grattan_y_continuous</code> to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding <code>labels = comma</code>.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="chart-cookbook.html#cb196-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb196-2"><a href="chart-cookbook.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
+<span id="cb196-3"><a href="chart-cookbook.html#cb196-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> workers)) <span class="sc">+</span> </span>
+<span id="cb196-4"><a href="chart-cookbook.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb196-5"><a href="chart-cookbook.html#cb196-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>() <span class="sc">+</span> </span>
+<span id="cb196-6"><a href="chart-cookbook.html#cb196-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> comma)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_bar_grattan-1.png" width="839.04" /></p>
+<p>To order the states by number of workers, you can tell the <code>x</code> aesthetic that you want to <code>reorder</code> the <code>state</code> variable by <code>workers</code>:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="chart-cookbook.html#cb197-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb197-2"><a href="chart-cookbook.html#cb197-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, workers), <span class="co"># reorder states by workers</span></span>
+<span id="cb197-3"><a href="chart-cookbook.html#cb197-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> workers)) <span class="sc">+</span> </span>
+<span id="cb197-4"><a href="chart-cookbook.html#cb197-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb197-5"><a href="chart-cookbook.html#cb197-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>() <span class="sc">+</span> </span>
+<span id="cb197-6"><a href="chart-cookbook.html#cb197-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> comma)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_bar_reorder-1.png" width="839.04" /></p>
+<p>You can probably drop the x-axis label – people will understand that they’re states without you explicitly saying it – and add a title and subtitle with <code>labs</code>:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="chart-cookbook.html#cb198-1" aria-hidden="true" tabindex="-1"></a>simple_bar <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb198-2"><a href="chart-cookbook.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, workers),</span>
+<span id="cb198-3"><a href="chart-cookbook.html#cb198-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> workers)) <span class="sc">+</span> </span>
+<span id="cb198-4"><a href="chart-cookbook.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb198-5"><a href="chart-cookbook.html#cb198-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>() <span class="sc">+</span> </span>
+<span id="cb198-6"><a href="chart-cookbook.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span> </span>
+<span id="cb198-7"><a href="chart-cookbook.html#cb198-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Most workers are on the east coast&quot;</span>,</span>
+<span id="cb198-8"><a href="chart-cookbook.html#cb198-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Number people in employment, 2016&quot;</span>,</span>
+<span id="cb198-9"><a href="chart-cookbook.html#cb198-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb198-10"><a href="chart-cookbook.html#cb198-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span>
+<span id="cb198-11"><a href="chart-cookbook.html#cb198-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-12"><a href="chart-cookbook.html#cb198-12" aria-hidden="true" tabindex="-1"></a>simple_bar</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="839.04" /></p>
+<p>Looks fab! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="chart-cookbook.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/simple_bar.pdf&quot;</span>, simple_bar, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/simple_bar.png" /><!-- --></p>
+</div>
+<div id="bar-multi" class="section level3" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Bar plot with multiple series</h3>
+<p>This section will create a horizontal bar plot showing average income by state and gender in 2016:</p>
+<p>First create the dataset you want to plot, getting the average income by state and gender in the year 2016:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="chart-cookbook.html#cb200-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb200-2"><a href="chart-cookbook.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2016</span>) <span class="sc">%&gt;%</span>   </span>
+<span id="cb200-3"><a href="chart-cookbook.html#cb200-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state, gender) <span class="sc">%&gt;%</span>   </span>
+<span id="cb200-4"><a href="chart-cookbook.html#cb200-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(total_income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="chart-cookbook.html#cb202-1" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 3
+## # Groups:   state [8]
+##    state gender average_income
+##    &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
+##  1 ACT   Men            78141.
+##  2 ACT   Women          65548.
+##  3 NSW   Men            69750.
+##  4 NSW   Women          53191.
+##  5 NT    Men            75246.
+##  6 NT    Women          58527.
+##  7 Qld   Men            65108.
+##  8 Qld   Women          48458.
+##  9 SA    Men            60244.
+## 10 SA    Women          47533.
+## 11 Tas   Men            56345.
+## 12 Tas   Women          45158.
+## 13 Vic   Men            64908.
+## 14 Vic   Women          49264.
+## 15 WA    Men            76677.
+## 16 WA    Women          51578.</code></pre>
+<p>Looks superior: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="chart-cookbook.html#cb204-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb204-2"><a href="chart-cookbook.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
+<span id="cb204-3"><a href="chart-cookbook.html#cb204-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb204-4"><a href="chart-cookbook.html#cb204-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb204-5"><a href="chart-cookbook.html#cb204-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_base-1.png" width="839.04" /></p>
+<p>The two series – women and men – created by <code>fill</code> are stacked on-top of each other by <code>geom_col</code>. You can tell it to plot them next to each other – to ‘dodge’ – instead with the <code>position</code> argument <em>within</em> <code>geom_col</code>:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="chart-cookbook.html#cb205-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb205-2"><a href="chart-cookbook.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
+<span id="cb205-3"><a href="chart-cookbook.html#cb205-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb205-4"><a href="chart-cookbook.html#cb205-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb205-5"><a href="chart-cookbook.html#cb205-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="co"># &#39;dodge&#39; the series</span></span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_dodge-1.png" width="839.04" /></p>
+<p>To flip the chart – a useful move when you have long labels – add <code>coord_flip</code> (ie ‘flip the x and y coordinates of the chart’).</p>
+<p>However, while the <em>coordinates</em> have been flipped, the underlying data hasn’t. If you want to refer to the <code>average_income</code> axis, which now lies horizontally, you would still refer to the <code>y</code> axis (eg <code>grattan_y_continuous</code> still refers to your <code>y</code> aesthetic, <code>average_income</code>).</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="chart-cookbook.html#cb206-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb206-2"><a href="chart-cookbook.html#cb206-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
+<span id="cb206-3"><a href="chart-cookbook.html#cb206-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb206-4"><a href="chart-cookbook.html#cb206-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb206-5"><a href="chart-cookbook.html#cb206-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb206-6"><a href="chart-cookbook.html#cb206-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="co"># rotate the chart</span></span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_flip-1.png" width="839.04" /></p>
+<p>And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the <code>reorder(var_to_reorder, var_to_reorder_by)</code> function when you define the <code>state</code> aesthetic:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="chart-cookbook.html#cb207-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb207-2"><a href="chart-cookbook.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), <span class="co"># reorder</span></span>
+<span id="cb207-3"><a href="chart-cookbook.html#cb207-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb207-4"><a href="chart-cookbook.html#cb207-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb207-5"><a href="chart-cookbook.html#cb207-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb207-6"><a href="chart-cookbook.html#cb207-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_reorder-1.png" width="839.04" /></p>
+<p>Wonderful – that’s how you want our <em>data</em> to look. Now you can Grattanise it. Note that <code>theme_grattan</code> needs to know that the coordinates were flipped so it can apply the right settings. Also tell <code>grattan_fill_manual</code> that there are two fill series.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="chart-cookbook.html#cb208-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb208-2"><a href="chart-cookbook.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), </span>
+<span id="cb208-3"><a href="chart-cookbook.html#cb208-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb208-4"><a href="chart-cookbook.html#cb208-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb208-5"><a href="chart-cookbook.html#cb208-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb208-6"><a href="chart-cookbook.html#cb208-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb208-7"><a href="chart-cookbook.html#cb208-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co"># grattan theme</span></span>
+<span id="cb208-8"><a href="chart-cookbook.html#cb208-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> <span class="co"># y axis</span></span>
+<span id="cb208-9"><a href="chart-cookbook.html#cb208-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="co"># grattan fill colours</span></span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_grattan-1.png" width="839.04" /></p>
+<p>You can use <code>grattan_label</code> to <strong>label your charts</strong> in the Grattan style. This function is a ‘wrapper’ around <code>geom_label</code> that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the <a href="https://ggplot2.tidyverse.org/reference/geom_text.html">standard arguments of <code>geom_label</code></a>.</p>
+<p>Section <a href="data-visualisation.html#adding-labels">12.6</a> shows how labels are treated like data points: they need to know where to go (<code>x</code> and <code>y</code>) and what to show (<code>label</code>). But if you provide <em>every point</em> to your labelling <code>geom</code>, it will plot every label:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="chart-cookbook.html#cb209-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb209-2"><a href="chart-cookbook.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), </span>
+<span id="cb209-3"><a href="chart-cookbook.html#cb209-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb209-4"><a href="chart-cookbook.html#cb209-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb209-5"><a href="chart-cookbook.html#cb209-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb209-6"><a href="chart-cookbook.html#cb209-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb209-7"><a href="chart-cookbook.html#cb209-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb209-8"><a href="chart-cookbook.html#cb209-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb209-9"><a href="chart-cookbook.html#cb209-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb209-10"><a href="chart-cookbook.html#cb209-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="fu">aes</span>(<span class="at">colour =</span> gender,  <span class="co"># colour the text according to gender</span></span>
+<span id="cb209-11"><a href="chart-cookbook.html#cb209-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label =</span> gender),  <span class="co"># label the text according to gender</span></span>
+<span id="cb209-12"><a href="chart-cookbook.html#cb209-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>),  <span class="co"># position dodge with width 1</span></span>
+<span id="cb209-13"><a href="chart-cookbook.html#cb209-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span>  <span class="co"># horizontally align the label so its outside the bar</span></span>
+<span id="cb209-14"><a href="chart-cookbook.html#cb209-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>)   <span class="co"># define colour as two grattan colours</span></span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_label_all-1.png" width="839.04" /></p>
+<p>To just label <em>one</em> of the plots – ie the first one, ACT in this case – we need to tell <code>grattan_label</code>. The easiest way to do this is by <strong>creating a label dataset beforehand</strong>, like <code>label_gender</code> below. This just includes the observations you want to label:</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="chart-cookbook.html#cb210-1" aria-hidden="true" tabindex="-1"></a>label_gender <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb210-2"><a href="chart-cookbook.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;ACT&quot;</span>)  <span class="co"># just want Tasmania observations</span></span>
+<span id="cb210-3"><a href="chart-cookbook.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-4"><a href="chart-cookbook.html#cb210-4" aria-hidden="true" tabindex="-1"></a>label_gender</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+## # Groups:   state [1]
+##   state gender average_income
+##   &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1 ACT   Men            78141.
+## 2 ACT   Women          65548.</code></pre>
+<p>So you can pass that <code>label_gender</code> dataset to <code>grattan_label</code>:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="chart-cookbook.html#cb212-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb212-2"><a href="chart-cookbook.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), </span>
+<span id="cb212-3"><a href="chart-cookbook.html#cb212-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb212-4"><a href="chart-cookbook.html#cb212-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb212-5"><a href="chart-cookbook.html#cb212-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb212-6"><a href="chart-cookbook.html#cb212-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb212-7"><a href="chart-cookbook.html#cb212-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb212-8"><a href="chart-cookbook.html#cb212-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb212-9"><a href="chart-cookbook.html#cb212-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb212-10"><a href="chart-cookbook.html#cb212-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_gender,  <span class="co"># supply the new dataset</span></span>
+<span id="cb212-11"><a href="chart-cookbook.html#cb212-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">colour =</span> gender,</span>
+<span id="cb212-12"><a href="chart-cookbook.html#cb212-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label =</span> gender), </span>
+<span id="cb212-13"><a href="chart-cookbook.html#cb212-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb212-14"><a href="chart-cookbook.html#cb212-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb212-15"><a href="chart-cookbook.html#cb212-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_label-1.png" width="839.04" /></p>
+<p>Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="chart-cookbook.html#cb213-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb213-2"><a href="chart-cookbook.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income),</span>
+<span id="cb213-3"><a href="chart-cookbook.html#cb213-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb213-4"><a href="chart-cookbook.html#cb213-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb213-5"><a href="chart-cookbook.html#cb213-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb213-6"><a href="chart-cookbook.html#cb213-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb213-7"><a href="chart-cookbook.html#cb213-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb213-8"><a href="chart-cookbook.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, </span>
+<span id="cb213-9"><a href="chart-cookbook.html#cb213-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">expand_top =</span> .<span class="dv">1</span>) <span class="sc">+</span> <span class="co"># expand the plot</span></span>
+<span id="cb213-10"><a href="chart-cookbook.html#cb213-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb213-11"><a href="chart-cookbook.html#cb213-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_gender,</span>
+<span id="cb213-12"><a href="chart-cookbook.html#cb213-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">colour =</span> gender,</span>
+<span id="cb213-13"><a href="chart-cookbook.html#cb213-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label =</span> gender), </span>
+<span id="cb213-14"><a href="chart-cookbook.html#cb213-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb213-15"><a href="chart-cookbook.html#cb213-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb213-16"><a href="chart-cookbook.html#cb213-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04" /></p>
+<p>Looks too good to be true! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="chart-cookbook.html#cb214-1" aria-hidden="true" tabindex="-1"></a>multiple_bar <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb214-2"><a href="chart-cookbook.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), </span>
+<span id="cb214-3"><a href="chart-cookbook.html#cb214-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb214-4"><a href="chart-cookbook.html#cb214-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb214-5"><a href="chart-cookbook.html#cb214-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb214-6"><a href="chart-cookbook.html#cb214-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb214-7"><a href="chart-cookbook.html#cb214-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb214-8"><a href="chart-cookbook.html#cb214-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, </span>
+<span id="cb214-9"><a href="chart-cookbook.html#cb214-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">expand_top =</span> .<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb214-10"><a href="chart-cookbook.html#cb214-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb214-11"><a href="chart-cookbook.html#cb214-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_gender, </span>
+<span id="cb214-12"><a href="chart-cookbook.html#cb214-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">colour =</span> gender,</span>
+<span id="cb214-13"><a href="chart-cookbook.html#cb214-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label =</span> gender), </span>
+<span id="cb214-14"><a href="chart-cookbook.html#cb214-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb214-15"><a href="chart-cookbook.html#cb214-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb214-16"><a href="chart-cookbook.html#cb214-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb214-17"><a href="chart-cookbook.html#cb214-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Women earn less than men in every state&quot;</span>,</span>
+<span id="cb214-18"><a href="chart-cookbook.html#cb214-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income of workers, 2016&quot;</span>,</span>
+<span id="cb214-19"><a href="chart-cookbook.html#cb214-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb214-20"><a href="chart-cookbook.html#cb214-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb214-21"><a href="chart-cookbook.html#cb214-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="chart-cookbook.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/multiple_bar.pdf&quot;</span>, multiple_bar, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/multiple_bar.png" /><!-- --></p>
+</div>
+<div id="facet-bar" class="section level3" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> Facetted bar charts</h3>
+<p>‘Facetting’ a chart means you create a separate plot for each group. It’s particularly useful in showing differences between more than one group. The chart you’ll make in this section will show annual income by gender and state, <em>and</em> by professional and non-professional workers:</p>
+<p>Start by creating the dataset you want to plot:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="chart-cookbook.html#cb216-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb216-2"><a href="chart-cookbook.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state, gender, prof) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-3"><a href="chart-cookbook.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(total_income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;, &#39;gender&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="chart-cookbook.html#cb218-1" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 4
+## # Groups:   state, gender [16]
+##    state gender prof             average_income
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;                     &lt;dbl&gt;
+##  1 ACT   Men    Non-professional         52545.
+##  2 ACT   Men    Professional             96488.
+##  3 ACT   Women  Non-professional         46151.
+##  4 ACT   Women  Professional             79828.
+##  5 NSW   Men    Non-professional         49182.
+##  6 NSW   Men    Professional             91624.
+##  7 NSW   Women  Non-professional         36772.
+##  8 NSW   Women  Professional             68445.
+##  9 NT    Men    Non-professional         58844.
+## 10 NT    Men    Professional             87666.
+## # … with 22 more rows</code></pre>
+<p>Then plot a bar chart with <code>geom_col</code> and <code>theme_grattan</code> elements, using a similar chain to the final plot of <a href="chart-cookbook.html#bar-multi">13.2.2</a> (without the labelling). We’ll build on this chart:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="chart-cookbook.html#cb220-1" aria-hidden="true" tabindex="-1"></a>facet_bar <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb220-2"><a href="chart-cookbook.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income),</span>
+<span id="cb220-3"><a href="chart-cookbook.html#cb220-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb220-4"><a href="chart-cookbook.html#cb220-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb220-5"><a href="chart-cookbook.html#cb220-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb220-6"><a href="chart-cookbook.html#cb220-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb220-7"><a href="chart-cookbook.html#cb220-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb220-8"><a href="chart-cookbook.html#cb220-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, </span>
+<span id="cb220-9"><a href="chart-cookbook.html#cb220-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">expand_top =</span> .<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb220-10"><a href="chart-cookbook.html#cb220-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb220-11"><a href="chart-cookbook.html#cb220-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb220-12"><a href="chart-cookbook.html#cb220-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Professional workers earn more in every state&quot;</span>,</span>
+<span id="cb220-13"><a href="chart-cookbook.html#cb220-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income of workers, 2016&quot;</span>,</span>
+<span id="cb220-14"><a href="chart-cookbook.html#cb220-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb220-15"><a href="chart-cookbook.html#cb220-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb220-16"><a href="chart-cookbook.html#cb220-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<p>You can ‘facet’ bar charts – and any other chart type – with the <code>facet_grid</code> or <code>facet_wrap</code> commands. The latter tends to give you more control over label placement, so let’s start with that. <code>fadcet_wrap</code> asks the questions: “what variables should I create separete charts for”, and “how should I place them on the page”? Tell it to use the <code>prof</code> variable with the <code>vars()</code> function.<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="chart-cookbook.html#cb221-1" aria-hidden="true" tabindex="-1"></a>facet_bar <span class="sc">+</span></span>
+<span id="cb221-2"><a href="chart-cookbook.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(prof))</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_facet_wrap-1.png" width="839.04" /></p>
+<p>That’s good! It does what it should. Now you just need to tidy it up a little bit by adding labels and avoiding clashes along the bottom axis.</p>
+<p>Create labels in the same way you have done before: you only want to label one ‘women’ and ‘men’ series, so create a dataset that contains only that information:</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="chart-cookbook.html#cb222-1" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb222-2"><a href="chart-cookbook.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;ACT&quot;</span>,</span>
+<span id="cb222-3"><a href="chart-cookbook.html#cb222-3" aria-hidden="true" tabindex="-1"></a>         prof <span class="sc">==</span> <span class="st">&quot;Non-professional&quot;</span>)</span>
+<span id="cb222-4"><a href="chart-cookbook.html#cb222-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-5"><a href="chart-cookbook.html#cb222-5" aria-hidden="true" tabindex="-1"></a>label_data</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+## # Groups:   state, gender [2]
+##   state gender prof             average_income
+##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;                     &lt;dbl&gt;
+## 1 ACT   Men    Non-professional         52545.
+## 2 ACT   Women  Non-professional         46151.</code></pre>
+<p>Good – now add that to the plot with <code>grattan_label</code>, supplying the required aesthetics and position. And use <code>hjust = 0</code> to tell the labels to be left-aligned.</p>
+<p>To give each plot a black base axis, you can add <code>geom_hline()</code> with <code>yintercept = 0</code>.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="chart-cookbook.html#cb224-1" aria-hidden="true" tabindex="-1"></a>facet_bar <span class="sc">+</span></span>
+<span id="cb224-2"><a href="chart-cookbook.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(prof)) <span class="sc">+</span> </span>
+<span id="cb224-3"><a href="chart-cookbook.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span>  <span class="co"># add black line</span></span>
+<span id="cb224-4"><a href="chart-cookbook.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_data, <span class="co"># supply label data</span></span>
+<span id="cb224-5"><a href="chart-cookbook.html#cb224-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> gender,</span>
+<span id="cb224-6"><a href="chart-cookbook.html#cb224-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">colour =</span> gender),</span>
+<span id="cb224-7"><a href="chart-cookbook.html#cb224-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb224-8"><a href="chart-cookbook.html#cb224-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="839.04" /></p>
+<p>Magnificent! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="chart-cookbook.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create label data</span></span>
+<span id="cb225-2"><a href="chart-cookbook.html#cb225-2" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb225-3"><a href="chart-cookbook.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;ACT&quot;</span>,</span>
+<span id="cb225-4"><a href="chart-cookbook.html#cb225-4" aria-hidden="true" tabindex="-1"></a>         prof <span class="sc">==</span> <span class="st">&quot;Non-professional&quot;</span>)</span>
+<span id="cb225-5"><a href="chart-cookbook.html#cb225-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-6"><a href="chart-cookbook.html#cb225-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb225-7"><a href="chart-cookbook.html#cb225-7" aria-hidden="true" tabindex="-1"></a>facet_bar <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb225-8"><a href="chart-cookbook.html#cb225-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income),</span>
+<span id="cb225-9"><a href="chart-cookbook.html#cb225-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb225-10"><a href="chart-cookbook.html#cb225-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb225-11"><a href="chart-cookbook.html#cb225-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb225-12"><a href="chart-cookbook.html#cb225-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb225-13"><a href="chart-cookbook.html#cb225-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">flipped =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb225-14"><a href="chart-cookbook.html#cb225-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar,</span>
+<span id="cb225-15"><a href="chart-cookbook.html#cb225-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">25e3</span>, <span class="fl">50e3</span>, <span class="fl">75e3</span>)) <span class="sc">+</span>  <span class="co"># change breaks</span></span>
+<span id="cb225-16"><a href="chart-cookbook.html#cb225-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb225-17"><a href="chart-cookbook.html#cb225-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb225-18"><a href="chart-cookbook.html#cb225-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Professional workers earn more in every state&quot;</span>,</span>
+<span id="cb225-19"><a href="chart-cookbook.html#cb225-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income of workers, 2016&quot;</span>,</span>
+<span id="cb225-20"><a href="chart-cookbook.html#cb225-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb225-21"><a href="chart-cookbook.html#cb225-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb225-22"><a href="chart-cookbook.html#cb225-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb225-23"><a href="chart-cookbook.html#cb225-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(prof)) <span class="sc">+</span> </span>
+<span id="cb225-24"><a href="chart-cookbook.html#cb225-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb225-25"><a href="chart-cookbook.html#cb225-25" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> gender,</span>
+<span id="cb225-26"><a href="chart-cookbook.html#cb225-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">colour =</span> gender),</span>
+<span id="cb225-27"><a href="chart-cookbook.html#cb225-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb225-28"><a href="chart-cookbook.html#cb225-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="chart-cookbook.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/facet_bar.pdf&quot;</span>, facet_bar, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/facet_bar.png" /><!-- --></p>
+</div>
+</div>
+<div id="line-charts" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Line charts</h2>
+<p>A line chart has one key aesthetic: <code>group</code>. This tells <code>ggplot</code> how to connect individual lines.</p>
+<div id="simple-line-chart" class="section level3" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Simple line chart</h3>
+<p>The first line chart shows the number of workers in Australia between 2011 and 2016:</p>
+</div>
+<div id="line-chart-with-multiple-series" class="section level3" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> Line chart with multiple series</h3>
+<p>This line chart will show how <strong>real</strong> average income has changed for each state over the past five years:</p>
+<p>First, take the <code>sa3_income</code> dataset and create a summary table average income by year and state. Ignore the territories for this chart.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="chart-cookbook.html#cb227-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb227-2"><a href="chart-cookbook.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ACT&quot;</span>, <span class="st">&quot;NT&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb227-3"><a href="chart-cookbook.html#cb227-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, state) <span class="sc">%&gt;%</span> </span>
+<span id="cb227-4"><a href="chart-cookbook.html#cb227-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(total_income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span>
+<span id="cb227-5"><a href="chart-cookbook.html#cb227-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-6"><a href="chart-cookbook.html#cb227-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   year [1]
+##    year state average_income
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+## 1  2011 NSW           55483.
+## 2  2011 Qld           51408.
+## 3  2011 SA            48443.
+## 4  2011 Tas           45439.
+## 5  2011 Vic           52053.
+## 6  2011 WA            58795.</code></pre>
+<p>The income data presented is nominal, so you’ll need to inflate to ‘real’ dollars using the `cpi_inflate</p>
+<p>Plot a line chart by taking the <code>data</code>, passing it to <code>ggplot</code> with <em>aes</em>thetics, then using <code>geom_line</code>:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="chart-cookbook.html#cb229-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb229-2"><a href="chart-cookbook.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb229-3"><a href="chart-cookbook.html#cb229-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb229-4"><a href="chart-cookbook.html#cb229-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> state)) <span class="sc">+</span> </span>
+<span id="cb229-5"><a href="chart-cookbook.html#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="839.04" /></p>
+<p>Now you can represent each <code>state</code> by colour:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="chart-cookbook.html#cb230-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb230-2"><a href="chart-cookbook.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb230-3"><a href="chart-cookbook.html#cb230-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb230-4"><a href="chart-cookbook.html#cb230-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> state,</span>
+<span id="cb230-5"><a href="chart-cookbook.html#cb230-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> state)) <span class="sc">+</span> </span>
+<span id="cb230-6"><a href="chart-cookbook.html#cb230-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="839.04" /></p>
+<p>Cooler! Adding some Grattan formatting to it and define it as our ‘base chart’:</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="chart-cookbook.html#cb231-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
+<span id="cb231-2"><a href="chart-cookbook.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb231-3"><a href="chart-cookbook.html#cb231-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb231-4"><a href="chart-cookbook.html#cb231-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> state,</span>
+<span id="cb231-5"><a href="chart-cookbook.html#cb231-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> state)) <span class="sc">+</span> </span>
+<span id="cb231-6"><a href="chart-cookbook.html#cb231-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb231-7"><a href="chart-cookbook.html#cb231-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>() <span class="sc">+</span> </span>
+<span id="cb231-8"><a href="chart-cookbook.html#cb231-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span> </span>
+<span id="cb231-9"><a href="chart-cookbook.html#cb231-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb231-10"><a href="chart-cookbook.html#cb231-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb231-11"><a href="chart-cookbook.html#cb231-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb231-12"><a href="chart-cookbook.html#cb231-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-13"><a href="chart-cookbook.html#cb231-13" aria-hidden="true" tabindex="-1"></a>base_chart</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="839.04" /></p>
+<p>You can add ‘dots’ for each year by layering <code>geom_point</code> on top of <code>geom_line</code>:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="chart-cookbook.html#cb232-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb232-2"><a href="chart-cookbook.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="839.04" /></p>
+<p>To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="chart-cookbook.html#cb233-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb233-2"><a href="chart-cookbook.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">expand_right =</span> .<span class="dv">3</span>,</span>
+<span id="cb233-3"><a href="chart-cookbook.html#cb233-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2011</span>, <span class="dv">2016</span>, <span class="dv">1</span>),</span>
+<span id="cb233-4"><a href="chart-cookbook.html#cb233-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;2011&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;16&quot;</span>)) </span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="839.04" /></p>
+<p>Then add labels, using</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="chart-cookbook.html#cb234-1" aria-hidden="true" tabindex="-1"></a>label_line <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb234-2"><a href="chart-cookbook.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>)</span>
+<span id="cb234-3"><a href="chart-cookbook.html#cb234-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-4"><a href="chart-cookbook.html#cb234-4" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb234-5"><a href="chart-cookbook.html#cb234-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb234-6"><a href="chart-cookbook.html#cb234-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">expand_left =</span> .<span class="dv">1</span>,</span>
+<span id="cb234-7"><a href="chart-cookbook.html#cb234-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2011</span>, <span class="dv">2016</span>, <span class="dv">1</span>),</span>
+<span id="cb234-8"><a href="chart-cookbook.html#cb234-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;2011&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;16&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb234-9"><a href="chart-cookbook.html#cb234-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_line,</span>
+<span id="cb234-10"><a href="chart-cookbook.html#cb234-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> state),</span>
+<span id="cb234-11"><a href="chart-cookbook.html#cb234-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">nudge_x =</span> <span class="sc">-</span><span class="cn">Inf</span>,</span>
+<span id="cb234-12"><a href="chart-cookbook.html#cb234-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">segment.colour =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<pre><code>## Warning: Ignoring unknown parameters: segment.colour</code></pre>
+<p><img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="839.04" />
+If you wanted to show each state individually, you could <strong>facet</strong> your chart so that a separate plot was produced for each state:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="chart-cookbook.html#cb236-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb236-2"><a href="chart-cookbook.html#cb236-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb236-3"><a href="chart-cookbook.html#cb236-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grattan_x_continuous</span>(<span class="at">expand_left =</span> .<span class="dv">1</span>, </span>
+<span id="cb236-4"><a href="chart-cookbook.html#cb236-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">expand_right =</span> .<span class="dv">1</span>,</span>
+<span id="cb236-5"><a href="chart-cookbook.html#cb236-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2011</span>, <span class="dv">2016</span>, <span class="dv">1</span>),</span>
+<span id="cb236-6"><a href="chart-cookbook.html#cb236-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;2011&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;16&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb236-7"><a href="chart-cookbook.html#cb236-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">10</span>, <span class="st">&quot;mm&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb236-8"><a href="chart-cookbook.html#cb236-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(state <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="839.04" /></p>
+</div>
+</div>
+<div id="scatter-plots" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> Scatter plots</h2>
+<p>Scatter plots require <code>x</code> and <code>y</code> aesthetics. These can then be coloured and faceted.</p>
+<div id="simple-scatter-plot" class="section level3" number="13.4.1">
+<h3><span class="header-section-number">13.4.1</span> Simple scatter plot</h3>
+<p>The first simple scatter plot will show the relationship between average incomes of professionals and the number of professional workers by area in 2016:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="chart-cookbook.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;atlas/simple_scatter.png&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/simple_scatter.png" /><!-- --></p>
+<p>Create the dataset you want to plot:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="chart-cookbook.html#cb238-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb238-2"><a href="chart-cookbook.html#cb238-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2016</span>,</span>
+<span id="cb238-3"><a href="chart-cookbook.html#cb238-3" aria-hidden="true" tabindex="-1"></a>         prof <span class="sc">==</span> <span class="st">&quot;Professional&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb238-4"><a href="chart-cookbook.html#cb238-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sa3_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb238-5"><a href="chart-cookbook.html#cb238-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">workers =</span> <span class="fu">sum</span>(workers),</span>
+<span id="cb238-6"><a href="chart-cookbook.html#cb238-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">average_income =</span> <span class="fu">sum</span>(total_income) <span class="sc">/</span> workers)</span>
+<span id="cb238-7"><a href="chart-cookbook.html#cb238-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-8"><a href="chart-cookbook.html#cb238-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   sa3_name       workers average_income
+##   &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Adelaide City    10005         90115.
+## 2 Adelaide Hills   24715         84921.
+## 3 Albany           12390         70581.
+## 4 Albury           16465         72305.
+## 5 Alice Springs     9640         84340.
+## 6 Armadale         19771         85407.</code></pre>
+<p>The dataset has one observation per SA3, and the two variables you want to plot: workers and average income. Pass the data to <code>ggplot</code>, set the aesthetics and plot with <code>geom_point</code>:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="chart-cookbook.html#cb240-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb240-2"><a href="chart-cookbook.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb240-3"><a href="chart-cookbook.html#cb240-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income)) <span class="sc">+</span> </span>
+<span id="cb240-4"><a href="chart-cookbook.html#cb240-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_scatter_base-1.png" width="839.04" /></p>
+<p>Then add Grattan theme elements:</p>
+<ul>
+<li><code>theme_grattan()</code>, telling it that the <code>chart_type</code> is a scatter plot.</li>
+<li><code>grattan_y_continuous()</code>, setting the label style to <code>dollar</code>.</li>
+<li><code>grattan_x_continuous()</code>, setting the label style to <code>comma</code>.</li>
+</ul>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="chart-cookbook.html#cb241-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb241-2"><a href="chart-cookbook.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb241-3"><a href="chart-cookbook.html#cb241-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income)) <span class="sc">+</span> </span>
+<span id="cb241-4"><a href="chart-cookbook.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb241-5"><a href="chart-cookbook.html#cb241-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb241-6"><a href="chart-cookbook.html#cb241-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb241-7"><a href="chart-cookbook.html#cb241-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">labels =</span> comma)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04" /></p>
+<p>Looks admirable. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="chart-cookbook.html#cb242-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb242-2"><a href="chart-cookbook.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb242-3"><a href="chart-cookbook.html#cb242-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income)) <span class="sc">+</span> </span>
+<span id="cb242-4"><a href="chart-cookbook.html#cb242-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb242-5"><a href="chart-cookbook.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb242-6"><a href="chart-cookbook.html#cb242-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb242-7"><a href="chart-cookbook.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">labels =</span> comma,</span>
+<span id="cb242-8"><a href="chart-cookbook.html#cb242-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">expand_right =</span> .<span class="dv">05</span>) <span class="co"># expand the right by 5%</span></span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/simple_scatter_expand-1.png" width="839.04" /></p>
+<p>Finally, add titles and save the plot:</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="chart-cookbook.html#cb243-1" aria-hidden="true" tabindex="-1"></a>simple_scatter <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb243-2"><a href="chart-cookbook.html#cb243-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
+<span id="cb243-3"><a href="chart-cookbook.html#cb243-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income)) <span class="sc">+</span> </span>
+<span id="cb243-4"><a href="chart-cookbook.html#cb243-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb243-5"><a href="chart-cookbook.html#cb243-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb243-6"><a href="chart-cookbook.html#cb243-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb243-7"><a href="chart-cookbook.html#cb243-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">labels =</span> comma,</span>
+<span id="cb243-8"><a href="chart-cookbook.html#cb243-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">expand_right =</span> .<span class="dv">05</span>) <span class="sc">+</span> </span>
+<span id="cb243-9"><a href="chart-cookbook.html#cb243-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;More workers, more income&quot;</span>,</span>
+<span id="cb243-10"><a href="chart-cookbook.html#cb243-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income and number of workers by SA3, 2016&quot;</span>,</span>
+<span id="cb243-11"><a href="chart-cookbook.html#cb243-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Average income&quot;</span>,</span>
+<span id="cb243-12"><a href="chart-cookbook.html#cb243-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Workers&quot;</span>,</span>
+<span id="cb243-13"><a href="chart-cookbook.html#cb243-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="chart-cookbook.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/simple_scatter.pdf&quot;</span>, simple_scatter, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/simple_scatter.png" /><!-- --></p>
+</div>
+<div id="scatter-plot-with-reshaped-data" class="section level3" number="13.4.2">
+<h3><span class="header-section-number">13.4.2</span> Scatter plot with reshaped data</h3>
+<p>The next scatter plot involves the same basic plotting principles of the chart above, but requires a bit more data manipulation before plotting.</p>
+<p>The chart will show the wages of professional workers and non-professional workers in 2016:</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="chart-cookbook.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;atlas/scatter_reshape.png&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/scatter_reshape.png" /><!-- --></p>
+<p>First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="chart-cookbook.html#cb246-1" aria-hidden="true" tabindex="-1"></a>data_prep <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb246-2"><a href="chart-cookbook.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2016</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-3"><a href="chart-cookbook.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sa3_name, prof) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-4"><a href="chart-cookbook.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(total_income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;sa3_name&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="chart-cookbook.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_prep)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   sa3_name [3]
+##   sa3_name       prof             average_income
+##   &lt;chr&gt;          &lt;chr&gt;                     &lt;dbl&gt;
+## 1 Adelaide City  Non-professional         40843.
+## 2 Adelaide City  Professional             90115.
+## 3 Adelaide Hills Non-professional         47208.
+## 4 Adelaide Hills Professional             84921.
+## 5 Albany         Non-professional         46609.
+## 6 Albany         Professional             70581.</code></pre>
+<p>That’s good – you have the numbers you need. But think about how you’re going to <em>plot</em> them using <code>x</code> and <code>y</code> aesthetics. You’ll need one variable for <code>x = professional_income</code> and one variable for <code>y = non_professional_income</code>. At the moment, these are represented by different <em>rows</em>.</p>
+<p>You can fix this by reshaping the data with the <code>pivot_wider</code> function. The three arguments you provide here are:</p>
+<ul>
+<li><code>id_cols = sa3_name</code>: the variable <code>sa3_name</code> uniquely identifies each row in your data.</li>
+<li><code>names_from = prof</code>: the variable <code>prof</code> contains the variables names for the <em>new</em> variables you are creating.</li>
+<li><code>values_from = average_income</code>: the variable <code>average_income</code> contains the <em>values</em> that will fill the new variables.</li>
+</ul>
+<p>After the <code>pivot_wider</code> step is complete, use <code>janitor::clean_names()</code> to convert the new <code>Professional</code> and <code>Non-Professional</code> names to <code>snake_case</code> to make them easier to use down the track:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="chart-cookbook.html#cb250-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_prep <span class="sc">%&gt;%</span> </span>
+<span id="cb250-2"><a href="chart-cookbook.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> sa3_name,  <span class="co"># variables that will stay the same</span></span>
+<span id="cb250-3"><a href="chart-cookbook.html#cb250-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> prof,   <span class="co"># variables that will dictate the new names</span></span>
+<span id="cb250-4"><a href="chart-cookbook.html#cb250-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> average_income) <span class="sc">%&gt;%</span>  <span class="co"># these will be the values</span></span>
+<span id="cb250-5"><a href="chart-cookbook.html#cb250-5" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="co"># tidy up the new variable names</span></span>
+<span id="cb250-6"><a href="chart-cookbook.html#cb250-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-7"><a href="chart-cookbook.html#cb250-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   sa3_name [6]
+##   sa3_name       non_professional professional
+##   &lt;chr&gt;                     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Adelaide City            40843.       90115.
+## 2 Adelaide Hills           47208.       84921.
+## 3 Albany                   46609.       70581.
+## 4 Albury                   44718.       72305.
+## 5 Alice Springs            54647.       84340.
+## 6 Armadale                 57599.       85407.</code></pre>
+<p>Getting the data in the right format for your plot – rather than ‘hacking’ your plot to fit your data – will save you time and effort down the line.</p>
+<p>Now you have a dataset in the format you want to plot, you can pass it to <code>ggplot</code> and add aesthetics like you normally would.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="chart-cookbook.html#cb252-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb252-2"><a href="chart-cookbook.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> non_professional,</span>
+<span id="cb252-3"><a href="chart-cookbook.html#cb252-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> professional)) <span class="sc">+</span> </span>
+<span id="cb252-4"><a href="chart-cookbook.html#cb252-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="co"># make the points a little transparent</span></span></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_reshape_base-1.png" width="839.04" /></p>
+<p>Then, like you’ve done before, add Grattan theme elements and titles, and save with <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="chart-cookbook.html#cb254-1" aria-hidden="true" tabindex="-1"></a>scatter_reshape <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb254-2"><a href="chart-cookbook.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> non_professional,</span>
+<span id="cb254-3"><a href="chart-cookbook.html#cb254-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> professional)) <span class="sc">+</span> </span>
+<span id="cb254-4"><a href="chart-cookbook.html#cb254-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb254-5"><a href="chart-cookbook.html#cb254-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb254-6"><a href="chart-cookbook.html#cb254-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
+<span id="cb254-7"><a href="chart-cookbook.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span></span>
+<span id="cb254-8"><a href="chart-cookbook.html#cb254-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Non-professionals tend to earn more when professionals do&quot;</span>,</span>
+<span id="cb254-9"><a href="chart-cookbook.html#cb254-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income for workers by SA3, 2016&quot;</span>,</span>
+<span id="cb254-10"><a href="chart-cookbook.html#cb254-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Professional incomes&quot;</span>,</span>
+<span id="cb254-11"><a href="chart-cookbook.html#cb254-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Non-professional incomes&quot;</span>,</span>
+<span id="cb254-12"><a href="chart-cookbook.html#cb254-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="chart-cookbook.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/scatter_reshape.pdf&quot;</span>, scatter_reshape, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/scatter_reshape.png" /><!-- --></p>
+</div>
+<div id="layered-scatter-plot" class="section level3" number="13.4.3">
+<h3><span class="header-section-number">13.4.3</span> Layered scatter plot</h3>
+<p>For the third plot, look at the incomes of non-professional workers by their area’s total income percentile:</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="chart-cookbook.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;atlas/scatter_layer.png&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/scatter_layer.png" /><!-- --></p>
+<p>Get the data you want to plot:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="chart-cookbook.html#cb257-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb257-2"><a href="chart-cookbook.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2016</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb257-3"><a href="chart-cookbook.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_income =</span> average_income <span class="sc">*</span> workers) <span class="sc">%&gt;%</span> </span>
+<span id="cb257-4"><a href="chart-cookbook.html#cb257-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sa3_name, sa3_income_percentile, prof, occ_short) <span class="sc">%&gt;%</span> </span>
+<span id="cb257-5"><a href="chart-cookbook.html#cb257-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">income =</span> <span class="fu">sum</span>(total_income),</span>
+<span id="cb257-6"><a href="chart-cookbook.html#cb257-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">workers =</span> <span class="fu">sum</span>(workers),</span>
+<span id="cb257-7"><a href="chart-cookbook.html#cb257-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">average_income =</span> income <span class="sc">/</span> workers)</span>
+<span id="cb257-8"><a href="chart-cookbook.html#cb257-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-9"><a href="chart-cookbook.html#cb257-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 7
+## # Groups:   sa3_name, sa3_income_percentile, prof [1]
+##   sa3_name      sa3_income_perce… prof   occ_short income workers average_income
+##   &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Adelaide City                66 Non-p… Admin     1.44e8    2674         53979.
+## 2 Adelaide City                66 Non-p… Driver    1.85e7     396         46762.
+## 3 Adelaide City                66 Non-p… Labourer  3.92e7    1516         25868.
+## 4 Adelaide City                66 Non-p… Sales     5.05e7    1546         32680.
+## 5 Adelaide City                66 Non-p… Service   7.75e7    2346         33034.
+## 6 Adelaide City                66 Non-p… Trades    7.85e7    1525         51448.</code></pre>
+<p>To make a scatter plot with <code>average_income</code> against <code>sa3_income_percentile</code>, pass the <code>income</code> dataset to <code>ggplot</code>, add <code>x = sa3_income_percentile</code>, <code>y = average_income</code> and <code>colour = gender</code> aesthetics, then plot it with <code>geom_point</code>. Tell <code>geom_point</code> to reduce the opacity with <code>alpha = 0.2</code>, as these individual points are more of the ‘background’ to the plot:</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="chart-cookbook.html#cb259-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb259-2"><a href="chart-cookbook.html#cb259-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sa3_income_percentile,</span>
+<span id="cb259-3"><a href="chart-cookbook.html#cb259-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb259-4"><a href="chart-cookbook.html#cb259-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> prof)) <span class="sc">+</span></span>
+<span id="cb259-5"><a href="chart-cookbook.html#cb259-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_prep-1.png" width="839.04" /></p>
+<p>Now add your Grattan theme elements:</p>
+<ul>
+<li><code>theme_grattan()</code>, telling it that the <code>chart_type</code> is a scatter plot.</li>
+<li><code>grattan_colour_manual()</code> with <code>2</code> colours.</li>
+<li><code>grattan_y_continuous()</code>, setting the label style to <code>dollar</code>. Also tell the plot to start at zero by setting <code>limits = c(0, NA)</code> (lower, upper limits, with <code>NA</code> representing ‘choose automatically’). Note that starting at zero isn’t a requirement for scatter plots, but here it will give you some breathing space for your labels.</li>
+<li><code>grattan_x_continuous()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="chart-cookbook.html#cb260-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb260-2"><a href="chart-cookbook.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sa3_income_percentile,</span>
+<span id="cb260-3"><a href="chart-cookbook.html#cb260-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb260-4"><a href="chart-cookbook.html#cb260-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> prof)) <span class="sc">+</span></span>
+<span id="cb260-5"><a href="chart-cookbook.html#cb260-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb260-6"><a href="chart-cookbook.html#cb260-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb260-7"><a href="chart-cookbook.html#cb260-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb260-8"><a href="chart-cookbook.html#cb260-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, </span>
+<span id="cb260-9"><a href="chart-cookbook.html#cb260-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb260-10"><a href="chart-cookbook.html#cb260-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>()</span>
+<span id="cb260-11"><a href="chart-cookbook.html#cb260-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-12"><a href="chart-cookbook.html#cb260-12" aria-hidden="true" tabindex="-1"></a>base_chart</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04" /></p>
+<p>Looks first-rate! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="chart-cookbook.html#cb261-1" aria-hidden="true" tabindex="-1"></a>perc_average <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb261-2"><a href="chart-cookbook.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prof, sa3_income_percentile) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-3"><a href="chart-cookbook.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;prof&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="chart-cookbook.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(perc_average)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   prof [1]
+##   prof             sa3_income_percentile average_income
+##   &lt;chr&gt;                            &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Non-professional                     1         40515.
+## 2 Non-professional                     2         42689.
+## 3 Non-professional                     3         42280.
+## 4 Non-professional                     4         42600.
+## 5 Non-professional                     5         43868.
+## 6 Non-professional                     6         42615.</code></pre>
+<p>Then layer this on your plot by adding another <code>geom_point</code> and providing the <code>perc_average</code> data. Add a <code>fill</code> aesthetic and change the shape to <code>21</code>: a circle with a border (controlled by <code>colour</code>) and fill colour (controlled by <code>fill</code>).<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>
+Make the outline of the circle black with <code>colour</code> and make the <code>size</code> a little bigger:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="chart-cookbook.html#cb265-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb265-2"><a href="chart-cookbook.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> perc_average,</span>
+<span id="cb265-3"><a href="chart-cookbook.html#cb265-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">fill =</span> prof),</span>
+<span id="cb265-4"><a href="chart-cookbook.html#cb265-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb265-5"><a href="chart-cookbook.html#cb265-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb265-6"><a href="chart-cookbook.html#cb265-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb265-7"><a href="chart-cookbook.html#cb265-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_add_perc-1.png" width="839.04" /></p>
+<p>To add labels, first decide where they should go. Try positioning the “Professional” above its averages, and “Non-professional” at the bottom.</p>
+<p>Like labelling before, you should create a new dataset with your label information, and pass that label dataset to the <code>grattan_label</code> function:</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="chart-cookbook.html#cb266-1" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb266-2"><a href="chart-cookbook.html#cb266-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sa3_income_percentile =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>),</span>
+<span id="cb266-3"><a href="chart-cookbook.html#cb266-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">average_income =</span> <span class="fu">c</span>(<span class="fl">15e3</span>, <span class="fl">120e3</span>),</span>
+<span id="cb266-4"><a href="chart-cookbook.html#cb266-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prof =</span>  <span class="fu">c</span>(<span class="st">&quot;Non-professional&quot;</span>, <span class="st">&quot;Professional&quot;</span>))</span></code></pre></div>
+<p>Finally, add the labels to the plot and give some titles:</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="chart-cookbook.html#cb267-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
+<span id="cb267-2"><a href="chart-cookbook.html#cb267-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> perc_average,</span>
+<span id="cb267-3"><a href="chart-cookbook.html#cb267-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">fill =</span> prof),</span>
+<span id="cb267-4"><a href="chart-cookbook.html#cb267-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb267-5"><a href="chart-cookbook.html#cb267-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb267-6"><a href="chart-cookbook.html#cb267-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb267-7"><a href="chart-cookbook.html#cb267-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb267-8"><a href="chart-cookbook.html#cb267-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb267-9"><a href="chart-cookbook.html#cb267-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> prof)) <span class="sc">+</span> </span>
+<span id="cb267-10"><a href="chart-cookbook.html#cb267-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Non-professional workers earn about the same, regardless of area income&quot;</span>,</span>
+<span id="cb267-11"><a href="chart-cookbook.html#cb267-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income of workers by area income percentile, 2016&quot;</span>,</span>
+<span id="cb267-12"><a href="chart-cookbook.html#cb267-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Area total income percentile&quot;</span>,</span>
+<span id="cb267-13"><a href="chart-cookbook.html#cb267-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Average income&quot;</span>,</span>
+<span id="cb267-14"><a href="chart-cookbook.html#cb267-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_label-1.png" width="839.04" /></p>
+<p>Putting that all together, your code will look something like this:</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="chart-cookbook.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create percentage data</span></span>
+<span id="cb268-2"><a href="chart-cookbook.html#cb268-2" aria-hidden="true" tabindex="-1"></a>perc_average <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb268-3"><a href="chart-cookbook.html#cb268-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prof, sa3_income_percentile) <span class="sc">%&gt;%</span> </span>
+<span id="cb268-4"><a href="chart-cookbook.html#cb268-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;prof&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="chart-cookbook.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create label data</span></span>
+<span id="cb270-2"><a href="chart-cookbook.html#cb270-2" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb270-3"><a href="chart-cookbook.html#cb270-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sa3_income_percentile =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>),</span>
+<span id="cb270-4"><a href="chart-cookbook.html#cb270-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">average_income =</span> <span class="fu">c</span>(<span class="fl">15e3</span>, <span class="fl">120e3</span>),</span>
+<span id="cb270-5"><a href="chart-cookbook.html#cb270-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prof =</span>  <span class="fu">c</span>(<span class="st">&quot;Non-professional&quot;</span>, <span class="st">&quot;Professional&quot;</span>))</span>
+<span id="cb270-6"><a href="chart-cookbook.html#cb270-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-7"><a href="chart-cookbook.html#cb270-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-8"><a href="chart-cookbook.html#cb270-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot </span></span>
+<span id="cb270-9"><a href="chart-cookbook.html#cb270-9" aria-hidden="true" tabindex="-1"></a>scatter_layer <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb270-10"><a href="chart-cookbook.html#cb270-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sa3_income_percentile,</span>
+<span id="cb270-11"><a href="chart-cookbook.html#cb270-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
+<span id="cb270-12"><a href="chart-cookbook.html#cb270-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> prof)) <span class="sc">+</span></span>
+<span id="cb270-13"><a href="chart-cookbook.html#cb270-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb270-14"><a href="chart-cookbook.html#cb270-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb270-15"><a href="chart-cookbook.html#cb270-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb270-16"><a href="chart-cookbook.html#cb270-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, </span>
+<span id="cb270-17"><a href="chart-cookbook.html#cb270-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb270-18"><a href="chart-cookbook.html#cb270-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>() <span class="sc">+</span> </span>
+<span id="cb270-19"><a href="chart-cookbook.html#cb270-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> perc_average,</span>
+<span id="cb270-20"><a href="chart-cookbook.html#cb270-20" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">fill =</span> prof),</span>
+<span id="cb270-21"><a href="chart-cookbook.html#cb270-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb270-22"><a href="chart-cookbook.html#cb270-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb270-23"><a href="chart-cookbook.html#cb270-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb270-24"><a href="chart-cookbook.html#cb270-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_fill_manual</span>(<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb270-25"><a href="chart-cookbook.html#cb270-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_label</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb270-26"><a href="chart-cookbook.html#cb270-26" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> prof)) <span class="sc">+</span> </span>
+<span id="cb270-27"><a href="chart-cookbook.html#cb270-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Non-professional workers earn about the same, regardless of area income&quot;</span>,</span>
+<span id="cb270-28"><a href="chart-cookbook.html#cb270-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Average income of workers by area income percentile, 2016&quot;</span>,</span>
+<span id="cb270-29"><a href="chart-cookbook.html#cb270-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Area total income percentile&quot;</span>,</span>
+<span id="cb270-30"><a href="chart-cookbook.html#cb270-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Average income&quot;</span>,</span>
+<span id="cb270-31"><a href="chart-cookbook.html#cb270-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="chart-cookbook.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">&quot;atlas/scatter_layer.pdf&quot;</span>, scatter_layer, <span class="at">type =</span> <span class="st">&quot;fullslide&quot;</span>)</span></code></pre></div>
+<p><img src="atlas/scatter_layer.png" /><!-- --></p>
+</div>
+<div id="scatter-plots-with-trendlines" class="section level3" number="13.4.4">
+<h3><span class="header-section-number">13.4.4</span> Scatter plots with trendlines</h3>
+</div>
+<div id="facetted-scatter-plots" class="section level3" number="13.4.5">
+<h3><span class="header-section-number">13.4.5</span> Facetted scatter plots</h3>
+</div>
+</div>
+<div id="distributions" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> Distributions</h2>
+<p><code>geom_histogram</code>
+<code>geom_density</code></p>
+<p><code>ggridges::</code></p>
+</div>
+<div id="maps" class="section level2" number="13.6">
+<h2><span class="header-section-number">13.6</span> Maps</h2>
+<div id="sf-objects" class="section level3" number="13.6.1">
+<h3><span class="header-section-number">13.6.1</span> <code>sf</code> objects</h3>
+<p>[what is]</p>
+</div>
+<div id="using-absmapsdata" class="section level3" number="13.6.2">
+<h3><span class="header-section-number">13.6.2</span> Using <code>absmapsdata</code></h3>
+<p>The <code>absmapsdata</code> contains compressed, and tidied <code>sf</code> objects containing geometric information about ABS data structures. The included objects are:</p>
+<ul>
+<li>Statistical Area 1 2011 and 2016: <code>sa12011</code> or <code>sa12016</code></li>
+<li>Statistical Area 2 2011 and 2016: <code>sa22011</code> or <code>sa22016</code></li>
+<li>Statistical Area 3 2011 and 2016: <code>sa32011</code> or <code>sa32016</code></li>
+<li>Statistical Area 4 2011 and 2016: <code>sa42011</code> or <code>sa42016</code></li>
+<li>Greater Capital Cities 2011 and 2016: <code>gcc2011</code> or <code>gcc2016</code></li>
+<li>Remoteness Areas 2011 and 2016: <code>ra2011</code> or <code>ra2016</code></li>
+<li>State 2011 and 2016: <code>state2011</code> or <code>state2016</code></li>
+<li>Commonwealth Electoral Divisions 2018: <code>ced2018</code></li>
+<li>State Electoral Divisions 2018:<code>sed2018</code></li>
+<li>Local Government Areas 2016 and 2018: <code>lga2016</code> or <code>lga2018</code></li>
+<li>Postcodes 2016: <code>postcodes2016</code></li>
+</ul>
+<p>The package is <a href="https://github.com/wfmackey/absmapsdata">hosted on Github</a> and can be installed with <code>remotes::install_github()</code></p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="chart-cookbook.html#cb272-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;wfmackey/absmapsdata&quot;</span>)</span>
+<span id="cb272-2"><a href="chart-cookbook.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(absmapsdata)</span></code></pre></div>
+<p>You will also need the <code>sf</code> package installed to handle the <code>sf</code> objects:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="chart-cookbook.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</span>
+<span id="cb273-2"><a href="chart-cookbook.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<p>Now you can view <code>sf</code> objects stored in <code>absmapsdata</code>:</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="chart-cookbook.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sa32016)</span></code></pre></div>
+<pre><code>## Rows: 358
+## Columns: 12
+## $ sa3_code_2016   &lt;chr&gt; &quot;10102&quot;, &quot;10103&quot;, &quot;10104&quot;, &quot;10105&quot;, &quot;10106&quot;, &quot;10201&quot;, …
+## $ sa3_name_2016   &lt;chr&gt; &quot;Queanbeyan&quot;, &quot;Snowy Mountains&quot;, &quot;South Coast&quot;, &quot;Goulb…
+## $ sa4_code_2016   &lt;chr&gt; &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;101&quot;, &quot;102&quot;, &quot;102&quot;, &quot;103&quot;…
+## $ sa4_name_2016   &lt;chr&gt; &quot;Capital Region&quot;, &quot;Capital Region&quot;, &quot;Capital Region&quot;, …
+## $ gcc_code_2016   &lt;chr&gt; &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1RNSW&quot;, &quot;1GSYD&quot;, …
+## $ gcc_name_2016   &lt;chr&gt; &quot;Rest of NSW&quot;, &quot;Rest of NSW&quot;, &quot;Rest of NSW&quot;, &quot;Rest of …
+## $ state_code_2016 &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;,…
+## $ state_name_2016 &lt;chr&gt; &quot;New South Wales&quot;, &quot;New South Wales&quot;, &quot;New South Wales…
+## $ areasqkm_2016   &lt;dbl&gt; 6511.1906, 14283.4221, 9864.8680, 9099.9086, 12136.173…
+## $ cent_long       &lt;dbl&gt; 149.6013, 148.9415, 149.8063, 149.6054, 148.6799, 151.…
+## $ cent_lat        &lt;dbl&gt; -35.44939, -36.43952, -36.49933, -34.51814, -34.58077,…
+## $ geometry        &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((149.979 -35..., MULTIPOLY…</code></pre>
+</div>
+<div id="making-choropleth-maps" class="section level3" number="13.6.3">
+<h3><span class="header-section-number">13.6.3</span> Making choropleth maps</h3>
+<p>Choropleth maps break an area into ‘bits’, and colours each ‘bit’ according to a variable.</p>
+<p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa3_name</code> compared to <code>sa3_name_2016</code> – so use the <code>by</code> argument to match them.</p>
+<p>First, take the <code>sa3_income</code> dataset and join the <code>sf</code> object <code>sa32016</code> from <code>absmapsdata</code>:</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="chart-cookbook.html#cb276-1" aria-hidden="true" tabindex="-1"></a>map_data <span class="ot">&lt;-</span> sa3_income <span class="sc">%&gt;%</span> </span>
+<span id="cb276-2"><a href="chart-cookbook.html#cb276-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sa32016, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;sa3_name&quot;</span> <span class="ot">=</span> <span class="st">&quot;sa3_name_2016&quot;</span>))</span></code></pre></div>
+<p>You then plot a map like you would any other <code>ggplot</code>: provide your data, then choose your <code>aes</code> and your <code>geom</code>. For maps with <code>sf</code> objects, the <strong>key aesthetic</strong> is <code>geometry = geometry</code>, and the <strong>key geom</strong> is <code>geom_sf</code>.</p>
+<p>The argument <code>lwd</code> controls the line width of area borders.</p>
+<p>Note that RStudio takes a long time to render a map in the</p>
+<p>Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful.</p>
+<p>To do this, filter the <code>map_data</code> object:</p>
+<div id="adding-labels-to-maps" class="section level4" number="13.6.3.1">
+<h4><span class="header-section-number">13.6.3.1</span> Adding labels to maps</h4>
+<p>You can add labels to choropleth maps with the standard <code>geom_text</code> or <code>geom_label</code>. Because it is likely that some labels will overlap, <code>ggrepel::geom_text_repel</code> or <code>ggrepel::geom_label_repel</code> is usually the better option.</p>
+<p>To use <code>geom_(text|label)_repel</code>, you need to tell <code>ggrepel</code> where in</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="chart-cookbook.html#cb277-1" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span> </span>
+<span id="cb277-2"><a href="chart-cookbook.html#cb277-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;Vic&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb277-3"><a href="chart-cookbook.html#cb277-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb277-4"><a href="chart-cookbook.html#cb277-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pop_change),</span>
+<span id="cb277-5"><a href="chart-cookbook.html#cb277-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">lwd =</span> .<span class="dv">1</span>,</span>
+<span id="cb277-6"><a href="chart-cookbook.html#cb277-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb277-7"><a href="chart-cookbook.html#cb277-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb277-8"><a href="chart-cookbook.html#cb277-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grattan_fill_manual</span>(<span class="at">discrete =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb277-9"><a href="chart-cookbook.html#cb277-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">palette =</span> <span class="st">&quot;diverging&quot;</span>,</span>
+<span id="cb277-10"><a href="chart-cookbook.html#cb277-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>),</span>
+<span id="cb277-11"><a href="chart-cookbook.html#cb277-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb277-12"><a href="chart-cookbook.html#cb277-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> sa3_name),</span>
+<span id="cb277-13"><a href="chart-cookbook.html#cb277-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stat =</span> <span class="st">&quot;sf_coordinates&quot;</span>, <span class="at">nudge_x =</span> <span class="dv">1000</span>, <span class="at">segment.alpha =</span> .<span class="dv">5</span>,</span>
+<span id="cb277-14"><a href="chart-cookbook.html#cb277-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="dv">4</span>, </span>
+<span id="cb277-15"><a href="chart-cookbook.html#cb277-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">direction =</span> <span class="st">&quot;y&quot;</span>,</span>
+<span id="cb277-16"><a href="chart-cookbook.html#cb277-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">label.size =</span> <span class="dv">0</span>, </span>
+<span id="cb277-17"><a href="chart-cookbook.html#cb277-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb277-18"><a href="chart-cookbook.html#cb277-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>,</span>
+<span id="cb277-19"><a href="chart-cookbook.html#cb277-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">segment.color =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb277-20"><a href="chart-cookbook.html#cb277-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expand_scale</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">2</span>))) <span class="sc">+</span> </span>
+<span id="cb277-21"><a href="chart-cookbook.html#cb277-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb277-22"><a href="chart-cookbook.html#cb277-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Population </span><span class="sc">\n</span><span class="st">change&quot;</span>)</span>
+<span id="cb277-23"><a href="chart-cookbook.html#cb277-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-24"><a href="chart-cookbook.html#cb277-24" aria-hidden="true" tabindex="-1"></a>map</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="creating-simple-interactive-graphs-with-plotly" class="section level2" number="13.7">
+<h2><span class="header-section-number">13.7</span> Creating simple interactive graphs with <code>plotly</code></h2>
+<p><code>plotly::ggplotly()</code></p>
+
+</div>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="24">
+<li id="fn24"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a><a href="chart-cookbook.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>Remember that <code>geom_col</code> is just shorthand for <code>geom_bar(stat = "identity")</code><a href="chart-cookbook.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>The aesthetic <code>fill</code> represents the ‘fill’ colour – the colour that fills the bars in your chart. The <code>colour</code> aesthetic controls the colours of the <em>lines</em>.<a href="chart-cookbook.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p><code>geom_col</code> is shorthand for <code>geom_bar(stat = "identity"</code><a href="chart-cookbook.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>The <code>vars()</code> function is sometimes used in the <code>tidyverse</code> to specifically say “I am using a variable name here”. You can’t use variable names directly because of legacy issues. You can learn more about it in the <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">official documentation</a>.<a href="chart-cookbook.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>See the full list of shapes <a href="https://ggplot2.tidyverse.org/reference/scale_shape.html">here</a>.<a href="chart-cookbook.html#fnref29" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualisation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r-at-grattan.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
