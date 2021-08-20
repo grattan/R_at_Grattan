@@ -97,78 +97,9 @@ For this reason, and a few others described in the next section, a function
 can only return one _thing_ (a number, or a vector or dataset, or `ggplot` object, or a list, and so on).
 
 
-## What is 'returned' from a function?
-
-A function can do lots of things in the background.
-For example, you might want to take a vector, square every number,
-and then add all those numbers up:
-
-```{r return1}
-sum_squares <- function(x) {
-  # first, add one to each using the function we defined above
-  added <- add_one(x)
-  # then sum all the numbers in the vector
-  summed <- sum(added)
-  # then return the summed object
-  summed
-}
-
-```
-
-Running that function on a vector of numbers \(1, 2, 3, ..., 10\) (created with `1:10`) does what we want:
-
-```{r return2}
-sum_squares(1:10)
-```
-
-But look in your **Environment** window. The two objects that were created in the
-function -- `added` and `summed` -- aren't there! They are instead calculated,
-stored in the background, and removed when the function is finished. 
-
-A function only returns **one thing**; everything else that is created in it 
-is discarded.^[Unless they are explicitly stored in your environment, but this is not recommended.] 
-This behaviour keeps your environment clean and tidy, but it can cause some frustration when you're getting started. 
-
-That **one thing** that is returned is -- by default -- the last thing printed in
-the function.  _this is a bad explanation that I need to make better_
-For `sum_squares` above, we defined two objects and then passed the `summed` to 
-the end of the function. If we omitted the last step, the function wouldn't return _anything_:
-
-```{r return3}
-empty_sum_squares <- function(x) {
-  # first, add one to each using the function we defined above
-  added <- add_one(x)
-  # then sum all the numbers in the vector
-  summed <- sum(added)
-}
-
-empty_sum_squares(1:10)
-```
-
-The `empty_sum_squares` function took the `1:10` vector, then added one, then
-summed the resulting numbers. But it didn't _return_ anything.
-It just assigned values to the `added` and `summed` objects, then the function
-finished and those objects vanished.
-
-The `return()` function can help you make this behaviour clear. Using `return()`
-will stop your function in its tracks and pass the object out of the function.
-We can use it in the `sum_squares` function:
-
-```{r return4}
-sum_squares <- function(x) {
-  # first, add one to each using the function we defined above
-  added <- add_one(x)
-  # then sum all the numbers in the vector
-  summed <- sum(added)
-  # then return the summed object
-  return(summed) # function stops here!
-}
-```
-
-Ensuring your function _returns_ the object you want in the form you want is the second step in writing your own functions.
 
 
-## Using conditional statements and categorical arguments
+# Using conditional statements and categorical arguments
 
 Sometimes you will want your function to behave differently under different 
 circumstances. For example, you might want to do one thing if your input is a 
@@ -347,9 +278,92 @@ make_age10(office_ages, validate_ages = "adjust")
 make_age10(office_ages, validate_ages = "remove")
 ```
 
+
+# Using functions on datasets
+
+Above, we created the `make_age10` function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:
+
+```{r same_length}
+office_ages %>% length()
+make_age10(office_ages) %>% length()
+```
+
+
+## What is 'returned' from a function?
+
+
+
+A function can do lots of things in the background.
+For example, you might want to take a vector, square every number,
+and then add all those numbers up:
+
+```{r return1}
+sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+  # then return the summed object
+  summed
+}
+
+```
+
+Running that function on a vector of numbers \(1, 2, 3, ..., 10\) (created with `1:10`) does what we want:
+
+```{r return2}
+sum_squares(1:10)
+```
+
+But look in your **Environment** window. The two objects that were created in the
+function -- `added` and `summed` -- aren't there! They are instead calculated,
+stored in the background, and removed when the function is finished. 
+
+A function only returns **one thing**; everything else that is created in it 
+is discarded.^[Unless they are explicitly stored in your environment, but this is not recommended.] 
+This behaviour keeps your environment clean and tidy, but it can cause some frustration when you're getting started. 
+
+That **one thing** that is returned is -- by default -- the last thing printed in
+the function.  _this is a bad explanation that I need to make better_
+For `sum_squares` above, we defined two objects and then passed the `summed` to 
+the end of the function. If we omitted the last step, the function wouldn't return _anything_:
+
+```{r return3}
+empty_sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+}
+
+empty_sum_squares(1:10)
+```
+
+The `empty_sum_squares` function took the `1:10` vector, then added one, then
+summed the resulting numbers. But it didn't _return_ anything.
+It just assigned values to the `added` and `summed` objects, then the function
+finished and those objects vanished.
+
+The `return()` function can help you make this behaviour clear. Using `return()`
+will stop your function in its tracks and pass the object out of the function.
+We can use it in the `sum_squares` function:
+
+```{r return4}
+sum_squares <- function(x) {
+  # first, add one to each using the function we defined above
+  added <- add_one(x)
+  # then sum all the numbers in the vector
+  summed <- sum(added)
+  # then return the summed object
+  return(summed) # function stops here!
+}
+```
+
+Ensuring your function _returns_ the object you want in the form you want is the second step in writing your own functions.
+
+
 # Using `purrr::map`
 
-asdasdasd
 
 # Using functions for visualisations
 
