@@ -29,6 +29,6 @@ As a guide to using R, this website is helpful but incomplete. We can't possibly
 
 Because the guide is intended for everyone who uses R at Grattan, there may be some material that is too basic for more experienced users, or material that goes over the heads of beginners. That's OK - just skip those bits for now.
 
-Any complaints or comments about this guide can be sent to Will or Matt, respectively. 
+Any complaints or comments about this guide can be sent to Will or James, respectively. 
 
 This site was written in R with RMarkdown and the [bookdown](https://bookdown.org) package.
