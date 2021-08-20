@@ -206,7 +206,7 @@ simple_bar
 
 <img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="839.04" />
 
-Looks splendid! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks too good to be true! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -266,7 +266,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks tremendous: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks pre-eminent: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -435,7 +435,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04" />
 
-Looks of the highest standard! Now you can add titles and a caption, and save using `grattan_save`:
+Looks worthy! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -588,7 +588,7 @@ facet_bar +
 
 <img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="839.04" />
 
-Worthy! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Bonzer! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -867,7 +867,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04" />
 
-Looks eminent. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks of high quality. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -1120,7 +1120,7 @@ base_chart
 
 <img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04" />
 
-Looks of the highest standard! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks badass! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r

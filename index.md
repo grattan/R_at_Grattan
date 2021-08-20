@@ -25,7 +25,7 @@ The guide does two main things:
 1. Sets out some guidelines and good practices when using R at Grattan.
 2. Shows you how to use R to undertake some of the analytical tasks you're likely to undertake at Grattan.
 
-As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free.
+As a guide to using R, this website is helpful but incomplete. We can't possibly cover - or anticipate - all the skills you might need to know. If you make it to the end of this guide and want to learn more, start by reading [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. It's free, and it is very good.
 
 Because the guide is intended for everyone who uses R at Grattan, there may be some material that is too basic for more experienced users, or material that goes over the heads of beginners. That's OK - just skip those bits for now.
 
