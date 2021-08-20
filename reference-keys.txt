@@ -120,11 +120,13 @@ making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
 creating-functions
-it-can-be-useful-to-make-your-own-function
+set-up-2
 defining-simple-functions
-more-complex-functions
-sets-of-functions
+using-conditional-statements-and-categorical-arguments
+using-functions-on-datasets
+what-is-returned-from-a-function
 using-purrrmap
+using-functions-for-visualisations
 sharing-your-useful-functions-with-grattan
 version-control
 version-control-is-important-and-intimidating
