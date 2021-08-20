@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Data transformation with dplyr | Using R at Grattan Institute</title>
-  <meta name="description" content="How to use R at Grattan good. In development." />
+  <meta name="description" content="How to use R at Grattan good" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Data transformation with dplyr | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta property="og:description" content="How to use R at Grattan good" />
   <meta name="github-repo" content="grattan/R_at_Grattan" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="10 Data transformation with dplyr | Using R at Grattan Institute" />
   
-  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  <meta name="twitter:description" content="How to use R at Grattan good" />
   
 
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
@@ -352,7 +352,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.1</span> Set up</h2>
 <p>Load your packages first. This chapter just uses the packages contained in the <code>tidyverse</code>:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-transformation-with-dplyr.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.</p>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="data-transformation-with-dplyr.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</span>
 <span id="cb51-2"><a href="data-transformation-with-dplyr.html#cb51-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</span></code></pre></div>
@@ -380,7 +380,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-pipe" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> The pipe: <code>%&gt;%</code></h2>
 <p>You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to ‘nest’ them inside. This nesting will be <em>painfully</em> familiar to Excel users.</p>
-<p>Consider an example of baking and eating a cake.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:</p>
+<p>Consider an example of baking and eating a cake.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="data-transformation-with-dplyr.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eat</span>(<span class="fu">bake</span>(<span class="fu">mix</span>(<span class="fu">combine</span>(ingredients))))</span></code></pre></div>
 <p>In a nested formula, you need to start in the <em>middle</em> and work your way out. This means anyone reading your code – including you in the future! – needs to start in the middle and work their way out. But because we’re used to left-right reading, we’re not particularly good at naturally interpreting nested functions like this one.</p>
 <p>This is where the ‘pipe’ can help. The pipe operator <code>%&gt;%</code> (keyboard shortcut: <code>cmd + shift + m</code>) takes an argument on the left and ‘pipes’ it into the function on the right. Each time you see <code>%&gt;%</code>, you can read it as ‘and then’.</p>
@@ -401,7 +401,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>which is the same as</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="data-transformation-with-dplyr.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;hello&quot;</span>, <span class="st">&quot;dear&quot;</span>, <span class="st">&quot;reader&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;hello dear reader&quot;</code></pre>
-<p>Or you could define a vector of numbers and pass<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> them to the <code>sum()</code> function:</p>
+<p>Or you could define a vector of numbers and pass<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> them to the <code>sum()</code> function:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="data-transformation-with-dplyr.html#cb64-1" aria-hidden="true" tabindex="-1"></a>my_numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>)</span>
 <span id="cb64-2"><a href="data-transformation-with-dplyr.html#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-3"><a href="data-transformation-with-dplyr.html#cb64-3" aria-hidden="true" tabindex="-1"></a>my_numbers <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span></code></pre></div>
@@ -471,7 +471,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  9 ACT   58132.
 ## 10 ACT   56247.
 ## # … with 4,009 more rows</code></pre>
-<p>Or you could use <code>-</code> (minus) to remove the <code>state</code> and <code>sa3_name</code> variables:<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>Or you could use <code>-</code> (minus) to remove the <code>state</code> and <code>sa3_name</code> variables:<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="data-transformation-with-dplyr.html#cb80-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="sc">%&gt;%</span> </span>
 <span id="cb80-2"><a href="data-transformation-with-dplyr.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>state, <span class="sc">-</span>sa3_name)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 4
@@ -491,7 +491,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="selecting-groups-of-variables" class="section level3" number="10.3.1">
 <h3><span class="header-section-number">10.3.1</span> Selecting groups of variables</h3>
 <p>Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether.</p>
-<p>You can use patterns and <a href="https://tidyselect.r-lib.org/reference/select_helpers.html">‘select helpers’</a><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+<p>You can use patterns and <a href="https://tidyselect.r-lib.org/reference/select_helpers.html">‘select helpers’</a><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>
 from the Tidyverse to help deal with these sets of variables.</p>
 <p>For example, if you want to keep just the SA3 and state variables – ie the variables that start with <code>"s"</code> – you could:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="data-transformation-with-dplyr.html#cb82-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="sc">%&gt;%</span> </span>
@@ -563,7 +563,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p><code>filter</code> has one required first argument – the data – and then as many ‘conditions’ as you want to provide.</p>
 <div id="conditions-logical-operations-true-or-false" class="section level3" number="10.4.1">
 <h3><span class="header-section-number">10.4.1</span> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></h3>
-<p>The <strong>conditions</strong> are logical operations, meaning they are a statement that return either <code>TRUE</code> or <code>FALSE</code> in the computer’s mind.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+<p>The <strong>conditions</strong> are logical operations, meaning they are a statement that return either <code>TRUE</code> or <code>FALSE</code> in the computer’s mind.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
 <p>We know, for instance, that <code>12</code> is equal to <code>12</code> and that <code>1 + 2</code> does not equal <code>12</code>. Which means if we type <code>12 == 12</code> or <code>1 + 2 == 12</code> into the console it should give <code>FALSE</code>:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-transformation-with-dplyr.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="sc">==</span> <span class="dv">12</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -611,7 +611,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <blockquote>
 <p>take the <code>sa3_income</code> data and filter to keep only the observations that are from Victoria<code>,</code> and that have a average income above 70k<code>,</code> and are from the year 2015.</p>
 </blockquote>
-<p>Sometimes you might want to relax a little, keeping observations from one category <strong>or</strong> another. You can do this with the <strong>or</strong> symbol: <code>|</code><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
+<p>Sometimes you might want to relax a little, keeping observations from one category <strong>or</strong> another. You can do this with the <strong>or</strong> symbol: <code>|</code><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data-transformation-with-dplyr.html#cb100-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="sc">%&gt;%</span> </span>
 <span id="cb100-2"><a href="data-transformation-with-dplyr.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;Vic&quot;</span> <span class="sc">|</span> state <span class="sc">==</span> <span class="st">&quot;Tas&quot;</span>,</span>
 <span id="cb100-3"><a href="data-transformation-with-dplyr.html#cb100-3" aria-hidden="true" tabindex="-1"></a>         income <span class="sc">&gt;</span> <span class="dv">100000</span>,</span>
@@ -634,7 +634,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ##    year sa3_name     state gender  income workers
 ##   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
 ## 1  2015 West Pilbara WA    Men    107844.   22928</code></pre>
-<p>To keep the observations that have the highest average incomes <em>in each state</em>, you can <code>group_by</code> state, then <code>filter</code>:<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+<p>To keep the observations that have the highest average incomes <em>in each state</em>, you can <code>group_by</code> state, then <code>filter</code>:<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data-transformation-with-dplyr.html#cb104-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="sc">%&gt;%</span> </span>
 <span id="cb104-2"><a href="data-transformation-with-dplyr.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span> </span>
 <span id="cb104-3"><a href="data-transformation-with-dplyr.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(income <span class="sc">==</span> <span class="fu">max</span>(income))</span></code></pre></div>
@@ -652,7 +652,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 8  2015 West Pilbara             WA    Men    107844.   22928</code></pre>
 <p>From the description of the tibble above, you can learn that your data has 8 unique groups of state:</p>
 <p><code>## # Groups:       state [8]</code></p>
-<p>Or you could keep the observations with the <em>lowest</em> average incomes in <em>each state and year</em>:<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>Or you could keep the observations with the <em>lowest</em> average incomes in <em>each state and year</em>:<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data-transformation-with-dplyr.html#cb106-1" aria-hidden="true" tabindex="-1"></a>sa3_income <span class="sc">%&gt;%</span> </span>
 <span id="cb106-2"><a href="data-transformation-with-dplyr.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state, year) <span class="sc">%&gt;%</span> </span>
 <span id="cb106-3"><a href="data-transformation-with-dplyr.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(income <span class="sc">==</span> <span class="fu">min</span>(income))</span></code></pre></div>
@@ -1151,16 +1151,16 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="10">
-<li id="fn10"><p>This is a tidied version of the <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a> dataset.<a href="data-transformation-with-dplyr.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?<a href="data-transformation-with-dplyr.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>‘pass’ can also be used to mean ‘pipe’.<a href="data-transformation-with-dplyr.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>This is the same as <strong>keeping everything except</strong> the <code>state</code> and <code>sa3_name</code> variables.<a href="data-transformation-with-dplyr.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>Explained in useful detail by the Tidyverse people at <a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri">https://tidyselect.r-lib.org/reference/select_helpers.html</a><a href="data-transformation-with-dplyr.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>Computers’ mind, more likely.<a href="data-transformation-with-dplyr.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>On the keyboard: <code>shift</code> + <code>backslash</code><a href="data-transformation-with-dplyr.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>Wow they are all men!<a href="data-transformation-with-dplyr.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>Wow they are all women!<a href="data-transformation-with-dplyr.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<ol start="11">
+<li id="fn11"><p>This is a tidied version of the <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a> dataset.<a href="data-transformation-with-dplyr.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?<a href="data-transformation-with-dplyr.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>‘pass’ can also be used to mean ‘pipe’.<a href="data-transformation-with-dplyr.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>This is the same as <strong>keeping everything except</strong> the <code>state</code> and <code>sa3_name</code> variables.<a href="data-transformation-with-dplyr.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Explained in useful detail by the Tidyverse people at <a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri">https://tidyselect.r-lib.org/reference/select_helpers.html</a><a href="data-transformation-with-dplyr.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>Computers’ mind, more likely.<a href="data-transformation-with-dplyr.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>On the keyboard: <code>shift</code> + <code>backslash</code><a href="data-transformation-with-dplyr.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>Wow they are all men!<a href="data-transformation-with-dplyr.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Wow they are all women!<a href="data-transformation-with-dplyr.html#fnref19" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -189,14 +189,14 @@ Plotting your data early in the analysis stage can help you quickly identify out
 
 ## Making Grattan-y charts
 
-The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/mattcowgill/grattantheme
+The `grattantheme` package contains functions that help _Grattanise_ your charts. It is hosted here: https://github.com/grattan/grattantheme
  
 You can install it with `remotes::install_github` from the package:
 
 
 ```r
 install.packages("remotes")
-remotes::install_github("mattcowgill/grattantheme")
+remotes::install_github("grattan/grattantheme")
 ```
  
 The key functions of `grattantheme` are:

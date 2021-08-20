@@ -30,7 +30,7 @@ If you're loading a package from Github, it's a good idea to leave a [comment](#
 ```r
 library(tidyverse)
 library(grattantheme)
-library(strayr) # remotes::install_github("mattcowgill/strayr")
+library(strayr) # remotes::install_github("runapp-aus/strayr")
 ```
 
 Don't scatter `library()` calls throughout your script - put them all at the top. 

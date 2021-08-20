@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Data Visualisation | Using R at Grattan Institute</title>
-  <meta name="description" content="How to use R at Grattan good. In development." />
+  <meta name="description" content="How to use R at Grattan good" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Data Visualisation | Using R at Grattan Institute" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="How to use R at Grattan good. In development." />
+  <meta property="og:description" content="How to use R at Grattan good" />
   <meta name="github-repo" content="grattan/R_at_Grattan" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="12 Data Visualisation | Using R at Grattan Institute" />
   
-  <meta name="twitter:description" content="How to use R at Grattan good. In development." />
+  <meta name="twitter:description" content="How to use R at Grattan good" />
   
 
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
@@ -349,7 +349,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction-to-data-visualisation" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Introduction to data visualisation</h2>
 <p>You can use data visualisation to <strong>examine and explore</strong> your data, and to <strong>present</strong> a finding to your audience. Both of these elements are important.</p>
-<p>When you start using a dataset, you should look at it.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots.</p>
+<p>When you start using a dataset, you should look at it.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots.</p>
 <p>These <strong>exploratory plots</strong> are just for you and your team. They don’t need to be perfectly labelled, the right size, in the Grattan palette, or be particularly interesting.
 They’re built and used only to help you and your team explore the data.
 Through this process, you can become confident your data is <em>what you think it is</em>.</p>
@@ -362,7 +362,7 @@ Through this process, you can become confident your data is <em>what you think i
 <li>The reader: the chart needs to help the reader understand something, and it must convince them to pay attention.</li>
 </ol>
 <p>At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart’s impact.</p>
-<p>Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to <em>earn</em> their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p>
+<p>Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to <em>earn</em> their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
 <p>The way we design charts – much like our writing – should always be honest, clear and engaging to the reader.</p>
 <p>This chapter shows how you can do this with R. It starts with the ‘grammar of graphics’ concepts of a package called <code>ggplot</code>, and explains how to make those charts ‘Grattan-y’. The next chapter gives you the when-to-use and how-to-make particular charts.</p>
 </div>
@@ -374,7 +374,7 @@ Through this process, you can become confident your data is <em>what you think i
 <span id="cb159-2"><a href="data-visualisation.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grattantheme)</span>
 <span id="cb159-3"><a href="data-visualisation.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb159-4"><a href="data-visualisation.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
-<p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a <code>professionals</code> subset that only includes people in professional occupations in 2015:</p>
+<p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a <code>professionals</code> subset that only includes people in professional occupations in 2015:</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="data-visualisation.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv&quot;</span>,</span>
 <span id="cb160-2"><a href="data-visualisation.html#cb160-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> <span class="st">&quot;data/sa3_income.csv&quot;</span>)</span></code></pre></div>
@@ -466,10 +466,10 @@ Through this process, you can become confident your data is <em>what you think i
 </div>
 <div id="making-grattan-y-charts" class="section level2" number="12.5">
 <h2><span class="header-section-number">12.5</span> Making Grattan-y charts</h2>
-<p>The <code>grattantheme</code> package contains functions that help <em>Grattanise</em> your charts. It is hosted here: <a href="https://github.com/mattcowgill/grattantheme" class="uri">https://github.com/mattcowgill/grattantheme</a></p>
+<p>The <code>grattantheme</code> package contains functions that help <em>Grattanise</em> your charts. It is hosted here: <a href="https://github.com/grattan/grattantheme" class="uri">https://github.com/grattan/grattantheme</a></p>
 <p>You can install it with <code>remotes::install_github</code> from the package:</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="data-visualisation.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb167-2"><a href="data-visualisation.html#cb167-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;mattcowgill/grattantheme&quot;</span>)</span></code></pre></div>
+<span id="cb167-2"><a href="data-visualisation.html#cb167-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;grattan/grattantheme&quot;</span>)</span></code></pre></div>
 <p>The key functions of <code>grattantheme</code> are:</p>
 <ul>
 <li><code>theme_grattan</code>: set size, font and colour defaults that adhere to the Grattan style guide.</li>
@@ -500,7 +500,7 @@ Through this process, you can become confident your data is <em>what you think i
 <span id="cb169-2"><a href="data-visualisation.html#cb169-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>)</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" /></p>
 <p>Then use <code>grattan_y_continuous</code> to adjust the y-axis. This takes the same arguments as the standard <code>scale_y_continuous</code> function, but has Grattan defaults built in. Use it to set the labels as dollars (with <code>scales::dollar()</code>) and to give the y-axis some breathing room (starting at $50,000 rather than the minimum point).
-Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using <code>scales::comma()</code>).<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
+Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using <code>scales::comma()</code>).<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="data-visualisation.html#cb170-1" aria-hidden="true" tabindex="-1"></a>base_chart <span class="sc">+</span></span>
 <span id="cb170-2"><a href="data-visualisation.html#cb170-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_grattan</span>(<span class="at">chart_type =</span> <span class="st">&quot;scatter&quot;</span>) <span class="sc">+</span></span>
 <span id="cb170-3"><a href="data-visualisation.html#cb170-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar, <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">50e3</span>, <span class="cn">NA</span>)) <span class="sc">+</span></span>
@@ -603,7 +603,7 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <span id="cb180-2"><a href="data-visualisation.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> label_data,</span>
 <span id="cb180-3"><a href="data-visualisation.html#cb180-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>)))</span></code></pre></div>
 <p><img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>To have more freedom over <em>where</em> your labels are placed, you can create a dataset yourself. Add the <code>x</code> and <code>y</code> values for your labels, and the label names.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
+<p>To have more freedom over <em>where</em> your labels are placed, you can create a dataset yourself. Add the <code>x</code> and <code>y</code> values for your labels, and the label names.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-visualisation.html#cb181-1" aria-hidden="true" tabindex="-1"></a>self_label <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
 <span id="cb181-2"><a href="data-visualisation.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>gender, <span class="sc">~</span>workers,   <span class="sc">~</span>median_income,</span>
 <span id="cb181-3"><a href="data-visualisation.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Women&quot;</span>,    <span class="dv">23000</span>,            <span class="dv">55000</span>,</span>
@@ -627,12 +627,12 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>From Kieran Healy’s <a href="https://socviz.co/"><em>Data Vizualization: A Practical Introduction</em></a>: ‘You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.’<a href="data-visualisation.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>‘Bar charts are evidence that you are dead inside’ – Amanda Cox, data editor for the New York Times.<a href="data-visualisation.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and gender, 2010-11 to 2015-16</a><a href="data-visualisation.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>The <code>dollar</code> and <code>comma</code> commands are functions, but can be used without <code>()</code>. Using <code>dollar()</code> or <code>comma()</code> works too, and you can provide arguments that adjust their output: eg <code>dollar(suffix = "million")</code><a href="data-visualisation.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>We are using the <code>tribble</code> function here to make it a little bit clearer what values apply to which gender. The ‘normal’ way to create a tibble is with the <code>tibble</code> function: <br> <code>tibble(x = c(10, 100), y = c(100, 10))</code>, etc.<a href="data-visualisation.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="20">
+<li id="fn20"><p>From Kieran Healy’s <a href="https://socviz.co/"><em>Data Vizualization: A Practical Introduction</em></a>: ‘You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.’<a href="data-visualisation.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>‘Bar charts are evidence that you are dead inside’ – Amanda Cox, data editor for the New York Times.<a href="data-visualisation.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and gender, 2010-11 to 2015-16</a><a href="data-visualisation.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>The <code>dollar</code> and <code>comma</code> commands are functions, but can be used without <code>()</code>. Using <code>dollar()</code> or <code>comma()</code> works too, and you can provide arguments that adjust their output: eg <code>dollar(suffix = "million")</code><a href="data-visualisation.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>We are using the <code>tribble</code> function here to make it a little bit clearer what values apply to which gender. The ‘normal’ way to create a tibble is with the <code>tibble</code> function: <br> <code>tibble(x = c(10, 100), y = c(100, 10))</code>, etc.<a href="data-visualisation.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
