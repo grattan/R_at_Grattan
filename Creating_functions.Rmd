@@ -8,7 +8,7 @@ It can be useful to make your own function
 
 ## Set up
 
-We will use the `tidyverse` and `purrr` and...
+We will use the `tidyverse` and `purrr` in this chapter.
 
 ```{r setup}
 library(tidyverse)
@@ -385,9 +385,12 @@ make_age10(office_ages) %>% length()
 # Using the `purrr` family of functions
 
 
+_Section to be finished_; see https://github.com/grattan/R_at_Grattan/issues/59
+
 
 # Using functions for visualisations
 
-# # Sharing your useful functions with Grattan
+
+# Sharing your useful functions with Grattan and the world
 
 

@@ -132,3 +132,4 @@ github
 git
 using-git
 adding-to-this-book
+analysis-template

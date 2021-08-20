@@ -161,3 +161,19 @@ When you're starting a new project:
 Now you've got a good shell of a project - a dedicated folder, with an associated RStudio project, and at least one subfolder. This is a good base to start your work.
 
 
+## Using the `grattan-analysis-template` {#analysis-template}
+
+There is a file on the Grattan Github that contains a template for analysis in R.
+This includes: 
+
+- an R project
+- `R/`, `data/`, and `output/` folders
+- examples of best-practice
+
+You can access that template from its [Github repository](https://github.com/grattan/grattan-analysis-template).
+Either: 
+
+- download it to your computer by navigating to _Code_ then _Download ZIP_ (or just click [**here**](https://github.com/grattan/grattan-analysis-template/archive/refs/heads/main.zip)); or 
+- click [_Use Template_](https://github.com/grattan/grattan-analysis-template/generate), which will create a new Github respository for you to edit (see the chapter on [Version control](#version-control) for more details on how to get started with Github, or reach out to Will or James).
+
+
