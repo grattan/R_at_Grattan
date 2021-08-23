@@ -40,7 +40,7 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages(c("renv", "bslib", "downlit"))
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
 
       - name: Cache bookdown results
@@ -51,7 +51,11 @@ jobs:
           restore-keys: bookdown-
 
       - name: Build site
-        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
+        shell: Rscript {0}
+        run: |
+        renv::install("bslib")
+        renv::install("downlit")        
+        bookdown::render_book("index.Rmd", quiet = TRUE)
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
