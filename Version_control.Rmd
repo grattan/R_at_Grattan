@@ -62,7 +62,15 @@ That should do it.
 
 ### Getting started with Github
 
-External exercise: a 10 minute introduction to Github: http://guides.github.com/activities/hello-world
+The 10-minute `hello-world` tutorial made by the people at Github is informative and useful.
+It explains the key terms used in the world of Git -- a few of them used below -- and runss your through how to:
+
+- Create and use a repository
+- Start and manage a new branch
+- Make changes to a file and push them to GitHub as commits
+- Open and merge a pull request
+
+Take the time to do it now: http://guides.github.com/activities/hello-world
 
 
 ## Git
