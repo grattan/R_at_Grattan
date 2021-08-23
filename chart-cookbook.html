@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
 
 
-<meta name="date" content="2021-08-20" />
+<meta name="date" content="2021-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -440,7 +440,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Tas    420767
 ## 7 Vic   5190976
 ## 8 WA    2297081</code></pre>
-<p>Looks marvellous: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Looks magnificent: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
 <p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="chart-cookbook.html#cb245-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb245-2"><a href="chart-cookbook.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
@@ -511,7 +511,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 14 Vic   Women          49264.
 ## 15 WA    Men            76677.
 ## 16 WA    Women          51578.</code></pre>
-<p>Looks too good to be true: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Looks bonzer: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
 <p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="chart-cookbook.html#cb254-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb254-2"><a href="chart-cookbook.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state,</span>
@@ -617,7 +617,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb263-15"><a href="chart-cookbook.html#cb263-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span> </span>
 <span id="cb263-16"><a href="chart-cookbook.html#cb263-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_colour_manual</span>(<span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04" /></p>
-<p>Looks marvellous! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<p>Looks badass! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="chart-cookbook.html#cb264-1" aria-hidden="true" tabindex="-1"></a>multiple_bar <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
 <span id="cb264-2"><a href="chart-cookbook.html#cb264-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(state, average_income), </span>
 <span id="cb264-3"><a href="chart-cookbook.html#cb264-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income,</span>
@@ -711,7 +711,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb274-7"><a href="chart-cookbook.html#cb274-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
 <span id="cb274-8"><a href="chart-cookbook.html#cb274-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="839.04" /></p>
-<p>Out of this world! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
+<p>Perfect! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="chart-cookbook.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create label data</span></span>
 <span id="cb275-2"><a href="chart-cookbook.html#cb275-2" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
 <span id="cb275-3"><a href="chart-cookbook.html#cb275-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">&quot;ACT&quot;</span>,</span>
@@ -885,7 +885,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <span id="cb291-6"><a href="chart-cookbook.html#cb291-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_y_continuous</span>(<span class="at">labels =</span> dollar) <span class="sc">+</span> </span>
 <span id="cb291-7"><a href="chart-cookbook.html#cb291-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grattan_x_continuous</span>(<span class="at">labels =</span> comma)</span></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04" /></p>
-<p>Looks smashing. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<p>Looks cool. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="chart-cookbook.html#cb292-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb292-2"><a href="chart-cookbook.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> workers,</span>
 <span id="cb292-3"><a href="chart-cookbook.html#cb292-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> average_income)) <span class="sc">+</span> </span>
@@ -1036,7 +1036,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <span id="cb310-11"><a href="chart-cookbook.html#cb310-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb310-12"><a href="chart-cookbook.html#cb310-12" aria-hidden="true" tabindex="-1"></a>base_chart</span></code></pre></div>
 <p><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04" /></p>
-<p>Looks super! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<p>Looks superior! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="chart-cookbook.html#cb311-1" aria-hidden="true" tabindex="-1"></a>perc_average <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
 <span id="cb311-2"><a href="chart-cookbook.html#cb311-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prof, sa3_income_percentile) <span class="sc">%&gt;%</span> </span>
 <span id="cb311-3"><a href="chart-cookbook.html#cb311-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_income =</span> <span class="fu">sum</span>(income) <span class="sc">/</span> <span class="fu">sum</span>(workers))</span></code></pre></div>
