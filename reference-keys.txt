@@ -136,5 +136,5 @@ get-outta-my-way
 using-github
 setting-up-a-github-account-and-github-desktop
 getting-started-with-github
-some-dos-and-some-do-nots
+some-git-tips
 contributing-to-this-book
