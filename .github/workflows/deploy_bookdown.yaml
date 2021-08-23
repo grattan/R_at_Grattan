@@ -40,7 +40,7 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages(c("renv", "bslib", "downlit"))
           renv::restore()
 
       - name: Cache bookdown results

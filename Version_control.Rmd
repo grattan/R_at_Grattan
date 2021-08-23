@@ -73,6 +73,12 @@ It explains the key terms used in the world of Git -- a few of them used below -
 Take the time to do it now: http://guides.github.com/activities/hello-world
 
 
+### Some dos and some do nots
+
+.gitignore
+
+
+
 ## Git
 
 Git is our preferred version control software. And what's nice is that you can set up RStudio to allow you use Git seamlessly.^[The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you'd rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.]
