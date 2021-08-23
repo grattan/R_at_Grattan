@@ -73,10 +73,7 @@ It explains the key terms used in the world of Git -- a few of them used below -
 Take the time to do it now: http://guides.github.com/activities/hello-world
 
 
-### Some dos and some do nots
-
-.gitignore
-
+### Some Git tips
 
 1. Commit early, commit often
     + By committing lots of small changes individually, you'll have a richer history of the project. It's a bit like trying to beat a difficult level of a video game. If you mess up but have saved often, you'll have a more recent place to go back to. But you if save rarely, then you'll need to go quite a way back to your last savefile. 
@@ -87,3 +84,4 @@ Take the time to do it now: http://guides.github.com/activities/hello-world
 3. Write meaningful, descriptive commit messages
     + You'll thank yourself later. 
 
+4. Use the `.gitignore` file to -- shockingly! -- tell Git and Github to ignore specific files. This can be useful for system files, like `.DS_Store` and your `.Rproj` that do not need to be synced with your project folder. It can also be useful for large datasets (i.e. those over 50MB).
