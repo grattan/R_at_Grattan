@@ -5,7 +5,7 @@ This section focusses on transforming rectangular datasets.
 
 The `dplyr` verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of _[R for Data Science](https://r4ds.had.co.nz/)_ with Hadley Wickham). 
 
-<iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="100%" height="400px"></iframe>
+<iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="672" height="400px"></iframe>
 
 
 ## Set up

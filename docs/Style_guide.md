@@ -93,6 +93,7 @@ Without the comment, readers of your code might not be aware that `1` in this da
 
 If your code _is_ self-explanatory, you can include or omit comments as you see fit.
 
+
 **Not necessary (but okay if included)**
 
 ```r
@@ -108,9 +109,12 @@ _Err on the side of commenting more_, rather than less, throughout your code. So
 
 Comments can go above code chunks, or next to code - there are examples of both above. 
 
+Try to keep them up-to-date.
+![](atlas/code-comments.png)<!-- -->
+
 ## Breaking your script into chunks
 
-It's useful to break a lengthy script into chunks with `-----`. 
+It's useful to break a lengthy script into chunks with `-----` (three or more hyphens). 
 
 **Good**
 

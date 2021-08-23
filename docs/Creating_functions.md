@@ -1,6 +1,6 @@
 # (PART) Advanced topics {-}
 
-# Creating functions
+# Functional programming: making and using your own functions
 
 Why on earth would you create your own function?
 
@@ -8,7 +8,7 @@ It can be useful to make your own function
 
 ## Set up
 
-We will use the `tidyverse` and `purrr` and...
+We will use the `tidyverse` and `purrr` in this chapter.
 
 
 ```r
@@ -164,10 +164,8 @@ Sometimes you will want your function to behave differently under different
 circumstances. For example, you might want to do one thing if your input is a 
 <b style='font-size:bigger'>REALLY BIG</b> number, and another if it's <span style='font-size:smaller'>very small</span>.
 
-Conditional statements -- that return either `TRUE` or `FALSE` -- can be useful
-for these occasions (see section x). 
-The function below takes one argument -- x -- and transforms it depending on 
-how large it is:
+Conditional `if` statements -- which evaluate an expression and proceed _if_ `TRUE` -- can be useful for these occasions. 
+The function below takes one argument -- `x` -- and transforms it depending on how large it is:
 
 
 ```r
@@ -246,7 +244,7 @@ office_ages
 ```
 
 To summarise your office by age, you might want a function that would round each age to the nearest `10`. You could make a function that rounds a number to the nearest `10`, 
-using the `round()` function with `digits` set to `-1` (ie round to the nearest `10`):
+using the `round()` function with `digits` set to `-1` (i.e. round to the nearest `10`):
 
 
 ```r
@@ -584,12 +582,15 @@ make_age10(office_ages) %>% length()
 
 
 
-# Using the `purrr` family of functions
+## Using the `purrr` family of functions
 
 
+_Section to be finished_; see https://github.com/grattan/R_at_Grattan/issues/59
 
-# Using functions for visualisations
 
-# # Sharing your useful functions with Grattan
+## Using functions for visualisations
+
+
+## Sharing your useful functions with Grattan and the world
 
 

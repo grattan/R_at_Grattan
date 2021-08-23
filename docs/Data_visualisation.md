@@ -124,7 +124,7 @@ professionals %>%
         ggplot()
 ```
 
-![](Data_visualisation_files/figure-epub3/empty_plot-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="672" />
 
 
 Next, set the `aes` (aesthetics) to `x = state` ("make the x-axis represent state"), `y = pop` ("the y-axis should represent population"), and `fill = year` ("the fill colour represents year"). Now `ggplot` knows where things should _go_. 
@@ -139,7 +139,7 @@ professionals %>%
                    colour = gender))
 ```
 
-![](Data_visualisation_files/figure-epub3/empty_aes-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="672" />
 
 
 Now that `ggplot` knows where things should go, it needs to how to _plot_ them on the chart. For this we use `geoms`. Tell `ggplot` to take the things it knows and plot them as a column chart by using `geom_col`:
@@ -153,7 +153,7 @@ professionals %>%
         geom_point()
 ```
 
-![](Data_visualisation_files/figure-epub3/complete_plot-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672" />
 
 Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don't need. So filter the data before you pass it to `ggplot` to just include 2015: `filter(year == 2015)`. There will still be lots of overlapping points, so set the opacity to below one with `alpha = 0.5`. The `workers` x-axis can be changed to a log scale with `scale_x_log10`.
 
@@ -167,7 +167,7 @@ professionals %>%
         scale_x_log10()
 ```
 
-![](Data_visualisation_files/figure-epub3/with_changes-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/with_changes-1.png" width="672" />
 
 
 That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of `data`, `aes`, and `geom`. 
@@ -231,7 +231,7 @@ base_chart <- professionals %>%
 base_chart
 ```
 
-![](Data_visualisation_files/figure-epub3/base_chart-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672" />
 
 
 Let's make it Grattany. First, add `theme_grattan` to your plot:
@@ -242,7 +242,7 @@ base_chart +
         theme_grattan(chart_type = "scatter")
 ```
 
-![](Data_visualisation_files/figure-epub3/add_theme_grattan-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672" />
 
 Then use `grattan_y_continuous` to adjust the y-axis. This takes the same arguments as the standard `scale_y_continuous` function, but has Grattan defaults built in. Use it to set the labels as dollars (with `scales::dollar()`) and to give the y-axis some breathing room (starting at \$50,000 rather than the minimum point).
 Also add `scale_x_log10` to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using `scales::comma()`).^[The `dollar` and `comma` commands are functions, but can be used without `()`. Using `dollar()` or `comma()` works too, and you can provide arguments that adjust their output: eg `dollar(suffix = "million")`]
@@ -255,7 +255,7 @@ base_chart +
         scale_x_log10(labels = comma) 
 ```
 
-![](Data_visualisation_files/figure-epub3/add_grattan_y_continuous-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672" />
 
 To define `colour` colours, use `grattan_colour_manual` with the number of colours you need (two, in this case):
 
@@ -270,7 +270,7 @@ prof_chart <- base_chart +
 prof_chart
 ```
 
-![](Data_visualisation_files/figure-epub3/add_fill-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672" />
 
 
 Nice chart! Now you can save it and share it with the world.
@@ -354,7 +354,7 @@ prof_chart +
   geom_text(aes(label = gender))
 ```
 
-![](Data_visualisation_files/figure-epub3/add_annotate-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="672" />
 
 Great! That looks _terrible_. `geom_text` is labelling each individual point because it has been told to do so. Just like `geom_point`, it takes the `x` and `y` aesthetics of each observation, then plots the `label` at that location. But we just want to label one of the points for `female` and one for `male`. 
 
@@ -388,7 +388,7 @@ prof_chart +
             aes(label = gender))
 ```
 
-![](Data_visualisation_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the `label_data`:
 
@@ -404,7 +404,7 @@ prof_chart +
             aes(label = gender_label))
 ```
 
-![](Data_visualisation_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 _Or_ you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).
 
@@ -415,7 +415,7 @@ prof_chart +
             aes(label = c("Female", "Male")))
 ```
 
-![](Data_visualisation_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 To have more freedom over _where_ your labels are placed, you can create a dataset yourself. Add the `x` and `y` values for your labels, and the label names.^[We are using the `tribble` function here to make it a little bit clearer what values apply to which gender. The 'normal' way to create a tibble is with the `tibble` function: <br> `tibble(x = c(10, 100), y = c(100, 10))`, etc.]
@@ -448,6 +448,6 @@ prof_chart +
             hjust = 1)
 ```
 
-![](Data_visualisation_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+<img src="Data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 [cover `annotate`]

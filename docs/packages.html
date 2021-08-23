@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
 
 
-<meta name="date" content="2021-08-20" />
+<meta name="date" content="2021-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +133,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Using R at Grattan Institute</a></li>
+<li><strong><a href="./">Using R at Grattan</a></strong></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
@@ -166,6 +166,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
 <li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.7</b> Keep your workspace clean</a></li>
 <li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#quick-guide"><i class="fa fa-check"></i><b>3.8</b> Quick guide to starting a project</a></li>
+<li class="chapter" data-level="3.9" data-path="organising-projects.html"><a href="organising-projects.html#analysis-template"><i class="fa fa-check"></i><b>3.9</b> Using the <code>grattan-analysis-template</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a>
 <ul>
@@ -311,14 +312,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>13.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced topics</b></span></li>
-<li class="chapter" data-level="14" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>14</b> Creating functions</a>
+<li class="chapter" data-level="14" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html"><i class="fa fa-check"></i><b>14</b> Functional programming: making and using your own functions</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>14.1</b> It can be useful to make your own function</a></li>
-<li class="chapter" data-level="14.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
-<li class="chapter" data-level="14.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>14.3</b> More complex functions</a></li>
-<li class="chapter" data-level="14.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>14.4</b> Sets of functions</a></li>
-<li class="chapter" data-level="14.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>14.5</b> Using <code>purrr::map</code></a></li>
-<li class="chapter" data-level="14.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>14.6</b> Sharing your useful functions with Grattan</a></li>
+<li class="chapter" data-level="14.1" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#set-up-2"><i class="fa fa-check"></i><b>14.1</b> Set up</a></li>
+<li class="chapter" data-level="14.2" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="14.3" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-conditionals"><i class="fa fa-check"></i><b>14.3</b> Using conditional statements and categorical arguments</a></li>
+<li class="chapter" data-level="14.4" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-returned"><i class="fa fa-check"></i><b>14.4</b> What is ‘returned’ from a function?</a></li>
+<li class="chapter" data-level="14.5" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-on-datasets-within-mutate"><i class="fa fa-check"></i><b>14.5</b> Using functions on datasets within <code>mutate()</code></a></li>
+<li class="chapter" data-level="14.6" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-the-purrr-family-of-functions"><i class="fa fa-check"></i><b>14.6</b> Using the <code>purrr</code> family of functions</a></li>
+<li class="chapter" data-level="14.7" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-for-visualisations"><i class="fa fa-check"></i><b>14.7</b> Using functions for visualisations</a></li>
+<li class="chapter" data-level="14.8" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fa fa-check"></i><b>14.8</b> Sharing your useful functions with Grattan and the world</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
 <ul>
@@ -327,10 +330,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
 <li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
-<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
-<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
+<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#using-github"><i class="fa fa-check"></i><b>15.2</b> Using Github</a></li>
+<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#github-desktop"><i class="fa fa-check"></i><b>15.3</b> Github Desktop</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.4</b> Git</a></li>
+<li class="chapter" data-level="15.5" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.5</b> Using Git</a></li>
 </ul></li>
+<li class="chapter" data-level="16" data-path="contributing-to-this-book.html"><a href="contributing-to-this-book.html"><i class="fa fa-check"></i><b>16</b> Contributing to this book</a></li>
 </ul>
 
       </nav>
@@ -350,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="packages" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> What are packages?</h1>
-<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. But using packages will make your life easier.</p>
+<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. But using packages will make your life easier.</p>
 <p>Like R itself, packages are free and open source. You can install them from within RStudio.</p>
 <div id="install-packages" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> How to install packages</h2>
@@ -398,7 +403,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="packages.html#cb40-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">update_packages</span>()</span></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
 <p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All.’</p>
-<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 </div>
 <div id="downgrading-packages" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Downgrading packages</h2>
@@ -409,9 +414,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.<a href="packages.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.<a href="packages.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -435,17 +440,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": false,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -463,7 +458,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["r-at-grattan.pdf"],
+"download": ["r-at-grattan.pdf", "r-at-grattan.epub"],
 "search": {
 "engine": "lunr",
 "options": null

@@ -1,5 +1,7 @@
 # Version control {#version-control}
 
+This chapter explores version control and lays out the tools we use for version control.
+
 ## Version control is important and intimidating
 
 Version control is great! And although it's initially quite complicated and stress-inducing, in the long run you'll find it actually makes so much sense, and wish you'd known about it while you were writing university essays! 
@@ -8,7 +10,7 @@ Why? Two reasons.
 
 1. Version control allows us to go back in time. 
 
-2. Version control allows multiple analysts to work on a project simulataneously, in a way that Excel just doesn't.
+2. Version control allows multiple analysts to work on a project simultaneously, in a way that Excel just doesn't.
 
 ### Step back in time
 
@@ -28,7 +30,8 @@ Version control allows you both to work on a document at the same time, but only
 
 Need more convincing? [Jenny Bryan](https://peerj.com/preprints/3159v2/) from RStudio eloquently explains why you need version control in your life. Seriously. It's a great article. It convinced us.
 
-## Github
+
+## Using Github
 
 We use Github to version-control and share reports in LaTeX, so you're already a bit set-up. 
 
@@ -40,11 +43,33 @@ To go back into the past and look at old versions of our analysis, we'd normally
 
 Make sure you have a personal Github account, and then ask a Grattan staff member (e.g. Will or James) to add you to Grattan's organisation-wide Github account. If you've set up a LaTeX document, you've probably already completed these steps.
 
+### Setting up a Github account and Github Desktop
+
+To set up a Github account, follow these steps:
+
+- Go to [github.com](github.com) and click **Sign up**.
+- Complete the sign up form. You can use your personal (recommended) or Grattan email address.^[Personal email addresses are recommended because you _may_ want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.]
+
+You access Github through your browser. But we need to connect and sync our local files as well. To do this, we use Github Desktop.^[This is definitely not the only way to do this. You can sync with Github through ]
+To download and use Github Desktop, follow these steps:
+
+- Create a Github account.
+- Go to [desktop.github.com](desktop.github.com) and download **Github Desktop**.
+- From Github Desktop, sign into your account and authorise Github Desktop.
+- If asked to 'Configure Git', select **Use my Github account name and email address** and click **Finish**. 
+
+That should do it. 
+
+### Getting started with Github
+
+External exercise: a 10 minute introduction to Github: http://guides.github.com/activities/hello-world
+
+
 ## Git
 
 Git is our preferred version control software. And what's nice is that you can set up RStudio to allow you use Git seamlessly.^[The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you'd rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.]
 
-Jenny Bryan from RStudio will walk you through the installation steps in Chatpers 4-7 (they're extremely short chapters):
+Jenny Bryan from RStudio will walk you through the installation steps in Chapters 4-7 (they're extremely short chapters):
 
 [Click here to access the definitive Git installation guide.](https://happygitwithr.com/install-intro.html) 
 Of course, if you get stuck, ask!

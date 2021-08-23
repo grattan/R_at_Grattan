@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
 
 
-<meta name="date" content="2021-08-20" />
+<meta name="date" content="2021-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +133,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Using R at Grattan Institute</a></li>
+<li><strong><a href="./">Using R at Grattan</a></strong></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
@@ -166,6 +166,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
 <li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.7</b> Keep your workspace clean</a></li>
 <li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#quick-guide"><i class="fa fa-check"></i><b>3.8</b> Quick guide to starting a project</a></li>
+<li class="chapter" data-level="3.9" data-path="organising-projects.html"><a href="organising-projects.html#analysis-template"><i class="fa fa-check"></i><b>3.9</b> Using the <code>grattan-analysis-template</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a>
 <ul>
@@ -311,14 +312,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>13.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced topics</b></span></li>
-<li class="chapter" data-level="14" data-path="creating-functions.html"><a href="creating-functions.html"><i class="fa fa-check"></i><b>14</b> Creating functions</a>
+<li class="chapter" data-level="14" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html"><i class="fa fa-check"></i><b>14</b> Functional programming: making and using your own functions</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="creating-functions.html"><a href="creating-functions.html#it-can-be-useful-to-make-your-own-function"><i class="fa fa-check"></i><b>14.1</b> It can be useful to make your own function</a></li>
-<li class="chapter" data-level="14.2" data-path="creating-functions.html"><a href="creating-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
-<li class="chapter" data-level="14.3" data-path="creating-functions.html"><a href="creating-functions.html#more-complex-functions"><i class="fa fa-check"></i><b>14.3</b> More complex functions</a></li>
-<li class="chapter" data-level="14.4" data-path="creating-functions.html"><a href="creating-functions.html#sets-of-functions"><i class="fa fa-check"></i><b>14.4</b> Sets of functions</a></li>
-<li class="chapter" data-level="14.5" data-path="creating-functions.html"><a href="creating-functions.html#using-purrrmap"><i class="fa fa-check"></i><b>14.5</b> Using <code>purrr::map</code></a></li>
-<li class="chapter" data-level="14.6" data-path="creating-functions.html"><a href="creating-functions.html#sharing-your-useful-functions-with-grattan"><i class="fa fa-check"></i><b>14.6</b> Sharing your useful functions with Grattan</a></li>
+<li class="chapter" data-level="14.1" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#set-up-2"><i class="fa fa-check"></i><b>14.1</b> Set up</a></li>
+<li class="chapter" data-level="14.2" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
+<li class="chapter" data-level="14.3" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-conditionals"><i class="fa fa-check"></i><b>14.3</b> Using conditional statements and categorical arguments</a></li>
+<li class="chapter" data-level="14.4" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-returned"><i class="fa fa-check"></i><b>14.4</b> What is ‘returned’ from a function?</a></li>
+<li class="chapter" data-level="14.5" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-on-datasets-within-mutate"><i class="fa fa-check"></i><b>14.5</b> Using functions on datasets within <code>mutate()</code></a></li>
+<li class="chapter" data-level="14.6" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-the-purrr-family-of-functions"><i class="fa fa-check"></i><b>14.6</b> Using the <code>purrr</code> family of functions</a></li>
+<li class="chapter" data-level="14.7" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-for-visualisations"><i class="fa fa-check"></i><b>14.7</b> Using functions for visualisations</a></li>
+<li class="chapter" data-level="14.8" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fa fa-check"></i><b>14.8</b> Sharing your useful functions with Grattan and the world</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
 <ul>
@@ -327,10 +330,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
 <li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#github"><i class="fa fa-check"></i><b>15.2</b> Github</a></li>
-<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.3</b> Git</a></li>
-<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.4</b> Using Git</a></li>
+<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#using-github"><i class="fa fa-check"></i><b>15.2</b> Using Github</a></li>
+<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#github-desktop"><i class="fa fa-check"></i><b>15.3</b> Github Desktop</a></li>
+<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.4</b> Git</a></li>
+<li class="chapter" data-level="15.5" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.5</b> Using Git</a></li>
 </ul></li>
+<li class="chapter" data-level="16" data-path="contributing-to-this-book.html"><a href="contributing-to-this-book.html"><i class="fa fa-check"></i><b>16</b> Contributing to this book</a></li>
 </ul>
 
       </nav>
@@ -363,7 +368,7 @@ The main packages in the <code>tidyverse</code> include:</p>
 <li><em>purrr</em> for functional programming</li>
 <li><em>stringr</em> for manipulating strings of text</li>
 </ul>
-<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</p>
+<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="packages-commonly-used-at-grattan.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
@@ -388,17 +393,17 @@ The main packages in the <code>tidyverse</code> include:</p>
 <p>The <code>tidyverse</code> makes life easier!</p>
 <p>The core <code>tidyverse</code> packages, like <code>ggplot2</code>, <code>dplyr</code>, and <code>tidyr</code>, are extremely popular. The <code>tidyverse</code> is probably the most popular ‘dialect’ of R. This means that any problem you encounter with the <code>tidyverse</code> will have been encountered many times before by other R users, so a solution will only be a Google search away.</p>
 <p>The <code>tidyverse</code> packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one <code>tidyverse</code> package, like <code>dplyr</code>, are also applicable to other packages, like <code>tidyr</code>.</p>
-<p>They’re designed to work with data frames<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
+<p>They’re designed to work with data frames<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
 <p>The creator of the <code>tidyverse</code>, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the <code>tidyverse</code> idiom is often able to be understood even if you haven’t encountered the functions before. For example, look at this chunk of code:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="packages-commonly-used-at-grattan.html#cb47-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
 <span id="cb47-2"><a href="packages-commonly-used-at-grattan.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb47-3"><a href="packages-commonly-used-at-grattan.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">relative_income =</span> income <span class="sc">/</span> <span class="fu">mean</span>(income))</span></code></pre></div>
-<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
+<p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
 <p>Here’s one way to do the same thing in base R:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="packages-commonly-used-at-grattan.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transform</span>(my_data[my_data<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">30</span>, ],</span>
 <span id="cb48-2"><a href="packages-commonly-used-at-grattan.html#cb48-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">relative_income =</span> income <span class="sc">/</span> <span class="fu">mean</span>(income))</span></code></pre></div>
 <p>The base R code gets the job done, but it’s clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work <strong>human readable</strong>.</p>
-<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+<p>Code written with <code>tidyverse</code> functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn’t usually a major concern anyway.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <p>The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The <code>tidyverse</code> packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan. This balance is the right one for most of our work, most of the time.</p>
 <p>Most R scripts at Grattan should start with <code>library(tidyverse)</code>. Most of your work will be in data frames, and most of the time the <code>tidyverse</code> contains the core tools you’ll need to do that work.</p>
 </div>
@@ -424,11 +429,11 @@ The main packages in the <code>tidyverse</code> include:</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages-commonly-used-at-grattan.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>The tidyverse works with ‘tibbles,’ which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages-commonly-used-at-grattan.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages-commonly-used-at-grattan.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages-commonly-used-at-grattan.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<ol start="8">
+<li id="fn8"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code>library(tidyverse)</code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages-commonly-used-at-grattan.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>The tidyverse works with ‘tibbles,’ which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="packages-commonly-used-at-grattan.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="packages-commonly-used-at-grattan.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="packages-commonly-used-at-grattan.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -452,17 +457,7 @@ The main packages in the <code>tidyverse</code> include:</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": false,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -480,7 +475,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["r-at-grattan.pdf"],
+"download": ["r-at-grattan.pdf", "r-at-grattan.epub"],
 "search": {
 "engine": "lunr",
 "options": null

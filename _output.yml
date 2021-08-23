@@ -1,11 +1,21 @@
-bookdown::gitbook:
-  css: style.css
+bookdown::bs4_book:
   config:
     toc:
       collapse: section
       before: |
         <li><a href="./">Using R at Grattan Institute</a></li>
     download: ["pdf"]
+    repo: https://github.com/grattan/R_at_grattan
+
+bookdown::gitbook:
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><strong><a href="./">Using R at Grattan</a></strong></li>
+    sharing: no
+  css: style.css
+
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
