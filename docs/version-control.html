@@ -4,19 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>14 Version control | Using R at Grattan Institute</title>
+<title>15 Version control | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="This chapter explores version control and lays out the tools we use for version control.  14.1 Version control is important and intimidating Version control is great! And although it’s initially...">
+<meta name="description" content="This chapter explores version control and lays out the tools we use for version control.  15.1 Version control is important and intimidating Version control is great! And although it’s initially...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="14 Version control | Using R at Grattan Institute">
+<meta property="og:title" content="15 Version control | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This chapter explores version control and lays out the tools we use for version control.  14.1 Version control is important and intimidating Version control is great! And although it’s initially...">
+<meta property="og:description" content="This chapter explores version control and lays out the tools we use for version control.  15.1 Version control is important and intimidating Version control is great! And although it’s initially...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="14 Version control | Using R at Grattan Institute">
-<meta name="twitter:description" content="This chapter explores version control and lays out the tools we use for version control.  14.1 Version control is important and intimidating Version control is great! And although it’s initially...">
+<meta name="twitter:title" content="15 Version control | Using R at Grattan Institute">
+<meta name="twitter:description" content="This chapter explores version control and lays out the tools we use for version control.  15.1 Version control is important and intimidating Version control is great! And although it’s initially...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -38,21 +40,43 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">14</span> Version control</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome!</a></li>
+<li class="book-part">What is R and why do we use it?</li>
+<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
+<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
+<li class="book-part">Using R the Grattan way</li>
+<li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
+<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
+<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li class="book-part">Load, manipulate and visualise data</li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
+<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
+<li><a class="active" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+</ul>
 
         <div class="book-extra">
           
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="version-control" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="version-control" class="section level1" number="15">
 <h1>
-<span class="header-section-number">14</span> Version control<a class="anchor" aria-label="anchor" href="#version-control"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> Version control<a class="anchor" aria-label="anchor" href="#version-control"><i class="fas fa-link"></i></a>
 </h1>
 <p>This chapter explores version control and lays out the tools we use for version control.</p>
-<div id="version-control-is-important-and-intimidating" class="section level2" number="14.1">
+<div id="version-control-is-important-and-intimidating" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">14.1</span> Version control is important and intimidating<a class="anchor" aria-label="anchor" href="#version-control-is-important-and-intimidating"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Version control is important and intimidating<a class="anchor" aria-label="anchor" href="#version-control-is-important-and-intimidating"><i class="fas fa-link"></i></a>
 </h2>
 <p>Version control is great! And although it’s initially quite complicated and stress-inducing, in the long run you’ll find it actually makes so much sense, and wish you’d known about it while you were writing university essays!</p>
 <p>Why? Two reasons.</p>
@@ -60,16 +84,16 @@
 <li><p>Version control allows us to go back in time.</p></li>
 <li><p>Version control allows multiple analysts to work on a project simultaneously, in a way that Excel just doesn’t.</p></li>
 </ol>
-<div id="step-back-in-time" class="section level3" number="14.1.1">
+<div id="step-back-in-time" class="section level3" number="15.1.1">
 <h3>
-<span class="header-section-number">14.1.1</span> Step back in time<a class="anchor" aria-label="anchor" href="#step-back-in-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1.1</span> Step back in time<a class="anchor" aria-label="anchor" href="#step-back-in-time"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s talk first about going back in time. Version control means we have multiple snapshots of a project at different stages during development. This means if you get into a big mess in your code one day, you can easily jump back to an earlier point and start again.</p>
 <p>And if used properly, version control also stores the project’s journey, allowing you to record why you made the decisions you did. This can be really useful – if you need to edit multiple files at once to make a big change, it’s useful to have a record of when and why you made those changes. This does not diminish the need to have lots of comments in your code, however; those remain vitally important for explaining what the code does.</p>
 </div>
-<div id="get-outta-my-way" class="section level3" number="14.1.2">
+<div id="get-outta-my-way" class="section level3" number="15.1.2">
 <h3>
-<span class="header-section-number">14.1.2</span> Get outta my way<a class="anchor" aria-label="anchor" href="#get-outta-my-way"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1.2</span> Get outta my way<a class="anchor" aria-label="anchor" href="#get-outta-my-way"><i class="fas fa-link"></i></a>
 </h3>
 <p>As for working together simultaneously, there are two extreme situations we often encounter (and version control bridges the gap).</p>
 <p>Situation 1: you’re working on an Excel model, and your teammate needs to make a change. They jump in, make a change, and save the file (despite Dropbox’s warning that someone else is editing the document). Soon after, you save your changes. Boom! Now you have a conflicted copy on the Dropbox.</p>
@@ -78,26 +102,26 @@
 <p>Need more convincing? <a href="https://peerj.com/preprints/3159v2/">Jenny Bryan</a> from RStudio eloquently explains why you need version control in your life. Seriously. It’s a great article. It convinced us.</p>
 </div>
 </div>
-<div id="using-github" class="section level2" number="14.2">
+<div id="using-github" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">14.2</span> Using Github<a class="anchor" aria-label="anchor" href="#using-github"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> Using Github<a class="anchor" aria-label="anchor" href="#using-github"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use Github to version-control and share reports in LaTeX, so you’re already a bit set-up.</p>
 <p>If version control is akin to writing history, Github is the library where that information is archived and where you can go to easily retrieve the information.</p>
 <p>Git, on the other hand, is the printing press that makes the books. Or, to try another tortured metaphor, if Github is like iTunes then Git is the software to make MP3s.</p>
 <p>To go back into the past and look at old versions of our analysis, we’d normally visit <a href="http://github.com">Github</a> to find our project and its history. Github is also the place where we can raise issues about the code to alert team members, assign team members specific tasks, and deal with code conflicts if/when they arise.</p>
 <p>Make sure you have a personal Github account, and then ask a Grattan staff member (e.g. Will or James) to add you to Grattan’s organisation-wide Github account. If you’ve set up a LaTeX document, you’ve probably already completed these steps.</p>
-<div id="setting-up-a-github-account-and-github-desktop" class="section level3" number="14.2.1">
+<div id="setting-up-a-github-account-and-github-desktop" class="section level3" number="15.2.1">
 <h3>
-<span class="header-section-number">14.2.1</span> Setting up a Github account and Github Desktop<a class="anchor" aria-label="anchor" href="#setting-up-a-github-account-and-github-desktop"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.1</span> Setting up a Github account and Github Desktop<a class="anchor" aria-label="anchor" href="#setting-up-a-github-account-and-github-desktop"><i class="fas fa-link"></i></a>
 </h3>
 <p>To set up a Github account, follow these steps:</p>
 <ul>
-<li>Go to github.com and click <strong>Sign up</strong>.</li>
-<li>Complete the sign up form. You can use your personal (recommended) or Grattan email address.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Personal email addresses are recommended because you &lt;em&gt;may&lt;/em&gt; want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.&lt;/p&gt;"><sup>1</sup></a>
+<li>Go to <a href="github.com">github.com</a> and click <strong>Sign up</strong>.</li>
+<li>Complete the sign up form. You can use your personal (recommended) or Grattan email address.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Personal email addresses are recommended because you &lt;em&gt;may&lt;/em&gt; want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.&lt;/p&gt;"><sup>37</sup></a>
 </li>
 </ul>
-<p>You access Github through your browser. But we need to connect and sync our local files as well. To do this, we use Github Desktop.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is definitely not the only way to do this. You can sync with Github through &lt;/p&gt;"><sup>2</sup></a>
+<p>You access Github through your browser. But we need to connect and sync our local files as well. To do this, we use Github Desktop.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is definitely not the only way to do this. You can sync with Github through &lt;/p&gt;"><sup>38</sup></a>
 To download and use Github Desktop, follow these steps:</p>
 <ul>
 <li>Create a Github account.</li>
@@ -107,37 +131,27 @@ To download and use Github Desktop, follow these steps:</p>
 </ul>
 <p>That should do it.</p>
 </div>
-<div id="getting-started-github" class="section level3" number="14.2.2">
+<div id="getting-started-with-github" class="section level3" number="15.2.2">
 <h3>
-<span class="header-section-number">14.2.2</span> Getting started Github<a class="anchor" aria-label="anchor" href="#getting-started-github"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.2</span> Getting started with Github<a class="anchor" aria-label="anchor" href="#getting-started-with-github"><i class="fas fa-link"></i></a>
 </h3>
-<p>External exercise: a 10 minute introduction to Github: <a href="http://guides.github.com/activities/hello-world" class="uri">http://guides.github.com/activities/hello-world</a></p>
+<p>The 10-minute <code>hello-world</code> tutorial made by the people at Github is informative and useful.
+It explains the key terms used in the world of Git – a few of them used below – and runss your through how to:</p>
+<ul>
+<li>Create and use a <strong>repository</strong>
+</li>
+<li>Start and manage a new <strong>branch</strong>
+</li>
+<li>Make changes to a file and <strong>push</strong> them to GitHub as commits</li>
+<li>Open and merge a <strong>pull</strong> request</li>
+</ul>
+<p>Take the time to do it now: <a href="http://guides.github.com/activities/hello-world" class="uri">http://guides.github.com/activities/hello-world</a></p>
 </div>
-</div>
-<div id="git" class="section level2" number="14.3">
-<h2>
-<span class="header-section-number">14.3</span> Git<a class="anchor" aria-label="anchor" href="#git"><i class="fas fa-link"></i></a>
-</h2>
-<p>Git is our preferred version control software. And what’s nice is that you can set up RStudio to allow you use Git seamlessly.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you’d rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.&lt;/p&gt;"><sup>3</sup></a></p>
-<p>Jenny Bryan from RStudio will walk you through the installation steps in Chapters 4-7 (they’re extremely short chapters):</p>
-<p><a href="https://happygitwithr.com/install-intro.html">Click here to access the definitive Git installation guide.</a>
-Of course, if you get stuck, ask!</p>
-<p>Now that you’re installed, we need to connect RStudio with Github so you can use Git.</p>
-<p>The best guide on how to do that is by Simon Brewer (link below). Jenny Bryan’s guide offers similar advice, but I found Simon’s easier to follow.</p>
-<p><a href="http://rstudio-pubs-static.s3.amazonaws.com/485236_9e71a253a02748cba293213a8aec5fe8.html">Click here for how to connect RStudio and Github</a></p>
-<p>There are some pretty unfriendly pieces of jargon in these steps. The worst is <code>SSH</code>, or “Secure Shell Protocol.” In brief, it’s how you’ll login to Github account from RStudio. Instead of submitting your username and password every time, you’ll have to set up an <code>SSH key pair</code> <strong>one time per device</strong> on which you want to link RStudio and Github. That’s probably just your work computer, and maybe a laptop too if you need.</p>
-<p><code>SSH</code> is a more secure way of logging into Github from other applications (in this case, RStudio), and by <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">August 2021</a> it will be the <strong>only</strong> method approved by Github.</p>
-<p>Again, this set up stuff is confusing, so please ask if you need help! It’s likely to be <em>much</em> faster if you ask a fellow staff member than try to solve an unexpected problem on your own.</p>
-</div>
-<div id="using-git" class="section level2" number="14.4">
-<h2>
-<span class="header-section-number">14.4</span> Using Git<a class="anchor" aria-label="anchor" href="#using-git"><i class="fas fa-link"></i></a>
-</h2>
-<p>Chapter 15 onwards of <a href="https://happygitwithr.com/install-intro.html">Happy Git with R</a> will walk you through some early examples of how to use Git.</p>
-<p>Another good option is to prod a Grattan staff member to run a tank-time on version control. If it’s a been a while, and there’s more than one new staff member, then this might be the most efficient way to get associates/fellows engaged in the topic and improve organisation-wide practice.</p>
-<p>If you’re using SSH to log into Git, you may run into an unexpected error when trying to clone a project from Github to your machine (this has happened to James twice). The solution is clone the project using the command line, rather than the RStudio interface. You can access the command line directly from RStudio, however. Go to <code>Tools</code> -&gt; <code>Terminal</code> -&gt; <code>New Terminal</code>, and then use the command</p>
-<pre><code>git clone git@github.com:grattan/MyRepoNameHere ~/path_to_the_folder_where_i_want_the_project_on_my_machine</code></pre>
-<p>Some guiding principles to leave you with:</p>
+<div id="some-dos-and-some-do-nots" class="section level3" number="15.2.3">
+<h3>
+<span class="header-section-number">15.2.3</span> Some dos and some do nots<a class="anchor" aria-label="anchor" href="#some-dos-and-some-do-nots"><i class="fas fa-link"></i></a>
+</h3>
+<p>.gitignore</p>
 <ol style="list-style-type: decimal">
 <li>Commit early, commit often
 <ul>
@@ -157,13 +171,29 @@ Of course, if you get stuck, ask!</p>
 </ol>
 </div>
 </div>
+</div>
 
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></div>
+<div class="next"><a href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#version-control"><span class="header-section-number">15</span> Version control</a></li>
+<li>
+<a class="nav-link" href="#version-control-is-important-and-intimidating"><span class="header-section-number">15.1</span> Version control is important and intimidating</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#step-back-in-time"><span class="header-section-number">15.1.1</span> Step back in time</a></li>
+<li><a class="nav-link" href="#get-outta-my-way"><span class="header-section-number">15.1.2</span> Get outta my way</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#using-github"><span class="header-section-number">15.2</span> Using Github</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#setting-up-a-github-account-and-github-desktop"><span class="header-section-number">15.2.1</span> Setting up a Github account and Github Desktop</a></li>
+<li><a class="nav-link" href="#getting-started-with-github"><span class="header-section-number">15.2.2</span> Getting started with Github</a></li>
+<li><a class="nav-link" href="#some-dos-and-some-do-nots"><span class="header-section-number">15.2.3</span> Some dos and some do nots</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -187,6 +217,34 @@ Of course, if you get stuck, ask!</p>
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

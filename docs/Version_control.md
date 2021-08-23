@@ -47,7 +47,7 @@ Make sure you have a personal Github account, and then ask a Grattan staff membe
 
 To set up a Github account, follow these steps:
 
-- Go to github.com and click **Sign up**.
+- Go to [github.com](github.com) and click **Sign up**.
 - Complete the sign up form. You can use your personal (recommended) or Grattan email address.^[Personal email addresses are recommended because you _may_ want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.]
 
 You access Github through your browser. But we need to connect and sync our local files as well. To do this, we use Github Desktop.^[This is definitely not the only way to do this. You can sync with Github through ]
@@ -60,46 +60,23 @@ To download and use Github Desktop, follow these steps:
 
 That should do it. 
 
-### Getting started Github
+### Getting started with Github
 
-External exercise: a 10 minute introduction to Github: http://guides.github.com/activities/hello-world
+The 10-minute `hello-world` tutorial made by the people at Github is informative and useful.
+It explains the key terms used in the world of Git -- a few of them used below -- and runss your through how to:
 
+- Create and use a **repository**
+- Start and manage a new **branch**
+- Make changes to a file and **push** them to GitHub as commits
+- Open and merge a **pull** request
 
-## Git
-
-Git is our preferred version control software. And what's nice is that you can set up RStudio to allow you use Git seamlessly.^[The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you'd rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.]
-
-Jenny Bryan from RStudio will walk you through the installation steps in Chapters 4-7 (they're extremely short chapters):
-
-[Click here to access the definitive Git installation guide.](https://happygitwithr.com/install-intro.html) 
-Of course, if you get stuck, ask!
-
-Now that you're installed, we need to connect RStudio with Github so you can use Git. 
-
-The best guide on how to do that is by Simon Brewer (link below). Jenny Bryan's guide offers similar advice, but I found Simon's easier to follow. 
-
-[Click here for how to connect RStudio and Github](http://rstudio-pubs-static.s3.amazonaws.com/485236_9e71a253a02748cba293213a8aec5fe8.html)
-
-There are some pretty unfriendly pieces of jargon in these steps. The worst is `SSH`, or "Secure Shell Protocol". In brief, it's how you'll login to Github account from RStudio. Instead of submitting your username and password every time, you'll have to set up an `SSH key pair` **one time per device** on which you want to link RStudio and Github. That's probably just your work computer, and maybe a laptop too if you need. 
-
-`SSH` is a more secure way of logging into Github from other applications (in this case, RStudio), and by [August 2021](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) it will be the **only** method approved by Github. 
-
-Again, this set up stuff is confusing, so please ask if you need help! It's likely to be *much* faster if you ask a fellow staff member than try to solve an unexpected problem on your own.
+Take the time to do it now: http://guides.github.com/activities/hello-world
 
 
+### Some dos and some do nots
 
-## Using Git
+.gitignore
 
-Chapter 15 onwards of [Happy Git with R](https://happygitwithr.com/install-intro.html) will walk you through some early examples of how to use Git. 
-
-Another good option is to prod a Grattan staff member to run a tank-time on version control. If it's a been a while, and there's more than one new staff member, then this might be the most efficient way to get associates/fellows engaged in the topic and improve organisation-wide practice.
-
-If you're using SSH to log into Git, you may run into an unexpected error when trying to clone a project from Github to your machine (this has happened to James twice). The solution is clone the project using the command line, rather than the RStudio interface. You can access the command line directly from RStudio, however. Go to `Tools` -> `Terminal` -> `New Terminal`, and then use the command 
-```{}
-git clone git@github.com:grattan/MyRepoNameHere ~/path_to_the_folder_where_i_want_the_project_on_my_machine
-```
-
-Some guiding principles to leave you with: 
 
 1. Commit early, commit often
     + By committing lots of small changes individually, you'll have a richer history of the project. It's a bit like trying to beat a difficult level of a video game. If you mess up but have saved often, you'll have a more recent place to go back to. But you if save rarely, then you'll need to go quite a way back to your last savefile. 

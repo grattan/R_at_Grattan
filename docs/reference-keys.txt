@@ -134,9 +134,7 @@ version-control-is-important-and-intimidating
 step-back-in-time
 get-outta-my-way
 using-github
-github-desktop
-git
-using-git
-contributing-to-this-book
 setting-up-a-github-account-and-github-desktop
-getting-started-github
+getting-started-with-github
+some-dos-and-some-do-nots
+contributing-to-this-book

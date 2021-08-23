@@ -5,8 +5,28 @@ bookdown::bs4_book:
       before: |
         <li><a href="./">Using R at Grattan Institute</a></li>
     download: ["pdf"]
-    repo: https://github.com/grattan/R_at_grattan
-  css: style.css
+    repo: 
+      base: https://github.com/grattan/R_at_grattan
+      branch: main
+  theme:
+    primary: "#f68b33"
+    danger:  "#dc3545"   # default .rmdcaution = red
+    success: "#198754"   # default .rmdimportant = green
+    info:    "#0dcaf0"   # default .rmdtip = cyan
+    warning: "#ffc107"   # default .rmdwarning = yellow
+    base_font: 
+      google: 
+        family: Roboto
+        wght: 300
+    heading_font:
+      google:
+        family: Roboto
+        wght: 900
+    code_font:
+      google: 
+        # arguments to sass::font_google() 
+        family: Roboto Mono
+        wght: 300
 
 bookdown::gitbook:
   config:

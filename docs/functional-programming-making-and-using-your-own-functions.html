@@ -1,366 +1,87 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14 Functional programming: making and using your own functions | Using R at Grattan Institute</title>
-  <meta name="description" content="How to use R at Grattan good" />
-  <meta name="generator" content="bookdown 0.23.1 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="How to use R at Grattan good" />
-  <meta name="github-repo" content="grattan/R_at_Grattan" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute" />
-  
-  <meta name="twitter:description" content="How to use R at Grattan good" />
-  
-
-<meta name="author" content="Matt Cowgill, Will Mackey, and James Ha" />
-
-
-<meta name="date" content="2021-08-23" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="chart-cookbook.html"/>
-<link rel="next" href="version-control.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>14 Functional programming: making and using your own functions | Using R at Grattan Institute</title>
+<meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
+<meta name="description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta property="og:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute">
+<meta name="twitter:description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><strong><a href="./">Using R at Grattan</a></strong></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
-<li class="part"><span><b>I What is R and why do we use it?</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2</b> What is RStudio?</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.3</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-more-about-r"><i class="fa fa-check"></i><b>1.4</b> Learning more about R</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r_at_grattan"><i class="fa fa-check"></i><b>1.5</b> <code>#r_at_grattan</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="why-use-r.html"><a href="why-use-r.html"><i class="fa fa-check"></i><b>2</b> Why use R?</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="why-use-r.html"><a href="why-use-r.html#why-script"><i class="fa fa-check"></i><b>2.1</b> Why use script-based software?</a></li>
-<li class="chapter" data-level="2.2" data-path="why-use-r.html"><a href="why-use-r.html#why-R"><i class="fa fa-check"></i><b>2.2</b> Why use R specifically?</a></li>
-</ul></li>
-<li class="part"><span><b>II Using R the Grattan way</b></span></li>
-<li class="chapter" data-level="3" data-path="organising-projects.html"><a href="organising-projects.html"><i class="fa fa-check"></i><b>3</b> Organising an R project at Grattan</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="organising-projects.html"><a href="organising-projects.html#rproj"><i class="fa fa-check"></i><b>3.1</b> Use RStudio projects, not <code>setwd()</code></a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="organising-projects.html"><a href="organising-projects.html#how-to-create-a-project"><i class="fa fa-check"></i><b>3.1.1</b> How to create a project</a></li>
-<li class="chapter" data-level="3.1.2" data-path="organising-projects.html"><a href="organising-projects.html#opening-a-project"><i class="fa fa-check"></i><b>3.1.2</b> Opening a project</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="organising-projects.html"><a href="organising-projects.html#use-relative-filepaths"><i class="fa fa-check"></i><b>3.2</b> Use relative filepaths</a></li>
-<li class="chapter" data-level="3.3" data-path="organising-projects.html"><a href="organising-projects.html#keep-your-stuff-together"><i class="fa fa-check"></i><b>3.3</b> Keep your stuff together</a></li>
-<li class="chapter" data-level="3.4" data-path="organising-projects.html"><a href="organising-projects.html#manageable"><i class="fa fa-check"></i><b>3.4</b> Keep your scripts manageable</a></li>
-<li class="chapter" data-level="3.5" data-path="organising-projects.html"><a href="organising-projects.html#make-your-filenames-readable-by-both-machines-and-humans"><i class="fa fa-check"></i><b>3.5</b> Make your filenames readable by both machines and humans</a></li>
-<li class="chapter" data-level="3.6" data-path="organising-projects.html"><a href="organising-projects.html#README"><i class="fa fa-check"></i><b>3.6</b> Include a README file</a></li>
-<li class="chapter" data-level="3.7" data-path="organising-projects.html"><a href="organising-projects.html#clean-workspace"><i class="fa fa-check"></i><b>3.7</b> Keep your workspace clean</a></li>
-<li class="chapter" data-level="3.8" data-path="organising-projects.html"><a href="organising-projects.html#quick-guide"><i class="fa fa-check"></i><b>3.8</b> Quick guide to starting a project</a></li>
-<li class="chapter" data-level="3.9" data-path="organising-projects.html"><a href="organising-projects.html#analysis-template"><i class="fa fa-check"></i><b>3.9</b> Using the <code>grattan-analysis-template</code></a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>4</b> Grattan coding style</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="coding-style.html"><a href="coding-style.html#load-packages-first"><i class="fa fa-check"></i><b>4.1</b> Load packages first</a></li>
-<li class="chapter" data-level="4.2" data-path="coding-style.html"><a href="coding-style.html#script-preamble"><i class="fa fa-check"></i><b>4.2</b> Script preamble</a></li>
-<li class="chapter" data-level="4.3" data-path="coding-style.html"><a href="coding-style.html#use-comments"><i class="fa fa-check"></i><b>4.3</b> Use comments</a></li>
-<li class="chapter" data-level="4.4" data-path="coding-style.html"><a href="coding-style.html#breaking-your-script-into-chunks"><i class="fa fa-check"></i><b>4.4</b> Breaking your script into chunks</a></li>
-<li class="chapter" data-level="4.5" data-path="coding-style.html"><a href="coding-style.html#assigning-values-to-objects"><i class="fa fa-check"></i><b>4.5</b> Assigning values to objects</a></li>
-<li class="chapter" data-level="4.6" data-path="coding-style.html"><a href="coding-style.html#naming-objects-and-variables"><i class="fa fa-check"></i><b>4.6</b> Naming objects and variables</a></li>
-<li class="chapter" data-level="4.7" data-path="coding-style.html"><a href="coding-style.html#spacing"><i class="fa fa-check"></i><b>4.7</b> Spacing</a>
-<ul>
-<li class="chapter" data-level="4.7.1" data-path="coding-style.html"><a href="coding-style.html#assign-and-equals"><i class="fa fa-check"></i><b>4.7.1</b> Assign and equals</a></li>
-<li class="chapter" data-level="4.7.2" data-path="coding-style.html"><a href="coding-style.html#commas"><i class="fa fa-check"></i><b>4.7.2</b> Commas</a></li>
-<li class="chapter" data-level="4.7.3" data-path="coding-style.html"><a href="coding-style.html#parentheses"><i class="fa fa-check"></i><b>4.7.3</b> Parentheses</a></li>
-</ul></li>
-<li class="chapter" data-level="4.8" data-path="coding-style.html"><a href="coding-style.html#short-lines-line-indentation-and-the-pipe"><i class="fa fa-check"></i><b>4.8</b> Short lines, line indentation and the pipe <code>%&gt;%</code></a></li>
-<li class="chapter" data-level="4.9" data-path="coding-style.html"><a href="coding-style.html#omit-needless-code"><i class="fa fa-check"></i><b>4.9</b> Omit needless code</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>5</b> What are packages?</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="packages.html"><a href="packages.html#install-packages"><i class="fa fa-check"></i><b>5.1</b> How to install packages</a></li>
-<li class="chapter" data-level="5.2" data-path="packages.html"><a href="packages.html#install-grattan-packages"><i class="fa fa-check"></i><b>5.2</b> Get set up: install packages for Grattan</a></li>
-<li class="chapter" data-level="5.3" data-path="packages.html"><a href="packages.html#using-packages"><i class="fa fa-check"></i><b>5.3</b> Using packages</a></li>
-<li class="chapter" data-level="5.4" data-path="packages.html"><a href="packages.html#upgrading-packages"><i class="fa fa-check"></i><b>5.4</b> Upgrading packages</a></li>
-<li class="chapter" data-level="5.5" data-path="packages.html"><a href="packages.html#downgrading-packages"><i class="fa fa-check"></i><b>5.5</b> Downgrading packages</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html"><i class="fa fa-check"></i><b>6</b> Packages commonly used at Grattan</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#tidyverse"><i class="fa fa-check"></i><b>6.1</b> The tidyverse!</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#why-do-we-use-the-tidyverse"><i class="fa fa-check"></i><b>6.1.1</b> Why do we use the tidyverse?</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#grattan-specific-packages"><i class="fa fa-check"></i><b>6.2</b> Grattan-specific packages</a></li>
-<li class="chapter" data-level="6.3" data-path="packages-commonly-used-at-grattan.html"><a href="packages-commonly-used-at-grattan.html#other-commonly-used-packages"><i class="fa fa-check"></i><b>6.3</b> Other commonly-used packages</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html"><i class="fa fa-check"></i><b>7</b> Getting help with R</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-at-grattan"><i class="fa fa-check"></i><b>7.1</b> Getting help with R problems at Grattan</a></li>
-<li class="chapter" data-level="7.2" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#getting-help-with-r-problems-in-general"><i class="fa fa-check"></i><b>7.2</b> Getting help with R problems in general</a></li>
-<li class="chapter" data-level="7.3" data-path="getting-help-with-r.html"><a href="getting-help-with-r.html#resources-for-learning-r"><i class="fa fa-check"></i><b>7.3</b> Resources for learning R</a></li>
-</ul></li>
-<li class="part"><span><b>III Load, manipulate and visualise data</b></span></li>
-<li class="chapter" data-level="8" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>8</b> Reading data</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="reading-data.html"><a href="reading-data.html#importing-data"><i class="fa fa-check"></i><b>8.1</b> Importing data</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="reading-data.html"><a href="reading-data.html#reading-csv-files"><i class="fa fa-check"></i><b>8.1.1</b> Reading CSV files</a></li>
-<li class="chapter" data-level="8.1.2" data-path="reading-data.html"><a href="reading-data.html#read_microdata"><i class="fa fa-check"></i><b>8.1.2</b> <code>grattandata::read_microdata()</code></a></li>
-<li class="chapter" data-level="8.1.3" data-path="reading-data.html"><a href="reading-data.html#readxlread_excel"><i class="fa fa-check"></i><b>8.1.3</b> <code>readxl::read_excel()</code></a></li>
-<li class="chapter" data-level="8.1.4" data-path="reading-data.html"><a href="reading-data.html#rio"><i class="fa fa-check"></i><b>8.1.4</b> <code>rio</code></a></li>
-<li class="chapter" data-level="8.1.5" data-path="reading-data.html"><a href="reading-data.html#readabs"><i class="fa fa-check"></i><b>8.1.5</b> <code>readabs</code></a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="reading-data.html"><a href="reading-data.html#reading-common-files"><i class="fa fa-check"></i><b>8.2</b> Reading common files:</a></li>
-<li class="chapter" data-level="8.3" data-path="reading-data.html"><a href="reading-data.html#appropriately-renaming-variables"><i class="fa fa-check"></i><b>8.3</b> Appropriately renaming variables</a></li>
-<li class="chapter" data-level="8.4" data-path="reading-data.html"><a href="reading-data.html#getting-to-tidy-data"><i class="fa fa-check"></i><b>8.4</b> Getting to tidy data</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="different-data-types.html"><a href="different-data-types.html"><i class="fa fa-check"></i><b>9</b> Different data types</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="different-data-types.html"><a href="different-data-types.html#set-up-and-packages"><i class="fa fa-check"></i><b>9.1</b> Set-up and packages</a></li>
-<li class="chapter" data-level="9.2" data-path="different-data-types.html"><a href="different-data-types.html#why-data-types-matter"><i class="fa fa-check"></i><b>9.2</b> Why data types matter</a></li>
-<li class="chapter" data-level="9.3" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types"><i class="fa fa-check"></i><b>9.3</b> Checking and changing data types</a></li>
-<li class="chapter" data-level="9.4" data-path="different-data-types.html"><a href="different-data-types.html#checking-and-changing-data-types-in-vectors-and-tibbles"><i class="fa fa-check"></i><b>9.4</b> Checking and changing data types in vectors and <code>tibbles</code></a></li>
-<li class="chapter" data-level="9.5" data-path="different-data-types.html"><a href="different-data-types.html#asserting-data-types-when-importing-data"><i class="fa fa-check"></i><b>9.5</b> Asserting data types when importing data</a></li>
-<li class="chapter" data-level="9.6" data-path="different-data-types.html"><a href="different-data-types.html#changing-the-data-types-of-lots-of-variables"><i class="fa fa-check"></i><b>9.6</b> Changing the data types of lots of variables</a></li>
-<li class="chapter" data-level="9.7" data-path="different-data-types.html"><a href="different-data-types.html#using-character-vectors"><i class="fa fa-check"></i><b>9.7</b> Using character vectors</a></li>
-<li class="chapter" data-level="9.8" data-path="different-data-types.html"><a href="different-data-types.html#using-dates-with-lubridate"><i class="fa fa-check"></i><b>9.8</b> Using dates with <code>lubridate::</code></a></li>
-<li class="chapter" data-level="9.9" data-path="different-data-types.html"><a href="different-data-types.html#strings-with-stringr"><i class="fa fa-check"></i><b>9.9</b> Strings with <code>stringr::</code></a></li>
-<li class="chapter" data-level="9.10" data-path="different-data-types.html"><a href="different-data-types.html#factors-with-forcats"><i class="fa fa-check"></i><b>9.10</b> Factors with <code>forcats::</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>10</b> Data transformation with <code>dplyr</code></a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#set-up"><i class="fa fa-check"></i><b>10.1</b> Set up</a></li>
-<li class="chapter" data-level="10.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe"><i class="fa fa-check"></i><b>10.2</b> The pipe: <code>%&gt;%</code></a></li>
-<li class="chapter" data-level="10.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-variables-with-select"><i class="fa fa-check"></i><b>10.3</b> Select variables with <code>select()</code></a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#selecting-groups-of-variables"><i class="fa fa-check"></i><b>10.3.1</b> Selecting groups of variables</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filter-with-filter"><i class="fa fa-check"></i><b>10.4</b> Filter with <code>filter()</code></a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#conditions-logical-operations-true-or-false"><i class="fa fa-check"></i><b>10.4.1</b> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code></a></li>
-<li class="chapter" data-level="10.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-data-with-filter"><i class="fa fa-check"></i><b>10.4.2</b> Filtering data with <code>filter</code></a></li>
-<li class="chapter" data-level="10.4.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-filtering-with-group_by"><i class="fa fa-check"></i><b>10.4.3</b> Grouped filtering with <code>group_by()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#edit-and-add-new-variables-with-mutate"><i class="fa fa-check"></i><b>10.5</b> Edit and add new variables with <code>mutate()</code></a>
-<ul>
-<li class="chapter" data-level="10.5.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#using-if_else-or-case_when"><i class="fa fa-check"></i><b>10.5.1</b> Using <code>if_else()</code> or <code>case_when()</code></a></li>
-<li class="chapter" data-level="10.5.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-mutates-with-group_by"><i class="fa fa-check"></i><b>10.5.2</b> Grouped mutates with <code>group_by()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#summarise-data-with-summarise"><i class="fa fa-check"></i><b>10.6</b> Summarise data with <code>summarise()</code></a>
-<ul>
-<li class="chapter" data-level="10.6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-group_by"><i class="fa fa-check"></i><b>10.6.1</b> Grouped summaries with <code>group_by()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-with-arrange"><i class="fa fa-check"></i><b>10.7</b> Arrange with <code>arrange()</code></a>
-<ul>
-<li class="chapter" data-level="10.7.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#lead-and-lag-functions-with-arrange"><i class="fa fa-check"></i><b>10.7.1</b> <code>lead</code> and <code>lag</code> functions with <code>arrange</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#putting-it-all-together"><i class="fa fa-check"></i><b>10.8</b> Putting it all together</a></li>
-<li class="chapter" data-level="10.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#joining-datasets-with-left_join"><i class="fa fa-check"></i><b>10.9</b> Joining datasets with <code>left_join()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>11</b> Analysis</a></li>
-<li class="chapter" data-level="12" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>12</b> Data Visualisation</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-to-data-visualisation"><i class="fa fa-check"></i><b>12.1</b> Introduction to data visualisation</a></li>
-<li class="chapter" data-level="12.2" data-path="data-visualisation.html"><a href="data-visualisation.html#set-up-and-packages-1"><i class="fa fa-check"></i><b>12.2</b> Set-up and packages</a></li>
-<li class="chapter" data-level="12.3" data-path="data-visualisation.html"><a href="data-visualisation.html#concepts"><i class="fa fa-check"></i><b>12.3</b> Concepts</a></li>
-<li class="chapter" data-level="12.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exploratory-data-visualisation"><i class="fa fa-check"></i><b>12.4</b> Exploratory data visualisation</a></li>
-<li class="chapter" data-level="12.5" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-y-charts"><i class="fa fa-check"></i><b>12.5</b> Making Grattan-y charts</a>
-<ul>
-<li class="chapter" data-level="12.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#making-grattan-charts"><i class="fa fa-check"></i><b>12.5.1</b> Making Grattan charts</a></li>
-<li class="chapter" data-level="12.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#saving-grattan-charts"><i class="fa fa-check"></i><b>12.5.2</b> Saving Grattan charts</a></li>
-</ul></li>
-<li class="chapter" data-level="12.6" data-path="data-visualisation.html"><a href="data-visualisation.html#adding-labels"><i class="fa fa-check"></i><b>12.6</b> Adding labels</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="chart-cookbook.html"><a href="chart-cookbook.html"><i class="fa fa-check"></i><b>13</b> Chart cookbook</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#set-up-1"><i class="fa fa-check"></i><b>13.1</b> Set up</a></li>
-<li class="chapter" data-level="13.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-charts"><i class="fa fa-check"></i><b>13.2</b> Bar charts</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-bar-plot"><i class="fa fa-check"></i><b>13.2.1</b> Simple bar plot</a></li>
-<li class="chapter" data-level="13.2.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#bar-multi"><i class="fa fa-check"></i><b>13.2.2</b> Bar plot with multiple series</a></li>
-<li class="chapter" data-level="13.2.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facet-bar"><i class="fa fa-check"></i><b>13.2.3</b> Facetted bar charts</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-charts"><i class="fa fa-check"></i><b>13.3</b> Line charts</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-line-chart"><i class="fa fa-check"></i><b>13.3.1</b> Simple line chart</a></li>
-<li class="chapter" data-level="13.3.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#line-chart-with-multiple-series"><i class="fa fa-check"></i><b>13.3.2</b> Line chart with multiple series</a></li>
-</ul></li>
-<li class="chapter" data-level="13.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots"><i class="fa fa-check"></i><b>13.4</b> Scatter plots</a>
-<ul>
-<li class="chapter" data-level="13.4.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#simple-scatter-plot"><i class="fa fa-check"></i><b>13.4.1</b> Simple scatter plot</a></li>
-<li class="chapter" data-level="13.4.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plot-with-reshaped-data"><i class="fa fa-check"></i><b>13.4.2</b> Scatter plot with reshaped data</a></li>
-<li class="chapter" data-level="13.4.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#layered-scatter-plot"><i class="fa fa-check"></i><b>13.4.3</b> Layered scatter plot</a></li>
-<li class="chapter" data-level="13.4.4" data-path="chart-cookbook.html"><a href="chart-cookbook.html#scatter-plots-with-trendlines"><i class="fa fa-check"></i><b>13.4.4</b> Scatter plots with trendlines</a></li>
-<li class="chapter" data-level="13.4.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#facetted-scatter-plots"><i class="fa fa-check"></i><b>13.4.5</b> Facetted scatter plots</a></li>
-</ul></li>
-<li class="chapter" data-level="13.5" data-path="chart-cookbook.html"><a href="chart-cookbook.html#distributions"><i class="fa fa-check"></i><b>13.5</b> Distributions</a></li>
-<li class="chapter" data-level="13.6" data-path="chart-cookbook.html"><a href="chart-cookbook.html#maps"><i class="fa fa-check"></i><b>13.6</b> Maps</a>
-<ul>
-<li class="chapter" data-level="13.6.1" data-path="chart-cookbook.html"><a href="chart-cookbook.html#sf-objects"><i class="fa fa-check"></i><b>13.6.1</b> <code>sf</code> objects</a></li>
-<li class="chapter" data-level="13.6.2" data-path="chart-cookbook.html"><a href="chart-cookbook.html#using-absmapsdata"><i class="fa fa-check"></i><b>13.6.2</b> Using <code>absmapsdata</code></a></li>
-<li class="chapter" data-level="13.6.3" data-path="chart-cookbook.html"><a href="chart-cookbook.html#making-choropleth-maps"><i class="fa fa-check"></i><b>13.6.3</b> Making choropleth maps</a></li>
-</ul></li>
-<li class="chapter" data-level="13.7" data-path="chart-cookbook.html"><a href="chart-cookbook.html#creating-simple-interactive-graphs-with-plotly"><i class="fa fa-check"></i><b>13.7</b> Creating simple interactive graphs with <code>plotly</code></a></li>
-</ul></li>
-<li class="part"><span><b>IV Advanced topics</b></span></li>
-<li class="chapter" data-level="14" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html"><i class="fa fa-check"></i><b>14</b> Functional programming: making and using your own functions</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#set-up-2"><i class="fa fa-check"></i><b>14.1</b> Set up</a></li>
-<li class="chapter" data-level="14.2" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#defining-simple-functions"><i class="fa fa-check"></i><b>14.2</b> Defining simple functions</a></li>
-<li class="chapter" data-level="14.3" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-conditionals"><i class="fa fa-check"></i><b>14.3</b> Using conditional statements and categorical arguments</a></li>
-<li class="chapter" data-level="14.4" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#functions-returned"><i class="fa fa-check"></i><b>14.4</b> What is ‘returned’ from a function?</a></li>
-<li class="chapter" data-level="14.5" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-on-datasets-within-mutate"><i class="fa fa-check"></i><b>14.5</b> Using functions on datasets within <code>mutate()</code></a></li>
-<li class="chapter" data-level="14.6" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-the-purrr-family-of-functions"><i class="fa fa-check"></i><b>14.6</b> Using the <code>purrr</code> family of functions</a></li>
-<li class="chapter" data-level="14.7" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#using-functions-for-visualisations"><i class="fa fa-check"></i><b>14.7</b> Using functions for visualisations</a></li>
-<li class="chapter" data-level="14.8" data-path="functional-programming-making-and-using-your-own-functions.html"><a href="functional-programming-making-and-using-your-own-functions.html#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fa fa-check"></i><b>14.8</b> Sharing your useful functions with Grattan and the world</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>15</b> Version control</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="version-control.html"><a href="version-control.html#version-control-is-important-and-intimidating"><i class="fa fa-check"></i><b>15.1</b> Version control is important and intimidating</a>
-<ul>
-<li class="chapter" data-level="15.1.1" data-path="version-control.html"><a href="version-control.html#step-back-in-time"><i class="fa fa-check"></i><b>15.1.1</b> Step back in time</a></li>
-<li class="chapter" data-level="15.1.2" data-path="version-control.html"><a href="version-control.html#get-outta-my-way"><i class="fa fa-check"></i><b>15.1.2</b> Get outta my way</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="version-control.html"><a href="version-control.html#using-github"><i class="fa fa-check"></i><b>15.2</b> Using Github</a></li>
-<li class="chapter" data-level="15.3" data-path="version-control.html"><a href="version-control.html#github-desktop"><i class="fa fa-check"></i><b>15.3</b> Github Desktop</a></li>
-<li class="chapter" data-level="15.4" data-path="version-control.html"><a href="version-control.html#git"><i class="fa fa-check"></i><b>15.4</b> Git</a></li>
-<li class="chapter" data-level="15.5" data-path="version-control.html"><a href="version-control.html#using-git"><i class="fa fa-check"></i><b>15.5</b> Using Git</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="contributing-to-this-book.html"><a href="contributing-to-this-book.html"><i class="fa fa-check"></i><b>16</b> Contributing to this book</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Using R at Grattan Institute</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using R at Grattan Institute</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome!</a></li>
+<li class="book-part">What is R and why do we use it?</li>
+<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
+<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
+<li class="book-part">Using R the Grattan way</li>
+<li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
+<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
+<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li class="book-part">Load, manipulate and visualise data</li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
+<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="active" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="functional-programming-making-and-using-your-own-functions" class="section level1" number="14">
-<h1><span class="header-section-number">14</span> Functional programming: making and using your own functions</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-programming-making-and-using-your-own-functions" class="section level1" number="14">
+<h1>
+<span class="header-section-number">14</span> Functional programming: making and using your own functions<a class="anchor" aria-label="anchor" href="#functional-programming-making-and-using-your-own-functions"><i class="fas fa-link"></i></a>
+</h1>
 <p>Why on earth would you create your own function?</p>
 <p>It can be useful to make your own function</p>
 <div id="set-up-2" class="section level2" number="14.1">
-<h2><span class="header-section-number">14.1</span> Set up</h2>
+<h2>
+<span class="header-section-number">14.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-2"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will use the <code>tidyverse</code> and <code>purrr</code> in this chapter.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
 ## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
@@ -369,156 +90,188 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="defining-simple-functions" class="section level2" number="14.2">
-<h2><span class="header-section-number">14.2</span> Defining simple functions</h2>
+<h2>
+<span class="header-section-number">14.2</span> Defining simple functions<a class="anchor" aria-label="anchor" href="#defining-simple-functions"><i class="fas fa-link"></i></a>
+</h2>
 <p>Like your data, a function is an <code>object</code> that is defined.</p>
 <p>Let’s say you wanted to take whatever value you had and add one to it.
 We could define a function called <code>add_one</code> to do this:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb333-1" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb333-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb333-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb333-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="op">}</span></code></pre></div>
 <p>There are four elements to what we just did:</p>
 <ol style="list-style-type: decimal">
 <li>Created a new function using the <code>function()</code> function.</li>
-<li>Defined one argument (input) to the new function: <code>x</code></li>
+<li>Defined one argument (input) to the new function: <code>x</code>
+</li>
 <li>Gave the function instructions to ‘take <code>x</code> and add one’: <code>x + 1</code>.</li>
 <li>Assigned this function to the object <code>add_one</code>.</li>
 </ol>
 <p>Now that you’ve done all that, you can call the function like you would any other:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 101</code></pre>
 <p>You can define functions can take more than one argument:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb340-1" aria-hidden="true" tabindex="-1"></a>add_together_plus_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, z) {</span>
-<span id="cb340-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y <span class="sc">+</span> z <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb340-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb340-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb340-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb340-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb340-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb340-5" aria-hidden="true" tabindex="-1"></a><span class="fu">add_together_plus_one</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">add_together_plus_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">+</span> <span class="va">z</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="op">}</span>
+
+<span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>As the above takes three arguments, and there are no defaults provided,
 we’ll get an error if we fotget one:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_together_plus_one</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## Error in add_together_plus_one(1, 2): argument &quot;z&quot; is missing, with no default</code></pre>
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## Error in add_together_plus_one(1, 2): argument "z" is missing, with no default</code></pre>
 <p>So you can also provide <em>default</em> values to your function when you define it:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb344-1" aria-hidden="true" tabindex="-1"></a>make_power <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">2</span>) {</span>
-<span id="cb344-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb344-2" aria-hidden="true" tabindex="-1"></a> x<span class="sc">^</span>n </span>
-<span id="cb344-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb344-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_power</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span>
+ <span class="va">x</span><span class="op">^</span><span class="va">n</span> 
+<span class="op">}</span></code></pre></div>
 <p>If you don’t provide a value for <code>n</code> when you call the <code>make_power</code> function,
 it will default to <code>2</code>:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_power</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
 <p>And you can override that by providing your own value:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_power</span>(<span class="dv">10</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 10000</code></pre>
 <p>We can also assign the result of this function (<code>10000</code> above) to
 an object of its own:</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb349-1" aria-hidden="true" tabindex="-1"></a>my_power_number <span class="ot">&lt;-</span> <span class="fu">make_power</span>(<span class="dv">10</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_power_number</span> <span class="op">&lt;-</span> <span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>For this reason, and a few others described in a <a href="functional-programming-making-and-using-your-own-functions.html#functions-returned">section to follow</a>, a function
 can only return one <em>thing</em> (a number, or a vector, or dataset, or list, and so on).</p>
 </div>
 <div id="functions-conditionals" class="section level2" number="14.3">
-<h2><span class="header-section-number">14.3</span> Using conditional statements and categorical arguments</h2>
+<h2>
+<span class="header-section-number">14.3</span> Using conditional statements and categorical arguments<a class="anchor" aria-label="anchor" href="#functions-conditionals"><i class="fas fa-link"></i></a>
+</h2>
 <p>Sometimes you will want your function to behave differently under different
 circumstances. For example, you might want to do one thing if your input is a
-<b style='font-size:bigger'>REALLY BIG</b> number, and another if it’s <span style="font-size:smaller">very small</span>.</p>
+<b style="font-size:bigger">REALLY BIG</b> number, and another if it’s <span style="font-size:smaller">very small</span>.</p>
 <p>Conditional <code>if</code> statements – which evaluate an expression and proceed <em>if</em> <code>TRUE</code> – can be useful for these occasions.
 The function below takes one argument – <code>x</code> – and transforms it depending on how large it is:</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-1" aria-hidden="true" tabindex="-1"></a>make_smaller <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb350-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb350-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-3" aria-hidden="true" tabindex="-1"></a>    return_number <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="dv">10</span></span>
-<span id="cb350-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb350-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
-<span id="cb350-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-6" aria-hidden="true" tabindex="-1"></a>    return_number <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="dv">5</span></span>
-<span id="cb350-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb350-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-8" aria-hidden="true" tabindex="-1"></a>  return_number</span>
-<span id="cb350-9"><a href="functional-programming-making-and-using-your-own-functions.html#cb350-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">10</span>
+  <span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">5</span>
+  <span class="op">}</span>
+  <span class="va">return_number</span>
+<span class="op">}</span></code></pre></div>
 <p>If the input number is greater than 10, the <code>make_smaller</code> function will take
 <code>10</code> off it; if it’s 10 or less, it will just take <code>5</code> off:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_smaller</span>(<span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_smaller</span>(<span class="dv">13</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>Making use of the <code>return()</code> function could make this clearer.
+<p>Making use of the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function could make this clearer.
 If <code>x</code> is greater than <code>10</code>, the <code>make_smaller</code> function will now subtract <code>10</code>
 and immediately return the value, ignoring everything else below it:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-1" aria-hidden="true" tabindex="-1"></a>make_smaller <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb355-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb355-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">10</span>)</span>
-<span id="cb355-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb355-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
-<span id="cb355-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">5</span>)</span>
-<span id="cb355-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb355-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb355-9"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-10"><a href="functional-programming-making-and-using-your-own-functions.html#cb355-10" aria-hidden="true" tabindex="-1"></a><span class="fu">make_smaller</span>(<span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">10</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_smaller</span>(<span class="dv">13</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>These conditional statements can be used for input options to your functions.
 Let’s say you had a vector of ages of people in your office, <code>office_ages</code>:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb359-1" aria-hidden="true" tabindex="-1"></a>office_ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">21</span>, <span class="dv">36</span>, <span class="dv">56</span>, <span class="dv">67</span>, <span class="dv">200</span>)</span>
-<span id="cb359-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb359-2" aria-hidden="true" tabindex="-1"></a>office_ages</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">office_ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">36</span>, <span class="fl">56</span>, <span class="fl">67</span>, <span class="fl">200</span><span class="op">)</span>
+<span class="va">office_ages</span></code></pre></div>
 <pre><code>## [1]  -6  12  21  36  56  67 200</code></pre>
 <p>To summarise your office by age, you might want a function that would round each age to the nearest <code>10</code>. You could make a function that rounds a number to the nearest <code>10</code>,
-using the <code>round()</code> function with <code>digits</code> set to <code>-1</code> (i.e. round to the nearest <code>10</code>):</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb361-1" aria-hidden="true" tabindex="-1"></a>make_age10 <span class="ot">&lt;-</span> <span class="cf">function</span>(age) {</span>
-<span id="cb361-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(age, <span class="at">digits =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb361-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb361-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb361-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb361-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb361-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb361-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages)</span></code></pre></div>
+using the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function with <code>digits</code> set to <code>-1</code> (i.e. round to the nearest <code>10</code>):</p>
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
 <p>Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and <code>100</code>. You could let <code>validate_ages</code> be an argument, defaulting to <code>TRUE</code>, and <em>if it is <code>TRUE</code></em>, then you could perform the validation:</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-1" aria-hidden="true" tabindex="-1"></a>make_age10 <span class="ot">&lt;-</span> <span class="cf">function</span>(age,</span>
-<span id="cb363-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">validate_ages =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb363-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb363-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, validate ages IF ASKED FOR</span></span>
-<span id="cb363-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (validate_ages) {</span>
-<span id="cb363-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-6" aria-hidden="true" tabindex="-1"></a>    age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, age)</span>
-<span id="cb363-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-7" aria-hidden="true" tabindex="-1"></a>    age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, age)</span>
-<span id="cb363-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb363-9"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb363-10"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Then round ages to the nearest 10:</span></span>
-<span id="cb363-11"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(age, <span class="at">digits =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb363-12"><a href="functional-programming-making-and-using-your-own-functions.html#cb363-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
+                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># First, validate ages IF ASKED FOR</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
+    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="co"># Then round ages to the nearest 10:</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Now, if <code>validate_ages == TRUE</code> (the default), the numbers over <code>100</code> will be replaced with <code>100</code>, and those less than <code>0</code> with <code>0</code>:</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
 <p>And you can turn that behaviour off by setting <code>validate_ages</code> to <code>FALSE</code>:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages, <span class="at">validate_ages =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
 <p>However, we might not trust an age entry of <code>-6</code> or <code>200</code> at all, and might want to give the user the option to remove them rather than assume they are <code>0</code> or <code>100</code>. We could provide that option in one of two ways.</p>
 <p>The first is to add another argument, shown below.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-1" aria-hidden="true" tabindex="-1"></a>make_age10 <span class="ot">&lt;-</span> <span class="cf">function</span>(age,</span>
-<span id="cb368-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">validate_ages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb368-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">remove_implausible =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb368-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb368-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, validate ages</span></span>
-<span id="cb368-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (validate_ages) {</span>
-<span id="cb368-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (remove_implausible) {</span>
-<span id="cb368-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Replace implausible ages with NAs</span></span>
-<span id="cb368-9"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-9" aria-hidden="true" tabindex="-1"></a>      age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">|</span> age <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, age)</span>
-<span id="cb368-10"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb368-11"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>remove_implausible) {</span>
-<span id="cb368-12"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Replace implausible ages with their nearest plausible age</span></span>
-<span id="cb368-13"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-13" aria-hidden="true" tabindex="-1"></a>      age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, age)</span>
-<span id="cb368-14"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-14" aria-hidden="true" tabindex="-1"></a>      age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, age)</span>
-<span id="cb368-15"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-15" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb368-16"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb368-17"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb368-18"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Then round ages to the nearest 10:</span></span>
-<span id="cb368-19"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(age, <span class="at">digits =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb368-20"><a href="functional-programming-making-and-using-your-own-functions.html#cb368-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
+                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span>,
+                       <span class="va">remove_implausible</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># First, validate ages</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span>
+      <span class="co"># Replace implausible ages with NAs</span>
+      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span>
+      <span class="co"># Replace implausible ages with their nearest plausible age</span>
+      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
+      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">}</span>
+  
+  <span class="co"># Then round ages to the nearest 10:</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>This is fine! By default, the function still works like it did previously:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages, <span class="at">validate_ages =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
 <p>And if the user wants to validate ages <strong>and</strong> they want to remove the
-implausible ages, then they will be replaced with <code>NA</code>:<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages, <span class="at">validate_ages =</span> <span class="cn">TRUE</span>, <span class="at">remove_implausible =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+implausible ages, then they will be replaced with <code>NA</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that when &lt;em&gt;creating&lt;/em&gt;
+an &lt;code&gt;NA&lt;/code&gt; value, like we’ve done above, we have to specify what &lt;em&gt;type&lt;/em&gt; of &lt;code&gt;NA&lt;/code&gt;
+value it is: a number &lt;code&gt;NA_real_&lt;/code&gt;, an integer &lt;code&gt;NA_integer&lt;/code&gt;, or a character
+&lt;code&gt;NA_character_&lt;/code&gt;.&lt;/p&gt;"><sup>35</sup></a></p>
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span>, remove_implausible <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 <p>But those nested conditional statements – which are often
 needed! – can be a bit of a headache.
@@ -526,85 +279,97 @@ There is another way we can do this, which might be neater in this instance.
 The <code>validate_ages</code> argument could take a character string that tells it which
 validation method to use. We could use <code>"remove"</code> and <code>"adjust"</code> to indicate the
 validation methods:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-1" aria-hidden="true" tabindex="-1"></a>make_age10 <span class="ot">&lt;-</span> <span class="cf">function</span>(age,</span>
-<span id="cb373-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">validate_ages =</span> <span class="st">&quot;remove&quot;</span>) {</span>
-<span id="cb373-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb373-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, validate ages</span></span>
-<span id="cb373-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (validate_ages <span class="sc">==</span> <span class="st">&quot;remove&quot;</span>) {</span>
-<span id="cb373-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-6" aria-hidden="true" tabindex="-1"></a>    age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">|</span> age <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, age)</span>
-<span id="cb373-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb373-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb373-9"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (validate_ages <span class="sc">==</span> <span class="st">&quot;adjust&quot;</span>) {</span>
-<span id="cb373-10"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace implausible ages with their nearest plausible age</span></span>
-<span id="cb373-11"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-11" aria-hidden="true" tabindex="-1"></a>    age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, age)</span>
-<span id="cb373-12"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-12" aria-hidden="true" tabindex="-1"></a>    age <span class="ot">&lt;-</span> <span class="fu">if_else</span>(age <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, age)</span>
-<span id="cb373-13"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-13" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb373-14"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb373-15"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Then round ages to the nearest 10:</span></span>
-<span id="cb373-16"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(age, <span class="at">digits =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb373-17"><a href="functional-programming-making-and-using-your-own-functions.html#cb373-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
+                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># First, validate ages</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"adjust"</span><span class="op">)</span> <span class="op">{</span>
+    <span class="co"># Replace implausible ages with their nearest plausible age</span>
+    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
+    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="co"># Then round ages to the nearest 10:</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Now we can use the <code>validate_ages</code> argument by itself to get the results we want:</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages, <span class="at">validate_ages =</span> <span class="st">&quot;adjust&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"adjust"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages, <span class="at">validate_ages =</span> <span class="st">&quot;remove&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 </div>
 <div id="functions-returned" class="section level2" number="14.4">
-<h2><span class="header-section-number">14.4</span> What is ‘returned’ from a function?</h2>
+<h2>
+<span class="header-section-number">14.4</span> What is ‘returned’ from a function?<a class="anchor" aria-label="anchor" href="#functions-returned"><i class="fas fa-link"></i></a>
+</h2>
 <p>A function can do lots of things in the background.
 For example, you might want to take a vector, square every number,
 and then add all those numbers up:</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-1" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb378-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first, add one to each using the function we defined above</span></span>
-<span id="cb378-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  added <span class="ot">&lt;-</span> <span class="fu">add_one</span>(x)</span>
-<span id="cb378-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then sum all the numbers in the vector</span></span>
-<span id="cb378-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-5" aria-hidden="true" tabindex="-1"></a>  summed <span class="ot">&lt;-</span> <span class="fu">sum</span>(added)</span>
-<span id="cb378-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then return the summed object</span></span>
-<span id="cb378-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-7" aria-hidden="true" tabindex="-1"></a>  summed</span>
-<span id="cb378-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb378-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="co"># first, add one to each using the function we defined above</span>
+  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="co"># then sum all the numbers in the vector</span>
+  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
+  <span class="co"># then return the summed object</span>
+  <span class="va">summed</span>
+<span class="op">}</span></code></pre></div>
 <p>Running that function on a vector of numbers <span class="math inline">\(1, 2, 3, ..., 10\)</span> (created with <code>1:10</code>) does what we want:</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum_squares</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 65</code></pre>
 <p>But look in your <strong>Environment</strong> window. The two objects that were created in the
 function – <code>added</code> and <code>summed</code> – aren’t there! They are instead calculated,
 stored in the background, and removed when the function is finished.</p>
 <p>A function only returns <strong>one thing</strong>; everything else that is created in it
-is discarded.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a>
+is discarded.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Unless they are explicitly stored in your environment, but this is not recommended.&lt;/p&gt;"><sup>36</sup></a>
 This behaviour keeps your environment clean and tidy, but it can cause some frustration when you’re getting started.</p>
 <p>That <strong>one thing</strong> that is returned is – by default – the last thing printed in
 the function. <em>this is a bad explanation that I need to make better</em>
 For <code>sum_squares</code> above, we defined two objects and then passed the <code>summed</code> to
 the end of the function. If we omitted the last step, the function wouldn’t return <em>anything</em>:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-1" aria-hidden="true" tabindex="-1"></a>empty_sum_squares <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb381-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first, add one to each using the function we defined above</span></span>
-<span id="cb381-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-3" aria-hidden="true" tabindex="-1"></a>  added <span class="ot">&lt;-</span> <span class="fu">add_one</span>(x)</span>
-<span id="cb381-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then sum all the numbers in the vector</span></span>
-<span id="cb381-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-5" aria-hidden="true" tabindex="-1"></a>  summed <span class="ot">&lt;-</span> <span class="fu">sum</span>(added)</span>
-<span id="cb381-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb381-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb381-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb381-8" aria-hidden="true" tabindex="-1"></a><span class="fu">empty_sum_squares</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">empty_sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="co"># first, add one to each using the function we defined above</span>
+  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="co"># then sum all the numbers in the vector</span>
+  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">empty_sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>The <code>empty_sum_squares</code> function took the <code>1:10</code> vector, then added one, then
 summed the resulting numbers. But it didn’t <em>return</em> anything.
 It just assigned values to the <code>added</code> and <code>summed</code> objects, then the function
 finished and those objects vanished.</p>
-<p>The <code>return()</code> function can help you make this behaviour clear. Using <code>return()</code>
+<p>The <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function can help you make this behaviour clear. Using <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>
 will stop your function in its tracks and pass the object out of the function.
 We can use it in the <code>sum_squares</code> function:</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-1" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb382-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first, add one to each using the function we defined above</span></span>
-<span id="cb382-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-3" aria-hidden="true" tabindex="-1"></a>  added <span class="ot">&lt;-</span> <span class="fu">add_one</span>(x)</span>
-<span id="cb382-4"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then sum all the numbers in the vector</span></span>
-<span id="cb382-5"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-5" aria-hidden="true" tabindex="-1"></a>  summed <span class="ot">&lt;-</span> <span class="fu">sum</span>(added)</span>
-<span id="cb382-6"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then return the summed object</span></span>
-<span id="cb382-7"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(summed) <span class="co"># function stops here!</span></span>
-<span id="cb382-8"><a href="functional-programming-making-and-using-your-own-functions.html#cb382-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="co"># first, add one to each using the function we defined above</span>
+  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="co"># then sum all the numbers in the vector</span>
+  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
+  <span class="co"># then return the summed object</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">summed</span><span class="op">)</span> <span class="co"># function stops here!</span>
+<span class="op">}</span></code></pre></div>
 <p>Ensuring your function <em>returns</em> the object you want in the form you want is the second step in writing your own functions.</p>
 </div>
 <div id="using-functions-on-datasets-within-mutate" class="section level2" number="14.5">
-<h2><span class="header-section-number">14.5</span> Using functions on datasets within <code>mutate()</code></h2>
+<h2>
+<span class="header-section-number">14.5</span> Using functions on datasets within <code>mutate()</code><a class="anchor" aria-label="anchor" href="#using-functions-on-datasets-within-mutate"><i class="fas fa-link"></i></a>
+</h2>
 <p>Recall that when you are adding (or changing) a variable in a dataset with <code>mutate</code>, the length of the output must be either the length of the dataset or one (which is then repeated). Anything else will throw an error:</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb383-1" aria-hidden="true" tabindex="-1"></a>office_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(office_ages)</span>
-<span id="cb383-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb383-2" aria-hidden="true" tabindex="-1"></a>office_df</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">office_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span>
+<span class="va">office_df</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 1
 ##   office_ages
 ##         &lt;dbl&gt;
@@ -615,9 +380,10 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56
 ## 6          67
 ## 7         200</code></pre>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A single element will be repeated:</span></span>
-<span id="cb385-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb385-2" aria-hidden="true" tabindex="-1"></a>office_df <span class="sc">%&gt;%</span> </span>
-<span id="cb385-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fave_colour =</span> <span class="st">&quot;#F68B33&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># A single element will be repeated:</span>
+<span class="va">office_df</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>fave_colour <span class="op">=</span> <span class="st">"#F68B33"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 2
 ##   office_ages fave_colour
 ##         &lt;dbl&gt; &lt;chr&gt;      
@@ -628,9 +394,10 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56 #F68B33    
 ## 6          67 #F68B33    
 ## 7         200 #F68B33</code></pre>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector of length of the dataset is fine:</span></span>
-<span id="cb387-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb387-2" aria-hidden="true" tabindex="-1"></a>office_df <span class="sc">%&gt;%</span> </span>
-<span id="cb387-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb387-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fave_number =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">99</span>, <span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># A vector of length of the dataset is fine:</span>
+<span class="va">office_df</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>fave_number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">99</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 2
 ##   office_ages fave_number
 ##         &lt;dbl&gt;       &lt;dbl&gt;
@@ -641,93 +408,80 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56           0
 ## 6          67          99
 ## 7         200         100</code></pre>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BUT a vector of a different length will cause an error:</span></span>
-<span id="cb389-2"><a href="functional-programming-making-and-using-your-own-functions.html#cb389-2" aria-hidden="true" tabindex="-1"></a>office_df <span class="sc">%&gt;%</span> </span>
-<span id="cb389-3"><a href="functional-programming-making-and-using-your-own-functions.html#cb389-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fave_lunch =</span> <span class="fu">c</span>(<span class="st">&quot;pasta salad&quot;</span>, <span class="st">&quot;a variety&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># BUT a vector of a different length will cause an error:</span>
+<span class="va">office_df</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>fave_lunch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pasta salad"</span>, <span class="st">"a variety"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Error: Problem with `mutate()` column `fave_lunch`.
-## ℹ `fave_lunch = c(&quot;pasta salad&quot;, &quot;a variety&quot;)`.
+## ℹ `fave_lunch = c("pasta salad", "a variety")`.
 ## ℹ `fave_lunch` must be size 7 or 1, not 2.</code></pre>
 <p>In <a href="functional-programming-making-and-using-your-own-functions.html#functions-conditionals">the section above</a>, we created the <code>make_age10</code> function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb391-1" aria-hidden="true" tabindex="-1"></a>office_ages <span class="sc">%&gt;%</span> <span class="fu">length</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">office_ages</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="functional-programming-making-and-using-your-own-functions.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_age10</span>(office_ages) <span class="sc">%&gt;%</span> <span class="fu">length</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="using-the-purrr-family-of-functions" class="section level2" number="14.6">
-<h2><span class="header-section-number">14.6</span> Using the <code>purrr</code> family of functions</h2>
+<h2>
+<span class="header-section-number">14.6</span> Using the <code>purrr</code> family of functions<a class="anchor" aria-label="anchor" href="#using-the-purrr-family-of-functions"><i class="fas fa-link"></i></a>
+</h2>
 <p><em>Section to be finished</em>; see <a href="https://github.com/grattan/R_at_Grattan/issues/59" class="uri">https://github.com/grattan/R_at_Grattan/issues/59</a></p>
 </div>
 <div id="using-functions-for-visualisations" class="section level2" number="14.7">
-<h2><span class="header-section-number">14.7</span> Using functions for visualisations</h2>
+<h2>
+<span class="header-section-number">14.7</span> Using functions for visualisations<a class="anchor" aria-label="anchor" href="#using-functions-for-visualisations"><i class="fas fa-link"></i></a>
+</h2>
 </div>
 <div id="sharing-your-useful-functions-with-grattan-and-the-world" class="section level2" number="14.8">
-<h2><span class="header-section-number">14.8</span> Sharing your useful functions with Grattan and the world</h2>
+<h2>
+<span class="header-section-number">14.8</span> Sharing your useful functions with Grattan and the world<a class="anchor" aria-label="anchor" href="#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="35">
-<li id="fn35"><p>Note that when <em>creating</em>
-an <code>NA</code> value, like we’ve done above, we have to specify what <em>type</em> of <code>NA</code>
-value it is: a number <code>NA_real_</code>, an integer <code>NA_integer</code>, or a character
-<code>NA_character_</code>.<a href="functional-programming-making-and-using-your-own-functions.html#fnref35" class="footnote-back">↩︎</a></p></li>
-<li id="fn36"><p>Unless they are explicitly stored in your environment, but this is not recommended.<a href="functional-programming-making-and-using-your-own-functions.html#fnref36" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="chart-cookbook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+  <div class="chapter-nav">
+<div class="prev"><a href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></div>
+<div class="next"><a href="version-control.html"><span class="header-section-number">15</span> Version control</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#functional-programming-making-and-using-your-own-functions"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
+<li><a class="nav-link" href="#set-up-2"><span class="header-section-number">14.1</span> Set up</a></li>
+<li><a class="nav-link" href="#defining-simple-functions"><span class="header-section-number">14.2</span> Defining simple functions</a></li>
+<li><a class="nav-link" href="#functions-conditionals"><span class="header-section-number">14.3</span> Using conditional statements and categorical arguments</a></li>
+<li><a class="nav-link" href="#functions-returned"><span class="header-section-number">14.4</span> What is ‘returned’ from a function?</a></li>
+<li><a class="nav-link" href="#using-functions-on-datasets-within-mutate"><span class="header-section-number">14.5</span> Using functions on datasets within mutate()</a></li>
+<li><a class="nav-link" href="#using-the-purrr-family-of-functions"><span class="header-section-number">14.6</span> Using the purrr family of functions</a></li>
+<li><a class="nav-link" href="#using-functions-for-visualisations"><span class="header-section-number">14.7</span> Using functions for visualisations</a></li>
+<li><a class="nav-link" href="#sharing-your-useful-functions-with-grattan-and-the-world"><span class="header-section-number">14.8</span> Sharing your useful functions with Grattan and the world</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": false,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["r-at-grattan.pdf", "r-at-grattan.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -739,7 +493,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
