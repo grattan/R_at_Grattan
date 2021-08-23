@@ -130,7 +130,7 @@ Even when you kind of think it should:
 ## Error in "100" * 2: non-numeric argument to binary operator
 ```
 
-Above, R is trying to multiply the _character_ `"100"` by the _number_ `2`. Which -- because of the types of these data -- makes as much sense as `"Hello" $\times$ 2`. 
+Above, R is trying to multiply the _character_ `"100"` by the _number_ `2`. Which -- because of the types of these data -- makes as much sense as `"Hello"` $\times$ `2`. 
 
 Defining and checking and being aware of the 'type' of your data is a boring and tedious task common to all statistical languages/software.
 It's just something you need to do.

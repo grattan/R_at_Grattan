@@ -29,7 +29,7 @@ RStudio is another piece of free software you can download and run on your compu
 
 In programmer jargon, RStudio is an "integrated development environment" or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R 'console' to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you've created, among other things. 
 
-![](atlas/rstudio_screenshot.png)<!-- -->
+<img src="atlas/rstudio_screenshot.png" width="100%" />
 
 You'll almost always interact with R by opening RStudio. 
 
@@ -39,16 +39,16 @@ Although you'll usually work with R by opening RStudio, you need to install both
 
 Install R by going to [CRAN](https://cran.r-project.org), the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages. 
 
-![](atlas/r_cran.png)<!-- -->
+<img src="atlas/r_cran.png" width="100%" />
 
 You want to download the latest base R release, as a 'binary'. Don't worry, you don't need to know what a binary is.
 
 For macOS, the page will look like this:
-![](atlas/r_cran_macos.png)<!-- -->
+<img src="atlas/r_cran_macos.png" width="100%" />
 
 For Windows, you'll need to click on the 'base' version, and then click again to start the download.
 
-![](atlas/r_cran_windows_1.png)<!-- -->![](atlas/r_cran_windows_2.png)<!-- -->
+<img src="atlas/r_cran_windows_1.png" width="100%" /><img src="atlas/r_cran_windows_2.png" width="100%" />
 
 Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
 
@@ -60,6 +60,6 @@ This guide will show you how to use R at Grattan. But it is not a comprehensive 
 
 
 ## `#r_at_grattan`
-A great way to learn about R is to ask a Grattan person! Pose a question in the `#r_at_grattan` channel in Grattan Slack and someone will be sure to answer it.
+A great way to learn about R is to ask a Grattan person! Pose a question in the `#r_at_grattan` channel in **Grattan Slack** and someone will be sure to answer it.
 
-At Grattan, none of us is a programmer first and foremost. We're a motley crew of economists, lawyers, doctors, scientists and philopsophers who have learned how to code so we can work with data. Don't feel bad if you don't know what you're doing yet -- we've all been there and are happy to help you get up to speed.
+At Grattan, none of us is a programmer first and foremost. We're a motley crew of economists, lawyers, doctors, scientists and philosophers who have learned how to code so we can work with data. Don't feel bad if you don't know what you're doing yet -- we've all been there and are happy to help you get up to speed.

@@ -3,15 +3,13 @@ title: "Using R at Grattan Institute"
 author: "Matt Cowgill, Will Mackey, and James Ha"
 date: "2021-08-23"
 site: bookdown::bookdown_site
-output: 
-  bookdown::gitbook:
-    highlight: tango
+output: bookdown::bs4_book
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: grattan/R_at_Grattan
-description: "How to use R at Grattan good"
+description: "How to use R at Grattan"
 ---
 
 # Welcome! {-}
@@ -32,3 +30,6 @@ Because the guide is intended for everyone who uses R at Grattan, there may be s
 Any complaints or comments about this guide can be sent to Will or James, respectively. 
 
 This site was written in R with RMarkdown and the [bookdown](https://bookdown.org) package.
+
+
+

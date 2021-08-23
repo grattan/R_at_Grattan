@@ -16,8 +16,10 @@
 <meta name="twitter:description" content="Most people reading this guide will know what R is. But if you don’t - that’s OK! If you have used R before and are comfortable enough with it, you might want to skip to the next page. This page...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -92,9 +94,7 @@
 </h2>
 <p>RStudio is another piece of free software you can download and run on your computer.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we’re referring to the desktop software unless we make it clear that we mean the company.&lt;/p&gt;"><sup>1</sup></a> Like R itself, RStudio is available for Windows, macOS and Linux.</p>
 <p>In programmer jargon, RStudio is an “integrated development environment” or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R ‘console’ to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you’ve created, among other things.</p>
-<div class="inline-figure">
-<img src="atlas/rstudio_screenshot.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="atlas/rstudio_screenshot.png" width="100%"></div>
 <p>You’ll almost always interact with R by opening RStudio.</p>
 </div>
 <div id="installing-r-and-rstudio" class="section level2" number="1.3">
@@ -103,15 +103,13 @@
 </h2>
 <p>Although you’ll usually work with R by opening RStudio, you need to install both R and RStudio separately.</p>
 <p>Install R by going to <a href="https://cran.r-project.org">CRAN</a>, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.</p>
-<div class="inline-figure">
-<img src="atlas/r_cran.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="atlas/r_cran.png" width="100%"></div>
 <p>You want to download the latest base R release, as a ‘binary’. Don’t worry, you don’t need to know what a binary is.</p>
 <div class="inline-figure">For macOS, the page will look like this:
-<img src="atlas/r_cran_macos.png"><!-- -->
+<img src="atlas/r_cran_macos.png" width="100%">
 </div>
 <p>For Windows, you’ll need to click on the ‘base’ version, and then click again to start the download.</p>
-<p><img src="atlas/r_cran_windows_1.png"><!-- --><img src="atlas/r_cran_windows_2.png"><!-- --></p>
+<p><img src="atlas/r_cran_windows_1.png" width="100%"><img src="atlas/r_cran_windows_2.png" width="100%"></p>
 <p>Once you’ve installed R, you’ll need to install RStudio. Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio website and install the latest version</a> of RStudio Desktop (open source license).</p>
 <p>Once they’re both installed, get started by opening RStudio.</p>
 </div>
@@ -125,8 +123,8 @@
 <h2>
 <span class="header-section-number">1.5</span> <code>#r_at_grattan</code><a class="anchor" aria-label="anchor" href="#r_at_grattan"><i class="fas fa-link"></i></a>
 </h2>
-<p>A great way to learn about R is to ask a Grattan person! Pose a question in the <code>#r_at_grattan</code> channel in Grattan Slack and someone will be sure to answer it.</p>
-<p>At Grattan, none of us is a programmer first and foremost. We’re a motley crew of economists, lawyers, doctors, scientists and philopsophers who have learned how to code so we can work with data. Don’t feel bad if you don’t know what you’re doing yet – we’ve all been there and are happy to help you get up to speed.</p>
+<p>A great way to learn about R is to ask a Grattan person! Pose a question in the <code>#r_at_grattan</code> channel in <strong>Grattan Slack</strong> and someone will be sure to answer it.</p>
+<p>At Grattan, none of us is a programmer first and foremost. We’re a motley crew of economists, lawyers, doctors, scientists and philosophers who have learned how to code so we can work with data. Don’t feel bad if you don’t know what you’re doing yet – we’ve all been there and are happy to help you get up to speed.</p>
 
 </div>
 </div>
