@@ -1,5 +1,7 @@
 # Version control {#version-control}
 
+This chapter explores version control and lays out the tools we use for version control.
+
 ## Version control is important and intimidating
 
 Version control is great! And although it's initially quite complicated and stress-inducing, in the long run you'll find it actually makes so much sense, and wish you'd known about it while you were writing university essays! 
@@ -8,7 +10,7 @@ Why? Two reasons.
 
 1. Version control allows us to go back in time. 
 
-2. Version control allows multiple analysts to work on a project simulataneously, in a way that Excel just doesn't.
+2. Version control allows multiple analysts to work on a project simultaneously, in a way that Excel just doesn't.
 
 ### Step back in time
 
@@ -28,7 +30,8 @@ Version control allows you both to work on a document at the same time, but only
 
 Need more convincing? [Jenny Bryan](https://peerj.com/preprints/3159v2/) from RStudio eloquently explains why you need version control in your life. Seriously. It's a great article. It convinced us.
 
-## Github
+
+## Using Github
 
 We use Github to version-control and share reports in LaTeX, so you're already a bit set-up. 
 
@@ -40,41 +43,40 @@ To go back into the past and look at old versions of our analysis, we'd normally
 
 Make sure you have a personal Github account, and then ask a Grattan staff member (e.g. Will or James) to add you to Grattan's organisation-wide Github account. If you've set up a LaTeX document, you've probably already completed these steps.
 
-## Git
+### Setting up a Github account and Github Desktop
 
-Git is our preferred version control software. And what's nice is that you can set up RStudio to allow you use Git seamlessly.^[The alternatives to using Git in RStudio are to use Git via the Github Desktop app (speak to Will if you'd rather do this) or directly from the command line. But the point-and-click functionality of RStudio is a much nicer way to get used to version control.]
+To set up a Github account, follow these steps:
 
-Jenny Bryan from RStudio will walk you through the installation steps in Chatpers 4-7 (they're extremely short chapters):
+- Go to [github.com](github.com) and click **Sign up**.
+- Complete the sign up form. You can use your personal (recommended) or Grattan email address.^[Personal email addresses are recommended because you _may_ want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.]
 
-[Click here to access the definitive Git installation guide.](https://happygitwithr.com/install-intro.html) 
-Of course, if you get stuck, ask!
+You access Github through your browser. But we need to connect and sync our local files as well. To do this, we use Github Desktop.^[This is definitely not the only way to do this. You can sync with Github through ]
+To download and use Github Desktop, follow these steps:
 
-Now that you're installed, we need to connect RStudio with Github so you can use Git. 
+- Create a Github account.
+- Go to [desktop.github.com](desktop.github.com) and download **Github Desktop**.
+- From Github Desktop, sign into your account and authorise Github Desktop.
+- If asked to 'Configure Git', select **Use my Github account name and email address** and click **Finish**. 
 
-The best guide on how to do that is by Simon Brewer (link below). Jenny Bryan's guide offers similar advice, but I found Simon's easier to follow. 
+That should do it. 
 
-[Click here for how to connect RStudio and Github](http://rstudio-pubs-static.s3.amazonaws.com/485236_9e71a253a02748cba293213a8aec5fe8.html)
+### Getting started with Github
 
-There are some pretty unfriendly pieces of jargon in these steps. The worst is `SSH`, or "Secure Shell Protocol". In brief, it's how you'll login to Github account from RStudio. Instead of submitting your username and password every time, you'll have to set up an `SSH key pair` **one time per device** on which you want to link RStudio and Github. That's probably just your work computer, and maybe a laptop too if you need. 
+The 10-minute `hello-world` tutorial made by the people at Github is informative and useful.
+It explains the key terms used in the world of Git -- a few of them used below -- and runss your through how to:
 
-`SSH` is a more secure way of logging into Github from other applications (in this case, RStudio), and by [August 2021](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) it will be the **only** method approved by Github. 
+- Create and use a **repository**
+- Start and manage a new **branch**
+- Make changes to a file and **push** them to GitHub as commits
+- Open and merge a **pull** request
 
-Again, this set up stuff is confusing, so please ask if you need help! It's likely to be *much* faster if you ask a fellow staff member than try to solve an unexpected problem on your own.
+Take the time to do it now: http://guides.github.com/activities/hello-world
 
 
+### Some dos and some do nots
 
-## Using Git
+.gitignore
 
-Chapter 15 onwards of [Happy Git with R](https://happygitwithr.com/install-intro.html) will walk you through some early examples of how to use Git. 
-
-Another good option is to prod a Grattan staff member to run a tank-time on version control. If it's a been a while, and there's more than one new staff member, then this might be the most efficient way to get associates/fellows engaged in the topic and improve organisation-wide practice.
-
-If you're using SSH to log into Git, you may run into an unexpected error when trying to clone a project from Github to your machine (this has happened to James twice). The solution is clone the project using the command line, rather than the RStudio interface. You can access the command line directly from RStudio, however. Go to `Tools` -> `Terminal` -> `New Terminal`, and then use the command 
-```{}
-git clone git@github.com:grattan/MyRepoNameHere ~/path_to_the_folder_where_i_want_the_project_on_my_machine
-```
-
-Some guiding principles to leave you with: 
 
 1. Commit early, commit often
     + By committing lots of small changes individually, you'll have a richer history of the project. It's a bit like trying to beat a difficult level of a video game. If you mess up but have saved often, you'll have a more recent place to go back to. But you if save rarely, then you'll need to go quite a way back to your last savefile. 
