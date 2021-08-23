@@ -6,6 +6,7 @@ bookdown::bs4_book:
         <li><a href="./">Using R at Grattan Institute</a></li>
     download: ["pdf"]
     repo: https://github.com/grattan/R_at_grattan
+  css: style.css
 
 bookdown::gitbook:
   config:
