@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>9 Different data types | Using R at Grattan Institute</title>
+<title>8 Different data types | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="9 Different data types | Using R at Grattan Institute">
+<meta property="og:title" content="8 Different data types | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="9 Different data types | Using R at Grattan Institute">
+<meta name="twitter:title" content="8 Different data types | Using R at Grattan Institute">
 <meta name="twitter:description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -42,26 +42,24 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help-and-using-other-resources.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
 <li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="active" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="active" href="different-data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -69,9 +67,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="different-data-types" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="different-data-types" class="section level1" number="8">
 <h1>
-<span class="header-section-number">9</span> Different data types<a class="anchor" aria-label="anchor" href="#different-data-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Different data types<a class="anchor" aria-label="anchor" href="#different-data-types"><i class="fas fa-link"></i></a>
 </h1>
 <p>Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them.</p>
 <p>It’s useful to make a distinction between data <strong>structures</strong> and data <strong>types</strong>. This is a simplification but is all we need to think about for now.</p>
@@ -87,9 +85,9 @@
 <li>Dates, which are notoriously hard to deal with in statistical software.</li>
 </ul>
 <p>The following sections will walk you through these data types and how to best handle them. We’ll first load the required packages and read in some data.</p>
-<div id="set-up-and-packages" class="section level2" number="9.1">
+<div id="set-up-and-packages" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">9.1</span> Set-up and packages<a class="anchor" aria-label="anchor" href="#set-up-and-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Set-up and packages<a class="anchor" aria-label="anchor" href="#set-up-and-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>This chapter uses packages that are designed to help with different data types.</p>
 <p>The <code>stringr</code> package helps deal with characters. The <code>forcats</code> package helps with factors. The <code>lubridate</code> package helps – a lot! – with dates.</p>
@@ -121,9 +119,9 @@
 ## $ total_income          &lt;dbl&gt; 235853682, 253323356, 266908460, 264054166, 2382…
 ## $ workers               &lt;dbl&gt; 4597, 4708, 4732, 4573, 4087, 4448, 1459, 1467, …</code></pre>
 </div>
-<div id="why-data-types-matter" class="section level2" number="9.2">
+<div id="why-data-types-matter" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">9.2</span> Why data types matter<a class="anchor" aria-label="anchor" href="#why-data-types-matter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Why data types matter<a class="anchor" aria-label="anchor" href="#why-data-types-matter"><i class="fas fa-link"></i></a>
 </h2>
 <p>Data ‘types’ define how your data is stored and what you can (or cannot) do with it.</p>
 <p>You can do maths on numbers:</p>
@@ -156,9 +154,9 @@ It’s just something you need to do.</p>
 <p>But knowing this information will save you countless errors, like the ones above, in the future.
 We’ll get through it briefly, focussing on the things you need to know and on how to solve the problems you are likely to encounter.</p>
 </div>
-<div id="checking-and-changing-data-types" class="section level2" number="9.3">
+<div id="checking-and-changing-data-types" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">9.3</span> Checking and changing data types<a class="anchor" aria-label="anchor" href="#checking-and-changing-data-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Checking and changing data types<a class="anchor" aria-label="anchor" href="#checking-and-changing-data-types"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can use the <code>str</code> function to check the type of an object:</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
@@ -191,9 +189,9 @@ We’ll get through it briefly, focussing on the things you need to know and on 
 <p>The characters “Hello” can’t be converted to a number, so R replaces it with <code>NA</code> and throws you a warning message.</p>
 <p>The next section extends these concepts from single elements to whole variables in your data.</p>
 </div>
-<div id="checking-and-changing-data-types-in-vectors-and-tibbles" class="section level2" number="9.4">
+<div id="checking-and-changing-data-types-in-vectors-and-tibbles" class="section level2" number="8.4">
 <h2>
-<span class="header-section-number">9.4</span> Checking and changing data types in vectors and <code>tibbles</code><a class="anchor" aria-label="anchor" href="#checking-and-changing-data-types-in-vectors-and-tibbles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4</span> Checking and changing data types in vectors and <code>tibbles</code><a class="anchor" aria-label="anchor" href="#checking-and-changing-data-types-in-vectors-and-tibbles"><i class="fas fa-link"></i></a>
 </h2>
 <p>In a <code>tibble</code>, each variable is a vector that can have <em>one-and-only-one</em> data type.</p>
 <p>A variable can be a numeric, or character, or factor, or date, or something else entirely.
@@ -292,19 +290,19 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <p>We again convert the variable to a numeric. The <code>as.numeric</code> function nails <code>"1"</code> and removes the leading and trailing white-spaces of <code>"  1  "</code>. But it doesn’t understand the space in the middle of <code>"0. 1"</code>, and doesn’t convert the percentage in <code>"1%"</code>. Luckily, we have the <code>warning</code> message that tells us this has happened.</p>
 <p>Complications like these mean we have to watch out for how our data is read.</p>
 </div>
-<div id="asserting-data-types-when-importing-data" class="section level2" number="9.5">
+<div id="asserting-data-types-when-importing-data" class="section level2" number="8.5">
 <h2>
-<span class="header-section-number">9.5</span> Asserting data types when importing data<a class="anchor" aria-label="anchor" href="#asserting-data-types-when-importing-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.5</span> Asserting data types when importing data<a class="anchor" aria-label="anchor" href="#asserting-data-types-when-importing-data"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="changing-the-data-types-of-lots-of-variables" class="section level2" number="9.6">
+<div id="changing-the-data-types-of-lots-of-variables" class="section level2" number="8.6">
 <h2>
-<span class="header-section-number">9.6</span> Changing the data types of lots of variables<a class="anchor" aria-label="anchor" href="#changing-the-data-types-of-lots-of-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.6</span> Changing the data types of lots of variables<a class="anchor" aria-label="anchor" href="#changing-the-data-types-of-lots-of-variables"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="using-character-vectors" class="section level2" number="9.7">
+<div id="using-character-vectors" class="section level2" number="8.7">
 <h2>
-<span class="header-section-number">9.7</span> Using character vectors<a class="anchor" aria-label="anchor" href="#using-character-vectors"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.7</span> Using character vectors<a class="anchor" aria-label="anchor" href="#using-character-vectors"><i class="fas fa-link"></i></a>
 </h2>
 <p>Characters contain information between quotes, like a letter or word or sentence. They can contain (almost) anything. They have no ‘rules,’ unlike numerics, factors or dates. This freedom can be good or bad depending on your situation: sometimes restrictions are good!</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
@@ -321,16 +319,16 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hello"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##  chr [1:2] "hello" "1"</code></pre>
 </div>
-<div id="using-dates-with-lubridate" class="section level2" number="9.8">
+<div id="using-dates-with-lubridate" class="section level2" number="8.8">
 <h2>
-<span class="header-section-number">9.8</span> Using dates with <code>lubridate::</code><a class="anchor" aria-label="anchor" href="#using-dates-with-lubridate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.8</span> Using dates with <code>lubridate::</code><a class="anchor" aria-label="anchor" href="#using-dates-with-lubridate"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dates are hard, and dealing with dates in statistical software like R, Excel</p>
 <p>The <code>lubridate::</code> package</p>
 </div>
-<div id="strings-with-stringr" class="section level2" number="9.9">
+<div id="strings-with-stringr" class="section level2" number="8.9">
 <h2>
-<span class="header-section-number">9.9</span> Strings with <code>stringr::</code><a class="anchor" aria-label="anchor" href="#strings-with-stringr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.9</span> Strings with <code>stringr::</code><a class="anchor" aria-label="anchor" href="#strings-with-stringr"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Replacing values</li>
@@ -338,9 +336,9 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <li>Separating columns</li>
 </ul>
 </div>
-<div id="factors-with-forcats" class="section level2" number="9.10">
+<div id="factors-with-forcats" class="section level2" number="8.10">
 <h2>
-<span class="header-section-number">9.10</span> Factors with <code>forcats::</code><a class="anchor" aria-label="anchor" href="#factors-with-forcats"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.10</span> Factors with <code>forcats::</code><a class="anchor" aria-label="anchor" href="#factors-with-forcats"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Dangers with factors</li>
@@ -349,22 +347,22 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></div>
-<div class="next"><a href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></div>
+<div class="prev"><a href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></div>
+<div class="next"><a href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#different-data-types"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="nav-link" href="#set-up-and-packages"><span class="header-section-number">9.1</span> Set-up and packages</a></li>
-<li><a class="nav-link" href="#why-data-types-matter"><span class="header-section-number">9.2</span> Why data types matter</a></li>
-<li><a class="nav-link" href="#checking-and-changing-data-types"><span class="header-section-number">9.3</span> Checking and changing data types</a></li>
-<li><a class="nav-link" href="#checking-and-changing-data-types-in-vectors-and-tibbles"><span class="header-section-number">9.4</span> Checking and changing data types in vectors and tibbles</a></li>
-<li><a class="nav-link" href="#asserting-data-types-when-importing-data"><span class="header-section-number">9.5</span> Asserting data types when importing data</a></li>
-<li><a class="nav-link" href="#changing-the-data-types-of-lots-of-variables"><span class="header-section-number">9.6</span> Changing the data types of lots of variables</a></li>
-<li><a class="nav-link" href="#using-character-vectors"><span class="header-section-number">9.7</span> Using character vectors</a></li>
-<li><a class="nav-link" href="#using-dates-with-lubridate"><span class="header-section-number">9.8</span> Using dates with lubridate::</a></li>
-<li><a class="nav-link" href="#strings-with-stringr"><span class="header-section-number">9.9</span> Strings with stringr::</a></li>
-<li><a class="nav-link" href="#factors-with-forcats"><span class="header-section-number">9.10</span> Factors with forcats::</a></li>
+<li><a class="nav-link" href="#different-data-types"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="nav-link" href="#set-up-and-packages"><span class="header-section-number">8.1</span> Set-up and packages</a></li>
+<li><a class="nav-link" href="#why-data-types-matter"><span class="header-section-number">8.2</span> Why data types matter</a></li>
+<li><a class="nav-link" href="#checking-and-changing-data-types"><span class="header-section-number">8.3</span> Checking and changing data types</a></li>
+<li><a class="nav-link" href="#checking-and-changing-data-types-in-vectors-and-tibbles"><span class="header-section-number">8.4</span> Checking and changing data types in vectors and tibbles</a></li>
+<li><a class="nav-link" href="#asserting-data-types-when-importing-data"><span class="header-section-number">8.5</span> Asserting data types when importing data</a></li>
+<li><a class="nav-link" href="#changing-the-data-types-of-lots-of-variables"><span class="header-section-number">8.6</span> Changing the data types of lots of variables</a></li>
+<li><a class="nav-link" href="#using-character-vectors"><span class="header-section-number">8.7</span> Using character vectors</a></li>
+<li><a class="nav-link" href="#using-dates-with-lubridate"><span class="header-section-number">8.8</span> Using dates with lubridate::</a></li>
+<li><a class="nav-link" href="#strings-with-stringr"><span class="header-section-number">8.9</span> Strings with stringr::</a></li>
+<li><a class="nav-link" href="#factors-with-forcats"><span class="header-section-number">8.10</span> Factors with forcats::</a></li>
 </ul>
 
       <div class="book-extra">
@@ -381,7 +379,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

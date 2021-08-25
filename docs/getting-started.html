@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>15 Contributing to this book | Using R at Grattan Institute</title>
+<title>2 Getting started | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="Add instructions on how to add to this book; see https://github.com/grattan/R_at_Grattan/issues/60. Thanks for making it this far! There are many, many things that you can do with R – far too many...">
+<meta name="description" content="This chapter X. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code: good_number &lt;- 10 big_product &lt;- 999...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="15 Contributing to this book | Using R at Grattan Institute">
+<meta property="og:title" content="2 Getting started | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Add instructions on how to add to this book; see https://github.com/grattan/R_at_Grattan/issues/60. Thanks for making it this far! There are many, many things that you can do with R – far too many...">
+<meta property="og:description" content="This chapter X. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code: good_number &lt;- 10 big_product &lt;- 999...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="15 Contributing to this book | Using R at Grattan Institute">
-<meta name="twitter:description" content="Add instructions on how to add to this book; see https://github.com/grattan/R_at_Grattan/issues/60. Thanks for making it this far! There are many, many things that you can do with R – far too many...">
+<meta name="twitter:title" content="2 Getting started | Using R at Grattan Institute">
+<meta name="twitter:description" content="This chapter X. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code: good_number &lt;- 10 big_product &lt;- 999...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 <li><a class="" href="index.html">Welcome!</a></li>
 <li class="book-part">Part I: Why and how we use R at Grattan</li>
 <li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
-<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
+<li><a class="active" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
 <li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
@@ -59,7 +59,7 @@
 <li class="book-part">Advanced topics</li>
 <li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
 <li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
-<li><a class="active" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,69 +67,83 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="contributing-to-this-book" class="section level1" number="15">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="getting-started" class="section level1" number="2">
 <h1>
-<span class="header-section-number">15</span> Contributing to this book<a class="anchor" aria-label="anchor" href="#contributing-to-this-book"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Getting started<a class="anchor" aria-label="anchor" href="#getting-started"><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Add instructions on how to add to this book</em>; see <a href="https://github.com/grattan/R_at_Grattan/issues/60" class="uri">https://github.com/grattan/R_at_Grattan/issues/60</a>.</p>
-<p>Thanks for making it this far!
-There are many, many things that you can do with R – far too many to cover in this book. But, while still very large, the world of data analysis/for public policy/in Australia/at Grattan Institute is smaller. Parts of our otherwise-unique analysis – for example, reading in a <code>.csv</code> file downloaded from ABS TableBuilder – will have been done by others at Grattan many times before.</p>
-<p>If you solve an annoying problem or discover a neat way to do something, future readers of this guide would benefit greatly from your discovery. Everyone at Grattan is encouraged to add to, and edit, this book as they see fit.</p>
-<p>This chapter provides a quick explanation of how, exactly, you can contribute to this book. It requires knowledge of R and Github. If you’re getting started with Github,</p>
+<p>This chapter X.</p>
+<p>By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">good_number</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">big_product</span> <span class="op">&lt;-</span> <span class="fl">999</span>
+
+<span class="va">one_to_ten</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+<span class="va">good_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">60</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">good_number</span><span class="op">)</span></code></pre></div>
+<div id="installing-r-and-rstudio" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Installing R and RStudio<a class="anchor" aria-label="anchor" href="#installing-r-and-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Although you’ll usually work with R by opening RStudio, you need to install both R and RStudio separately.</p>
+<p>Install R by going to <a href="https://cran.r-project.org">CRAN</a>, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.</p>
+<div class="inline-figure"><img src="atlas/r_cran.png" width="100%"></div>
+<p>You want to download the latest base R release, as a ‘binary.’ Don’t worry, you don’t need to know what a binary is.</p>
+<div class="inline-figure">For macOS, the page will look like this:
+<img src="atlas/r_cran_macos.png" width="100%">
+</div>
+<p>For Windows, you’ll need to click on the ‘base’ version, and then click again to start the download.</p>
+<p><img src="atlas/r_cran_windows_1.png" width="100%"><img src="atlas/r_cran_windows_2.png" width="100%"></p>
+<p>Once you’ve installed R, you’ll need to install RStudio. Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio website and install the latest version</a> of RStudio Desktop (open source license).</p>
+<p>Once they’re both installed, get started by opening RStudio.</p>
+</div>
+<div id="setting-up-rstudio" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Setting up RStudio<a class="anchor" aria-label="anchor" href="#setting-up-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Theme (important)</p>
+<p>Save data off</p>
+<div id="scripts" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Scripts<a class="anchor" aria-label="anchor" href="#scripts"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="objects" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="functions" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="errors-warnings-and-messages" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> Errors, warnings and messages<a class="anchor" aria-label="anchor" href="#errors-warnings-and-messages"><i class="fas fa-link"></i></a>
+</h3>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="version-control.html"><span class="header-section-number">14</span> Version control</a></div>
-<div class="empty"></div>
+<div class="prev"><a href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></div>
+<div class="next"><a href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#contributing-to-this-book"><span class="header-section-number">15</span> Contributing to this book</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#getting-started"><span class="header-section-number">2</span> Getting started</a></li>
+<li><a class="nav-link" href="#installing-r-and-rstudio"><span class="header-section-number">2.1</span> Installing R and RStudio</a></li>
+<li>
+<a class="nav-link" href="#setting-up-rstudio"><span class="header-section-number">2.2</span> Setting up RStudio</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#scripts"><span class="header-section-number">2.2.1</span> Scripts</a></li>
+<li><a class="nav-link" href="#objects"><span class="header-section-number">2.2.2</span> Objects</a></li>
+<li><a class="nav-link" href="#functions"><span class="header-section-number">2.2.3</span> Functions</a></li>
+<li><a class="nav-link" href="#errors-warnings-and-messages"><span class="header-section-number">2.2.4</span> Errors, warnings and messages</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

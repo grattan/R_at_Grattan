@@ -42,26 +42,24 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="active" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help-and-using-other-resources.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
 <li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="different-data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -88,7 +86,7 @@
 </h2>
 <p>In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. Your R script is like a recipe in a cookbook - when R is cooking your recipe, it needs to know where to find your ingredients (the data) and put the finished product (your delicious analysis).</p>
 <p>When it’s executing your script, R needs to know where to read files from and save files to on your computer. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>.</p>
-<p>You can tell R which folder to use as your working directory by using the command <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code>, as in <code><a href="https://rdrr.io/r/base/getwd.html">setwd("~/Desktop/some random folder")</a></code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea that you should avoid!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
+<p>You can tell R which folder to use as your working directory by using the command <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code>, as in <code><a href="https://rdrr.io/r/base/getwd.html">setwd("~/Desktop/some random folder")</a></code> or <code>setwd("C:\Users\jamesha\Documents\Somerandomfolder")</code>. <strong>This is a bad idea that you should avoid!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
 <p>In the <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">words of Jenny Bryan</a>:</p>
 <blockquote>
 <p>if the first line of your R script is <code>setwd("C:\Users\jenny\path\that\only\I\have")</code> I will come into your office and SET YOUR COMPUTER ON FIRE.</p>
@@ -233,8 +231,8 @@ Either:</p>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></div>
-<div class="next"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></div>
+<div class="prev"><a href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></div>
+<div class="next"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -269,7 +267,7 @@ Either:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>14 Functional programming: making and using your own functions | Using R at Grattan Institute</title>
+<title>13 Functional programming: making and using your own functions | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<meta name="description" content="Why on earth would you create your own function? It can be useful to make your own function  13.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute">
+<meta property="og:title" content="13 Functional programming: making and using your own functions | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<meta property="og:description" content="Why on earth would you create your own function? It can be useful to make your own function  13.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="14 Functional programming: making and using your own functions | Using R at Grattan Institute">
-<meta name="twitter:description" content="Why on earth would you create your own function? It can be useful to make your own function  14.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
+<meta name="twitter:title" content="13 Functional programming: making and using your own functions | Using R at Grattan Institute">
+<meta name="twitter:description" content="Why on earth would you create your own function? It can be useful to make your own function  13.1 Set up We will use the tidyverse and purrr in this chapter. library(tidyverse) ## ── Attaching...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
@@ -42,26 +42,24 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help-and-using-other-resources.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
 <li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="different-data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="active" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="active" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -69,15 +67,15 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-programming-making-and-using-your-own-functions" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-programming-making-and-using-your-own-functions" class="section level1" number="13">
 <h1>
-<span class="header-section-number">14</span> Functional programming: making and using your own functions<a class="anchor" aria-label="anchor" href="#functional-programming-making-and-using-your-own-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13</span> Functional programming: making and using your own functions<a class="anchor" aria-label="anchor" href="#functional-programming-making-and-using-your-own-functions"><i class="fas fa-link"></i></a>
 </h1>
 <p>Why on earth would you create your own function?</p>
 <p>It can be useful to make your own function</p>
-<div id="set-up-2" class="section level2" number="14.1">
+<div id="set-up-2" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">14.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will use the <code>tidyverse</code> and <code>purrr</code> in this chapter.</p>
 <div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
@@ -93,9 +91,9 @@
 <div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="defining-simple-functions" class="section level2" number="14.2">
+<div id="defining-simple-functions" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">14.2</span> Defining simple functions<a class="anchor" aria-label="anchor" href="#defining-simple-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Defining simple functions<a class="anchor" aria-label="anchor" href="#defining-simple-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Like your data, a function is an <code>object</code> that is defined.</p>
 <p>Let’s say you wanted to take whatever value you had and add one to it.
@@ -156,9 +154,9 @@ an object of its own:</p>
 <p>For this reason, and a few others described in a <a href="functional-programming-making-and-using-your-own-functions.html#functions-returned">section to follow</a>, a function
 can only return one <em>thing</em> (a number, or a vector, or dataset, or list, and so on).</p>
 </div>
-<div id="functions-conditionals" class="section level2" number="14.3">
+<div id="functions-conditionals" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">14.3</span> Using conditional statements and categorical arguments<a class="anchor" aria-label="anchor" href="#functions-conditionals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Using conditional statements and categorical arguments<a class="anchor" aria-label="anchor" href="#functions-conditionals"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sometimes you will want your function to behave differently under different
 circumstances. For example, you might want to do one thing if your input is a
@@ -305,9 +303,9 @@ validation methods:</p>
 <code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 </div>
-<div id="functions-returned" class="section level2" number="14.4">
+<div id="functions-returned" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">14.4</span> What is ‘returned’ from a function?<a class="anchor" aria-label="anchor" href="#functions-returned"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> What is ‘returned’ from a function?<a class="anchor" aria-label="anchor" href="#functions-returned"><i class="fas fa-link"></i></a>
 </h2>
 <p>A function can do lots of things in the background.
 For example, you might want to take a vector, square every number,
@@ -362,9 +360,9 @@ We can use it in the <code>sum_squares</code> function:</p>
 <span class="op">}</span></code></pre></div>
 <p>Ensuring your function <em>returns</em> the object you want in the form you want is the second step in writing your own functions.</p>
 </div>
-<div id="using-functions-on-datasets-within-mutate" class="section level2" number="14.5">
+<div id="using-functions-on-datasets-within-mutate" class="section level2" number="13.5">
 <h2>
-<span class="header-section-number">14.5</span> Using functions on datasets within <code>mutate()</code><a class="anchor" aria-label="anchor" href="#using-functions-on-datasets-within-mutate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5</span> Using functions on datasets within <code>mutate()</code><a class="anchor" aria-label="anchor" href="#using-functions-on-datasets-within-mutate"><i class="fas fa-link"></i></a>
 </h2>
 <p>Recall that when you are adding (or changing) a variable in a dataset with <code>mutate</code>, the length of the output must be either the length of the dataset or one (which is then repeated). Anything else will throw an error:</p>
 <div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
@@ -423,40 +421,40 @@ We can use it in the <code>sum_squares</code> function:</p>
 <code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 </div>
-<div id="using-the-purrr-family-of-functions" class="section level2" number="14.6">
+<div id="using-the-purrr-family-of-functions" class="section level2" number="13.6">
 <h2>
-<span class="header-section-number">14.6</span> Using the <code>purrr</code> family of functions<a class="anchor" aria-label="anchor" href="#using-the-purrr-family-of-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Using the <code>purrr</code> family of functions<a class="anchor" aria-label="anchor" href="#using-the-purrr-family-of-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p><em>Section to be finished</em>; see <a href="https://github.com/grattan/R_at_Grattan/issues/59" class="uri">https://github.com/grattan/R_at_Grattan/issues/59</a></p>
 </div>
-<div id="using-functions-for-visualisations" class="section level2" number="14.7">
+<div id="using-functions-for-visualisations" class="section level2" number="13.7">
 <h2>
-<span class="header-section-number">14.7</span> Using functions for visualisations<a class="anchor" aria-label="anchor" href="#using-functions-for-visualisations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.7</span> Using functions for visualisations<a class="anchor" aria-label="anchor" href="#using-functions-for-visualisations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="sharing-your-useful-functions-with-grattan-and-the-world" class="section level2" number="14.8">
+<div id="sharing-your-useful-functions-with-grattan-and-the-world" class="section level2" number="13.8">
 <h2>
-<span class="header-section-number">14.8</span> Sharing your useful functions with Grattan and the world<a class="anchor" aria-label="anchor" href="#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.8</span> Sharing your useful functions with Grattan and the world<a class="anchor" aria-label="anchor" href="#sharing-your-useful-functions-with-grattan-and-the-world"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></div>
-<div class="next"><a href="version-control.html"><span class="header-section-number">15</span> Version control</a></div>
+<div class="prev"><a href="analysis.html"><span class="header-section-number">12</span> Analysis</a></div>
+<div class="next"><a href="version-control.html"><span class="header-section-number">14</span> Version control</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#functional-programming-making-and-using-your-own-functions"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="nav-link" href="#set-up-2"><span class="header-section-number">14.1</span> Set up</a></li>
-<li><a class="nav-link" href="#defining-simple-functions"><span class="header-section-number">14.2</span> Defining simple functions</a></li>
-<li><a class="nav-link" href="#functions-conditionals"><span class="header-section-number">14.3</span> Using conditional statements and categorical arguments</a></li>
-<li><a class="nav-link" href="#functions-returned"><span class="header-section-number">14.4</span> What is ‘returned’ from a function?</a></li>
-<li><a class="nav-link" href="#using-functions-on-datasets-within-mutate"><span class="header-section-number">14.5</span> Using functions on datasets within mutate()</a></li>
-<li><a class="nav-link" href="#using-the-purrr-family-of-functions"><span class="header-section-number">14.6</span> Using the purrr family of functions</a></li>
-<li><a class="nav-link" href="#using-functions-for-visualisations"><span class="header-section-number">14.7</span> Using functions for visualisations</a></li>
-<li><a class="nav-link" href="#sharing-your-useful-functions-with-grattan-and-the-world"><span class="header-section-number">14.8</span> Sharing your useful functions with Grattan and the world</a></li>
+<li><a class="nav-link" href="#functional-programming-making-and-using-your-own-functions"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="nav-link" href="#set-up-2"><span class="header-section-number">13.1</span> Set up</a></li>
+<li><a class="nav-link" href="#defining-simple-functions"><span class="header-section-number">13.2</span> Defining simple functions</a></li>
+<li><a class="nav-link" href="#functions-conditionals"><span class="header-section-number">13.3</span> Using conditional statements and categorical arguments</a></li>
+<li><a class="nav-link" href="#functions-returned"><span class="header-section-number">13.4</span> What is ‘returned’ from a function?</a></li>
+<li><a class="nav-link" href="#using-functions-on-datasets-within-mutate"><span class="header-section-number">13.5</span> Using functions on datasets within mutate()</a></li>
+<li><a class="nav-link" href="#using-the-purrr-family-of-functions"><span class="header-section-number">13.6</span> Using the purrr family of functions</a></li>
+<li><a class="nav-link" href="#using-functions-for-visualisations"><span class="header-section-number">13.7</span> Using functions for visualisations</a></li>
+<li><a class="nav-link" href="#sharing-your-useful-functions-with-grattan-and-the-world"><span class="header-section-number">13.8</span> Sharing your useful functions with Grattan and the world</a></li>
 </ul>
 
       <div class="book-extra">
@@ -473,7 +471,7 @@ We can use it in the <code>sum_squares</code> function:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

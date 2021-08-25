@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>13 Chart cookbook | Using R at Grattan Institute</title>
+<title>11 Chart cookbook | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="This section takes you through a few often-used chart types.  13.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
+<meta name="description" content="This section takes you through a few often-used chart types.  11.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="13 Chart cookbook | Using R at Grattan Institute">
+<meta property="og:title" content="11 Chart cookbook | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This section takes you through a few often-used chart types.  13.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
+<meta property="og:description" content="This section takes you through a few often-used chart types.  11.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="13 Chart cookbook | Using R at Grattan Institute">
-<meta name="twitter:description" content="This section takes you through a few often-used chart types.  13.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
+<meta name="twitter:title" content="11 Chart cookbook | Using R at Grattan Institute">
+<meta name="twitter:description" content="This section takes you through a few often-used chart types.  11.1 Set up library(tidyverse) library(grattantheme) library(ggrepel) library(absmapsdata) library(sf) library(scales)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
@@ -42,26 +42,24 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help-and-using-other-resources.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
 <li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="active" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="different-data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="active" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -69,14 +67,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chart-cookbook" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chart-cookbook" class="section level1" number="11">
 <h1>
-<span class="header-section-number">13</span> Chart cookbook<a class="anchor" aria-label="anchor" href="#chart-cookbook"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11</span> Chart cookbook<a class="anchor" aria-label="anchor" href="#chart-cookbook"><i class="fas fa-link"></i></a>
 </h1>
 <p>This section takes you through a few often-used chart types.</p>
-<div id="set-up-1" class="section level2" number="13.1">
+<div id="set-up-1" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">13.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
@@ -121,9 +119,9 @@
 ## #   year &lt;dbl&gt;, median_income &lt;dbl&gt;, average_income &lt;dbl&gt;, total_income &lt;dbl&gt;,
 ## #   workers &lt;dbl&gt;</code></pre>
 </div>
-<div id="bar-charts" class="section level2" number="13.2">
+<div id="bar-charts" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">13.2</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts"><i class="fas fa-link"></i></a>
 </h2>
 <p>Bar charts are made with <code>geom_bar</code> or <code>geom_col</code>. Creating a bar chart will look something like this:</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="chart-cookbook.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
@@ -151,9 +149,9 @@
 <li>
 <code>"fill"</code>: bars in the same group are stacked and all fill to 100 per cent.</li>
 </ul>
-<div id="simple-bar-plot" class="section level3" number="13.2.1">
+<div id="simple-bar-plot" class="section level3" number="11.2.1">
 <h3>
-<span class="header-section-number">13.2.1</span> Simple bar plot<a class="anchor" aria-label="anchor" href="#simple-bar-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.1</span> Simple bar plot<a class="anchor" aria-label="anchor" href="#simple-bar-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>This section will create the following vertical bar plot showing number of workers by state in 2016:</p>
 <div class="inline-figure">
@@ -178,7 +176,7 @@
 ## 6 Tas    420767
 ## 7 Vic   5190976
 ## 8 WA    2297081</code></pre>
-<p>Looks superlative: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Looks tremendous: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
 <p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Remember that &lt;code&gt;geom_col&lt;/code&gt; is just shorthand for &lt;code&gt;geom_bar(stat = "identity")&lt;/code&gt;&lt;/p&gt;'><sup>30</sup></a></p>
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> 
@@ -219,16 +217,16 @@
 
 <span class="va">simple_bar</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="839.04"></div>
-<p>Looks admirable! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<p>Looks bonzer! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/simple_bar.pdf"</span>, <span class="va">simple_bar</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure">
 <img src="atlas/simple_bar.png"><!-- -->
 </div>
 </div>
-<div id="bar-multi" class="section level3" number="13.2.2">
+<div id="bar-multi" class="section level3" number="11.2.2">
 <h3>
-<span class="header-section-number">13.2.2</span> Bar plot with multiple series<a class="anchor" aria-label="anchor" href="#bar-multi"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.2</span> Bar plot with multiple series<a class="anchor" aria-label="anchor" href="#bar-multi"><i class="fas fa-link"></i></a>
 </h3>
 <p>This section will create a horizontal bar plot showing average income by state and gender in 2016:</p>
 <p>First create the dataset you want to plot, getting the average income by state and gender in the year 2016:</p>
@@ -260,7 +258,7 @@
 ## 14 Vic   Women          49264.
 ## 15 WA    Men            76677.
 ## 16 WA    Women          51578.</code></pre>
-<p>Looks awesomesauce: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Looks great: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
 <p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The aesthetic &lt;code&gt;fill&lt;/code&gt; represents the ‘fill’ colour – the colour that fills the bars in your chart. The &lt;code&gt;colour&lt;/code&gt; aesthetic controls the colours of the &lt;em&gt;lines&lt;/em&gt;.&lt;/p&gt;"><sup>31</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;code&gt;geom_col&lt;/code&gt; is shorthand for &lt;code&gt;geom_bar(stat = "identity"&lt;/code&gt;&lt;/p&gt;'><sup>32</sup></a></p>
 <div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> 
@@ -309,7 +307,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_fill_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co"># grattan fill colours</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_grattan-1.png" width="839.04"></div>
 <p>You can use <code>grattan_label</code> to <strong>label your charts</strong> in the Grattan style. This function is a ‘wrapper’ around <code>geom_label</code> that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the <a href="https://ggplot2.tidyverse.org/reference/geom_text.html">standard arguments of <code>geom_label</code></a>.</p>
-<p>Section <a href="data-visualisation.html#adding-labels">12.6</a> shows how labels are treated like data points: they need to know where to go (<code>x</code> and <code>y</code>) and what to show (<code>label</code>). But if you provide <em>every point</em> to your labelling <code>geom</code>, it will plot every label:</p>
+<p>Section <a href="data-visualisation.html#adding-labels">10.6</a> shows how labels are treated like data points: they need to know where to go (<code>x</code> and <code>y</code>) and what to show (<code>label</code>). But if you provide <em>every point</em> to your labelling <code>geom</code>, it will plot every label:</p>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
@@ -375,7 +373,7 @@
                 hjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04"></div>
-<p>Looks eminent! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<p>Looks beaut! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">multiple_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
@@ -404,9 +402,9 @@
 <img src="atlas/multiple_bar.png"><!-- -->
 </div>
 </div>
-<div id="facet-bar" class="section level3" number="13.2.3">
+<div id="facet-bar" class="section level3" number="11.2.3">
 <h3>
-<span class="header-section-number">13.2.3</span> Facetted bar charts<a class="anchor" aria-label="anchor" href="#facet-bar"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.3</span> Facetted bar charts<a class="anchor" aria-label="anchor" href="#facet-bar"><i class="fas fa-link"></i></a>
 </h3>
 <p>‘Facetting’ a chart means you create a separate plot for each group. It’s particularly useful in showing differences between more than one group. The chart you’ll make in this section will show annual income by gender and state, <em>and</em> by professional and non-professional workers:</p>
 <p>Start by creating the dataset you want to plot:</p>
@@ -432,7 +430,7 @@
 ##  9 NT    Men    Non-professional         58844.
 ## 10 NT    Men    Professional             87666.
 ## # … with 22 more rows</code></pre>
-<p>Then plot a bar chart with <code>geom_col</code> and <code>theme_grattan</code> elements, using a similar chain to the final plot of <a href="chart-cookbook.html#bar-multi">13.2.2</a> (without the labelling). We’ll build on this chart:</p>
+<p>Then plot a bar chart with <code>geom_col</code> and <code>theme_grattan</code> elements, using a similar chain to the final plot of <a href="chart-cookbook.html#bar-multi">11.2.2</a> (without the labelling). We’ll build on this chart:</p>
 <div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">facet_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>,
@@ -481,7 +479,7 @@
                 position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, 
                 hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="839.04"></div>
-<p>Outstanding! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
+<p>First-rate! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create label data</span>
 <span class="va">label_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> 
@@ -518,20 +516,20 @@
 </div>
 </div>
 </div>
-<div id="line-charts" class="section level2" number="13.3">
+<div id="line-charts" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">13.3</span> Line charts<a class="anchor" aria-label="anchor" href="#line-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Line charts<a class="anchor" aria-label="anchor" href="#line-charts"><i class="fas fa-link"></i></a>
 </h2>
 <p>A line chart has one key aesthetic: <code>group</code>. This tells <code>ggplot</code> how to connect individual lines.</p>
-<div id="simple-line-chart" class="section level3" number="13.3.1">
+<div id="simple-line-chart" class="section level3" number="11.3.1">
 <h3>
-<span class="header-section-number">13.3.1</span> Simple line chart<a class="anchor" aria-label="anchor" href="#simple-line-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.1</span> Simple line chart<a class="anchor" aria-label="anchor" href="#simple-line-chart"><i class="fas fa-link"></i></a>
 </h3>
 <p>The first line chart shows the number of workers in Australia between 2011 and 2016:</p>
 </div>
-<div id="line-chart-with-multiple-series" class="section level3" number="13.3.2">
+<div id="line-chart-with-multiple-series" class="section level3" number="11.3.2">
 <h3>
-<span class="header-section-number">13.3.2</span> Line chart with multiple series<a class="anchor" aria-label="anchor" href="#line-chart-with-multiple-series"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.2</span> Line chart with multiple series<a class="anchor" aria-label="anchor" href="#line-chart-with-multiple-series"><i class="fas fa-link"></i></a>
 </h3>
 <p>This line chart will show how <strong>real</strong> average income has changed for each state over the past five years:</p>
 <p>First, take the <code>sa3_income</code> dataset and create a summary table average income by year and state. Ignore the territories for this chart.</p>
@@ -627,14 +625,14 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="839.04"></div>
 </div>
 </div>
-<div id="scatter-plots" class="section level2" number="13.4">
+<div id="scatter-plots" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">13.4</span> Scatter plots<a class="anchor" aria-label="anchor" href="#scatter-plots"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Scatter plots<a class="anchor" aria-label="anchor" href="#scatter-plots"><i class="fas fa-link"></i></a>
 </h2>
 <p>Scatter plots require <code>x</code> and <code>y</code> aesthetics. These can then be coloured and faceted.</p>
-<div id="simple-scatter-plot" class="section level3" number="13.4.1">
+<div id="simple-scatter-plot" class="section level3" number="11.4.1">
 <h3>
-<span class="header-section-number">13.4.1</span> Simple scatter plot<a class="anchor" aria-label="anchor" href="#simple-scatter-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.1</span> Simple scatter plot<a class="anchor" aria-label="anchor" href="#simple-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>The first simple scatter plot will show the relationship between average incomes of professionals and the number of professional workers by area in 2016:</p>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
@@ -686,7 +684,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">dollar</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04"></div>
-<p>Looks awesomesauce. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<p>Looks cool. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
 <div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
@@ -718,9 +716,9 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <img src="atlas/simple_scatter.png"><!-- -->
 </div>
 </div>
-<div id="scatter-plot-with-reshaped-data" class="section level3" number="13.4.2">
+<div id="scatter-plot-with-reshaped-data" class="section level3" number="11.4.2">
 <h3>
-<span class="header-section-number">13.4.2</span> Scatter plot with reshaped data<a class="anchor" aria-label="anchor" href="#scatter-plot-with-reshaped-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.2</span> Scatter plot with reshaped data<a class="anchor" aria-label="anchor" href="#scatter-plot-with-reshaped-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>The next scatter plot involves the same basic plotting principles of the chart above, but requires a bit more data manipulation before plotting.</p>
 <p>The chart will show the wages of professional workers and non-professional workers in 2016:</p>
@@ -806,9 +804,9 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 <img src="atlas/scatter_reshape.png"><!-- -->
 </div>
 </div>
-<div id="layered-scatter-plot" class="section level3" number="13.4.3">
+<div id="layered-scatter-plot" class="section level3" number="11.4.3">
 <h3>
-<span class="header-section-number">13.4.3</span> Layered scatter plot<a class="anchor" aria-label="anchor" href="#layered-scatter-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.3</span> Layered scatter plot<a class="anchor" aria-label="anchor" href="#layered-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>For the third plot, look at the incomes of non-professional workers by their area’s total income percentile:</p>
 <div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
@@ -870,7 +868,7 @@ If you wanted to show each state individually, you could <strong>facet</strong> 
 
 <span class="va">base_chart</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04"></div>
-<p>Looks superior! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<p>Looks too good to be true! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
 <div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">perc_average</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">prof</span>, <span class="va">sa3_income_percentile</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -968,38 +966,38 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 <img src="atlas/scatter_layer.png"><!-- -->
 </div>
 </div>
-<div id="scatter-plots-with-trendlines" class="section level3" number="13.4.4">
+<div id="scatter-plots-with-trendlines" class="section level3" number="11.4.4">
 <h3>
-<span class="header-section-number">13.4.4</span> Scatter plots with trendlines<a class="anchor" aria-label="anchor" href="#scatter-plots-with-trendlines"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.4</span> Scatter plots with trendlines<a class="anchor" aria-label="anchor" href="#scatter-plots-with-trendlines"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="facetted-scatter-plots" class="section level3" number="13.4.5">
+<div id="facetted-scatter-plots" class="section level3" number="11.4.5">
 <h3>
-<span class="header-section-number">13.4.5</span> Facetted scatter plots<a class="anchor" aria-label="anchor" href="#facetted-scatter-plots"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.5</span> Facetted scatter plots<a class="anchor" aria-label="anchor" href="#facetted-scatter-plots"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="distributions" class="section level2" number="13.5">
+<div id="distributions" class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">13.5</span> Distributions<a class="anchor" aria-label="anchor" href="#distributions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Distributions<a class="anchor" aria-label="anchor" href="#distributions"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>geom_histogram</code>
 <code>geom_density</code></p>
 <p><code>ggridges::</code></p>
 </div>
-<div id="maps" class="section level2" number="13.6">
+<div id="maps" class="section level2" number="11.6">
 <h2>
-<span class="header-section-number">13.6</span> Maps<a class="anchor" aria-label="anchor" href="#maps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6</span> Maps<a class="anchor" aria-label="anchor" href="#maps"><i class="fas fa-link"></i></a>
 </h2>
-<div id="sf-objects" class="section level3" number="13.6.1">
+<div id="sf-objects" class="section level3" number="11.6.1">
 <h3>
-<span class="header-section-number">13.6.1</span> <code>sf</code> objects<a class="anchor" aria-label="anchor" href="#sf-objects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.1</span> <code>sf</code> objects<a class="anchor" aria-label="anchor" href="#sf-objects"><i class="fas fa-link"></i></a>
 </h3>
 <p>[what is]</p>
 </div>
-<div id="using-absmapsdata" class="section level3" number="13.6.2">
+<div id="using-absmapsdata" class="section level3" number="11.6.2">
 <h3>
-<span class="header-section-number">13.6.2</span> Using <code>absmapsdata</code><a class="anchor" aria-label="anchor" href="#using-absmapsdata"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.2</span> Using <code>absmapsdata</code><a class="anchor" aria-label="anchor" href="#using-absmapsdata"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code>absmapsdata</code> contains compressed, and tidied <code>sf</code> objects containing geometric information about ABS data structures. The included objects are:</p>
 <ul>
@@ -1052,9 +1050,9 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 ## $ cent_lat        &lt;dbl&gt; -35.44939, -36.43952, -36.49933, -34.51814, -34.58077,…
 ## $ geometry        &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((149.979 -35..., MULTIPOLY…</code></pre>
 </div>
-<div id="making-choropleth-maps" class="section level3" number="13.6.3">
+<div id="making-choropleth-maps" class="section level3" number="11.6.3">
 <h3>
-<span class="header-section-number">13.6.3</span> Making choropleth maps<a class="anchor" aria-label="anchor" href="#making-choropleth-maps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.3</span> Making choropleth maps<a class="anchor" aria-label="anchor" href="#making-choropleth-maps"><i class="fas fa-link"></i></a>
 </h3>
 <p>Choropleth maps break an area into ‘bits,’ and colours each ‘bit’ according to a variable.</p>
 <p>You can join the <code>sf</code> objects from <code>absmapsdata</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa3_name</code> compared to <code>sa3_name_2016</code> – so use the <code>by</code> argument to match them.</p>
@@ -1067,9 +1065,9 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 <p>Note that RStudio takes a long time to render a map in the</p>
 <p>Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful.</p>
 <p>To do this, filter the <code>map_data</code> object:</p>
-<div id="adding-labels-to-maps" class="section level4" number="13.6.3.1">
+<div id="adding-labels-to-maps" class="section level4" number="11.6.3.1">
 <h4>
-<span class="header-section-number">13.6.3.1</span> Adding labels to maps<a class="anchor" aria-label="anchor" href="#adding-labels-to-maps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.3.1</span> Adding labels to maps<a class="anchor" aria-label="anchor" href="#adding-labels-to-maps"><i class="fas fa-link"></i></a>
 </h4>
 <p>You can add labels to choropleth maps with the standard <code>geom_text</code> or <code>geom_label</code>. Because it is likely that some labels will overlap, <code><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">ggrepel::geom_text_repel</a></code> or <code><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">ggrepel::geom_label_repel</a></code> is usually the better option.</p>
 <p>To use <code>geom_(text|label)_repel</code>, you need to tell <code>ggrepel</code> where in</p>
@@ -1101,57 +1099,54 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 </div>
 </div>
 </div>
-<div id="creating-simple-interactive-graphs-with-plotly" class="section level2" number="13.7">
+<div id="creating-simple-interactive-graphs-with-plotly" class="section level2" number="11.7">
 <h2>
-<span class="header-section-number">13.7</span> Creating simple interactive graphs with <code>plotly</code><a class="anchor" aria-label="anchor" href="#creating-simple-interactive-graphs-with-plotly"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.7</span> Creating simple interactive graphs with <code>plotly</code><a class="anchor" aria-label="anchor" href="#creating-simple-interactive-graphs-with-plotly"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>plotly::ggplotly()</code></p>
 
 </div>
 </div>
 
-
-
-
   <div class="chapter-nav">
-<div class="prev"><a href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></div>
-<div class="next"><a href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></div>
+<div class="prev"><a href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></div>
+<div class="next"><a href="analysis.html"><span class="header-section-number">12</span> Analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#chart-cookbook"><span class="header-section-number">13</span> Chart cookbook</a></li>
-<li><a class="nav-link" href="#set-up-1"><span class="header-section-number">13.1</span> Set up</a></li>
+<li><a class="nav-link" href="#chart-cookbook"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="nav-link" href="#set-up-1"><span class="header-section-number">11.1</span> Set up</a></li>
 <li>
-<a class="nav-link" href="#bar-charts"><span class="header-section-number">13.2</span> Bar charts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-bar-plot"><span class="header-section-number">13.2.1</span> Simple bar plot</a></li>
-<li><a class="nav-link" href="#bar-multi"><span class="header-section-number">13.2.2</span> Bar plot with multiple series</a></li>
-<li><a class="nav-link" href="#facet-bar"><span class="header-section-number">13.2.3</span> Facetted bar charts</a></li>
+<a class="nav-link" href="#bar-charts"><span class="header-section-number">11.2</span> Bar charts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simple-bar-plot"><span class="header-section-number">11.2.1</span> Simple bar plot</a></li>
+<li><a class="nav-link" href="#bar-multi"><span class="header-section-number">11.2.2</span> Bar plot with multiple series</a></li>
+<li><a class="nav-link" href="#facet-bar"><span class="header-section-number">11.2.3</span> Facetted bar charts</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#line-charts"><span class="header-section-number">13.3</span> Line charts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-line-chart"><span class="header-section-number">13.3.1</span> Simple line chart</a></li>
-<li><a class="nav-link" href="#line-chart-with-multiple-series"><span class="header-section-number">13.3.2</span> Line chart with multiple series</a></li>
+<a class="nav-link" href="#line-charts"><span class="header-section-number">11.3</span> Line charts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simple-line-chart"><span class="header-section-number">11.3.1</span> Simple line chart</a></li>
+<li><a class="nav-link" href="#line-chart-with-multiple-series"><span class="header-section-number">11.3.2</span> Line chart with multiple series</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#scatter-plots"><span class="header-section-number">13.4</span> Scatter plots</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-scatter-plot"><span class="header-section-number">13.4.1</span> Simple scatter plot</a></li>
-<li><a class="nav-link" href="#scatter-plot-with-reshaped-data"><span class="header-section-number">13.4.2</span> Scatter plot with reshaped data</a></li>
-<li><a class="nav-link" href="#layered-scatter-plot"><span class="header-section-number">13.4.3</span> Layered scatter plot</a></li>
-<li><a class="nav-link" href="#scatter-plots-with-trendlines"><span class="header-section-number">13.4.4</span> Scatter plots with trendlines</a></li>
-<li><a class="nav-link" href="#facetted-scatter-plots"><span class="header-section-number">13.4.5</span> Facetted scatter plots</a></li>
+<a class="nav-link" href="#scatter-plots"><span class="header-section-number">11.4</span> Scatter plots</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simple-scatter-plot"><span class="header-section-number">11.4.1</span> Simple scatter plot</a></li>
+<li><a class="nav-link" href="#scatter-plot-with-reshaped-data"><span class="header-section-number">11.4.2</span> Scatter plot with reshaped data</a></li>
+<li><a class="nav-link" href="#layered-scatter-plot"><span class="header-section-number">11.4.3</span> Layered scatter plot</a></li>
+<li><a class="nav-link" href="#scatter-plots-with-trendlines"><span class="header-section-number">11.4.4</span> Scatter plots with trendlines</a></li>
+<li><a class="nav-link" href="#facetted-scatter-plots"><span class="header-section-number">11.4.5</span> Facetted scatter plots</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#distributions"><span class="header-section-number">13.5</span> Distributions</a></li>
+<li><a class="nav-link" href="#distributions"><span class="header-section-number">11.5</span> Distributions</a></li>
 <li>
-<a class="nav-link" href="#maps"><span class="header-section-number">13.6</span> Maps</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sf-objects"><span class="header-section-number">13.6.1</span> sf objects</a></li>
-<li><a class="nav-link" href="#using-absmapsdata"><span class="header-section-number">13.6.2</span> Using absmapsdata</a></li>
-<li><a class="nav-link" href="#making-choropleth-maps"><span class="header-section-number">13.6.3</span> Making choropleth maps</a></li>
+<a class="nav-link" href="#maps"><span class="header-section-number">11.6</span> Maps</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sf-objects"><span class="header-section-number">11.6.1</span> sf objects</a></li>
+<li><a class="nav-link" href="#using-absmapsdata"><span class="header-section-number">11.6.2</span> Using absmapsdata</a></li>
+<li><a class="nav-link" href="#making-choropleth-maps"><span class="header-section-number">11.6.3</span> Making choropleth maps</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#creating-simple-interactive-graphs-with-plotly"><span class="header-section-number">13.7</span> Creating simple interactive graphs with plotly</a></li>
+<li><a class="nav-link" href="#creating-simple-interactive-graphs-with-plotly"><span class="header-section-number">11.7</span> Creating simple interactive graphs with plotly</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1168,7 +1163,7 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

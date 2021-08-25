@@ -1,5 +1,6 @@
-# (PART) What is R and why do we use it? {-}
-# Introduction to R
+# (PART) Part I: Why and how we use R at Grattan {-}
+
+# What is R and what is R Studio and why are we doing all of this
 
 Most people reading this guide will know what R is. But if you don't - that's OK! 
 
@@ -33,33 +34,48 @@ In programmer jargon, RStudio is an "integrated development environment" or IDE.
 
 You'll almost always interact with R by opening RStudio. 
 
-## Installing R and RStudio
 
-Although you'll usually work with R by opening RStudio, you need to install both R and RStudio separately. 
+## Why use R?
 
-Install R by going to [CRAN](https://cran.r-project.org), the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages. 
+![](atlas/hadley_typing_r_code.gif)<!-- -->
 
-<img src="atlas/r_cran.png" width="100%" />
+We can break this question into two parts:
 
-You want to download the latest base R release, as a 'binary'. Don't worry, you don't need to know what a binary is.
+1. Why use script-based software to analyse data?
+2. Why use R, specifically?
 
-For macOS, the page will look like this:
-<img src="atlas/r_cran_macos.png" width="100%" />
+### Why use script-based software? {#why-script}
 
-For Windows, you'll need to click on the 'base' version, and then click again to start the download.
+It's important for our analyses to be **reproducible**. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary. 
 
-<img src="atlas/r_cran_windows_1.png" width="100%" /><img src="atlas/r_cran_windows_2.png" width="100%" />
+Reproducibility is very important for quality control ("QC"), particularly of complex analyses - if it's not clear what you've done, it's hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it's reproducible. At Grattan, most of us rotate from program to program periodically -- your colleagues will probably need to revisit your work at some point in the future, and they'll thank you if it's in a reproducible script.
 
-Once you've installed R, you'll need to install RStudio. Go to the [RStudio website and install the latest version](https://www.rstudio.com/products/rstudio/download/#download) of RStudio Desktop (open source license).
+Script-based analyses are more likely to be reproducible.^[Using a script-based approach doesn't guarantee that your analysis will be truly reproducible. If your work involves some steps that aren't documented in the script - such as data "cleaning" in Excel - then it is not fully reproducible. If your script will only run on your machine - because there are undocumented options, for example - it is not reproducible.] A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output. 
 
-Once they're both installed, get started by opening RStudio. 
+Analysis that isn't script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn't even always clear in a spreadsheet what is the 'raw data' and what has been modified in some way.
 
-## Learning more about R
+Using scripts makes us less susceptible to the sort of errors [famously made by the economists Reinhart and Rogoff](https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt#Methodological_flaws) in their Excel-based analysis of the effect of public debt on economic growth. It's still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.
 
-This guide will show you how to use R at Grattan. But it is not a comprehensive tool for learning R. The book [R For Data Science](https://r4ds.had.co.nz) by Garrett Grolemund and Hadley Wickham is a great resource that will help you go from being a beginner to being able to do real-world analysis. The book is available for free online. There's even an active [R for Data Science community online](https://www.rfordatasci.com) that shares tips and solutions to R problems.
+![](atlas/reinhart_rogoff.jpg)<!-- -->
 
+Script-based analysis software also allows us to:
 
-## `#r_at_grattan`
-A great way to learn about R is to ask a Grattan person! Pose a question in the `#r_at_grattan` channel in **Grattan Slack** and someone will be sure to answer it.
+* Work with larger data sets;
+* Work with data in a broader range of formats;
+* Easily combine different data sets;
+* Automate tasks and build from previous analyses; and
+* Estimate a broad range of statistical models.
 
-At Grattan, none of us is a programmer first and foremost. We're a motley crew of economists, lawyers, doctors, scientists and philosophers who have learned how to code so we can work with data. Don't feel bad if you don't know what you're doing yet -- we've all been there and are happy to help you get up to speed.
+### Why use R specifically? {#why-R}
+
+Doing reproducible, script-based, research doesn't necessarily involve using R. It's perfectly possible to do reproducible work in Stata or Python (though somewhat harder in SPSS, where data is often manipulated by clicking things).
+
+We use R specifically because:
+
+* It's free!
+* It's open source.
+* It's powerful, particularly when it comes to statistics and data science.
+* It's flexible and customisable.
+* It has an active community extending its capabilities all the time and providing support online.
+* It can be used to make publication-quality graphs.
+* It's becoming the norm in academic research and more common in the corporate world.
