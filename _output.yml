@@ -28,14 +28,14 @@ bookdown::bs4_book:
         family: Roboto Mono
         wght: 300
 
-bookdown::gitbook:
-  config:
-    toc:
-      collapse: section
-      before: |
-        <li><strong><a href="./">Using R at Grattan</a></strong></li>
-    sharing: no
-  css: style.css
+# bookdown::gitbook:
+#   config:
+#     toc:
+#       collapse: section
+#       before: |
+#         <li><strong><a href="./">Using R at Grattan</a></strong></li>
+#     sharing: no
+#   css: style.css
 
 bookdown::pdf_book:
   includes:
@@ -43,4 +43,4 @@ bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
-bookdown::epub_book: default
+# bookdown::epub_book: default

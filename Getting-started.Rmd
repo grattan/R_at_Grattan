@@ -1,12 +1,14 @@
 # Getting started {#getting-started}
 
-This chapter X.
+This chapter gets you up and running with R Studio and writing R code like a real hacker.
 
 By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code:
 
-```r
+```{r}
 good_number <- 10
 big_product <- 999
+
+good_number * big_product
 
 one_to_ten <- 1:10
 good_numbers <- c(10, 10, 20, 20, 40, 50, 60)
