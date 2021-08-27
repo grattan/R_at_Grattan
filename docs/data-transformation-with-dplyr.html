@@ -80,15 +80,15 @@
 <span class="header-section-number">9.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up"><i class="fas fa-link"></i></a>
 </h2>
 <p>Load your packages first. This chapter just uses the packages contained in the <code>tidyverse</code>:</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a tidied version of the &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and sex, 2010-11 to 2016-16&lt;/a&gt; dataset.&lt;/p&gt;'><sup>20</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.</p>
+<p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a tidied version of the &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and sex, 2010-11 to 2016-16&lt;/a&gt; dataset.&lt;/p&gt;'><sup>22</sup></a> It is a long dataset from the ABS that contains the average income and number of workers by Statistical Area 3, occupation and sex between 2011 and 2016.</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv"</span>,
               destfile <span class="op">=</span> <span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then read it using the <code>read_csv</code> function:</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 47899 Columns: 16</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
@@ -98,7 +98,7 @@
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sa3_income</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##    year sa3_name  state gender income workers
@@ -115,13 +115,13 @@
 <span class="header-section-number">9.2</span> The pipe: <code>%&gt;%</code><a class="anchor" aria-label="anchor" href="#the-pipe"><i class="fas fa-link"></i></a>
 </h2>
 <p>You will almost always want to perform more than one of the operations described below on your dataset. One way to perform multiple operations, one after the other, is to ‘nest’ them inside. This nesting will be <em>painfully</em> familiar to Excel users.</p>
-<p>Consider an example of baking and eating a cake.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?&lt;/p&gt;"><sup>21</sup></a> You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<p>Consider an example of baking and eating a cake.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?&lt;/p&gt;"><sup>23</sup></a> You take the ingredients, combine them, then mix, then bake, and then eat them. In a nested formula, this process looks like:</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">eat</span><span class="op">(</span><span class="fu">bake</span><span class="op">(</span><span class="fu">mix</span><span class="op">(</span><span class="fu">combine</span><span class="op">(</span><span class="va">ingredients</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>In a nested formula, you need to start in the <em>middle</em> and work your way out. This means anyone reading your code – including you in the future! – needs to start in the middle and work their way out. But because we’re used to left-right reading, we’re not particularly good at naturally interpreting nested functions like this one.</p>
 <p>This is where the ‘pipe’ can help. The pipe operator <code><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></code> (keyboard shortcut: <code>cmd + shift + m</code>) takes an argument on the left and ‘pipes’ it into the function on the right. Each time you see <code><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></code>, you can read it as ‘and then.’</p>
 <p>So the you could express the baking example as:</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ingredients</span> <span class="op">%&gt;%</span> <span class="co"># and then</span>
   <span class="fu">combine</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># and then</span>
   <span class="fu">mix</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># and then</span>
@@ -133,31 +133,31 @@
 </blockquote>
 <p>This does the same thing as <code>eat(bake(mix(combine(ingredients))))</code>. But it’s much nicer and more natural to read, and to <em>write</em>.</p>
 <p>Another example: the function <code>paste</code> takes arguments and combines them together into a single string. So you could use the pipe to:</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="st">"hello"</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"dear"</span>, <span class="st">"reader"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "hello dear reader"</code></pre>
 <p>which is the same as</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"hello"</span>, <span class="st">"dear"</span>, <span class="st">"reader"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "hello dear reader"</code></pre>
-<p>Or you could define a vector of numbers and pass<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;‘pass’ can also be used to mean ‘pipe.’&lt;/p&gt;"><sup>22</sup></a> them to the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> function:</p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<p>Or you could define a vector of numbers and pass<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;‘pass’ can also be used to mean ‘pipe.’&lt;/p&gt;"><sup>24</sup></a> them to the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> function:</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">13</span><span class="op">)</span>
 
 <span class="va">my_numbers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 32</code></pre>
 <p>Or you could skip the intermediate step altogether:</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">13</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 32</code></pre>
 <p>This is the same as:</p>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 32</code></pre>
 <p>The benefits of piping become more clear when you want to perform a few sequential operations on a dataset. For example, you might want to <code>filter</code> the observations in the <code>sa3_income</code> data to only <code>NSW</code>, before you <code>group_by</code> <code>gender</code> and <code>summarise</code> the <code>income</code> of these grops (these functions are explained in detail below). All of these functions take ‘data’ as the first argument, and are designed to be used with pipes.</p>
 <p>Like the income differential it shows, writing this process as a nested function is outrageous and hard to read:</p>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">summarise</span><span class="op">(</span><span class="op">(</span><span class="fu">group_by</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sa3_income</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>, <span class="va">gender</span><span class="op">)</span><span class="op">)</span>, av_mean_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   gender av_mean_income
@@ -165,7 +165,7 @@
 ## 1 Men            58202.
 ## 2 Women          41662.</code></pre>
 <p>The original common way to avoid this unseemly nesting in <code>R</code> was to assign each ‘step’ its own object, which is definitely clearer:</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sa3_income</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
 <span class="va">data2</span> <span class="op">&lt;-</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">data1</span>, <span class="va">gender</span><span class="op">)</span>
 <span class="va">data3</span> <span class="op">&lt;-</span> <span class="fu">summarise</span><span class="op">(</span><span class="va">data2</span>, av_mean_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span>
@@ -185,7 +185,7 @@
 <li>
 <code>summarise</code> it</li>
 </ol>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span>  <span class="co"># and then</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># and then </span>
   <span class="fu">group_by</span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># and then</span>
@@ -202,11 +202,11 @@
 </h2>
 <p>The <code>select</code> function takes a dataset and <strong>keeps</strong> or <strong>drops</strong> variables (columns) that are specified.</p>
 <p>For example, look at the variables that are in the <code>sa3_income</code> dataset (using the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function):</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sa3_income</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "year"     "sa3_name" "state"    "gender"   "income"   "workers"</code></pre>
 <p>If you wanted to keep just the <code>state</code> and <code>income</code> variables, you could take the <code>sa3_income</code> dataset and select just those variables:</p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">state</span>, <span class="va">income</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 2
@@ -223,8 +223,8 @@
 ##  9 ACT   58132.
 ## 10 ACT   56247.
 ## # … with 4,009 more rows</code></pre>
-<p>Or you could use <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> (minus) to remove the <code>state</code> and <code>sa3_name</code> variables:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is the same as &lt;strong&gt;keeping everything except&lt;/strong&gt; the &lt;code&gt;state&lt;/code&gt; and &lt;code&gt;sa3_name&lt;/code&gt; variables.&lt;/p&gt;"><sup>23</sup></a></p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<p>Or you could use <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> (minus) to remove the <code>state</code> and <code>sa3_name</code> variables:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is the same as &lt;strong&gt;keeping everything except&lt;/strong&gt; the &lt;code&gt;state&lt;/code&gt; and &lt;code&gt;sa3_name&lt;/code&gt; variables.&lt;/p&gt;"><sup>25</sup></a></p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">state</span>, <span class="op">-</span><span class="va">sa3_name</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 4
@@ -246,10 +246,10 @@
 <span class="header-section-number">9.3.1</span> Selecting groups of variables<a class="anchor" aria-label="anchor" href="#selecting-groups-of-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sometimes it can be useful to keep or drop variables with names that have a certain characteristic; they begin with some text string, or end with one, or contain one, or have some other pattern altogether.</p>
-<p>You can use patterns and <a href="https://tidyselect.r-lib.org/reference/select_helpers.html">‘select helpers’</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Explained in useful detail by the Tidyverse people at &lt;a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri"&gt;https://tidyselect.r-lib.org/reference/select_helpers.html&lt;/a&gt;&lt;/p&gt;'><sup>24</sup></a>
+<p>You can use patterns and <a href="https://tidyselect.r-lib.org/reference/select_helpers.html">‘select helpers’</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Explained in useful detail by the Tidyverse people at &lt;a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri"&gt;https://tidyselect.r-lib.org/reference/select_helpers.html&lt;/a&gt;&lt;/p&gt;'><sup>26</sup></a>
 from the Tidyverse to help deal with these sets of variables.</p>
 <p>For example, if you want to keep just the SA3 and state variables – ie the variables that start with <code>"s"</code> – you could:</p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"s"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 2
@@ -267,7 +267,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10 Canberra East ACT  
 ## # … with 4,009 more rows</code></pre>
 <p>Or, instead, if you wanted to keep just the variables that contain <code>"er"</code>, you could:</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"er"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 2
@@ -285,7 +285,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10 Men        561
 ## # … with 4,009 more rows</code></pre>
 <p>And if you wanted to keep <strong>both</strong> the <code>"s"</code> variables and the <code>"er"</code> variables, you could:</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"s"</span><span class="op">)</span>, <span class="fu">contains</span><span class="op">(</span><span class="st">"er"</span><span class="op">)</span>, <span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 4
@@ -333,20 +333,20 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <h3>
 <span class="header-section-number">9.4.1</span> Conditions; logical operations; <code>TRUE</code> or <code>FALSE</code><a class="anchor" aria-label="anchor" href="#conditions-logical-operations-true-or-false"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <strong>conditions</strong> are logical operations, meaning they are a statement that return either <code>TRUE</code> or <code>FALSE</code> in the computer’s mind.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Computers’ mind, more likely.&lt;/p&gt;"><sup>25</sup></a></p>
+<p>The <strong>conditions</strong> are logical operations, meaning they are a statement that return either <code>TRUE</code> or <code>FALSE</code> in the computer’s mind.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Computers’ mind, more likely.&lt;/p&gt;"><sup>27</sup></a></p>
 <p>We know, for instance, that <code>12</code> is equal to <code>12</code> and that <code>1 + 2</code> does not equal <code>12</code>. Which means if we type <code>12 == 12</code> or <code>1 + 2 == 12</code> into the console it should give <code>FALSE</code>:</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">12</span> <span class="op">==</span> <span class="fl">12</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">12</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Or, we can see if <code>1 + 2</code> is equal <code>5</code> or <code>9</code> or <code>3</code> by providing a vector of those numbers:</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">9</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE</code></pre>
 <p>This works for character strings, too:</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="st">"apple"</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"orange"</span>, <span class="st">"apple"</span>, <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE</code></pre>
 <p>A lot of what we do in ‘data science’ is based on these <code>TRUE</code> and <code>FALSE</code> conditions.</p>
@@ -356,7 +356,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <span class="header-section-number">9.4.2</span> Filtering data with <code>filter</code><a class="anchor" aria-label="anchor" href="#filtering-data-with-filter"><i class="fas fa-link"></i></a>
 </h3>
 <p>Turning back to the <code>sa3_income</code> data, if you just wanted to see observations people in <code>NT</code>:</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"NT"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 123 × 6
@@ -374,7 +374,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Barkly        NT    Men    56543.    2234
 ## # … with 113 more rows</code></pre>
 <p>Or you might just want to look at high-income (<code>income &gt; 70,000</code>) areas from Victoria in 2015:</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"Vic"</span>,
          <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">70000</span>,
@@ -389,8 +389,8 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <blockquote>
 <p>take the <code>sa3_income</code> data and filter to keep only the observations that are from Victoria<code>,</code> and that have a average income above 70k<code>,</code> and are from the year 2015.</p>
 </blockquote>
-<p>Sometimes you might want to relax a little, keeping observations from one category <strong>or</strong> another. You can do this with the <strong>or</strong> symbol: <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;On the keyboard: &lt;code&gt;shift&lt;/code&gt; + &lt;code&gt;backslash&lt;/code&gt;&lt;/p&gt;"><sup>26</sup></a></p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<p>Sometimes you might want to relax a little, keeping observations from one category <strong>or</strong> another. You can do this with the <strong>or</strong> symbol: <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;On the keyboard: &lt;code&gt;shift&lt;/code&gt; + &lt;code&gt;backslash&lt;/code&gt;&lt;/p&gt;"><sup>28</sup></a></p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"Vic"</span> <span class="op">|</span> <span class="va">state</span> <span class="op">==</span> <span class="st">"Tas"</span>,
          <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">100000</span>,
@@ -409,15 +409,15 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </h3>
 <p>The <code>group_by</code> function groups a dataset by given variables. This effectively generates one dataset per group within your main dataset. Any function you then apply – like <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> – will be applied to <em>each</em> of the grouped datasets.</p>
 <p>For example, you could filter the <code>sa3_income</code> dataset to keep just the observation with the highest average income:</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">income</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##    year sa3_name     state gender  income workers
 ##   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
 ## 1  2015 West Pilbara WA    Men    107844.   22928</code></pre>
-<p>To keep the observations that have the highest average incomes <em>in each state</em>, you can <code>group_by</code> state, then <code>filter</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Wow they are all men!&lt;/p&gt;"><sup>27</sup></a></p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<p>To keep the observations that have the highest average incomes <em>in each state</em>, you can <code>group_by</code> state, then <code>filter</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Wow they are all men!&lt;/p&gt;"><sup>29</sup></a></p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">state</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">income</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -435,8 +435,8 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 8  2015 West Pilbara             WA    Men    107844.   22928</code></pre>
 <p>From the description of the tibble above, you can learn that your data has 8 unique groups of state:</p>
 <p><code>## # Groups:       state [8]</code></p>
-<p>Or you could keep the observations with the <em>lowest</em> average incomes in <em>each state and year</em>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Wow they are all women!&lt;/p&gt;"><sup>28</sup></a></p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<p>Or you could keep the observations with the <em>lowest</em> average incomes in <em>each state and year</em>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Wow they are all women!&lt;/p&gt;"><sup>30</sup></a></p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">state</span>, <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">income</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -456,7 +456,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2011 Lower Murray            NSW   Women  30800.    2122
 ## # … with 38 more rows</code></pre>
 <p>The dataset remains grouped after your function(s). To explicitly ‘ungroup’ your data, add the <code>ungroup</code> function to your chain (the ‘Groups’ note has disappeared in the below):</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">state</span>, <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">income</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -483,7 +483,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </h2>
 <p>To add new variables to your dataset, use the <code>mutate</code> function. Like all <code>dplyr</code> verbs, the first argument to <code>mutate</code> is your data. Then define variables using a <code>new_variable_name = x</code> format, where <code>x</code> can be a single number or character string, or simple operation or function using current variables.</p>
 <p>To add a new variable to the <code>sa3_income</code> dataset that shows the log the number of workers:</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>log_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 7
@@ -501,7 +501,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Canberra East ACT   Men    56247.     561        6.33
 ## # … with 4,009 more rows</code></pre>
 <p>To edit a variable, redefine it in <code>mutate</code>. For example, if you wanted to take the last two digits of year:</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">year</span> <span class="op">-</span> <span class="fl">2000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 6
@@ -526,7 +526,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p>This kind of operation can be thought of as <code>if_else</code>: <code>if</code> (some condition), do this, otherwise do that.</p>
 <p>That’s what the <code>if_else()</code> function does. It takes three arguments: a condition, a value if that condition is true, and a value if that condition is false.</p>
 <p>You can use the <code>if_else()</code> function when you are creating new variables in a <code>mutate</code> command:</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>many_workers <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">2000</span>, <span class="st">"Many workers"</span>, <span class="st">"Not many workers"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 7
@@ -549,7 +549,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </blockquote>
 <p>With the <code>if_else</code> function, you take one conditional statement and return something based on that. But <strong>often</strong> you don’t want to be so binary; you want to do this if this is true, that if that is true, and the other if the other is true, etc.</p>
 <p>This could be done by nesting <code>if_else</code> statements:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>worker_group <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">2000</span>, <span class="st">"More than 2000 workers"</span>, 
                                 <span class="fu">if_else</span><span class="op">(</span><span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">1000</span>, <span class="st">"1000-2000 workers"</span>,
@@ -570,7 +570,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Canberra East ACT   Men    56247.     561 500-1000 workers      
 ## # … with 4,009 more rows</code></pre>
 <p>But that syntax can be a bit difficult to read. You can do this in a clearer way using <code>case_when</code>:</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>worker_group <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">20000</span> <span class="op">~</span> <span class="st">"More than 20,000 workers"</span>,
@@ -594,7 +594,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## # … with 4,009 more rows</code></pre>
 <p>The <code>case_when</code> function takes the first condition (LHS) and applies some value (RHS) if it is true. It then moves to the next condition, and so on. Once an observation has been classified – eg an observation has more than 20,000 workers – it is ignored in proceeding conditions.</p>
 <p>Ending a <code>case_when</code> statement with <code>TRUE ~ [some value]</code> is a catch all, and will apply the RHS <code>[some value]</code> to any observations that did not meet an explicit condition. For example, you could end the worker classification with:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>worker_group <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">20000</span> <span class="op">~</span> <span class="st">"More than 20,000 workers"</span>,
@@ -618,7 +618,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## # … with 4,009 more rows</code></pre>
 <p>Meaning, for any observation that did not have workers more than 20,000 or more than 10,000 or more than 5,000, assign the value <code>"5,000 or fewer workers"</code>.</p>
 <p>Observations that do not meet a condition will be set to <code>NA</code>:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>worker_group <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">10e6</span> <span class="op">~</span> <span class="st">"More than 10 million workers"</span>
@@ -638,7 +638,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Canberra East ACT   Men    56247.     561 &lt;NA&gt;        
 ## # … with 4,009 more rows</code></pre>
 <p>Like any <code>if</code> or <code>if_else</code>, you can provide more than one condition to your conditional statement:</p>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>women_group <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="va">gender</span> <span class="op">==</span> <span class="st">"Women"</span> <span class="op">&amp;</span> <span class="va">workers</span> <span class="op">&gt;</span> <span class="fl">20000</span> <span class="op">~</span> <span class="st">"More than 20,000 women"</span>,
@@ -667,7 +667,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <span class="header-section-number">9.5.2</span> Grouped mutates with <code>group_by()</code><a class="anchor" aria-label="anchor" href="#grouped-mutates-with-group_by"><i class="fas fa-link"></i></a>
 </h3>
 <p>Like filtering, you can add or edit variables on grouped data. For example, you could get the average number of workers in each SA3 over the 6 years:</p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>av_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -688,7 +688,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## # … with 4,009 more rows</code></pre>
 <p>Above, the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function is applied separately to each unique group of <code>sa3_name</code> and <code>gender</code>, taking one average for women in Queanbeyan, one average for men in Queanbeyan, and so on.</p>
 <p>Grouping a dataset does not prohibit operations that don’t utilise the grouping. For example, you could get each year’s workers relative to the SA3/gender average in the same call to <code>mutate</code>:</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>av_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span>,
@@ -709,7 +709,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Canberra East ACT   Men    56247.     561       641.       0.875
 ## # … with 4,009 more rows</code></pre>
 <p>See that the data remains grouped after the <code>mutate</code>. You can explicitly <code>ungroup()</code> afterwards:</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>av_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span>,
@@ -736,7 +736,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <span class="header-section-number">9.6</span> Summarise data with <code>summarise()</code><a class="anchor" aria-label="anchor" href="#summarise-data-with-summarise"><i class="fas fa-link"></i></a>
 </h2>
 <p>Summarising is a useful way to assess and present data. The <code>summarise</code> function collapses your data down into a single row, performing the operation(s) you provide:</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>mean_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span>,
             total_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span>  <span class="co"># this is a silly statistic</span></code></pre></div>
@@ -750,7 +750,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <span class="header-section-number">9.6.1</span> Grouped summaries with <code>group_by()</code><a class="anchor" aria-label="anchor" href="#grouped-summaries-with-group_by"><i class="fas fa-link"></i></a>
 </h3>
 <p>Grouped summaries can help change the <em>detail</em> of your data. In the original <code>sa3_income</code> data, there is a unique <code>workers</code> observation for each year, SA3 and gender. If you wanted to aggregate that information up see the total number of workers for each year and SA3:</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">year</span>, <span class="va">sa3_name</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -773,7 +773,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p>After the <code>summarise</code> function, the dataset grouping remains but is reduced by one – so the right-hand-side grouping is lost. This enables a common combination to find a proportion of a group. For example, if you</p>
 <p><strong>Common functions to use with summarise</strong></p>
 <p>Grouped summaries generate summary statistics for grouped data. It uses the same <code>summarise</code> function, but is preceded with a <code>group_by</code>. For example, if you want to find the average income for women and men:</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>mean_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -783,7 +783,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 1 Men         58780.
 ## 2 Women       41760.</code></pre>
 <p>Or the total workers in each year and state by gender:</p>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">year</span>, <span class="va">state</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">summarise</span><span class="op">(</span>workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -812,7 +812,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p>‘doesn’t add or subtract to your data’</p>
 <p>Sorting data in one way or another can be useful. Use the <code>arrange</code> function to sort data by the provided variable(s). Like with <code>select</code>, you can use the minus sign <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> to reverse the order.</p>
 <p>For example, to find the areas in 2016 with the <strong>least</strong> workers:</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">arrange</span><span class="op">(</span><span class="va">workers</span><span class="op">)</span></code></pre></div>
@@ -831,7 +831,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2016 Daly - Tiwi - West Arnhem NT    Women  50096.    1075
 ## # … with 660 more rows</code></pre>
 <p>You can provide more than one variable. To sort the data first by <code>state</code> and, within each state, by the most workers (ie sorting by negative workers):</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">arrange</span><span class="op">(</span><span class="va">state</span>, <span class="op">-</span><span class="va">workers</span><span class="op">)</span></code></pre></div>
@@ -855,7 +855,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </h3>
 <p>Having your data arranged in the way you want lets you use the <code>lead</code> (looking forward) and <code>lag</code> (looking backward) functions.</p>
 <p>Both the <code>lead</code> and <code>lag</code> functions take a variable as their only requried argument. The default number of lags or leads is <code>1</code>, and this can be changed with the second argument. For example:</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>last_workers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4,019 × 7
@@ -873,7 +873,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 10  2014 Canberra East ACT   Men    56247.     561          641
 ## # … with 4,009 more rows</code></pre>
 <p>If you wanted to see the growth rate of income over time, you could <code>arrange</code> then <code>group_by</code> your data before creating an <code>income_growth</code> variable that is <code>income / lag(income)</code>.</p>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span>
   <span class="fu">arrange</span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">gender</span>, <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -901,7 +901,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 </h2>
 <p>You will often use a combination of the above <code>dplyr</code> functions to get your data into shape.</p>
 <p>For example, say you want to get the total workers and total income in each state and year by gender. You could start with the <code>sa3_income</code> dataset, and then filter to year 2016, then create a new variable equal to <code>workers * income</code>, then group by year, state and gender before you summarise to get the statistics you want. With pipes, it could look something like:</p>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>total_income <span class="op">=</span> <span class="va">workers</span> <span class="op">*</span> <span class="va">income</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -931,7 +931,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 ## 15  2016 WA    Men          1756314      72582. 127679046129.
 ## 16  2016 WA    Women         540767      48537.  26179412110.</code></pre>
 <p>Or say you want to see the annual growth rate of female workers in the SA3 with the highest female income. You could filter to keep women, and then group by SA3, then get the highest income for each of SA3, then ungroup and filter to keep only the SA3 with the highest income, then arrange by year and get the annual worker growth:</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"Women"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sa3_name</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -961,7 +961,7 @@ from the Tidyverse to help deal with these sets of variables.</p>
 <p>The <code>dplyr</code> package <a href="https://dplyr.tidyverse.org/reference/join.html">‘Join two tbls together’</a> page provides a comprehensive summary of all join types. We will explore the key use of joins in our line of work – <code>left_join</code> – below.</p>
 <p>A ‘left’ join takes your main dataset, and adds variables from a new dataset based on a matching condition <strong>that’s unhelpful, fix</strong>. If an observation in the new dataset is not found in the main dataset, it is ignored.</p>
 <p>It is probably easier to show this with an example. Say that we had the income percentiles of each SA3 in each year from a different data source:</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_percentiles</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/sa3_percentiles.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 2010 Columns: 3</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────

@@ -2,26 +2,10 @@
 
 This chapter gets you up and running with R Studio and writing R code like a real hacker.
 
-By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code:
-
-
-```r
-good_number <- 10
-big_product <- 999
-
-good_number * big_product
-
-good_numbers <- c(10.5, 15, 45, 46, 54, 91, 101, 120, 150, 1e6)
-
-mean(good_numbers)
-sum(good_numbers)
-round(good_numbers)
-round(good_numbers, digits = -2)
-
-normal_numbers <- rnorm(10, 0, 1)
-summary(normal_numbers)
-hist(normal_numbers)
-```
+::: {.rmdimportant}
+**Goals**:
+By the end of this chapter you will have R and R Studio installed, and be able to write, execute and understand some simple R code.
+:::
 
 ## Installing R and RStudio
 
@@ -68,9 +52,11 @@ From within RStudio, open a new script by: File -> New File -> R Script.
 
 In that script, let’s do three things:
 
-1. Write a comment starting with `#` something R will ignore – it’s just there for you.
-2. Define an object: **assign** the number 119 to the object named goodnumber. We **assign** something in R by using  `<-`, which you can read as 'assign the thing on the right to the objected on the left'.^[It works the other way, too, with `->`. But best to stick with `<-`.]
+1. Write a comment starting with `#` something R will ignore – it’s just there for you.  
+2. Define an object: **assign** the number 119 to the object named `goodnumber`.^[R is an 'object oriented' programming language. This means that all the things we want R to know about -- datasets, or vectors, or lists, or functions, or whatever -- are stored as 'objects'.] We **assign** something in R by using  `<-`, which you can read as 'assign the thing on the right to the objected on the left'.^[It works the other way, too, with `->`. But best to stick with `<-`.]
 3. Calculate a thing.
+
+Your script will look like this:
 
 
 ```r
@@ -99,21 +85,39 @@ Having run your three lines of code, your RStuido should now look something like
 <img src="atlas/your-console2.png" width="100%" />
 
 
+The object are stored in your **environment** (top-right panel of your RStudio window). 
+You can think about your environment as _the things that R knows about at this point in time_.
 
-### Objects
+::: {.rmdimportant}
+**Exercise:**
 
-R is an 'object oriented' programming language. This means that all the things we want R to know about -- datasets, or vectors, or lists, or functions, or whatever -- are stored as 'objects'. 
+In your R script: 
 
-These objects are stored in your **environment**. You can think about your environment as _the things that R knows about at this point in time_.
+- Define an object to be equal to 90 
 
-We define an object using the `<-` symbol.
+- Multiply the object by 100
+
+- Divide the object by 10
+
+
+```{.r .fold-hide}
+# Hello I am starting my R script
+
+goodnumber <- 119
+
+2 * goodnumber
+```
+
+```
+## [1] 238
+```
+
+:::
 
 
 ### Functions
 
-A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs.
-
-For example, we can use the `c` function to combine numbers into a series of numbers (called a vector):
+A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs. For example, we can use the `c` function to combine numbers into a series of numbers (called a vector):
 
 
 ```r
@@ -123,6 +127,9 @@ c(3, 4, 5)
 ```
 ## [1] 3 4 5
 ```
+_'combine the elements 3, 4 and 5 into a single vector'_
+
+You could combine this with the `mean` function that calculates the average by 'nesting' one function inside another:^[This will be a well-known approach for Excel users!]
 
 
 
@@ -130,5 +137,25 @@ c(3, 4, 5)
 
 
 
+### Some other things to explore
+
+
+```r
+good_number <- 10
+big_product <- 999
+
+good_number * big_product
+
+good_numbers <- c(10.5, 15, 45, 46, 54, 91, 101, 120, 150, 1e6)
+
+mean(good_numbers)
+sum(good_numbers)
+round(good_numbers)
+round(good_numbers, digits = -2)
+
+normal_numbers <- rnorm(10, 0, 1)
+summary(normal_numbers)
+hist(normal_numbers)
+```
 
 

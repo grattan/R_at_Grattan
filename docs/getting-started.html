@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>2 Getting started | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the...">
+<meta name="description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
 <meta property="og:title" content="2 Getting started | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the...">
+<meta property="og:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2 Getting started | Using R at Grattan Institute">
-<meta name="twitter:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. By the end of this chapter you will have R and R Studio installed, and be able to write and understand the...">
+<meta name="twitter:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
@@ -72,23 +72,10 @@
 <span class="header-section-number">2</span> Getting started<a class="anchor" aria-label="anchor" href="#getting-started"><i class="fas fa-link"></i></a>
 </h1>
 <p>This chapter gets you up and running with R Studio and writing R code like a real hacker.</p>
-<p>By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">good_number</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="va">big_product</span> <span class="op">&lt;-</span> <span class="fl">999</span>
-
-<span class="va">good_number</span> <span class="op">*</span> <span class="va">big_product</span>
-
-<span class="va">good_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.5</span>, <span class="fl">15</span>, <span class="fl">45</span>, <span class="fl">46</span>, <span class="fl">54</span>, <span class="fl">91</span>, <span class="fl">101</span>, <span class="fl">120</span>, <span class="fl">150</span>, <span class="fl">1e6</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>
-
-<span class="va">normal_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span></code></pre></div>
+<div class="rmdimportant">
+<p><strong>Goals</strong>:
+By the end of this chapter you will have R and R Studio installed, and be able to write, execute and understand some simple R code.</p>
+</div>
 <div id="installing-r-and-rstudio" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Installing R and RStudio<a class="anchor" aria-label="anchor" href="#installing-r-and-rstudio"><i class="fas fa-link"></i></a>
@@ -134,12 +121,14 @@
 <p>From within RStudio, open a new script by: File -&gt; New File -&gt; R Script.</p>
 <p>In that script, let’s do three things:</p>
 <ol style="list-style-type: decimal">
-<li>Write a comment starting with <code>#</code> something R will ignore – it’s just there for you.</li>
-<li>Define an object: <strong>assign</strong> the number 119 to the object named goodnumber. We <strong>assign</strong> something in R by using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>, which you can read as ‘assign the thing on the right to the objected on the left.’<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It works the other way, too, with &lt;code&gt;-&amp;gt;&lt;/code&gt;. But best to stick with &lt;code&gt;&amp;lt;-&lt;/code&gt;.&lt;/p&gt;"><sup>4</sup></a>
+<li>Write a comment starting with <code>#</code> something R will ignore – it’s just there for you.<br>
+</li>
+<li>Define an object: <strong>assign</strong> the number 119 to the object named <code>goodnumber</code>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;R is an ‘object oriented’ programming language. This means that all the things we want R to know about – datasets, or vectors, or lists, or functions, or whatever – are stored as ‘objects.’&lt;/p&gt;"><sup>4</sup></a> We <strong>assign</strong> something in R by using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>, which you can read as ‘assign the thing on the right to the objected on the left.’<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It works the other way, too, with &lt;code&gt;-&amp;gt;&lt;/code&gt;. But best to stick with &lt;code&gt;&amp;lt;-&lt;/code&gt;.&lt;/p&gt;"><sup>5</sup></a>
 </li>
 <li>Calculate a thing.</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>Your script will look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Hello I am starting my R script</span>
 
 <span class="va">goodnumber</span> <span class="op">&lt;-</span> <span class="fl">119</span>
@@ -155,28 +144,60 @@
 <div class="inline-figure"><img src="atlas/rstudio-run.png" width="100%"></div>
 <p>Having run your three lines of code, your RStuido should now look something like this:</p>
 <div class="inline-figure"><img src="atlas/your-console2.png" width="100%"></div>
-<div id="objects" class="section level3" number="2.4.1">
-<h3>
-<span class="header-section-number">2.4.1</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
-</h3>
-<p>R is an ‘object oriented’ programming language. This means that all the things we want R to know about – datasets, or vectors, or lists, or functions, or whatever – are stored as ‘objects.’</p>
-<p>These objects are stored in your <strong>environment</strong>. You can think about your environment as <em>the things that R knows about at this point in time</em>.</p>
-<p>We define an object using the <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> symbol.</p>
+<p>The object are stored in your <strong>environment</strong> (top-right panel of your RStudio window).
+You can think about your environment as <em>the things that R knows about at this point in time</em>.</p>
+<div class="rmdimportant">
+<p><strong>Exercise:</strong></p>
+<p>In your R script:</p>
+<ul>
+<li><p>Define an object to be equal to 90</p></li>
+<li><p>Multiply the object by 100</p></li>
+<li><p>Divide the object by 10</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Hello I am starting my R script</span>
+
+<span class="va">goodnumber</span> <span class="op">&lt;-</span> <span class="fl">119</span>
+
+<span class="fl">2</span> <span class="op">*</span> <span class="va">goodnumber</span></code></pre></div>
+<pre><code>## [1] 238</code></pre>
 </div>
-<div id="functions" class="section level3" number="2.4.2">
+<div id="functions" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">2.4.2</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
 </h3>
-<p>A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs.</p>
-<p>For example, we can use the <code>c</code> function to combine numbers into a series of numbers (called a vector):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs. For example, we can use the <code>c</code> function to combine numbers into a series of numbers (called a vector):</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3 4 5</code></pre>
+<p><em>‘combine the elements 3, 4 and 5 into a single vector’</em></p>
+<p>You could combine this with the <code>mean</code> function that calculates the average by ‘nesting’ one function inside another:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This will be a well-known approach for Excel users!&lt;/p&gt;"><sup>6</sup></a></p>
 </div>
-<div id="errors-warnings-and-messages" class="section level3" number="2.4.3">
+<div id="errors-warnings-and-messages" class="section level3" number="2.4.2">
 <h3>
-<span class="header-section-number">2.4.3</span> Errors, warnings and messages<a class="anchor" aria-label="anchor" href="#errors-warnings-and-messages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.2</span> Errors, warnings and messages<a class="anchor" aria-label="anchor" href="#errors-warnings-and-messages"><i class="fas fa-link"></i></a>
 </h3>
+</div>
+<div id="some-other-things-to-explore" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> Some other things to explore<a class="anchor" aria-label="anchor" href="#some-other-things-to-explore"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">good_number</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">big_product</span> <span class="op">&lt;-</span> <span class="fl">999</span>
+
+<span class="va">good_number</span> <span class="op">*</span> <span class="va">big_product</span>
+
+<span class="va">good_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.5</span>, <span class="fl">15</span>, <span class="fl">45</span>, <span class="fl">46</span>, <span class="fl">54</span>, <span class="fl">91</span>, <span class="fl">101</span>, <span class="fl">120</span>, <span class="fl">150</span>, <span class="fl">1e6</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>
+
+<span class="va">normal_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span></code></pre></div>
 
 </div>
 </div>
@@ -194,9 +215,9 @@
 <li><a class="nav-link" href="#scripts-and-coding"><span class="header-section-number">2.3</span> Scripts and ‘coding’</a></li>
 <li>
 <a class="nav-link" href="#a-practical-introduction-to-writing-r-code"><span class="header-section-number">2.4</span> A practical introduction to writing R code</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#objects"><span class="header-section-number">2.4.1</span> Objects</a></li>
-<li><a class="nav-link" href="#functions"><span class="header-section-number">2.4.2</span> Functions</a></li>
-<li><a class="nav-link" href="#errors-warnings-and-messages"><span class="header-section-number">2.4.3</span> Errors, warnings and messages</a></li>
+<li><a class="nav-link" href="#functions"><span class="header-section-number">2.4.1</span> Functions</a></li>
+<li><a class="nav-link" href="#errors-warnings-and-messages"><span class="header-section-number">2.4.2</span> Errors, warnings and messages</a></li>
+<li><a class="nav-link" href="#some-other-things-to-explore"><span class="header-section-number">2.4.3</span> Some other things to explore</a></li>
 </ul>
 </li>
 </ul>

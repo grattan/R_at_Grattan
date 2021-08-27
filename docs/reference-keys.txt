@@ -9,9 +9,9 @@ installing-r-and-rstudio
 setting-up-rstudio
 scripts-and-coding
 a-practical-introduction-to-writing-r-code
-objects
 functions
 errors-warnings-and-messages
+some-other-things-to-explore
 organising-projects
 analysis-template
 rproj
