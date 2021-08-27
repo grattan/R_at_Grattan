@@ -4,17 +4,22 @@ This chapter gets you up and running with R Studio and writing R code like a rea
 
 By the end of this chapter you will have R and R Studio installed, and be able to write and understand the following chunk of R code:
 
-```{r}
+```{r, eval=FALSE}
 good_number <- 10
 big_product <- 999
 
 good_number * big_product
 
-one_to_ten <- 1:10
-good_numbers <- c(10, 10, 20, 20, 40, 50, 60)
+good_numbers <- c(10.5, 15, 45, 46, 54, 91, 101, 120, 150, 1e6)
 
+mean(good_numbers)
 sum(good_numbers)
-hist(good_number)
+round(good_numbers)
+round(good_numbers, digits = -2)
+
+normal_numbers <- rnorm(10, 0, 1)
+summary(normal_numbers)
+hist(normal_numbers)
 ```
 
 ## Installing R and RStudio
@@ -47,17 +52,84 @@ Once they're both installed, get started by opening RStudio.
 
 ## Setting up RStudio
 
-Theme (important)
+_Will to finish. Include:_ 
 
-Save data off
+* Save data off (and other good defaults)
+* Colour theme (important!)
 
-### Scripts 
+## Scripts and 'coding'
+
+R is a script-based program. You write a list of instructions and R will follow it. This is wonderfully handy: 
+
+- everything you have told it to do, it will do;
+- you have a record of everything you have told it to do. 
+
+But 'coding' can intimidating! However, it’s just a list of instructions. If you have ever used Excel you have used functions to create output. You have written code. You're already a coder! 
+
+We can greatly enhance the things we can do by using R. The rest of this chapter is a short guide to walk you through your first lines of R code. If you get stuck or something doesn't work or you have an urge to throw your computer out the window, please reach out to Will or James, or post on the `#r_at_grattan` [Slack channel](#seeking-help), and someone will help you out.
+
+## A practical introduction to writing R code
+
+From within RStudio, open a new script by: File -> New File -> R Script.
+
+In that script, let’s do three things:
+
+1. Write a comment starting with `#` something R will ignore – it’s just there for you.  
+2. Define an object: **assign** the number 119 to the object named goodnumber. We **assign** something in R by using  `<-`, which you can read as 'assign the thing on the right to the objected on the left'.^[It works the other way, too, with `->`. But best to stick with `<-`.]
+3. Calculate a thing.
+
+Your script will look like this:
+
+```{r}
+# Hello I am starting my R script
+
+goodnumber <- 119
+
+2 * goodnumber
+```
+
+The code that you write in your script will sit there idly until you send it to be processed in the console. Run the code by:
+
+* sending the _current line_ (where your cursor is) to the console with keyboard shortcut `CMD + return` (Mac) or `CTRL + shift` (Windows); or
+* selecting a few lines of code and sending it to the console with the same keyboard shortcut; or 
+* running the whole script -- from the first line to the last -- clicking 'Run':
+
+```{r, echo=FALSE, out.width='100%'}
+knitr::include_graphics("atlas/rstudio-run.png")
+```
+
+
+Having run your three lines of code, your RStuido should now look something like this:
+
+```{r, echo=FALSE, out.width='100%'}
+knitr::include_graphics("atlas/your-console2.png")
+```
+
+
 
 ### Objects
 
+R is an 'object oriented' programming language. This means that all the things we want R to know about -- datasets, or vectors, or lists, or functions, or whatever -- are stored as 'objects'. 
+
+These objects are stored in your **environment**. You can think about your environment as _the things that R knows about at this point in time_.
+
+We define an object using the `<-` symbol.
+
+
 ### Functions
 
+A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs.
+
+For example, we can use the `c` function to combine numbers into a series of numbers (called a vector):
+
+```{r functions1}
+c(3, 4, 5)
+```
+
+
+
 ### Errors, warnings and messages
+
 
 
 

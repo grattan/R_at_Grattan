@@ -74,7 +74,7 @@ If you're loading a package from Github, it's a good idea to leave a [comment](#
 
 ```r
 library(tidyverse)
-library(grattantheme)
+library(grattantheme) # remotes::install_github("grattan/grattantheme")
 library(strayr) # remotes::install_github("runapp-aus/strayr")
 ```
 
@@ -155,8 +155,7 @@ _Err on the side of commenting more_, rather than less, throughout your code. So
 Comments can go above code chunks, or next to code - there are examples of both above. 
 
 Try to keep them up-to-date.
-![](atlas/code-comments.png)<!-- -->
-
+<img src="atlas/code-comments.png" width="100%" />
 ## Breaking your script into chunks
 
 It's useful to break a lengthy script into chunks with `-----` (three or more hyphens). 

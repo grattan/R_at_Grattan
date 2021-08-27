@@ -1,4 +1,4 @@
-# Seeking help and using other resources
+# Seeking help and using other resources {#seeking-help}
 
 The most important skill you need to learn to use R well is how to get help. This is a great list of steps to try:
 
