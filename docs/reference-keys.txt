@@ -9,9 +9,11 @@ installing-r-and-rstudio
 setting-up-rstudio
 scripts-and-coding
 a-practical-introduction-to-writing-r-code
+starting-a-new-script-and-defining-an-object
 functions
+data-types
 errors-warnings-and-messages
-some-other-things-to-explore
+file-paths
 organising-projects
 analysis-template
 rproj
@@ -66,7 +68,6 @@ readabs
 reading-common-files
 appropriately-renaming-variables
 getting-to-tidy-data
-different-data-types
 set-up-and-packages
 why-data-types-matter
 checking-and-changing-data-types

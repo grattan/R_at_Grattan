@@ -15,7 +15,7 @@ A core principle for coding at Grattan is that your code should be **readable by
 
 ## The `tidyverse` {#tidyverse}
 
-_insert LOGO_
+![](atlas/tidyverse.png)<!-- -->
 
 The `tidyverse` is central to our work at Grattan. The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. 
 

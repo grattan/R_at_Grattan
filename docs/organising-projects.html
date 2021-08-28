@@ -49,10 +49,11 @@
 <li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
 <li><a class="" href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
-<li class="book-part">Load, manipulate and visualise data</li>
+<li class="book-part">Part II: Loading and transforming data</li>
 <li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
 <li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li class="book-part">Part III: Visualising data</li>
 <li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
 <li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
 <li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
@@ -111,8 +112,8 @@ The folder structure is:</p>
 <li><code>run-analysis.Rmd</code></li>
 </ul>
 <p>This includes a ready-to-go R project <code>grattan-analysis-template.Rproj</code> (feel free to rename to something related to your project.</p>
-<p>Your raw – untouched! – data should go in the <code>data/</code> folder. If you have lots of data files, it might be worth organsing them in subfolders (e.g. <code>data/abs</code>, <code>data/dept-health</code>, etc.). Data that you have generated or changed in R and exported for use in subsequent scripts can be saved in <code>data/intermediate</code> folder.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So that one script will end with &lt;code&gt;write_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt; and the next script will have &lt;code&gt;read_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt;&lt;/p&gt;'><sup>7</sup></a></p>
-<p>All of your scripts should go in the <code>R</code> folder. Scripts that need to be run in order should be prefixed by a number: <code>01-</code>, <code>02-</code>, etc. Scripts names should be short and clear, and be both human-readable and machine readable (see ).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See &lt;a href="https://speakerdeck.com/jennybc/how-to-name-files"&gt;Jenny Bryan’s fantastic presentation&lt;/a&gt; on how to name files (it’s fun).&lt;/p&gt;'><sup>8</sup></a></p>
+<p>Your raw – untouched! – data should go in the <code>data/</code> folder. If you have lots of data files, it might be worth organsing them in subfolders (e.g. <code>data/abs</code>, <code>data/dept-health</code>, etc.). Data that you have generated or changed in R and exported for use in subsequent scripts can be saved in <code>data/intermediate</code> folder.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So that one script will end with &lt;code&gt;write_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt; and the next script will have &lt;code&gt;read_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt;&lt;/p&gt;'><sup>12</sup></a></p>
+<p>All of your scripts should go in the <code>R</code> folder. Scripts that need to be run in order should be prefixed by a number: <code>01-</code>, <code>02-</code>, etc. Scripts names should be short and clear, and be both human-readable and machine readable (see ).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See &lt;a href="https://speakerdeck.com/jennybc/how-to-name-files"&gt;Jenny Bryan’s fantastic presentation&lt;/a&gt; on how to name files (it’s fun).&lt;/p&gt;'><sup>13</sup></a></p>
 <p>You can access that template from its <a href="https://github.com/grattan/grattan-analysis-template">Github repository</a>.
 Either:</p>
 <ul>
@@ -155,12 +156,12 @@ Either:</p>
 </h2>
 <p>A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths. Machine-specific filepaths not only stop you from sharing your work with others, they’re also super annoying for you! Who wants to type out a full filepath everytime you load or save a file?</p>
 <p><strong>Bad, machine-specific filepaths, boo, hiss</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="organising-projects.html#cb8-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
-<span id="cb8-2"><a href="organising-projects.html#cb8-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
-<span id="cb8-3"><a href="organising-projects.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="organising-projects.html#cb60-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
+<span id="cb60-2"><a href="organising-projects.html#cb60-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
+<span id="cb60-3"><a href="organising-projects.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
 <p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
 <p><strong>Good, relative filepaths, cool, yay</strong></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hes</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/HES/hes1516.csv"</span><span class="op">)</span>
 <span class="fu">grattan_save</span><span class="op">(</span><span class="st">"output/atlas/expenditure_by_income.pdf"</span><span class="op">)</span></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data,’ to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
@@ -170,7 +171,7 @@ Either:</p>
 <h2>
 <span class="header-section-number">3.4</span> Keep your stuff together<a class="anchor" aria-label="anchor" href="#keep-your-stuff-together"><i class="fas fa-link"></i></a>
 </h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>9</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
+<p>Your script(s), data, and output should generally all live in the same place.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>14</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
@@ -178,7 +179,7 @@ Either:</p>
 <li>your source data - called ‘data’</li>
 <li>your output - called ‘output.’ Include subdirectories for:
 <ul>
-<li>your charts - called ‘atlas’ (like in our LaTeX projects)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We’re not sure where or why this practice started but there’s some path dependency here meaning that the switching costs are high without a clear benefit. Guess we’re stuck with it.&lt;/p&gt;"><sup>10</sup></a>
+<li>your charts - called ‘atlas’ (like in our LaTeX projects)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We’re not sure where or why this practice started but there’s some path dependency here meaning that the switching costs are high without a clear benefit. Guess we’re stuck with it.&lt;/p&gt;"><sup>15</sup></a>
 </li>
 <li>your exported tables - called ‘tables.’</li>
 </ul>
@@ -200,7 +201,7 @@ Either:</p>
 <li>04_visualise.R</li>
 </ul>
 <p>You don’t need to use these filenames. Think about what works best for your project.</p>
-<p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more <a href="coding-style.html#use-comments">elsewhere in this guide</a>). At the end of each script, you can save the script’s output, and then load the file you create in the next script.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Alternatively, &lt;code&gt;source()&lt;/code&gt; the previous script.&lt;/p&gt;"><sup>11</sup></a></p>
+<p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more <a href="coding-style.html#use-comments">elsewhere in this guide</a>). At the end of each script, you can save the script’s output, and then load the file you create in the next script.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Alternatively, &lt;code&gt;source()&lt;/code&gt; the previous script.&lt;/p&gt;"><sup>16</sup></a></p>
 </div>
 <div id="make-your-filenames-readable-by-both-machines-and-humans" class="section level2" number="3.6">
 <h2>
@@ -234,7 +235,7 @@ Either:</p>
 <p>Sometimes R doesn’t behave the way you expect it to. You might run a script and find it works fine, then run it again and find it’s producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn’t have originally, or some extra packages loaded.</p>
 <p>To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.</p>
 <p><em>But</em>… don’t clean your workspace within your analysis script. People sometimes do this using this command:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow.”</p>
 </div>
@@ -307,7 +308,7 @@ Either:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-27.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
