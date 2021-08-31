@@ -1,3 +1,4 @@
+# (PART) Part III: Visualising data {-}
 # Data Visualisation
 
 This chapter explores data visualisation broadly, and how to 'do' data visualisation in R specifically. 

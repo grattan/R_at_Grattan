@@ -1,10 +1,9 @@
-# Grattan coding style {#coding-style}
+# Grattan's coding style and the `tidyverse` {#coding-style}
 
 ```{r message = FALSE, echo = FALSE}
 library(tidyverse)
 ```
 
-*This page sets out the core elements of coding style we use at Grattan. If you're new to R, don't stress about remembering - or even understanding - everything on this page. Just be aware that we have a coding style, and come back to this when you're a bit further along.*
 
 The benefits of a common coding style are well explained [by Hadley Wickham](http://r-pkgs.had.co.nz/style.html):
 
@@ -14,7 +13,55 @@ Below we describe the **key** elements of Grattan coding style, without being to
 
 You should also see the [Using R at Grattan](#organising-projects) page for guidelines about setting up your project.
 
-A core principle for coding at Grattan is that your code should be **readable by humans**. 
+A core principle for coding at Grattan is that your code should be **readable by humans**. For this reason, we prefer to use the `tidyverse` set of packages for data reading, manipulation and visualisation. 
+
+## The `tidyverse` {#tidyverse}
+
+```{r tidyverse-hex, echo=FALSE}
+knitr::include_graphics("atlas/tidyverse.png")
+```
+
+The `tidyverse` is central to our work at Grattan. The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. 
+
+
+### Why do we use the tidyverse?
+
+The `tidyverse` makes life easier! 
+
+The core `tidyverse` packages, like `ggplot2`, `dplyr`, and `tidyr`, are extremely popular. The `tidyverse` is probably the most popular 'dialect' of R. This means that any problem you encounter with the `tidyverse` will have been encountered many times before by other R users, so a solution will only be a Google search away.
+
+The `tidyverse` packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one `tidyverse` package, like `dplyr`, are also applicable to other packages, like `tidyr`. 
+
+They're designed to work with data frames^[The tidyverse works with 'tibbles', which are a tidyverse-specific variant of the data frame. Don't worry about the difference between tibbles and data frames.], a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the `tidyverse` is built around the concept of [*tidy data*](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html), which has a specific meaning in this context that we'll come to later. The fact that `tidyverse` packages are all built around one type of data object makes them easier to work with.
+
+The creator of the `tidyverse`, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the `tidyverse` idiom is often able to be understood even if you haven't encountered the functions before. For example, look at this chunk of code:
+
+```{r, eval = FALSE}
+my_data %>%
+  filter(age >= 30) %>%
+  mutate(relative_income = income / mean(income))
+```
+
+Without knowing what `my_data` looks like, and even if you haven't encountered these functions before, this should be reasonably intuitive. We're taking some data, and then^[you can read the pipe, `%>%`, as 'and then'] only keeping observations that relate to people aged 30 and older, then calculating a new variable, `relative_income`. The name of a `tidyverse` function - like `filter`, `group_by`, `summarise`, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn't always the case with other approaches.
+
+Here's one way to do the same thing in base R: 
+
+```{r, eval = FALSE}
+
+transform(my_data[my_data$age >= 30, ],
+          relative_income = income / mean(income))
+
+```
+
+The base R code gets the job done, but it's clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work **human readable**.
+
+Code written with `tidyverse` functions is often faster than its base R equivalents. But most of our work at Grattan is with small-to-medium sized datasets (with fewer than a million rows or so), so speed isn't usually a major concern anyway.^[When working with very large datasets, it might be worth gaining speed using other packages, such as [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html). Fortunately, using the `dtplyr` package you can get most of the speed benefits of `data.table` and stick to familiar `dplyr` syntax.]
+
+The most valuable resource we deal with at Grattan is our time. Computers are cheap, people are not. If your code executes quickly, but it takes your colleague many hours to decipher it, the cost of the extra QC time more than outweighs the saving through faster computation. The `tidyverse` packages strike a balance between expressive, comprehensible code and computational efficiency that suits the nature of our work at Grattan. This balance is the right one for most of our work, most of the time.
+
+Most R scripts at Grattan should start with `library(tidyverse)`. Most of your work will be in data frames, and most of the time the `tidyverse` contains the core tools you'll need to do that work.
+
+
 
 ## Load packages first
 
@@ -29,7 +76,7 @@ If you're loading a package from Github, it's a good idea to leave a [comment](#
 
 ```{r eval=FALSE}
 library(tidyverse)
-library(grattantheme)
+library(grattantheme) # remotes::install_github("grattan/grattantheme")
 library(strayr) # remotes::install_github("runapp-aus/strayr")
 ```
 
@@ -104,8 +151,9 @@ _Err on the side of commenting more_, rather than less, throughout your code. So
 Comments can go above code chunks, or next to code - there are examples of both above. 
 
 Try to keep them up-to-date.
-`r knitr::include_graphics("atlas/code-comments.png")`
-
+```{r code-comments, echo = FALSE, out.width='100%'}
+knitr::include_graphics("atlas/code-comments.png")
+```
 ## Breaking your script into chunks
 
 It's useful to break a lengthy script into chunks with `-----` (three or more hyphens). 

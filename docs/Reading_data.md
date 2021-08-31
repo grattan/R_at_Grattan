@@ -1,4 +1,4 @@
-# (PART) Load, manipulate and visualise data {-}
+# (PART) Part II: Loading and transforming data {-}
 # Reading data {#reading-data}
 
 ## Importing data

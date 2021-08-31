@@ -42,26 +42,25 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="active" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
-<li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
+<li class="book-part">Part II: Loading and transforming data</li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li class="book-part">Part III: Visualising data</li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -82,70 +81,116 @@
 <li>Naming your scripts and keeping them manageable.</li>
 </ul>
 <p>Using a consistent coding style also helps make our work more shareable; that’s <a href="coding-style.html#coding-style">covered on the next page</a>.</p>
-<div id="rproj" class="section level2" number="3.1">
+<div id="analysis-template" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.1</span> Use RStudio projects, not <code>setwd()</code><a class="anchor" aria-label="anchor" href="#rproj"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Using the <code>grattan-analysis-template</code><a class="anchor" aria-label="anchor" href="#analysis-template"><i class="fas fa-link"></i></a>
+</h2>
+<p>There is a file on the Grattan Github that contains a template for analysis in R.
+The folder structure is:</p>
+<ul>
+<li>
+<code>data/</code>
+<ul>
+<li><code>intermediate/</code></li>
+</ul>
+</li>
+<li>
+<code>output/</code>
+<ul>
+<li><code>tables/</code></li>
+<li><code>atlas/</code></li>
+</ul>
+</li>
+<li>
+<code>R/</code>
+<ul>
+<li><code>00-setup.R</code></li>
+</ul>
+</li>
+<li><code>grattan-analysis-template.Rproj</code></li>
+<li><code>README.md</code></li>
+<li><code>run-analysis.Rmd</code></li>
+</ul>
+<p>This includes a ready-to-go R project <code>grattan-analysis-template.Rproj</code> (feel free to rename to something related to your project.</p>
+<p>Your raw – untouched! – data should go in the <code>data/</code> folder. If you have lots of data files, it might be worth organsing them in subfolders (e.g. <code>data/abs</code>, <code>data/dept-health</code>, etc.). Data that you have generated or changed in R and exported for use in subsequent scripts can be saved in <code>data/intermediate</code> folder.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So that one script will end with &lt;code&gt;write_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt; and the next script will have &lt;code&gt;read_csv("data/intermediate/census-income-clean.csv")&lt;/code&gt;&lt;/p&gt;'><sup>12</sup></a></p>
+<p>All of your scripts should go in the <code>R</code> folder. Scripts that need to be run in order should be prefixed by a number: <code>01-</code>, <code>02-</code>, etc. Scripts names should be short and clear, and be both human-readable and machine readable (see ).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See &lt;a href="https://speakerdeck.com/jennybc/how-to-name-files"&gt;Jenny Bryan’s fantastic presentation&lt;/a&gt; on how to name files (it’s fun).&lt;/p&gt;'><sup>13</sup></a></p>
+<p>You can access that template from its <a href="https://github.com/grattan/grattan-analysis-template">Github repository</a>.
+Either:</p>
+<ul>
+<li>download it to your computer by navigating to <em>Code</em> then <em>Download ZIP</em> (or just click <a href="https://github.com/grattan/grattan-analysis-template/archive/refs/heads/main.zip"><strong>here</strong></a>); or</li>
+<li>click <a href="https://github.com/grattan/grattan-analysis-template/generate"><em>Use Template</em></a>, which will create a new Github respository for you to edit (see the chapter on <a href="version-control.html#version-control">Version control</a> for more details on how to get started with Github, or reach out to Will or James).</li>
+</ul>
+<p>The following sections provide a rationale for why we do things this way.</p>
+</div>
+<div id="rproj" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Use RStudio projects, not <code>setwd()</code><a class="anchor" aria-label="anchor" href="#rproj"><i class="fas fa-link"></i></a>
 </h2>
 <p>In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. Your R script is like a recipe in a cookbook - when R is cooking your recipe, it needs to know where to find your ingredients (the data) and put the finished product (your delicious analysis).</p>
 <p>When it’s executing your script, R needs to know where to read files from and save files to on your computer. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>.</p>
-<p>You can tell R which folder to use as your working directory by using the command <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code>, as in <code><a href="https://rdrr.io/r/base/getwd.html">setwd("~/Desktop/some random folder")</a></code> or <code>setwd("C:\Users\mcowgill\Documents\Somerandomfolder")</code>. <strong>This is a bad idea that you should avoid!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
+<p>You can tell R which folder to use as your working directory by using the command <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code>, as in <code><a href="https://rdrr.io/r/base/getwd.html">setwd("~/Desktop/some random folder")</a></code> or <code>setwd("C:\Users\astobart\Documents\Somerandomfolder")</code>. <strong>This is a bad idea that you should avoid!</strong> If anyone - including you - tries to run your script on a different machine, with a different folder structure, it won’t work. If people can’t get past the first line when they’re trying to run your script, there’s an annoying and unnecessary hurdle to reproducing and checking your analysis.</p>
 <p>In the <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">words of Jenny Bryan</a>:</p>
 <blockquote>
 <p>if the first line of your R script is <code>setwd("C:\Users\jenny\path\that\only\I\have")</code> I will come into your office and SET YOUR COMPUTER ON FIRE.</p>
 </blockquote>
 <p>Seems fair.</p>
 <p>Creating a ‘project’ in RStudio sets your working directory in a way that’s portable across machines.</p>
-<div id="how-to-create-a-project" class="section level3" number="3.1.1">
+<div id="how-to-create-a-project" class="section level3" number="3.2.1">
 <h3>
-<span class="header-section-number">3.1.1</span> How to create a project<a class="anchor" aria-label="anchor" href="#how-to-create-a-project"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.1</span> How to create a project<a class="anchor" aria-label="anchor" href="#how-to-create-a-project"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creating an RStudio project is straightforward: <strong>click File, then New Project</strong>. You can then choose to start your project in a new directory, or an existing directory. Simple!</p>
 <div class="inline-figure"><img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;"></div>
 <p>RStudio will then create a file with an .Rproj extension in the folder you’ve chosen.</p>
 </div>
-<div id="opening-a-project" class="section level3" number="3.1.2">
+<div id="opening-a-project" class="section level3" number="3.2.2">
 <h3>
-<span class="header-section-number">3.1.2</span> Opening a project<a class="anchor" aria-label="anchor" href="#opening-a-project"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.2</span> Opening a project<a class="anchor" aria-label="anchor" href="#opening-a-project"><i class="fas fa-link"></i></a>
 </h3>
 <p>When you want to work on a particular project, just open the <code>.Rproj</code> file, or click File -&gt; Open project in RStudio. Your working directory will be set to the directory that contains the .Rproj file.</p>
 </div>
 </div>
-<div id="use-relative-filepaths" class="section level2" number="3.2">
+<div id="use-relative-filepaths" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.2</span> Use relative filepaths<a class="anchor" aria-label="anchor" href="#use-relative-filepaths"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Use relative filepaths<a class="anchor" aria-label="anchor" href="#use-relative-filepaths"><i class="fas fa-link"></i></a>
 </h2>
 <p>A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths. Machine-specific filepaths not only stop you from sharing your work with others, they’re also super annoying for you! Who wants to type out a full filepath everytime you load or save a file?</p>
 <p><strong>Bad, machine-specific filepaths, boo, hiss</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="organising-projects.html#cb2-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
-<span id="cb2-2"><a href="organising-projects.html#cb2-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
-<span id="cb2-3"><a href="organising-projects.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="organising-projects.html#cb60-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
+<span id="cb60-2"><a href="organising-projects.html#cb60-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
+<span id="cb60-3"><a href="organising-projects.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
 <p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
 <p><strong>Good, relative filepaths, cool, yay</strong></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hes</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/HES/hes1516.csv"</span><span class="op">)</span>
-<span class="fu">grattan_save</span><span class="op">(</span><span class="st">"atlas/expenditure_by_income.pdf"</span><span class="op">)</span></code></pre></div>
+<span class="fu">grattan_save</span><span class="op">(</span><span class="st">"output/atlas/expenditure_by_income.pdf"</span><span class="op">)</span></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data,’ to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
 <p>At Grattan, we even have our own R package, called <a href="https://github.com/grattan/grattandata">grattandata</a> that helps load certain types of data in R in a way that makes your script portable and reusable by colleagues. We cover that more in the <a href="reading-data.html#read_microdata">Reading Data chapter</a>.</p>
 </div>
-<div id="keep-your-stuff-together" class="section level2" number="3.3">
+<div id="keep-your-stuff-together" class="section level2" number="3.4">
 <h2>
-<span class="header-section-number">3.3</span> Keep your stuff together<a class="anchor" aria-label="anchor" href="#keep-your-stuff-together"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4</span> Keep your stuff together<a class="anchor" aria-label="anchor" href="#keep-your-stuff-together"><i class="fas fa-link"></i></a>
 </h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>3</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
+<p>Your script(s), data, and output should generally all live in the same place.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>14</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
 <li>your code - called ‘R’</li>
 <li>your source data - called ‘data’</li>
-<li>your graphs - called ‘atlas,’ like in our LaTeX projects</li>
-<li>your non-graph output, like formatted tables, called ‘output’</li>
+<li>your output - called ‘output.’ Include subdirectories for:
+<ul>
+<li>your charts - called ‘atlas’ (like in our LaTeX projects)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We’re not sure where or why this practice started but there’s some path dependency here meaning that the switching costs are high without a clear benefit. Guess we’re stuck with it.&lt;/p&gt;"><sup>15</sup></a>
+</li>
+<li>your exported tables - called ‘tables.’</li>
+</ul>
+</li>
 </ul>
 <p>Sometimes your data folder might have subfolders - ‘raw’ for data that you’ve done nothing to, and ‘clean’ for data you’ve modified in some way. Don’t keep ‘raw’ data together in the same place as data you’ve modified.</p>
 <p>Other folder structures are OK and might make more sense for your project. The important thing is to <strong>have</strong> a folder structure, and to use a structure that is easily comprehensible to anyone else looking at your analysis.</p>
 </div>
-<div id="manageable" class="section level2" number="3.4">
+<div id="manageable" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.4</span> Keep your scripts manageable<a class="anchor" aria-label="anchor" href="#manageable"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Keep your scripts manageable<a class="anchor" aria-label="anchor" href="#manageable"><i class="fas fa-link"></i></a>
 </h2>
 <p>Unless your project is very simple, it’s not a good idea to put all your work into one R script. Instead, break your analysis into discrete pieces and put each piece in its own file. Number the files to make it clear what order they’re supposed to be run in.</p>
 <p>Here’s a useful structure:</p>
@@ -156,11 +201,11 @@
 <li>04_visualise.R</li>
 </ul>
 <p>You don’t need to use these filenames. Think about what works best for your project.</p>
-<p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more <a href="coding-style.html#use-comments">elsewhere in this guide</a>). At the end of each script, you can save the script’s output, and then load the file you create in the next script.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Alternatively, &lt;code&gt;source()&lt;/code&gt; the previous script.&lt;/p&gt;"><sup>4</sup></a></p>
+<p>It should be clear what each script is trying to do. Use meaningful filenames that clearly indicate the overarching purpose of the script. Use comments to explain why you’re doing things. Err on the side of over-commenting, rather than under-commenting (we cover this more <a href="coding-style.html#use-comments">elsewhere in this guide</a>). At the end of each script, you can save the script’s output, and then load the file you create in the next script.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Alternatively, &lt;code&gt;source()&lt;/code&gt; the previous script.&lt;/p&gt;"><sup>16</sup></a></p>
 </div>
-<div id="make-your-filenames-readable-by-both-machines-and-humans" class="section level2" number="3.5">
+<div id="make-your-filenames-readable-by-both-machines-and-humans" class="section level2" number="3.6">
 <h2>
-<span class="header-section-number">3.5</span> Make your filenames readable by both machines and humans<a class="anchor" aria-label="anchor" href="#make-your-filenames-readable-by-both-machines-and-humans"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6</span> Make your filenames readable by both machines and humans<a class="anchor" aria-label="anchor" href="#make-your-filenames-readable-by-both-machines-and-humans"><i class="fas fa-link"></i></a>
 </h2>
 <p>Have another look at the example filenames set out above:</p>
 <ul>
@@ -175,28 +220,28 @@
 <p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) We’re all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like <code>cool_word_doc_002.docx</code>. Soon enough your hard drive and email client is cluttered with endless iterations of your document. Try to avoid replicating this nightmare in R.</p>
 <p>If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive.” To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
 </div>
-<div id="README" class="section level2" number="3.6">
+<div id="README" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.6</span> Include a README file<a class="anchor" aria-label="anchor" href="#README"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Include a README file<a class="anchor" aria-label="anchor" href="#README"><i class="fas fa-link"></i></a>
 </h2>
 <p>Your analysis workflow might seem completely obvious to you. Let’s say that in one script you load raw ABS microdata, run a particular script to clean it up, save the cleaned data somewhere, then load that cleaned data in a second script to produce a summary table, then use a third script to produce a graph based on the summary table. Easy!</p>
 <p>Except that might not seem easy or self-explanatory to anyone who comes along and tries to figure out how your analysis works, including you in the future.</p>
 <p>Make things easier by including a short text file - called README - in the project folder. This should explain the purpose of the project, the key files, and (if it isn’t clear) the order in which they should be run. If you got the data from somewhere non-obvious, explain that in the README file.</p>
 </div>
-<div id="clean-workspace" class="section level2" number="3.7">
+<div id="clean-workspace" class="section level2" number="3.8">
 <h2>
-<span class="header-section-number">3.7</span> Keep your workspace clean<a class="anchor" aria-label="anchor" href="#clean-workspace"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.8</span> Keep your workspace clean<a class="anchor" aria-label="anchor" href="#clean-workspace"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sometimes R doesn’t behave the way you expect it to. You might run a script and find it works fine, then run it again and find it’s producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn’t have originally, or some extra packages loaded.</p>
 <p>To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.</p>
 <p><em>But</em>… don’t clean your workspace within your analysis script. People sometimes do this using this command:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow.”</p>
 </div>
-<div id="quick-guide" class="section level2" number="3.8">
+<div id="quick-guide" class="section level2" number="3.9">
 <h2>
-<span class="header-section-number">3.8</span> Quick guide to starting a project<a class="anchor" aria-label="anchor" href="#quick-guide"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.9</span> Quick guide to starting a project<a class="anchor" aria-label="anchor" href="#quick-guide"><i class="fas fa-link"></i></a>
 </h2>
 <p>When you’re starting a new project:</p>
 <ol style="list-style-type: decimal">
@@ -210,49 +255,43 @@
 <li>Save your R script in your R folder.</li>
 </ol>
 <p>Now you’ve got a good shell of a project - a dedicated folder, with an associated RStudio project, and at least one subfolder. This is a good base to start your work.</p>
-</div>
-<div id="analysis-template" class="section level2" number="3.9">
-<h2>
-<span class="header-section-number">3.9</span> Using the <code>grattan-analysis-template</code><a class="anchor" aria-label="anchor" href="#analysis-template"><i class="fas fa-link"></i></a>
-</h2>
-<p>There is a file on the Grattan Github that contains a template for analysis in R.
-This includes:</p>
+<div class="rmdtip">
+<p><strong>Learn more:</strong></p>
 <ul>
-<li>an R project</li>
 <li>
-<code>R/</code>, <code>data/</code>, and <code>output/</code> folders</li>
-<li>examples of best-practice</li>
+<a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">‘Using RStudio Projects’</a> by the good people of R Studio</li>
+<li>
+<a href="https://slides.djnavarro.net/project-structure">Danielle Navarro’s wonderful slides</a> on project structures</li>
+<li><a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">Jenny Bryan’s article on project-oriented workflow</a></li>
+<li>
+<a href="https://speakerdeck.com/jennybc/how-to-name-files">Jenny Bryan’s fantastic presentation</a> on how to name files (it’s fun I promise)</li>
 </ul>
-<p>You can access that template from its <a href="https://github.com/grattan/grattan-analysis-template">Github repository</a>.
-Either:</p>
-<ul>
-<li>download it to your computer by navigating to <em>Code</em> then <em>Download ZIP</em> (or just click <a href="https://github.com/grattan/grattan-analysis-template/archive/refs/heads/main.zip"><strong>here</strong></a>); or</li>
-<li>click <a href="https://github.com/grattan/grattan-analysis-template/generate"><em>Use Template</em></a>, which will create a new Github respository for you to edit (see the chapter on <a href="version-control.html#version-control">Version control</a> for more details on how to get started with Github, or reach out to Will or James).</li>
-</ul>
+</div>
+
 </div>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></div>
-<div class="next"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></div>
+<div class="prev"><a href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></div>
+<div class="next"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#organising-projects"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
+<li><a class="nav-link" href="#analysis-template"><span class="header-section-number">3.1</span> Using the grattan-analysis-template</a></li>
 <li>
-<a class="nav-link" href="#rproj"><span class="header-section-number">3.1</span> Use RStudio projects, not setwd()</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#how-to-create-a-project"><span class="header-section-number">3.1.1</span> How to create a project</a></li>
-<li><a class="nav-link" href="#opening-a-project"><span class="header-section-number">3.1.2</span> Opening a project</a></li>
+<a class="nav-link" href="#rproj"><span class="header-section-number">3.2</span> Use RStudio projects, not setwd()</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#how-to-create-a-project"><span class="header-section-number">3.2.1</span> How to create a project</a></li>
+<li><a class="nav-link" href="#opening-a-project"><span class="header-section-number">3.2.2</span> Opening a project</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#use-relative-filepaths"><span class="header-section-number">3.2</span> Use relative filepaths</a></li>
-<li><a class="nav-link" href="#keep-your-stuff-together"><span class="header-section-number">3.3</span> Keep your stuff together</a></li>
-<li><a class="nav-link" href="#manageable"><span class="header-section-number">3.4</span> Keep your scripts manageable</a></li>
-<li><a class="nav-link" href="#make-your-filenames-readable-by-both-machines-and-humans"><span class="header-section-number">3.5</span> Make your filenames readable by both machines and humans</a></li>
-<li><a class="nav-link" href="#README"><span class="header-section-number">3.6</span> Include a README file</a></li>
-<li><a class="nav-link" href="#clean-workspace"><span class="header-section-number">3.7</span> Keep your workspace clean</a></li>
-<li><a class="nav-link" href="#quick-guide"><span class="header-section-number">3.8</span> Quick guide to starting a project</a></li>
-<li><a class="nav-link" href="#analysis-template"><span class="header-section-number">3.9</span> Using the grattan-analysis-template</a></li>
+<li><a class="nav-link" href="#use-relative-filepaths"><span class="header-section-number">3.3</span> Use relative filepaths</a></li>
+<li><a class="nav-link" href="#keep-your-stuff-together"><span class="header-section-number">3.4</span> Keep your stuff together</a></li>
+<li><a class="nav-link" href="#manageable"><span class="header-section-number">3.5</span> Keep your scripts manageable</a></li>
+<li><a class="nav-link" href="#make-your-filenames-readable-by-both-machines-and-humans"><span class="header-section-number">3.6</span> Make your filenames readable by both machines and humans</a></li>
+<li><a class="nav-link" href="#README"><span class="header-section-number">3.7</span> Include a README file</a></li>
+<li><a class="nav-link" href="#clean-workspace"><span class="header-section-number">3.8</span> Keep your workspace clean</a></li>
+<li><a class="nav-link" href="#quick-guide"><span class="header-section-number">3.9</span> Quick guide to starting a project</a></li>
 </ul>
 
       <div class="book-extra">
@@ -269,7 +308,7 @@ Either:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
