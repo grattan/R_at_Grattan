@@ -11,7 +11,6 @@ This section uses the package XX.
 
 ```{r load_packages, message = FALSE}
 library(tidyverse)
-library(rio)
 ```
 
 
