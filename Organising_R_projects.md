@@ -1,4 +1,3 @@
-# (PART) Using R the Grattan way {-}
 # Organising an R project at Grattan {#organising-projects} 
 
 All our work at Grattan, whether it's in R or some other software, should heed the "hit by a bus" rule. If you're not around, colleagues should be able to access, understand, verify, and build on the work you've done.
@@ -13,13 +12,46 @@ This page sets out some guidelines for organising your work in R at Grattan. It 
 
 Using a consistent coding style also helps make our work more shareable; that's [covered on the next page](#coding-style).
 
+## Using the `grattan-analysis-template` {#analysis-template}
+
+There is a file on the Grattan Github that contains a template for analysis in R.
+The folder structure is:
+
+- `data/`
+    - `intermediate/`
+- `output/`
+    - `tables/`
+    - `atlas/`
+- `R/`
+    - `00-setup.R`
+- `grattan-analysis-template.Rproj`
+- `README.md`
+- `run-analysis.Rmd`
+
+This includes a ready-to-go R project `grattan-analysis-template.Rproj` (feel free to rename to something related to your project. 
+
+Your raw -- untouched! -- data should go in the `data/` folder. If you have lots of data files, it might be worth organsing them in subfolders (e.g. `data/abs`, `data/dept-health`, etc.). Data that you have generated or changed in R and exported for use in subsequent scripts can be saved in `data/intermediate` folder.^[So that one script will end with `write_csv("data/intermediate/census-income-clean.csv")` and the next script will have `read_csv("data/intermediate/census-income-clean.csv")`]
+
+All of your scripts should go in the `R` folder. Scripts that need to be run in order should be prefixed by a number: `01-`, `02-`, etc. Scripts names should be short and clear, and be both human-readable and machine readable (see ).^[See [Jenny Bryan's fantastic presentation](https://speakerdeck.com/jennybc/how-to-name-files)  on how to name files (it's fun).]
+
+You can access that template from its [Github repository](https://github.com/grattan/grattan-analysis-template).
+Either: 
+
+- download it to your computer by navigating to _Code_ then _Download ZIP_ (or just click [**here**](https://github.com/grattan/grattan-analysis-template/archive/refs/heads/main.zip)); or 
+- click [_Use Template_](https://github.com/grattan/grattan-analysis-template/generate), which will create a new Github respository for you to edit (see the chapter on [Version control](#version-control) for more details on how to get started with Github, or reach out to Will or James).
+
+
+The following sections provide a rationale for why we do things this way. 
+
+
+
 ## Use RStudio projects, not `setwd()` {#rproj}
 
 In Excel, your data, code and output generally all live together in one file. In R, you have a script, which will usually load some data, do something to it, and save some output. You end up with multiple files - the raw data, your script, and some output. Your R script is like a recipe in a cookbook - when R is cooking your recipe, it needs to know where to find your ingredients (the data) and put the finished product (your delicious analysis).
 
 When it's executing your script, R needs to know where to read files from and save files to on your computer. By default, it uses your working directory. Your working directory is shown at the top of your console in RStudio, or you can find out what it is by running the command `getwd()`. 
 
-You can tell R which folder to use as your working directory by using the command `setwd()`, as in `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\mcowgill\Documents\Somerandomfolder")`. **This is a bad idea that you should avoid!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it probably won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
+You can tell R which folder to use as your working directory by using the command `setwd()`, as in `setwd("~/Desktop/some random folder")` or `setwd("C:\Users\astobart\Documents\Somerandomfolder")`. **This is a bad idea that you should avoid!** If anyone - including you - tries to run your script on a different machine, with a different folder structure, it won't work. If people can't get past the first line when they're trying to run your script, there's an annoying and unnecessary hurdle to reproducing and checking your analysis.
 
 In the [words of Jenny Bryan](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/):
 
@@ -59,7 +91,7 @@ Instead, use relative filepaths. These are filepaths that are relative (hence th
 
 ```r
 hes <- read_csv("data/HES/hes1516.csv")
-grattan_save("atlas/expenditure_by_income.pdf")
+grattan_save("output/atlas/expenditure_by_income.pdf")
 ```
 
 The first example above tells R to look in the 'data' subdirectory of your project folder, and then the 'HES' subdirectory of 'data', to find the 'hes1516.csv' file. This file path isn't specific to your machine, so your code is more shareable this way. 
@@ -76,8 +108,9 @@ A good structure is to have a subfolder for:
 
 - your code - called 'R'
 - your source data - called 'data'
-- your graphs - called 'atlas', like in our LaTeX projects
-- your non-graph output, like formatted tables, called 'output'
+- your output - called 'output'. Include subdirectories for:
+    - your charts - called 'atlas' (like in our LaTeX projects)^[We're not sure where or why this practice started but there's some path dependency here meaning that the switching costs are high without a clear benefit. Guess we're stuck with it.]
+    - your exported tables - called 'tables'.
 
 Sometimes your data folder might have subfolders - 'raw' for data that you've done nothing to, and 'clean' for data you've modified in some way. Don't keep 'raw' data together in the same place as data you've modified.
 
@@ -138,7 +171,7 @@ To avoid this situation, keep your workspace tidy. When you load a script, do it
 rm(list = ls())
 ```
 
-This removes all objects from your environment. But it doesn't completely clear your R environment, and it doesn't do anything to any packages you have loaded. As [Jenny Bryan puts it](https://rstats.wtf/save-source.html#rm-list-ls), this command is "a red flag, because it is indicative of a non-reproducible workflow."
+This removes all objects from your environment. But it doesn't completely clear your R environment, and it doesn't do anything to any packages you have loaded. As [Jenny Bryan puts it](https://rstats.wtf/save-source.html#rm-list-ls), this command is "a red flag, because it is indicative of a non-reproducible workflow".
 
 ## Quick guide to starting a project {#quick-guide}
 
@@ -156,19 +189,15 @@ When you're starting a new project:
 Now you've got a good shell of a project - a dedicated folder, with an associated RStudio project, and at least one subfolder. This is a good base to start your work.
 
 
-## Using the `grattan-analysis-template` {#analysis-template}
 
-There is a file on the Grattan Github that contains a template for analysis in R.
-This includes: 
 
-- an R project
-- `R/`, `data/`, and `output/` folders
-- examples of best-practice
+::: {.rmdtip}
+**Learn more:** 
 
-You can access that template from its [Github repository](https://github.com/grattan/grattan-analysis-template).
-Either: 
+* ['Using RStudio Projects'](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) by the good people of R Studio
+* [Danielle Navarro's wonderful slides](https://slides.djnavarro.net/project-structure)  on project structures
+* [Jenny Bryan's article on project-oriented workflow](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+* [Jenny Bryan's fantastic presentation](https://speakerdeck.com/jennybc/how-to-name-files)  on how to name files (it's fun I promise)
 
-- download it to your computer by navigating to _Code_ then _Download ZIP_ (or just click [**here**](https://github.com/grattan/grattan-analysis-template/archive/refs/heads/main.zip)); or 
-- click [_Use Template_](https://github.com/grattan/grattan-analysis-template/generate), which will create a new Github respository for you to edit (see the chapter on [Version control](#version-control) for more details on how to get started with Github, or reach out to Will or James).
-
+:::
 

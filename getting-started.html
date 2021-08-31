@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Getting started | Using R at Grattan Institute</title>
+<meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
+<meta name="description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
+<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta property="og:title" content="2 Getting started | Using R at Grattan Institute">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2 Getting started | Using R at Grattan Institute">
+<meta name="twitter:description" content="This chapter gets you up and running with R Studio and writing R code like a real hacker. Goals: By the end of this chapter you will have R and R Studio installed, and be able to write, execute...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Using R at Grattan Institute</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome!</a></li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="active" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
+<li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
+<li class="book-part">Part II: Loading and transforming data</li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li class="book-part">Part III: Visualising data</li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="getting-started" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Getting started<a class="anchor" aria-label="anchor" href="#getting-started"><i class="fas fa-link"></i></a>
+</h1>
+<p>This chapter gets you up and running with R Studio and writing R code like a real hacker.</p>
+<div class="rmdimportant">
+<p><strong>Goals</strong>:
+By the end of this chapter you will have R and R Studio installed, and be able to write, execute and understand some simple R code.</p>
+</div>
+<div id="installing-r-and-rstudio" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Installing R and RStudio<a class="anchor" aria-label="anchor" href="#installing-r-and-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Although you’ll usually work with R by opening RStudio, you need to install both R and RStudio separately.</p>
+<p>Install R by going to <a href="https://cran.r-project.org">CRAN</a>, the Comprehensive R Archive Network. CRAN is a community-run website that houses R itself as well as a broad range of R packages.</p>
+<div class="inline-figure"><img src="atlas/r_cran.png" width="100%"></div>
+<p>You want to download the latest base R release, as a ‘binary’. Don’t worry, you don’t need to know what a binary is.</p>
+<div class="inline-figure">For macOS, the page will look like this:
+<img src="atlas/r_cran_macos.png" width="100%">
+</div>
+<p>For Windows, you’ll need to click on the ‘base’ version, and then click again to start the download.</p>
+<p><img src="atlas/r_cran_windows_1.png" width="100%"><img src="atlas/r_cran_windows_2.png" width="100%"></p>
+<p>Once you’ve installed R, you’ll need to install RStudio. Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio website and install the latest version</a> of RStudio Desktop (open source license).</p>
+<p>Once they’re both installed, get started by opening RStudio.</p>
+</div>
+<div id="setting-up-rstudio" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Setting up RStudio<a class="anchor" aria-label="anchor" href="#setting-up-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p><em>Will to finish. Include:</em></p>
+<ul>
+<li>Save data off (and other good defaults)</li>
+<li>Colour theme (important!)</li>
+</ul>
+</div>
+<div id="scripts-and-coding" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Scripts and ‘coding’<a class="anchor" aria-label="anchor" href="#scripts-and-coding"><i class="fas fa-link"></i></a>
+</h2>
+<p>R is a script-based program. You write a list of instructions and R will follow it. This is wonderfully handy:</p>
+<ul>
+<li>everything you have told it to do, it will do;</li>
+<li>you have a record of everything you have told it to do.</li>
+</ul>
+<p>But ‘coding’ can intimidating! However, it’s just a list of instructions. If you have ever used Excel you have used functions to create output. You have written code. You’re already a coder!</p>
+<p>We can greatly enhance the things we can do by using R. The rest of this chapter is a short guide to walk you through your first lines of R code. If you get stuck or something doesn’t work or you have an urge to throw your computer out the window, please reach out to Will or James, or post on the <code>#r_at_grattan</code> <a href="seeking-help.html#seeking-help">Slack channel</a>, and someone will help you out.</p>
+</div>
+<div id="a-practical-introduction-to-writing-r-code" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> A practical introduction to writing R code<a class="anchor" aria-label="anchor" href="#a-practical-introduction-to-writing-r-code"><i class="fas fa-link"></i></a>
+</h2>
+<div id="starting-a-new-script-and-defining-an-object" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> Starting a new script and defining an object<a class="anchor" aria-label="anchor" href="#starting-a-new-script-and-defining-an-object"><i class="fas fa-link"></i></a>
+</h3>
+<p>From within RStudio, open a new script by: File -&gt; New File -&gt; R Script.</p>
+<p>In that script, let’s do three things:</p>
+<ol style="list-style-type: decimal">
+<li>Write a comment starting with <code>#</code> something R will ignore – it’s just there for you.<br>
+</li>
+<li>Define an object: <strong>assign</strong> the number 119 to the object named <code>goodnumber</code>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;R is an ‘object oriented’ programming language. This means that all the things we want R to know about – datasets, or vectors, or lists, or functions, or whatever – are stored as ‘objects’.&lt;/p&gt;"><sup>4</sup></a> We <strong>assign</strong> something in R by using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>, which you can read as ‘assign the thing on the right to the objected on the left’.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It works the other way, too, with &lt;code&gt;-&amp;gt;&lt;/code&gt;. But best to stick with &lt;code&gt;&amp;lt;-&lt;/code&gt;.&lt;/p&gt;"><sup>5</sup></a>
+</li>
+<li>Calculate a thing.</li>
+</ol>
+<p>Your script will look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Hello I am starting my R script</span>
+
+<span class="va">goodnumber</span> <span class="op">&lt;-</span> <span class="fl">119</span>
+
+<span class="fl">2</span> <span class="op">*</span> <span class="va">goodnumber</span></code></pre></div>
+<pre><code>## [1] 238</code></pre>
+<p>The code that you write in your script will sit there idly until you send it to be processed in the console. Run the code by:</p>
+<ul>
+<li>sending the <em>current line</em> (where your cursor is) to the console with keyboard shortcut <code>CMD + return</code> (Mac) or <code>CTRL + shift</code> (Windows); or</li>
+<li>selecting a few lines of code and sending it to the console with the same keyboard shortcut; or</li>
+<li>running the whole script – from the first line to the last – clicking ‘Run’:</li>
+</ul>
+<div class="inline-figure"><img src="atlas/rstudio-run.png" width="100%"></div>
+<p>Having run your three lines of code, your RStuido should now look something like this:</p>
+<div class="inline-figure"><img src="atlas/your-console2.png" width="100%"></div>
+<p>The object are stored in your <strong>environment</strong> (top-right panel of your RStudio window).
+You can think about your environment as <em>the things that R knows about at this point in time</em>.</p>
+<div class="rmdimportant">
+<p><strong>Exercise 1:</strong></p>
+<p>In your R script:</p>
+<ul>
+<li><p>Define an object to be equal to 90</p></li>
+<li><p>Multiply the object by 100</p></li>
+<li><p>Divide the object by 10</p></li>
+<li><p>Why does the final step produce <code>9</code> (<code>90 / 10</code>) rather than <code>900</code> (<code>(90 * 100) / 10</code>)?</p></li>
+<li><p>How might you incorporate the second line into your code so that the result is <code>900</code> as described above?</p></li>
+</ul>
+<p><strong>Answer:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cool_object</span> <span class="op">&lt;-</span> <span class="fl">90</span>
+
+<span class="va">cool_object</span> <span class="op">*</span> <span class="fl">100</span></code></pre></div>
+<pre><code>## [1] 9000</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cool_object</span> <span class="op">/</span> <span class="fl">10</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<p>The final line <code>cool_object / 10</code> results in <code>9</code> because we have defined <code>cool_object</code> to be <code>90</code> in the first line of code, but not assigned the second line of code <code>cool_object * 90</code> to an object.</p>
+<p>To incorporate the second line we would need to define <code>cool_object</code> or use a different object to then be used in the third line:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cool_object</span> <span class="op">&lt;-</span> <span class="fl">90</span>
+
+<span class="va">new_object</span> <span class="op">&lt;-</span> <span class="va">cool_object</span> <span class="op">*</span> <span class="fl">100</span>
+<span class="va">new_object</span></code></pre></div>
+<pre><code>## [1] 9000</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_object</span> <span class="op">/</span> <span class="fl">10</span></code></pre></div>
+<pre><code>## [1] 900</code></pre>
+</div>
+</div>
+<div id="functions" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>A function takes inputs (arguments, or parameters), performs an operation (or many), and produces outputs. For example, we can use the <code>c</code> function to combine numbers into a series of numbers (called a vector):</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3 4 5</code></pre>
+<p><em>‘combine the elements 3, 4 and 5 into a single vector’</em></p>
+<p>You could combine this with the <code>mean</code> function that calculates the average by ‘nesting’ one function inside another:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This will be a well-known approach for Excel users!&lt;/p&gt;"><sup>6</sup></a></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Above, R will first process the <code>c</code> command that combines the numbers into a single vector, <code><a href="https://rdrr.io/r/base/c.html">c(3, 4, 5)</a></code>, and then process the <code>mean</code> command which takes the average of the numbers in that vector. In other words, it runs <em>inside out</em>.</p>
+<p>But we aren’t very good at reading things inside out, and so writing things this way can quickly become difficult.
+By assigning the vector to an object with <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>, you could instead write your script so it first combines the numbers into a vector, and then takes the mean of that vector:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;There is another way to make your code more ‘human readable’ – the pipe, &lt;code&gt;%&amp;gt;%&lt;/code&gt; – that will be explored and used in later sections.&lt;/p&gt;"><sup>7</sup></a></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">goodnumbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">goodnumbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="rmdtip">
+<p><strong>Hot tip:</strong> if you want to know more information about a function you can access its documentation by asking R. Type <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code> followed by the function name – e.g. <code><a href="https://rdrr.io/r/base/mean.html">?mean</a></code> – into the console and a handy little help window will pop up in the bottom right of your RStudio window.</p>
+<p>This is a useful exercise when you’re trying to remember what the function needs as inputs (parameters, or arguments), what the function <em>actually does</em>, or what the function outputs.</p>
+<p>Try these in your own console:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">?</span><span class="va">mean</span>
+<span class="op">?</span><span class="va">median</span>
+<span class="op">?</span><span class="va">max</span></code></pre></div>
+</div>
+<p>You could then apply different functions to that same set of numbers:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">goodnumbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">goodnumbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">goodnumbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">goodnumbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="data-types" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> Data types<a class="anchor" aria-label="anchor" href="#data-types"><i class="fas fa-link"></i></a>
+</h3>
+<p>Data ‘types’ define how your data is stored and what you can (or cannot) do with it.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See the chapter on &lt;a href="getting-started.html#data-types"&gt;Data Types&lt;/a&gt;.&lt;/p&gt;'><sup>8</sup></a>
+A piece of data might be a:</p>
+<ul>
+<li>
+<strong>numeric</strong>: a number, like <code>6</code>
+</li>
+<li>
+<strong>a character</strong>: characters within quotation marks, like “hello”.</li>
+<li>
+<strong>a logical</strong>: binary <code>TRUE</code> or <code>FALSE</code>, and nothing in between.</li>
+</ul>
+<p>These types are important.
+As we have seen above, you can do maths on numbers:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">num1</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">num2</span> <span class="op">&lt;-</span> <span class="fl">5</span>
+
+<span class="va">num1</span> <span class="op">+</span> <span class="va">num2</span></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">num1</span> <span class="op">/</span> <span class="va">num2</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>And you can perform string operations on characters:</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">char1</span> <span class="op">&lt;-</span> <span class="st">"Hello"</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/substr.html">substring</a></span><span class="op">(</span><span class="va">char1</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "lo"</code></pre>
+<p>But you can’t perform maths on characters, because that doesn’t really make sense:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="st">"Hello"</span> <span class="op">*</span> <span class="fl">2</span> </code></pre></div>
+<pre><code>## Error in "Hello" * 2: non-numeric argument to binary operator</code></pre>
+<p>Even when you kind of think it should:</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="st">"100"</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
+<pre><code>## Error in "100" * 2: non-numeric argument to binary operator</code></pre>
+<p>Above, R is trying to multiply the <em>character</em> <code>"100"</code> by the <em>number</em> <code>2</code>. Which – because of the types of these data – makes as much sense as <code>"Hello"</code> <span class="math inline">\(\times\)</span> <code>2</code>.</p>
+<p>We can use in-built functions to change the class of an object. To solve our issue above, we could convert <code>"100"</code> into a numeric before we do cool maths on it:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"100"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
+<pre><code>## [1] 200</code></pre>
+<p><em>Cool!</em></p>
+</div>
+<div id="errors-warnings-and-messages" class="section level3" number="2.4.4">
+<h3>
+<span class="header-section-number">2.4.4</span> Errors, warnings and messages<a class="anchor" aria-label="anchor" href="#errors-warnings-and-messages"><i class="fas fa-link"></i></a>
+</h3>
+<p>When you run your code, there are three types of <em>things</em> that will pop up in response in addition to any output you might expect:</p>
+<ol style="list-style-type: decimal">
+<li>Message (hello)</li>
+<li>Warning (warning!)</li>
+<li>Error message (oh no!)</li>
+</ol>
+<p>Messages are friendly and are designed to just keep you abreast with what’s going on. Messages are not prefixed with anything, they’ll just pop up as you’re running a function. How ‘verbose’ a function it is – how much it talks to you via messages – will depend on the authors. An example of a message is below:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"Just typing R code, all good"</span><span class="op">)</span></code></pre></div>
+<pre><code>## Just typing R code, all good</code></pre>
+<p><strong>Warnings</strong> indicate that there is something you should be aware of. The function still runs and your output will still be produced, but something might be <em>off</em>. A warning message will be prefixed with <code>Warning message:</code>. For example:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Ooooh something could be wrong here and I just thought you should know about it."</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning: Ooooh something could be wrong here and I just thought you should know
+## about it.</code></pre>
+<p>A classic example of a warning message is when the <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> function we saw in the previous section encounters a character it just can’t find a suitable corresponding number for.</p>
+<p>Suppose we had a vector of characters:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fun_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10"</span>, <span class="st">"50"</span>, <span class="st">"-5"</span>, <span class="st">"banana"</span>, <span class="st">"87"</span><span class="op">)</span></code></pre></div>
+<p>And we tried to convert these to numbers using the <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> function:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">fun_numbers</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] 10 50 -5 NA 87</code></pre>
+<p>We get two things here: our output (yay!) that includes an <code>NA</code> value; and a stern warning message explaining that there were <em>NAs introduced by coercion</em>.</p>
+<p>You should pay attention to warnings: they’re trying to help. It might be the case that we are happy that <code>"banana"</code> was unable to be converted into a number and so was replaced with a missing value, but it is good to be aware that this is happening.</p>
+<p>Finally, <strong>errors</strong> call the whole show off. An error will stop the process in its tracks and immediately return an error message.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Something has gone horribly wrong"</span><span class="op">)</span></code></pre></div>
+<pre><code>## Error in eval(expr, envir, enclos): Something has gone horribly wrong</code></pre>
+<p>When this happens, read the error message to try to understand what’s going on. Sometimes the error message will be kind of understandable:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="st">"hello"</span><span class="op">)</span></code></pre></div>
+<pre><code>## Error in sum("hello"): invalid 'type' (character) of argument</code></pre>
+<p>Some authors take a lot of time and care into writing clear and actionable error messages for humans. The <code>tidyverse</code> team are particularly good at this, and have a <a href="https://style.tidyverse.org/error-messages.html">whole chapter of their style guide</a> dedicated to writing informative error messages:</p>
+<blockquote>
+<p>An error message should start with a general statement of the problem then give a concise description of what went wrong. Consistent use of punctuation and formatting makes errors easier to parse.</p>
+</blockquote>
+<p>For example, both of these error messages try to give you a solution (we’ll learn more about these <code>tidyverse</code> packages and functions in an <a href="packages.html#packages">upcoming section</a>):</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## Error: Tibble columns must have compatible sizes.
+## * Size 2: Existing data.
+## * Size 3: Column `y`.
+## ℹ Only values of size one are recycled.</code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, Species <span class="op">=</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
+<pre><code>## Error: Problem with `filter()` input `..1`.
+## ✖ Input `..1` is named.
+## ℹ This usually means that you've used `=` instead of `==`.
+## ℹ Did you mean `Species == "setosa"`?</code></pre>
+<p>Not all error messages are like this. There are some that you will look at and think ‘well what the hell am I meant to do with that’. A classic is <code>object of type 'closure' is not subsettable</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So much so that it was the name of Jenny Bryan’s &lt;a href="https://www.rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/"&gt;keynote speech&lt;/a&gt; at RStudio Conference in 2020.&lt;/p&gt;'><sup>9</sup></a></p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mean</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>## Error in mean[1]: object of type 'closure' is not subsettable</code></pre>
+<p>If you see an error message like this that you don’t understand, time to <a href="seeking-help.html#seeking-help">seek help</a>.</p>
+</div>
+<div id="file-paths" class="section level3" number="2.4.5">
+<h3>
+<span class="header-section-number">2.4.5</span> File paths<a class="anchor" aria-label="anchor" href="#file-paths"><i class="fas fa-link"></i></a>
+</h3>
+<p>File paths are a boring but necessary part of your coding journey (sorry).
+We will almost always want to import a data file from our computer into R, and export a table or chart at the end.</p>
+<p>On a Mac or Windows, from R this might look something like this:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="getting-started.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mac:</span></span>
+<span id="cb56-2"><a href="getting-started.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="st">"/Users/mackeyw/Dropbox (Grattan Institute)/Will/presentations/data_class/grattan-R-course/r-presentation.pptx"</span></span>
+<span id="cb56-3"><a href="getting-started.html#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="getting-started.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows:</span></span>
+<span id="cb56-5"><a href="getting-started.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="st">"C:\users\mackeyw\documents\Dropbox (Grattan Institute)\Will\presentations\data_class\grattan-R-course</span><span class="sc">\t</span><span class="st">his-very-file.pptx"</span></span></code></pre></div>
+<p>We will often need to provide a file path to a function that can read that file (eg <code>read_csv</code>).
+There is a .csv file<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a ‘comma separated values’ file. Learn more in the &lt;a href="reading-data.html#reading-data"&gt;reading data chapter&lt;/a&gt;.&lt;/p&gt;'><sup>10</sup></a> full of sweet data located in:</p>
+<p>Dropbox -&gt; Grattan Team -&gt; Learning -&gt; Data Class -&gt; grattan-R-course -&gt; data -&gt; sa3_income.csv</p>
+<p>Say you want to read that data into R using the <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> function.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is the ‘base R’ function for reading a CSV file&lt;/p&gt;"><sup>11</sup></a>
+The first argument of that function is the path to your csv file.</p>
+<p>What do you enter? Try for yourself:</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"path"</span><span class="op">)</span></code></pre></div>
+<p>When you open quotation marks in an R script or in the console, you can use the <strong>TAB</strong> key to navigate through your files (this is easier than typing, and you’re far less likely to make a typo!).</p>
+<p>Depending on whether you use a Mac or Windows, and whether your computer user name is <code>mackeyw</code>, your path might be:</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/Users/mackeyw/Dropbox (Grattan Institute)/Grattan Team/Data Class/grattan-R-course/data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
+<p>This line of code is saying: use the function <code>read.csv</code> to read a CSV file which is located exactly in Will Mackey’s computer, inside Dropbox, etc.</p>
+<p>This is <strong>great!</strong>. But we can see a few issues:</p>
+<ol style="list-style-type: decimal">
+<li>The path is very long. How annoying!</li>
+<li>The line of code will break if the folder is moved to somewhere else on your computer.</li>
+<li>The line of code won’t work on your colleague’s computer unless they happen to share the same name.</li>
+</ol>
+<p>We solve these issues by using <em>relative file paths</em> and R ‘projects’, covered in the <a href="organising-projects.html#organising-projects">next chapter</a>. But, for now: well done! You’ve used absolute file paths to read a data file into your R session.</p>
+<div class="rmdimportant">
+<p><strong>Exercise 2:</strong></p>
+<p>Create a new script and recreate the following code, adding a comment after each line briefly describing what the line is doing (like in the first line).</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">good_number</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># this assigns 10 to the object good_number</span>
+<span class="va">big_product</span> <span class="op">&lt;-</span> <span class="fl">999</span>
+
+<span class="va">good_number</span> <span class="op">*</span> <span class="fl">2</span>
+<span class="va">good_number</span> <span class="op">*</span> <span class="va">big_product</span>
+
+<span class="va">good_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.5</span>, <span class="fl">15</span>, <span class="fl">45</span>, <span class="fl">46</span>, <span class="fl">54</span>, <span class="fl">91</span>, <span class="fl">101</span>, <span class="fl">120</span>, <span class="fl">150</span>, <span class="fl">1e6</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">good_numbers</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span> 
+
+<span class="op">?</span><span class="va">rnorm</span>
+
+<span class="va">normal_numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">normal_numbers</span><span class="op">)</span></code></pre></div>
+</div>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></div>
+<div class="next"><a href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#getting-started"><span class="header-section-number">2</span> Getting started</a></li>
+<li><a class="nav-link" href="#installing-r-and-rstudio"><span class="header-section-number">2.1</span> Installing R and RStudio</a></li>
+<li><a class="nav-link" href="#setting-up-rstudio"><span class="header-section-number">2.2</span> Setting up RStudio</a></li>
+<li><a class="nav-link" href="#scripts-and-coding"><span class="header-section-number">2.3</span> Scripts and ‘coding’</a></li>
+<li>
+<a class="nav-link" href="#a-practical-introduction-to-writing-r-code"><span class="header-section-number">2.4</span> A practical introduction to writing R code</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#starting-a-new-script-and-defining-an-object"><span class="header-section-number">2.4.1</span> Starting a new script and defining an object</a></li>
+<li><a class="nav-link" href="#functions"><span class="header-section-number">2.4.2</span> Functions</a></li>
+<li><a class="nav-link" href="#data-types"><span class="header-section-number">2.4.3</span> Data types</a></li>
+<li><a class="nav-link" href="#errors-warnings-and-messages"><span class="header-section-number">2.4.4</span> Errors, warnings and messages</a></li>
+<li><a class="nav-link" href="#file-paths"><span class="header-section-number">2.4.5</span> File paths</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-31.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

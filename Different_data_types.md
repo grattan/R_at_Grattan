@@ -1,4 +1,4 @@
-# Different data types
+# Different data types {#data-types}
 
 Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. 
 

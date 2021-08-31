@@ -95,16 +95,16 @@ The main packages in the <code>tidyverse</code> include:</p>
 <em>stringr</em> for manipulating strings of text</li>
 </ul>
 <p>All these packages (and more!) will automatically be loaded for you when you run the command<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;There’s no need to install or load the individual &lt;code&gt;tidyverse&lt;/code&gt; packages - like &lt;code&gt;dplyr&lt;/code&gt; - separately. Just install them all together, and load them with the single &lt;code&gt;library(tidyverse)&lt;/code&gt; command. That way, you don’t need to remember which functions come from &lt;code&gt;tidyr&lt;/code&gt; and which from &lt;code&gt;dplyr&lt;/code&gt; - they’re all just &lt;code&gt;tidyverse&lt;/code&gt; functions.&lt;/p&gt;"><sup>8</sup></a>:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-## ✔ tibble  3.1.3     ✔ dplyr   1.0.7
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   2.0.0     ✔ forcats 0.5.1</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   2.0.0     ✓ forcats 0.5.1</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>A range of other packages are installed on your machine as part of the <code>tidyverse.</code> These include:</p>
 <ul>
 <li>
@@ -117,7 +117,7 @@ The main packages in the <code>tidyverse</code> include:</p>
 <em>rvest</em> for scraping websites</li>
 </ul>
 <p>Although these packages are installed as part of the <code>tidyverse</code>, they aren’t loaded automatically when you run <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>. You’ll need to load them individually, like:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
 <div id="why-do-we-use-the-tidyverse" class="section level3" number="6.1.1">
@@ -127,15 +127,15 @@ The main packages in the <code>tidyverse</code> include:</p>
 <p>The <code>tidyverse</code> makes life easier!</p>
 <p>The core <code>tidyverse</code> packages, like <code>ggplot2</code>, <code>dplyr</code>, and <code>tidyr</code>, are extremely popular. The <code>tidyverse</code> is probably the most popular ‘dialect’ of R. This means that any problem you encounter with the <code>tidyverse</code> will have been encountered many times before by other R users, so a solution will only be a Google search away.</p>
 <p>The <code>tidyverse</code> packages are all designed to work well together, with a consistent underlying philosophy and design. This means that coding habits you learn with one <code>tidyverse</code> package, like <code>dplyr</code>, are also applicable to other packages, like <code>tidyr</code>.</p>
-<p>They’re designed to work with data frames<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.&lt;/p&gt;"><sup>9</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
+<p>They’re designed to work with data frames<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The tidyverse works with ‘tibbles,’ which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.&lt;/p&gt;"><sup>9</sup></a>, a rectangular data object that will be familiar to spreadsheet users that is very intuitive and convenient for the sort of work we do at Grattan. In particular, the <code>tidyverse</code> is built around the concept of <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>tidy data</em></a>, which has a specific meaning in this context that we’ll come to later. The fact that <code>tidyverse</code> packages are all built around one type of data object makes them easier to work with.</p>
 <p>The creator of the <code>tidyverse</code>, Hadley Wickham, places great value on code that is expressive and comprehensible to humans. This means that code written in the <code>tidyverse</code> idiom is often able to be understood even if you haven’t encountered the functions before. For example, look at this chunk of code:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_data</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>relative_income <span class="op">=</span> <span class="va">income</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Without knowing what <code>my_data</code> looks like, and even if you haven’t encountered these functions before, this should be reasonably intuitive. We’re taking some data, and then<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;you can read the pipe, &lt;code&gt;%&amp;gt;%&lt;/code&gt;, as ‘and then’&lt;/p&gt;"><sup>10</sup></a> only keeping observations that relate to people aged 30 and older, then calculating a new variable, <code>relative_income</code>. The name of a <code>tidyverse</code> function - like <code>filter</code>, <code>group_by</code>, <code>summarise</code>, and so on - generally gives you a pretty good idea what the function is going to do with your data, which isn’t always the case with other approaches.</p>
 <p>Here’s one way to do the same thing in base R:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">[</span><span class="va">my_data</span><span class="op">$</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">30</span>, <span class="op">]</span>,
           relative_income <span class="op">=</span> <span class="va">income</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The base R code gets the job done, but it’s clunkier, less expressive, and harder to read. A core principle of coding at Grattan is that you should strive to make your work <strong>human readable</strong>.</p>
@@ -195,7 +195,7 @@ The main packages in the <code>tidyverse</code> include:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-27.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

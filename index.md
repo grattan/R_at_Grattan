@@ -1,7 +1,7 @@
 --- 
 title: "Using R at Grattan Institute"
 author: "Matt Cowgill, Will Mackey, and James Ha"
-date: "2021-08-27"
+date: "2021-08-31"
 site: bookdown::bookdown_site
 output: bookdown::bs4_book
 documentclass: book
@@ -29,7 +29,30 @@ Because the guide is intended for everyone who uses R at Grattan, there may be s
 
 Any complaints or comments about this guide can be sent to Will or James, respectively. 
 
-This site was written in R with RMarkdown and the [bookdown](https://bookdown.org) package.
+
+The book uses the following five notations/highlights to help you understand whats going on:^[yes, yes I know these aren't Grattan colours. Sorry!]
+
+::: {.rmdimportant}
+**Important:** this is a key bit of information.
+:::
+
+::: {.rmdtip}
+**Learn more:** links to resources
+:::
+
+::: {.rmdnote}
+**Note:** highlight this point, put it away somewhere safe.
+:::
+
+::: {.rmdwarning}
+**Warning:** this is an area where a few people -- including the authors -- trip up.
+:::
+
+::: {.rmdcaution}
+**Caution:** steer clear, don't do this!
+:::
+
+
 
 
 

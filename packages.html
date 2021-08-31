@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>5 What are packages? | Using R at Grattan Institute</title>
+<title>5 Using packages | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
-<meta name="description" content="R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the...">
+<meta name="description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="5 What are packages? | Using R at Grattan Institute">
+<meta property="og:title" content="5 Using packages | Using R at Grattan Institute">
 <meta property="og:type" content="book">
-<meta property="og:description" content="R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the...">
+<meta property="og:description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5 What are packages? | Using R at Grattan Institute">
-<meta name="twitter:description" content="R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the...">
+<meta name="twitter:title" content="5 Using packages | Using R at Grattan Institute">
+<meta name="twitter:description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
@@ -42,26 +42,25 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
+<li class="book-part">Part I: Why and how we use R at Grattan</li>
+<li><a class="" href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html"><span class="header-section-number">1</span> What is R and what is R Studio and why are we doing all of this</a></li>
+<li><a class="" href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></li>
 <li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="active" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
-<li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
+<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></li>
+<li><a class="active" href="packages.html"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="" href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></li>
+<li class="book-part">Part II: Loading and transforming data</li>
+<li><a class="" href="reading-data.html"><span class="header-section-number">7</span> Reading data</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">8</span> Different data types</a></li>
+<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">9</span> Data transformation with dplyr</a></li>
+<li class="book-part">Part III: Visualising data</li>
+<li><a class="" href="data-visualisation.html"><span class="header-section-number">10</span> Data Visualisation</a></li>
+<li><a class="" href="chart-cookbook.html"><span class="header-section-number">11</span> Chart cookbook</a></li>
+<li><a class="" href="analysis.html"><span class="header-section-number">12</span> Analysis</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
+<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">13</span> Functional programming: making and using your own functions</a></li>
+<li><a class="" href="version-control.html"><span class="header-section-number">14</span> Version control</a></li>
+<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">15</span> Contributing to this book</a></li>
 </ul>
 
         <div class="book-extra">
@@ -71,33 +70,38 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="packages" class="section level1" number="5">
 <h1>
-<span class="header-section-number">5</span> What are packages?<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Using packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h1>
-<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Technically some of the ‘built-in’ functions are part of packages, like the &lt;code&gt;tools&lt;/code&gt;, &lt;code&gt;utils&lt;/code&gt; and &lt;code&gt;stats&lt;/code&gt; packages that come with R. We’ll refer to all these as base R.&lt;/p&gt;"><sup>6</sup></a>. But using packages will make your life easier.</p>
-<p>Like R itself, packages are free and open source. You can install them from within RStudio.</p>
-<div id="install-packages" class="section level2" number="5.1">
+<div id="what-are-packages" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">5.1</span> How to install packages<a class="anchor" aria-label="anchor" href="#install-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> What are packages?<a class="anchor" aria-label="anchor" href="#what-are-packages"><i class="fas fa-link"></i></a>
+</h2>
+<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Technically some of the ‘built-in’ functions are part of packages, like the &lt;code&gt;tools&lt;/code&gt;, &lt;code&gt;utils&lt;/code&gt; and &lt;code&gt;stats&lt;/code&gt; packages that come with R. We’ll refer to all these as base R.&lt;/p&gt;"><sup>21</sup></a>. But using packages will make your life easier.</p>
+<p>Like R itself, packages are free and open source. You can install them from within RStudio.</p>
+</div>
+<div id="install-packages" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> How to install packages<a class="anchor" aria-label="anchor" href="#install-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>You’ll typically install packages using the console in RStudio. That’s the part of the window that, by default, sits in the bottom-left corner of the screen.</p>
 <p>In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></code></pre></div>
 <p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></code></pre></div>
 <p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan <code>ggplot2</code> theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="install-grattan-packages" class="section level2" number="5.2">
+<div id="install-grattan-packages" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">5.2</span> Get set up: install packages for Grattan<a class="anchor" aria-label="anchor" href="#install-grattan-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Get set up: install packages for Grattan<a class="anchor" aria-label="anchor" href="#install-grattan-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>Just starting out or setting up a new machine? Run this block of code to get yourself all set up:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cran_packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"tidyverse"</span>, <span class="st">"readabs"</span>, <span class="st">"janitor"</span>, 
                    <span class="st">"rio"</span>, <span class="st">"sf"</span><span class="op">)</span>
 
@@ -110,57 +114,148 @@
                         dependencies <span class="op">=</span> <span class="cn">TRUE</span>,
                         upgrade <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="using-packages" class="section level2" number="5.3">
+<div id="using-packages" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">5.3</span> Using packages<a class="anchor" aria-label="anchor" href="#using-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Using packages<a class="anchor" aria-label="anchor" href="#using-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">remotes</span><span class="op">)</span>
 
 <span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span>
 
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
-<p>Or, we can use two colons - <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<p>Or, we can use two colons <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> to tell R to use an individual function from a package without loading it:</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
 <p>It usually makes sense to load a package with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> operator even if you have already loaded a package with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
-<div id="upgrading-packages" class="section level2" number="5.4">
+<div id="package-versions" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.4</span> Upgrading packages<a class="anchor" aria-label="anchor" href="#upgrading-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Package versions<a class="anchor" aria-label="anchor" href="#package-versions"><i class="fas fa-link"></i></a>
 </h2>
+<div id="updating-packages" class="section level3" number="5.5.1">
+<h3>
+<span class="header-section-number">5.5.1</span> Updating packages<a class="anchor" aria-label="anchor" href="#updating-packages"><i class="fas fa-link"></i></a>
+</h3>
 <p>It’s generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">update_packages</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
 <p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All’.</p>
-<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.&lt;/p&gt;"><sup>7</sup></a></p>
+<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.&lt;/p&gt;"><sup>22</sup></a></p>
 </div>
-<div id="downgrading-packages" class="section level2" number="5.5">
-<h2>
-<span class="header-section-number">5.5</span> Downgrading packages<a class="anchor" aria-label="anchor" href="#downgrading-packages"><i class="fas fa-link"></i></a>
-</h2>
+<div id="downgrading-packages" class="section level3" number="5.5.2">
+<h3>
+<span class="header-section-number">5.5.2</span> Downgrading packages<a class="anchor" aria-label="anchor" href="#downgrading-packages"><i class="fas fa-link"></i></a>
+</h3>
 <p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code>install_version()</code> function, like this:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_version</span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"1.13.3"</span><span class="op">)</span></code></pre></div>
 <p>It’s rare that you’d need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.</p>
 </div>
 </div>
+<div id="packages-commonly-used-at-grattan" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Packages commonly used at Grattan<a class="anchor" aria-label="anchor" href="#packages-commonly-used-at-grattan"><i class="fas fa-link"></i></a>
+</h2>
+<p>Some packages we use at Grattan - like the <code>tidyverse</code> collection of packages - are very popular among R users. Some - like the <code>grattantheme</code> package - are specific to Grattan Institute. Others - like the <code>readabs</code> package - are made by Grattan people, useful at Grattan, but also used outside of the Institute. To install a core set of packages we use at Grattan, <a href="packages.html#install-grattan-packages">click here and run the code chunk</a>.</p>
+<div id="using-the-tidyverse" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Using the <code>tidyverse</code><a class="anchor" aria-label="anchor" href="#using-the-tidyverse"><i class="fas fa-link"></i></a>
+</h3>
+<p>The main packages in the <code>tidyverse</code> include:</p>
+<ul>
+<li>
+<em>ggplot2</em> for making beautiful, customisable graphs</li>
+<li>
+<em>dplyr</em> for manipulating data frames</li>
+<li>
+<em>tidyr</em> for tidying your data</li>
+<li>
+<em>readr</em> for importing data from a broad range of formats</li>
+<li>
+<em>purrr</em> for functional programming</li>
+<li>
+<em>stringr</em> for manipulating strings of text</li>
+</ul>
+<p>All these packages (and more!) will automatically be loaded for you when you run the command<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;There’s no need to install or load the individual &lt;code&gt;tidyverse&lt;/code&gt; packages - like &lt;code&gt;dplyr&lt;/code&gt; - separately. Just install them all together, and load them with the single &lt;code&gt;library(tidyverse)&lt;/code&gt; command. That way, you don’t need to remember which functions come from &lt;code&gt;tidyr&lt;/code&gt; and which from &lt;code&gt;dplyr&lt;/code&gt; - they’re all just &lt;code&gt;tidyverse&lt;/code&gt; functions.&lt;/p&gt;"><sup>23</sup></a>:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+## ✔ tibble  3.1.3     ✔ dplyr   1.0.7
+## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
+## ✔ readr   2.0.0     ✔ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<p>A range of other packages are installed on your machine as part of the <code>tidyverse.</code> These include:</p>
+<ul>
+<li>
+<em>readxl</em> for importing Excel spreadsheets into R</li>
+<li>
+<em>haven</em> for importing Stata, SAS and SPSS data</li>
+<li>
+<em>lubridate</em> for working with dates</li>
+<li>
+<em>rvest</em> for scraping websites</li>
+</ul>
+<p>Although these packages are installed as part of the <code>tidyverse</code>, they aren’t loaded automatically when you run <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>. You’ll need to load them individually, like:</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
+</div>
+<div id="grattan-specific-packages" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> Grattan-specific packages<a class="anchor" aria-label="anchor" href="#grattan-specific-packages"><i class="fas fa-link"></i></a>
+</h3>
+<p>A range of Grattan people have written packages that come in handy at Grattan.
+* <em>grattantheme</em> The <code>grattantheme</code> package, by Matt Cowgill and Will Mackey, helps to make your ggplot2 charts Grattan-y. We cover the package extensively in the data visualisation chapter. Find it on <a href="https://github.com/grattan/grattantheme">Github</a>.</p>
+<ul>
+<li><p><em>grattandata</em> The <code>grattandata</code> package, by Matt Cowgill and Jonathan Nolan, is used to load microdata from the Grattan microdata repository. We cover this in the <a href="reading-data.html#reading-data">reading data</a> chapter. Find it on <a href="https://github.com/grattan/grattandata">Github</a>.</p></li>
+<li><p><em>grattan</em> The <code>grattan</code> package, created by Hugh Parsonage, contains two broad sets of functions. One set of functions (sometimes known by the nickname “Grattax”) is used for modelling the personal income tax system. Another set of functions (“Grattools”) are useful for a lot of our work, like converting dates to financial years (<code><a href="https://hughparsonage.github.io/grattan/reference/is.fy.html">grattan::date2fy()</a></code>) or a version of <code><a href="https://dplyr.tidyverse.org/reference/ranking.html">dplyr::ntile()</a></code> that uses weights (<code><a href="https://hughparsonage.github.io/hutils/reference/weighted_ntile.html">grattan::weighted_ntile()</a></code>). Find it on <a href="https://github.com/hughparsonage/grattan">Github</a>.</p></li>
+<li><p><em>grattanReporter</em> The <code>grattanReporter</code> package, created by Hugh Parsonage (and currently maintained by Will Mackey), runs a series of checks on Grattan’s LaTeX reports to ensure consistent style. Find it on <a href="https://github.com/grattan/grattanreporter">Github</a>.</p></li>
+</ul>
+</div>
+<div id="other-commonly-used-useful-packages" class="section level3" number="5.6.3">
+<h3>
+<span class="header-section-number">5.6.3</span> Other commonly-used, useful packages<a class="anchor" aria-label="anchor" href="#other-commonly-used-useful-packages"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are other packages we commonly use at Grattan, including some developed by Grattan staff. These include:</p>
+<ul>
+<li><p><em>absmapsdata</em> This package, by Will Mackey, is very handy for working with spatial data. You’ll want it if you’re going to be making maps. Find it on <a href="https://github.com/wfmackey/absmapsdata">Github</a>.</p></li>
+<li><p><em>readabs</em> The <code>readabs</code> package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R. Find it on <a href="https://github.com/mattcowgill/readabs">Github</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></div>
-<div class="next"><a href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></div>
+<div class="prev"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></div>
+<div class="next"><a href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#packages"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="nav-link" href="#install-packages"><span class="header-section-number">5.1</span> How to install packages</a></li>
-<li><a class="nav-link" href="#install-grattan-packages"><span class="header-section-number">5.2</span> Get set up: install packages for Grattan</a></li>
-<li><a class="nav-link" href="#using-packages"><span class="header-section-number">5.3</span> Using packages</a></li>
-<li><a class="nav-link" href="#upgrading-packages"><span class="header-section-number">5.4</span> Upgrading packages</a></li>
-<li><a class="nav-link" href="#downgrading-packages"><span class="header-section-number">5.5</span> Downgrading packages</a></li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">5</span> Using packages</a></li>
+<li><a class="nav-link" href="#what-are-packages"><span class="header-section-number">5.1</span> What are packages?</a></li>
+<li><a class="nav-link" href="#install-packages"><span class="header-section-number">5.2</span> How to install packages</a></li>
+<li><a class="nav-link" href="#install-grattan-packages"><span class="header-section-number">5.3</span> Get set up: install packages for Grattan</a></li>
+<li><a class="nav-link" href="#using-packages"><span class="header-section-number">5.4</span> Using packages</a></li>
+<li>
+<a class="nav-link" href="#package-versions"><span class="header-section-number">5.5</span> Package versions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#updating-packages"><span class="header-section-number">5.5.1</span> Updating packages</a></li>
+<li><a class="nav-link" href="#downgrading-packages"><span class="header-section-number">5.5.2</span> Downgrading packages</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#packages-commonly-used-at-grattan"><span class="header-section-number">5.6</span> Packages commonly used at Grattan</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#using-the-tidyverse"><span class="header-section-number">5.6.1</span> Using the tidyverse</a></li>
+<li><a class="nav-link" href="#grattan-specific-packages"><span class="header-section-number">5.6.2</span> Grattan-specific packages</a></li>
+<li><a class="nav-link" href="#other-commonly-used-useful-packages"><span class="header-section-number">5.6.3</span> Other commonly-used, useful packages</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -177,7 +272,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-27.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
