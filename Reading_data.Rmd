@@ -50,12 +50,13 @@ We focus here on the 'best practice' methods that align with Grattan's style.
 
 ### Reading CSVs`.csv`
 
-The `read_csv` function from the `dplyr` package is the preffered method for reading CSV files.
-This function     
+The `read_csv` function from the `dplyr` package is the weakly-preferred method for reading CSV files.
+This function is well documented, provides clear messages and warnings, and is just a safe bet all-round.
 
 ```{r}
-
+sa3_income <- read_csv("data/sa3_income.csv")
 ```
+
 
 
 There are *lots* of different packages and functions that exist to read data files into R.
