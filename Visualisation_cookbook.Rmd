@@ -14,14 +14,13 @@ source("R/great_words.R")
 
 # Set figure output to replicate type = "normal" 
 knitr::opts_chunk$set(echo = TRUE, 
-                      fig.width = 8.74, # inches
-                      fig.height = 5.71) # inches
+                      out.width = "100%")
 
 
 # Define function for coloured text:
 col_text <- function(text, colour){
   outputFormat <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-  if(outputFormat == 'latex') {
+  if (outputFormat == 'latex') {
     paste0("\\textcolor{", colour,"}{", text, "}")
   } else {
     paste0("<font color='",colour,"'>", text, "</font>")
@@ -36,7 +35,7 @@ col_text <- function(text, colour){
 library(tidyverse)
 library(grattantheme)
 library(ggrepel)
-library(absmapsdata)
+library(strayr)
 library(sf)
 library(scales)
 library(janitor)
@@ -470,9 +469,9 @@ facet_bar <- data %>%
              fill = gender)) + 
   geom_col(position = "dodge") + 
   coord_flip() + 
-  theme_grattan(flipped = TRUE) + 
+  theme_grattan(flipped = TRUE, base_size = 16) + 
   grattan_y_continuous(labels = dollar,
-                       breaks = c(25e3, 50e3, 75e3)) +  # change breaks
+                       breaks = c(0, 25e3, 50e3, 75e3)) +  # change breaks
   grattan_fill_manual(2) + 
   grattan_colour_manual(2) + 
   labs(title = "Professional workers earn more in every state",
@@ -592,8 +591,8 @@ To add labels to the end of each line, you would expand the x-axis to make room 
 ```{r line_expand, message = FALSE}
 base_chart +
   grattan_x_continuous(expand_right = .3,
-                       breaks = seq(2011, 2016, 1),
-                       labels = c("2011", "12", "13", "14", "15", "16")) 
+                       breaks = seq(2010, 2016, 2),
+                       labels = c("2010", "12", "14", "16")) 
 ```
 
 Then add labels, using 
@@ -605,8 +604,8 @@ label_line <- data %>%
 base_chart +
   geom_point() +
   grattan_x_continuous(expand_left = .1,
-                       breaks = seq(2011, 2016, 1),
-                       labels = c("2011", "12", "13", "14", "15", "16")) + 
+                       breaks = seq(2010, 2016, 2),
+                       labels = c("2010", "12", "14", "16")) 
   grattan_label(data = label_line,
                 aes(label = state),
                 nudge_x = -Inf,
@@ -620,8 +619,8 @@ base_chart +
   geom_point() +
     grattan_x_continuous(expand_left = .1, 
                          expand_right = .1,
-                         breaks = seq(2011, 2016, 1),
-                         labels = c("2011", "12", "13", "14", "15", "16")) + 
+                         breaks = seq(2010, 2016, 2),
+                         labels = c("2010", "12", "14", "16")) + 
   theme(panel.spacing.x = unit(10, "mm")) + 
   facet_wrap(state ~ .)
 ```
@@ -1000,27 +999,30 @@ include_graphics("atlas/scatter_layer.png")
 ### `sf` objects
 [what is]
 
-### Using `absmapsdata`
+### Using `absmapsdata` and `strayr`
 
-The `absmapsdata` contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
+The `absmapsdata` package contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
-  - Statistical Area 1 2011 and 2016: `sa12011` or `sa12016`
-  - Statistical Area 2 2011 and 2016: `sa22011` or `sa22016`
-  - Statistical Area 3 2011 and 2016: `sa32011` or `sa32016`
-  - Statistical Area 4 2011 and 2016: `sa42011` or `sa42016`
-  - Greater Capital Cities 2011 and 2016: `gcc2011` or `gcc2016`
-  - Remoteness Areas 2011 and 2016: `ra2011` or `ra2016`
-  - State 2011 and 2016: `state2011` or `state2016`
-  - Commonwealth Electoral Divisions 2018: `ced2018`
-  - State Electoral Divisions 2018:`sed2018`
-  - Local Government Areas 2016 and 2018: `lga2016` or `lga2018`
-  - Postcodes 2016: `postcodes2016`
+* Statistical Area 1 2011: `sa12011`; 2016: `sa12016`; and 2021: `sa12021`. 
+* Statistical Area 2 2011: `sa22011`; 2016: `sa22016`; and 2021: `sa22021`. 
+* Statistical Area 3 2011: `sa32011`; 2016: `sa32016`; and 2021: `sa32021`. 
+* Statistical Area 4 2011: `sa42011`; 2016: `sa42016`; and 2021: `sa42021`. 
+* Greater Capital Cities 2011: `gcc2011`; 2016: `gcc2016`; and 2021: `gcc2021`. 
+* Remoteness Areas 2011: `ra2011`; and 2016: `ra2016`
+* State 2011: `state2011`; 2016: `state2016`; and `state2021`.
+* Commonwealth Electoral Divisions 2018: `ced2018`; and 2021: `ced2021`
+* State Electoral Divisions 2018:`sed2018`; and 2021: `sed2021`
+* Local Government Areas 2016: `lga2016`; 2018: `lga2018`; and 2021: `lga2021`
+* Regions for the Internet Vacancy Index 2008: `regional_ivi2008`
+* Postcodes 2016: `postcodes2016`; and 2021: `postcodes2021`
+* Census of Population and Housing Destination Zones 2011: `dz2011`; 2016: `dz2016`; and 2021: `dz2021`.
 
-The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and can be installed with `remotes::install_github()`
+The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and **could be** installed with `remotes::install_github("wfmackey/absmapsdata")`.
+However, as the package contains a **lot** of data, it is quite large and can be a pain to install. As an alternative, you can use the `strayr` package to download the `sf` objects on demand rather than installing the whole `absmapsdata` package:
 
 ```{r install_absmapsdata, eval = FALSE}
-remotes::install_github("wfmackey/absmapsdata")
-library(absmapsdata)
+remotes::install_github("runapp-aus/strayr")
+library(strayr)
 ```
 
 You will also need the `sf` package installed to handle the `sf` objects:
@@ -1033,6 +1035,7 @@ library(sf)
 Now you can view `sf` objects stored in `absmapsdata`:
 
 ```{r}
+sa32016 <- strayr::read_absmap("sa32016")
 glimpse(sa32016)
 ```
 

@@ -4,6 +4,10 @@ This chapter explores data visualisation broadly, and how to 'do' data visualisa
 
 The next chapter -- the Visualisation Cookbook -- gives more practical advice for the charts you might want to create. 
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
 
 ## Introduction to data visualisation
 
@@ -272,7 +276,7 @@ grattan_save("atlas/professionals_chart_report.pdf", prof_chart, type = "wholeco
 ```
 
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-```{r save_hide1, message = FALSE, echo = FALSE}
+```{r save_hide1, message = FALSE, echo = FALSE, out.width="100%"}
 grattan_save("atlas/professionals_chart_report.png", prof_chart, type = "wholecolumn")
 knitr::include_graphics("atlas/professionals_chart_report.png")
 ```

@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>12 Data Visualisation | Using R at Grattan Institute</title>
+<title>11 Data Visualisation | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="This chapter explores data visualisation broadly, and how to ‘do’ data visualisation in R specifically. The next chapter – the Visualisation Cookbook – gives more practical advice for the charts...">
 <meta name="generator" content="bookdown 0.23.1 with bs4_book()">
-<meta property="og:title" content="12 Data Visualisation | Using R at Grattan Institute">
+<meta property="og:title" content="11 Data Visualisation | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This chapter explores data visualisation broadly, and how to ‘do’ data visualisation in R specifically. The next chapter – the Visualisation Cookbook – gives more practical advice for the charts...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12 Data Visualisation | Using R at Grattan Institute">
+<meta name="twitter:title" content="11 Data Visualisation | Using R at Grattan Institute">
 <meta name="twitter:description" content="This chapter explores data visualisation broadly, and how to ‘do’ data visualisation in R specifically. The next chapter – the Visualisation Cookbook – gives more practical advice for the charts...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -40,47 +40,25 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome!</a></li>
-<li class="book-part">What is R and why do we use it?</li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="why-use-r.html"><span class="header-section-number">2</span> Why use R?</a></li>
-<li class="book-part">Using R the Grattan way</li>
-<li><a class="" href="organising-projects.html"><span class="header-section-number">3</span> Organising an R project at Grattan</a></li>
-<li><a class="" href="coding-style.html"><span class="header-section-number">4</span> Grattan coding style</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">5</span> What are packages?</a></li>
-<li><a class="" href="packages-commonly-used-at-grattan.html"><span class="header-section-number">6</span> Packages commonly used at Grattan</a></li>
-<li><a class="" href="getting-help-with-r.html"><span class="header-section-number">7</span> Getting help with R</a></li>
-<li class="book-part">Load, manipulate and visualise data</li>
-<li><a class="" href="reading-data.html"><span class="header-section-number">8</span> Reading data</a></li>
-<li><a class="" href="different-data-types.html"><span class="header-section-number">9</span> Different data types</a></li>
-<li><a class="" href="data-transformation-with-dplyr.html"><span class="header-section-number">10</span> Data transformation with dplyr</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">11</span> Analysis</a></li>
-<li><a class="active" href="data-visualisation.html"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="" href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></li>
-<li class="book-part">Advanced topics</li>
-<li><a class="" href="functional-programming-making-and-using-your-own-functions.html"><span class="header-section-number">14</span> Functional programming: making and using your own functions</a></li>
-<li><a class="" href="version-control.html"><span class="header-section-number">15</span> Version control</a></li>
-<li><a class="" href="contributing-to-this-book.html"><span class="header-section-number">16</span> Contributing to this book</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">11</span> Data Visualisation</a></li></ul>
 
         <div class="book-extra">
           
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-visualisation" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-visualisation" class="section level1" number="11">
 <h1>
-<span class="header-section-number">12</span> Data Visualisation<a class="anchor" aria-label="anchor" href="#data-visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11</span> Data Visualisation<a class="anchor" aria-label="anchor" href="#data-visualisation"><i class="fas fa-link"></i></a>
 </h1>
 <p>This chapter explores data visualisation broadly, and how to ‘do’ data visualisation in R specifically.</p>
 <p>The next chapter – the Visualisation Cookbook – gives more practical advice for the charts you might want to create.</p>
-<div id="introduction-to-data-visualisation" class="section level2" number="12.1">
+<div id="introduction-to-data-visualisation" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">12.1</span> Introduction to data visualisation<a class="anchor" aria-label="anchor" href="#introduction-to-data-visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Introduction to data visualisation<a class="anchor" aria-label="anchor" href="#introduction-to-data-visualisation"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can use data visualisation to <strong>examine and explore</strong> your data, and to <strong>present</strong> a finding to your audience. Both of these elements are important.</p>
-<p>When you start using a dataset, you should look at it.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From Kieran Healy’s &lt;a href="https://socviz.co/"&gt;&lt;em&gt;Data Vizualization: A Practical Introduction&lt;/em&gt;&lt;/a&gt;: ‘You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.’&lt;/p&gt;'><sup>24</sup></a> Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots.</p>
+<p>When you start using a dataset, you should look at it.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From Kieran Healy’s &lt;a href="https://socviz.co/"&gt;&lt;em&gt;Data Vizualization: A Practical Introduction&lt;/em&gt;&lt;/a&gt;: ‘You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.’&lt;/p&gt;'><sup>1</sup></a> Plot histograms of variables-of-interest to spot outliers. Explore correlations between variables with scatter plots and lines-of-best-fit. Check how many observations are in particular groups with bar charts. Identify variables that have missing or coded-missing values. Use faceting to explore differences in the above between groups, and do it interactively with non-static plots.</p>
 <p>These <strong>exploratory plots</strong> are just for you and your team. They don’t need to be perfectly labelled, the right size, in the Grattan palette, or be particularly interesting.
 They’re built and used only to help you and your team explore the data.
 Through this process, you can become confident your data is <em>what you think it is</em>.</p>
@@ -93,28 +71,28 @@ Through this process, you can become confident your data is <em>what you think i
 <li>The reader: the chart needs to help the reader understand something, and it must convince them to pay attention.</li>
 </ol>
 <p>At the margins, sometimes these two ideas can be in conflict. Maybe a 70-word definition in the middle of your chart would improve its technical accuracy, but it could confuse the average reader and reduce the chart’s impact.</p>
-<p>Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to <em>earn</em> their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;‘Bar charts are evidence that you are dead inside’ – Amanda Cox, data editor for the New York Times.&lt;/p&gt;"><sup>25</sup></a></p>
+<p>Similarly, a bar chart is often the safest way to display data. Like our prose, our charts need to be designed for an interested teenager. But we need to <em>earn</em> their interest. If your reader has seen four similar bar charts in a row and has stopped paying attention by the fifth, your point loses its punch.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;‘Bar charts are evidence that you are dead inside’ – Amanda Cox, data editor for the New York Times.&lt;/p&gt;"><sup>2</sup></a></p>
 <p>The way we design charts – much like our writing – should always be honest, clear and engaging to the reader.</p>
 <p>This chapter shows how you can do this with R. It starts with the ‘grammar of graphics’ concepts of a package called <code>ggplot</code>, and explains how to make those charts ‘Grattan-y.’ The next chapter gives you the when-to-use and how-to-make particular charts.</p>
 </div>
-<div id="set-up-and-packages-1" class="section level2" number="12.2">
+<div id="set-up-and-packages-1" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">12.2</span> Set-up and packages<a class="anchor" aria-label="anchor" href="#set-up-and-packages-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Set-up and packages<a class="anchor" aria-label="anchor" href="#set-up-and-packages-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This section uses the package <code>ggplot2</code> to visualise data, and <code>dplyr</code> functions to manipulate data. Both of these packages are loaded with <code>tidyverse</code>. The <code>scales</code> package helps with labelling your axes.</p>
 <p>The <code>grattantheme</code> package is used to make charts look Grattan-y. The <code>absmapsdata</code> package is used to help make maps.</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grattantheme</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></code></pre></div>
-<p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and gender, 2010-11 to 2015-16&lt;/a&gt;&lt;/p&gt;'><sup>26</sup></a> It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a <code>professionals</code> subset that only includes people in professional occupations in 2015:</p>
+<p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and gender, 2010-11 to 2015-16&lt;/a&gt;&lt;/p&gt;'><sup>3</sup></a> It is a long dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015. We will also create a <code>professionals</code> subset that only includes people in professional occupations in 2015:</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv"</span>,
               destfile <span class="op">=</span> <span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then read it using the <code>read_csv</code> function:</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span>
 
 <span class="va">professionals</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op">%&gt;%</span> 
@@ -138,9 +116,9 @@ Through this process, you can become confident your data is <em>what you think i
 ## # … with 6 more variables: gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;,
 ## #   average_income &lt;dbl&gt;, total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
 </div>
-<div id="concepts" class="section level2" number="12.3">
+<div id="concepts" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">12.3</span> Concepts<a class="anchor" aria-label="anchor" href="#concepts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Concepts<a class="anchor" aria-label="anchor" href="#concepts"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code>ggplot2</code> package is based on the <strong>g</strong>rammar of <strong>g</strong>raphics. …</p>
 <p>The main ingredients to a <code>ggplot</code> chart are:</p>
@@ -167,37 +145,37 @@ Through this process, you can become confident your data is <em>what you think i
 </ul>
 <p>Each plot you make will be made up of these three elements. The <a href="https://ggplot2.tidyverse.org/reference/">full list of standard geoms</a> is listed in the <code>tidyverse</code> documentation.</p>
 <p><code>ggplot</code> also has a ‘cheat sheet’ that contains many of the often-used elements of a plot, which you can download <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">here</a>.</p>
-<div class="inline-figure"><img src="atlas/ggplot_cheat_sheet.png" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="atlas/ggplot_cheat_sheet.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For example, you can plot a column chart by passing the <code>sa3_income</code> dataset into <code>ggplot()</code> (“make a chart with this data”). This completes the first step – data – and produces an empty plot:</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">professionals</span> <span class="op">%&gt;%</span> 
         <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/empty_plot-1.png" width="100%"></div>
 <p>Next, set the <code>aes</code> (aesthetics) to <code>x = state</code> (“make the x-axis represent state”), <code>y = pop</code> (“the y-axis should represent population”), and <code>fill = year</code> (“the fill colour represents year”). Now <code>ggplot</code> knows where things should <em>go</em>.</p>
 <p>If we just plot that, you’ll see that <code>ggplot</code> knows a little bit more about what we’re trying to do. It has the states on the x-axis and range of populations on the y-axis:</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">professionals</span> <span class="op">%&gt;%</span> 
         <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
                    y <span class="op">=</span> <span class="va">median_income</span>,
                    colour <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/empty_aes-1.png" width="100%"></div>
 <p>Now that <code>ggplot</code> knows where things should go, it needs to how to <em>plot</em> them on the chart. For this we use <code>geoms</code>. Tell <code>ggplot</code> to take the things it knows and plot them as a column chart by using <code>geom_col</code>:</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">professionals</span> <span class="op">%&gt;%</span>
         <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
                    y <span class="op">=</span> <span class="va">median_income</span>,
                    colour <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
         <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/complete_plot-1.png" width="100%"></div>
 <p>Great! There are a couple of quick things we can do to make the chart a bit clearer. There are points for each group in each year, which we probably don’t need. So filter the data before you pass it to <code>ggplot</code> to just include 2015: <code><a href="https://rdrr.io/r/stats/filter.html">filter(year == 2015)</a></code>. There will still be lots of overlapping points, so set the opacity to below one with <code>alpha = 0.5</code>. The <code>workers</code> x-axis can be changed to a log scale with <code>scale_x_log10</code>.</p>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">professionals</span> <span class="op">%&gt;%</span> 
         <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
                    y <span class="op">=</span> <span class="va">median_income</span>,
                    colour <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
         <span class="fu">geom_point</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span> 
         <span class="fu">scale_x_log10</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/with_changes-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/with_changes-1.png" width="100%"></div>
 <p>That looks a bit better. The following sections in this chapter will cover a broad range of charts and designs, but they will all use the same building-blocks of <code>data</code>, <code>aes</code>, and <code>geom</code>.</p>
 <p>The rest of the chapter will explore:</p>
 <ul>
@@ -209,19 +187,19 @@ Through this process, you can become confident your data is <em>what you think i
 <li>Adding chart labels</li>
 </ul>
 </div>
-<div id="exploratory-data-visualisation" class="section level2" number="12.4">
+<div id="exploratory-data-visualisation" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">12.4</span> Exploratory data visualisation<a class="anchor" aria-label="anchor" href="#exploratory-data-visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Exploratory data visualisation<a class="anchor" aria-label="anchor" href="#exploratory-data-visualisation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Plotting your data early in the analysis stage can help you quickly identify outliers, oddities, things that don’t look quite right.</p>
 </div>
-<div id="making-grattan-y-charts" class="section level2" number="12.5">
+<div id="making-grattan-y-charts" class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">12.5</span> Making Grattan-y charts<a class="anchor" aria-label="anchor" href="#making-grattan-y-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Making Grattan-y charts<a class="anchor" aria-label="anchor" href="#making-grattan-y-charts"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code>grattantheme</code> package contains functions that help <em>Grattanise</em> your charts. It is hosted here: <a href="https://github.com/grattan/grattantheme" class="uri">https://github.com/grattan/grattantheme</a></p>
 <p>You can install it with <code>remotes::install_github</code> from the package:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
 <p>The key functions of <code>grattantheme</code> are:</p>
@@ -238,12 +216,12 @@ Through this process, you can become confident your data is <em>what you think i
 <code>grattan_save</code>: a save function that exports charts in correct report or presentation dimensions.</li>
 </ul>
 <p>This section will run through some examples of <em>Grattanising</em> charts. The <code>ggplot</code> functions are explored in more detail in the next section.</p>
-<div id="making-grattan-charts" class="section level3" number="12.5.1">
+<div id="making-grattan-charts" class="section level3" number="11.5.1">
 <h3>
-<span class="header-section-number">12.5.1</span> Making Grattan charts<a class="anchor" aria-label="anchor" href="#making-grattan-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5.1</span> Making Grattan charts<a class="anchor" aria-label="anchor" href="#making-grattan-charts"><i class="fas fa-link"></i></a>
 </h3>
 <p>Start with a scatterplot, similar to the one made above:</p>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">&lt;-</span> <span class="va">professionals</span> <span class="op">%&gt;%</span> 
         <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
                    y <span class="op">=</span> <span class="va">median_income</span>,
@@ -256,22 +234,22 @@ Through this process, you can become confident your data is <em>what you think i
              caption <span class="op">=</span> <span class="st">"Source: ABS Estimates of Personal Income for Small Areas, 2011-2016"</span><span class="op">)</span>
 
 <span class="va">base_chart</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/base_chart-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/base_chart-1.png" width="100%"></div>
 <p>Let’s make it Grattany. First, add <code>theme_grattan</code> to your plot:</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/theme_grattan.html">theme_grattan</a></span><span class="op">(</span>chart_type <span class="op">=</span> <span class="st">"scatter"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_theme_grattan-1.png" width="100%"></div>
 <p>Then use <code>grattan_y_continuous</code> to adjust the y-axis. This takes the same arguments as the standard <code>scale_y_continuous</code> function, but has Grattan defaults built in. Use it to set the labels as dollars (with <code><a href="https://scales.r-lib.org/reference/label_dollar.html">scales::dollar()</a></code>) and to give the y-axis some breathing room (starting at $50,000 rather than the minimum point).
-Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using <code><a href="https://scales.r-lib.org/reference/label_number.html">scales::comma()</a></code>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The &lt;code&gt;dollar&lt;/code&gt; and &lt;code&gt;comma&lt;/code&gt; commands are functions, but can be used without &lt;code&gt;()&lt;/code&gt;. Using &lt;code&gt;dollar()&lt;/code&gt; or &lt;code&gt;comma()&lt;/code&gt; works too, and you can provide arguments that adjust their output: eg &lt;code&gt;dollar(suffix = "million")&lt;/code&gt;&lt;/p&gt;'><sup>27</sup></a></p>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it to format the labels as numbers with commas (using <code><a href="https://scales.r-lib.org/reference/label_number.html">scales::comma()</a></code>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The &lt;code&gt;dollar&lt;/code&gt; and &lt;code&gt;comma&lt;/code&gt; commands are functions, but can be used without &lt;code&gt;()&lt;/code&gt;. Using &lt;code&gt;dollar()&lt;/code&gt; or &lt;code&gt;comma()&lt;/code&gt; works too, and you can provide arguments that adjust their output: eg &lt;code&gt;dollar(suffix = "million")&lt;/code&gt;&lt;/p&gt;'><sup>4</sup></a></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/theme_grattan.html">theme_grattan</a></span><span class="op">(</span>chart_type <span class="op">=</span> <span class="st">"scatter"</span><span class="op">)</span> <span class="op">+</span>
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">dollar</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50e3</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
         <span class="fu">scale_x_log10</span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span> </code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_grattan_y_continuous-1.png" width="100%"></div>
 <p>To define <code>colour</code> colours, use <code>grattan_colour_manual</code> with the number of colours you need (two, in this case):</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_chart</span> <span class="op">&lt;-</span> <span class="va">base_chart</span> <span class="op">+</span>
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/theme_grattan.html">theme_grattan</a></span><span class="op">(</span>chart_type <span class="op">=</span> <span class="st">"scatter"</span><span class="op">)</span> <span class="op">+</span>
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">dollar</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50e3</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -279,12 +257,12 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
         <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> 
 
 <span class="va">prof_chart</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_fill-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_fill-1.png" width="100%"></div>
 <p>Nice chart! Now you can save it and share it with the world.</p>
 </div>
-<div id="saving-grattan-charts" class="section level3" number="12.5.2">
+<div id="saving-grattan-charts" class="section level3" number="11.5.2">
 <h3>
-<span class="header-section-number">12.5.2</span> Saving Grattan charts<a class="anchor" aria-label="anchor" href="#saving-grattan-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5.2</span> Saving Grattan charts<a class="anchor" aria-label="anchor" href="#saving-grattan-charts"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code>grattan_save</code> function saves your charts according to Grattan templates. It takes these arguments:</p>
 <ul>
@@ -324,33 +302,27 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <code>force_labs</code>: override the removal of labels for a particular <code>type</code>. eg <code>force_labs = TRUE</code> will keep the y-axis label.</li>
 </ul>
 <p>To save the <code>prof_chart</code> plot created above as a whole-column chart for a <strong>report</strong>:</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/professionals_chart_report.pdf"</span>, <span class="va">prof_chart</span>, type <span class="op">=</span> <span class="st">"wholecolumn"</span><span class="op">)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<div class="inline-figure">
-<img src="atlas/professionals_chart_report.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="atlas/professionals_chart_report.png" width="100%"></div>
 <p>To save it as a <strong>presentation</strong> slide instead, use <code>type = "fullslide"</code>:</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/professionals_chart_presentation.pdf"</span>, <span class="va">prof_chart</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<div class="inline-figure">
-<img src="atlas/professionals_chart_presentation.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="atlas/professionals_chart_presentation.png" width="100%"></div>
 <p>Or, if you want to emphasise the point in a <em>really tall</em> chart for a <strong>blogpost</strong>, you can use <code>type = "blog"</code> and adjust the <code>height</code> to be 50cm. Also note that because this is for the blog, you should save it as a <code>png</code> file:</p>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/professionals_chart_blog.png"</span>, <span class="va">prof_chart</span>, 
              type <span class="op">=</span> <span class="st">"blog"</span>, height <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 <!--- background: include=FALSE, echo=FALSE, results=FALSE ---->
-<div class="inline-figure">
-<img src="atlas/professionals_chart_blog.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="atlas/professionals_chart_blog.png" width="100%"></div>
 <p>And that’s it! The following sections will go into more detail about different chart types in R, but you’ll mostly use the same basic <code>grattantheme</code> formatting you’ve used here.</p>
 </div>
 </div>
-<div id="adding-labels" class="section level2" number="12.6">
+<div id="adding-labels" class="section level2" number="11.6">
 <h2>
-<span class="header-section-number">12.6</span> Adding labels<a class="anchor" aria-label="anchor" href="#adding-labels"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6</span> Adding labels<a class="anchor" aria-label="anchor" href="#adding-labels"><i class="fas fa-link"></i></a>
 </h2>
 <p>Labels can be a bit finicky – especially compared to labelling charts visually in PowerPoint. …</p>
 <p>Labels can be done in two broad ways:</p>
@@ -359,13 +331,13 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <li>Labelling some of the data points on your chart. This is how you label Grattan charts: label on item in a group and let the reader join the dots.</li>
 </ol>
 <p>We’ll look at the first approach so you can get a feel for how the labelling geoms – <code>geom_label</code> and <code>geom_text</code> (and some useful extensions) – work. It won’t be pretty.</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_chart</span> <span class="op">+</span>
   <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/add_annotate-1.png" width="100%"></div>
 <p>Great! That looks <em>terrible</em>. <code>geom_text</code> is labelling each individual point because it has been told to do so. Just like <code>geom_point</code>, it takes the <code>x</code> and <code>y</code> aesthetics of each observation, then plots the <code>label</code> at that location. But we just want to label one of the points for <code>female</code> and one for <code>male</code>.</p>
 <p>To do this, we can create a new dataset that just contains one observation each. Here, you’re filtering the dataset to include <em>only</em> the female/male observations that have the most people:</p>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_data</span> <span class="op">&lt;-</span> <span class="va">professionals</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">workers</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -380,13 +352,13 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 ## # … with 6 more variables: gender &lt;chr&gt;, year &lt;dbl&gt;, median_income &lt;dbl&gt;,
 ## #   average_income &lt;dbl&gt;, total_income &lt;dbl&gt;, workers &lt;dbl&gt;</code></pre>
 <p>And then tell <code>geom_text</code> to look at <em>that</em> dataset:</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_chart</span> <span class="op">+</span>
   <span class="fu">geom_text</span><span class="op">(</span>data <span class="op">=</span> <span class="va">label_data</span>,
             <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="100%"></div>
 <p>Okay, not bad. The labels go off the chart. You could fix this by shortening the labels either inside the <code>label_data</code>:</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_data_short</span> <span class="op">&lt;-</span> <span class="va">label_data</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>gender_label <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"Females"</span>, 
                              <span class="st">"Women"</span>, 
@@ -395,15 +367,15 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 <span class="va">prof_chart</span> <span class="op">+</span>
   <span class="fu">geom_text</span><span class="op">(</span>data <span class="op">=</span> <span class="va">label_data_short</span>,
             <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">gender_label</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="100%"></div>
 <p><em>Or</em> you could adjust the label values directly inside the aesthetics call. Note that this means you have to provide a vector that is the same length as the number of observations in the data (a length of two, in this case).</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_chart</span> <span class="op">+</span>
   <span class="fu">geom_text</span><span class="op">(</span>data <span class="op">=</span> <span class="va">label_data</span>,
             <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
-<p>To have more freedom over <em>where</em> your labels are placed, you can create a dataset yourself. Add the <code>x</code> and <code>y</code> values for your labels, and the label names.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We are using the &lt;code&gt;tribble&lt;/code&gt; function here to make it a little bit clearer what values apply to which gender. The ‘normal’ way to create a tibble is with the &lt;code&gt;tibble&lt;/code&gt; function: &lt;br&gt;&lt;code&gt;tibble(x = c(10, 100), y = c(100, 10))&lt;/code&gt;, etc.&lt;/p&gt;"><sup>28</sup></a></p>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-5-1.png" width="100%"></div>
+<p>To have more freedom over <em>where</em> your labels are placed, you can create a dataset yourself. Add the <code>x</code> and <code>y</code> values for your labels, and the label names.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We are using the &lt;code&gt;tribble&lt;/code&gt; function here to make it a little bit clearer what values apply to which gender. The ‘normal’ way to create a tibble is with the &lt;code&gt;tibble&lt;/code&gt; function: &lt;br&gt;&lt;code&gt;tibble(x = c(10, 100), y = c(100, 10))&lt;/code&gt;, etc.&lt;/p&gt;"><sup>5</sup></a></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">self_label</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span>
   <span class="op">~</span><span class="va">gender</span>, <span class="op">~</span><span class="va">workers</span>,   <span class="op">~</span><span class="va">median_income</span>,
   <span class="st">"Women"</span>,    <span class="fl">23000</span>,            <span class="fl">55000</span>,
@@ -416,36 +388,23 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
 ##   &lt;chr&gt;    &lt;dbl&gt;         &lt;dbl&gt;
 ## 1 Women    23000         55000
 ## 2 Men      23000        110000</code></pre>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_chart</span> <span class="op">+</span>
   <span class="fu">geom_text</span><span class="op">(</span>data <span class="op">=</span> <span class="va">self_label</span>,
             <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">gender</span><span class="op">)</span>, 
             hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="inline-figure"><img src="Data_visualisation_files/figure-html/unnamed-chunk-7-1.png" width="100%"></div>
 <p>[cover <code>annotate</code>]</p>
 
 </div>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="analysis.html"><span class="header-section-number">11</span> Analysis</a></div>
-<div class="next"><a href="chart-cookbook.html"><span class="header-section-number">13</span> Chart cookbook</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-visualisation"><span class="header-section-number">12</span> Data Visualisation</a></li>
-<li><a class="nav-link" href="#introduction-to-data-visualisation"><span class="header-section-number">12.1</span> Introduction to data visualisation</a></li>
-<li><a class="nav-link" href="#set-up-and-packages-1"><span class="header-section-number">12.2</span> Set-up and packages</a></li>
-<li><a class="nav-link" href="#concepts"><span class="header-section-number">12.3</span> Concepts</a></li>
-<li><a class="nav-link" href="#exploratory-data-visualisation"><span class="header-section-number">12.4</span> Exploratory data visualisation</a></li>
-<li>
-<a class="nav-link" href="#making-grattan-y-charts"><span class="header-section-number">12.5</span> Making Grattan-y charts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#making-grattan-charts"><span class="header-section-number">12.5.1</span> Making Grattan charts</a></li>
-<li><a class="nav-link" href="#saving-grattan-charts"><span class="header-section-number">12.5.2</span> Saving Grattan charts</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#adding-labels"><span class="header-section-number">12.6</span> Adding labels</a></li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -469,34 +428,6 @@ Also add <code>scale_x_log10</code> to make the x-axis a log10 scale, telling it
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
