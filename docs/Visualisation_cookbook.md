@@ -13,7 +13,7 @@ This section takes you through a few often-used chart types.
 library(tidyverse)
 library(grattantheme)
 library(ggrepel)
-library(absmapsdata)
+library(strayr)
 library(sf)
 library(scales)
 library(janitor)
@@ -114,7 +114,7 @@ Second, `position`, dictates how multiple bars occupying the same x-axis positio
 
 This section will create the following vertical bar plot showing number of workers by state in 2016:
 
-![](atlas/simple_bar.png)<!-- -->
+<img src="atlas/simple_bar.png" width="100%" />
 
 First, create the data you want to plot. 
 
@@ -142,7 +142,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks super: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks of the highest quality: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -154,7 +154,7 @@ data %>%
   geom_col()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_bar_base-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_bar_base-1.png" width="100%" />
 
 Make it Grattany by adjusting general theme defaults with `theme_grattan`, and use `grattan_y_continuous` to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding `labels = comma`. 
 
@@ -168,7 +168,7 @@ data %>%
   grattan_y_continuous(labels = comma)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_bar_grattan-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_bar_grattan-1.png" width="100%" />
 
 
 To order the states by number of workers, you can tell the `x` aesthetic that you want to `reorder` the `state` variable by `workers`:
@@ -183,7 +183,7 @@ data %>%
   grattan_y_continuous(labels = comma)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_bar_reorder-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_bar_reorder-1.png" width="100%" />
 
 You can probably drop the x-axis label -- people will understand that they're states without you explicitly saying it -- and add a title and subtitle with `labs`:
 
@@ -204,9 +204,9 @@ simple_bar <- data %>%
 simple_bar
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="100%" />
 
-Looks magnificent! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks super! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -215,7 +215,7 @@ grattan_save("atlas/simple_bar.pdf", simple_bar, type = "fullslide")
 
 
 
-![](atlas/simple_bar.png)<!-- -->
+<img src="atlas/simple_bar.png" width="100%" />
 
 
 
@@ -266,7 +266,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks of high quality: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks fine: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -281,7 +281,7 @@ data %>%
   geom_col()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_base-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_base-1.png" width="100%" />
 
 The two series -- women and men -- created by `fill` are stacked on-top of each other by `geom_col`. You can tell it to plot them next to each other -- to 'dodge' -- instead with the `position` argument _within_ `geom_col`:
 
@@ -294,7 +294,7 @@ data %>%
   geom_col(position = "dodge") # 'dodge' the series
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_dodge-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_dodge-1.png" width="100%" />
 
 To flip the chart -- a useful move when you have long labels -- add `coord_flip` (ie 'flip the x and y coordinates of the chart'). 
 
@@ -310,7 +310,7 @@ data %>%
   coord_flip() # rotate the chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_flip-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_flip-1.png" width="100%" />
 
 And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the `reorder(var_to_reorder, var_to_reorder_by)` function when you define the `state` aesthetic:
 
@@ -324,7 +324,7 @@ data %>%
   coord_flip()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_reorder-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_reorder-1.png" width="100%" />
 
 Wonderful -- that's how you want our _data_ to look. Now you can Grattanise it. Note that `theme_grattan` needs to know that the coordinates were flipped so it can apply the right settings. Also tell `grattan_fill_manual` that there are two fill series. 
 
@@ -341,7 +341,7 @@ data %>%
   grattan_fill_manual(2) # grattan fill colours
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_grattan-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_grattan-1.png" width="100%" />
 
 You can use `grattan_label` to **label your charts** in the Grattan style. This function is a 'wrapper' around `geom_label` that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the [standard arguments of `geom_label`](https://ggplot2.tidyverse.org/reference/geom_text.html). 
 
@@ -366,7 +366,7 @@ data %>%
   grattan_colour_manual(2)   # define colour as two grattan colours
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_label_all-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_label_all-1.png" width="100%" />
 
 To just label _one_ of the plots -- ie the first one, ACT in this case -- we need to tell `grattan_label`. The easiest way to do this is by **creating a label dataset beforehand**, like `label_gender` below. This just includes the observations you want to label:
 
@@ -409,7 +409,7 @@ data %>%
   grattan_colour_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_label-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_label-1.png" width="100%" />
 
 Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:
 
@@ -433,9 +433,9 @@ data %>%
   grattan_colour_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="100%" />
 
-Looks supreme! Now you can add titles and a caption, and save using `grattan_save`:
+Looks bonzer! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -469,7 +469,7 @@ grattan_save("atlas/multiple_bar.pdf", multiple_bar, type = "fullslide")
 
 
 
-![](atlas/multiple_bar.png)<!-- -->
+<img src="atlas/multiple_bar.png" width="100%" />
 
 
 
@@ -546,7 +546,7 @@ facet_bar +
   facet_wrap(vars(prof))
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_facet_wrap-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_facet_wrap-1.png" width="100%" />
 
 That's good! It does what it should. Now you just need to tidy it up a little bit by adding labels and avoiding clashes along the bottom axis.
 
@@ -586,9 +586,9 @@ facet_bar +
                 hjust = 0)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="100%" />
 
-Cool! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Brill! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -604,9 +604,9 @@ facet_bar <- data %>%
              fill = gender)) + 
   geom_col(position = "dodge") + 
   coord_flip() + 
-  theme_grattan(flipped = TRUE) + 
+  theme_grattan(flipped = TRUE, base_size = 16) + 
   grattan_y_continuous(labels = dollar,
-                       breaks = c(25e3, 50e3, 75e3)) +  # change breaks
+                       breaks = c(0, 25e3, 50e3, 75e3)) +  # change breaks
   grattan_fill_manual(2) + 
   grattan_colour_manual(2) + 
   labs(title = "Professional workers earn more in every state",
@@ -631,7 +631,7 @@ grattan_save("atlas/facet_bar.pdf", facet_bar, type = "fullslide")
 
 
 
-![](atlas/facet_bar.png)<!-- -->
+<img src="atlas/facet_bar.png" width="100%" />
 
 
 
@@ -690,7 +690,7 @@ data %>%
   geom_line()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="100%" />
 
 
 Now you can represent each `state` by colour:
@@ -705,7 +705,7 @@ data %>%
   geom_line()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="100%" />
 
 Cooler! Adding some Grattan formatting to it and define it as our 'base chart':
 
@@ -726,7 +726,7 @@ base_chart <-data %>%
 base_chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
 
 
 You can add 'dots' for each year by layering `geom_point` on top of `geom_line`:
@@ -737,7 +737,7 @@ base_chart +
   geom_point()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="100%" />
 
 To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:
 
@@ -745,11 +745,11 @@ To add labels to the end of each line, you would expand the x-axis to make room 
 ```r
 base_chart +
   grattan_x_continuous(expand_right = .3,
-                       breaks = seq(2011, 2016, 1),
-                       labels = c("2011", "12", "13", "14", "15", "16")) 
+                       breaks = seq(2010, 2016, 2),
+                       labels = c("2010", "12", "14", "16")) 
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="100%" />
 
 Then add labels, using 
 
@@ -761,8 +761,13 @@ label_line <- data %>%
 base_chart +
   geom_point() +
   grattan_x_continuous(expand_left = .1,
-                       breaks = seq(2011, 2016, 1),
-                       labels = c("2011", "12", "13", "14", "15", "16")) + 
+                       breaks = seq(2010, 2016, 2),
+                       labels = c("2010", "12", "14", "16")) 
+```
+
+<img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="100%" />
+
+```r
   grattan_label(data = label_line,
                 aes(label = state),
                 nudge_x = -Inf,
@@ -773,7 +778,12 @@ base_chart +
 ## Warning: Ignoring unknown parameters: segment.colour
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="839.04" />
+```
+## mapping: label = ~state 
+## geom_label: parse = FALSE, label.padding = 0.1, label.r = 0.15, label.size = 0, na.rm = FALSE
+## stat_identity: na.rm = FALSE
+## position_nudge
+```
 If you wanted to show each state individually, you could **facet** your chart so that a separate plot was produced for each state:
 
 
@@ -782,13 +792,13 @@ base_chart +
   geom_point() +
     grattan_x_continuous(expand_left = .1, 
                          expand_right = .1,
-                         breaks = seq(2011, 2016, 1),
-                         labels = c("2011", "12", "13", "14", "15", "16")) + 
+                         breaks = seq(2010, 2016, 2),
+                         labels = c("2010", "12", "14", "16")) + 
   theme(panel.spacing.x = unit(10, "mm")) + 
   facet_wrap(state ~ .)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/line3-1.png" width="100%" />
 
 
 
@@ -807,7 +817,7 @@ The first simple scatter plot will show the relationship between average incomes
 include_graphics("atlas/simple_scatter.png")
 ```
 
-![](atlas/simple_scatter.png)<!-- -->
+<img src="atlas/simple_scatter.png" width="100%" />
 
 Create the dataset you want to plot:
 
@@ -845,7 +855,7 @@ data %>%
   geom_point()
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_scatter_base-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_scatter_base-1.png" width="100%" />
 
 Then add Grattan theme elements:
 
@@ -865,9 +875,9 @@ data %>%
   grattan_x_continuous(labels = comma)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="100%" />
 
-Looks outstanding. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks wonderful. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -881,7 +891,7 @@ data %>%
                        expand_right = .05) # expand the right by 5%
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/simple_scatter_expand-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/simple_scatter_expand-1.png" width="100%" />
 
 Finally, add titles and save the plot:
 
@@ -910,7 +920,7 @@ grattan_save("atlas/simple_scatter.pdf", simple_scatter, type = "fullslide")
 
 
 
-![](atlas/simple_scatter.png)<!-- -->
+<img src="atlas/simple_scatter.png" width="100%" />
 
 
 
@@ -926,7 +936,7 @@ The chart will show the wages of professional workers and non-professional worke
 include_graphics("atlas/scatter_reshape.png")
 ```
 
-![](atlas/scatter_reshape.png)<!-- -->
+<img src="atlas/scatter_reshape.png" width="100%" />
 
 First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:
 
@@ -1009,7 +1019,7 @@ data %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/scatter_reshape_base-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/scatter_reshape_base-1.png" width="100%" />
 
 Then, like you've done before, add Grattan theme elements and titles, and save with `grattan_save`:
 
@@ -1037,7 +1047,7 @@ grattan_save("atlas/scatter_reshape.pdf", scatter_reshape, type = "fullslide")
 
 
 
-![](atlas/scatter_reshape.png)<!-- -->
+<img src="atlas/scatter_reshape.png" width="100%" />
 
 
 ### Layered scatter plot 
@@ -1049,7 +1059,7 @@ For the third plot, look at the incomes of non-professional workers by their are
 include_graphics("atlas/scatter_layer.png")
 ```
 
-![](atlas/scatter_layer.png)<!-- -->
+<img src="atlas/scatter_layer.png" width="100%" />
 
 Get the data you want to plot:
 
@@ -1091,7 +1101,7 @@ data %>%
   geom_point(alpha = 0.2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/scatter_layer_prep-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/scatter_layer_prep-1.png" width="100%" />
 
 
 Now add your Grattan theme elements: 
@@ -1118,9 +1128,9 @@ base_chart <- data %>%
 base_chart
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="100%" />
 
-Looks bonzer! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks superlative! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
@@ -1164,7 +1174,7 @@ base_chart +
   grattan_fill_manual(2)
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/scatter_layer_add_perc-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/scatter_layer_add_perc-1.png" width="100%" />
 
 To add labels, first decide where they should go. Try positioning the "Professional" above its averages, and "Non-professional" at the bottom. 
 
@@ -1198,7 +1208,7 @@ base_chart +
        caption = "Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)")
 ```
 
-<img src="Visualisation_cookbook_files/figure-html/scatter_layer_label-1.png" width="839.04" />
+<img src="Visualisation_cookbook_files/figure-html/scatter_layer_label-1.png" width="100%" />
 
 Putting that all together, your code will look something like this:
 
@@ -1257,7 +1267,7 @@ grattan_save("atlas/scatter_layer.pdf", scatter_layer, type = "fullslide")
 
 
 
-![](atlas/scatter_layer.png)<!-- -->
+<img src="atlas/scatter_layer.png" width="100%" />
 
 
 ### Scatter plots with trendlines
@@ -1278,28 +1288,31 @@ grattan_save("atlas/scatter_layer.pdf", scatter_layer, type = "fullslide")
 ### `sf` objects
 [what is]
 
-### Using `absmapsdata`
+### Using `absmapsdata` and `strayr`
 
-The `absmapsdata` contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
+The `absmapsdata` package contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
-  - Statistical Area 1 2011 and 2016: `sa12011` or `sa12016`
-  - Statistical Area 2 2011 and 2016: `sa22011` or `sa22016`
-  - Statistical Area 3 2011 and 2016: `sa32011` or `sa32016`
-  - Statistical Area 4 2011 and 2016: `sa42011` or `sa42016`
-  - Greater Capital Cities 2011 and 2016: `gcc2011` or `gcc2016`
-  - Remoteness Areas 2011 and 2016: `ra2011` or `ra2016`
-  - State 2011 and 2016: `state2011` or `state2016`
-  - Commonwealth Electoral Divisions 2018: `ced2018`
-  - State Electoral Divisions 2018:`sed2018`
-  - Local Government Areas 2016 and 2018: `lga2016` or `lga2018`
-  - Postcodes 2016: `postcodes2016`
+* Statistical Area 1 2011: `sa12011`; 2016: `sa12016`; and 2021: `sa12021`. 
+* Statistical Area 2 2011: `sa22011`; 2016: `sa22016`; and 2021: `sa22021`. 
+* Statistical Area 3 2011: `sa32011`; 2016: `sa32016`; and 2021: `sa32021`. 
+* Statistical Area 4 2011: `sa42011`; 2016: `sa42016`; and 2021: `sa42021`. 
+* Greater Capital Cities 2011: `gcc2011`; 2016: `gcc2016`; and 2021: `gcc2021`. 
+* Remoteness Areas 2011: `ra2011`; and 2016: `ra2016`
+* State 2011: `state2011`; 2016: `state2016`; and `state2021`.
+* Commonwealth Electoral Divisions 2018: `ced2018`; and 2021: `ced2021`
+* State Electoral Divisions 2018:`sed2018`; and 2021: `sed2021`
+* Local Government Areas 2016: `lga2016`; 2018: `lga2018`; and 2021: `lga2021`
+* Regions for the Internet Vacancy Index 2008: `regional_ivi2008`
+* Postcodes 2016: `postcodes2016`; and 2021: `postcodes2021`
+* Census of Population and Housing Destination Zones 2011: `dz2011`; 2016: `dz2016`; and 2021: `dz2021`.
 
-The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and can be installed with `remotes::install_github()`
+The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and **could be** installed with `remotes::install_github("wfmackey/absmapsdata")`.
+However, as the package contains a **lot** of data, it is quite large and can be a pain to install. As an alternative, you can use the `strayr` package to download the `sf` objects on demand rather than installing the whole `absmapsdata` package:
 
 
 ```r
-remotes::install_github("wfmackey/absmapsdata")
-library(absmapsdata)
+remotes::install_github("runapp-aus/strayr")
+library(strayr)
 ```
 
 You will also need the `sf` package installed to handle the `sf` objects:
@@ -1314,6 +1327,7 @@ Now you can view `sf` objects stored in `absmapsdata`:
 
 
 ```r
+sa32016 <- strayr::read_absmap("sa32016")
 glimpse(sa32016)
 ```
 

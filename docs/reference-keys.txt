@@ -57,7 +57,10 @@ using-the-r_at_grattan-slack-channel
 google-blogs-stackoverflow
 learning-more-about-r
 reading-data
-importing-data
+set-up-and-packages
+different-data-file-types
+reading-common-data-files
+reading-csvs.csv
 reading-csv-files
 read_csv
 data.tablefread
@@ -68,7 +71,7 @@ readabs
 reading-common-files
 appropriately-renaming-variables
 getting-to-tidy-data
-set-up-and-packages
+set-up-and-packages-1
 why-data-types-matter
 checking-and-changing-data-types
 checking-and-changing-data-types-in-vectors-and-tibbles
@@ -98,7 +101,7 @@ putting-it-all-together
 joining-datasets-with-left_join
 data-visualisation
 introduction-to-data-visualisation
-set-up-and-packages-1
+set-up-and-packages-2
 concepts
 exploratory-data-visualisation
 making-grattan-y-charts
@@ -123,7 +126,7 @@ facetted-scatter-plots
 distributions
 maps
 sf-objects
-using-absmapsdata
+using-absmapsdata-and-strayr
 making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
