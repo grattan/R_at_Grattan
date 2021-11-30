@@ -83,21 +83,21 @@
 <p>In our work at Grattan, we use packages from two different source: the Comprehensive R Archive Network (CRAN) and Github. The main difference you need to know about is that we use different commands to install packages from these two sources.</p>
 <p>To install a package from CRAN, we use the command <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <p>For example, this code will install the <code>ggplot2</code> package from CRAN:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></code></pre></div>
-<p>The easiest way to install a package from Github is to use the function <code>install_github()</code>. Unfortunately, this function doesn’t come with base R. The <code>install_github()</code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<p>The easiest way to install a package from Github is to use the function <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code>. Unfortunately, this function doesn’t come with base R. The <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code> function is part of the <code>remotes</code> package. To use it, we first need to install <code>remotes</code> from CRAN:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></code></pre></div>
-<p>Now we can install packages from Github using the <code>install_github()</code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan <code>ggplot2</code> theme, which we’ll discuss later in this website:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
+<p>Now we can install packages from Github using the <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code> function from the <code>remotes</code> package. For example, here’s how we would install the Grattan <code>ggplot2</code> theme, which we’ll discuss later in this website:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"grattan/grattantheme"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="install-grattan-packages" class="section level2" number="5.2">
 <h2>
 <span class="header-section-number">5.2</span> Get set up: install packages for Grattan<a class="anchor" aria-label="anchor" href="#install-grattan-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>Just starting out or setting up a new machine? Run this block of code to get yourself all set up:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cran_packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"tidyverse"</span>, <span class="st">"readabs"</span>, <span class="st">"janitor"</span>, 
                    <span class="st">"rio"</span>, <span class="st">"sf"</span><span class="op">)</span>
 
@@ -106,7 +106,7 @@
 <span class="va">github_packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"grattan/grattantheme"</span>, <span class="st">"grattan/grattandata"</span>,
                      <span class="st">"wfmackey/absmapsdata"</span>, <span class="st">"grattan/grattanReporter"</span><span class="op">)</span>
 
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="va">github_packages</span>,
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="va">github_packages</span>,
                         dependencies <span class="op">=</span> <span class="cn">TRUE</span>,
                         upgrade <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -116,15 +116,15 @@
 </h2>
 <p>Before using a function that comes from a package, you need to tell R where to look for the function. There are two main ways to do that.</p>
 <p>We can either load (aka ‘attach’) the package by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. We typically do this at the top of a script.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">remotes</span><span class="op">)</span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
 
 <span class="co"># Now that the `remotes` package is loaded, we can use its `install_github()` function:</span>
 
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
 <p>Or, we can use two colons - <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> - to tell R to use an individual function from a package without loading it:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"grattan/grattantheme"</span><span class="op">)</span></code></pre></div>
 <p>It usually makes sense to load a package with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, unless you only need to use one of its function once or twice. There’s no harm to using the <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> operator even if you have already loaded a package with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. This can remove ambiguity both for R and for humans reading your code, particularly if you’re using an obscure function - it makes it clearer where the function comes from.</p>
 </div>
 <div id="upgrading-packages" class="section level2" number="5.4">
@@ -132,7 +132,7 @@
 <span class="header-section-number">5.4</span> Upgrading packages<a class="anchor" aria-label="anchor" href="#upgrading-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>It’s generally a good idea to keep your packages up-to-date. The easiest way to do this is to run this code:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">update_packages</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
 <p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All.’</p>
@@ -142,8 +142,8 @@
 <h2>
 <span class="header-section-number">5.5</span> Downgrading packages<a class="anchor" aria-label="anchor" href="#downgrading-packages"><i class="fas fa-link"></i></a>
 </h2>
-<p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code>install_version()</code> function, like this:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<p>Sometimes, when packages change, their functions evolve. The arguments to a function might change, or a function might be phased out (‘deprecated’) in favour of another. You can usually just adapt your workflow to the package’s new version without much fuss. If you find this isn’t the case, and you want to downgrade to an earlier version of a package, it’s straightforward. Just use the <code><a href="https://remotes.r-lib.org/reference/install_version.html">install_version()</a></code> function, like this:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_version</span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"1.13.3"</span><span class="op">)</span></code></pre></div>
 <p>It’s rare that you’d need to downgrade. Better to stay up to date, and adapt your code when necessary to changes in packages.</p>
 </div>
@@ -177,7 +177,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-23.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

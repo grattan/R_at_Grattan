@@ -1,7 +1,7 @@
 --- 
 title: "Using R at Grattan Institute"
 author: "Matt Cowgill, Will Mackey, and James Ha"
-date: "2021-08-23"
+date: "2021-12-01"
 site: bookdown::bookdown_site
 output: bookdown::bs4_book
 documentclass: book
@@ -33,6 +33,3 @@ This site was written in R with RMarkdown and the [bookdown](https://bookdown.or
 
 
 
-```r
-knitr::opts_chunk$set(out.width = "100%")
-```

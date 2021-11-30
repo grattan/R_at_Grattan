@@ -116,7 +116,7 @@ facetted-scatter-plots
 distributions
 maps
 sf-objects
-using-absmapsdata
+using-absmapsdata-and-strayr
 making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
@@ -136,6 +136,5 @@ get-outta-my-way
 using-github
 setting-up-a-github-account-and-github-desktop
 getting-started-with-github
-some-dos-and-some-do-nots
+some-git-tips
 contributing-to-this-book
-using-absmapsdata-and-strayr
