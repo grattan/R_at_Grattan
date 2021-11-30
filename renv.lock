@@ -857,16 +857,15 @@
     },
     "strayr": {
       "Package": "strayr",
-      "Version": "0.1.2",
+      "Version": "0.1.5.1",
       "Source": "GitHub",
-      "Remotes": "wfmackey/absmapsdata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "strayr",
       "RemoteUsername": "runapp-aus",
       "RemoteRef": "HEAD",
-      "RemoteSha": "fbd1c0405a8fa93bca3930d816e95d9dc6cf1273",
-      "Hash": "e2df55b3fb8fc68e3493c9e653c7e71c"
+      "RemoteSha": "3a5e84e73c1a66bbf663fe87c20c1b5ae14e6512",
+      "Hash": "17ce8cad9223c4def89227b767bb37df"
     },
     "stringdist": {
       "Package": "stringdist",
