@@ -18,7 +18,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -79,65 +79,66 @@ There are many, many things that you can do with R – far too many to cover in 
 <p>This chapter provides a quick explanation of how, exactly, you can contribute to this book. It requires knowledge of R and Github. If you’re getting started with Github,</p>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="footnotes footnotes-end-of-document">
+<hr>
+<ol>
+<li id="fn1"><p>yes, yes I know these aren’t Grattan colours. Sorry!<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we’re referring to the desktop software unless we make it clear that we mean the company.<a href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Using a script-based approach doesn’t guarantee that your analysis will be truly reproducible. If your work involves some steps that aren’t documented in the script - such as data “cleaning” in Excel - then it is not fully reproducible. If your script will only run on your machine - because there are undocumented options, for example - it is not reproducible.<a href="what-is-r-and-what-is-r-studio-and-why-are-we-doing-all-of-this.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>R is an ‘object oriented’ programming language. This means that all the things we want R to know about – datasets, or vectors, or lists, or functions, or whatever – are stored as ‘objects’.<a href="getting-started.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>It works the other way, too, with <code>-&gt;</code>. But best to stick with <code>&lt;-</code>.<a href="getting-started.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>This will be a well-known approach for Excel users!<a href="getting-started.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>There is another way to make your code more ‘human readable’ – the pipe, <code>%&gt;%</code> – that will be explored and used in later sections.<a href="getting-started.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>See the chapter on <a href="getting-started.html#data-types">Data Types</a>.<a href="getting-started.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>So much so that it was the name of Jenny Bryan’s <a href="https://www.rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/">keynote speech</a> at RStudio Conference in 2020.<a href="getting-started.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>This is a ‘comma separated values’ file. Learn more in the <a href="reading-data.html#reading-data">reading data chapter</a>.<a href="getting-started.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>This is the ‘base R’ function for reading a CSV file<a href="getting-started.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>So that one script will end with <code>write_csv("data/intermediate/census-income-clean.csv")</code> and the next script will have <code>read_csv("data/intermediate/census-income-clean.csv")</code><a href="organising-projects.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>See <a href="https://speakerdeck.com/jennybc/how-to-name-files">Jenny Bryan’s fantastic presentation</a> on how to name files (it’s fun).<a href="organising-projects.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.<a href="organising-projects.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>We’re not sure where or why this practice started but there’s some path dependency here meaning that the switching costs are high without a clear benefit. Guess we’re stuck with it.<a href="organising-projects.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>Alternatively, <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> the previous script.<a href="organising-projects.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>The tidyverse works with ‘tibbles’, which are a tidyverse-specific variant of the data frame. Don’t worry about the difference between tibbles and data frames.<a href="coding-style.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>you can read the pipe, <code>%&gt;%</code>, as ‘and then’<a href="coding-style.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>When working with very large datasets, it might be worth gaining speed using other packages, such as <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><code>data.table</code></a>. Fortunately, using the <code>dtplyr</code> package you can get most of the speed benefits of <code>data.table</code> and stick to familiar <code>dplyr</code> syntax.<a href="coding-style.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>The pipe is from the <code>magrittr</code> package and is used to chain functions together, so that the output from one function becomes the input to the next function. The pipe is loaded as part of the <a href="coding-style.html#tidyverse"><code>tidyverse</code></a>.<a href="coding-style.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Technically some of the ‘built-in’ functions are part of packages, like the <code>tools</code>, <code>utils</code> and <code>stats</code> packages that come with R. We’ll refer to all these as base R.<a href="packages.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.<a href="packages.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>There’s no need to install or load the individual <code>tidyverse</code> packages - like <code>dplyr</code> - separately. Just install them all together, and load them with the single <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> command. That way, you don’t need to remember which functions come from <code>tidyr</code> and which from <code>dplyr</code> - they’re all just <code>tidyverse</code> functions.<a href="packages.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>or <code>.xls</code> if the data is very old.<a href="reading-data.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>This is called ‘data serialisation’, a process described entertainingly in Danielle Navarro’s blogpost about <a href="https://blog.djnavarro.net/posts/2021-11-15_serialisation-with-rds/">data serialisation in R</a>.<a href="reading-data.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>A <code>tibble</code> is the <code>tidyverse</code> version of a standard R <code>data.frame</code>. They are basically the same; a <code>tibble</code> just has some more sensible default behaviours. If you want to learn more about this, see <a href="https://adv-r.hadley.nz/vectors-chap.html#tibble">Section 3.6 in Advanced R</a>. <a href="data-types.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and gender, 2010-11 to 2015-16</a><a href="data-types.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>There are ways around this using ‘list’ variables, but this is rarely useful or necessary.<a href="data-types.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>This is a tidied version of the <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a> dataset.<a href="data-transformation-with-dplyr.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>XXX cannot remember the source for this example; probably Hadley? Jenny Bryan? Maybe somenone else?<a href="data-transformation-with-dplyr.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>‘pass’ can also be used to mean ‘pipe’.<a href="data-transformation-with-dplyr.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>This is the same as <strong>keeping everything except</strong> the <code>state</code> and <code>sa3_name</code> variables.<a href="data-transformation-with-dplyr.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>Explained in useful detail by the Tidyverse people at <a href="https://tidyselect.r-lib.org/reference/select_helpers.html" class="uri">https://tidyselect.r-lib.org/reference/select_helpers.html</a><a href="data-transformation-with-dplyr.html#fnref33" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>Computers’ mind, more likely.<a href="data-transformation-with-dplyr.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>On the keyboard: <code>shift</code> + <code>backslash</code><a href="data-transformation-with-dplyr.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p>Wow they are all men!<a href="data-transformation-with-dplyr.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p>Wow they are all women!<a href="data-transformation-with-dplyr.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>From Kieran Healy’s <a href="https://socviz.co/"><em>Data Vizualization: A Practical Introduction</em></a>: ‘You should look at your data. Graphs and charts let you explore and learn about the structure of the information you collect. Good data visualizations also make it easier to communicate your ideas and findings to other people.’<a href="data-visualisation.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn39"><p>‘Bar charts are evidence that you are dead inside’ – Amanda Cox, data editor for the New York Times.<a href="data-visualisation.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and gender, 2010-11 to 2015-16</a><a href="data-visualisation.html#fnref40" class="footnote-back">↩︎</a></p></li>
+<li id="fn41"><p>The <code>dollar</code> and <code>comma</code> commands are functions, but can be used without <code>()</code>. Using <code><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar()</a></code> or <code><a href="https://scales.r-lib.org/reference/label_number.html">comma()</a></code> works too, and you can provide arguments that adjust their output: eg <code>dollar(suffix = "million")</code><a href="data-visualisation.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p>We are using the <code>tribble</code> function here to make it a little bit clearer what values apply to which gender. The ‘normal’ way to create a tibble is with the <code>tibble</code> function: <br><code>tibble(x = c(10, 100), y = c(100, 10))</code>, etc.<a href="data-visualisation.html#fnref42" class="footnote-back">↩︎</a></p></li>
+<li id="fn43"><p>From <a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument">ABS Employee income by occupation and sex, 2010-11 to 2016-16</a><a href="chart-cookbook.html#fnref43" class="footnote-back">↩︎</a></p></li>
+<li id="fn44"><p>Remember that <code>geom_col</code> is just shorthand for <code>geom_bar(stat = "identity")</code><a href="chart-cookbook.html#fnref44" class="footnote-back">↩︎</a></p></li>
+<li id="fn45"><p>The aesthetic <code>fill</code> represents the ‘fill’ colour – the colour that fills the bars in your chart. The <code>colour</code> aesthetic controls the colours of the <em>lines</em>.<a href="chart-cookbook.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn46"><p><code>geom_col</code> is shorthand for <code>geom_bar(stat = "identity"</code><a href="chart-cookbook.html#fnref46" class="footnote-back">↩︎</a></p></li>
+<li id="fn47"><p>The <code><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars()</a></code> function is sometimes used in the <code>tidyverse</code> to specifically say “I am using a variable name here”. You can’t use variable names directly because of legacy issues. You can learn more about it in the <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">official documentation</a>.<a href="chart-cookbook.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn48"><p>See the full list of shapes <a href="https://ggplot2.tidyverse.org/reference/scale_shape.html">here</a>.<a href="chart-cookbook.html#fnref48" class="footnote-back">↩︎</a></p></li>
+<li id="fn49"><p>Note that when <em>creating</em>
+an <code>NA</code> value, like we’ve done above, we have to specify what <em>type</em> of <code>NA</code>
+value it is: a number <code>NA_real_</code>, an integer <code>NA_integer</code>, or a character
+<code>NA_character_</code>.<a href="functional-programming-making-and-using-your-own-functions.html#fnref49" class="footnote-back">↩︎</a></p></li>
+<li id="fn50"><p>Unless they are explicitly stored in your environment, but this is not recommended.<a href="functional-programming-making-and-using-your-own-functions.html#fnref50" class="footnote-back">↩︎</a></p></li>
+<li id="fn51"><p>Personal email addresses are recommended because you <em>may</em> want to keep your Github account after you have left Grattan. Although that may be wishful thinking from the authors.<a href="version-control.html#fnref51" class="footnote-back">↩︎</a></p></li>
+<li id="fn52"><p>This is definitely not the only way to do this. You can sync with Github through <a href="version-control.html#fnref52" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
   <div class="chapter-nav">
 <div class="prev"><a href="version-control.html"><span class="header-section-number">14</span> Version control</a></div>
 <div class="empty"></div>
@@ -159,7 +160,7 @@ There are many, many things that you can do with R – far too many to cover in 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-31.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-11-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

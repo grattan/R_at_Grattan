@@ -18,7 +18,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -91,7 +91,7 @@
 <h2>
 <span class="header-section-number">1.2</span> What is RStudio?<a class="anchor" aria-label="anchor" href="#what-is-rstudio"><i class="fas fa-link"></i></a>
 </h2>
-<p>RStudio is another piece of free software you can download and run on your computer.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;RStudio is, somewhat confusingly, a product made by a company called RStudio. Although the RStudio desktop software is free, RStudio makes money by charging for other services, like running R in the cloud. When we refer to RStudio, we’re referring to the desktop software unless we make it clear that we mean the company.&lt;/p&gt;"><sup>2</sup></a> Like R itself, RStudio is available for Windows, macOS and Linux.</p>
+<p>RStudio is another piece of free software you can download and run on your computer.<a href="contributing-to-this-book.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Like R itself, RStudio is available for Windows, macOS and Linux.</p>
 <p>In programmer jargon, RStudio is an “integrated development environment” or IDE. Translated to English, this means RStudio has a range of tools that help you work with R. It has a text editor for you to write R scripts, an R ‘console’ to interact directly with the language, and panes that let you see the objects you have stored in memory and any graphs you’ve created, among other things.</p>
 <div class="inline-figure"><img src="atlas/rstudio_screenshot.png" width="100%"></div>
 <p>You’ll almost always interact with R by opening RStudio.</p>
@@ -112,7 +112,7 @@
 </h3>
 <p>It’s important for our analyses to be <strong>reproducible</strong>. This means that all of the steps that were taken to go from your raw data to your final outputs are clearly set out and can be reproduced if necessary.</p>
 <p>Reproducibility is very important for quality control (“QC”), particularly of complex analyses - if it’s not clear what you’ve done, it’s hard for someone to check your work. It also makes things easier for you in the future - coming back to an old analysis a few months or years down the track is much easier if it’s reproducible. At Grattan, most of us rotate from program to program periodically – your colleagues will probably need to revisit your work at some point in the future, and they’ll thank you if it’s in a reproducible script.</p>
-<p>Script-based analyses are more likely to be reproducible.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Using a script-based approach doesn’t guarantee that your analysis will be truly reproducible. If your work involves some steps that aren’t documented in the script - such as data “cleaning” in Excel - then it is not fully reproducible. If your script will only run on your machine - because there are undocumented options, for example - it is not reproducible.&lt;/p&gt;"><sup>3</sup></a> A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.</p>
+<p>Script-based analyses are more likely to be reproducible.<a href="contributing-to-this-book.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> A script sets out all the steps that were taken from reading in data, to tidying it, to estimating models or summary statistics and generating output.</p>
 <p>Analysis that isn’t script based, like work done in Excel, is almost never reproducible. It is generally unclear what steps were taken, in which order, to go from the raw data to the output. It isn’t even always clear in a spreadsheet what is the ‘raw data’ and what has been modified in some way.</p>
 <p>Using scripts makes us less susceptible to the sort of errors <a href="https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt#Methodological_flaws">famously made by the economists Reinhart and Rogoff</a> in their Excel-based analysis of the effect of public debt on economic growth. It’s still quite possible to make errors in a script-based analysis, but those errors are easier to find when the analysis is more transparent.</p>
 <div class="inline-figure"><img src="atlas/reinhart_rogoff.jpg" width="100%"></div>
@@ -143,7 +143,6 @@
 </div>
 </div>
 </div>
-
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Welcome!</a></div>
 <div class="next"><a href="getting-started.html"><span class="header-section-number">2</span> Getting started</a></div>
@@ -175,7 +174,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-08-31.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-11-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

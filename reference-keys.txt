@@ -61,11 +61,9 @@ set-up-and-packages
 different-data-file-types
 reading-common-data-files
 reading-csvs.csv
-reading-csv-files
-read_csv
-data.tablefread
+reading-excel-files-with-readxlread_excel
+reading-shapefiles-with-sfread_sf
 read_microdata
-readxlread_excel
 rio
 readabs
 reading-common-files
@@ -126,7 +124,7 @@ facetted-scatter-plots
 distributions
 maps
 sf-objects
-using-absmapsdata
+using-absmapsdata-and-strayr
 making-choropleth-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
