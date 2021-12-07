@@ -7,18 +7,18 @@
 <title>7 Reading data | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="Introduction  7.1 Set-up and packages This section uses the package XX. library(tidyverse)  7.2 Different data file types There are lots of different ways to store data on a computer. A common...">
-<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.24.4 with bs4_book()">
 <meta property="og:title" content="7 Reading data | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Introduction  7.1 Set-up and packages This section uses the package XX. library(tidyverse)  7.2 Different data file types There are lots of different ways to store data on a computer. A common...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7 Reading data | Using R at Grattan Institute">
 <meta name="twitter:description" content="Introduction  7.1 Set-up and packages This section uses the package XX. library(tidyverse)  7.2 Different data file types There are lots of different ways to store data on a computer. A common...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -94,7 +94,7 @@ A common way, and a useful starting point, is a ‘comma separated value,’ or 
 <span id="cb109-4"><a href="reading-data.html#cb109-4" aria-hidden="true" tabindex="-1"></a>Anika, <span class="sc">-</span><span class="dv">50</span></span></code></pre></div>
 <p>Simple! A bunch of programs are able to read – or ‘parse’ – a <code>.csv</code> file. They’ve very versatile and – along with their cousin ‘tab separated value,’ or <code>.tsv</code> files – are used widely.</p>
 <p>But there are limitation to <code>.csv</code> files. They’re plain text, meaning they can’t store ‘metadata’ – additional information – about the rows or columns. For example, if we wanted to store the data above but include the information that the <code>name</code> column is a character and the <code>age</code> column is a numeric, we would need a different data file type.</p>
-<p>An Excel file is the next most common type. An <code>.xlsx</code> file<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;or &lt;code&gt;.xls&lt;/code&gt; if the data is very old.&lt;/p&gt;"><sup>24</sup></a> file contains more than just the data shown in the rows and columns. The same goes for Google Sheets files. They contains information about cell formats (‘this cell is a DATE’; ‘this cell is YELLOW’; this cell is merged with the one next to it’) and formulas contained within them. This makes Excel/Sheets files very useful for use with Excel or Google Sheets, but not elsewhere.</p>
+<p>An Excel file is the next most common type. An <code>.xlsx</code> file<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;or &lt;code&gt;.xls&lt;/code&gt; if the data is very old.&lt;/p&gt;"><sup>24</sup></a> file contains more than just the data shown in the rows and columns. The same goes for Google Sheets files. They contain information about cell formats (‘this cell is a DATE’; ‘this cell is YELLOW’; ‘this cell is merged with the one next to it because you like chaos’) and formulas contained within them. This makes Excel/Sheets files very useful for use with Excel or Google Sheets, but not elsewhere.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is called ‘data serialisation,’ a process described entertainingly in Danielle Navarro’s blogpost about &lt;a href="https://blog.djnavarro.net/posts/2021-11-15_serialisation-with-rds/"&gt;data serialisation in R&lt;/a&gt;.&lt;/p&gt;'><sup>25</sup></a></p>
 <p>The same goes for data files created and exported from Stata (<code>.dta</code> files), SPSS (<code>.sav</code>), SAS (<code>.sas7bdat</code> et al).</p>
 <p>And these are just <em>rectangular</em> data files. Other, non-rectangular data types exist for other purposes too. For example, there is a whole world of mapping software and data file types that are designed specifically for that purpose. Files hosted and used on the internet are often stored in ‘JSON’ files.</p>
 <p>Different file types will often require a specialised function to be read into R in a usable way. This chapter covers the key packages and functions we use to read data types often seen in the wild.</p>
@@ -112,7 +112,7 @@ We focus here on the ‘best practice’ methods that align with Grattan’s sty
 <p>The <code>read_csv</code> function from the <code>dplyr</code> package is the weakly-preferred method for reading CSV files.
 This function is well documented, provides clear messages and warnings, and is just a safe bet all-round.</p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 47899 Columns: 16</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
@@ -121,43 +121,32 @@ This function is well documented, provides clear messages and warnings, and is j
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>There are <em>lots</em> of different packages and functions that exist to read data files into R.</p>
+<div class="rmdwarning">
+<p><strong>Warning:</strong> <code>read_csv</code> is quicker because uses the first 1,000 rows to determine the type of each column. But if some of your columns in a large dataset have empty rows – e.g. if the particular variable was only collected for a small subsample of observations – then this process can <strong>incorrectly</strong> allocate the column types, replacing data elements with <code>NA</code>.</p>
 </div>
-<div id="reading-csv-files" class="section level3" number="7.3.2">
-<h3>
-<span class="header-section-number">7.3.2</span> Reading CSV files<a class="anchor" aria-label="anchor" href="#reading-csv-files"><i class="fas fa-link"></i></a>
-</h3>
-<div id="read_csv" class="section level4" number="7.3.2.1">
-<h4>
-<span class="header-section-number">7.3.2.1</span> <code>read_csv()</code><a class="anchor" aria-label="anchor" href="#read_csv"><i class="fas fa-link"></i></a>
-</h4>
-<p>The <code>read_csv()</code> function from the <code>tidyverse</code> is quicker and smarter than <code>read.csv</code> in base R.</p>
-<p>Pitfalls:
-1. read_csv is quicker because it surveys a sample of the data</p>
-<p>We can also compress <code>.csv</code> files into <code>.zip</code> files and read them <em>directly</em> using <code>read_csv()</code>:</p>
+<p>An alternative is <code>fread</code> from the <code>data.table</code> package, which has the benefits of being faster and less prone to the error described above (because <code>fread</code> uses a <a href="https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread">sample of 10,000 rows</a> from ‘100 contiguous rows are read from 100 equally spaced points throughout the file including the beginning, middle and the very end.’)</p>
+<p>We can also compress <code>.csv</code> files into <code>.zip</code> files and read them <em>directly</em> using both <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and <code>fread()</code>:</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/my_data.zip"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/my_data.zip"</span><span class="op">)</span></code></pre></div>
 <p>This is useful for two reasons:</p>
 <ol style="list-style-type: decimal">
 <li>The data takes up less room on your computer; and</li>
 <li>The original data, which shouldn’t ever be directly edited, is protected and cannot be directly edited.</li>
 </ol>
 </div>
-<div id="data.tablefread" class="section level4" number="7.3.2.2">
-<h4>
-<span class="header-section-number">7.3.2.2</span> <code>data.table::fread()</code><a class="anchor" aria-label="anchor" href="#data.tablefread"><i class="fas fa-link"></i></a>
-</h4>
-<p>The <code>fread</code> function from <code>data.table</code> is quicker than both <code>read.csv</code> and <code>read_csv</code>.</p>
-</div>
-</div>
-<div id="read_microdata" class="section level3" number="7.3.3">
+<div id="reading-excel-files-with-readxlread_excel" class="section level3" number="7.3.2">
 <h3>
-<span class="header-section-number">7.3.3</span> <code>grattandata::read_microdata()</code><a class="anchor" aria-label="anchor" href="#read_microdata"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.2</span> Reading Excel files with <code>readxl::read_excel()</code><a class="anchor" aria-label="anchor" href="#reading-excel-files-with-readxlread_excel"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="readxlread_excel" class="section level3" number="7.3.4">
+<div id="reading-shapefiles-with-sfread_sf" class="section level3" number="7.3.3">
 <h3>
-<span class="header-section-number">7.3.4</span> <code>readxl::read_excel()</code><a class="anchor" aria-label="anchor" href="#readxlread_excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.3</span> Reading shapefiles with <code>sf::read_sf()</code><a class="anchor" aria-label="anchor" href="#reading-shapefiles-with-sfread_sf"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="read_microdata" class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> <code>grattandata::read_microdata()</code><a class="anchor" aria-label="anchor" href="#read_microdata"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 <div id="rio" class="section level3" number="7.3.5">
@@ -212,9 +201,9 @@ This function is well documented, provides clear messages and warnings, and is j
 <li>
 <a class="nav-link" href="#reading-common-data-files"><span class="header-section-number">7.3</span> Reading common data files</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#reading-csvs.csv"><span class="header-section-number">7.3.1</span> Reading CSVs.csv</a></li>
-<li><a class="nav-link" href="#reading-csv-files"><span class="header-section-number">7.3.2</span> Reading CSV files</a></li>
-<li><a class="nav-link" href="#read_microdata"><span class="header-section-number">7.3.3</span> grattandata::read_microdata()</a></li>
-<li><a class="nav-link" href="#readxlread_excel"><span class="header-section-number">7.3.4</span> readxl::read_excel()</a></li>
+<li><a class="nav-link" href="#reading-excel-files-with-readxlread_excel"><span class="header-section-number">7.3.2</span> Reading Excel files with readxl::read_excel()</a></li>
+<li><a class="nav-link" href="#reading-shapefiles-with-sfread_sf"><span class="header-section-number">7.3.3</span> Reading shapefiles with sf::read_sf()</a></li>
+<li><a class="nav-link" href="#read_microdata"><span class="header-section-number">7.3.4</span> grattandata::read_microdata()</a></li>
 <li><a class="nav-link" href="#rio"><span class="header-section-number">7.3.5</span> rio</a></li>
 <li><a class="nav-link" href="#readabs"><span class="header-section-number">7.3.6</span> readabs</a></li>
 </ul>
@@ -238,7 +227,7 @@ This function is well documented, provides clear messages and warnings, and is j
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-01.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

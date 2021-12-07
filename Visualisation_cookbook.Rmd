@@ -981,11 +981,6 @@ include_graphics("atlas/scatter_layer.png")
 ```
 
 
-### Scatter plots with trendlines
-
-### Facetted scatter plots
-
-
 ## Distributions
 
 `geom_histogram`
@@ -1032,7 +1027,7 @@ install.packages("sf")
 library(sf)
 ```
 
-Now you can view `sf` objects stored in `absmapsdata`:
+Now you can view `sf` object retrieved from the `strayr` package:
 
 ```{r}
 sa32016 <- strayr::read_absmap("sa32016")
@@ -1047,12 +1042,21 @@ Choropleth maps break an area into 'bits', and colours each 'bit' according to a
 
 You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
 
-First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`:
+First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`, then create some filtered datasets.
 
 ```{r make_map_data, message = FALSE}
-map_data <- sa3_income %>% 
+sa3_income_map <- sa3_income %>% 
   left_join(sa32016, by = c("sa3_name" = "sa3_name_2016"))
 
+
+prof_women <- sa3_income_map %>% 
+  filter(occupation == "Professionals",
+         gender == "Women",
+         year == 2016)
+
+professionals <- sa3_income_map %>% 
+  filter(occupation == "Professionals",
+         year == 2016)
 ```
 
 You then plot a map like you would any other `ggplot`: provide your data, then choose your `aes` and your `geom`. For maps with `sf` objects, the **key aesthetic** is `geometry = geometry`, and the **key geom** is `geom_sf`.
@@ -1062,16 +1066,62 @@ The argument `lwd` controls the line width of area borders.
 Note that RStudio takes a long time to render a map in the 
 
 
-```{r map1}
-
+```{r map1, cache=TRUE}
+prof_women %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = .1,
+          colour = "black")
 ```
 
 Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful. 
 
-To do this, filter the `map_data` object: 
+To do this, filter the `map_data` object to just the Melbourne Greater Capital City area is shown. Here, we'll also turn off the borders and add some Grattan colours.
 
 ```{r map_filter}
+melbourne_data <- prof_women %>% 
+  filter(gcc_name == "Greater Melbourne")
 
+melbourne_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      breaks = seq(0, 100e3, 5e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of women in professional occupations",
+       subtitle = "Melbourne by SA3 in 2016",
+       fill = NULL)
+```
+
+#### Facetted maps 
+
+You can use `facet_wrap` (or `facet_grid`) on maps just like you would on any other chart type. 
+
+```{r facet_map}
+melbourne_professionals_data <- professionals %>% 
+  filter(gcc_name == "Greater Melbourne")
+
+melbourne_professionals_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  facet_wrap(~gender) + 
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      limits = c(50e3, 110e3),
+                      breaks = seq(0, 110e3, 20e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of professionals in Melbourne",
+       subtitle = "By SA3 in 2016",
+       fill = NULL)
 ```
 
 
@@ -1083,32 +1133,36 @@ To use `geom_(text|label)_repel`, you need to tell `ggrepel` where in
 
 
 
-```{r map_label, warning = FALSE, eval = FALSE}
-map <- map_data %>% 
-        filter(state == "Vic") %>% 
-        ggplot(aes(geometry = geometry)) +
-        geom_sf(aes(fill = pop_change),
-                lwd = .1,
-                colour = "black") +
-        theme_void() +
-        grattan_fill_manual(discrete = FALSE, 
-                            palette = "diverging",
-                            limits = c(-20, 20),
-                            breaks = seq(-20, 20, 10)) +
-  geom_label_repel(aes(label = sa3_name),
-                  stat = "sf_coordinates", nudge_x = 1000, segment.alpha = .5,
-                  size = 4, 
-                  direction = "y",
-                  label.size = 0, 
-                  label.padding = unit(0.1, "lines"),
-                  colour = "grey50",
-                  segment.color = "grey50") + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, .2))) + 
-  theme(legend.position = "top") + 
-  labs(fill = "Population \nchange")
+```{r facet_map_labels}
+high_income_labels <- melbourne_data %>% 
+  filter(average_income > 75e3)
 
-map
+melbourne_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  grattan_label_repel(
+    data = high_income_labels,
+    aes(label = sa3_name),
+    stat = "sf_coordinates", nudge_x = -1000, segment.alpha = .5,
+    size = 12, 
+    direction = "y",
+    colour = grattan_red,
+    segment.color = grattan_red) + 
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      breaks = seq(50e3, 80e3, 5e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of women in professional occupations",
+       subtitle = "Melbourne by SA3 in 2016",
+       fill = NULL)
+
 ```
+
+
 
 
 ## Creating simple interactive graphs with `plotly`

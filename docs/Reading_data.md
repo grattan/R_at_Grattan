@@ -34,7 +34,7 @@ Simple! A bunch of programs are able to read -- or 'parse' -- a `.csv` file. The
 
 But there are limitation to `.csv` files. They're plain text, meaning they can't store 'metadata' -- additional information -- about the rows or columns. For example, if we wanted to store the data above but include the information that the `name` column is a character and the `age` column is a numeric, we would need a different data file type. 
 
-An Excel file is the next most common type. An `.xlsx` file^[or `.xls` if the data is very old.] file contains more than just the data shown in the rows and columns. The same goes for Google Sheets files. They contains information about cell formats ('this cell is a DATE'; 'this cell is YELLOW'; this cell is merged with the one next to it') and formulas contained within them. This makes Excel/Sheets files very useful for use with Excel or Google Sheets, but not elsewhere.
+An Excel file is the next most common type. An `.xlsx` file^[or `.xls` if the data is very old.] file contains more than just the data shown in the rows and columns. The same goes for Google Sheets files. They contain information about cell formats ('this cell is a DATE'; 'this cell is YELLOW'; 'this cell is merged with the one next to it because you like chaos') and formulas contained within them. This makes Excel/Sheets files very useful for use with Excel or Google Sheets, but not elsewhere.^[This is called 'data serialisation', a process described entertainingly in Danielle Navarro's blogpost about [data serialisation in R]( https://blog.djnavarro.net/posts/2021-11-15_serialisation-with-rds/).]
 
 The same goes for data files created and exported from Stata (`.dta` files), SPSS (`.sav`), SAS (`.sas7bdat` et al).
 
@@ -76,21 +76,13 @@ sa3_income <- read_csv("data/sa3_income.csv")
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
+::: {.rmdwarning}
+**Warning:** `read_csv` is quicker because uses the first 1,000 rows to determine the type of each column. But if some of your columns in a large dataset have empty rows -- e.g. if the particular variable was only collected for a small subsample of observations -- then this process can **incorrectly** allocate the column types, replacing data elements with `NA`. 
+:::
 
+An alternative is `fread` from the `data.table` package, which has the benefits of being faster and less prone to the error described above (because `fread` uses a [sample of 10,000 rows](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread) from '100 contiguous rows are read from 100 equally spaced points throughout the file including the beginning, middle and the very end.')
 
-There are *lots* of different packages and functions that exist to read data files into R.
-
-
-### Reading CSV files
-
-#### `read_csv()`
-
-The `read_csv()` function from the `tidyverse` is quicker and smarter than `read.csv` in base R. 
-
-Pitfalls:
-1. read_csv is quicker because it surveys a sample of the data
-
-We can also compress `.csv` files into `.zip` files and read them _directly_ using `read_csv()`:
+We can also compress `.csv` files into `.zip` files and read them _directly_ using both `read_csv()` and `fread()`:
 
 
 ```r
@@ -102,13 +94,12 @@ This is useful for two reasons:
 1. The data takes up less room on your computer; and
 2. The original data, which shouldn't ever be directly edited, is protected and cannot be directly edited.
 
-#### `data.table::fread()`
+### Reading Excel files with `readxl::read_excel()`
 
-The `fread` function from `data.table` is quicker than both `read.csv` and `read_csv`. 
+### Reading shapefiles with `sf::read_sf()`
 
 ### `grattandata::read_microdata()` {#read_microdata}
 
-### `readxl::read_excel()`
 
 ### `rio` 
 
