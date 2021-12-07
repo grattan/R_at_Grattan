@@ -5,7 +5,7 @@ This section focusses on transforming rectangular datasets.
 
 The `dplyr` verbs and concepts covered in this chapter are also covered in this video by Garrett Grolemund (a co-author of _[R for Data Science](https://r4ds.had.co.nz/)_ with Hadley Wickham). 
 
-<iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="672" height="400px"></iframe>
+<iframe src="https://www.youtube.com/embed/y9KJmUGc8SE" width="672" height="400px" data-external="1"></iframe>
 
 
 ## Set up
@@ -1258,14 +1258,14 @@ sa3_income %>%
 
 ```
 ## # A tibble: 6 × 8
-##    year sa3_name           state gender income workers highest_income worker_growth
-##   <dbl> <chr>              <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
-## 1  2011 Urriarra - Namadgi ACT   Women  48525.      84         86672.        NA    
-## 2  2012 Urriarra - Namadgi ACT   Women  51648.      96         86672.         0.143
-## 3  2013 Urriarra - Namadgi ACT   Women  61858.     124         86672.         0.292
-## 4  2014 Urriarra - Namadgi ACT   Women  72980.      99         86672.        -0.202
-## 5  2015 Urriarra - Namadgi ACT   Women  68534.      72         86672.        -0.273
-## 6  2016 Urriarra - Namadgi ACT   Women  86672.      90         86672.         0.25
+##    year sa3_name        state gender income workers highest_income worker_growth
+##   <dbl> <chr>           <chr> <chr>   <dbl>   <dbl>          <dbl>         <dbl>
+## 1  2011 Urriarra - Nam… ACT   Women  48525.      84         86672.        NA    
+## 2  2012 Urriarra - Nam… ACT   Women  51648.      96         86672.         0.143
+## 3  2013 Urriarra - Nam… ACT   Women  61858.     124         86672.         0.292
+## 4  2014 Urriarra - Nam… ACT   Women  72980.      99         86672.        -0.202
+## 5  2015 Urriarra - Nam… ACT   Women  68534.      72         86672.        -0.273
+## 6  2016 Urriarra - Nam… ACT   Women  86672.      90         86672.         0.25
 ```
 
 

@@ -142,7 +142,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks brilliant: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks beaut: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -206,7 +206,7 @@ simple_bar
 
 <img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="100%" />
 
-Looks wicked! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks swell! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -266,7 +266,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks of the highest quality: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks cool: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -435,7 +435,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="100%" />
 
-Looks beaut! Now you can add titles and a caption, and save using `grattan_save`:
+Looks eminent! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -588,7 +588,7 @@ facet_bar +
 
 <img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="100%" />
 
-Ace! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Terrific! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -877,7 +877,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="100%" />
 
-Looks class. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks wonderful. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -1130,7 +1130,7 @@ base_chart
 
 <img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="100%" />
 
-Looks class! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks legit! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
@@ -1270,11 +1270,6 @@ grattan_save("atlas/scatter_layer.pdf", scatter_layer, type = "fullslide")
 <img src="atlas/scatter_layer.png" width="100%" />
 
 
-### Scatter plots with trendlines
-
-### Facetted scatter plots
-
-
 ## Distributions
 
 `geom_histogram`
@@ -1323,7 +1318,7 @@ install.packages("sf")
 library(sf)
 ```
 
-Now you can view `sf` objects stored in `absmapsdata`:
+Now you can view `sf` object retrieved from the `strayr` package:
 
 
 ```r
@@ -1356,12 +1351,22 @@ Choropleth maps break an area into 'bits', and colours each 'bit' according to a
 
 You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
 
-First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`:
+First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`, then create some filtered datasets.
 
 
 ```r
-map_data <- sa3_income %>% 
+sa3_income_map <- sa3_income %>% 
   left_join(sa32016, by = c("sa3_name" = "sa3_name_2016"))
+
+
+prof_women <- sa3_income_map %>% 
+  filter(occupation == "Professionals",
+         gender == "Women",
+         year == 2016)
+
+professionals <- sa3_income_map %>% 
+  filter(occupation == "Professionals",
+         year == 2016)
 ```
 
 You then plot a map like you would any other `ggplot`: provide your data, then choose your `aes` and your `geom`. For maps with `sf` objects, the **key aesthetic** is `geometry = geometry`, and the **key geom** is `geom_sf`.
@@ -1372,12 +1377,71 @@ Note that RStudio takes a long time to render a map in the
 
 
 
+```r
+prof_women %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = .1,
+          colour = "black")
+```
+
+<img src="Visualisation_cookbook_files/figure-html/map1-1.png" width="100%" />
 
 Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful. 
 
-To do this, filter the `map_data` object: 
+To do this, filter the `map_data` object to just the Melbourne Greater Capital City area is shown. Here, we'll also turn off the borders and add some Grattan colours.
 
 
+```r
+melbourne_data <- prof_women %>% 
+  filter(gcc_name == "Greater Melbourne")
+
+melbourne_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      breaks = seq(0, 100e3, 5e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of women in professional occupations",
+       subtitle = "Melbourne by SA3 in 2016",
+       fill = NULL)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/map_filter-1.png" width="100%" />
+
+#### Facetted maps 
+
+You can use `facet_wrap` (or `facet_grid`) on maps just like you would on any other chart type. 
+
+
+```r
+melbourne_professionals_data <- professionals %>% 
+  filter(gcc_name == "Greater Melbourne")
+
+melbourne_professionals_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  facet_wrap(~gender) + 
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      limits = c(50e3, 110e3),
+                      breaks = seq(0, 110e3, 20e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of professionals in Melbourne",
+       subtitle = "By SA3 in 2016",
+       fill = NULL)
+```
+
+<img src="Visualisation_cookbook_files/figure-html/facet_map-1.png" width="100%" />
 
 
 #### Adding labels to maps
@@ -1390,31 +1454,41 @@ To use `geom_(text|label)_repel`, you need to tell `ggrepel` where in
 
 
 ```r
-map <- map_data %>% 
-        filter(state == "Vic") %>% 
-        ggplot(aes(geometry = geometry)) +
-        geom_sf(aes(fill = pop_change),
-                lwd = .1,
-                colour = "black") +
-        theme_void() +
-        grattan_fill_manual(discrete = FALSE, 
-                            palette = "diverging",
-                            limits = c(-20, 20),
-                            breaks = seq(-20, 20, 10)) +
-  geom_label_repel(aes(label = sa3_name),
-                  stat = "sf_coordinates", nudge_x = 1000, segment.alpha = .5,
-                  size = 4, 
-                  direction = "y",
-                  label.size = 0, 
-                  label.padding = unit(0.1, "lines"),
-                  colour = "grey50",
-                  segment.color = "grey50") + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, .2))) + 
-  theme(legend.position = "top") + 
-  labs(fill = "Population \nchange")
+high_income_labels <- melbourne_data %>% 
+  filter(average_income > 75e3)
 
-map
+melbourne_data %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = average_income),
+          lwd = 0) +
+  grattan_label_repel(
+    data = high_income_labels,
+    aes(label = sa3_name),
+    stat = "sf_coordinates", nudge_x = -1000, segment.alpha = .5,
+    size = 12, 
+    direction = "y",
+    colour = grattan_red,
+    segment.color = grattan_red) + 
+  theme_void() +
+  grattan_fill_manual(discrete = FALSE, 
+                      palette = "full", 
+                      reverse = TRUE,
+                      breaks = seq(50e3, 80e3, 5e3),
+                      labels = dollar,
+                      guide = guide_colorsteps()) + 
+  labs(title = "Average income of women in professional occupations",
+       subtitle = "Melbourne by SA3 in 2016",
+       fill = NULL)
 ```
+
+```
+## Warning in st_point_on_surface.sfc(sf::st_zm(x)): st_point_on_surface may not
+## give correct results for longitude/latitude data
+```
+
+<img src="Visualisation_cookbook_files/figure-html/facet_map_labels-1.png" width="100%" />
+
+
 
 
 ## Creating simple interactive graphs with `plotly`

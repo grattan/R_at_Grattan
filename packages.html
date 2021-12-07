@@ -7,14 +7,14 @@
 <title>5 Using packages | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
-<meta name="generator" content="bookdown 0.23.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.24.4 with bs4_book()">
 <meta property="og:title" content="5 Using packages | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5 Using packages | Using R at Grattan Institute">
 <meta name="twitter:description" content="5.1 What are packages? R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
@@ -76,7 +76,7 @@
 <h2>
 <span class="header-section-number">5.1</span> What are packages?<a class="anchor" aria-label="anchor" href="#what-are-packages"><i class="fas fa-link"></i></a>
 </h2>
-<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a href="contributing-to-this-book.html#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>. But using packages will make your life easier.</p>
+<p>R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as ‘base R’<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Technically some of the ‘built-in’ functions are part of packages, like the &lt;code&gt;tools&lt;/code&gt;, &lt;code&gt;utils&lt;/code&gt; and &lt;code&gt;stats&lt;/code&gt; packages that come with R. We’ll refer to all these as base R.&lt;/p&gt;"><sup>21</sup></a>. But using packages will make your life easier.</p>
 <p>Like R itself, packages are free and open source. You can install them from within RStudio.</p>
 </div>
 <div id="install-packages" class="section level2" number="5.2">
@@ -144,7 +144,7 @@
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">update_packages</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>This will upgrade all your packages - including those you’ve installed from CRAN and Github.</p>
 <p>When you run the above command, it will prompt you to ask which packages you want to update - press 1 for ‘All’.</p>
-<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a href="contributing-to-this-book.html#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
+<p>If it asks you ‘Do you want to install from sources the package which needs compilation?’ type ‘no’ and press enter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Nothing against installing from source, but this part of the guide is aimed at people who are not familiar with R and may not have the tools installed to build from source.&lt;/p&gt;"><sup>22</sup></a></p>
 </div>
 <div id="downgrading-packages" class="section level3" number="5.5.2">
 <h3>
@@ -180,14 +180,14 @@
 <li>
 <em>stringr</em> for manipulating strings of text</li>
 </ul>
-<p>All these packages (and more!) will automatically be loaded for you when you run the command<a href="contributing-to-this-book.html#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>:</p>
+<p>All these packages (and more!) will automatically be loaded for you when you run the command<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;There’s no need to install or load the individual &lt;code&gt;tidyverse&lt;/code&gt; packages - like &lt;code&gt;dplyr&lt;/code&gt; - separately. Just install them all together, and load them with the single &lt;code&gt;library(tidyverse)&lt;/code&gt; command. That way, you don’t need to remember which functions come from &lt;code&gt;tidyr&lt;/code&gt; and which from &lt;code&gt;dplyr&lt;/code&gt; - they’re all just &lt;code&gt;tidyverse&lt;/code&gt; functions.&lt;/p&gt;"><sup>23</sup></a>:</p>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-## ✔ tibble  3.1.3     ✔ dplyr   1.0.7
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   2.0.0     ✔ forcats 0.5.1</code></pre>
+## ✔ tibble  3.1.6     ✔ dplyr   1.0.7
+## ✔ tidyr   1.1.4     ✔ stringr 1.4.0
+## ✔ readr   2.1.1     ✔ forcats 0.5.1</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
@@ -231,6 +231,7 @@
 </div>
 </div>
 </div>
+
   <div class="chapter-nav">
 <div class="prev"><a href="coding-style.html"><span class="header-section-number">4</span> Grattan’s coding style and the tidyverse</a></div>
 <div class="next"><a href="seeking-help.html"><span class="header-section-number">6</span> Seeking help and using other resources</a></div>
@@ -271,7 +272,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-11-30.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -119,13 +119,12 @@ scatter-plots
 simple-scatter-plot
 scatter-plot-with-reshaped-data
 layered-scatter-plot
-scatter-plots-with-trendlines
-facetted-scatter-plots
 distributions
 maps
 sf-objects
 using-absmapsdata-and-strayr
 making-choropleth-maps
+facetted-maps
 adding-labels-to-maps
 creating-simple-interactive-graphs-with-plotly
 analysis
