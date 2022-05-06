@@ -31,6 +31,10 @@ jobs:
       - name: Install udunits
         run: |
           brew install udunits
+
+      - name: Install gdal
+        run: |
+          brew install gdal
           
       # renv details from https://github.com/actions/cache/blob/master/examples.md#r---renv
       - name: Cache Renv packages
