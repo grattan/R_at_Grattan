@@ -7,19 +7,22 @@
 <title>8 Different data types | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
-<meta name="generator" content="bookdown 0.24.4 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="8 Different data types | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8 Different data types | Using R at Grattan Institute">
 <meta name="twitter:description" content="Data comes in many different forms. This chapter explores some of these forms and provides some tools to deal with them. It’s useful to make a distinction between data structures and data types....">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
-<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.1/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.1/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -93,11 +96,11 @@
 <p>This chapter uses packages that are designed to help with different data types.</p>
 <p>The <code>stringr</code> package helps deal with characters. The <code>forcats</code> package helps with factors. The <code>lubridate</code> package helps – a lot! – with dates.</p>
 <p>These three packages are <em>installed</em> part of the <code>tidyverse</code> and are installed with it. <code>stringr</code> and <code>forcats</code> are <em>loaded</em> with <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>, but <code>lubridate</code> isn’t and needs to be loaded separately.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></code></pre></div>
 <p>For most charts in this chapter, we’ll use the <code>sa3_income</code> data summarised below.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and gender, 2010-11 to 2015-16&lt;/a&gt;&lt;/p&gt;'><sup>27</sup></a> It is a tidy dataset containing the median income and number of workers by SA3, occupation and gender between 2010 and 2015:</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">sa3_income</span><span class="op">)</span></code></pre></div>
@@ -126,27 +129,27 @@
 </h2>
 <p>Data ‘types’ define how your data is stored and what you can (or cannot) do with it.</p>
 <p>You can do maths on numbers:</p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">num1</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 <span class="va">num2</span> <span class="op">&lt;-</span> <span class="fl">5</span>
 
 <span class="va">num1</span> <span class="op">+</span> <span class="va">num2</span></code></pre></div>
 <pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">num1</span> <span class="op">/</span> <span class="va">num2</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>And you can perform string operations on characters:</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">char1</span> <span class="op">&lt;-</span> <span class="st">"Hello"</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substring</a></span><span class="op">(</span><span class="va">char1</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "lo"</code></pre>
 <p>But you can’t perform maths on characters, because that doesn’t really make sense:</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="st">"Hello"</span> <span class="op">*</span> <span class="fl">2</span> </code></pre></div>
 <pre><code>## Error in "Hello" * 2: non-numeric argument to binary operator</code></pre>
 <p>Even when you kind of think it should:</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="st">"100"</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
 <pre><code>## Error in "100" * 2: non-numeric argument to binary operator</code></pre>
 <p>Above, R is trying to multiply the <em>character</em> <code>"100"</code> by the <em>number</em> <code>2</code>. Which – because of the types of these data – makes as much sense as <code>"Hello"</code> <span class="math inline">\(\times\)</span> <code>2</code>.</p>
@@ -160,29 +163,29 @@ We’ll get through it briefly, focussing on the things you need to know and on 
 <span class="header-section-number">8.3</span> Checking and changing data types<a class="anchor" aria-label="anchor" href="#checking-and-changing-data-types"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can use the <code>str</code> function to check the type of an object:</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob1</span> <span class="op">&lt;-</span> <span class="st">"Hello"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ob1</span><span class="op">)</span></code></pre></div>
 <pre><code>##  chr "Hello"</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob2</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ob2</span><span class="op">)</span></code></pre></div>
 <pre><code>##  num 10</code></pre>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob3</span> <span class="op">&lt;-</span> <span class="st">"10"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ob3</span><span class="op">)</span></code></pre></div>
 <pre><code>##  chr "10"</code></pre>
 <p>You can also change or assert the data type explicitly:</p>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"10"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ob4</span><span class="op">)</span></code></pre></div>
 <pre><code>##  num 10</code></pre>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ob5</span><span class="op">)</span></code></pre></div>
 <pre><code>##  chr "10"</code></pre>
 <p>But be cautious: forcing data from one type to another can lead to <code>NA</code> values when the conversion isn’t possible. For example:</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ob6</span> <span class="op">&lt;-</span> <span class="st">"Hello"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">ob6</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
@@ -200,7 +203,7 @@ But it can only be of one type.<a class="footnote-ref" tabindex="0" data-toggle=
 This means that every observation in a variable must be of the same type.</p>
 <p>Below is an example <code>tibble</code> to explore how we can check, change and use different data types.
 This <code>tibble</code> is constructed by defining four vectors:</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Kate"</span>, <span class="st">"Jonathan"</span>, <span class="st">"Emily"</span>, <span class="st">"James"</span><span class="op">)</span>,
   numb1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,
@@ -223,7 +226,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <p>The <code>numb2</code> and <code>messy</code> variables are also all strings, so R will store them as character variables (even if a human <em>may</em> be able to decipher some of the strings as numbers),</p>
 <p><code>numb3</code> contains <strong>both</strong> numbers and strings. When this is the case, R converts everything to a character to preserve all the information.</p>
 <p>We can check the types of the variables in the <code>eg</code> dataset with the <code>str</code> function:</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></code></pre></div>
 <pre><code>## tibble [4 × 5] (S3: tbl_df/tbl/data.frame)
 ##  $ name : chr [1:4] "Kate" "Jonathan" "Emily" "James"
@@ -234,14 +237,15 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <p>This tells us that our data <strong>structure</strong> is <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code> (i.e. a <code>tibble</code>), and the data <strong>types</strong> of our variables are: character, numeric, character, character and character.</p>
 <p>The first two variables are classified as we want them. <code>names</code> should be stored as characters; <code>numb1</code> should be stored as doubles.</p>
 <p>But we can see that <code>numb2</code> is a set of numbers that have been stored as characters. And this means we can’t use their wonderful numeric powers:</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb2_div10 <span class="op">=</span> <span class="va">numb2</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<pre><code>## Error: Problem with `mutate()` column `numb2_div10`.
-## ℹ `numb2_div10 = numb2/10`.
-## ✖ non-numeric argument to binary operator</code></pre>
+<pre><code>## Error in `mutate()`:
+## ! Problem while computing `numb2_div10 = numb2/10`.
+## Caused by error in `numb2 / 10`:
+## ! non-numeric argument to binary operator</code></pre>
 <p>If we want to change that, we redefine the <code>numb2</code> variable using the <code>mutate</code> function (from the previous chapter) and the <code>as.numeric</code> function described in the previous section:</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">numb2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
@@ -252,7 +256,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 ## 3 Emily        3   -20 10000 "0. 1" 
 ## 4 James        4    20 None  "1%"</code></pre>
 <p>The <code>tibble</code> output shows that <code>numb2</code> is now a double. Yay! And this means we can do maths on it:</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">numb2</span><span class="op">)</span>,
          numb2_div10 <span class="op">=</span> <span class="va">numb2</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
@@ -264,7 +268,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 ## 3 Emily        3   -20 10000 "0. 1"           -2
 ## 4 James        4    20 None  "1%"              2</code></pre>
 <p>What about <code>numb3</code>? It has a numbers and a string that are stored as a character variable. If we use the same approach as above:</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">numb3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
@@ -277,7 +281,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 ## 4 James        4 20       NA "1%"</code></pre>
 <p>We do convert the <code>numb3</code> variable to a numeric, which is what we wanted. But there are casualties. Because <code>"None"</code> cannot be neatly converted to a number, the string in the last observation is removed and replaced with <code>NA</code> (and we get a warning that there were <code>NAs introduced by coercion</code>).</p>
 <p>Converting strings to numerics made harder by data that is stored messily. The <code>messy</code> variable is made up of numbers that humans could decipher. The <code>as.numeric</code> function tries its best:</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>messy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">messy</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
@@ -306,17 +310,17 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <span class="header-section-number">8.7</span> Using character vectors<a class="anchor" aria-label="anchor" href="#using-character-vectors"><i class="fas fa-link"></i></a>
 </h2>
 <p>Characters contain information between quotes, like a letter or word or sentence. They can contain (almost) anything. They have no ‘rules’, unlike numerics, factors or dates. This freedom can be good or bad depending on your situation: sometimes restrictions are good!</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="st">"hello"</span></code></pre></div>
 <pre><code>## [1] "hello"</code></pre>
 <div class="inline-figure"><img src="atlas/rstudio_newproject.png" width="66%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hello"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hello"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hello"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##  chr [1:2] "hello" "1"</code></pre>
 </div>
@@ -380,7 +384,7 @@ This <code>tibble</code> is constructed by defining four vectors:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-07.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-05-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

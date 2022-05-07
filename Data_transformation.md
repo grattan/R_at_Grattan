@@ -37,16 +37,10 @@ sa3_income <- read_csv("data/sa3_income.csv")
 
 ```
 ## Rows: 47899 Columns: 16
-```
-
-```
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## chr (8): sa3_name, sa4_name, gcc_name, state, occupation, occ_short, prof, g...
 ## dbl (8): sa3, sa3_sqkm, sa3_income_percentile, year, median_income, average_...
-```
-
-```
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1003,7 +997,8 @@ sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'year'. You can override using the
+## `.groups` argument.
 ```
 
 ```
@@ -1055,7 +1050,8 @@ sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'year', 'state'. You can override using the
+## `.groups` argument.
 ```
 
 ```
@@ -1216,7 +1212,8 @@ sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'year', 'state'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'year', 'state'. You can override using the
+## `.groups` argument.
 ```
 
 ```
@@ -1292,16 +1289,10 @@ sa3_percentiles <- read_csv("data/sa3_percentiles.csv")
 
 ```
 ## Rows: 2010 Columns: 3
-```
-
-```
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## chr (1): sa3_name
 ## dbl (2): year, sa3_income_percentile
-```
-
-```
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
