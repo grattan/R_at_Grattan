@@ -19,11 +19,11 @@ Imports:
     bookdown,
     tidyverse,
     grattantheme,
-    absmapsdata,
+    strayr,
     sf,
     janitor,
     grattan
 Remotes:
     rstudio/bookdown,
-    mattcowgill/grattantheme,
-    wfmackey/absmapsdata
+    grattan/grattantheme,
+    runapp-aus/strayr
