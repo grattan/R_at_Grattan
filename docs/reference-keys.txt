@@ -122,7 +122,7 @@ layered-scatter-plot
 distributions
 maps
 sf-objects
-using-absmapsdata-and-strayr
+using-strayr-to-access-absmapsdata
 making-choropleth-maps
 facetted-maps
 adding-labels-to-maps

@@ -994,7 +994,7 @@ include_graphics("atlas/scatter_layer.png")
 ### `sf` objects
 [what is]
 
-### Using `absmapsdata` and `strayr`
+### Using `strayr` to access `absmapsdata`
 
 The `absmapsdata` package contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
@@ -1012,10 +1012,10 @@ The `absmapsdata` package contains compressed, and tidied `sf` objects containin
 * Postcodes 2016: `postcodes2016`; and 2021: `postcodes2021`
 * Census of Population and Housing Destination Zones 2011: `dz2011`; 2016: `dz2016`; and 2021: `dz2021`.
 
-The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and **could be** installed with `remotes::install_github("wfmackey/absmapsdata")`.
+The package is [hosted on Github](https://github.com/wfmackey/absmapsdata).
 However, as the package contains a **lot** of data, it is quite large and can be a pain to install. As an alternative, you can use the `strayr` package to download the `sf` objects on demand rather than installing the whole `absmapsdata` package:
 
-```{r install_absmapsdata, eval = FALSE}
+```{r install_strayr, eval = FALSE}
 remotes::install_github("runapp-aus/strayr")
 library(strayr)
 ```
@@ -1040,9 +1040,9 @@ glimpse(sa32016)
 
 Choropleth maps break an area into 'bits', and colours each 'bit' according to a variable.
 
-You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
+You can join the `sf` objects from `strayr` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
 
-First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`, then create some filtered datasets.
+First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `strayr`, then create some filtered datasets.
 
 ```{r make_map_data, message = FALSE}
 sa3_income_map <- sa3_income %>% 

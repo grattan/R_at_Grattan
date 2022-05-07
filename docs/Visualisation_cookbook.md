@@ -43,16 +43,10 @@ sa3_income <- read_csv("data/sa3_income.csv") %>%
 
 ```
 ## Rows: 47899 Columns: 16
-```
-
-```
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## chr (8): sa3_name, sa4_name, gcc_name, state, occupation, occ_short, prof, g...
 ## dbl (8): sa3, sa3_sqkm, sa3_income_percentile, year, median_income, average_...
-```
-
-```
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -142,7 +136,7 @@ data
 ## 8 WA    2297081
 ```
 
-Looks first-rate: you have one observation (row) for each state you want to plot, and a value for their number of workers.
+Looks wicked: you have one observation (row) for each state you want to plot, and a value for their number of workers.
 
 Now pass the nice, simple table to `ggplot` and add aesthetics so that `x` represents `state`, and `y` represents `workers`. Then, because the dataset contains the _actual_ numbers you want on the chart, you can plot the data with `geom_col`:^[Remember that `geom_col` is just shorthand for `geom_bar(stat = "identity")`]
 
@@ -206,7 +200,7 @@ simple_bar
 
 <img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="100%" />
 
-Looks tip-top! Now you can export as a full-slide Grattan chart using `grattan_save`:
+Looks too good to be true! Now you can export as a full-slide Grattan chart using `grattan_save`:
 
 
 ```r
@@ -236,7 +230,8 @@ data <- sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'state'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'state'. You can override using the
+## `.groups` argument.
 ```
 
 ```r
@@ -266,7 +261,7 @@ data
 ## 16 WA    Women          51578.
 ```
 
-Looks bonzer: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
+Looks shit hot: you have one observation (row) for each state $\times$ gender group you want to plot, and a value for their average income. Put `state` on the x-axis, `average_income` on the y-axis, and split gender by fill-colour (`fill`).
 
 
 
@@ -435,7 +430,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="100%" />
 
-Looks of high quality! Now you can add titles and a caption, and save using `grattan_save`:
+Looks sterling! Now you can add titles and a caption, and save using `grattan_save`:
 
 
 ```r
@@ -489,7 +484,8 @@ data <- sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'state', 'gender'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'state', 'gender'. You can override using
+## the `.groups` argument.
 ```
 
 ```r
@@ -588,7 +584,7 @@ facet_bar +
 
 <img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="100%" />
 
-Of high quality! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
+Eminent! But the "\$0" and "\$100,000" labels are clashing along the horizontal axis. To tidy these up, we redefine the `breaks` -- the points that will be labelled -- to 25,000, 50,000 and 75,000 inside `grattan_y_continuous`. Putting everything together and saving the plot as a fullslide chart with `grattan_save`:
 
 
 ```r
@@ -877,7 +873,7 @@ data %>%
 
 <img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="100%" />
 
-Looks awesome. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
+Looks awesomesauce. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the `grattan_x_continuous` element:
 
 
 ```r
@@ -949,7 +945,8 @@ data_prep <- sa3_income %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'sa3_name'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'sa3_name'. You can override using the
+## `.groups` argument.
 ```
 
 ```r
@@ -1079,14 +1076,14 @@ head(data)
 ```
 ## # A tibble: 6 × 7
 ## # Groups:   sa3_name, sa3_income_percentile, prof [1]
-##   sa3_name      sa3_income_perce… prof   occ_short income workers average_income
-##   <chr>                     <dbl> <chr>  <chr>      <dbl>   <dbl>          <dbl>
-## 1 Adelaide City                66 Non-p… Admin     1.44e8    2674         53979.
-## 2 Adelaide City                66 Non-p… Driver    1.85e7     396         46762.
-## 3 Adelaide City                66 Non-p… Labourer  3.92e7    1516         25868.
-## 4 Adelaide City                66 Non-p… Sales     5.05e7    1546         32680.
-## 5 Adelaide City                66 Non-p… Service   7.75e7    2346         33034.
-## 6 Adelaide City                66 Non-p… Trades    7.85e7    1525         51448.
+##   sa3_name      sa3_income_percen… prof  occ_short income workers average_income
+##   <chr>                      <dbl> <chr> <chr>      <dbl>   <dbl>          <dbl>
+## 1 Adelaide City                 66 Non-… Admin     1.44e8    2674         53979.
+## 2 Adelaide City                 66 Non-… Driver    1.85e7     396         46762.
+## 3 Adelaide City                 66 Non-… Labourer  3.92e7    1516         25868.
+## 4 Adelaide City                 66 Non-… Sales     5.05e7    1546         32680.
+## 5 Adelaide City                 66 Non-… Service   7.75e7    2346         33034.
+## 6 Adelaide City                 66 Non-… Trades    7.85e7    1525         51448.
 ```
 
 To make a scatter plot with `average_income` against `sa3_income_percentile`, pass the `income` dataset to `ggplot`, add `x = sa3_income_percentile`, `y = average_income` and `colour = gender` aesthetics, then plot it with `geom_point`. Tell `geom_point` to reduce the opacity with `alpha = 0.2`, as these individual points are more of the 'background' to the plot:
@@ -1130,7 +1127,7 @@ base_chart
 
 <img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="100%" />
 
-Looks legit! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
+Looks first-rate! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:
 
 
 ```r
@@ -1140,7 +1137,8 @@ perc_average <- data %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'prof'. You can override using the
+## `.groups` argument.
 ```
 
 ```r
@@ -1221,7 +1219,8 @@ perc_average <- data %>%
 ```
 
 ```
-## `summarise()` has grouped output by 'prof'. You can override using the `.groups` argument.
+## `summarise()` has grouped output by 'prof'. You can override using the
+## `.groups` argument.
 ```
 
 ```r
@@ -1283,7 +1282,7 @@ grattan_save("atlas/scatter_layer.pdf", scatter_layer, type = "fullslide")
 ### `sf` objects
 [what is]
 
-### Using `absmapsdata` and `strayr`
+### Using `strayr` to access `absmapsdata`
 
 The `absmapsdata` package contains compressed, and tidied `sf` objects containing geometric information about ABS data structures. The included objects are:
 
@@ -1301,7 +1300,7 @@ The `absmapsdata` package contains compressed, and tidied `sf` objects containin
 * Postcodes 2016: `postcodes2016`; and 2021: `postcodes2021`
 * Census of Population and Housing Destination Zones 2011: `dz2011`; 2016: `dz2016`; and 2021: `dz2021`.
 
-The package is [hosted on Github](https://github.com/wfmackey/absmapsdata) and **could be** installed with `remotes::install_github("wfmackey/absmapsdata")`.
+The package is [hosted on Github](https://github.com/wfmackey/absmapsdata).
 However, as the package contains a **lot** of data, it is quite large and can be a pain to install. As an alternative, you can use the `strayr` package to download the `sf` objects on demand rather than installing the whole `absmapsdata` package:
 
 
@@ -1349,9 +1348,9 @@ glimpse(sa32016)
 
 Choropleth maps break an area into 'bits', and colours each 'bit' according to a variable.
 
-You can join the `sf` objects from `absmapsdata` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
+You can join the `sf` objects from `strayr` to your dataset using `left_join`. The variable names might be different -- eg `sa3_name` compared to `sa3_name_2016` -- so use the `by` argument to match them.
 
-First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `absmapsdata`, then create some filtered datasets.
+First, take the `sa3_income` dataset and join the `sf` object `sa32016` from `strayr`, then create some filtered datasets.
 
 
 ```r

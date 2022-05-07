@@ -7,4 +7,6 @@ There are many, many things that you can do with R -- far too many to cover in t
 
 If you solve an annoying problem or discover a neat way to do something, future readers of this guide would benefit greatly from your discovery. Everyone at Grattan is encouraged to add to, and edit, this book as they see fit. 
 
-This chapter provides a quick explanation of how, exactly, you can contribute to this book. It requires knowledge of R and Github. If you're getting started with Github, 
+This chapter provides a quick explanation of how, exactly, you can contribute to this book. It requires knowledge of R and Github. If you're getting started with Github, ...
+
+[test change]

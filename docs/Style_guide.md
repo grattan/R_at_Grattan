@@ -15,7 +15,7 @@ A core principle for coding at Grattan is that your code should be **readable by
 
 ## The `tidyverse` {#tidyverse}
 
-![](atlas/tidyverse.png)<!-- -->
+<img src="atlas/tidyverse.png" width="139" />
 
 The `tidyverse` is central to our work at Grattan. The `tidyverse` is a [collection of related R packages](https://www.tidyverse.org/packages/) for importing, wrangling, exploring and visualising data in R. The packages are designed to work well together. 
 
@@ -180,7 +180,7 @@ c <- bind_rows(a, b)
 
 This helps you, and others, navigate your code better, using the navigation tool built in to RStudio. In the script editor pane of RStudio, at the bottom left, there's a little navigation tool that helps you easily jump between named sections of your script. 
 
-![](atlas/rstudio_navigation.png)<!-- -->
+<img src="atlas/rstudio_navigation.png" width="275" />
 
 Breaking your script into chunks with `-----` also makes your code easier to read.
 

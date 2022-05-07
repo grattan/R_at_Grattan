@@ -288,9 +288,10 @@ eg %>%
 ```
 
 ```
-## Error: Problem with `mutate()` column `numb2_div10`.
-## ℹ `numb2_div10 = numb2/10`.
-## x non-numeric argument to binary operator
+## Error in `mutate()`:
+## ! Problem while computing `numb2_div10 = numb2/10`.
+## Caused by error in `numb2 / 10`:
+## ! non-numeric argument to binary operator
 ```
 
 If we want to change that, we redefine the `numb2` variable using the `mutate` function (from the previous chapter) and the `as.numeric` function described in the previous section:

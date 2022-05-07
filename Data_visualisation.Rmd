@@ -48,7 +48,8 @@ This chapter shows how you can do this with R. It starts with the 'grammar of gr
 
 This section uses the package `ggplot2` to visualise data, and `dplyr` functions to manipulate data. Both of these packages are loaded with `tidyverse`. The `scales` package helps with labelling your axes.
 
-The `grattantheme` package is used to make charts look Grattan-y. The `absmapsdata` package is used to help make maps.
+The `grattantheme` package is used to make charts look Grattan-y. 
+<!-- The `strayr` package is used to help make maps. -->
 
 ```{r load_packages, message = FALSE}
 library(tidyverse)

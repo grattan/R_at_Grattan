@@ -21,9 +21,9 @@ library(tidyverse)
 
 ```
 ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.1.1     ✓ forcats 0.5.1
+## ✓ tibble  3.1.6     ✓ dplyr   1.0.8
+## ✓ tidyr   1.2.0     ✓ stringr 1.4.0
+## ✓ readr   2.1.2     ✓ forcats 0.5.1
 ```
 
 ```
@@ -555,9 +555,9 @@ office_df %>%
 ```
 
 ```
-## Error: Problem with `mutate()` column `fave_lunch`.
-## ℹ `fave_lunch = c("pasta salad", "a variety")`.
-## ℹ `fave_lunch` must be size 7 or 1, not 2.
+## Error in `mutate()`:
+## ! Problem while computing `fave_lunch = c("pasta salad", "a variety")`.
+## x `fave_lunch` must be size 7 or 1, not 2.
 ```
 
 In [the section above](#functions-conditionals), we created the `make_age10` function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:

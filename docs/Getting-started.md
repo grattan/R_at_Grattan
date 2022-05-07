@@ -425,9 +425,10 @@ tibble::tibble(x = 1:2, y = 1:3)
 ```
 
 ```
-## Error: Tibble columns must have compatible sizes.
-## * Size 2: Existing data.
-## * Size 3: Column `y`.
+## Error:
+## ! Tibble columns must have compatible sizes.
+## • Size 2: Existing data.
+## • Size 3: Column `y`.
 ## ℹ Only values of size one are recycled.
 ```
 
@@ -436,8 +437,8 @@ dplyr::filter(iris, Species = "setosa")
 ```
 
 ```
-## Error: Problem with `filter()` input `..1`.
-## x Input `..1` is named.
+## Error in `dplyr::filter()`:
+## ! We detected a named input.
 ## ℹ This usually means that you've used `=` instead of `==`.
 ## ℹ Did you mean `Species == "setosa"`?
 ```

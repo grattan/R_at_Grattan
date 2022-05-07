@@ -47,7 +47,7 @@ cran_packages <- c("devtools", "tidyverse", "readabs", "janitor",
 install.packages(cran_packages)
 
 github_packages <- c("grattan/grattantheme", "grattan/grattandata",
-                     "wfmackey/absmapsdata", "grattan/grattanReporter")
+                     "runapp-aus/strayr",  "grattan/grattanReporter")
 
 remotes::install_github(github_packages,
                         dependencies = TRUE,
@@ -135,9 +135,9 @@ library(tidyverse)
 
 ```
 ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.1.1     ✓ forcats 0.5.1
+## ✓ tibble  3.1.6     ✓ dplyr   1.0.8
+## ✓ tidyr   1.2.0     ✓ stringr 1.4.0
+## ✓ readr   2.1.2     ✓ forcats 0.5.1
 ```
 
 ```
@@ -177,6 +177,6 @@ A range of Grattan people have written packages that come in handy at Grattan.
 
 There are other packages we commonly use at Grattan, including some developed by Grattan staff. These include:
 
-* *absmapsdata* This package, by Will Mackey, is very handy for working with spatial data. You'll want it if you're going to be making maps.  Find it on [Github](https://github.com/wfmackey/absmapsdata).
+* *strayr* This package, by Will Mackey and others, is very handy for working with Australian classifications (eg ANZSCO, ANZSIC, ASCED), and for using Australian spatial data. You'll want it if you're going to be making maps.  Find it on [Github](https://github.com/runapp-aus/strayr).
 
 * *readabs* The `readabs` package, by Matt Cowgill, provides an easy way to download, tidy, and import ABS time series data in R. Find it on [Github](https://github.com/mattcowgill/readabs).

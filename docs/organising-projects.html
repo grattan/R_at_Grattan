@@ -7,19 +7,22 @@
 <title>3 Organising an R project at Grattan | Using R at Grattan Institute</title>
 <meta name="author" content="Matt Cowgill, Will Mackey, and James Ha">
 <meta name="description" content="All our work at Grattan, whether it’s in R or some other software, should heed the “hit by a bus” rule. If you’re not around, colleagues should be able to access, understand, verify, and build on...">
-<meta name="generator" content="bookdown 0.24.4 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="3 Organising an R project at Grattan | Using R at Grattan Institute">
 <meta property="og:type" content="book">
 <meta property="og:description" content="All our work at Grattan, whether it’s in R or some other software, should heed the “hit by a bus” rule. If you’re not around, colleagues should be able to access, understand, verify, and build on...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3 Organising an R project at Grattan | Using R at Grattan Institute">
 <meta name="twitter:description" content="All our work at Grattan, whether it’s in R or some other software, should heed the “hit by a bus” rule. If you’re not around, colleagues should be able to access, understand, verify, and build on...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.0/font.css" rel="stylesheet">
-<link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Roboto-0.4.1/font.css" rel="stylesheet">
+<link href="libs/_Roboto%20Mono-0.4.1/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -164,24 +167,24 @@ Either:</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hes</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/HES/hes1516.csv"</span><span class="op">)</span>
 <span class="fu">grattan_save</span><span class="op">(</span><span class="st">"output/atlas/expenditure_by_income.pdf"</span><span class="op">)</span></code></pre></div>
-<p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data,’ to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
+<p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
 <p>At Grattan, we even have our own R package, called <a href="https://github.com/grattan/grattandata">grattandata</a> that helps load certain types of data in R in a way that makes your script portable and reusable by colleagues. We cover that more in the <a href="reading-data.html#read_microdata">Reading Data chapter</a>.</p>
 </div>
 <div id="keep-your-stuff-together" class="section level2" number="3.4">
 <h2>
 <span class="header-section-number">3.4</span> Keep your stuff together<a class="anchor" aria-label="anchor" href="#keep-your-stuff-together"><i class="fas fa-link"></i></a>
 </h2>
-<p>Your script(s), data, and output should generally all live in the same place.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>14</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
+<p>Your script(s), data, and output should generally all live in the same place. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This isn’t always possible, like when you’re working with restricted-access microdata. But unless there’s a really good reason why you can’t keep your data together with the rest of your work, you should do it.&lt;/p&gt;"><sup>14</sup></a> That place should be the project folder - that’s the folder that contains the .Rproj file that was created when you created an RStudio project (you did that, right? Scroll back up the page if not).</p>
 <p>Don’t just put everything in your project folder itself. This can get really overwhelming and confusing, particularly for anyone trying to understand and check your work. Instead, separate your code, your source data, and your output into subfolders.</p>
 <p>A good structure is to have a subfolder for:</p>
 <ul>
 <li>your code - called ‘R’</li>
 <li>your source data - called ‘data’</li>
-<li>your output - called ‘output.’ Include subdirectories for:
+<li>your output - called ‘output’. Include subdirectories for:
 <ul>
 <li>your charts - called ‘atlas’ (like in our LaTeX projects)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;We’re not sure where or why this practice started but there’s some path dependency here meaning that the switching costs are high without a clear benefit. Guess we’re stuck with it.&lt;/p&gt;"><sup>15</sup></a>
 </li>
-<li>your exported tables - called ‘tables.’</li>
+<li>your exported tables - called ‘tables’.</li>
 </ul>
 </li>
 </ul>
@@ -218,7 +221,7 @@ Either:</p>
 <p>For more on good principles for naming files, see <a href="https://speakerdeck.com/jennybc/how-to-name-files">this excellent presentation by Jenny Bryan</a>, which includes the following examples:</p>
 <div class="inline-figure"><img src="atlas/jenny_bryan_filenames.png" width="66%" style="display: block; margin: auto;"></div>
 <p><strong>Don’t</strong> create multiple versions of the same script (like <code>analysis_FINAL_002_MC.R</code> and <code>analysis_FINALFINAL_003_MC_WM.R</code>.) We’re all familiar with this hellish scenario: you do some work in a Word document (shudder, shudder, the horror, etc.), email it to a colleague, the colleague edits it and sends it back with a tweaked filename, like <code>cool_word_doc_002.docx</code>. Soon enough your hard drive and email client is cluttered with endless iterations of your document. Try to avoid replicating this nightmare in R.</p>
-<p>If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive.” To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
+<p>If you do end up with multiple versions, put everything other than the latest version in a subfolder of your “R” folder, called “R/archive”. To avoid a horrible mess of <code>analysis_FINAL_002.R</code> type documents cluttering up your folder, consider using <a href="version-control.html#version-control">Git for version control</a>.</p>
 </div>
 <div id="README" class="section level2" number="3.7">
 <h2>
@@ -237,7 +240,7 @@ Either:</p>
 <p><em>But</em>… don’t clean your workspace within your analysis script. People sometimes do this using this command:</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow.”</p>
+<p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow”.</p>
 </div>
 <div id="quick-guide" class="section level2" number="3.9">
 <h2>
@@ -308,7 +311,7 @@ Either:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2021-12-07.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-05-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
