@@ -4,7 +4,7 @@
 
 R comes with a lot of functions - commands - built in to do a broad range of tasks. You could, if you really wanted, import a dataset, clean it up, estimate a model, and make a plot just using the functions that come with R - known as 'base R'^[Technically some of the 'built-in' functions are part of packages, like the `tools`, `utils` and `stats` packages that come with R. We'll refer to all these as base R.]. But using packages will make your life easier.
 
-Like R itself, packages are free and open source. You can install them from within RStudio.
+Like R itself, packages are free and open source. You can install them from within RStudio using the methods described below.
 
 ## How to install packages {#install-packages}
 
