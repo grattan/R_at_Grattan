@@ -81,7 +81,7 @@
 <span class="header-section-number">7.1</span> Set-up and packages<a class="anchor" aria-label="anchor" href="#set-up-and-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>This section uses the package XX.</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="different-data-file-types" class="section level2" number="7.2">
@@ -91,10 +91,10 @@
 <p>There are lots of different ways to store data on a computer.
 A common way, and a useful starting point, is a ‘comma separated value’, or CSV file.</p>
 <p>CSVs are incredibly simple. They are a text file that contain characters separated by commas to indicate new columns, and new lines to indicate rows. A <code>.csv</code> file looks something like this:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="reading-data.html#cb109-1" aria-hidden="true" tabindex="-1"></a>name, age</span>
-<span id="cb109-2"><a href="reading-data.html#cb109-2" aria-hidden="true" tabindex="-1"></a>Will, <span class="dv">95</span></span>
-<span id="cb109-3"><a href="reading-data.html#cb109-3" aria-hidden="true" tabindex="-1"></a>James, <span class="dv">16</span></span>
-<span id="cb109-4"><a href="reading-data.html#cb109-4" aria-hidden="true" tabindex="-1"></a>Anika, <span class="sc">-</span><span class="dv">50</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="reading-data.html#cb114-1" aria-hidden="true" tabindex="-1"></a>name, age</span>
+<span id="cb114-2"><a href="reading-data.html#cb114-2" aria-hidden="true" tabindex="-1"></a>Will, <span class="dv">95</span></span>
+<span id="cb114-3"><a href="reading-data.html#cb114-3" aria-hidden="true" tabindex="-1"></a>James, <span class="dv">16</span></span>
+<span id="cb114-4"><a href="reading-data.html#cb114-4" aria-hidden="true" tabindex="-1"></a>Anika, <span class="sc">-</span><span class="dv">50</span></span></code></pre></div>
 <p>Simple! A bunch of programs are able to read – or ‘parse’ – a <code>.csv</code> file. They’ve very versatile and – along with their cousin ‘tab separated value’, or <code>.tsv</code> files – are used widely.</p>
 <p>But there are limitation to <code>.csv</code> files. They’re plain text, meaning they can’t store ‘metadata’ – additional information – about the rows or columns. For example, if we wanted to store the data above but include the information that the <code>name</code> column is a character and the <code>age</code> column is a numeric, we would need a different data file type.</p>
 <p>An Excel file is the next most common type. An <code>.xlsx</code> file<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;or &lt;code&gt;.xls&lt;/code&gt; if the data is very old.&lt;/p&gt;"><sup>24</sup></a> file contains more than just the data shown in the rows and columns. The same goes for Google Sheets files. They contain information about cell formats (‘this cell is a DATE’; ‘this cell is YELLOW’; ‘this cell is merged with the one next to it because you like chaos’) and formulas contained within them. This makes Excel/Sheets files very useful for use with Excel or Google Sheets, but not elsewhere.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is called ‘data serialisation’, a process described entertainingly in Danielle Navarro’s blogpost about &lt;a href="https://blog.djnavarro.net/posts/2021-11-15_serialisation-with-rds/"&gt;data serialisation in R&lt;/a&gt;.&lt;/p&gt;'><sup>25</sup></a></p>
@@ -114,7 +114,7 @@ We focus here on the ‘best practice’ methods that align with Grattan’s sty
 </h3>
 <p>The <code>read_csv</code> function from the <code>dplyr</code> package is the weakly-preferred method for reading CSV files.
 This function is well documented, provides clear messages and warnings, and is just a safe bet all-round.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 47899 Columns: 16
 ## ── Column specification ────────────────────────────────────────────────────────
@@ -129,7 +129,7 @@ This function is well documented, provides clear messages and warnings, and is j
 </div>
 <p>An alternative is <code>fread</code> from the <code>data.table</code> package, which has the benefits of being faster and less prone to the error described above (because <code>fread</code> uses a <a href="https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread">sample of 10,000 rows</a> from ‘100 contiguous rows are read from 100 equally spaced points throughout the file including the beginning, middle and the very end.’)</p>
 <p>We can also compress <code>.csv</code> files into <code>.zip</code> files and read them <em>directly</em> using both <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and <code>fread()</code>:</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/my_data.zip"</span><span class="op">)</span></code></pre></div>
 <p>This is useful for two reasons:</p>
 <ol style="list-style-type: decimal">
@@ -230,7 +230,7 @@ This function is well documented, provides clear messages and warnings, and is j
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-05-08.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-06-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

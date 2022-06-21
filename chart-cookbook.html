@@ -80,7 +80,7 @@
 <h2>
 <span class="header-section-number">11.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grattantheme</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
@@ -92,11 +92,11 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HughParsonage/grattan">grattan</a></span><span class="op">)</span></code></pre></div>
 <p>The <code>sa3_income</code> dataset will be used for all key examples in this chapter.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;From &lt;a href="https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/6524.0.55.0022011-2016?OpenDocument"&gt;ABS Employee income by occupation and sex, 2010-11 to 2016-16&lt;/a&gt;&lt;/p&gt;'><sup>43</sup></a> It is a long dataset from the ABS that contains the median income and number of workers by Statistical Area 3, occupation and sex between 2010 and 2016.</p>
 <p>If you haven’t already, download the <code>sa3_income.csv</code> file to your own <code>data</code> folder:</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/grattan/R_at_Grattan/master/data/sa3_income.csv"</span>,
               destfile <span class="op">=</span> <span class="st">"data/sa3_income.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then read it using the <code>read_csv</code> function, removing any rows missing average or median income values:</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/sa3_income.csv"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">median_income</span><span class="op">)</span>,
          <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">average_income</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -108,7 +108,7 @@
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sa3_income</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 16
 ##     sa3 sa3_name   sa3_sqkm sa3_income_perce… sa4_name gcc_name state occupation
@@ -128,11 +128,11 @@
 <span class="header-section-number">11.2</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts"><i class="fas fa-link"></i></a>
 </h2>
 <p>Bar charts are made with <code>geom_bar</code> or <code>geom_col</code>. Creating a bar chart will look something like this:</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="chart-cookbook.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
-<span id="cb299-2"><a href="chart-cookbook.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">&lt;</span>xvar<span class="sc">&gt;</span>, <span class="at">y =</span> <span class="sc">&lt;</span>yvar<span class="sc">&gt;</span>),</span>
-<span id="cb299-3"><a href="chart-cookbook.html#cb299-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
-<span id="cb299-4"><a href="chart-cookbook.html#cb299-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
-<span id="cb299-5"><a href="chart-cookbook.html#cb299-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="chart-cookbook.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>data<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb304-2"><a href="chart-cookbook.html#cb304-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">&lt;</span>xvar<span class="sc">&gt;</span>, <span class="at">y =</span> <span class="sc">&lt;</span>yvar<span class="sc">&gt;</span>),</span>
+<span id="cb304-3"><a href="chart-cookbook.html#cb304-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
+<span id="cb304-4"><a href="chart-cookbook.html#cb304-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
+<span id="cb304-5"><a href="chart-cookbook.html#cb304-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>It has two key arguments: <code>stat</code> and <code>position</code>.</p>
 <p>First, <code>stat</code> defines what kind of <em>operation</em> the function will do on the dataset before plotting. Some options are:</p>
 <ul>
@@ -160,7 +160,7 @@
 <p>This section will create the following vertical bar plot showing number of workers by state in 2016:</p>
 <div class="inline-figure"><img src="atlas/simple_bar.png" width="100%"></div>
 <p>First, create the data you want to plot.</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -178,16 +178,16 @@
 ## 6 Tas    420767
 ## 7 Vic   5190976
 ## 8 WA    2297081</code></pre>
-<p>Looks marvellous: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Looks wicked: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
 <p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Remember that &lt;code&gt;geom_col&lt;/code&gt; is just shorthand for &lt;code&gt;geom_bar(stat = "identity")&lt;/code&gt;&lt;/p&gt;'><sup>44</sup></a></p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>,
              y <span class="op">=</span> <span class="va">workers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_base-1.png" width="100%"></div>
 <p>Make it Grattany by adjusting general theme defaults with <code>theme_grattan</code>, and use <code>grattan_y_continuous</code> to change the y-axis. Use labels formatted with commas (rather than scientific notation) by adding <code>labels = comma</code>.</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>,
              y <span class="op">=</span> <span class="va">workers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -196,7 +196,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_grattan-1.png" width="100%"></div>
 <p>To order the states by number of workers, you can tell the <code>x</code> aesthetic that you want to <code>reorder</code> the <code>state</code> variable by <code>workers</code>:</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">workers</span><span class="op">)</span>, <span class="co"># reorder states by workers</span>
              y <span class="op">=</span> <span class="va">workers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -205,7 +205,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_reorder-1.png" width="100%"></div>
 <p>You can probably drop the x-axis label – people will understand that they’re states without you explicitly saying it – and add a title and subtitle with <code>labs</code>:</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simple_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">workers</span><span class="op">)</span>,
              y <span class="op">=</span> <span class="va">workers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -219,8 +219,8 @@
 
 <span class="va">simple_bar</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="100%"></div>
-<p>Looks perfect! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<p>Looks top-notch! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/simple_bar.pdf"</span>, <span class="va">simple_bar</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/simple_bar.png" width="100%"></div>
 </div>
@@ -230,14 +230,14 @@
 </h3>
 <p>This section will create a horizontal bar plot showing average income by state and gender in 2016:</p>
 <p>First create the dataset you want to plot, getting the average income by state and gender in the year 2016:</p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span>   
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span>   
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">total_income</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'state'. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span></code></pre></div>
 <pre><code>## # A tibble: 16 × 3
 ## # Groups:   state [8]
@@ -259,9 +259,9 @@
 ## 14 Vic   Women          49264.
 ## 15 WA    Men            76677.
 ## 16 WA    Women          51578.</code></pre>
-<p>Looks terrific: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Looks fine: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
 <p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The aesthetic &lt;code&gt;fill&lt;/code&gt; represents the ‘fill’ colour – the colour that fills the bars in your chart. The &lt;code&gt;colour&lt;/code&gt; aesthetic controls the colours of the &lt;em&gt;lines&lt;/em&gt;.&lt;/p&gt;"><sup>45</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;code&gt;geom_col&lt;/code&gt; is shorthand for &lt;code&gt;geom_bar(stat = "identity"&lt;/code&gt;&lt;/p&gt;'><sup>46</sup></a></p>
-<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -269,7 +269,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_base-1.png" width="100%"></div>
 <p>The two series – women and men – created by <code>fill</code> are stacked on-top of each other by <code>geom_col</code>. You can tell it to plot them next to each other – to ‘dodge’ – instead with the <code>position</code> argument <em>within</em> <code>geom_col</code>:</p>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -278,7 +278,7 @@
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_dodge-1.png" width="100%"></div>
 <p>To flip the chart – a useful move when you have long labels – add <code>coord_flip</code> (ie ‘flip the x and y coordinates of the chart’).</p>
 <p>However, while the <em>coordinates</em> have been flipped, the underlying data hasn’t. If you want to refer to the <code>average_income</code> axis, which now lies horizontally, you would still refer to the <code>y</code> axis (eg <code>grattan_y_continuous</code> still refers to your <code>y</code> aesthetic, <code>average_income</code>).</p>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -287,7 +287,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># rotate the chart</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_flip-1.png" width="100%"></div>
 <p>And reorder the states by average income, so that the state with the highest (combined) average income is at the top. This is done with the <code>reorder(var_to_reorder, var_to_reorder_by)</code> function when you define the <code>state</code> aesthetic:</p>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, <span class="co"># reorder</span>
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -296,7 +296,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_reorder-1.png" width="100%"></div>
 <p>Wonderful – that’s how you want our <em>data</em> to look. Now you can Grattanise it. Note that <code>theme_grattan</code> needs to know that the coordinates were flipped so it can apply the right settings. Also tell <code>grattan_fill_manual</code> that there are two fill series.</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -309,7 +309,7 @@
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_grattan-1.png" width="100%"></div>
 <p>You can use <code>grattan_label</code> to <strong>label your charts</strong> in the Grattan style. This function is a ‘wrapper’ around <code>geom_label</code> that has settings that we tend to like: white background with a thin margin, 18-point font, and no border. It takes the <a href="https://ggplot2.tidyverse.org/reference/geom_text.html">standard arguments of <code>geom_label</code></a>.</p>
 <p>Section <a href="data-visualisation.html#adding-labels">10.6</a> shows how labels are treated like data points: they need to know where to go (<code>x</code> and <code>y</code>) and what to show (<code>label</code>). But if you provide <em>every point</em> to your labelling <code>geom</code>, it will plot every label:</p>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -326,7 +326,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>   <span class="co"># define colour as two grattan colours</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_label_all-1.png" width="100%"></div>
 <p>To just label <em>one</em> of the plots – ie the first one, ACT in this case – we need to tell <code>grattan_label</code>. The easiest way to do this is by <strong>creating a label dataset beforehand</strong>, like <code>label_gender</code> below. This just includes the observations you want to label:</p>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_gender</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"ACT"</span><span class="op">)</span>  <span class="co"># just want Tasmania observations</span>
 
@@ -338,7 +338,7 @@
 ## 1 ACT   Men            78141.
 ## 2 ACT   Women          65548.</code></pre>
 <p>So you can pass that <code>label_gender</code> dataset to <code>grattan_label</code>:</p>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -356,7 +356,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_label-1.png" width="100%"></div>
 <p>Almost there! The labels go out of range a little bit, and we can fix this by expanding the plot:</p>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -374,8 +374,8 @@
                 hjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="100%"></div>
-<p>Looks worthy! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<p>Looks fab! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">multiple_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -397,7 +397,7 @@
        x <span class="op">=</span> <span class="st">""</span>,
        y <span class="op">=</span> <span class="st">""</span>,
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/multiple_bar.pdf"</span>, <span class="va">multiple_bar</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/multiple_bar.png" width="100%"></div>
 </div>
@@ -407,13 +407,13 @@
 </h3>
 <p>‘Facetting’ a chart means you create a separate plot for each group. It’s particularly useful in showing differences between more than one group. The chart you’ll make in this section will show annual income by gender and state, <em>and</em> by professional and non-professional workers:</p>
 <p>Start by creating the dataset you want to plot:</p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">gender</span>, <span class="va">prof</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">total_income</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'state', 'gender'. You can override using
 ## the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span></code></pre></div>
 <pre><code>## # A tibble: 32 × 4
 ## # Groups:   state, gender [16]
@@ -431,7 +431,7 @@
 ## 10 NT    Men    Professional             87666.
 ## # … with 22 more rows</code></pre>
 <p>Then plot a bar chart with <code>geom_col</code> and <code>theme_grattan</code> elements, using a similar chain to the final plot of <a href="chart-cookbook.html#bar-multi">11.2.2</a> (without the labelling). We’ll build on this chart:</p>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">facet_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -449,13 +449,13 @@
        y <span class="op">=</span> <span class="st">""</span>,
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
 <p>You can ‘facet’ bar charts – and any other chart type – with the <code>facet_grid</code> or <code>facet_wrap</code> commands. The latter tends to give you more control over label placement, so let’s start with that. <code>fadcet_wrap</code> asks the questions: “what variables should I create separete charts for”, and “how should I place them on the page”? Tell it to use the <code>prof</code> variable with the <code><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars()</a></code> function.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The &lt;code&gt;vars()&lt;/code&gt; function is sometimes used in the &lt;code&gt;tidyverse&lt;/code&gt; to specifically say “I am using a variable name here”. You can’t use variable names directly because of legacy issues. You can learn more about it in the &lt;a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html"&gt;official documentation&lt;/a&gt;.&lt;/p&gt;'><sup>47</sup></a></p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">facet_bar</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">prof</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_facet_wrap-1.png" width="100%"></div>
 <p>That’s good! It does what it should. Now you just need to tidy it up a little bit by adding labels and avoiding clashes along the bottom axis.</p>
 <p>Create labels in the same way you have done before: you only want to label one ‘women’ and ‘men’ series, so create a dataset that contains only that information:</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"ACT"</span>,
          <span class="va">prof</span> <span class="op">==</span> <span class="st">"Non-professional"</span><span class="op">)</span>
@@ -469,7 +469,7 @@
 ## 2 ACT   Women  Non-professional         46151.</code></pre>
 <p>Good – now add that to the plot with <code>grattan_label</code>, supplying the required aesthetics and position. And use <code>hjust = 0</code> to tell the labels to be left-aligned.</p>
 <p>To give each plot a black base axis, you can add <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline()</a></code> with <code>yintercept = 0</code>.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">facet_bar</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">prof</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># add black line</span>
@@ -479,8 +479,8 @@
                 position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, 
                 hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="100%"></div>
-<p>Brill! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<p>Beaut! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create label data</span>
 <span class="va">label_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"ACT"</span>,
@@ -509,7 +509,7 @@
                     colour <span class="op">=</span> <span class="va">gender</span><span class="op">)</span>,
                 position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, 
                 hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/facet_bar.pdf"</span>, <span class="va">facet_bar</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/facet_bar.png" width="100%"></div>
 </div>
@@ -531,7 +531,7 @@
 </h3>
 <p>This line chart will show how <strong>real</strong> average income has changed for each state over the past five years:</p>
 <p>First, take the <code>sa3_income</code> dataset and create a summary table average income by year and state. Ignore the territories for this chart.</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">state</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ACT"</span>, <span class="st">"NT"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">state</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -550,7 +550,7 @@
 ## 6  2011 WA            58795.</code></pre>
 <p>The income data presented is nominal, so you’ll need to inflate to ‘real’ dollars using the `cpi_inflate</p>
 <p>Plot a line chart by taking the <code>data</code>, passing it to <code>ggplot</code> with <em>aes</em>thetics, then using <code>geom_line</code>:</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -558,7 +558,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line1_nocol-1.png" width="100%"></div>
 <p>Now you can represent each <code>state</code> by colour:</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -567,7 +567,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line1_wcol-1.png" width="100%"></div>
 <p>Cooler! Adding some Grattan formatting to it and define it as our ‘base chart’:</p>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">&lt;-</span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -583,19 +583,19 @@
 <span class="va">base_chart</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="100%"></div>
 <p>You can add ‘dots’ for each year by layering <code>geom_point</code> on top of <code>geom_line</code>:</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line2-1.png" width="100%"></div>
 <p>To add labels to the end of each line, you would expand the x-axis to make room for labels and add reasonable breaks:</p>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous</a></span><span class="op">(</span>expand_right <span class="op">=</span> <span class="fl">.3</span>,
                        breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2016</span>, <span class="fl">2</span><span class="op">)</span>,
                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2010"</span>, <span class="st">"12"</span>, <span class="st">"14"</span>, <span class="st">"16"</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line_expand-1.png" width="100%"></div>
 <p>Then add labels, using</p>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_line</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2010</span><span class="op">)</span>
 
@@ -605,7 +605,7 @@
                        breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2016</span>, <span class="fl">2</span><span class="op">)</span>,
                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2010"</span>, <span class="st">"12"</span>, <span class="st">"14"</span>, <span class="st">"16"</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/line_label-1.png" width="100%"></div>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_label_functions.html">grattan_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">label_line</span>,
                 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">state</span><span class="op">)</span>,
                 nudge_x <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>,
@@ -616,7 +616,7 @@
 ## stat_identity: na.rm = FALSE
 ## position_nudge</code></pre>
 <p>If you wanted to show each state individually, you could <strong>facet</strong> your chart so that a separate plot was produced for each state:</p>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous</a></span><span class="op">(</span>expand_left <span class="op">=</span> <span class="fl">.1</span>, 
@@ -638,11 +638,11 @@
 <span class="header-section-number">11.4.1</span> Simple scatter plot<a class="anchor" aria-label="anchor" href="#simple-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>The first simple scatter plot will show the relationship between average incomes of professionals and the number of professional workers by area in 2016:</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">include_graphics</span><span class="op">(</span><span class="st">"atlas/simple_scatter.png"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/simple_scatter.png" width="100%"></div>
 <p>Create the dataset you want to plot:</p>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span>,
          <span class="va">prof</span> <span class="op">==</span> <span class="st">"Professional"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -661,7 +661,7 @@
 ## 5 Alice Springs     9640         84340.
 ## 6 Armadale         19771         85407.</code></pre>
 <p>The dataset has one observation per SA3, and the two variables you want to plot: workers and average income. Pass the data to <code>ggplot</code>, set the aesthetics and plot with <code>geom_point</code>:</p>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
              y <span class="op">=</span> <span class="va">average_income</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -676,7 +676,7 @@
 <li>
 <code><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous()</a></code>, setting the label style to <code>comma</code>.</li>
 </ul>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
              y <span class="op">=</span> <span class="va">average_income</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -685,8 +685,8 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">dollar</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="100%"></div>
-<p>Looks awesome. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<p>Looks first-rate. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
              y <span class="op">=</span> <span class="va">average_income</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -697,7 +697,7 @@
                        expand_right <span class="op">=</span> <span class="fl">.05</span><span class="op">)</span> <span class="co"># expand the right by 5%</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_scatter_expand-1.png" width="100%"></div>
 <p>Finally, add titles and save the plot:</p>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simple_scatter</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
              y <span class="op">=</span> <span class="va">average_income</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -711,7 +711,7 @@
        y <span class="op">=</span> <span class="st">"Average income"</span>,
        x <span class="op">=</span> <span class="st">"Workers"</span>,
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/simple_scatter.pdf"</span>, <span class="va">simple_scatter</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/simple_scatter.png" width="100%"></div>
 </div>
@@ -721,18 +721,18 @@
 </h3>
 <p>The next scatter plot involves the same basic plotting principles of the chart above, but requires a bit more data manipulation before plotting.</p>
 <p>The chart will show the wages of professional workers and non-professional workers in 2016:</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">include_graphics</span><span class="op">(</span><span class="st">"atlas/scatter_reshape.png"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/scatter_reshape.png" width="100%"></div>
 <p>First prepare your data. You want to find the average incomes of all professional and non-professional workers in 2016:</p>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_prep</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sa3_name</span>, <span class="va">prof</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">total_income</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'sa3_name'. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data_prep</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ## # Groups:   sa3_name [3]
@@ -755,7 +755,7 @@
 <code>values_from = average_income</code>: the variable <code>average_income</code> contains the <em>values</em> that will fill the new variables.</li>
 </ul>
 <p>After the <code>pivot_wider</code> step is complete, use <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code> to convert the new <code>Professional</code> and <code>Non-Professional</code> names to <code>snake_case</code> to make them easier to use down the track:</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_prep</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="va">sa3_name</span>,  <span class="co"># variables that will stay the same</span>
               names_from <span class="op">=</span> <span class="va">prof</span>,   <span class="co"># variables that will dictate the new names</span>
@@ -775,7 +775,7 @@
 ## 6 Armadale                 57599.       85407.</code></pre>
 <p>Getting the data in the right format for your plot – rather than ‘hacking’ your plot to fit your data – will save you time and effort down the line.</p>
 <p>Now you have a dataset in the format you want to plot, you can pass it to <code>ggplot</code> and add aesthetics like you normally would.</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">non_professional</span>,
              y <span class="op">=</span> <span class="va">professional</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -783,7 +783,7 @@
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_reshape_base-1.png" width="100%"></div>
 <p>Then, like you’ve done before, add Grattan theme elements and titles, and save with <code>grattan_save</code>:</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">scatter_reshape</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">non_professional</span>,
              y <span class="op">=</span> <span class="va">professional</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -796,7 +796,7 @@
        y <span class="op">=</span> <span class="st">"Professional incomes"</span>,
        x <span class="op">=</span> <span class="st">"Non-professional incomes"</span>,
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/scatter_reshape.pdf"</span>, <span class="va">scatter_reshape</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/scatter_reshape.png" width="100%"></div>
 </div>
@@ -805,11 +805,11 @@
 <span class="header-section-number">11.4.3</span> Layered scatter plot<a class="anchor" aria-label="anchor" href="#layered-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>For the third plot, look at the incomes of non-professional workers by their area’s total income percentile:</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">include_graphics</span><span class="op">(</span><span class="st">"atlas/scatter_layer.png"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/scatter_layer.png" width="100%"></div>
 <p>Get the data you want to plot:</p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total_income <span class="op">=</span> <span class="va">average_income</span> <span class="op">*</span> <span class="va">workers</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -830,7 +830,7 @@
 ## 5 Adelaide City                 66 Non-… Service   7.75e7    2346         33034.
 ## 6 Adelaide City                 66 Non-… Trades    7.85e7    1525         51448.</code></pre>
 <p>To make a scatter plot with <code>average_income</code> against <code>sa3_income_percentile</code>, pass the <code>income</code> dataset to <code>ggplot</code>, add <code>x = sa3_income_percentile</code>, <code>y = average_income</code> and <code>colour = gender</code> aesthetics, then plot it with <code>geom_point</code>. Tell <code>geom_point</code> to reduce the opacity with <code>alpha = 0.2</code>, as these individual points are more of the ‘background’ to the plot:</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sa3_income_percentile</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -848,7 +848,7 @@
 <li>
 <code><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous()</a></code>.</li>
 </ul>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sa3_income_percentile</span>,
              y <span class="op">=</span> <span class="va">average_income</span>,
@@ -862,14 +862,14 @@
 
 <span class="va">base_chart</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="100%"></div>
-<p>Looks terrific! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<p>Looks first-class! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">perc_average</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">prof</span>, <span class="va">sa3_income_percentile</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'prof'. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">perc_average</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ## # Groups:   prof [1]
@@ -883,7 +883,7 @@
 ## 6 Non-professional                     6         42615.</code></pre>
 <p>Then layer this on your plot by adding another <code>geom_point</code> and providing the <code>perc_average</code> data. Add a <code>fill</code> aesthetic and change the shape to <code>21</code>: a circle with a border (controlled by <code>colour</code>) and fill colour (controlled by <code>fill</code>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See the full list of shapes &lt;a href="https://ggplot2.tidyverse.org/reference/scale_shape.html"&gt;here&lt;/a&gt;.&lt;/p&gt;'><sup>48</sup></a>
 Make the outline of the circle black with <code>colour</code> and make the <code>size</code> a little bigger:</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">perc_average</span>,
              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">prof</span><span class="op">)</span>,
@@ -894,13 +894,13 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_layer_add_perc-1.png" width="100%"></div>
 <p>To add labels, first decide where they should go. Try positioning the “Professional” above its averages, and “Non-professional” at the bottom.</p>
 <p>Like labelling before, you should create a new dataset with your label information, and pass that label dataset to the <code>grattan_label</code> function:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">label_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tibble.html">tibble</a></span><span class="op">(</span>
   sa3_income_percentile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span>,
   average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15e3</span>, <span class="fl">120e3</span><span class="op">)</span>,
   prof <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-professional"</span>, <span class="st">"Professional"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Finally, add the labels to the plot and give some titles:</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">base_chart</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">perc_average</span>,
              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">prof</span><span class="op">)</span>,
@@ -917,14 +917,14 @@ Make the outline of the circle black with <code>colour</code> and make the <code
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_layer_label-1.png" width="100%"></div>
 <p>Putting that all together, your code will look something like this:</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create percentage data</span>
 <span class="va">perc_average</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">prof</span>, <span class="va">sa3_income_percentile</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>average_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">workers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by 'prof'. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create label data</span>
 <span class="va">label_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tibble.html">tibble</a></span><span class="op">(</span>
   sa3_income_percentile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">50</span><span class="op">)</span>,
@@ -956,7 +956,7 @@ Make the outline of the circle black with <code>colour</code> and make the <code
        x <span class="op">=</span> <span class="st">"Area total income percentile"</span>,
        y <span class="op">=</span> <span class="st">"Average income"</span>,
        caption <span class="op">=</span> <span class="st">"Notes: Only includes people who submitted a tax return in 2016-16. Source: ABS (2018)"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/scatter_layer.pdf"</span>, <span class="va">scatter_layer</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/scatter_layer.png" width="100%"></div>
 </div>
@@ -1007,15 +1007,15 @@ Make the outline of the circle black with <code>colour</code> and make the <code
 </ul>
 <p>The package is <a href="https://github.com/wfmackey/absmapsdata">hosted on Github</a>.
 However, as the package contains a <strong>lot</strong> of data, it is quite large and can be a pain to install. As an alternative, you can use the <code>strayr</code> package to download the <code>sf</code> objects on demand rather than installing the whole <code>absmapsdata</code> package:</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"runapp-aus/strayr"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">strayr</span><span class="op">)</span></code></pre></div>
 <p>You will also need the <code>sf</code> package installed to handle the <code>sf</code> objects:</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"sf"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></code></pre></div>
 <p>Now you can view <code>sf</code> object retrieved from the <code>strayr</code> package:</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa32016</span> <span class="op">&lt;-</span> <span class="fu">strayr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/strayr/man/read_absmap.html">read_absmap</a></span><span class="op">(</span><span class="st">"sa32016"</span><span class="op">)</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">sa32016</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 358
@@ -1040,7 +1040,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 <p>Choropleth maps break an area into ‘bits’, and colours each ‘bit’ according to a variable.</p>
 <p>You can join the <code>sf</code> objects from <code>strayr</code> to your dataset using <code>left_join</code>. The variable names might be different – eg <code>sa3_name</code> compared to <code>sa3_name_2016</code> – so use the <code>by</code> argument to match them.</p>
 <p>First, take the <code>sa3_income</code> dataset and join the <code>sf</code> object <code>sa32016</code> from <code>strayr</code>, then create some filtered datasets.</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sa3_income_map</span> <span class="op">&lt;-</span> <span class="va">sa3_income</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">sa32016</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sa3_name"</span> <span class="op">=</span> <span class="st">"sa3_name_2016"</span><span class="op">)</span><span class="op">)</span>
 
@@ -1056,7 +1056,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 <p>You then plot a map like you would any other <code>ggplot</code>: provide your data, then choose your <code>aes</code> and your <code>geom</code>. For maps with <code>sf</code> objects, the <strong>key aesthetic</strong> is <code>geometry = geometry</code>, and the <strong>key geom</strong> is <code>geom_sf</code>.</p>
 <p>The argument <code>lwd</code> controls the line width of area borders.</p>
 <p>Note that RStudio takes a long time to render a map in the</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prof_women</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>geometry <span class="op">=</span> <span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">average_income</span><span class="op">)</span>,
@@ -1065,7 +1065,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/map1-1.png" width="100%"></div>
 <p>Showing all of Australia on a single map is difficult: there are enormous areas that are home to few people which dominate the space. Showing individual states or capital city areas can sometimes be useful.</p>
 <p>To do this, filter the <code>map_data</code> object to just the Melbourne Greater Capital City area is shown. Here, we’ll also turn off the borders and add some Grattan colours.</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">melbourne_data</span> <span class="op">&lt;-</span> <span class="va">prof_women</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gcc_name</span> <span class="op">==</span> <span class="st">"Greater Melbourne"</span><span class="op">)</span>
 
@@ -1089,7 +1089,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 <span class="header-section-number">11.6.3.1</span> Facetted maps<a class="anchor" aria-label="anchor" href="#facetted-maps"><i class="fas fa-link"></i></a>
 </h4>
 <p>You can use <code>facet_wrap</code> (or <code>facet_grid</code>) on maps just like you would on any other chart type.</p>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">melbourne_professionals_data</span> <span class="op">&lt;-</span> <span class="va">professionals</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gcc_name</span> <span class="op">==</span> <span class="st">"Greater Melbourne"</span><span class="op">)</span>
 
@@ -1117,7 +1117,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 </h4>
 <p>You can add labels to choropleth maps with the standard <code>geom_text</code> or <code>geom_label</code>. Because it is likely that some labels will overlap, <code><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">ggrepel::geom_text_repel</a></code> or <code><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">ggrepel::geom_label_repel</a></code> is usually the better option.</p>
 <p>To use <code>geom_(text|label)_repel</code>, you need to tell <code>ggrepel</code> where in</p>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">high_income_labels</span> <span class="op">&lt;-</span> <span class="va">melbourne_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">average_income</span> <span class="op">&gt;</span> <span class="fl">75e3</span><span class="op">)</span>
 
@@ -1211,7 +1211,7 @@ However, as the package contains a <strong>lot</strong> of data, it is quite lar
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-05-08.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-06-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
