@@ -178,7 +178,7 @@
 ## 6 Tas    420767
 ## 7 Vic   5190976
 ## 8 WA    2297081</code></pre>
-<p>Looks wicked: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
+<p>Looks smashing: you have one observation (row) for each state you want to plot, and a value for their number of workers.</p>
 <p>Now pass the nice, simple table to <code>ggplot</code> and add aesthetics so that <code>x</code> represents <code>state</code>, and <code>y</code> represents <code>workers</code>. Then, because the dataset contains the <em>actual</em> numbers you want on the chart, you can plot the data with <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Remember that &lt;code&gt;geom_col&lt;/code&gt; is just shorthand for &lt;code&gt;geom_bar(stat = "identity")&lt;/code&gt;&lt;/p&gt;'><sup>44</sup></a></p>
 <div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -219,7 +219,7 @@
 
 <span class="va">simple_bar</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_bar_title-1.png" width="100%"></div>
-<p>Looks top-notch! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
+<p>Looks mind-blowing! Now you can export as a full-slide Grattan chart using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_save.html">grattan_save</a></span><span class="op">(</span><span class="st">"atlas/simple_bar.pdf"</span>, <span class="va">simple_bar</span>, type <span class="op">=</span> <span class="st">"fullslide"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="atlas/simple_bar.png" width="100%"></div>
@@ -259,7 +259,7 @@
 ## 14 Vic   Women          49264.
 ## 15 WA    Men            76677.
 ## 16 WA    Women          51578.</code></pre>
-<p>Looks fine: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
+<p>Looks tremendous: you have one observation (row) for each state <span class="math inline">\(\times\)</span> gender group you want to plot, and a value for their average income. Put <code>state</code> on the x-axis, <code>average_income</code> on the y-axis, and split gender by fill-colour (<code>fill</code>).</p>
 <p>Pass the data to <code>ggplot</code>, give it the appropriate <code>x</code> and <code>y</code> aesthetics, along with <code>fill</code> (the fill colour<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The aesthetic &lt;code&gt;fill&lt;/code&gt; represents the ‘fill’ colour – the colour that fills the bars in your chart. The &lt;code&gt;colour&lt;/code&gt; aesthetic controls the colours of the &lt;em&gt;lines&lt;/em&gt;.&lt;/p&gt;"><sup>45</sup></a>) representing <code>gender</code>. And because you have the <em>actual</em> values for <code>average_income</code> you want to plot, use <code>geom_col</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;code&gt;geom_col&lt;/code&gt; is shorthand for &lt;code&gt;geom_bar(stat = "identity"&lt;/code&gt;&lt;/p&gt;'><sup>46</sup></a></p>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -374,7 +374,7 @@
                 hjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_scale.html">grattan_colour_manual</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_multi_expand-1.png" width="100%"></div>
-<p>Looks fab! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
+<p>Looks of high quality! Now you can add titles and a caption, and save using <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">multiple_bar</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">average_income</span><span class="op">)</span>, 
@@ -479,7 +479,7 @@
                 position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, 
                 hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/bar_facet_label-1.png" width="100%"></div>
-<p>Beaut! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
+<p>Tip-top! But the “$0” and “$100,000” labels are clashing along the horizontal axis. To tidy these up, we redefine the <code>breaks</code> – the points that will be labelled – to 25,000, 50,000 and 75,000 inside <code>grattan_y_continuous</code>. Putting everything together and saving the plot as a fullslide chart with <code>grattan_save</code>:</p>
 <div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create label data</span>
 <span class="va">label_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
@@ -685,7 +685,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">dollar</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://rdrr.io/pkg/grattantheme/man/grattan_axes.html">grattan_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/simple_scatter_grattan-1.png" width="100%"></div>
-<p>Looks first-rate. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
+<p>Looks splendid. The last label on the x-axis goes off the page a bit so you can expand the plot to the right in the <code>grattan_x_continuous</code> element:</p>
 <div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">workers</span>,
@@ -862,7 +862,7 @@
 
 <span class="va">base_chart</span></code></pre></div>
 <div class="inline-figure"><img src="Visualisation_cookbook_files/figure-html/scatter_layer_base-1.png" width="100%"></div>
-<p>Looks first-class! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
+<p>Looks ace! To make the point a little clearer, we can overlay a point for average income each percentile. Create a dataset that has the average income for each area and professional work category:</p>
 <div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">perc_average</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">prof</span>, <span class="va">sa3_income_percentile</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/strayr/man/pipe.html">%&gt;%</a></span> 
