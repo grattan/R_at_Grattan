@@ -37,10 +37,62 @@ Once they're both installed, get started by opening RStudio.
 
 ## Setting up RStudio
 
-_Will to finish. Include:_ 
+Change the defaults of Rstudio to make it a bit easier to use. 
 
-* Save data off (and other good defaults)
-* Colour theme (important!)
+Open your R studio preferences by: 
+
+```{r update_defaults}
+# install the package 
+install.packages("usethis")
+
+# open your R preferences
+usethis::edit_rstudio_prefs()
+
+```
+
+And then copy the following, updating the relevant bits. 
+
+```{json preference_json}
+{
+    "default_project_location": "C:/r_projects",
+    "soft_wrap_r_files": true,
+    "scroll_past_end_of_document": true,
+    "highlight_r_function_calls": true,
+    "save_files_before_build": true,
+    "editor_theme": "Tomorrow",
+    "default_encoding": "UTF-8",
+    "document_author": "tyler reysenbach",
+    "wrap_tab_navigation": false,
+    "save_workspace": "never",
+    "rainbow_parentheses": true,
+    "reuse_sessions_for_project_links": true,
+    "syntax_color_console": true,
+    "spelling_dictionary_language": "en_AU",
+    "windows_terminal_shell": "win-git-bash",
+    "jobs_tab_visibility": "shown",
+    "cran_mirror": {
+        "name": "Australia (Canberra) [https]",
+        "host": "CSIRO",
+        "url": "http://cran.csiro.au/",
+        "secondary": "",
+        "country": "au"
+    },
+    "graphics_backend": "cairo",
+    "graphics_antialiasing": "subpixel",
+    "console_double_click_select": true,
+    "load_workspace": false,
+    "knit_working_dir": "project",
+    "doc_outline_show": "sections_and_chunks",
+    "rmd_viewer_type": "pane",
+    "rmd_chunk_output_inline": false,
+    "use_internet2": false,
+    "show_publish_diagnostics": true,
+    "use_secure_download": false,
+    "initial_working_directory": "~",
+    "source_with_echo": true
+}
+
+```
 
 ## Scripts and 'coding'
 
