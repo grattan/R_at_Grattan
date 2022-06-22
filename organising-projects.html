@@ -159,12 +159,12 @@ Either:</p>
 </h2>
 <p>A benefit of using RStudio projects is that you can use relative filepaths rather than machine-specific filepaths. Machine-specific filepaths not only stop you from sharing your work with others, they’re also super annoying for you! Who wants to type out a full filepath everytime you load or save a file?</p>
 <p><strong>Bad, machine-specific filepaths, boo, hiss</strong></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="organising-projects.html#cb65-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
-<span id="cb65-2"><a href="organising-projects.html#cb65-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
-<span id="cb65-3"><a href="organising-projects.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="organising-projects.html#cb63-1" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/mcowgill/Desktop/hes1516.csv"</span>)</span>
+<span id="cb63-2"><a href="organising-projects.html#cb63-2" aria-hidden="true" tabindex="-1"></a>hes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\mcowgill\Desktop\hes1516.csv"</span>)</span>
+<span id="cb63-3"><a href="organising-projects.html#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grattan_save</span>(<span class="st">"/Users/mcowgill/Desktop/images/expenditure_by_income.pdf"</span>)</span></code></pre></div>
 <p>Instead, use relative filepaths. These are filepaths that are relative (hence the name) to your project folder, which you set by creating an RStudio project.</p>
 <p><strong>Good, relative filepaths, cool, yay</strong></p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hes</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/HES/hes1516.csv"</span><span class="op">)</span>
 <span class="fu">grattan_save</span><span class="op">(</span><span class="st">"output/atlas/expenditure_by_income.pdf"</span><span class="op">)</span></code></pre></div>
 <p>The first example above tells R to look in the ‘data’ subdirectory of your project folder, and then the ‘HES’ subdirectory of ‘data’, to find the ‘hes1516.csv’ file. This file path isn’t specific to your machine, so your code is more shareable this way.</p>
@@ -238,7 +238,7 @@ Either:</p>
 <p>Sometimes R doesn’t behave the way you expect it to. You might run a script and find it works fine, then run it again and find it’s producing some strange output. This can be the result of changes in your R environment. You can set different options in R, which can (silently!) affect things. Or maybe you had some different objects - data, functions - defined in your environment the second time round that you didn’t have originally, or some extra packages loaded.</p>
 <p>To avoid this situation, keep your workspace tidy. When you load a script, do it in a fresh R session.</p>
 <p><em>But</em>… don’t clean your workspace within your analysis script. People sometimes do this using this command:</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This removes all objects from your environment. But it doesn’t completely clear your R environment, and it doesn’t do anything to any packages you have loaded. As <a href="https://rstats.wtf/save-source.html#rm-list-ls">Jenny Bryan puts it</a>, this command is “a red flag, because it is indicative of a non-reproducible workflow”.</p>
 </div>
@@ -311,7 +311,7 @@ Either:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-06-21.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

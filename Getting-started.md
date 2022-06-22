@@ -35,19 +35,9 @@ Change the defaults of Rstudio to make it a bit easier to use.
 Open your R studio preferences by: 
 
 
-```r
-# install the package 
-install.packages("usethis")
-```
-
 ```
 ## Installing usethis [2.1.6] ...
 ## 	OK [linked cache]
-```
-
-```r
-# open your R preferences
-usethis::edit_rstudio_prefs()
 ```
 
 ```
