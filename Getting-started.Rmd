@@ -41,7 +41,7 @@ Change the defaults of Rstudio to make it a bit easier to use.
 
 Open your R studio preferences by: 
 
-```{r update_defaults}
+```{r update_defaults, echo = FALSE}
 # install the package 
 install.packages("usethis")
 
