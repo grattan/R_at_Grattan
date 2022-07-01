@@ -8,6 +8,7 @@ This section takes you through a few often-used chart types.
 ```{r, include = FALSE}
 # Load typesetting packages
 library(knitr)
+library(remotes)
 
 # Get dumb local functions
 source("R/great_words.R")
