@@ -82,8 +82,8 @@
 <span class="header-section-number">13.1</span> Set up<a class="anchor" aria-label="anchor" href="#set-up-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will use the <code>tidyverse</code> and <code>purrr</code> in this chapter.</p>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
 ## ✔ tibble  3.1.6     ✔ dplyr   1.0.8
@@ -92,8 +92,8 @@
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="defining-simple-functions" class="section level2" number="13.2">
 <h2>
@@ -102,10 +102,10 @@
 <p>Like your data, a function is an <code>object</code> that is defined.</p>
 <p>Let’s say you wanted to take whatever value you had and add one to it.
 We could define a function called <code>add_one</code> to do this:</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>There are four elements to what we just did:</p>
 <ol style="list-style-type: decimal">
 <li>Created a new function using the <code>function()</code> function.</li>
@@ -115,46 +115,46 @@ We could define a function called <code>add_one</code> to do this:</p>
 <li>Assigned this function to the object <code>add_one</code>.</li>
 </ol>
 <p>Now that you’ve done all that, you can call the function like you would any other:</p>
-<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">add_one</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 101</code></pre>
 <p>You can define functions can take more than one argument:</p>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">add_together_plus_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">+</span> <span class="va">z</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="op">}</span>
-
-<span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">add_together_plus_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">+</span> <span class="va">z</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>As the above takes three arguments, and there are no defaults provided,
 we’ll get an error if we fotget one:</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">add_together_plus_one</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Error in add_together_plus_one(1, 2): argument "z" is missing, with no default</code></pre>
 <p>So you can also provide <em>default</em> values to your function when you define it:</p>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_power</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span>
- <span class="va">x</span><span class="op">^</span><span class="va">n</span> 
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_power</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span> <span class="va">x</span><span class="op">^</span><span class="va">n</span> </span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>If you don’t provide a value for <code>n</code> when you call the <code>make_power</code> function,
 it will default to <code>2</code>:</p>
-<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
 <p>And you can override that by providing your own value:</p>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 10000</code></pre>
 <p>We can also assign the result of this function (<code>10000</code> above) to
 an object of its own:</p>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_power_number</span> <span class="op">&lt;-</span> <span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_power_number</span> <span class="op">&lt;-</span> <span class="fu">make_power</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p>For this reason, and a few others described in a <a href="functional-programming-making-and-using-your-own-functions.html#functions-returned">section to follow</a>, a function
 can only return one <em>thing</em> (a number, or a vector, or dataset, or list, and so on).</p>
 </div>
@@ -167,113 +167,113 @@ circumstances. For example, you might want to do one thing if your input is a
 <b style="font-size:bigger">REALLY BIG</b> number, and another if it’s <span style="font-size:smaller">very small</span>.</p>
 <p>Conditional <code>if</code> statements – which evaluate an expression and proceed <em>if</em> <code>TRUE</code> – can be useful for these occasions.
 The function below takes one argument – <code>x</code> – and transforms it depending on how large it is:</p>
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">10</span>
-  <span class="op">}</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">5</span>
-  <span class="op">}</span>
-  <span class="va">return_number</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">10</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">return_number</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">5</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">return_number</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>If the input number is greater than 10, the <code>make_smaller</code> function will take
 <code>10</code> off it; if it’s 10 or less, it will just take <code>5</code> off:</p>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Making use of the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function could make this clearer.
 If <code>x</code> is greater than <code>10</code>, the <code>make_smaller</code> function will now subtract <code>10</code>
 and immediately return the value, ignoring everything else below it:</p>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">10</span><span class="op">)</span>
-  <span class="op">}</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">}</span>
-
-<span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_smaller</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_smaller</span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>These conditional statements can be used for input options to your functions.
 Let’s say you had a vector of ages of people in your office, <code>office_ages</code>:</p>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">office_ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">36</span>, <span class="fl">56</span>, <span class="fl">67</span>, <span class="fl">200</span><span class="op">)</span>
-<span class="va">office_ages</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">office_ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">36</span>, <span class="fl">56</span>, <span class="fl">67</span>, <span class="fl">200</span><span class="op">)</span></span>
+<span><span class="va">office_ages</span></span></code></pre></div>
 <pre><code>## [1]  -6  12  21  36  56  67 200</code></pre>
 <p>To summarise your office by age, you might want a function that would round each age to the nearest <code>10</code>. You could make a function that rounds a number to the nearest <code>10</code>,
 using the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function with <code>digits</code> set to <code>-1</code> (i.e. round to the nearest <code>10</code>):</p>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
 <p>Perfect. But some of those ages look implausible, and you might also want your function to validate them, by, say, capping ages to be between zero and <code>100</code>. You could let <code>validate_ages</code> be an argument, defaulting to <code>TRUE</code>, and <em>if it is <code>TRUE</code></em>, then you could perform the validation:</p>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
-                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="co"># First, validate ages IF ASKED FOR</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
-    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
-  <span class="op">}</span>
-  
-  <span class="co"># Then round ages to the nearest 10:</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,</span>
+<span>                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># First, validate ages IF ASKED FOR</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Then round ages to the nearest 10:</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Now, if <code>validate_ages == TRUE</code> (the default), the numbers over <code>100</code> will be replaced with <code>100</code>, and those less than <code>0</code> with <code>0</code>:</p>
-<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
 <p>And you can turn that behaviour off by setting <code>validate_ages</code> to <code>FALSE</code>:</p>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -10  10  20  40  60  70 200</code></pre>
 <p>However, we might not trust an age entry of <code>-6</code> or <code>200</code> at all, and might want to give the user the option to remove them rather than assume they are <code>0</code> or <code>100</code>. We could provide that option in one of two ways.</p>
 <p>The first is to add another argument, shown below.</p>
-<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
-                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span>,
-                       <span class="va">remove_implausible</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="co"># First, validate ages</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span>
-      <span class="co"># Replace implausible ages with NAs</span>
-      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span>
-    <span class="op">}</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span>
-      <span class="co"># Replace implausible ages with their nearest plausible age</span>
-      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
-      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
-    <span class="op">}</span>
-  <span class="op">}</span>
-  
-  <span class="co"># Then round ages to the nearest 10:</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,</span>
+<span>                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                       <span class="va">remove_implausible</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># First, validate ages</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="co"># Replace implausible ages with NAs</span></span>
+<span>      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">remove_implausible</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="co"># Replace implausible ages with their nearest plausible age</span></span>
+<span>      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>      <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Then round ages to the nearest 10:</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>This is fine! By default, the function still works like it did previously:</p>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
 <p>And if the user wants to validate ages <strong>and</strong> they want to remove the
 implausible ages, then they will be replaced with <code>NA</code>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that when &lt;em&gt;creating&lt;/em&gt;
 an &lt;code&gt;NA&lt;/code&gt; value, like we’ve done above, we have to specify what &lt;em&gt;type&lt;/em&gt; of &lt;code&gt;NA&lt;/code&gt;
 value it is: a number &lt;code&gt;NA_real_&lt;/code&gt;, an integer &lt;code&gt;NA_integer&lt;/code&gt;, or a character
 &lt;code&gt;NA_character_&lt;/code&gt;.&lt;/p&gt;"><sup>49</sup></a></p>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span>, remove_implausible <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="cn">TRUE</span>, remove_implausible <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 <p>But those nested conditional statements – which are often
 needed! – can be a bit of a headache.
@@ -281,30 +281,30 @@ There is another way we can do this, which might be neater in this instance.
 The <code>validate_ages</code> argument could take a character string that tells it which
 validation method to use. We could use <code>"remove"</code> and <code>"adjust"</code> to indicate the
 validation methods:</p>
-<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,
-                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="co"># First, validate ages</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span>
-  <span class="op">}</span>
-  
-  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"adjust"</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># Replace implausible ages with their nearest plausible age</span>
-    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span>
-    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span>
-  <span class="op">}</span>
-  
-  <span class="co"># Then round ages to the nearest 10:</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">make_age10</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">age</span>,</span>
+<span>                       <span class="va">validate_ages</span> <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># First, validate ages</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"remove"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span> <span class="op">|</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="cn">NA_real_</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">validate_ages</span> <span class="op">==</span> <span class="st">"adjust"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Replace implausible ages with their nearest plausible age</span></span>
+<span>    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">100</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>    <span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="va">age</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Then round ages to the nearest 10:</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">age</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Now we can use the <code>validate_ages</code> argument by itself to get the results we want:</p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"adjust"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"adjust"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]   0  10  20  40  60  70 100</code></pre>
-<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span>, validate_ages <span class="op">=</span> <span class="st">"remove"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] NA 10 20 40 60 70 NA</code></pre>
 </div>
 <div id="functions-returned" class="section level2" number="13.4">
@@ -314,18 +314,18 @@ validation methods:</p>
 <p>A function can do lots of things in the background.
 For example, you might want to take a vector, square every number,
 and then add all those numbers up:</p>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># first, add one to each using the function we defined above</span>
-  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-  <span class="co"># then sum all the numbers in the vector</span>
-  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
-  <span class="co"># then return the summed object</span>
-  <span class="va">summed</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># first, add one to each using the function we defined above</span></span>
+<span>  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="co"># then sum all the numbers in the vector</span></span>
+<span>  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span></span>
+<span>  <span class="co"># then return the summed object</span></span>
+<span>  <span class="va">summed</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Running that function on a vector of numbers <span class="math inline">\(1, 2, 3, ..., 10\)</span> (created with <code>1:10</code>) does what we want:</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 65</code></pre>
 <p>But look in your <strong>Environment</strong> window. The two objects that were created in the
 function – <code>added</code> and <code>summed</code> – aren’t there! They are instead calculated,
@@ -337,15 +337,15 @@ This behaviour keeps your environment clean and tidy, but it can cause some frus
 the function. <em>this is a bad explanation that I need to make better</em>
 For <code>sum_squares</code> above, we defined two objects and then passed the <code>summed</code> to
 the end of the function. If we omitted the last step, the function wouldn’t return <em>anything</em>:</p>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">empty_sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># first, add one to each using the function we defined above</span>
-  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-  <span class="co"># then sum all the numbers in the vector</span>
-  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu">empty_sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">empty_sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># first, add one to each using the function we defined above</span></span>
+<span>  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="co"># then sum all the numbers in the vector</span></span>
+<span>  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">empty_sum_squares</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>empty_sum_squares</code> function took the <code>1:10</code> vector, then added one, then
 summed the resulting numbers. But it didn’t <em>return</em> anything.
 It just assigned values to the <code>added</code> and <code>summed</code> objects, then the function
@@ -353,15 +353,15 @@ finished and those objects vanished.</p>
 <p>The <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function can help you make this behaviour clear. Using <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>
 will stop your function in its tracks and pass the object out of the function.
 We can use it in the <code>sum_squares</code> function:</p>
-<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># first, add one to each using the function we defined above</span>
-  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-  <span class="co"># then sum all the numbers in the vector</span>
-  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span>
-  <span class="co"># then return the summed object</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">summed</span><span class="op">)</span> <span class="co"># function stops here!</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sum_squares</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># first, add one to each using the function we defined above</span></span>
+<span>  <span class="va">added</span> <span class="op">&lt;-</span> <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="co"># then sum all the numbers in the vector</span></span>
+<span>  <span class="va">summed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">added</span><span class="op">)</span></span>
+<span>  <span class="co"># then return the summed object</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">summed</span><span class="op">)</span> <span class="co"># function stops here!</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Ensuring your function <em>returns</em> the object you want in the form you want is the second step in writing your own functions.</p>
 </div>
 <div id="using-functions-on-datasets-within-mutate" class="section level2" number="13.5">
@@ -369,9 +369,9 @@ We can use it in the <code>sum_squares</code> function:</p>
 <span class="header-section-number">13.5</span> Using functions on datasets within <code>mutate()</code><a class="anchor" aria-label="anchor" href="#using-functions-on-datasets-within-mutate"><i class="fas fa-link"></i></a>
 </h2>
 <p>Recall that when you are adding (or changing) a variable in a dataset with <code>mutate</code>, the length of the output must be either the length of the dataset or one (which is then repeated). Anything else will throw an error:</p>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">office_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span>
-<span class="va">office_df</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">office_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span></span>
+<span><span class="va">office_df</span></span></code></pre></div>
 <pre><code>## # A tibble: 7 × 1
 ##   office_ages
 ##         &lt;dbl&gt;
@@ -382,10 +382,10 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56
 ## 6          67
 ## 7         200</code></pre>
-<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># A single element will be repeated:</span>
-<span class="va">office_df</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_colour <span class="op">=</span> <span class="st">"#F68B33"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># A single element will be repeated:</span></span>
+<span><span class="va">office_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_colour <span class="op">=</span> <span class="st">"#F68B33"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 7 × 2
 ##   office_ages fave_colour
 ##         &lt;dbl&gt; &lt;chr&gt;      
@@ -396,10 +396,10 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56 #F68B33    
 ## 6          67 #F68B33    
 ## 7         200 #F68B33</code></pre>
-<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># A vector of length of the dataset is fine:</span>
-<span class="va">office_df</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">99</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># A vector of length of the dataset is fine:</span></span>
+<span><span class="va">office_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">99</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 7 × 2
 ##   office_ages fave_number
 ##         &lt;dbl&gt;       &lt;dbl&gt;
@@ -410,19 +410,19 @@ We can use it in the <code>sum_squares</code> function:</p>
 ## 5          56           0
 ## 6          67          99
 ## 7         200         100</code></pre>
-<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># BUT a vector of a different length will cause an error:</span>
-<span class="va">office_df</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_lunch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pasta salad"</span>, <span class="st">"a variety"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># BUT a vector of a different length will cause an error:</span></span>
+<span><span class="va">office_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fave_lunch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pasta salad"</span>, <span class="st">"a variety"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Error in `mutate()`:
 ## ! Problem while computing `fave_lunch = c("pasta salad", "a variety")`.
 ## ✖ `fave_lunch` must be size 7 or 1, not 2.</code></pre>
 <p>In <a href="functional-programming-making-and-using-your-own-functions.html#functions-conditionals">the section above</a>, we created the <code>make_age10</code> function and applied it to our little vector of ages. The function took a vector and returned a vector of the same length:</p>
-<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">office_ages</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">office_ages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">make_age10</span><span class="op">(</span><span class="va">office_ages</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="using-the-purrr-family-of-functions" class="section level2" number="13.6">
@@ -475,7 +475,7 @@ We can use it in the <code>sum_squares</code> function:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-06-22.</p>
+    <p>"<strong>Using R at Grattan Institute</strong>" was written by Matt Cowgill, Will Mackey, and James Ha. It was last built on 2022-07-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -35,15 +35,12 @@ Change the defaults of Rstudio to make it a bit easier to use.
 Open your R studio preferences by: 
 
 
-```
-## Installing usethis [2.1.6] ...
-## 	OK [linked cache]
-```
+```r
+# install the package 
+install.packages("usethis")
 
-```
-## ✔ Creating '/Users/runner/.config/rstudio/'
-## • Edit '/Users/runner/.config/rstudio/rstudio-prefs.json'
-## • Restart RStudio for changes to take effect
+# open your R preferences
+usethis::edit_rstudio_prefs()
 ```
 
 And then copy the following, updating the relevant bits. 
